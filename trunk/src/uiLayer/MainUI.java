@@ -3,7 +3,7 @@ package uiLayer;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class MainUI {
+public class MainUI extends SuperUI{
 	
 	private MainUI(){
 		menu();
@@ -36,10 +36,9 @@ public class MainUI {
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
-			System.out.println(e);
+			System.out.println("Wrong input!");
 		}
 		return choice;
-		
 	}
 	
 	public static void main(String[] args){
