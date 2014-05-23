@@ -1,5 +1,5 @@
 package uiLayer;
 
-public class SaleUI {
+public class SaleUI extends SuperUI{
 
 }

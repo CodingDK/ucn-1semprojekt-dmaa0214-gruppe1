@@ -1,5 +1,5 @@
 package uiLayer;
 
-public class PersonUI {
+public class PersonUI extends SuperUI{
 
 }
