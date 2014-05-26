@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import ctrLayer.CategoryCtr;
+import ctrLayer.ItemCtr;
 import modelLayer.Category;
 import modelLayer.Storage;
 
@@ -41,8 +42,18 @@ public class createItemUI extends SuperUI {
 		int choice = 0;
 		try{
 			System.out.println("## Opret Vare ##");
-			System.out.println(" 1. Vælg Kategori");
-			System.out.println(" 2. Vælg Lager");
+			if(selectedCategory == null){
+				System.out.println(" 1. Vælg Kategori");
+			}else{
+				System.out.println(" 1. Skift Kategori (" + selectedCategory.getName() + ")");
+			}
+			
+			if(selectedStorage == null){
+				System.out.println(" 2. Vælg Lager");
+			}else{
+				System.out.println(" 2. Skift Lager (" + selectedStorage.getName() + ")");
+			}
+			
 			if(selectedStorage != null && selectedCategory != null){
 				System.out.println(" 3. Opret Vare (" + selectedStorage.getName() + ", " + selectedCategory.getName() + ")");
 				System.out.println(" 4. Tilbage");
@@ -59,26 +70,47 @@ public class createItemUI extends SuperUI {
 	}
 	
 	private void selectCategory() {
-		CategoryCtr cCtr = new CategoryCtr();
-		ArrayList<Category> categories = cCtr.getAllCategories();
-		System.out.println("## Vælg Kategori ##");
-		for(Category c : categories){
-			System.out.println("#" + c.getId() + " - " + c.getName());
-		}
-		
 		boolean done = false;
 		while(!done){
+			CategoryCtr cCtr = new CategoryCtr();
+			ArrayList<Category> categories = cCtr.getAllCategories();
+			System.out.println("## Vælg Kategori ##");
+			for(Category c : categories){
+				System.out.println("#" + c.getId() + " - " + c.getName());
+			}
 			Scanner k = new Scanner(System.in);
 			System.out.print("Vælg Kategori(ID): ");
-			String categoryID = k.nextLine();
-			if(cCtr.findCategory(categoryID)){
-				
+			int categoryID = k.nextInt();
+			k.nextLine();
+			if(cCtr.findCategory(categoryID) != null){
+				selectedCategory = cCtr.findCategory(categoryID);
+				done = true;
+			}else{
+				System.out.println("Den valgte kategori findes ikke");
 			}
 		}
 	}
-
+	
 	private void selectStorage() {
-		
+		boolean done = false;
+		while(!done){
+			ItemCtr iCtr = new ItemCtr();
+			ArrayList<Storage> storages = iCtr.getAllStorages();
+			System.out.println("## Vælg Lager ##");
+			for(Storage s : storages){
+				System.out.println("#" + s.getId() + " - " + s.getName());
+			}
+			Scanner k = new Scanner(System.in);
+			System.out.print("Vælg Lager(ID): ");
+			int storageID = k.nextInt();
+			k.nextLine();
+			if(iCtr.findStorage(storageID) != null){
+				selectedStorage = iCtr.findStorage(storageID);
+				done = true;
+			}else{
+				System.out.println("Det valgte lager findes ikke");
+			}
+		}
 	}
 
 	private void createItem() {
