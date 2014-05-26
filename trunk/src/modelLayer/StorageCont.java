@@ -66,4 +66,12 @@ public class StorageCont{
 	public void removeStorage(Storage s){
 		storages.remove(s);
 	}
+	
+	/**
+	 * getAll - Get a list of all Storages.
+	 * @return ArrayList<Storage> A list with all storages.
+	 */
+	public ArrayList<Storage> getAll(){
+		return storages;
+	}
 }
