@@ -40,13 +40,14 @@ public class CustomerCont {
 	public Customer findCustomer(String nameOrPhone){
 		boolean found = false;
 		Customer c = null;
-		Iterator<Customer> it = customers.iterator();
-		while(it.hasNext() && !found){
-			Customer cu = it.next();
+		int i = 0;
+		while(i < customers.size() && !found){
+			Customer cu = customers.get(i);
 			if(cu.getName().equalsIgnoreCase(nameOrPhone) || cu.getPhoneNr().equalsIgnoreCase(nameOrPhone)){
 				c = cu;
 				found = true;
 			}
+			i++;
 		}
 		
 		return c;
