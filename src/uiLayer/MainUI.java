@@ -36,7 +36,7 @@ public class MainUI extends SuperUI{
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
-			System.out.println("Wrong input!");
+			System.out.println("Forkert input!");
 		}
 		return choice;
 	}

@@ -9,4 +9,11 @@ public abstract class SuperUI {
 		k.nextLine();
 	}
 	
+	protected void emptyTypeIn(String typeIn){
+		if(typeIn.trim().isEmpty()){
+			System.out.println("Feltet må ikke være tomt");
+			pause();
+			return;
+		}
+	}
 }
