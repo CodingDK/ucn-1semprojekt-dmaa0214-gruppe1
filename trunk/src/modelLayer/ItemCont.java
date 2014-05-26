@@ -79,4 +79,8 @@ public class ItemCont {
     	}
     	return retItem;
 	}
+	
+	public ArrayList<Item> getAll(){
+		return items;
+	}
 }
