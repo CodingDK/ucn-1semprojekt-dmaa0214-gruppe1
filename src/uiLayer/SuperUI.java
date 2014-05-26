@@ -28,13 +28,14 @@ public abstract class SuperUI {
 			if(inputData.trim().isEmpty()){
 				System.out.println("Feltet må ikke være tomt");
 				pause();
-			} else if(minLength != null){
-				if(inputData.length() > minLength || inputData.length() < maxLength){
+			} else if(minLength != null || maxLength != null){
+				if(inputData.length() < minLength || inputData.length() > maxLength){
 					System.out.println(input + " skal v¾re l¾ngere end " + minLength + " og kortere end " + maxLength + " tegn");
 					pause();
 				}
 			} else {
 				ret = inputData;
+				done = true;
 			}
 		}
 		
