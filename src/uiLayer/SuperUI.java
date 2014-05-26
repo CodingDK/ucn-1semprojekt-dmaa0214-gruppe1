@@ -17,6 +17,24 @@ public abstract class SuperUI {
 		}
 	}
 	
+	/**
+	 * stringToNull - used when "" is changed to a null
+	 * @param typeIn 
+	 * @return String
+	 */
+	protected String stringToNull(){
+		Scanner k = new Scanner(System.in);
+		String n = k.nextLine();
+		String typeOut= null;
+		if(n.equals("")){
+			typeOut = null;			
+		} else {
+			typeOut = n;
+		}
+		return typeOut;
+	}	
+
+	
 	protected String requestString(String input, Integer minLength, Integer maxLength){
 		Scanner k = new Scanner(System.in);
 		String ret = "";
