@@ -44,7 +44,8 @@ public class ItemUI extends SuperUI{
 		try{
 			System.out.println("## Kunde menu ##");
 			System.out.println(" 1. Opret Kategori");
-			System.out.println(" 2. Opret Vare");
+			System.out.println(" 1. Opret Lager");
+			System.out.println(" 3. Opret Vare");
 			System.out.println(" 3. Find Vare");
 			System.out.println(" 4. Find Kategori");
 			System.out.println(" 5. Opdater Vare");
@@ -88,12 +89,12 @@ public class ItemUI extends SuperUI{
 			
 			System.out.println(" *** Opret Lager *** ");
 			String storageName = requestString("Lager navn", 1, null);
-			if(iCtr.findStorage(storageName)){
+			if(iCtr.findStorage(storageName) == null){
 				iCtr.createStorage(storageName);
 			}else{
 				System.out.println("Dette Lager eksistere allerede");
 				if(confirm("Vil du markere denne til senere brug?(Oprettelse af ny vare)")){
-					selectedStorage = iCtr.findCategory(storageName);
+					selectedStorage = iCtr.findStorage(storageName);
 				}
 			}
 			
