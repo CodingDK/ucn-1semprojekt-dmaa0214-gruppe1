@@ -32,6 +32,11 @@ public class CustomerCont {
 		customers.add(c);
 	}
 	
+	/**
+	 * Finds and returns a CustomerObj by name or phone number
+	 * @param nameOrPhone
+	 * @return CustomerObj
+	 */
 	public Customer findCustomer(String nameOrPhone){
 		boolean found = false;
 		Customer c = null;
@@ -47,6 +52,11 @@ public class CustomerCont {
 		return c;
 	}
 	
+	/**
+	 * Finds a Business Customer by Company name
+	 * @param company
+	 * @return Business
+	 */
 	public Business findBusiness(String company){
 		boolean found = false;
 		Business c = null;
@@ -65,6 +75,11 @@ public class CustomerCont {
 		return c;
 	}
 	
+	/**
+	 * Finds a Customer by ID
+	 * @param id
+	 * @return Customer
+	 */
 	public Customer findCustomer(int id){
 		boolean found = false;
 		Customer c = null;
@@ -80,6 +95,10 @@ public class CustomerCont {
 		return c;
 	}
 	
+	/**
+	 * Removes a Customer by Customer Obj
+	 * @param c
+	 */
 	public void removeCustomer(Customer c){
 		customers.remove(c);
 	}
