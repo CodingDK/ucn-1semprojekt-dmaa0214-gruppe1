@@ -3,8 +3,8 @@ package personLayer;
 public class Private extends Customer{
 	private String cprNr, pictureID;
 	
-	public Private(String name, String phoneNr, String address, String email, String city, String postCode, String cprNr, String pictureID){
-		super(name, phoneNr, address, email, city, postCode);
+	public Private(String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String pictureID){
+		super(name, phoneNr, street, email, city, postCode);
 		this.cprNr = cprNr;
 		this.pictureID = pictureID;
 	}
