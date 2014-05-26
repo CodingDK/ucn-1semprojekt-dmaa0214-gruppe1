@@ -9,23 +9,65 @@ public class CustomerCtr {
 		cCont = CustomerCont.getInstance();
 	}
 	
+	/**
+	 * Finds a Customer by name or phone
+	 * @param nameOrPhone
+	 * @return Customer
+	 */
 	public Customer findCustomer(String nameOrPhone){
 		return cCont.findCustomer(nameOrPhone);
 	}
 	
+	/**
+	 * Finds a Business Customer by Company name
+	 * @param company
+	 * @return Business
+	 */
 	public Business findBusiness(String company){
 		return cCont.findBusiness(company);
 	}
 	
+	/**
+	 * Finds a CustomerObj by ID
+	 * @param id
+	 * @return Customer
+	 */
 	public Customer findCustomer(int id){
 		return cCont.findCustomer(id);
 	}
 	
+	/**
+	 * Creates a Private Customer
+	 * 
+	 * @param name
+	 * @param phoneNr
+	 * @param street
+	 * @param email
+	 * @param city
+	 * @param postCode
+	 * @param cprNr
+	 * @param pictureId
+	 */
 	public void createPrivateCustomer(String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String pictureId){
 		cCont.addCustomer(new Private(name, phoneNr, street, email, city, postCode, cprNr, pictureId));
 	}
 	
-	public void updateCustomer(int id, String name, String phoneNr, String street, String email, String city, String postCode, String pictureID, String company, String cvrNr){
+	/**
+	 * Updates a customers data
+	 * 
+	 * @param id
+	 * @param name
+	 * @param phoneNr
+	 * @param street
+	 * @param email
+	 * @param city
+	 * @param postCode
+	 * @param pictureID
+	 * @param company
+	 * @param cvrNr
+	 * @throws NullPointerException if Customer does not exist
+	 */
+	public void updateCustomer(int id, String name, String phoneNr, String street, String email, String city, String postCode, String pictureID, String company, String cvrNr) throws NullPointerException{
 		Customer c = cCont.findCustomer(id);
 		if(c != null){
 			if(name != null){
@@ -66,10 +108,25 @@ public class CustomerCtr {
 		}
 	}
 	
+	/**
+	 * Removes a Customer by ID
+	 * @param id
+	 */
 	public void removeCustomer(int id){
 		cCont.removeCustomer(cCont.findCustomer(id));
 	}
 	
+	/**
+	 * Creates a Business Customer
+	 * @param name
+	 * @param phoneNr
+	 * @param street
+	 * @param email
+	 * @param city
+	 * @param postCode
+	 * @param company
+	 * @param cvrNr
+	 */
 	public void createBusinessCustomer(String name, String phoneNr, String street, String email, String city, String postCode, String company, String cvrNr){
 		cCont.addCustomer(new Business(name, phoneNr, street, email, city, postCode, company, cvrNr));
 	}
