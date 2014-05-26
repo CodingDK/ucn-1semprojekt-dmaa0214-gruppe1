@@ -145,8 +145,7 @@ public class ItemCtr {
 				item.setMin(min);
 			}
 			if(category != null){
-				Category oldCat = item.getCategory();
-				ItemCont.getInstance(oldCat).removeItem(item);
+				removeItem(item);
 				ItemCont.getInstance(category).addItem(item);
 				item.setCategory(category);
 			}
@@ -155,9 +154,13 @@ public class ItemCtr {
 		}
 	}
 	
-	
+	/**
+	 * removeItem - Remove an item.
+	 * @param i The Item object to remove.
+	 */
 	public void removeItem(Item i){
-		
+		Category oldCat = i.getCategory();
+		ItemCont.getInstance(oldCat).removeItem(i);
 	}
 	
 	/**
