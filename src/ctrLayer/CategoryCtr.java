@@ -2,6 +2,7 @@ package ctrLayer;
 
 import java.util.ArrayList;
 
+import exceptionLayer.AlreadyExistException;
 import exceptionLayer.NoSelectionException;
 import modelLayer.Category;
 import modelLayer.CategoryCont;
@@ -14,10 +15,24 @@ public class CategoryCtr {
 		cCont = CategoryCont.getInstance();
 	}
 	
-	public void createCategory(String name) {
-		cCont.addCategory(new Category(name));
+	/**
+	 * Creates a new Category
+	 * @param name
+	 * @throws AlreadyExistException If the category already exists
+	 */
+	public void createCategory(String name) throws AlreadyExistException{
+		if(exist(name)){
+			cCont.addCategory(new Category(name));
+		}else{
+			throw new AlreadyExistException("Kategorien eksistere allerede");
+		}
 	}
 	
+	/**
+	 * Updates the name of the Category
+	 * @param newName
+	 * @throws NoSelectionException If no category is selected
+	 */
 	public void updateCategory(String newName) throws NoSelectionException {
 		if(selectedCategory != null){
 			selectedCategory.setName(newName);
@@ -26,6 +41,10 @@ public class CategoryCtr {
 		}
 	}
 	
+	/**
+	 * Removes the selected category
+	 * @throws NoSelectionException
+	 */
 	public void removeCategory() throws NoSelectionException {
 		if(selectedCategory != null){
 			cCont.removeCategory(selectedCategory);
@@ -34,6 +53,11 @@ public class CategoryCtr {
 		}
 	}
 	
+	/**
+	 * Returns boolean true if the category exists
+	 * @param name
+	 * @return boolean
+	 */
 	public boolean exist(String name){
 		boolean ret = false;
 		if(cCont.findCategory(name) != null){
@@ -43,12 +67,29 @@ public class CategoryCtr {
 		return ret;
 	}
 	
+	/**
+	 * Finds the category by name
+	 * @param name
+	 * @return
+	 */
 	public Category findCategory(String name){
 		return cCont.findCategory(name);
 	} 
 	
+	/**
+	 * Returns all Categorys as ArrayList
+	 * @return ArrayList<Category>
+	 */
 	public ArrayList<Category> getAllCategories(){
 		return cCont.getAll();
+	}
+	
+	/**
+	 * Selects the category for later use
+	 * @param name
+	 */
+	public void selectCategory(String name){
+		selectedCategory = cCont.findCategory(name);
 	}
 
 }
