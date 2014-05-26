@@ -10,11 +10,11 @@ import modelLayer.Category;
 import modelLayer.Item;
 import modelLayer.Storage;
 
-public class createItemUI extends SuperUI {
+public class CreateItemUI extends SuperUI {
 	private Category selectedCategory;
 	private Storage selectedStorage;
 
-	public createItemUI(Category c, Storage s) {
+	public CreateItemUI(Category c, Storage s) {
 		this.selectedCategory = c;
 		this.selectedStorage = s;
 		
