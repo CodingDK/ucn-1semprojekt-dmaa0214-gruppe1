@@ -59,7 +59,7 @@ public class EmployeeCont{
     	boolean found = false;
     	int i = 0;
     	while(i < employees.size() && !found) {
-    		if(employees.get(i).getEmployeeNr() == employeeNr) {
+    		if(employees.get(i).getEmployeeNr().equalsIgnoreCase(employeeNr)) {
     			retEmployee = employees.get(i);
     			found = true;
     		}
