@@ -3,6 +3,7 @@ package uiLayer;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import personLayer.Customer;
 import ctrLayer.CustomerCtr;
 import ctrLayer.EmployeeCtr;
 
@@ -51,7 +52,7 @@ public class PersonUI extends SuperUI{
 			System.out.println(" 7. Opdater erhvervs kunde");
 			System.out.println(" 8. Opdater s¾lger");
 			System.out.println(" 9. Opdater administrator");
-			System.out.println("10. Slet Person");
+			System.out.println("10. Fjern Person");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
@@ -156,33 +157,84 @@ public class PersonUI extends SuperUI{
 	}
 
 	public void findCustomer() {
-		try{
 			System.out.println("## Find kunde ##");
 			System.out.print("Indtast kunde navn eller telefon nr: ");
 			Scanner k = new Scanner(System.in);
-			String find = k.nextLine();
+			String nameOrPhone = k.nextLine();
 			
 			CustomerCtr customerCtr = new CustomerCtr();
-			customerCtr.findCustomer(find);
+			Customer customer = customerCtr.findCustomer(nameOrPhone);
 			
-			if(customerCtr.findCustomer(find) == null){
-				System.out.println("Kunden blev ikke fundet");
+			if(customer == null){
+				System.out.println("Kunden er ikke fundet");
 				pause();
 			}
+			else {
+				updateCustomerMenu(customer);
+			}
+	}
+	
+	
+
+	private int findCustomerMenu(){
+		int choice = 0;
+		try{
+			System.out.println("## Menu ");
+			System.out.println("1. Opdater kunde");
+			System.out.println("2. Tilbage til kundemenu");
+			Scanner k = new Scanner(System.in);
+			choice = k.nextInt();
 		} catch(InputMismatchException e){
 			System.out.println("Forkert input!");
 		}
+		return choice;
 	}
 	
-	public void updatePrivate() {
-//		try{
-//			System.out.println("## Opdater privat kunde ##");
-//			
-//			CustomerCtr customerCtr = new CustomerCtr();
-//			customerCtr.
-//		} catch(InputMismatchException e){
-//			System.out.println("Forkert input!");
-//		}
+	public void updateCustomerMenu(Customer customer){
+		boolean exit = false;
+		while(!exit){
+			int choice = findCustomerMenu();
+			if(choice == 1){
+				updatePrivate(customer);
+			} else if(choice == 2){
+				return;
+			}	
+		}
+	}
+	
+	public void updatePrivate(Customer customer) {
+	
+		System.out.println("## Opdater privat kunde ##");
+		System.out.println("Skriv ny info ellers tryk enter");
+		
+		System.out.println("Navn: (" + customer.getName() + ")" );
+		String name = stringToNull();
+		
+		System.out.println("Vej navn: (" + customer.getStreet() + ")");
+		String street = stringToNull();
+		
+		System.out.println("Postnummer: (" + customer.getStreet() + ")");
+		String postCode = stringToNull();
+		
+		System.out.println("By: (" + customer.getCity() + ")");
+		String city = stringToNull();
+		
+		System.out.println("Telefon nr: (" + customer.getPhoneNr() + ")");
+		String phoneNr = stringToNull();
+		
+		System.out.println("E-mail: (" + customer.getEmail() + ")");
+		String email = stringToNull();
+		
+		System.out.println("Billede ID:");
+		String pictureID = stringToNull();
+		
+		int id = customer.getId();
+		String company = null;
+		String cvrNr = null;
+		
+		CustomerCtr customerCtr = new CustomerCtr();
+		customerCtr.updateCustomer(id, name, phoneNr, street, email, city, postCode, pictureID, company, cvrNr);
+		
 	}
 
 	public void updateBusiness() {
