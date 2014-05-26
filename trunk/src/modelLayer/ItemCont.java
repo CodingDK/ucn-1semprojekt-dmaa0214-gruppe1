@@ -80,7 +80,19 @@ public class ItemCont {
     	return retItem;
 	}
 	
+	/**
+	 * getAll - Get a list of all items in the category.
+	 * @return ArrayList<Item> List of all items in the category.
+	 */
 	public ArrayList<Item> getAll(){
 		return items;
+	}
+	
+	/**
+	 * removeItem - Remove an Item object from the category.
+	 * @param i The Item object to remove.
+	 */
+	public void removeItem(Item i){
+		items.remove(i);
 	}
 }
