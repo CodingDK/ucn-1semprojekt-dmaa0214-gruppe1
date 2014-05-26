@@ -49,17 +49,17 @@ public class EmployeeCont{
     }
 	
     /**
-     * findEmployee - Get a Employee object from the id of the Employee.
-     * @param id - The id of the Employee.
+     * findEmployee - Get a Employee object from the employeeNr of the Employee.
+     * @param employeeNr - The employeeNr of the Employee.
      * @return Employee object of the Employee or null if not found.
      */
-    public Employee findEmployee(int employeeNr){
+    public Employee findEmployee(String employeeNr){
     	
     	Employee retEmployee = null;
     	boolean found = false;
     	int i = 0;
     	while(i < employees.size() && !found) {
-    		if(employees.get(i).getId() == employeeNr) {
+    		if(employees.get(i).getEmployeeNr() == employeeNr) {
     			retEmployee = employees.get(i);
     			found = true;
     		}
@@ -68,4 +68,26 @@ public class EmployeeCont{
     	
     	return retEmployee;
     }
+    
+    /**
+     * findEmployee - Get a Employee object from the id of the Employee.
+     * @param id - The id of the Employee.
+     * @return Employee object of the Employee or null if not found.
+     */
+    public Employee findEmployee(int id){
+    	
+    	Employee retEmployee = null;
+    	boolean found = false;
+    	int i = 0;
+    	while(i < employees.size() && !found) {
+    		if(employees.get(i).getId() == id) {
+    			retEmployee = employees.get(i);
+    			found = true;
+    		}
+    		i++;
+    	}
+    	
+    	return retEmployee;
+    }
+    
 }
