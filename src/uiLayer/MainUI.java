@@ -28,13 +28,14 @@ public class MainUI extends SuperUI{
 	
 	private int writeMenu(){
 		int choice = 0;
+		Scanner k = new Scanner(System.in);
 		try{
 			System.out.println("1. Kunde UI");
 			System.out.println("2. Salg UI");
 			System.out.println("3. Vare UI");
 			System.out.println("4. Exit");
-			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
+			k.nextLine();
 		} catch(InputMismatchException e){
 			System.out.println("Forkert input!");
 		}
