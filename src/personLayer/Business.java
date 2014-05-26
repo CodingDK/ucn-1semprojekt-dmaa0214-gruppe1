@@ -22,6 +22,22 @@ private String company, cvrNr;
 	public String getCvrNr() {
 		return cvrNr;
 	}
+
+	/**
+	 * @param company the company to set
+	 */
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	/**
+	 * @param cvrNr the cvrNr to set
+	 */
+	public void setCvrNr(String cvrNr) {
+		this.cvrNr = cvrNr;
+	}
+	
+	
 	
 	
 
