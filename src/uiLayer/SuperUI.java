@@ -74,6 +74,60 @@ public abstract class SuperUI {
 		return ret;
 	}
 	
+	protected int requestInt(String input){
+		Scanner k = new Scanner(System.in);
+		int ret = 0;
+		boolean done = false;
+		while(!done){
+			System.out.print(input + ":" );
+			String inputData = k.nextLine();
+			
+			if(isInteger(inputData)){
+				ret = Integer.parseInt(inputData);
+				done = true;
+			}
+			
+		}
+		return ret;
+	}
+	
+	protected double requestDouble(String input){
+		Scanner k = new Scanner(System.in);
+		double ret = 0;
+		boolean done = false;
+		while(!done){
+			System.out.print(input + ":" );
+			String inputData = k.nextLine();
+			
+			if(isDouble(inputData)){
+				ret = Double.parseDouble(inputData);
+				done = true;
+			}
+			
+		}
+		return ret;
+	}
+	
+	protected boolean isInteger(String s){
+		try{
+			Integer.parseInt(s);
+		}catch(NumberFormatException e){
+			return false;
+		}
+		
+		return true;
+	}
+	
+	protected boolean isDouble(String s){
+		try{
+			Double.parseDouble(s);
+		}catch(NumberFormatException e){
+			return false;
+		}
+		
+		return true;
+	}
+	
 	protected boolean confirm(String confirmStatement){
         boolean confirm = true;
         Scanner s = new Scanner(System.in);
