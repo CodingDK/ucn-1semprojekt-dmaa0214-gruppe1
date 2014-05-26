@@ -41,8 +41,8 @@ public class Item{
 			double salePrice, double purchasePrice, double bulkSalePrice,
 			int bulk, String location, Storage storage, int max, int min,
 			Category category){
-		this.id = idIterator;
 		idIterator++;
+		this.id = idIterator;
 		this.name = name;
 		this.amount = amount;
 		this.reserved = reserved;
