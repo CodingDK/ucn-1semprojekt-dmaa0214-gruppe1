@@ -21,7 +21,7 @@ public class CategoryCtr {
 	 * @throws AlreadyExistException If the category already exists
 	 */
 	public void createCategory(String name) throws AlreadyExistException{
-		if(exist(name)){
+		if(!exist(name)){
 			cCont.addCategory(new Category(name));
 		}else{
 			throw new AlreadyExistException("Kategorien eksistere allerede");
@@ -70,11 +70,22 @@ public class CategoryCtr {
 	/**
 	 * Finds the category by name
 	 * @param name
-	 * @return
+	 * @return Category
 	 */
 	public Category findCategory(String name){
 		return cCont.findCategory(name);
 	} 
+	
+	/**
+	 * Finds the category by ID
+	 * @param name
+	 * @return Category
+	 */
+	public Category findCategory(int id){
+		return cCont.findCategory(id);
+	} 
+	
+	
 	
 	/**
 	 * Returns all Categorys as ArrayList
