@@ -203,4 +203,11 @@ public class ItemCtr {
 		StorageCont.getInstance().removeStorage(s);
 	}
 	
+	/**
+	 * getAllStorages - Get a list of all Storages.
+	 * @return ArrayList<Storage> A list with all storages.
+	 */
+	public ArrayList<Storage> getAllStorages(){
+		return StorageCont.getInstance().getAll();
+	}
 }
