@@ -7,6 +7,7 @@ import java.util.Scanner;
 import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
 import modelLayer.Category;
+import modelLayer.Item;
 import modelLayer.Storage;
 
 public class createItemUI extends SuperUI {
@@ -27,7 +28,9 @@ public class createItemUI extends SuperUI {
 				}else if(choice == 2){
 					selectStorage();
 				}else if(choice == 3){
-					createItem();
+					if(selectedCategory != null && selectedStorage != null){
+						createItem();
+					}
 				}else if(choice == 4){
 					exit = true;
 				}
@@ -114,7 +117,36 @@ public class createItemUI extends SuperUI {
 	}
 
 	private void createItem() {
-		
+		ItemCtr iCtr = new ItemCtr();
+		Scanner k = new Scanner(System.in);
+		String name = null;
+		boolean done = false;
+		while(!done){
+			name = requestString("Navn", 1, null);
+			boolean reCheck = true;
+			while(reCheck){
+				Item i = iCtr.getItem(name);
+				if(iCtr.getItem(name) != null && i.getStorage() == selectedStorage){
+					if(confirm("Denne vare(" + i.getName() + ") eksistere allerede på (" + i.getStorage().getName() + "), vil du vælge et nyt lager?")){
+						selectStorage();
+					}else{
+						return;
+					}
+				}else{
+					reCheck = false;
+					done = true;
+				}
+			}
+		}
+		int amount = requestInt("Antal");
+		double salePrice = requestDouble("Salgs pris");
+		double purchasePrice = requestDouble("Købs pris");
+		double bulkSalePrice = requestDouble("Bulk pris");
+		int bulk = requestInt("Bulk");
+		String location = requestString("Placering", 1, null);
+		int max = requestInt("Maksimal Lagerbeholdning");
+		int min = requestInt("Minimum Lagerbeholdning");
+		iCtr.createItem(name, amount, 0, salePrice, purchasePrice, bulkSalePrice, bulk, location, selectedStorage, max, min, selectedCategory);
 	}
 
 }
