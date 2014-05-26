@@ -3,8 +3,8 @@ package personLayer;
 public class Customer extends Person{
 	protected double credit;
 	
-	public Customer(String name, String phoneNr, String address, String email, String city, String postCode){
-		super(name, phoneNr, address, email, city, postCode);
+	public Customer(String name, String phoneNr, String street, String email, String city, String postCode){
+		super(name, phoneNr, street, email, city, postCode);
 	}
 
 	/**
