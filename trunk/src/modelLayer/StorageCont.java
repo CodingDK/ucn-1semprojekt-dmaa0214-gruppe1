@@ -1,8 +1,6 @@
 package modelLayer;
 import java.util.ArrayList;
 
-import personLayer.Employee;
-
 /**
  * StorageCont contains a list of all storage in the StorageCont.
  * 
@@ -50,6 +48,26 @@ public class StorageCont{
     	int i = 0;
     	while(i < storages.size() && !found) {
     		if(storages.get(i).getName().equalsIgnoreCase(name)) {
+    			retStorage = storages.get(i);
+    			found = true;
+    		}
+    		i++;
+    	}
+    	
+    	return retStorage;
+	}
+	
+	/**
+     * findStorage - Get a Storage object from the id of the Storage.
+     * @param id - The id of the Storage.
+     * @return Storage object of the Storage or null if not found.
+     */
+	public Storage findStorage(int id){
+		Storage retStorage = null;
+    	boolean found = false;
+    	int i = 0;
+    	while(i < storages.size() && !found) {
+    		if(storages.get(i).getId() == id) {
     			retStorage = storages.get(i);
     			found = true;
     		}
