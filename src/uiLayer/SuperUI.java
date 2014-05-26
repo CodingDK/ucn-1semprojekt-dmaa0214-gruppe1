@@ -21,8 +21,8 @@ public abstract class SuperUI {
 		Scanner k = new Scanner(System.in);
 		String ret = "";
 		boolean done = false;
-		boolean error = false;
 		while(!done){
+			boolean error = false;
 			System.out.print(input + ": ");
 			String inputData = k.nextLine();
 			
