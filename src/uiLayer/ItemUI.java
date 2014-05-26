@@ -33,7 +33,7 @@ public class ItemUI extends SuperUI{
 				
 			} else if(choice == 8){
 				
-			} else if(choice == 9){
+			} else if(choice == 15){
 				exit = true;
 			}		
 		}		
@@ -44,15 +44,18 @@ public class ItemUI extends SuperUI{
 		try{
 			System.out.println("## Kunde menu ##");
 			System.out.println(" 1. Opret Kategori");
-			System.out.println(" 1. Opret Lager");
+			System.out.println(" 2. Opret Lager");
 			System.out.println(" 3. Opret Vare");
-			System.out.println(" 3. Find Vare");
 			System.out.println(" 4. Find Kategori");
-			System.out.println(" 5. Opdater Vare");
-			System.out.println(" 6. Opdater Kategori");
-			System.out.println(" 7. Fjern Vare");
-			System.out.println(" 8. Fjern Kategori");
-			System.out.println(" 9. Exit");
+			System.out.println(" 5. Find Lager");
+			System.out.println(" 6. Find Vare");
+			System.out.println(" 7. Opdater Kategori");
+			System.out.println(" 8. Opdater Lager");
+			System.out.println(" 9. Opdater Vare");
+			System.out.println(" 10. Fjern Kategori");
+			System.out.println(" 11. Fjern Lager");
+			System.out.println(" 12. Fjern Vare");
+			System.out.println(" 15. Exit");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
@@ -109,16 +112,28 @@ public class ItemUI extends SuperUI{
 	private void findCategory() {
 	}
 	
+	private void findStorage(){
+		
+	}
+	
 	private void updateItem() {
 	}
 	
 	private void updateCategory() {
 	}
 	
+	private void updateStorage(){
+		
+	}
+	
 	private void removeItem() {
 	}
 	
 	private void removeCategory() {
+	}
+	
+	private void removeStorage(){
+		
 	}
 	
 }
