@@ -22,7 +22,7 @@ public class ItemUI extends SuperUI{
 			} else if(choice == 2){
 				createStorage();
 			} else if(choice == 3){
-				new createItemUI(selectedCategory, selectedStorage);
+				new CreateItemUI(selectedCategory, selectedStorage);
 			} else if(choice == 4){
 				
 			} else if(choice == 5){
