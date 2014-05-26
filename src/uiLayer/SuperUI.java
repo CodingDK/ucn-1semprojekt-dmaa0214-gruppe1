@@ -21,6 +21,7 @@ public abstract class SuperUI {
 		Scanner k = new Scanner(System.in);
 		String ret = "";
 		boolean done = false;
+		boolean error = false;
 		while(!done){
 			System.out.print(input + ": ");
 			String inputData = k.nextLine();
@@ -28,12 +29,25 @@ public abstract class SuperUI {
 			if(inputData.trim().isEmpty()){
 				System.out.println("Feltet må ikke være tomt");
 				pause();
+				error = true;
 			} else if(minLength != null || maxLength != null){
-				if(inputData.length() < minLength || inputData.length() > maxLength){
-					System.out.println(input + " skal v¾re l¾ngere end " + minLength + " og kortere end " + maxLength + " tegn");
-					pause();
+				if(minLength != null){
+					if(inputData.length() < minLength){
+						System.out.println(input + " skal være længere end " + minLength + " tegn");
+						pause();
+						error = true;
+					}
 				}
-			} else {
+				if(maxLength != null){
+					if(inputData.length() > maxLength){
+						System.out.println(input + " skal være kortere end " + maxLength + " tegn");
+						pause();
+						error = true;
+					}
+				}
+			} 
+			
+			if(!error){
 				ret = inputData;
 				done = true;
 			}
