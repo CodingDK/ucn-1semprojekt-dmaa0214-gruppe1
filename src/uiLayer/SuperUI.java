@@ -108,7 +108,7 @@ public abstract class SuperUI {
 		return ret;
 	}
 	
-	protected boolean isInteger(String s){
+	private boolean isInteger(String s){
 		try{
 			Integer.parseInt(s);
 		}catch(NumberFormatException e){
@@ -118,7 +118,7 @@ public abstract class SuperUI {
 		return true;
 	}
 	
-	protected boolean isDouble(String s){
+	private boolean isDouble(String s){
 		try{
 			Double.parseDouble(s);
 		}catch(NumberFormatException e){
