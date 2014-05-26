@@ -15,12 +15,12 @@ public class PersonUI extends SuperUI{
 			int choice = writeMenu();
 			if(choice == 1){
 				createPrivate();
-			}
-			if(choice ==2){
+			} else if(choice == 2){
 				createBusiness();
-			}
-		}
-		
+			} else if(choice == 3){
+				
+			}			
+		}		
 	}
 	
 	private int writeMenu(){
@@ -28,6 +28,7 @@ public class PersonUI extends SuperUI{
 		try{
 			System.out.println("1. Opret privat kunde");
 			System.out.println("2. Opret erhvervs kunde");
+			System.out.println("3. Tilbage");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
@@ -71,17 +72,22 @@ public class PersonUI extends SuperUI{
 			
 			CustomerCtr customerCtr = new CustomerCtr();
 			customerCtr.createPrivateCustomer(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
-		}
-		catch(InputMismatchException e){
+		} catch(InputMismatchException e){
 			System.out.println("Forket input!");
+			return;
 		}
-		
-		
+			
 	}
 
 
 	public void createBusiness() {
-		
+		//try{
+			Scanner k = new Scanner(System.in);
+			System.out.println("## Opret erhvervs kunde ##");
+			
+			//requestString(input ex. navn, min l¾ngde int, max l¾ngde int)
+			requestString("Name", 2, 10);
+		//}
 	}
 	
 	public void createSeller() {
