@@ -3,8 +3,8 @@ package personLayer;
 public class Business extends Customer{
 private String company, cvrNr;
 	
-	public Business(String name, String phoneNr, String address, String email, String city, String postCode, String company, String cvrNr){
-		super(name, phoneNr, address, email, city, postCode);
+	public Business(String name, String phoneNr, String street, String email, String city, String postCode, String company, String cvrNr){
+		super(name, phoneNr, street, email, city, postCode);
 		this.company = company;
 		this.cvrNr = cvrNr;
 	}

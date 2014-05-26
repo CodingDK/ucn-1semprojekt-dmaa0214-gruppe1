@@ -21,11 +21,11 @@ public class CustomerCtr {
 		return cCont.findCustomer(id);
 	}
 	
-	public void createPrivateCustomer(String name, String phoneNr, String address, String email, String city, String postCode, String cprNr, String pictureId){
-		cCont.addCustomer(new Private(name, phoneNr, address, email, city, postCode, cprNr, pictureId));
+	public void createPrivateCustomer(String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String pictureId){
+		cCont.addCustomer(new Private(name, phoneNr, street, email, city, postCode, cprNr, pictureId));
 	}
 	
-	public void updateCustomer(int id, String name, String phoneNr, String address, String email, String city, String postCode, String pictureID, String company, String cvrNr){
+	public void updateCustomer(int id, String name, String phoneNr, String street, String email, String city, String postCode, String pictureID, String company, String cvrNr){
 		Customer c = cCont.findCustomer(id);
 		if(c != null){
 			if(name != null){
@@ -34,8 +34,8 @@ public class CustomerCtr {
 			if(phoneNr != null){
 				c.setPhoneNr(phoneNr);
 			}
-			if(address != null){
-				c.setAddress(address);
+			if(street != null){
+				c.setStreet(street);
 			}
 			if(email != null){
 				c.setEmail(email);
@@ -70,7 +70,7 @@ public class CustomerCtr {
 		cCont.removeCustomer(cCont.findCustomer(id));
 	}
 	
-	public void createBusinessCustomer(String name, String phoneNr, String address, String email, String city, String postCode, String company, String cvrNr){
-		cCont.addCustomer(new Business(name, phoneNr, address, email, city, postCode, company, cvrNr));
+	public void createBusinessCustomer(String name, String phoneNr, String street, String email, String city, String postCode, String company, String cvrNr){
+		cCont.addCustomer(new Business(name, phoneNr, street, email, city, postCode, company, cvrNr));
 	}
 }

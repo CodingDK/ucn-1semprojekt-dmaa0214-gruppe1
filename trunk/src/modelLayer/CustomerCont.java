@@ -12,6 +12,10 @@ public class CustomerCont {
 		customers = new ArrayList<Customer>();
 	}
 	
+	/**
+	 * Returns the instance of CustomerCont
+	 * @return instance
+	 */
 	public static CustomerCont getInstance(){
 		if(instance == null){
 			instance = new CustomerCont();
@@ -20,6 +24,10 @@ public class CustomerCont {
 		return instance;
 	}
 	
+	/**
+	 * Adds a Customer to the ArrayList
+	 * @param c
+	 */
 	public void addCustomer(Customer c){
 		customers.add(c);
 	}

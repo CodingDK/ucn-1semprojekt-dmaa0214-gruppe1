@@ -3,14 +3,14 @@ package personLayer;
 public class Person {
 	private static int idIterator;
 	protected int id;
-	protected String name, phoneNr, address, email, city, postCode;
+	protected String name, phoneNr, street, email, city, postCode;
 	
-	public Person(String name, String phoneNr, String address, String email, String city, String postCode){
+	public Person(String name, String phoneNr, String street, String email, String city, String postCode){
 		idIterator++;
 		this.id = idIterator;
 		this.name = name;
 		this.phoneNr = phoneNr;
-		this.address = address;
+		this.street = street;
 		this.email = email;
 		this.city = city;
 		this.postCode = postCode;
@@ -44,18 +44,20 @@ public class Person {
 		this.phoneNr = phoneNr;
 	}
 
+	
+
 	/**
-	 * @return the address
+	 * @return the street
 	 */
-	public String getAddress() {
-		return address;
+	public String getStreet() {
+		return street;
 	}
 
 	/**
-	 * @param address the address to set
+	 * @param street the street to set
 	 */
-	public void setAddress(String address) {
-		this.address = address;
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
 	/**
