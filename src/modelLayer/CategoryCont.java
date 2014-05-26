@@ -61,6 +61,27 @@ public class CategoryCont {
 	}
 	
 	/**
+	 * Finds the Category by ID
+	 * @param ID
+	 * @return Category
+	 */
+	public Category findCategory(int id){
+		boolean found = false;
+		Category c = null;
+		int i = 0;
+		while(i < categories.size() && !found){
+			Category ca = categories.get(i);
+			if(ca.getId() == id){
+				c = ca;
+				found = true;
+			}
+			i++;
+		}
+		
+		return c;
+	}
+	
+	/**
 	 * Removes the category
 	 * @param c
 	 */
