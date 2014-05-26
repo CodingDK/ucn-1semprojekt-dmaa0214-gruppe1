@@ -61,6 +61,8 @@ public class CustomerCtr {
 					b.setCvrNr(cvrNr);
 				}
 			}
+		}else{
+			throw new NullPointerException("Kunden eksistere ikke");
 		}
 	}
 	

@@ -14,6 +14,15 @@ public class Employee extends Person{
 	public String getEmployeeNr() {
 		return employeeNr;
 	}
+
+	/**
+	 * @param employeeNr the employeeNr to set
+	 */
+	public void setEmployeeNr(String employeeNr) {
+		this.employeeNr = employeeNr;
+	}
+	
+	
 	
 	
 
