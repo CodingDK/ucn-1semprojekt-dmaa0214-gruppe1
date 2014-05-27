@@ -157,19 +157,19 @@ public class CustomerCtr {
 	 * @param partName
 	 * @return Customer
 	 */
-	public ArrayList<Customer> searchBusiness(String partName){
-		ArrayList<Customer> foundCustomers = new ArrayList<Customer>();
-		
-		
-		ArrayList<Customer> cust = customerCont.getCustomers();
-		if(cust != null)
-			for(Customer c : cust){
-				if( ){
-					foundCustomers.add(c.);			
-				}	
-			}
-		return foundCustomers;
-	}
+//	public ArrayList<Customer> searchBusiness(String partName){
+//		ArrayList<Customer> foundCustomers = new ArrayList<Customer>();
+//		
+//		
+//		ArrayList<Customer> cust = customerCont.getCustomers();
+//		if(cust != null)
+//			for(Customer c : cust){
+//				if( ){
+//					foundCustomers.add(c.);			
+//				}	
+//			}
+//		return foundCustomers;
+//	}
 }
 
 
