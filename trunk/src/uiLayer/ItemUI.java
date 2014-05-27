@@ -92,13 +92,86 @@ public class ItemUI extends SuperUI{
 		}		
 	}
 	
-	private void searchStorage() {
-		// TODO Auto-generated method stub
+	private Storage searchStorage() {
+		Storage retStorage = null;
+		try{
+			boolean done = false;
+			while(!done){
+				System.out.println("## Vælg Lagre ##");
+				String name = requestString("Lager navn", null, null);
+				ItemCtr iCtr = new ItemCtr();
+				ArrayList<Storage> storages = iCtr.searchStorage(name);
+				if(storages != null && storages.size() > 0){
+					boolean recheck = true;
+					System.out.println(storages.size() + " Lagre Fundet");
+					while(recheck){
+						for(Storage s : storages){
+							System.out.println("#" + s.getId() + " - " + s.getName());
+						}
+						int i = requestInt("LagerID", null);
+						if(iCtr.findStorage(i) != null && storages.contains(iCtr.findStorage(i))){
+							retStorage = iCtr.findStorage(i);
+							System.out.println("Lager " + retStorage.getName() + " valgt");
+							pause();
+							done = true;
+							recheck = false;
+						}else{
+							recheck = true;
+						}
+					}
+				}else{
+					System.out.println("0 Lagre Fundet");
+					pause();
+					done = true;
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return retStorage;
 		
 	}
 
-	private void searchCategory() {
-		// TODO Auto-generated method stub
+	private Category searchCategory() {
+		Category retCategory = null;
+		try{
+			boolean done = false;
+			while(!done){
+				System.out.println("## Vælg Kategori ##");
+				String name = requestString("Kategori navn", null, null);
+				CategoryCtr cCtr = new CategoryCtr();
+				ArrayList<Category> cats = cCtr.searchCategory(name);
+				if(cats != null && cats.size() > 0){
+					boolean recheck = true;
+					System.out.println(cats.size() + " Kategorier Fundet");
+					while(recheck){
+						for(Category c : cats){
+							System.out.println("#" + c.getId() + " - " + c.getName());
+						}
+						int i = requestInt("KategoriID", null);
+						if(cCtr.findCategory(i) != null && cats.contains(cCtr.findCategory(i))){
+							retCategory = cCtr.findCategory(i);
+							System.out.println("Kategori " + retCategory.getName() + " valgt");
+							pause();
+							done = true;
+							recheck = false;
+						}else{
+							recheck = true;
+						}
+					}
+				}else{
+					System.out.println("0 Kategorier Fundet");
+					pause();
+					done = true;
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return retCategory;
+		
 		
 	}
 
