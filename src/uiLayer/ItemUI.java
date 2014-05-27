@@ -314,15 +314,15 @@ public class ItemUI extends SuperUI{
 			System.out.println("## Søg Kategori ##");
 			String name = requestString("Kategori navn: ", null, null);
 			CategoryCtr cCtr = new CategoryCtr();
-			ArrayList<Category> items = cCtr.searchCategory(name);
-			if(items != null){
-				System.out.println(items.size() + " Varer Fundet");
-				for(Item i : items){
-					System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + i.getAmount() + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
+			ArrayList<Category> cats = cCtr.searchCategory(name);
+			if(cats != null){
+				System.out.println(cats.size() + " Kategorier Fundet");
+				for(Category c : cats){
+					System.out.println("#" + c.getId() + " - " + c.getName());
 				}
 				pause();
 			}else{
-				System.out.println("0 Varer Fundet");
+				System.out.println("0 Kategorier Fundet");
 				pause();
 				return;
 			}
@@ -333,8 +333,26 @@ public class ItemUI extends SuperUI{
 	}
 	
 	private void findStorage(){
-		// TODO Auto-generated method stub
-		
+		try{
+			System.out.println("## Søg Lager ##");
+			String name = requestString("Lager navn: ", null, null);
+			ItemCtr iCtr = new ItemCtr();
+			ArrayList<Storage> storages = iCtr.searchStorage(name);
+			if(storages != null){
+				System.out.println(storages.size() + " Lagre Fundet");
+				for(Storage s : storages){
+					System.out.println("#" + s.getId() + " - " + s.getName());
+				}
+				pause();
+			}else{
+				System.out.println("0 Lagre Fundet");
+				pause();
+				return;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	private void updateItem() {
