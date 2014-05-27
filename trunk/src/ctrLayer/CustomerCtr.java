@@ -1,4 +1,6 @@
 package ctrLayer;
+import java.util.ArrayList;
+
 import personLayer.*;
 import modelLayer.*;
 
@@ -130,4 +132,24 @@ public class CustomerCtr {
 	public void createBusinessCustomer(String name, String phoneNr, String street, String email, String city, String postCode, String company, String cvrNr){
 		cCont.addCustomer(new Business(name, phoneNr, street, email, city, postCode, company, cvrNr));
 	}
+	
+	/**
+	 * searchCustomer
+	 * @param partName
+	 * @return Customer
+	 */
+	public ArrayList<Customer> searchCustomer(String partName){
+		ArrayList<Customer> foundCustomers = new ArrayList<Customer>();
+		CustomerCont customerCont = CustomerCont.getInstance();
+		ArrayList<Customer> cust = customerCont.getCustomers();
+		if(cust != null)
+			for(Customer c : cust){
+				if(c.getName().contains(partName) ){
+					foundCustomers.add(c);			
+				}	
+			}
+		return foundCustomers;
+	}
 }
+
+

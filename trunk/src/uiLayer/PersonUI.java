@@ -41,7 +41,7 @@ public class PersonUI extends SuperUI{
 		int choice = 0;
 		try{
 			System.out.println("## Kunde menu ##");
-			System.out.println(" 1. Find kunde");
+			System.out.println(" 1. S¿g kunde");
 			System.out.println(" 2. Opret privat kunde");
 			System.out.println(" 3. Opret erhvervs kunde");
 			System.out.println(" 4. Opret sælger");
@@ -158,14 +158,16 @@ public class PersonUI extends SuperUI{
 	 * findCustomer - Find a customer in the system by the name or phone number
 	 */
 	public void findCustomer() {
-		System.out.println("## Find kunde ##");
+		System.out.println("## S¿g kunde ##");
 		System.out.print("Indtast kunde navn eller telefon nr: ");
 		Scanner k = new Scanner(System.in);
 		String nameOrPhone = k.nextLine();
-			
+		
+		
 		CustomerCtr customerCtr = new CustomerCtr();
 		Customer customer = customerCtr.findCustomer(nameOrPhone);
 			
+		
 		if(customer == null){
 			System.out.println("Kunden er ikke fundet");
 			pause();
@@ -179,6 +181,7 @@ public class PersonUI extends SuperUI{
 			System.out.println("Telefon nr: " + customer.getPhoneNr());
 			pause();
 			updateCustomerMenu(customer);
+			
 		}
 	}
 	
