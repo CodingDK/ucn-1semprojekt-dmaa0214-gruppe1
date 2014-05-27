@@ -35,7 +35,7 @@ public abstract class SuperUI {
 	}	
 
 	
-	protected String requestString(String input, Integer minLength, Integer maxLength){
+	protected String requestString(String input, Integer minLength, Integer maxLength, boolean allowNull){
 		Scanner k = new Scanner(System.in);
 		String ret = "";
 		boolean done = false;
@@ -44,7 +44,7 @@ public abstract class SuperUI {
 			System.out.print(input + ": ");
 			String inputData = k.nextLine();
 			
-			if(inputData.trim().isEmpty()){
+			if(inputData.trim().isEmpty() || !allowNull){
 				System.out.println("Feltet må ikke være tomt");
 				pause();
 				error = true;
