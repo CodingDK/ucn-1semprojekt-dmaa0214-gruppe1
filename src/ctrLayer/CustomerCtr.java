@@ -150,6 +150,25 @@ public class CustomerCtr {
 			}
 		return foundCustomers;
 	}
+	
+	
+	/**
+	 * searchBusiness
+	 * @param partName
+	 * @return Customer
+	 */
+	public ArrayList<Customer> searchBusiness(String partName){
+		ArrayList<Customer> foundCustomers = new ArrayList<Customer>();
+		CustomerCont customerCont = CustomerCont.getInstance();
+		ArrayList<Customer> cust = customerCont.findBusiness();
+		if(cust != null)
+			for(Customer c : cust){
+				if( ){
+					foundCustomers.add(c);			
+				}	
+			}
+		return foundCustomers;
+	}
 }
 
 
