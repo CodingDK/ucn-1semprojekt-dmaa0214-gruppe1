@@ -32,7 +32,13 @@ public class MainUI extends SuperUI{
 					makeTest();
 					testCreated = true;
 				}
-			} else if(choice == 5){
+			}else if(choice == 5){
+				if(!admin){
+					login();
+				}else{
+					admin = false;
+				}
+			} else if(choice == 6){
 				System.out.println("Program afsluttet.");
 				exit = true;
 			}
@@ -47,7 +53,12 @@ public class MainUI extends SuperUI{
 			System.out.println("2. Salg UI");
 			System.out.println("3. Vare UI");
 			System.out.println("4. Lav Test");
-			System.out.println("5. Afslut program");
+			if(!admin){
+				System.out.println("5. Administrator Login");
+			}else{
+				System.out.println("5. Logud");
+			}
+			System.out.println("6. Afslut program");
 			choice = k.nextInt();
 			k.nextLine();
 		} catch(InputMismatchException e){

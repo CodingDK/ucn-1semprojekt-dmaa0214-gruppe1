@@ -1,5 +1,6 @@
 package uiLayer;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -41,10 +42,10 @@ public class ItemUI extends SuperUI{
 					selectedCategory = pickCategory();
 					removeCategory();
 				}
-			} else if(choice == 4){ // Sï¿½g
-				searchCategory();
-			} else if(choice == 5){ // Vï¿½lg
+			} else if(choice == 4){ // Vælg
 				selectedCategory = pickCategory();
+			} else if(choice == 5){ // Søg
+				searchCategory();
 			} else if(choice == 6){ // Opret Lager
 				createStorage();
 			} else if(choice == 7){ // Opdater
@@ -61,10 +62,10 @@ public class ItemUI extends SuperUI{
 					selectedStorage = pickStorage();
 					removeStorage();
 				}
-			} else if(choice == 9){ // Sï¿½g
-				searchStorage();
-			} else if(choice == 10){ // Vï¿½lg
+			} else if(choice == 9){ // Vælg
 				selectedStorage = pickStorage();
+			} else if(choice == 10){ // Søg
+				searchStorage();
 			} else if(choice == 11){ // Opret Vare
 				new CreateItemUI(selectedCategory, selectedStorage);
 			} else if(choice == 12){ // Opdater
@@ -81,17 +82,95 @@ public class ItemUI extends SuperUI{
 					pickItem();
 					removeItem();
 				}
-			} else if(choice == 14){ // Sï¿½g
-				searchItem();
-			} else if(choice == 15){ // Vï¿½lg
+			} else if(choice == 14){ // Vælg
 				selectedItem = pickItem();
+			} else if(choice == 15){ // Søg
+				searchItem();
 			} else if(choice == 16){
 				exit = true;
-			} else if(choice == 17){
-				test();
 			}
 		}		
 	}
+	
+
+	private int writeMenu(){
+		int choice = 0;
+		try{
+			System.out.println("## Item menu ##");
+			
+			{
+				if(admin){
+					System.out.println("--------------------------");
+					System.out.println(" 1. Opret Kategori");
+					
+					if(selectedCategory != null){
+						System.out.println(" 2. Opdater Kategori (" + selectedCategory.getName() + ")");
+					}else{
+						System.out.println(" 2. Opdater Kategori");
+					}
+					if(selectedCategory != null){
+						System.out.println(" 3. Fjern Kategori (" + selectedCategory.getName() + ")");
+					}else{
+						System.out.println(" 3. Fjern Kategori");
+					}
+				System.out.println(" 4. Vï¿½lg Kategori");
+				}
+				
+				System.out.println(" 5. Sï¿½g Kategori");
+				System.out.println("--------------------------");
+			}
+			
+			{
+			
+				if(admin){
+					System.out.println(" 6. Opret Lager");
+					if(selectedStorage != null){
+						System.out.println(" 7. Opdater Lager (" + selectedStorage.getName() + ")");
+					}else{
+						System.out.println(" 7. Opdater Lager");
+					}
+					if(selectedStorage != null){
+						System.out.println(" 8. Fjern Lager (" + selectedStorage.getName() + ")");
+					}else{
+						System.out.println(" 8. Fjern Lager");
+					}
+					System.out.println(" 9. Vï¿½lg Lager");
+				}
+				System.out.println(" 10. Sï¿½g Lager");
+				System.out.println("--------------------------");
+			}
+
+			{
+				if(admin){
+					System.out.println(" 11. Opret Vare");
+					if(selectedItem != null){
+						System.out.println(" 12. Opdater Vare (" + selectedItem.getName() + ")");
+					}else{
+						System.out.println(" 12. Opdater Vare");
+					}
+					if(selectedItem != null){
+						System.out.println(" 13. Fjern Vare (" + selectedItem.getName() + ")");
+					}else{
+						System.out.println(" 13. Fjern Vare");
+					}
+					System.out.println(" 14. Vï¿½lg Vare");
+				}
+				System.out.println(" 15. Sï¿½g Vare");
+				System.out.println("--------------------------");
+			}
+			
+			
+			
+			System.out.println(" 16. Tilbage");
+			System.out.print("Valg: ");
+			Scanner k = new Scanner(System.in);
+			choice = k.nextInt();
+		} catch(InputMismatchException e){
+			System.out.println("Forkert input!");
+		}
+		return choice;
+	}
+	
 	
 	private Storage pickStorage() {
 		Storage retStorage = null;
@@ -174,98 +253,6 @@ public class ItemUI extends SuperUI{
 		return retCategory;
 		
 		
-	}
-
-	private void test(){
-		ItemCtr iCtr = new ItemCtr();
-		CategoryCtr cCtr = new CategoryCtr();
-		iCtr.createStorage("Lager1");
-		iCtr.createStorage("Lager2");
-		Storage s1 = iCtr.findStorage("Lager1");
-		Storage s2 = iCtr.findStorage("Lager2");
-		cCtr.createCategory("Søm");
-		cCtr.createCategory("Hammer");
-		Category c1 = cCtr.findCategory("Søm");
-		Category c2 = cCtr.findCategory("Hammer");
-		
-		
-		iCtr.createItem("Søm Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
-		iCtr.createItem("Søm t. Sømpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
-		
-		iCtr.createItem("Flad Hammer", 200, 0, 1., 1., 1., 1, "1234", s2, 10, 1, c2);
-		iCtr.createItem("Rund Hammer", 200, 0, 1., 1., 1., 1, "1234", s2, 10, 1, c2);
-	}
-	
-	private int writeMenu(){
-		int choice = 0;
-		try{
-			System.out.println("## Item menu ##");
-			
-			{
-				System.out.println("--------------------------");
-				System.out.println(" 1. Opret Kategori");
-				if(selectedCategory != null){
-					System.out.println(" 2. Opdater Kategori (" + selectedCategory.getName() + ")");
-				}else{
-					System.out.println(" 2. Opdater Kategori");
-				}
-				if(selectedCategory != null){
-					System.out.println(" 3. Fjern Kategori (" + selectedCategory.getName() + ")");
-				}else{
-					System.out.println(" 3. Fjern Kategori");
-				}
-				System.out.println(" 4. Sï¿½g Kategori");
-				System.out.println(" 5. Vï¿½lg Kategori");
-				System.out.println("--------------------------");
-			}
-			
-			
-			{
-				System.out.println(" 6. Opret Lager");
-				if(selectedStorage != null){
-					System.out.println(" 7. Opdater Lager (" + selectedStorage.getName() + ")");
-				}else{
-					System.out.println(" 7. Opdater Lager");
-				}
-				if(selectedStorage != null){
-					System.out.println(" 8. Fjern Lager (" + selectedStorage.getName() + ")");
-				}else{
-					System.out.println(" 8. Fjern Lager");
-				}
-				System.out.println(" 9. Sï¿½g Lager");
-				System.out.println(" 10. Vï¿½lg Lager");
-				System.out.println("--------------------------");
-			}
-
-			
-			{
-				System.out.println(" 11. Opret Vare");
-				if(selectedItem != null){
-					System.out.println(" 12. Opdater Vare (" + selectedItem.getName() + ")");
-				}else{
-					System.out.println(" 12. Opdater Vare");
-				}
-				if(selectedItem != null){
-					System.out.println(" 13. Fjern Vare (" + selectedItem.getName() + ")");
-				}else{
-					System.out.println(" 13. Fjern Vare");
-				}
-				System.out.println(" 14. Sï¿½g Vare");
-				System.out.println(" 15. Vï¿½lg Vare");
-				System.out.println("--------------------------");
-			}
-			
-			
-			
-			System.out.println(" 16. Exit");
-			System.out.println(" 17. Test");
-			System.out.print("Valg: ");
-			Scanner k = new Scanner(System.in);
-			choice = k.nextInt();
-		} catch(InputMismatchException e){
-			System.out.println("Forkert input!");
-		}
-		return choice;
 	}
 	
 	private void createCategory() {

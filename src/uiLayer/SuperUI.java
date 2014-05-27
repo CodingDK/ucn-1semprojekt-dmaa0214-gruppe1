@@ -2,7 +2,11 @@ package uiLayer;
 
 import java.util.Scanner;
 
+import personLayer.Employee;
+import ctrLayer.EmployeeCtr;
+
 public abstract class SuperUI {
+	protected static boolean admin;
 	
 	protected void pause(){
 		Scanner k = new Scanner(System.in);	
@@ -171,4 +175,27 @@ public abstract class SuperUI {
         }
         return confirm;
     }
+	
+	protected void login(){
+		Scanner k = new Scanner(System.in);
+		System.out.println("## Administrator Login ##");
+		String employeeID = requestString("Medarbejder Nummer", null, null, false);
+		String password = requestString("Kodeord", null, null, false);
+		
+		EmployeeCtr eCtr = new EmployeeCtr();
+		Employee e = eCtr.findEmployee(employeeID);
+		if(e != null){
+			if(!e.getAdmin()){
+				System.out.println("Dette mederbajder nummer har ikke administrator rettigheder");
+				pause();
+			}else if(e.getAdmin() && e.getPassword().equals(password)){
+				System.out.println("Du er nu logget ind som administrator");
+				admin = true;
+				pause();
+			}
+		}else{
+			System.out.println("Denne medarbejder eksistere ikke");
+		}
+		
+	}
 }
