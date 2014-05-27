@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import personLayer.Business;
 import personLayer.Customer;
+import personLayer.Employee;
 import ctrLayer.CustomerCtr;
 import ctrLayer.EmployeeCtr;
 
@@ -34,7 +34,7 @@ public class PersonUI extends SuperUI{
 			} else if(choice == 6){
 				createAdministrator();
 			} else if(choice == 7){
-				
+				findEmployee();
 			} else if(choice == 8){
 				
 			} else if(choice == 9){
@@ -54,7 +54,7 @@ public class PersonUI extends SuperUI{
 			System.out.println(" 4. Opret erhvervskunde");
 			System.out.println(" 5. Opret s¾lger");
 			System.out.println(" 6. Opret administrator");
-			System.out.println(" 7. Opdater erhvervs kunde");
+			System.out.println(" 7. S¿g medarbejder (s¾lger eller administrator)");
 			System.out.println(" 8. Opdater s¾lger");
 			System.out.println(" 9. Opdater administrator");
 			Scanner k = new Scanner(System.in);
@@ -221,19 +221,6 @@ public class PersonUI extends SuperUI{
 	}
 	
 	/**
-	 * findBusiness - Search for a business customer
-	 */
-	public void findBusiness(){
-		System.out.println("## S¿g erhvervskunde ##");
-		System.out.print("Indtast virksomhedsnavn: ");
-		Scanner k = new Scanner(System.in);
-		String comp = k.nextLine();
-		
-		
-	}
-	
-	
-	/**
 	 * updateCustomerMenu
 	 * @param customer
 	 */
@@ -246,9 +233,9 @@ public class PersonUI extends SuperUI{
 			} else if(choice == 2){
 				removePerson(customer);
 			} else if(choice == 3){
-				return;
+				exit = true;
 			}	
-		}
+		}		
 	}
 	
 	/**
@@ -286,34 +273,179 @@ public class PersonUI extends SuperUI{
 		String cvrNr = null;
 		
 		CustomerCtr customerCtr = new CustomerCtr();
-		customerCtr.updateCustomer(id, name, phoneNr, street, email, city, postCode, pictureID, company, cvrNr);
-		
+		customerCtr.updateCustomer(id, name, phoneNr, street, email, city, postCode, pictureID, company, cvrNr);		
 	}
 
-	public void updateBusiness() {
-		// TODO Auto-generated method stub
-	}
-
-	private void updateSeller() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	private void updateAdministrator() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	/**
 	 * removePerson - Used to remove a person from the Customer object
 	 * @param customer
 	 */
 	private void removePerson(Customer customer) {
-		if(confirm("¯nsker du at slette: " + customer.getName() ) ){
+		if(confirm("¯nsker du at slette: ") ){
 			int id = customer.getId();
 			CustomerCtr customerCtr = new CustomerCtr();
 			customerCtr.removeCustomer(id);
+			System.out.println("Personen er nu slettet");
+			pause();
+		} else{
+			System.out.println("Personen er ikke slettet");
+			pause();
+		}
+	}
+	
+	/**
+	 * findBusiness - Search for a business customer
+	 */
+	public void findBusiness(){
+//		System.out.println("## S¿g erhvervskunde ##");
+//		System.out.print("Indtast virksomhedsnavn: ");
+//		Scanner k = new Scanner(System.in);
+//		String comp = k.nextLine();				
+	}
+	
+	public void updateBusiness() {
+		// TODO Auto-generated method stub
+	}
+	
+	
+	
+	public void findEmployee(){	
+			System.out.println("## S¿g medarbejder ##");
+			System.out.print("Indtast medarbejder navn eller medarbejder nr: ");
+			Scanner k = new Scanner(System.in);
+			String nameOrEmpNr = k.nextLine();
+			
+			EmployeeCtr employeeCtr = new EmployeeCtr();
+			ArrayList<Employee> employees = employeeCtr.searchEmployee(nameOrEmpNr);
+			if(employees != null){
+				System.out.println(employees.size() + " medarbejder fundet");
+				for(Employee e : employees){
+					System.out.println("ID: " + e.getId() + ", Navn: " + e.getName() + ", Gade: " + e.getStreet() + ", PostNummer: " + e.getPostCode() + ", By: " + e.getCity() + ", Tlf nr: " + e.getPhoneNr());
+				}
+			} else{
+				System.out.println("0 medarbejdere Fundet");
+				pause();
+				return;
+			}
+			boolean recheck = false;
+			while(!recheck){
+				if(employees.size() > 1){
+					int id = requestInt("Indtast medarbejder ID for den ¿nskede medarbejder", null, false);
+					for(Employee e : employees){
+						if(id == e.getId()){
+							System.out.println("Navn: " + e.getName() + ", Gade: " + e.getStreet() + ", PostNummer: " + e.getPostCode() + ", By: " + e.getCity() + ", Tlf nr: " + e.getPhoneNr());
+							updateEmployeeMenu(e);
+							pause();
+							recheck = true;
+						}
+					}
+				} else if(employees.size() == 1){
+					updateEmployeeMenu(employeeCtr.findEmployee(nameOrEmpNr));
+				}
+			}				
+	}
+	
+	
+	public void updateEmployeeMenu(Employee employee){
+		boolean exit = false;
+		boolean admin = employee.getAdmin();
+		while(!exit){
+			int choice = findEmployeeMenu();
+			if(choice == 1 && !admin){
+				updateSeller(employee);
+			} else if(choice == 1 && admin){
+				updateAdministrator(employee);
+			} else if(choice == 2){
+				removeEmploye(employee);
+			} else if(choice == 3){
+				exit = true;
+			}
+		}
+	}
+	
+	private int findEmployeeMenu(){
+		int choice = 0;
+		try{
+			System.out.println("## Menu ");
+			System.out.println("1. Opdater medarbejder");
+			System.out.println("2. Fjern medarbejder");
+			System.out.println("3. Tilbage til medarbejdermenu");
+			
+			Scanner k = new Scanner(System.in);
+			choice = k.nextInt();
+		} catch(InputMismatchException e){
+			System.out.println("Forkert input!");
+		}
+		return choice;
+	}
+	
+	
+	
+
+	/**
+	 * updateAdministrator
+	 * @param employee
+	 */
+	private void updateAdministrator(Employee employee) {
+		System.out.println("## Opdater admin ##");
+		boolean admin = true;
+		updateEmployee(employee, admin);		
+	}
+	
+	/**
+	 * updateSeller
+	 * @param employee
+	 */
+	private void updateSeller(Employee employee){
+		System.out.println("## Opdater medarbejder ##");
+		boolean admin = false;
+		updateEmployee(employee, admin);		
+	}
+
+	/**
+	 * Update Empluyee
+	 * @param employee
+	 * @param admin
+	 */
+	private void updateEmployee(Employee employee, boolean admin) {
+		System.out.println("Skriv ny info ellers tryk enter");
+			
+		System.out.println("Medarbejder nr: (" + employee.getEmployeeNr());
+		String employeeNr = stringToNull();
+		
+		System.out.println("Navn: (" + employee.getName() + ")" );
+		String name = stringToNull();
+			
+		System.out.println("Gade: (" + employee.getStreet() + ")");
+		String street = stringToNull();
+			
+		System.out.println("Postnummer: (" + employee.getStreet() + ")");
+		String postCode = stringToNull();
+			
+		System.out.println("By: (" + employee.getCity() + ")");
+		String city = stringToNull();
+			
+		System.out.println("Telefon nr: (" + employee.getPhoneNr() + ")");
+		String phoneNr = stringToNull();
+			
+		System.out.println("E-mail: (" + employee.getEmail() + ")");
+		String email = stringToNull();
+					
+		int id = employee.getId();
+				
+		EmployeeCtr employeeCtr = new EmployeeCtr();
+		employeeCtr.updateEmployee(id, employeeNr, name, phoneNr, street, email, city, postCode, admin);	
+	}
+
+	/**
+	 * removeEmployee - Used to remove an employee from the Employee object
+	 * @param Employee
+	 */
+	private void removeEmploye(Employee employee) {
+		if(confirm("¯nsker du at slette: ") ){
+			EmployeeCtr employeeCtr = new EmployeeCtr();
+			employeeCtr.removeEmployee(employee);
 			System.out.println("Personen er nu slettet");
 			pause();
 		} else{
