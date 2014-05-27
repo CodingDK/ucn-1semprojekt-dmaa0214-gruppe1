@@ -1,13 +1,11 @@
 package uiLayer;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import modelLayer.*;
 import ctrLayer.*;
-import exceptionLayer.NoSelectionException;
 
 public class ItemUI extends SuperUI{
 	private Category selectedCategory;
@@ -178,7 +176,7 @@ public class ItemUI extends SuperUI{
 	}
 	
 	
-	private Storage pickStorage() {
+	public Storage pickStorage() {
 		Storage retStorage = null;
 		try{
 			boolean done = false;
@@ -219,7 +217,7 @@ public class ItemUI extends SuperUI{
 		
 	}
 
-	private Category pickCategory() {
+	public Category pickCategory() {
 		Category retCategory = null;
 		try{
 			boolean done = false;
@@ -264,7 +262,6 @@ public class ItemUI extends SuperUI{
 	private void createCategory() {
 		try{
 			CategoryCtr cCtr = new CategoryCtr();
-			Scanner k = new Scanner(System.in);
 			
 			System.out.println(" *** Opret Kategori *** ");
 			String categoryName = requestString("Kategori navn", 1, null, false);
@@ -285,7 +282,6 @@ public class ItemUI extends SuperUI{
 	private void createStorage() {
 		try{
 			ItemCtr iCtr = new ItemCtr();
-			Scanner k = new Scanner(System.in);
 			
 			System.out.println(" *** Opret Lager *** ");
 			String storageName = requestString("Lager navn", 1, null, false);
@@ -447,12 +443,8 @@ public class ItemUI extends SuperUI{
 	private void updateCategory() {
 		CategoryCtr cCtr = new CategoryCtr();
 		String name = requestString("Navn(" + selectedCategory.getName() + ")", null, null, false);
-		try {
-			cCtr.selectCategory(selectedCategory.getName());
-			cCtr.updateCategory(name);
-		} catch (NoSelectionException e) {
-			e.printStackTrace();
-		}
+		cCtr.updateCategory(selectedCategory, name);
+
 	}
 	
 	private void updateStorage(){
@@ -468,12 +460,7 @@ public class ItemUI extends SuperUI{
 	
 	private void removeCategory() {
 		CategoryCtr cCtr = new CategoryCtr();
-		cCtr.selectCategory(selectedCategory.getName());
-		try {
-			cCtr.removeCategory();
-		} catch (NoSelectionException e) {
-			e.printStackTrace();
-		}
+		cCtr.removeCategory(selectedCategory);
 	}
 	
 	private void removeStorage(){

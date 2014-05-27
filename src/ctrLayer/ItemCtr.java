@@ -247,7 +247,7 @@ public class ItemCtr {
 		return StorageCont.getInstance().getAll();
 	}
 	
-	public ArrayList<Item> searchItem(String s){
+	public ArrayList<Item> searchItem(String name){
 		ArrayList<Item> items = new ArrayList<Item>();
 		CategoryCtr cCtr = new CategoryCtr();
 		ArrayList<Category> cats = cCtr.getAllCategories();
@@ -256,7 +256,7 @@ public class ItemCtr {
 				ArrayList<Item> list = ItemCont.getInstance(cat).getAll();
 				if(list != null){
 					for(Item i : list){
-						if(i.getName().toLowerCase().contains(s.toLowerCase())){
+						if(i.getName().toLowerCase().contains(name.toLowerCase())){
 							items.add(i);
 						}
 					}

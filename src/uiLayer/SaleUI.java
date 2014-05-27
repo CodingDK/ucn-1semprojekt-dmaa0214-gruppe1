@@ -72,7 +72,7 @@ public class SaleUI extends SuperUI{
 
 	private void searchCustomer() {
 		PersonUI pUI = new PersonUI("Dry Run");
-		pUI.findCustomer();
+		//pUI.findCustomer();
 	}
 
 	private void createPrivate() {
