@@ -6,6 +6,8 @@ import exceptionLayer.AlreadyExistException;
 import exceptionLayer.NoSelectionException;
 import modelLayer.Category;
 import modelLayer.CategoryCont;
+import modelLayer.Item;
+import modelLayer.ItemCont;
 
 public class CategoryCtr {
 	private Category selectedCategory;
@@ -101,6 +103,20 @@ public class CategoryCtr {
 	 */
 	public void selectCategory(String name){
 		selectedCategory = cCont.findCategory(name);
+	}
+
+	public ArrayList<Category> searchCategory(String name) {
+		ArrayList<Category> categories = new ArrayList<Category>();
+		CategoryCtr cCtr = new CategoryCtr();
+		ArrayList<Category> cats = cCtr.getAllCategories();
+		if(cats != null){
+			for(Category cat : cats){
+				if(cat.getName().toLowerCase().contains(name.toLowerCase())){
+					categories.add(cat);
+				}
+			}
+		}
+		return categories;
 	}
 
 }

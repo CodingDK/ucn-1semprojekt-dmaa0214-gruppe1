@@ -310,7 +310,26 @@ public class ItemUI extends SuperUI{
 	}
 	
 	private void findCategory() {
-		// TODO Auto-generated method stub
+		try{
+			System.out.println("## Søg Kategori ##");
+			String name = requestString("Kategori navn: ", null, null);
+			CategoryCtr cCtr = new CategoryCtr();
+			ArrayList<Category> items = cCtr.searchCategory(name);
+			if(items != null){
+				System.out.println(items.size() + " Varer Fundet");
+				for(Item i : items){
+					System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + i.getAmount() + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
+				}
+				pause();
+			}else{
+				System.out.println("0 Varer Fundet");
+				pause();
+				return;
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	private void findStorage(){
