@@ -6,12 +6,15 @@ import java.util.Scanner;
 import modelLayer.Item;
 import modelLayer.Sale;
 import ctrLayer.SaleCtr;
+import exceptionLayer.NotEnoughItemsException;
+import exceptionLayer.SaleNotCreatedException;
 
 public class SaleUI extends SuperUI{
 	private Sale sale;
+	private SaleCtr sCtr;
 		
 	public SaleUI(){
-		SaleCtr sCtr = new SaleCtr();
+		sCtr = new SaleCtr();
 		this.sale = sCtr.createSale();
 		boolean exit = false;
 		while(!exit){
@@ -57,14 +60,17 @@ public class SaleUI extends SuperUI{
 	*/
 	
 	private void finishSale() {
-		// TODO Auto-generated method stub
-		SaleCtr sCtr = new SaleCtr();
-		String employeeNr = requestString("Indtast medarbejdernr.", null, null);
-		sCtr.finishSale(employeeNr);
+		String employeeNr = requestString("Indtast medarbejdernr.", null, null, false);
+		try {
+			sCtr.finishSale(employeeNr);
+		} catch (NullPointerException e) {
+			System.out.println(e);
+		} catch (SaleNotCreatedException e) {
+			System.out.println(e);
+		}
 	}
 
 	private void searchCustomer() {
-		// TODO Auto-generated method stub
 		PersonUI pUI = new PersonUI("Dry Run");
 		pUI.findCustomer();
 	}
@@ -83,7 +89,13 @@ public class SaleUI extends SuperUI{
 		ItemUI iUi = new ItemUI("Dry Run");
 		Item i = iUi.pickItem();
 		
-		int amount = requestInt("Antal", 1);
-		sale.addPartSale(i, amount);
+		int amount = requestInt("Antal", 1, false);
+		try {
+			sCtr.addItem(i, amount);
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		} catch (NotEnoughItemsException e) {
+			System.out.println(e);
+		}
 	}
 }
