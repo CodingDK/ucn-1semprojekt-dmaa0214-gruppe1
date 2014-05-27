@@ -103,4 +103,11 @@ public class CustomerCont {
 	public void removeCustomer(Customer c){
 		customers.remove(c);
 	}
+	
+	/**
+	 * @return customers Returns the list of customers.
+	 */
+	public ArrayList<Customer> getCustomers(){
+		return customers;
+	}
 }
