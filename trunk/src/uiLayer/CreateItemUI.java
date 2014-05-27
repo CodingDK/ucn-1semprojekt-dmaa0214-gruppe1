@@ -1,10 +1,8 @@
 package uiLayer;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
 import modelLayer.Category;
 import modelLayer.Item;
@@ -17,16 +15,17 @@ public class CreateItemUI extends SuperUI {
 	public CreateItemUI(Category c, Storage s) {
 		this.selectedCategory = c;
 		this.selectedStorage = s;
-		
+
 		try{
-			Scanner k = new Scanner(System.in);
 			boolean exit = false;
 			while(!exit){
 				int choice = writeItemMenu();
 				if(choice == 1){
-					selectCategory();
+					ItemUI iUi = new ItemUI("DryRun");
+					selectedCategory = iUi.pickCategory();
 				}else if(choice == 2){
-					selectStorage();
+					ItemUI iUi = new ItemUI("DryRun");
+					selectedStorage = iUi.pickStorage();
 				}else if(choice == 3){
 					if(selectedCategory != null && selectedStorage != null){
 						createItem();
@@ -58,7 +57,7 @@ public class CreateItemUI extends SuperUI {
 			}
 			
 			if(selectedStorage != null && selectedCategory != null){
-				System.out.println(" 3. Opret Vare (" + selectedStorage.getName() + ", " + selectedCategory.getName() + ")");
+				System.out.println(" 3. Opret Vare (Lager: " + selectedStorage.getName() + ", Kategori: " + selectedCategory.getName() + ")");
 				System.out.println(" 4. Tilbage");
 			}else{
 				System.out.println(" 4. Tilbage");
@@ -72,53 +71,8 @@ public class CreateItemUI extends SuperUI {
 		return choice;
 	}
 	
-	private void selectCategory() {
-		boolean done = false;
-		while(!done){
-			CategoryCtr cCtr = new CategoryCtr();
-			ArrayList<Category> categories = cCtr.getAllCategories();
-			System.out.println("## Vælg Kategori ##");
-			for(Category c : categories){
-				System.out.println("#" + c.getId() + " - " + c.getName());
-			}
-			Scanner k = new Scanner(System.in);
-			System.out.print("Vælg Kategori(ID): ");
-			int categoryID = k.nextInt();
-			k.nextLine();
-			if(cCtr.findCategory(categoryID) != null){
-				selectedCategory = cCtr.findCategory(categoryID);
-				done = true;
-			}else{
-				System.out.println("Den valgte kategori findes ikke");
-			}
-		}
-	}
-	
-	private void selectStorage() {
-		boolean done = false;
-		while(!done){
-			ItemCtr iCtr = new ItemCtr();
-			ArrayList<Storage> storages = iCtr.getAllStorages();
-			System.out.println("## Vælg Lager ##");
-			for(Storage s : storages){
-				System.out.println("#" + s.getId() + " - " + s.getName());
-			}
-			Scanner k = new Scanner(System.in);
-			System.out.print("Vælg Lager(ID): ");
-			int storageID = k.nextInt();
-			k.nextLine();
-			if(iCtr.findStorage(storageID) != null){
-				selectedStorage = iCtr.findStorage(storageID);
-				done = true;
-			}else{
-				System.out.println("Det valgte lager findes ikke");
-			}
-		}
-	}
-
 	private void createItem() {
 		ItemCtr iCtr = new ItemCtr();
-		Scanner k = new Scanner(System.in);
 		String name = null;
 		boolean done = false;
 		while(!done){
@@ -128,7 +82,8 @@ public class CreateItemUI extends SuperUI {
 				Item i = iCtr.getItem(name);
 				if(iCtr.getItem(name) != null && i.getStorage() == selectedStorage){
 					if(confirm(i.getName() + " eksistere allerede på " + i.getStorage().getName() + ", vil du vælge et andet lager?")){
-						selectStorage();
+						ItemUI iUi = new ItemUI("DryRun");
+						selectedStorage = iUi.pickStorage();
 					}else{
 						return;
 					}
