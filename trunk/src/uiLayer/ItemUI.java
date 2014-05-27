@@ -12,6 +12,10 @@ public class ItemUI extends SuperUI{
 	private Storage selectedStorage;
 	private Item selectedItem;
 	
+	public ItemUI(String dryRun){
+		
+	}
+	
 	public ItemUI(){
 		selectedCategory = null;
 		selectedStorage = null;
@@ -79,10 +83,12 @@ public class ItemUI extends SuperUI{
 			} else if(choice == 14){ // Søg
 				searchItem();
 			} else if(choice == 15){ // Vælg
-				pickItem();
+				selectedItem = pickItem();
 			} else if(choice == 16){
 				exit = true;
-			}		
+			} else if(choice == 17){
+				test();
+			}
 		}		
 	}
 	
@@ -188,6 +194,8 @@ public class ItemUI extends SuperUI{
 			
 			
 			System.out.println(" 16. Exit");
+			System.out.println(" 17. Test");
+			System.out.print("Valg: ");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
@@ -261,7 +269,8 @@ public class ItemUI extends SuperUI{
 		}
 	}
 	
-	private void pickItem() {
+	public Item pickItem() {
+		Item retItem = null;
 		try{
 			boolean done = false;
 			while(!done){
@@ -270,16 +279,22 @@ public class ItemUI extends SuperUI{
 				ItemCtr iCtr = new ItemCtr();
 				ArrayList<Item> items = iCtr.searchItem(name);
 				if(items != null && items.size() > 0){
+					boolean recheck = true;
 					System.out.println(items.size() + " Varer Fundet");
-					for(Item i : items){
-						System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + i.getAmount() + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
-					}
-					int i = requestInt("VareID", null);
-					if(iCtr.getItem(i) != null){
-						selectedItem = iCtr.getItem(i);
-						System.out.println("Vare " + selectedItem.getName() + " valgt");
-						pause();
-						done = true;
+					while(recheck){
+						for(Item i : items){
+							System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + i.getAmount() + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
+						}
+						int i = requestInt("VareID", null);
+						if(iCtr.getItem(i) != null && items.contains(iCtr.getItem(i))){
+							retItem = iCtr.getItem(i);
+							System.out.println("Vare " + selectedItem.getName() + " valgt");
+							pause();
+							done = true;
+							recheck = false;
+						}else{
+							recheck = true;
+						}
 					}
 				}else{
 					System.out.println("0 Varer Fundet");
@@ -290,6 +305,8 @@ public class ItemUI extends SuperUI{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		
+		return retItem;
 	}
 	
 	private void findCategory() {
