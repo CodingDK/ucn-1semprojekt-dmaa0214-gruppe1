@@ -2,10 +2,10 @@ package modelLayer;
 
 public class PartSale {
 	
-	private static int idIterator;
-	int id;
-	int amount;
-	Item item;
+	private static int idIterator = 0;
+	private int id;
+	private int amount;
+	private Item item;
 	
 	/**
 	 * Constructor of the class PartSale
@@ -13,9 +13,9 @@ public class PartSale {
 	 * @param amount Amount of item.
 	 */
 	public PartSale(Item i, int amount){
-		idIterator++;
-		id = idIterator;
-		item = i;
+		this.idIterator++;
+		this.id = idIterator;
+		this.item = i;
 		this.amount = amount;
 	}
 

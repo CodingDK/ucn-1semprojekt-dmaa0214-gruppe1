@@ -21,6 +21,7 @@ public class Sale {
 		this.customer = null;
 		this.employee = null;
 		this.done = false;
+		this.partSales = new ArrayList<PartSale>();
 	} 
 		
 	public void setTotalPrice(double totalPrice) {
@@ -41,13 +42,9 @@ public class Sale {
 	public ArrayList<PartSale> getPartSales() {
 		return partSales;
 	}
-	
-	public void setPartSales(ArrayList<PartSale> partSales) {
-		this.partSales = partSales;
-	}
 
-	public void addPartSale(Item i,int amount){
-		PartSale p = new PartSale(i,amount);
+	public void addPartSale(Item i, int amount){
+		PartSale p = new PartSale(i, amount);
 		partSales.add(p);
 	}
 	
