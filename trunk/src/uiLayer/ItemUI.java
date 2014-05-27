@@ -9,10 +9,12 @@ import ctrLayer.*;
 public class ItemUI extends SuperUI{
 	private Category selectedCategory;
 	private Storage selectedStorage;
+	private Item selectedItem;
 	
 	public ItemUI(){
 		selectedCategory = null;
 		selectedStorage = null;
+		selectedItem = null;
 		
 		boolean exit = false;
 		while(!exit){
@@ -106,30 +108,43 @@ public class ItemUI extends SuperUI{
 		}
 	}
 	
-	private void findItem() {
+	private void searchItem() {
+		try{
+			System.out.println("## Søg Item ##");
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	private void findCategory() {
+		
 	}
 	
 	private void findStorage(){
 		
+		
 	}
 	
 	private void updateItem() {
+		
 	}
 	
 	private void updateCategory() {
+		
 	}
 	
 	private void updateStorage(){
 		
+		
 	}
 	
 	private void removeItem() {
+		
 	}
 	
 	private void removeCategory() {
+		
 	}
 	
 	private void removeStorage(){
