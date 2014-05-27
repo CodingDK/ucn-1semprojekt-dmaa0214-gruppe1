@@ -12,7 +12,7 @@ public class Sale {
 	private static int idIterator;
 	private Customer customer;
 	private Employee employee;
-	private boolean done = false;
+	private boolean done;
 	
 	public Sale(){
 		idIterator++;
@@ -20,6 +20,7 @@ public class Sale {
 		this.date = new Date();
 		this.customer = null;
 		this.employee = null;
+		this.done = false;
 	} 
 		
 	public void setTotalPrice(double totalPrice) {
