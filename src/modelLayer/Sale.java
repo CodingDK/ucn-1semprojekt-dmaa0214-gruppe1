@@ -1,7 +1,10 @@
 package modelLayer;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 import personLayer.*;
 
 public class Sale {
@@ -33,6 +36,11 @@ public class Sale {
 
 	public Date getDate() {
 		return date;
+	}
+	
+	public String getDateToString(){
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		return df.format(date);
 	}
 	
 	public double getTotalPrice() {
