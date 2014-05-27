@@ -40,9 +40,9 @@ public class ItemUI extends SuperUI{
 					pickCategory();
 					removeCategory();
 				}
-			} else if(choice == 4){ // Søg
+			} else if(choice == 4){ // Sï¿½g
 				searchCategory();
-			} else if(choice == 5){ // Vælg
+			} else if(choice == 5){ // Vï¿½lg
 				pickCategory();
 			} else if(choice == 6){ // Opret Lager
 				createStorage();
@@ -60,9 +60,9 @@ public class ItemUI extends SuperUI{
 					pickStorage();
 					removeStorage();
 				}
-			} else if(choice == 9){ // Søg
+			} else if(choice == 9){ // Sï¿½g
 				searchStorage();
-			} else if(choice == 10){ // Vælg
+			} else if(choice == 10){ // Vï¿½lg
 				pickStorage();
 			} else if(choice == 11){ // Opret Vare
 				new CreateItemUI(selectedCategory, selectedStorage);
@@ -80,9 +80,9 @@ public class ItemUI extends SuperUI{
 					pickItem();
 					removeItem();
 				}
-			} else if(choice == 14){ // Søg
+			} else if(choice == 14){ // Sï¿½g
 				searchItem();
-			} else if(choice == 15){ // Vælg
+			} else if(choice == 15){ // Vï¿½lg
 				selectedItem = pickItem();
 			} else if(choice == 16){
 				exit = true;
@@ -119,14 +119,14 @@ public class ItemUI extends SuperUI{
 		iCtr.createStorage("Lager2");
 		Storage s1 = iCtr.findStorage("Lager1");
 		Storage s2 = iCtr.findStorage("Lager2");
-		cCtr.createCategory("Søm");
+		cCtr.createCategory("Sï¿½m");
 		cCtr.createCategory("Hammer");
-		Category c1 = cCtr.findCategory("Søm");
+		Category c1 = cCtr.findCategory("Sï¿½m");
 		Category c2 = cCtr.findCategory("Hammer");
 		
 		
-		iCtr.createItem("Søm Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
-		iCtr.createItem("Søm t. Sømpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
+		iCtr.createItem("Sï¿½m Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
+		iCtr.createItem("Sï¿½m t. Sï¿½mpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
 		
 		iCtr.createItem("Flad Hammer", 200, 0, 1., 1., 1., 1, "1234", s2, 10, 1, c2);
 		iCtr.createItem("Rund Hammer", 200, 0, 1., 1., 1., 1, "1234", s2, 10, 1, c2);
@@ -150,8 +150,8 @@ public class ItemUI extends SuperUI{
 				}else{
 					System.out.println(" 3. Fjern Kategori");
 				}
-				System.out.println(" 4. Søg Kategori");
-				System.out.println(" 5. Vælg Kategori");
+				System.out.println(" 4. Sï¿½g Kategori");
+				System.out.println(" 5. Vï¿½lg Kategori");
 				System.out.println("--------------------------");
 			}
 			
@@ -168,8 +168,8 @@ public class ItemUI extends SuperUI{
 				}else{
 					System.out.println(" 8. Fjern Lager");
 				}
-				System.out.println(" 9. Søg Lager");
-				System.out.println(" 10. Vælg Lager");
+				System.out.println(" 9. Sï¿½g Lager");
+				System.out.println(" 10. Vï¿½lg Lager");
 				System.out.println("--------------------------");
 			}
 
@@ -186,8 +186,8 @@ public class ItemUI extends SuperUI{
 				}else{
 					System.out.println(" 13. Fjern Vare");
 				}
-				System.out.println(" 14. Søg Vare");
-				System.out.println(" 15. Vælg Vare");
+				System.out.println(" 14. Sï¿½g Vare");
+				System.out.println(" 15. Vï¿½lg Vare");
 				System.out.println("--------------------------");
 			}
 			
@@ -248,7 +248,7 @@ public class ItemUI extends SuperUI{
 	
 	private void searchItem() {
 		try{
-			System.out.println("## Søg Vare ##");
+			System.out.println("## Sï¿½g Vare ##");
 			String name = requestString("Vare navn: ", null, null);
 			ItemCtr iCtr = new ItemCtr();
 			ArrayList<Item> items = iCtr.searchItem(name);
@@ -274,7 +274,7 @@ public class ItemUI extends SuperUI{
 		try{
 			boolean done = false;
 			while(!done){
-				System.out.println("## Vælg Vare ##");
+				System.out.println("## Vï¿½lg Vare ##");
 				String name = requestString("Vare navn", null, null);
 				ItemCtr iCtr = new ItemCtr();
 				ArrayList<Item> items = iCtr.searchItem(name);
@@ -288,7 +288,7 @@ public class ItemUI extends SuperUI{
 						int i = requestInt("VareID", null);
 						if(iCtr.getItem(i) != null && items.contains(iCtr.getItem(i))){
 							retItem = iCtr.getItem(i);
-							System.out.println("Vare " + selectedItem.getName() + " valgt");
+							System.out.println("Vare " + retItem.getName() + " valgt");
 							pause();
 							done = true;
 							recheck = false;

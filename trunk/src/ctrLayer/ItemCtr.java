@@ -228,7 +228,7 @@ public class ItemCtr {
 				ArrayList<Item> list = ItemCont.getInstance(cat).getAll();
 				if(list != null){
 					for(Item i : list){
-						if(i.getName().toLowerCase().startsWith(s.toLowerCase())){
+						if(i.getName().toLowerCase().contains(s.toLowerCase())){
 							items.add(i);
 						}
 					}

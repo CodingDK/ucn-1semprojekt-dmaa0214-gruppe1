@@ -3,6 +3,7 @@ package uiLayer;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import modelLayer.Item;
 import modelLayer.Sale;
 import ctrLayer.SaleCtr;
 
@@ -63,15 +64,15 @@ public class SaleUI extends SuperUI{
 	}
 
 	private void createCustomer() {
-		// TODO Auto-generated method stub
+		PersonUI pUI = new PersonUI();
 		
 	}
 
 	private void addPartSale() {
-		// Indtast varenr, / s�g vare
 		ItemUI iUi = new ItemUI("Dry Run");
-		iUi.pickItem();
+		Item i = iUi.pickItem();
 		
+		int amount = requestInt("Antal", 1);
+		sale.addPartSale(i, amount);
 	}
-	
 }
