@@ -19,12 +19,14 @@ public class SaleUI extends SuperUI{
 			if(choice == 1){
 				addPartSale();
 			} else if(choice == 2){
-				createCustomer();
-			} else if (choice == 3){
-				searchCustomer();
+				createPrivate();
+			} else if(choice == 3){
+				createBusiness();
 			} else if(choice == 4){
-				finishSale();
+				searchCustomer();
 			} else if(choice == 5){
+				finishSale();
+			} else if(choice == 6){
 				exit = true;
 			}
 		}
@@ -35,10 +37,11 @@ public class SaleUI extends SuperUI{
 		try{
 			System.out.println("## Opret salg ##");
 			System.out.println("1. Tilføj vare");
-			System.out.println("2. Opret kunde");
-			System.out.println("3. Søg kunde");
-			System.out.println("4. Udfør salg");
-			System.out.println("5. Gå tilbage");
+			System.out.println("2. Opret privatkunde");
+			System.out.println("3. Opret erhvervskunde");
+			System.out.println("4. Søg kunde");
+			System.out.println("5. Udfør salg");
+			System.out.println("6. Gå tilbage");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();		
 		} catch(InputMismatchException e){
@@ -55,17 +58,25 @@ public class SaleUI extends SuperUI{
 	
 	private void finishSale() {
 		// TODO Auto-generated method stub
-		
+		SaleCtr sCtr = new SaleCtr();
+		String employeeNr = requestString("Indtast medarbejdernr.", null, null);
+		sCtr.finishSale(employeeNr);
 	}
 
 	private void searchCustomer() {
 		// TODO Auto-generated method stub
-		
+		PersonUI pUI = new PersonUI("Dry Run");
+		pUI.findCustomer();
 	}
 
-	private void createCustomer() {
-		PersonUI pUI = new PersonUI();
-		
+	private void createPrivate() {
+		PersonUI pUI = new PersonUI("Dry Run");
+		pUI.createPrivate();
+	}
+	
+	private void createBusiness(){
+		PersonUI pUI = new PersonUI("Dry Run");
+		pUI.createBusiness();
 	}
 
 	private void addPartSale() {
