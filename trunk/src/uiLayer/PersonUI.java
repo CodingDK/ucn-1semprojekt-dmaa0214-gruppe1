@@ -8,6 +8,7 @@ import ctrLayer.CustomerCtr;
 import ctrLayer.EmployeeCtr;
 
 public class PersonUI extends SuperUI{
+
 	
 	public PersonUI(){
 	
@@ -25,19 +26,16 @@ public class PersonUI extends SuperUI{
 				createSeller();
 			} else if(choice == 5){
 				
-			} else if(choice == 6){
-				
 			} else if(choice == 7){
 				
 			} else if(choice == 8){
 				
 			} else if(choice == 9){
 				
-			} else if(choice == 10){
-				
-			}			
+			} 			
 		}		
 	}
+	
 	
 	private int writeMenu(){
 		int choice = 0;
@@ -48,11 +46,9 @@ public class PersonUI extends SuperUI{
 			System.out.println(" 3. Opret erhvervs kunde");
 			System.out.println(" 4. Opret sælger");
 			System.out.println(" 5. Opret administrator");
-			System.out.println(" 6. Opdater privat kunde");
 			System.out.println(" 7. Opdater erhvervs kunde");
 			System.out.println(" 8. Opdater sælger");
 			System.out.println(" 9. Opdater administrator");
-			System.out.println("10. Fjern Person");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
@@ -70,7 +66,7 @@ public class PersonUI extends SuperUI{
 			System.out.println("## Opret privat kunde ##");
 			
 		 	String name 		= requestString("Navn", null, null);
-		 	String street 		= requestString("Vej navn", null, null);
+		 	String street 		= requestString("Gade", null, null);
 		 	String postCode 	= requestString("Postnummer", null, null);
 		 	String city 		= requestString("By", null, null);
 		 	String phoneNr 		= requestString("Telefon nr", null, null);
@@ -84,8 +80,7 @@ public class PersonUI extends SuperUI{
 		} catch(InputMismatchException e){
 			System.out.println("Forket input!");
 			return;
-		}
-			
+		}			
 	}
 
 	/**
@@ -95,7 +90,7 @@ public class PersonUI extends SuperUI{
 		try{
 			System.out.println("## Opret erhvervs kunde ##");			
 			String company 	= requestString("Virksomhedsnavn", null, null);
-			String street	= requestString("Vej navn", null, null);
+			String street	= requestString("Gade", null, null);
 			String postCode = requestString("Postnummer", null, null);
 			String city 	= requestString("By", null, null);
 			String phoneNr 	= requestString("Telefon nr", null, null);
@@ -110,6 +105,7 @@ public class PersonUI extends SuperUI{
 			System.out.println("Forkert input!");
 		}		
 	}
+	
 	/**
 	 * createSeller - Create a seller
 	 */
@@ -118,7 +114,7 @@ public class PersonUI extends SuperUI{
 			System.out.println("## Opret s¾lger ##");
 			String employeeNr 	= requestString("Medarbejder nummer", null, null);
 			String name			= requestString("Navn", null, null);
-			String street		= requestString("Vej navn", null, null);
+			String street		= requestString("Gade", null, null);
 			String postCode		= requestString("Postnummer", null, null);
 			String city			= requestString("By", null, null);
 			String phoneNr		= requestString("Telefon nr", null, null);
@@ -142,7 +138,7 @@ public class PersonUI extends SuperUI{
 			System.out.println("## Opret administrator ##");
 			String employeeNr 	= requestString("Medarbejder nummer", null, null);
 			String name			= requestString("Navn", null, null);
-			String street		= requestString("Vej navn", null, null);
+			String street		= requestString("Gade", null, null);
 			String postCode		= requestString("Postnummer", null, null);
 			String city			= requestString("By", null, null);
 			String phoneNr		= requestString("Telefon nr", null, null);
@@ -156,32 +152,46 @@ public class PersonUI extends SuperUI{
 		}
 	}
 
+	/**
+	 * findCustomer - Find a customer in the system by the name or phone number
+	 */
 	public void findCustomer() {
-			System.out.println("## Find kunde ##");
-			System.out.print("Indtast kunde navn eller telefon nr: ");
-			Scanner k = new Scanner(System.in);
-			String nameOrPhone = k.nextLine();
+		System.out.println("## Find kunde ##");
+		System.out.print("Indtast kunde navn eller telefon nr: ");
+		Scanner k = new Scanner(System.in);
+		String nameOrPhone = k.nextLine();
 			
-			CustomerCtr customerCtr = new CustomerCtr();
-			Customer customer = customerCtr.findCustomer(nameOrPhone);
+		CustomerCtr customerCtr = new CustomerCtr();
+		Customer customer = customerCtr.findCustomer(nameOrPhone);
 			
-			if(customer == null){
-				System.out.println("Kunden er ikke fundet");
-				pause();
-			}
-			else {
-				updateCustomerMenu(customer);
-			}
+		if(customer == null){
+			System.out.println("Kunden er ikke fundet");
+			pause();
+		} else {
+			System.out.println("--- Kunde info ---");
+			System.out.println("Kunde ID  : " + customer.getId());
+			System.out.println("Navn	  : " + customer.getName());
+			System.out.println("Gade	  : " + customer.getStreet());
+			System.out.println("Postnummer: " + customer.getPostCode());
+			System.out.println("By	  : " + customer.getCity());
+			System.out.println("Telefon nr: " + customer.getPhoneNr());
+			pause();
+			updateCustomerMenu(customer);
+		}
 	}
 	
 	
-
+	/**
+	 * findCustomerMenu
+	 * @return choice
+	 */
 	private int findCustomerMenu(){
 		int choice = 0;
 		try{
 			System.out.println("## Menu ");
 			System.out.println("1. Opdater kunde");
-			System.out.println("2. Tilbage til kundemenu");
+			System.out.println("2. Fjern kunde");
+			System.out.println("3. Tilbage til kundemenu");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
@@ -190,6 +200,10 @@ public class PersonUI extends SuperUI{
 		return choice;
 	}
 	
+	/**
+	 * updateCustomerMenu
+	 * @param customer
+	 */
 	public void updateCustomerMenu(Customer customer){
 		boolean exit = false;
 		while(!exit){
@@ -197,11 +211,17 @@ public class PersonUI extends SuperUI{
 			if(choice == 1){
 				updatePrivate(customer);
 			} else if(choice == 2){
+				removePerson(customer);
+			} else if(choice == 3){
 				return;
 			}	
 		}
 	}
 	
+	/**
+	 * updatePrivate - Udates a privat customer
+	 * @param customer
+	 */
 	public void updatePrivate(Customer customer) {
 	
 		System.out.println("## Opdater privat kunde ##");
@@ -210,7 +230,7 @@ public class PersonUI extends SuperUI{
 		System.out.println("Navn: (" + customer.getName() + ")" );
 		String name = stringToNull();
 		
-		System.out.println("Vej navn: (" + customer.getStreet() + ")");
+		System.out.println("Gade: (" + customer.getStreet() + ")");
 		String street = stringToNull();
 		
 		System.out.println("Postnummer: (" + customer.getStreet() + ")");
@@ -252,9 +272,21 @@ public class PersonUI extends SuperUI{
 		
 	}
 
-	private void removePerson() {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * removePerson - Used to remove a person from the Customer object
+	 * @param customer
+	 */
+	private void removePerson(Customer customer) {
+		if(confirm("¯nsker du at slette: " + customer.getName() ) ){
+			int id = customer.getId();
+			CustomerCtr customerCtr = new CustomerCtr();
+			customerCtr.removeCustomer(id);
+			System.out.println("Personen er nu slettet");
+			pause();
+		} else{
+			System.out.println("Personen er ikke slettet");
+			pause();
+		}
 	}
-
+	
 }
