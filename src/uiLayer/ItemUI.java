@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import modelLayer.*;
 import ctrLayer.*;
+import exceptionLayer.NoSelectionException;
 
 public class ItemUI extends SuperUI{
 	private Category selectedCategory;
@@ -30,40 +31,40 @@ public class ItemUI extends SuperUI{
 				if(selectedCategory != null){
 					updateCategory();
 				}else{
-					pickCategory();
+					selectedCategory = pickCategory();
 					updateCategory();
 				}
 			} else if(choice == 3){ // Fjern
 				if(selectedCategory != null){
 					removeCategory();
 				}else{
-					pickCategory();
+					selectedCategory = pickCategory();
 					removeCategory();
 				}
 			} else if(choice == 4){ // Sï¿½g
 				searchCategory();
 			} else if(choice == 5){ // Vï¿½lg
-				pickCategory();
+				selectedCategory = pickCategory();
 			} else if(choice == 6){ // Opret Lager
 				createStorage();
 			} else if(choice == 7){ // Opdater
 				if(selectedStorage != null){
 					updateStorage();
 				}else{
-					pickStorage();
+					selectedStorage = pickStorage();
 					updateStorage();
 				}
 			} else if(choice == 8){ // Fjern
 				if(selectedStorage != null){
 					removeStorage();
 				}else{
-					pickStorage();
+					selectedStorage = pickStorage();
 					removeStorage();
 				}
 			} else if(choice == 9){ // Sï¿½g
 				searchStorage();
 			} else if(choice == 10){ // Vï¿½lg
-				pickStorage();
+				selectedStorage = pickStorage();
 			} else if(choice == 11){ // Opret Vare
 				new CreateItemUI(selectedCategory, selectedStorage);
 			} else if(choice == 12){ // Opdater
@@ -92,13 +93,13 @@ public class ItemUI extends SuperUI{
 		}		
 	}
 	
-	private Storage searchStorage() {
+	private Storage pickStorage() {
 		Storage retStorage = null;
 		try{
 			boolean done = false;
 			while(!done){
 				System.out.println("## Vælg Lagre ##");
-				String name = requestString("Lager navn", null, null);
+				String name = requestString("Lager navn", null, null, false);
 				ItemCtr iCtr = new ItemCtr();
 				ArrayList<Storage> storages = iCtr.searchStorage(name);
 				if(storages != null && storages.size() > 0){
@@ -108,7 +109,7 @@ public class ItemUI extends SuperUI{
 						for(Storage s : storages){
 							System.out.println("#" + s.getId() + " - " + s.getName());
 						}
-						int i = requestInt("LagerID", null);
+						int i = requestInt("LagerID", null, false);
 						if(iCtr.findStorage(i) != null && storages.contains(iCtr.findStorage(i))){
 							retStorage = iCtr.findStorage(i);
 							System.out.println("Lager " + retStorage.getName() + " valgt");
@@ -133,13 +134,13 @@ public class ItemUI extends SuperUI{
 		
 	}
 
-	private Category searchCategory() {
+	private Category pickCategory() {
 		Category retCategory = null;
 		try{
 			boolean done = false;
 			while(!done){
 				System.out.println("## Vælg Kategori ##");
-				String name = requestString("Kategori navn", null, null);
+				String name = requestString("Kategori navn", null, null, false);
 				CategoryCtr cCtr = new CategoryCtr();
 				ArrayList<Category> cats = cCtr.searchCategory(name);
 				if(cats != null && cats.size() > 0){
@@ -149,7 +150,7 @@ public class ItemUI extends SuperUI{
 						for(Category c : cats){
 							System.out.println("#" + c.getId() + " - " + c.getName());
 						}
-						int i = requestInt("KategoriID", null);
+						int i = requestInt("KategoriID", null, false);
 						if(cCtr.findCategory(i) != null && cats.contains(cCtr.findCategory(i))){
 							retCategory = cCtr.findCategory(i);
 							System.out.println("Kategori " + retCategory.getName() + " valgt");
@@ -175,16 +176,6 @@ public class ItemUI extends SuperUI{
 		
 	}
 
-	private void pickCategory() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void pickStorage() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	private void test(){
 		ItemCtr iCtr = new ItemCtr();
 		CategoryCtr cCtr = new CategoryCtr();
@@ -192,14 +183,14 @@ public class ItemUI extends SuperUI{
 		iCtr.createStorage("Lager2");
 		Storage s1 = iCtr.findStorage("Lager1");
 		Storage s2 = iCtr.findStorage("Lager2");
-		cCtr.createCategory("Sï¿½m");
+		cCtr.createCategory("Søm");
 		cCtr.createCategory("Hammer");
-		Category c1 = cCtr.findCategory("Sï¿½m");
+		Category c1 = cCtr.findCategory("Søm");
 		Category c2 = cCtr.findCategory("Hammer");
 		
 		
-		iCtr.createItem("Sï¿½m Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
-		iCtr.createItem("Sï¿½m t. Sï¿½mpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
+		iCtr.createItem("Søm Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
+		iCtr.createItem("Søm t. Sømpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
 		
 		iCtr.createItem("Flad Hammer", 200, 0, 1., 1., 1., 1, "1234", s2, 10, 1, c2);
 		iCtr.createItem("Rund Hammer", 200, 0, 1., 1., 1., 1, "1234", s2, 10, 1, c2);
@@ -283,7 +274,7 @@ public class ItemUI extends SuperUI{
 			Scanner k = new Scanner(System.in);
 			
 			System.out.println(" *** Opret Kategori *** ");
-			String categoryName = requestString("Kategori navn", 1, null);
+			String categoryName = requestString("Kategori navn", 1, null, false);
 			if(cCtr.findCategory(categoryName) == null){
 				cCtr.createCategory(categoryName);
 			}else{
@@ -304,7 +295,7 @@ public class ItemUI extends SuperUI{
 			Scanner k = new Scanner(System.in);
 			
 			System.out.println(" *** Opret Lager *** ");
-			String storageName = requestString("Lager navn", 1, null);
+			String storageName = requestString("Lager navn", 1, null, false);
 			if(iCtr.findStorage(storageName) == null){
 				iCtr.createStorage(storageName);
 			}else{
@@ -322,7 +313,7 @@ public class ItemUI extends SuperUI{
 	private void searchItem() {
 		try{
 			System.out.println("## Sï¿½g Vare ##");
-			String name = requestString("Vare navn: ", null, null);
+			String name = requestString("Vare navn: ", null, null, false);
 			ItemCtr iCtr = new ItemCtr();
 			ArrayList<Item> items = iCtr.searchItem(name);
 			if(items != null){
@@ -348,7 +339,7 @@ public class ItemUI extends SuperUI{
 			boolean done = false;
 			while(!done){
 				System.out.println("## Vï¿½lg Vare ##");
-				String name = requestString("Vare navn", null, null);
+				String name = requestString("Vare navn", null, null, false);
 				ItemCtr iCtr = new ItemCtr();
 				ArrayList<Item> items = iCtr.searchItem(name);
 				if(items != null && items.size() > 0){
@@ -358,7 +349,7 @@ public class ItemUI extends SuperUI{
 						for(Item i : items){
 							System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + i.getAmount() + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
 						}
-						int i = requestInt("VareID", null);
+						int i = requestInt("VareID", null, false);
 						if(iCtr.getItem(i) != null && items.contains(iCtr.getItem(i))){
 							retItem = iCtr.getItem(i);
 							System.out.println("Vare " + retItem.getName() + " valgt");
@@ -382,10 +373,10 @@ public class ItemUI extends SuperUI{
 		return retItem;
 	}
 	
-	private void findCategory() {
+	private void searchCategory() {
 		try{
 			System.out.println("## Søg Kategori ##");
-			String name = requestString("Kategori navn: ", null, null);
+			String name = requestString("Kategori navn: ", null, null, false);
 			CategoryCtr cCtr = new CategoryCtr();
 			ArrayList<Category> cats = cCtr.searchCategory(name);
 			if(cats != null){
@@ -405,10 +396,10 @@ public class ItemUI extends SuperUI{
 		}
 	}
 	
-	private void findStorage(){
+	private void searchStorage(){
 		try{
 			System.out.println("## Søg Lager ##");
-			String name = requestString("Lager navn: ", null, null);
+			String name = requestString("Lager navn", null, null, false);
 			ItemCtr iCtr = new ItemCtr();
 			ArrayList<Storage> storages = iCtr.searchStorage(name);
 			if(storages != null){
@@ -429,27 +420,66 @@ public class ItemUI extends SuperUI{
 	}
 	
 	private void updateItem() {
-		// TODO Auto-generated method stub
+		ItemCtr iCtr = new ItemCtr();
+		System.out.println("## Opdater Vare : " + selectedItem.getName() + " ##");
+		
+		String name = requestString("Navn(" + selectedItem.getName() + ")", null, null, true);
+		int amount = requestInt("Antal(" + selectedItem.getAmount() + ")", null, true);
+		int reserved = requestInt("Reserveret(" + selectedItem.getReserved() + ")", null, true);
+		double salePrice = requestDouble("Salgs Pris(" + selectedItem.getSalePrice() + ")", true);
+		double purchasePrice = requestDouble("Købs Pris(" + selectedItem.getPurchasePrice() + ")", true);
+		double bulkSalePrice = requestDouble("Bulk Pris(" + selectedItem.getBulkSalePrice() + ")", true);
+		int bulk = requestInt("Bulk(" + selectedItem.getBulk() + ")", null, true);
+		String location = requestString("Placering(" + selectedItem.getLocation() + ")", 0, null, true);
+		int min = requestInt("Minimum Lagerbeholdning(" + selectedItem.getMin() + ")", null, true);
+		int max = requestInt("Maksimal Lagerbeholdning(" + selectedItem.getMax() + ")", min, true);
+		Storage storage = null;
+		Category category = null;
+		
+		if(confirm("Vil du ændre Lager?(" + selectedItem.getStorage().getName() + ")")){
+			while(storage == null){
+				storage = pickStorage();
+			}
+		}
+		if(confirm("Vil du ændre Kategori?(" + selectedItem.getCategory().getName() + ")")){
+			while(category == null){
+				category = pickCategory();
+			}
+		}
+		
+		iCtr.updateItem(selectedItem.getId(), name, amount, reserved, salePrice, purchasePrice, 
+				bulkSalePrice, bulk, location, storage, max, min, category);
 	}
 	
 	private void updateCategory() {
-		// TODO Auto-generated method stub
+		CategoryCtr cCtr = new CategoryCtr();
+		String name = requestString("Navn(" + selectedCategory.getName() + ")", null, null, false);
+		try {
+			cCtr.selectCategory(selectedCategory.getName());
+			cCtr.updateCategory(name);
+		} catch (NoSelectionException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void updateStorage(){
-		// TODO Auto-generated method stub
+		ItemCtr iCtr = new ItemCtr();
+		String name = requestString("Navn(" + selectedStorage.getName() + ")", null, null, false);
+		iCtr.updateStorage(selectedStorage, name);
 	}
 	
 	private void removeItem() {
-		// TODO Auto-generated method stub
+		ItemCtr iCtr = new ItemCtr();
+		iCtr.removeItem(selectedItem);
 	}
 	
 	private void removeCategory() {
-		// TODO Auto-generated method stub
+		
 	}
 	
 	private void removeStorage(){
-		// TODO Auto-generated method stub
+		ItemCtr iCtr = new ItemCtr();
+		iCtr.removeStorage(selectedStorage);
 	}
 	
 }
