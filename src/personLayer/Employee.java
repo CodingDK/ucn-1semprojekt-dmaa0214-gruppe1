@@ -8,7 +8,7 @@ package personLayer;
  * 
  */
 public class Employee extends Person{
-	protected String employeeNr;
+	private String employeeNr;
 	private boolean admin;
 	private String cprNr;
 	private String password;
