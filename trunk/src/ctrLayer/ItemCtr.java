@@ -271,7 +271,7 @@ public class ItemCtr {
 		StorageCont sCont = StorageCont.getInstance();
 		ArrayList<Storage> stor = sCont.getAll();
 		if(stor != null){
-			for(Storage s : storages){
+			for(Storage s : stor){
 				if(s.getName().toLowerCase().contains(name.toLowerCase())){
 					storages.add(s);
 				}
