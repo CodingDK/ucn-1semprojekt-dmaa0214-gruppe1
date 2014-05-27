@@ -16,7 +16,7 @@ public class CustomerCtr {
 	 * @param nameOrPhone
 	 * @return Customer
 	 */
-	public Customer findPrivate(String nameOrPhone){
+	public Customer findCustomer(String nameOrPhone){
 		return cCont.findCustomer(nameOrPhone);
 	}
 	
@@ -34,7 +34,7 @@ public class CustomerCtr {
 	 * @param id
 	 * @return Customer
 	 */
-	public Customer findPrivate(int id){
+	public Customer findCustomer(int id){
 		return cCont.findCustomer(id);
 	}
 	
