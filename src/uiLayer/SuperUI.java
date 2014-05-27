@@ -70,6 +70,11 @@ public abstract class SuperUI {
 					done = true;
 				}
 			}else{
+				if(inputData.trim().isEmpty()){
+					ret = null;
+				}else{
+					ret = inputData;
+				}
 				done = true;
 			}
 		}
@@ -77,24 +82,28 @@ public abstract class SuperUI {
 		return ret;
 	}
 	
-	protected int requestInt(String input, Integer min){
+	protected int requestInt(String input, Integer min, boolean allowNull){
 		Scanner k = new Scanner(System.in);
 		int ret = 0;
 		boolean done = false;
 		while(!done){
 			System.out.print(input + ": " );
 			String inputData = k.nextLine();
-			
-			if(isInteger(inputData)){
-				ret = Integer.parseInt(inputData);
-				if(min != null){
-					if(ret != min && ret <= min){
-						System.out.println(input + " skal være større end " + min);
+			if(allowNull && inputData.trim().isEmpty()){
+				ret = -1;
+				done = true;
+			}else{
+				if(isInteger(inputData)){
+					ret = Integer.parseInt(inputData);
+					if(min != null){
+						if(ret != min && ret <= min){
+							System.out.println(input + " skal være større end " + min);
+						}else{
+							done = true;
+						}
 					}else{
 						done = true;
 					}
-				}else{
-					done = true;
 				}
 			}
 			
@@ -102,17 +111,21 @@ public abstract class SuperUI {
 		return ret;
 	}
 	
-	protected double requestDouble(String input){
+	protected double requestDouble(String input, boolean allowNull){
 		Scanner k = new Scanner(System.in);
 		double ret = 0;
 		boolean done = false;
 		while(!done){
 			System.out.print(input + ": " );
 			String inputData = k.nextLine();
-			
-			if(isDouble(inputData)){
-				ret = Double.parseDouble(inputData);
+			if(allowNull && inputData.trim().isEmpty()){
+				ret = -1;
 				done = true;
+			}else{
+				if(isDouble(inputData)){
+					ret = Double.parseDouble(inputData);
+					done = true;
+				}
 			}
 			
 		}
