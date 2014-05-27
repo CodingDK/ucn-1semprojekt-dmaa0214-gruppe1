@@ -11,6 +11,7 @@ public class Employee extends Person{
 	protected String employeeNr;
 	private boolean admin;
 	private String cprNr;
+	private String password;
 	
 	/**
      * Constructor for Employee objects.
@@ -22,13 +23,15 @@ public class Employee extends Person{
      * @param city The city of the employee.
      * @param postCode The postCode of the employee.
      * @param cprNr The cprNr of the employee.
+     * @param password the admin password
      * @param admin A boolean value, true for admin.
      */
-	public Employee(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, boolean admin){
+	public Employee(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String password, boolean admin){
 		super(name, phoneNr, street, email, city, postCode);
 		this.employeeNr = employeeNr;
 		this.admin = admin;
 		this.cprNr = cprNr;
+		this.password = password;
 	}
 
 	/**
@@ -60,4 +63,10 @@ public class Employee extends Person{
 	public void setAdmin(boolean admin){
 		this.admin = admin;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+	
+	
 }
