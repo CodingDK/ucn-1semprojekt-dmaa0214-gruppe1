@@ -1,7 +1,6 @@
 package modelLayer;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class CategoryCont {
 	private static CategoryCont instance;
