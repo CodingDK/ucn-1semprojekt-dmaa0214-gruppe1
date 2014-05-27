@@ -11,11 +11,15 @@ public class Sale {
 	private ArrayList<PartSale> partSales;
 	private static int idIterator;
 	private Customer customer;
+	private Employee employee;
+	private boolean done = false;
 	
 	public Sale(){
 		idIterator++;
 		this.id = idIterator;
 		this.date = new Date();
+		this.customer = null;
+		this.employee = null;
 	} 
 		
 	public void setTotalPrice(double totalPrice) {
@@ -52,6 +56,34 @@ public class Sale {
 	
 	public Customer getCustomer(){
 		return this.customer;
+	}
+
+	/**
+	 * @return the done
+	 */
+	public boolean isDone() {
+		return done;
+	}
+
+	/**
+	 * @param done the done to set
+	 */
+	public void setDone(boolean done) {
+		this.done = done;
+	}
+
+	/**
+	 * @return the employee
+	 */
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	/**
+	 * @param employee the employee to set
+	 */
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 }
