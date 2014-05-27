@@ -2,6 +2,7 @@ package ctrLayer;
 import modelLayer.*;
 import personLayer.*;
 import exceptionLayer.NotEnoughItemsException;
+
 import java.util.*;
 
 public class SaleCtr {
@@ -21,8 +22,9 @@ public class SaleCtr {
 		Item item = iCtr.getItem(id);
 		
 		if(item != null){
-			if(item.getAmount()-amount < 0){
-				throw new NotEnoughItemsException("Der er kun " + item.getAmount() + " af " + item.getName());
+			int count = item.getAmount()-item.getReserved();
+			if(count-amount < 0){
+				throw new NotEnoughItemsException("Der er kun " + count + " af " + item.getName() + " ledige på lageret.");
 			} else {
 			item.addReserved(amount);
 			sale.addPartSale(item, amount);
@@ -38,8 +40,9 @@ public class SaleCtr {
 		Item item = iCtr.getItem(name);
 		
 		if(item != null){
-			if(item.getAmount()-amount < 0){
-				throw new NotEnoughItemsException("Der er kun " + item.getAmount() + " af " + item.getName());
+			int count = item.getAmount()-item.getReserved();
+			if(count-amount < 0){
+				throw new NotEnoughItemsException("Der er kun " + count + " af " + item.getName() + " ledige på lageret.");
 			} else {
 			item.addReserved(amount);
 			sale.addPartSale(item, amount);
@@ -55,6 +58,9 @@ public class SaleCtr {
 	}
 	
 	public void finishSale(int employeeNr){
-		
+		ArrayList<PartSale> partsales = sale.getPartSales();
+		for(PartSale ps : partsales){
+			System.out.println("OST OST");
+		}
 	}
 }

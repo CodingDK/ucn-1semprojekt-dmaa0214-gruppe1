@@ -2,7 +2,7 @@ package modelLayer;
 
 public class PartSale {
 	
-	private static idIterator = 1000;
+	private static int idIterator;
 	int id;
 	int amount;
 	Item item;
@@ -18,5 +18,20 @@ public class PartSale {
 		item = i;
 		this.amount = amount;
 	}
+
+	/**
+	 * @return the amount
+	 */
+	public int getAmount() {
+		return amount;
+	}
+
+	/**
+	 * @return the item
+	 */
+	public Item getItem() {
+		return item;
+	}
+	
 
 }
