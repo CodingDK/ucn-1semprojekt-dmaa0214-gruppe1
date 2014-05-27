@@ -28,7 +28,29 @@ public class SaleCtr {
 	 * @return Sale The new sale.
 	 */
 	public Sale createSale(){
-		return sale = new Sale();
+		this.sale = new Sale();
+		return this.sale;
+	}
+	
+	public void addItem(Item item, int amount) throws NullPointerException, NotEnoughItemsException{
+		ItemCtr iCtr = new ItemCtr();
+		
+		if(item != null){
+			int availableAmount = iCtr.getAvailableAmount(item);
+			if(availableAmount-amount < 0){
+				throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige på lageret.");
+			} else {
+				iCtr.addReserved(item, amount);
+				if(sale != null){
+					sale.addPartSale(item, amount);
+				}else{
+					System.out.println("Der mangler noget :o");
+				}
+			}
+			
+		} else {
+			throw new NullPointerException("Varen blev ikke fundet.");
+		}
 	}
 	
 	/**
