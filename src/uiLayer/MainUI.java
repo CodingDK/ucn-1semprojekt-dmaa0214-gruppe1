@@ -20,7 +20,7 @@ public class MainUI extends SuperUI{
 			} else if(choice == 3){
 				new ItemUI();
 			} else if(choice == 4){
-				System.out.println("System is shutting down.");
+				System.out.println("Program afsluttet.");
 				exit = true;
 			}
 		}
@@ -33,7 +33,7 @@ public class MainUI extends SuperUI{
 			System.out.println("1. Kunde UI");
 			System.out.println("2. Salg UI");
 			System.out.println("3. Vare UI");
-			System.out.println("4. Exit");
+			System.out.println("4. Afslut program");
 			choice = k.nextInt();
 			k.nextLine();
 		} catch(InputMismatchException e){
