@@ -20,28 +20,92 @@ public class ItemUI extends SuperUI{
 		boolean exit = false;
 		while(!exit){
 			int choice = writeMenu();
-			if(choice == 1){
+			if(choice == 1){ // Opret Kategori
 				createCategory();
-			} else if(choice == 2){
+			} else if(choice == 2){ // Opdater
+				if(selectedCategory != null){
+					updateCategory();
+				}else{
+					pickCategory();
+					updateCategory();
+				}
+			} else if(choice == 3){ // Fjern
+				if(selectedCategory != null){
+					removeCategory();
+				}else{
+					pickCategory();
+					removeCategory();
+				}
+			} else if(choice == 4){ // Søg
+				searchCategory();
+			} else if(choice == 5){ // Vælg
+				pickCategory();
+			} else if(choice == 6){ // Opret Lager
 				createStorage();
-			} else if(choice == 3){
+			} else if(choice == 7){ // Opdater
+				if(selectedStorage != null){
+					updateStorage();
+				}else{
+					pickStorage();
+					updateStorage();
+				}
+			} else if(choice == 8){ // Fjern
+				if(selectedStorage != null){
+					removeStorage();
+				}else{
+					pickStorage();
+					removeStorage();
+				}
+			} else if(choice == 9){ // Søg
+				searchStorage();
+			} else if(choice == 10){ // Vælg
+				pickStorage();
+			} else if(choice == 11){ // Opret Vare
 				new CreateItemUI(selectedCategory, selectedStorage);
-			} else if(choice == 4){
+			} else if(choice == 12){ // Opdater
+				if(selectedItem != null){
+					updateItem();
+				}else{
+					pickItem();
+					updateItem();
+				}
+			} else if(choice == 13){ // Fjern
+				if(selectedItem != null){
+					removeItem();
+				}else{
+					pickItem();
+					removeItem();
+				}
+			} else if(choice == 14){ // Søg
 				searchItem();
-			} else if(choice == 5){
+			} else if(choice == 15){ // Vælg
 				pickItem();
-			} else if(choice == 6){
-				
-			} else if(choice == 7){
-				
-			} else if(choice == 8){
-				test();
-			} else if(choice == 15){
+			} else if(choice == 16){
 				exit = true;
 			}		
 		}		
 	}
 	
+	private void searchStorage() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void searchCategory() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void pickCategory() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void pickStorage() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void test(){
 		ItemCtr iCtr = new ItemCtr();
 		CategoryCtr cCtr = new CategoryCtr();
@@ -55,59 +119,75 @@ public class ItemUI extends SuperUI{
 		Category c2 = cCtr.findCategory("Hammer");
 		
 		
-		iCtr.createItem("Søm Og Skruer", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
-		iCtr.createItem("Søm Og Handsker", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
+		iCtr.createItem("Søm Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
+		iCtr.createItem("Søm t. Sømpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
+		
+		iCtr.createItem("Flad Hammer", 200, 0, 1., 1., 1., 1, "1234", s2, 10, 1, c2);
+		iCtr.createItem("Rund Hammer", 200, 0, 1., 1., 1., 1, "1234", s2, 10, 1, c2);
 	}
 	
 	private int writeMenu(){
 		int choice = 0;
 		try{
-			String menu = "## Kunde menu ##";
-			if(selectedStorage != null){
-				menu += " Valgt Lager: " + selectedStorage.getName() + " ##";
-			}
-			if(selectedCategory != null){
-				menu += " Valgt Kategori" + ": " + selectedCategory.getName() + " ##";
-			}
-			System.out.println(menu);
-			System.out.println(" 1. Opret Kategori");
-			System.out.println(" 2. Opret Lager");
-			System.out.println(" 3. Opret Vare");
-			System.out.println(" 4. Søg Vare");
-			System.out.println(" 5. Vælg Vare");
-			System.out.println(" 6. Find Vare");
-			if(selectedCategory != null){
-				System.out.println(" 7. Opdater Kategori (" + selectedStorage.getName() + ")");
-			}else{
-				System.out.println(" 7. Opdater Kategori");
-			}
-			if(selectedStorage != null){
-				System.out.println(" 8. Opdater Lager (" + selectedStorage.getName() + ")");
-			}else{
-				System.out.println(" 8. Opdater Lager");
-			}
-			if(selectedItem != null){
-				System.out.println(" 9. Opdater Vare (" + selectedItem.getName() + ")");
-			}else{
-				System.out.println(" 9. Opdater Vare");
+			System.out.println("## Item menu ##");
+			
+			{
+				System.out.println("--------------------------");
+				System.out.println(" 1. Opret Kategori");
+				if(selectedCategory != null){
+					System.out.println(" 2. Opdater Kategori (" + selectedCategory.getName() + ")");
+				}else{
+					System.out.println(" 2. Opdater Kategori");
+				}
+				if(selectedCategory != null){
+					System.out.println(" 3. Fjern Kategori (" + selectedCategory.getName() + ")");
+				}else{
+					System.out.println(" 3. Fjern Kategori");
+				}
+				System.out.println(" 4. Søg Kategori");
+				System.out.println(" 5. Vælg Kategori");
+				System.out.println("--------------------------");
 			}
 			
-			if(selectedCategory != null){
-				System.out.println(" 10. Fjern Kategori (" + selectedStorage.getName() + ")");
-			}else{
-				System.out.println(" 10. Fjern Kategori");
+			
+			{
+				System.out.println(" 6. Opret Lager");
+				if(selectedStorage != null){
+					System.out.println(" 7. Opdater Lager (" + selectedStorage.getName() + ")");
+				}else{
+					System.out.println(" 7. Opdater Lager");
+				}
+				if(selectedStorage != null){
+					System.out.println(" 8. Fjern Lager (" + selectedStorage.getName() + ")");
+				}else{
+					System.out.println(" 8. Fjern Lager");
+				}
+				System.out.println(" 9. Søg Lager");
+				System.out.println(" 10. Vælg Lager");
+				System.out.println("--------------------------");
 			}
-			if(selectedStorage != null){
-				System.out.println(" 11. Fjern Lager (" + selectedStorage.getName() + ")");
-			}else{
-				System.out.println(" 11. Fjern Lager");
+
+			
+			{
+				System.out.println(" 11. Opret Vare");
+				if(selectedItem != null){
+					System.out.println(" 12. Opdater Vare (" + selectedItem.getName() + ")");
+				}else{
+					System.out.println(" 12. Opdater Vare");
+				}
+				if(selectedItem != null){
+					System.out.println(" 13. Fjern Vare (" + selectedItem.getName() + ")");
+				}else{
+					System.out.println(" 13. Fjern Vare");
+				}
+				System.out.println(" 14. Søg Vare");
+				System.out.println(" 15. Vælg Vare");
+				System.out.println("--------------------------");
 			}
-			if(selectedItem != null){
-				System.out.println(" 12. Fjern Vare (" + selectedItem.getName() + ")");
-			}else{
-				System.out.println(" 12. Fjern Vare");
-			}
-			System.out.println("15. Exit");
+			
+			
+			
+			System.out.println(" 16. Exit");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
@@ -213,37 +293,36 @@ public class ItemUI extends SuperUI{
 	}
 	
 	private void findCategory() {
-		
+		// TODO Auto-generated method stub
 	}
 	
 	private void findStorage(){
-		
+		// TODO Auto-generated method stub
 		
 	}
 	
 	private void updateItem() {
-		
+		// TODO Auto-generated method stub
 	}
 	
 	private void updateCategory() {
-		
+		// TODO Auto-generated method stub
 	}
 	
 	private void updateStorage(){
-		
-		
+		// TODO Auto-generated method stub
 	}
 	
 	private void removeItem() {
-		
+		// TODO Auto-generated method stub
 	}
 	
 	private void removeCategory() {
-		
+		// TODO Auto-generated method stub
 	}
 	
 	private void removeStorage(){
-		
+		// TODO Auto-generated method stub
 	}
 	
 }
