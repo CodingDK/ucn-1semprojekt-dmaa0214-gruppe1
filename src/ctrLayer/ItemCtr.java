@@ -219,4 +219,20 @@ public class ItemCtr {
 	public ArrayList<Storage> getAllStorages(){
 		return StorageCont.getInstance().getAll();
 	}
+	
+	public ArrayList<Item> searchItem(String s){
+		ArrayList<Item> items = new ArrayList<Item>();
+		CategoryCtr cCtr = new CategoryCtr();
+		ArrayList<Category> cats = cCtr.getAllCategories();
+		for(Category cat : cats){
+			ArrayList<Item> list = ItemCont.getInstance(cat).getAll();
+			for(Item i : list){
+				if(i.getName().toLowerCase().startsWith(s.toLowerCase())){
+					items.add(i);
+				}
+			}
+		}
+		
+		return items;
+	}
 }
