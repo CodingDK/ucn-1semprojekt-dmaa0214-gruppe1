@@ -69,6 +69,8 @@ public abstract class SuperUI {
 					ret = inputData;
 					done = true;
 				}
+			}else{
+				done = true;
 			}
 		}
 		
