@@ -13,39 +13,43 @@ public class Sale {
 	public Sale(){
 		idIterator++;
 		this.id = idIterator;
-		this.date = new Date();	
+		this.date = new Date();
 	} 
 		
 	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
+		 this.totalPrice = totalPrice;
 	}
-	
-	public int getId(){
+	public int getId() {
 		return id;
 	}
-	
-	public Date getDate(){
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Date getDate() {
 		return date;
 	}
-	
-	public void setDate(Date date){
+	public void setDate(Date date) {
 		this.date = date;
 	}
-	
-	public double getTotalPrice(){
+	public double getTotalPrice() {
 		return totalPrice;
 	}
-	
-	public ArrayList<PartSale> getPartSales(){
+	public ArrayList<PartSale> getPartSales() {
 		return partSales;
 	}
-	
-	public void setPartSales(ArrayList<PartSale> partSales){
+	public void setPartSales(ArrayList<PartSale> partSales) {
 		this.partSales = partSales;
 	}
-
+	public static int getIdIterator() {
+		return idIterator;
+	}
+	public static void setIdIterator(int idIterator) {
+		Sale.idIterator = idIterator;
+	}
 	public void addPartSale(Item i,int amount){
 		PartSale p = new PartSale(i,amount);
 		partSales.add(p);
 	}
+	
+
 }
