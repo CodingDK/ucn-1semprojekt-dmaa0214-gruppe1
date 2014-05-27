@@ -1,5 +1,6 @@
 package ctrLayer;
 import modelLayer.*;
+
 import java.util.*;
 
 /**
@@ -263,5 +264,19 @@ public class ItemCtr {
 			}
 		}
 		return items;
+	}
+	
+	public ArrayList<Storage> searchStorage(String name) {
+		ArrayList<Storage> storages = new ArrayList<Storage>();
+		StorageCont sCont = StorageCont.getInstance();
+		ArrayList<Storage> stor = sCont.getAll();
+		if(stor != null){
+			for(Storage s : storages){
+				if(s.getName().toLowerCase().contains(name.toLowerCase())){
+					storages.add(s);
+				}
+			}
+		}
+		return storages;
 	}
 }
