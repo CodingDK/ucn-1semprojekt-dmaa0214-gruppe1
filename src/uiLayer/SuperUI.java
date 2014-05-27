@@ -8,15 +8,15 @@ public abstract class SuperUI {
 		Scanner k = new Scanner(System.in);	
 		k.nextLine();
 	}
-	
+	/*
 	protected void emptyTypeIn(String typeIn){
 		if(typeIn.trim().isEmpty()){
-			System.out.println("Feltet mŒ ikke v¾re tomt");
+			System.out.println("Feltet må ikke være tomt");
 			pause();
 			return;
 		}
 	}
-	
+	*/
 	/**
 	 * stringToNull - used when "" is changed to a null
 	 * @param typeIn 
@@ -74,17 +74,25 @@ public abstract class SuperUI {
 		return ret;
 	}
 	
-	protected int requestInt(String input){
+	protected int requestInt(String input, Integer min){
 		Scanner k = new Scanner(System.in);
 		int ret = 0;
 		boolean done = false;
 		while(!done){
-			System.out.print(input + ":" );
+			System.out.print(input + ": " );
 			String inputData = k.nextLine();
 			
 			if(isInteger(inputData)){
 				ret = Integer.parseInt(inputData);
-				done = true;
+				if(min != null){
+					if(ret != min && ret <= min){
+						System.out.println(input + " skal være større end " + min);
+					}else{
+						done = true;
+					}
+				}else{
+					done = true;
+				}
 			}
 			
 		}
@@ -96,7 +104,7 @@ public abstract class SuperUI {
 		double ret = 0;
 		boolean done = false;
 		while(!done){
-			System.out.print(input + ":" );
+			System.out.print(input + ": " );
 			String inputData = k.nextLine();
 			
 			if(isDouble(inputData)){
