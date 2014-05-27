@@ -35,7 +35,7 @@ public class SaleCtr {
 	 * addItem - Add an item to the sale.
 	 * @param id The id of the item to add.
 	 * @param amount the amount of the item to add.
-	 * @throws NotEnoughItemsException if amount is under 0. 
+	 * @throws NotEnoughItemsException if amount and reserved in storage is under 0. 
 	 * @throws NullPointerException if item object not created.
 	 */
 	public void addItem(int id, int amount) throws NotEnoughItemsException, NullPointerException{
