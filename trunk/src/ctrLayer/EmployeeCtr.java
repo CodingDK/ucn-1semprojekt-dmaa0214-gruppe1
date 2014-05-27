@@ -42,7 +42,7 @@ public class EmployeeCtr{
      * @param admin A boolean value, true for admin.
      */
     public void createEmployee(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, boolean admin){
-    	eCont.addEmployee(new Seller(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, admin));
+    	eCont.addEmployee(new Employee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, admin));
     }
     
     /**

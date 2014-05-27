@@ -120,9 +120,10 @@ public class PersonUI extends SuperUI{
 			String phoneNr		= requestString("Telefon nr", null, null);
 			String email		= requestString("E-mail", null, null);
 			String cprNr		= requestString("CPR nr", null, null);
+			Boolean admin 		= false;
 			
 			EmployeeCtr employeeCtr = new EmployeeCtr();
-			employeeCtr.createSeller(employeeNr, name, phoneNr, street, email, city, postCode, cprNr);
+			employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, admin);
 			
 		} catch(InputMismatchException e){
 			System.out.println("Forkert input!");
@@ -144,9 +145,10 @@ public class PersonUI extends SuperUI{
 			String phoneNr		= requestString("Telefon nr", null, null);
 			String email		= requestString("E-mail", null, null);
 			String cprNr		= requestString("CPR nr", null, null);
+			Boolean admin		= true;
 			
 			EmployeeCtr employeeCtr = new EmployeeCtr();
-			employeeCtr.createAdministrator(employeeNr, name, phoneNr, street, email, city, postCode, cprNr);
+			employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, admin);
 		} catch(InputMismatchException e){
 			System.out.println("Forkert input!");
 		}
