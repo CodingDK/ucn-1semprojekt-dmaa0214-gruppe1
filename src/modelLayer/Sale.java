@@ -2,6 +2,7 @@ package modelLayer;
 
 import java.util.ArrayList;
 import java.util.Date;
+import personLayer.*;
 
 public class Sale {
 	private double totalPrice;
@@ -9,6 +10,7 @@ public class Sale {
 	private Date date;
 	private ArrayList<PartSale> partSales;
 	private static int idIterator;
+	private Customer customer;
 	
 	public Sale(){
 		idIterator++;
@@ -44,5 +46,12 @@ public class Sale {
 		partSales.add(p);
 	}
 	
+	public void setCustomer(Customer c){
+		this.customer = c;
+	}
+	
+	public Customer getCustomer(){
+		return this.customer;
+	}
 
 }
