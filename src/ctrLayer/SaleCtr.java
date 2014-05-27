@@ -43,11 +43,11 @@ public class SaleCtr {
 		Item item = iCtr.getItem(id);
 		
 		if(item != null){
-			int count = item.getAmount()-item.getReserved();
-			if(count-amount < 0){
-				throw new NotEnoughItemsException("Der er kun " + count + " af " + item.getName() + " ledige på lageret.");
+			int availableAmount = iCtr.getAvailableAmount(item);
+			if(availableAmount-amount < 0){
+				throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige på lageret.");
 			} else {
-			item.addReserved(amount);
+			iCtr.addReserved(item, amount);
 			sale.addPartSale(item, amount);
 			}
 		} else {
@@ -70,11 +70,11 @@ public class SaleCtr {
 			Item item = iCtr.getItem(name);
 
 			if(item != null){
-				int count = item.getAmount()-item.getReserved();
-				if(count-amount < 0){
-					throw new NotEnoughItemsException("Der er kun " + count + " af " + item.getName() + " ledige på lageret.");
+				int availableAmount = iCtr.getAvailableAmount(item);
+				if(availableAmount-amount < 0){
+					throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige på lageret.");
 				} else {
-					item.addReserved(amount);
+					iCtr.addReserved(item, amount);
 					sale.addPartSale(item, amount);
 				}
 			} else {
@@ -114,10 +114,12 @@ public class SaleCtr {
 			sale.setEmployee(employee);
 			
 			ArrayList<PartSale> partsales = sale.getPartSales();
+			
+			ItemCtr iCtr = new ItemCtr();
 			for(PartSale ps : partsales){
 				Item item = ps.getItem();
-				item.addReserved(-ps.getAmount());
-				item.addAmount(-ps.getAmount());
+				iCtr.addReserved(item, -ps.getAmount());
+				iCtr.addAmount(item, -ps.getAmount());
 			}
 			sale.setDone(true);
 			SaleCont.getInstance().addSale(sale);
