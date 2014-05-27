@@ -26,68 +26,74 @@ public class ItemUI extends SuperUI{
 		boolean exit = false;
 		while(!exit){
 			int choice = writeMenu();
-			if(choice == 1){ // Opret Kategori
-				createCategory();
-			} else if(choice == 2){ // Opdater
-				if(selectedCategory != null){
-					updateCategory();
-				}else{
+			if(admin){ // Admin adgang
+				if(choice == 1){ // Opret Kategori
+					createCategory();
+				} else if(choice == 2){ // Opdater
+					if(selectedCategory != null){
+						updateCategory();
+					}else{
+						selectedCategory = pickCategory();
+						updateCategory();
+					}
+				} else if(choice == 3){ // Fjern
+					if(selectedCategory != null){
+						removeCategory();
+					}else{
+						selectedCategory = pickCategory();
+						removeCategory();
+					}
+				} else if(choice == 4){ // Vælg
 					selectedCategory = pickCategory();
-					updateCategory();
-				}
-			} else if(choice == 3){ // Fjern
-				if(selectedCategory != null){
-					removeCategory();
-				}else{
-					selectedCategory = pickCategory();
-					removeCategory();
-				}
-			} else if(choice == 4){ // Vælg
-				selectedCategory = pickCategory();
-			} else if(choice == 5){ // Søg
-				searchCategory();
-			} else if(choice == 6){ // Opret Lager
-				createStorage();
-			} else if(choice == 7){ // Opdater
-				if(selectedStorage != null){
-					updateStorage();
-				}else{
+				} else if(choice == 6){ // Opret Lager
+					createStorage();
+				} else if(choice == 7){ // Opdater
+					if(selectedStorage != null){
+						updateStorage();
+					}else{
+						selectedStorage = pickStorage();
+						updateStorage();
+					}
+				} else if(choice == 8){ // Fjern
+					if(selectedStorage != null){
+						removeStorage();
+					}else{
+						selectedStorage = pickStorage();
+						removeStorage();
+					}
+				} else if(choice == 9){ // Vælg
 					selectedStorage = pickStorage();
-					updateStorage();
+				}  else if(choice == 11){ // Opret Vare
+					new CreateItemUI(selectedCategory, selectedStorage);
+				} else if(choice == 12){ // Opdater
+					if(selectedItem != null){
+						updateItem();
+					}else{
+						pickItem();
+						updateItem();
+					}
+				} else if(choice == 13){ // Fjern
+					if(selectedItem != null){
+						removeItem();
+					}else{
+						pickItem();
+						removeItem();
+					}
+				} else if(choice == 14){ // Vælg
+					selectedItem = pickItem();
+				}  
+			}
+			
+			{ // Seller + Admin adgang
+				if(choice == 5){ // Søg
+					searchCategory();
+				}else if(choice == 10){ // Søg
+					searchStorage();
+				}else if(choice == 15){ // Søg
+					searchItem();
+				}else if(choice == 16){
+					exit = true;
 				}
-			} else if(choice == 8){ // Fjern
-				if(selectedStorage != null){
-					removeStorage();
-				}else{
-					selectedStorage = pickStorage();
-					removeStorage();
-				}
-			} else if(choice == 9){ // Vælg
-				selectedStorage = pickStorage();
-			} else if(choice == 10){ // Søg
-				searchStorage();
-			} else if(choice == 11){ // Opret Vare
-				new CreateItemUI(selectedCategory, selectedStorage);
-			} else if(choice == 12){ // Opdater
-				if(selectedItem != null){
-					updateItem();
-				}else{
-					pickItem();
-					updateItem();
-				}
-			} else if(choice == 13){ // Fjern
-				if(selectedItem != null){
-					removeItem();
-				}else{
-					pickItem();
-					removeItem();
-				}
-			} else if(choice == 14){ // Vælg
-				selectedItem = pickItem();
-			} else if(choice == 15){ // Søg
-				searchItem();
-			} else if(choice == 16){
-				exit = true;
 			}
 		}		
 	}
