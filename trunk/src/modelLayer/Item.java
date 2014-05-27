@@ -62,7 +62,7 @@ public class Item{
 	 * @param amount The amount to add.
 	 */
 	public void addReserved(int amount){
-		this.reserved -= amount;
+		this.reserved += amount;
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class Item{
 	 * @param amount The amount to add.
 	 */
 	public void addAmount(int amount){
-		this.amount -= amount;
+		this.amount += amount;
 	}
 
 	/**
