@@ -1,11 +1,17 @@
 package uiLayer;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import modelLayer.Sale;
+import ctrLayer.SaleCtr;
+
 public class SaleUI extends SuperUI{
+	private Sale sale;
 		
 	public SaleUI(){
-		sCtr.createSale();
+		SaleCtr sCtr = new SaleCtr();
+		this.sale = sCtr.createSale();
 		boolean exit = false;
 		while(!exit){
 			int choice = writeSaleMenu();
@@ -18,11 +24,13 @@ public class SaleUI extends SuperUI{
 			} else if(choice == 4){
 				finishSale();
 			} else if(choice == 5){
-				exit = true
-				new MainUI();
+				exit = true;
 			}
+		}
 	}
 	
+
+
 	private int writeSaleMenu(){
 		int choice = 0;
 		try{
@@ -35,7 +43,7 @@ public class SaleUI extends SuperUI{
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();		
 		} catch(InputMismatchException e){
-			System.out.println("Forkert input!")
+			System.out.println("Forkert input!");
 		}
 		return choice;
 	}
@@ -45,5 +53,27 @@ public class SaleUI extends SuperUI{
 	
 	}
 	*/
+	
+	private void finishSale() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void searchCustomer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void createCustomer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void addPartSale() {
+		// Indtast varenr, / søg vare
+		ItemUI iUi = new ItemUI("Dry Run");
+		iUi.pickItem();
+		
+	}
 	
 }
