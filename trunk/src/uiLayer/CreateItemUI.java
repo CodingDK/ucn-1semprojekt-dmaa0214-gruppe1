@@ -138,14 +138,14 @@ public class CreateItemUI extends SuperUI {
 				}
 			}
 		}
-		int amount = requestInt("Antal");
+		int amount = requestInt("Antal", null);
 		double salePrice = requestDouble("Salgs pris");
 		double purchasePrice = requestDouble("Købs pris");
 		double bulkSalePrice = requestDouble("Bulk pris");
-		int bulk = requestInt("Bulk");
+		int bulk = requestInt("Bulk", null);
 		String location = requestString("Placering", 4, null);
-		int max = requestInt("Maksimal Lagerbeholdning");
-		int min = requestInt("Minimum Lagerbeholdning");
+		int min = requestInt("Minimum Lagerbeholdning", null);
+		int max = requestInt("Maksimal Lagerbeholdning", min);
 		iCtr.createItem(name, amount, 0, salePrice, purchasePrice, bulkSalePrice, bulk, location, selectedStorage, max, min, selectedCategory);
 	}
 

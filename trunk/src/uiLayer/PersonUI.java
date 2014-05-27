@@ -46,11 +46,11 @@ public class PersonUI extends SuperUI{
 			System.out.println(" 1. Find kunde");
 			System.out.println(" 2. Opret privat kunde");
 			System.out.println(" 3. Opret erhvervs kunde");
-			System.out.println(" 4. Opret s¾lger");
+			System.out.println(" 4. Opret sælger");
 			System.out.println(" 5. Opret administrator");
 			System.out.println(" 6. Opdater privat kunde");
 			System.out.println(" 7. Opdater erhvervs kunde");
-			System.out.println(" 8. Opdater s¾lger");
+			System.out.println(" 8. Opdater sælger");
 			System.out.println(" 9. Opdater administrator");
 			System.out.println("10. Fjern Person");
 			Scanner k = new Scanner(System.in);

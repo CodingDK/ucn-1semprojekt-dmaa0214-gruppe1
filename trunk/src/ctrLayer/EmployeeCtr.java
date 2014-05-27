@@ -41,7 +41,7 @@ public class EmployeeCtr{
      * @param cprNr The cprNr of the employee.
      */
     public void createSeller(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr){
-    	eCont.addEmployee(new Seller(employeeNr, name, phoneNr, street, email, city, postCode));
+    	//eCont.addEmployee(new Seller(employeeNr, name, phoneNr, street, email, city, postCode));
     }
     
     /**
@@ -56,7 +56,7 @@ public class EmployeeCtr{
      * @param cprNr The cprNr of the employee.
      */
     public void createAdministrator(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr){
-    	eCont.addEmployee(new Administrator(employeeNr, name, phoneNr, street, email, city, postCode));
+    	//eCont.addEmployee(new Administrator(employeeNr, name, phoneNr, street, email, city, postCode));
     }
     
     /**
