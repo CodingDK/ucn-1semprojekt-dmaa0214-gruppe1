@@ -474,7 +474,13 @@ public class ItemUI extends SuperUI{
 	}
 	
 	private void removeCategory() {
-		
+		CategoryCtr cCtr = new CategoryCtr();
+		cCtr.selectCategory(selectedCategory.getName());
+		try {
+			cCtr.removeCategory();
+		} catch (NoSelectionException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void removeStorage(){

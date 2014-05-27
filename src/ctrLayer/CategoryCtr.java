@@ -15,6 +15,10 @@ public class CategoryCtr {
 	
 	public CategoryCtr(){
 		cCont = CategoryCont.getInstance();
+		if(findCategory("U/K") == null){
+			createCategory("U/K");
+			ItemCont iCont = ItemCont.getInstance(findCategory("U/K"));
+		}
 	}
 	
 	/**
@@ -49,6 +53,15 @@ public class CategoryCtr {
 	 */
 	public void removeCategory() throws NoSelectionException {
 		if(selectedCategory != null){
+			ItemCont iContDel = ItemCont.getInstance(selectedCategory);
+			ArrayList<Item> items = iContDel.getAll();
+			Category cat = findCategory("U/K");
+			ItemCont iContAll = ItemCont.getInstance(findCategory("U/K"));
+			for(Item i : items){
+				i.setCategory(cat);
+				iContAll.addItem(i);
+			}
+			ItemCont.removeInstance(selectedCategory);
 			cCont.removeCategory(selectedCategory);
 		} else {
 			throw new NoSelectionException("Der er ikke valgt nogen kategori");

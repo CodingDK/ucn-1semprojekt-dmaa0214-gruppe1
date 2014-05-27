@@ -95,4 +95,8 @@ public class ItemCont {
 	public void removeItem(Item i){
 		items.remove(i);
 	}
+	
+	public static void removeInstance(Category c){
+		instance.remove(getInstance(c));
+	}
 }
