@@ -1,5 +1,6 @@
 package modelLayer;
 import personLayer.*;
+
 import java.util.ArrayList;
 
 /**
@@ -69,6 +70,27 @@ public class EmployeeCont{
     	return retEmployee;
     }
     
+    
+    /**
+	 * Finds and returns a EmployeeObj by name or employee number
+	 * @param nameOrPhone
+	 * @return CustomerObj
+	 */
+	public Employee findEmployeeNameOrEmpNr(String nameOrEmployeeNr){
+		boolean found = false;
+		Employee e = null;
+		int i = 0;
+		while(i < employees.size() && !found){
+			Employee em = employees.get(i);
+			if(em.getName().equalsIgnoreCase(nameOrEmployeeNr) || em.getEmployeeNr().equalsIgnoreCase(nameOrEmployeeNr) ){
+				e = em;
+				found = true;
+			}
+			i++;
+		}
+		return e;
+		}
+	
     /**
      * findEmployee - Get a Employee object from the id of the Employee.
      * @param id - The id of the Employee.
@@ -89,5 +111,12 @@ public class EmployeeCont{
     	
     	return retEmployee;
     }
+    
+    /**
+	 * @return employee Returns the list of employees.
+	 */
+	public ArrayList<Employee> getEmployee(){
+		return employees;
+	}
     
 }

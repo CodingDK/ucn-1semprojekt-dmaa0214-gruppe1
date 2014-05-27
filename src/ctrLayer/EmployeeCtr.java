@@ -1,4 +1,6 @@
 package ctrLayer;
+import java.util.ArrayList;
+
 import personLayer.*;
 import modelLayer.*;
 
@@ -28,6 +30,17 @@ public class EmployeeCtr{
     public Employee findEmployee(String employeeNr){
     	return eCont.findEmployee(employeeNr);
     }
+    
+    /**
+     * findEmployeeNameOrEmpNr - Return Employee object found.
+     * @param employeeNr The employeeNr of the Employee object to find.
+     * @return Employee - The Employee object of Employee or null.
+     */
+    public Employee findEmployeeNameOrEmpNr(String nameOrEmployeeNr){
+    	return eCont.findEmployeeNameOrEmpNr(nameOrEmployeeNr);
+    }
+    
+    
     
     /**
      * createEmployee - Create a new Employee.
@@ -97,4 +110,22 @@ public class EmployeeCtr{
     public void removeEmployee(Employee e) {
     	eCont.removeEmployee(e);
     }
+    
+    /**
+	 * searchEmployee
+	 * @param partName
+	 * @return Employee
+	 */
+	public ArrayList<Employee> searchEmployee(String partName){
+		ArrayList<Employee> foundEmployees = new ArrayList<Employee>();
+		EmployeeCont employeeCont = EmployeeCont.getInstance();
+		ArrayList<Employee> emp = employeeCont.getEmployee();
+		if(emp != null)
+			for(Employee e : emp){
+				if(e.getName().contains(partName) ){
+					foundEmployees.add(e);			
+				}	
+			}
+		return foundEmployees;
+	}
 }
