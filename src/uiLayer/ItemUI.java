@@ -1,5 +1,6 @@
 package uiLayer;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -26,7 +27,7 @@ public class ItemUI extends SuperUI{
 			} else if(choice == 3){
 				new CreateItemUI(selectedCategory, selectedStorage);
 			} else if(choice == 4){
-				
+				searchItem();
 			} else if(choice == 5){
 				
 			} else if(choice == 6){
@@ -34,11 +35,28 @@ public class ItemUI extends SuperUI{
 			} else if(choice == 7){
 				
 			} else if(choice == 8){
-				
+				test();
 			} else if(choice == 15){
 				exit = true;
 			}		
 		}		
+	}
+	
+	private void test(){
+		ItemCtr iCtr = new ItemCtr();
+		CategoryCtr cCtr = new CategoryCtr();
+		iCtr.createStorage("Lager1");
+		iCtr.createStorage("Lager2");
+		Storage s1 = iCtr.findStorage("Lager1");
+		Storage s2 = iCtr.findStorage("Lager2");
+		cCtr.createCategory("Søm");
+		cCtr.createCategory("Hammer");
+		Category c1 = cCtr.findCategory("Søm");
+		Category c2 = cCtr.findCategory("Hammer");
+		
+		
+		iCtr.createItem("Søm Og Skruer", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
+		iCtr.createItem("Søm Og Handsker", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
 	}
 	
 	private int writeMenu(){
@@ -111,6 +129,20 @@ public class ItemUI extends SuperUI{
 	private void searchItem() {
 		try{
 			System.out.println("## Søg Item ##");
+			String name = requestString("Vare navn: ", null, null);
+			ItemCtr iCtr = new ItemCtr();
+			ArrayList<Item> items = iCtr.searchItem(name);
+			if(items != null){
+				System.out.println(items.size() + " Varer Fundet");
+				for(Item i : items){
+					System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + i.getAmount() + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
+				}
+				pause();
+			}else{
+				System.out.println("0 Varer Fundet");
+				pause();
+				return;
+			}
 			
 		}catch(Exception e){
 			e.printStackTrace();

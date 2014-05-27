@@ -20,11 +20,11 @@ public class CategoryCtr {
 	 * @param name
 	 * @throws AlreadyExistException If the category already exists
 	 */
-	public void createCategory(String name) throws AlreadyExistException{
+	public void createCategory(String name){
 		if(!exist(name)){
 			cCont.addCategory(new Category(name));
 		}else{
-			throw new AlreadyExistException("Kategorien eksistere allerede");
+			//throw new AlreadyExistException("Kategorien eksistere allerede");
 		}
 	}
 	
