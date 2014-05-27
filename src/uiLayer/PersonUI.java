@@ -128,10 +128,9 @@ public class PersonUI extends SuperUI{
 			String phoneNr		= requestString("Telefon nr", null, null, false);
 			String email		= requestString("E-mail", null, null, false);
 			String cprNr		= requestString("CPR nr", null, null, false);
-			Boolean admin 		= false;
 			
 			EmployeeCtr employeeCtr = new EmployeeCtr();
-			employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, admin);
+			employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, null, false);
 			
 		} catch(InputMismatchException e){
 			System.out.println("Forkert input!");
@@ -153,10 +152,11 @@ public class PersonUI extends SuperUI{
 			String phoneNr		= requestString("Telefon nr", null, null, false);
 			String email		= requestString("E-mail", null, null, false);
 			String cprNr		= requestString("CPR nr", null, null, false);
+			String password		= requestString("Kode", null, null, false);
 			Boolean admin		= true;
 			
 			EmployeeCtr employeeCtr = new EmployeeCtr();
-			employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, admin);
+			employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, password, admin);
 		} catch(InputMismatchException e){
 			System.out.println("Forkert input!");
 		}
@@ -166,7 +166,7 @@ public class PersonUI extends SuperUI{
 	 * findCustomer - Find a customer in the system by the name or phone number
 	 */
 	public void findPrivate() {
-		System.out.println("## S¿g privatkunde ##");
+		System.out.println("## Søg privatkunde ##");
 		System.out.print("Indtast kunde navn eller telefon nr: ");
 		Scanner k = new Scanner(System.in);
 		String nameOrPhone = k.nextLine();
@@ -186,7 +186,7 @@ public class PersonUI extends SuperUI{
 		boolean recheck = false;
 		while(!recheck){
 			if(customers.size() > 1){
-				int id = requestInt("Indtast kunde ID for den ¿nskede kunde", null);
+				int id = requestInt("Indtast kunde ID for den ¿nskede kunde", null, false);
 				for(Customer c : customers){
 					if(id == c.getId()){
 						System.out.println("Navn: " + c.getName() + ", Gade: " + c.getStreet() + ", PostNummer: " + c.getPostCode() + ", By: " + c.getCity() + ", Tlf nr: " + c.getPhoneNr());
