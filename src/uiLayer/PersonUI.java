@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import personLayer.Business;
 import personLayer.Customer;
 import ctrLayer.CustomerCtr;
 import ctrLayer.EmployeeCtr;
@@ -21,15 +22,17 @@ public class PersonUI extends SuperUI{
 			
 			int choice = writeMenu();
 			if(choice == 1){
-				findCustomer();
+				findPrivate();
 			} else if(choice == 2){
 				createPrivate();
 			} else if(choice == 3){
-				createBusiness();
+				findBusiness();
 			} else if(choice == 4){
-				createSeller();
+				createBusiness();
 			} else if(choice == 5){
-				
+				createSeller();
+			} else if(choice == 6){
+				createAdministrator();
 			} else if(choice == 7){
 				
 			} else if(choice == 8){
@@ -45,13 +48,14 @@ public class PersonUI extends SuperUI{
 		int choice = 0;
 		try{
 			System.out.println("## Kunde menu ##");
-			System.out.println(" 1. S¿g kunde");
+			System.out.println(" 1. S¿g privatkunde");
 			System.out.println(" 2. Opret privat kunde");
-			System.out.println(" 3. Opret erhvervs kunde");
-			System.out.println(" 4. Opret sælger");
-			System.out.println(" 5. Opret administrator");
+			System.out.println(" 3. S¿g erhvervskunde");
+			System.out.println(" 4. Opret erhvervskunde");
+			System.out.println(" 5. Opret s¾lger");
+			System.out.println(" 6. Opret administrator");
 			System.out.println(" 7. Opdater erhvervs kunde");
-			System.out.println(" 8. Opdater sælger");
+			System.out.println(" 8. Opdater s¾lger");
 			System.out.println(" 9. Opdater administrator");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
@@ -69,14 +73,14 @@ public class PersonUI extends SuperUI{
 		try{
 			System.out.println("## Opret privat kunde ##");
 			
-		 	String name 		= requestString("Navn", null, null);
-		 	String street 		= requestString("Gade", null, null);
-		 	String postCode 	= requestString("Postnummer", null, null);
-		 	String city 		= requestString("By", null, null);
-		 	String phoneNr 		= requestString("Telefon nr", null, null);
-		 	String email 		= requestString("E-mail", null, null);
-		 	String cprNr 		= requestString("CPR nr", null, null);
-		 	String pictureId 	= requestString("Billede ID", null, null);
+		 	String name 		= requestString("Navn", null, null, false);
+		 	String street 		= requestString("Gade", null, null, false);
+		 	String postCode 	= requestString("Postnummer", null, null, false);
+		 	String city 		= requestString("By", null, null, false);
+		 	String phoneNr 		= requestString("Telefon nr", null, null, false);
+		 	String email 		= requestString("E-mail", null, null, false);
+		 	String cprNr 		= requestString("CPR nr", null, null, false);
+		 	String pictureId 	= requestString("Billede ID", null, null, false);
 			
 			CustomerCtr customerCtr = new CustomerCtr();
 			customerCtr.createPrivateCustomer(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
@@ -93,14 +97,14 @@ public class PersonUI extends SuperUI{
 	public void createBusiness() {
 		try{
 			System.out.println("## Opret erhvervs kunde ##");			
-			String company 	= requestString("Virksomhedsnavn", null, null);
-			String street	= requestString("Gade", null, null);
-			String postCode = requestString("Postnummer", null, null);
-			String city 	= requestString("By", null, null);
-			String phoneNr 	= requestString("Telefon nr", null, null);
-			String email 	= requestString("E-mail", null, null);
-			String cvrNr 	= requestString("CVR nr", null, null);
-			String name 	= requestString("Kontakt person", null, null);
+			String company 	= requestString("Virksomhedsnavn", null, null, false);
+			String street	= requestString("Gade", null, null, false);
+			String postCode = requestString("Postnummer", null, null, false);
+			String city 	= requestString("By", null, null, false);
+			String phoneNr 	= requestString("Telefon nr", null, null, false);
+			String email 	= requestString("E-mail", null, null, false);
+			String cvrNr 	= requestString("CVR nr", null, null, false);
+			String name 	= requestString("Kontakt person", null, null, false);
 			
 			CustomerCtr customerCtr = new CustomerCtr();
 			customerCtr.createBusinessCustomer(name, phoneNr, street, email, city, postCode, company, cvrNr);
@@ -116,14 +120,14 @@ public class PersonUI extends SuperUI{
 	public void createSeller() {
 		try{
 			System.out.println("## Opret s¾lger ##");
-			String employeeNr 	= requestString("Medarbejder nummer", null, null);
-			String name			= requestString("Navn", null, null);
-			String street		= requestString("Gade", null, null);
-			String postCode		= requestString("Postnummer", null, null);
-			String city			= requestString("By", null, null);
-			String phoneNr		= requestString("Telefon nr", null, null);
-			String email		= requestString("E-mail", null, null);
-			String cprNr		= requestString("CPR nr", null, null);
+			String employeeNr 	= requestString("Medarbejder nummer", null, null, false);
+			String name			= requestString("Navn", null, null, false);
+			String street		= requestString("Gade", null, null, false);
+			String postCode		= requestString("Postnummer", null, null, false);
+			String city			= requestString("By", null, null, false);
+			String phoneNr		= requestString("Telefon nr", null, null, false);
+			String email		= requestString("E-mail", null, null, false);
+			String cprNr		= requestString("CPR nr", null, null, false);
 			Boolean admin 		= false;
 			
 			EmployeeCtr employeeCtr = new EmployeeCtr();
@@ -141,14 +145,14 @@ public class PersonUI extends SuperUI{
 	public void createAdministrator() {
 		try{
 			System.out.println("## Opret administrator ##");
-			String employeeNr 	= requestString("Medarbejder nummer", null, null);
-			String name			= requestString("Navn", null, null);
-			String street		= requestString("Gade", null, null);
-			String postCode		= requestString("Postnummer", null, null);
-			String city			= requestString("By", null, null);
-			String phoneNr		= requestString("Telefon nr", null, null);
-			String email		= requestString("E-mail", null, null);
-			String cprNr		= requestString("CPR nr", null, null);
+			String employeeNr 	= requestString("Medarbejder nummer", null, null, false);
+			String name			= requestString("Navn", null, null, false);
+			String street		= requestString("Gade", null, null, false);
+			String postCode		= requestString("Postnummer", null, null, false);
+			String city			= requestString("By", null, null, false);
+			String phoneNr		= requestString("Telefon nr", null, null, false);
+			String email		= requestString("E-mail", null, null, false);
+			String cprNr		= requestString("CPR nr", null, null, false);
 			Boolean admin		= true;
 			
 			EmployeeCtr employeeCtr = new EmployeeCtr();
@@ -161,8 +165,8 @@ public class PersonUI extends SuperUI{
 	/**
 	 * findCustomer - Find a customer in the system by the name or phone number
 	 */
-	public void findCustomer() {
-		System.out.println("## S¿g kunde ##");
+	public void findPrivate() {
+		System.out.println("## S¿g privatkunde ##");
 		System.out.print("Indtast kunde navn eller telefon nr: ");
 		Scanner k = new Scanner(System.in);
 		String nameOrPhone = k.nextLine();
@@ -192,12 +196,11 @@ public class PersonUI extends SuperUI{
 					}
 				}
 			} else if(customers.size() == 1){
-				updateCustomerMenu();
+				updateCustomerMenu(customerCtr.findCustomer(nameOrPhone));
 			}
 		}
 	}
-	
-	
+		
 	/**
 	 * findCustomerMenu
 	 * @return choice
@@ -216,6 +219,19 @@ public class PersonUI extends SuperUI{
 		}
 		return choice;
 	}
+	
+	/**
+	 * findBusiness - Search for a business customer
+	 */
+	public void findBusiness(){
+		System.out.println("## S¿g erhvervskunde ##");
+		System.out.print("Indtast virksomhedsnavn: ");
+		Scanner k = new Scanner(System.in);
+		String comp = k.nextLine();
+		
+		
+	}
+	
 	
 	/**
 	 * updateCustomerMenu

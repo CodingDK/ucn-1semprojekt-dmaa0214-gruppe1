@@ -159,12 +159,13 @@ public class CustomerCtr {
 	 */
 	public ArrayList<Customer> searchBusiness(String partName){
 		ArrayList<Customer> foundCustomers = new ArrayList<Customer>();
-		CustomerCont customerCont = CustomerCont.getInstance();
-		ArrayList<Customer> cust = customerCont.findBusiness();
+		
+		
+		ArrayList<Customer> cust = customerCont.getCustomers();
 		if(cust != null)
 			for(Customer c : cust){
 				if( ){
-					foundCustomers.add(c);			
+					foundCustomers.add(c.);			
 				}	
 			}
 		return foundCustomers;
