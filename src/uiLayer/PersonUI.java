@@ -1,5 +1,6 @@
 package uiLayer;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -9,6 +10,9 @@ import ctrLayer.EmployeeCtr;
 
 public class PersonUI extends SuperUI{
 
+	public PersonUI(String DriveRun){
+		
+	}
 	
 	public PersonUI(){
 	
@@ -163,25 +167,33 @@ public class PersonUI extends SuperUI{
 		Scanner k = new Scanner(System.in);
 		String nameOrPhone = k.nextLine();
 		
-		
 		CustomerCtr customerCtr = new CustomerCtr();
-		Customer customer = customerCtr.findCustomer(nameOrPhone);
-			
-		
-		if(customer == null){
-			System.out.println("Kunden er ikke fundet");
+		ArrayList<Customer> customers = customerCtr.searchCustomer(nameOrPhone);
+		if(customers != null){
+			System.out.println(customers.size() + " Kunder fundet");
+			for(Customer c : customers){
+				System.out.println("ID: " + c.getId() + ", Navn: " + c.getName() + ", Gade: " + c.getStreet() + ", PostNummer: " + c.getPostCode() + ", By: " + c.getCity() + ", Tlf nr: " + c.getPhoneNr());
+			}
+		} else{
+			System.out.println("0 Kunder Fundet");
 			pause();
-		} else {
-			System.out.println("--- Kunde info ---");
-			System.out.println("Kunde ID  : " + customer.getId());
-			System.out.println("Navn	  : " + customer.getName());
-			System.out.println("Gade	  : " + customer.getStreet());
-			System.out.println("Postnummer: " + customer.getPostCode());
-			System.out.println("By	  : " + customer.getCity());
-			System.out.println("Telefon nr: " + customer.getPhoneNr());
-			pause();
-			updateCustomerMenu(customer);
-			
+			return;
+		}
+		boolean recheck = false;
+		while(!recheck){
+			if(customers.size() > 1){
+				int id = requestInt("Indtast kunde ID for den ¿nskede kunde", null);
+				for(Customer c : customers){
+					if(id == c.getId()){
+						System.out.println("Navn: " + c.getName() + ", Gade: " + c.getStreet() + ", PostNummer: " + c.getPostCode() + ", By: " + c.getCity() + ", Tlf nr: " + c.getPhoneNr());
+						updateCustomerMenu(c);
+						pause();
+						recheck = true;
+					}
+				}
+			} else if(customers.size() == 1){
+				updateCustomerMenu();
+			}
 		}
 	}
 	
