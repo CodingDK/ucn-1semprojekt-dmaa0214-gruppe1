@@ -224,15 +224,18 @@ public class ItemCtr {
 		ArrayList<Item> items = new ArrayList<Item>();
 		CategoryCtr cCtr = new CategoryCtr();
 		ArrayList<Category> cats = cCtr.getAllCategories();
-		for(Category cat : cats){
-			ArrayList<Item> list = ItemCont.getInstance(cat).getAll();
-			for(Item i : list){
-				if(i.getName().toLowerCase().startsWith(s.toLowerCase())){
-					items.add(i);
+		if(cats != null){
+			for(Category cat : cats){
+				ArrayList<Item> list = ItemCont.getInstance(cat).getAll();
+				if(list != null){
+					for(Item i : list){
+						if(i.getName().toLowerCase().startsWith(s.toLowerCase())){
+							items.add(i);
+						}
+					}
 				}
 			}
 		}
-		
 		return items;
 	}
 }
