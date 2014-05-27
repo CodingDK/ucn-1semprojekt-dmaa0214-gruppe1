@@ -13,8 +13,8 @@ public class PartSale {
 	 * @param amount Amount of item.
 	 */
 	public PartSale(Item i, int amount){
-		id = idIterator;
 		idIterator++;
+		id = idIterator;
 		item = i;
 		this.amount = amount;
 	}
