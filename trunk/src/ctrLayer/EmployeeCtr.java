@@ -30,7 +30,7 @@ public class EmployeeCtr{
     }
     
     /**
-     * createSeller - Create a new Seller.
+     * createEmployee - Create a new Employee.
      * @param employeeNr The employeeNr of the employee.
      * @param name The name of the employee.
      * @param phoneNr The phoneNr of the employee.
@@ -39,24 +39,10 @@ public class EmployeeCtr{
      * @param city The city of the employee.
      * @param postCode The postCode of the employee.
      * @param cprNr The cprNr of the employee.
+     * @param admin A boolean value, true for admin.
      */
-    public void createSeller(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr){
-    	//eCont.addEmployee(new Seller(employeeNr, name, phoneNr, street, email, city, postCode));
-    }
-    
-    /**
-     * createAdministrator - Create a new Administrator.
-     * @param employeeNr The employeeNr of the employee.
-     * @param name The name of the employee.
-     * @param phoneNr The phoneNr of the employee.
-     * @param street The Street of the employee.
-     * @param email The email of the employee.
-     * @param city The city of the employee.
-     * @param postCode The postCode of the employee.
-     * @param cprNr The cprNr of the employee.
-     */
-    public void createAdministrator(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr){
-    	//eCont.addEmployee(new Administrator(employeeNr, name, phoneNr, street, email, city, postCode));
+    public void createEmployee(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, boolean admin){
+    	eCont.addEmployee(new Seller(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, admin));
     }
     
     /**
@@ -69,9 +55,10 @@ public class EmployeeCtr{
      * @param email The new value or null if not changed.
      * @param city The new value or null if not changed.
      * @param postCode The new value or null if not changed.
+     * @param admin The new value or null if not changed.
      * @throws NullPointerException Employee not exits.
      */
-    public void updateEmployee(int id, String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode) throws NullPointerException{
+    public void updateEmployee(int id, String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, Boolean admin) throws NullPointerException{
     	Employee e = eCont.findEmployee(id);
     	if(e != null) {
     		if(employeeNr != null) {
@@ -94,6 +81,9 @@ public class EmployeeCtr{
     		}
     		if(postCode != null) {
     			e.setPostCode(postCode);
+    		}
+    		if(admin != null){
+    			e.setAdmin(admin);
     		}
     	} else {
     		throw new NullPointerException("Medarbejder ikke fundet");
