@@ -28,8 +28,6 @@ public class SaleUI extends SuperUI{
 			}
 		}
 	}
-	
-
 
 	private int writeSaleMenu(){
 		int choice = 0;
@@ -70,7 +68,7 @@ public class SaleUI extends SuperUI{
 	}
 
 	private void addPartSale() {
-		// Indtast varenr, / søg vare
+		// Indtast varenr, / sï¿½g vare
 		ItemUI iUi = new ItemUI("Dry Run");
 		iUi.pickItem();
 		
