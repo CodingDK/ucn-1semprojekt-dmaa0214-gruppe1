@@ -247,14 +247,15 @@ public class PersonUI extends SuperUI{
 	 * @param customer
 	 */
 	private void removeCustomer(Customer customer) {
-		if(confirm("Ønsker du at slette: ") ){
+		String name = selectedCustomer.getName();
+		if(confirm("Ønsker du at slette " + name + "? ") ){
 			int id = customer.getId();
 			CustomerCtr customerCtr = new CustomerCtr();
 			customerCtr.removeCustomer(id);
-			System.out.println("Personen er nu slettet");
+			System.out.println(name + " blev slettet");
 			pause();
 		} else{
-			System.out.println("Personen er ikke slettet");
+			System.out.println(name + "blev ikke slettet");
 			pause();
 		}
 	}
@@ -354,13 +355,13 @@ public class PersonUI extends SuperUI{
 	 */
 	private void removeEmployee(Employee employee) {
 		String name = selectedEmployee.getName();
-		if(confirm("Er du sikker på du vil slette " + name + "? ")){
+		if(confirm("Ønsker du at slette " + name + "? ") ){			
 			EmployeeCtr eCtr = new EmployeeCtr();
 			eCtr.removeEmployee(employee);
-			System.out.println(name + " er nu slettet");
+			System.out.println(name + " blev slettet");
 			pause();
 		} else{
-			System.out.println("Personen er ikke slettet");
+			System.out.println(name + "blev ikke slettet");
 			pause();
 		}
 	}
