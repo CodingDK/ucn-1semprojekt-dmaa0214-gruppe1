@@ -142,4 +142,11 @@ public class SaleCtr {
 		}
 	}
 	
+	public ArrayList<Sale> getSales(){
+		SaleCont sCont = SaleCont.getInstance();
+		ArrayList<Sale> sales = sCont.getAll();
+		
+		return sales;
+	}
+	
 }

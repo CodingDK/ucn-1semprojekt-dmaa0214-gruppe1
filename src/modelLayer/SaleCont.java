@@ -36,4 +36,8 @@ public class SaleCont {
 	public void addSale(Sale s){
 		sales.add(s);
 	}
+
+	public ArrayList<Sale> getAll() {
+		return sales;
+	}
 }
