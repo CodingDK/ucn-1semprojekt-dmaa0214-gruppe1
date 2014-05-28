@@ -204,7 +204,8 @@ public class ItemCtr {
      * @return Storage object of the Storage or null if not found.
      */
 	public Storage findStorage(String name){
-		return StorageCont.getInstance().findStorage(name);
+		StorageCont cCont = StorageCont.getInstance();
+		return cCont.findStorage(name);
 	}
 	
 	/**
@@ -213,7 +214,8 @@ public class ItemCtr {
      * @return Storage object of the Storage or null if not found.
      */
 	public Storage findStorage(int id){
-		return StorageCont.getInstance().findStorage(id);
+		StorageCont cCont = StorageCont.getInstance();
+		return cCont.findStorage(id);
 	}
 	
 	/**
@@ -222,8 +224,7 @@ public class ItemCtr {
 	 * @param name The new name of the Storage.
 	 * @throws NullPointerException If Storage object not found.
 	 */
-	public void updateStorage(Storage storage, String name) throws NullPointerException {
-		Storage s = StorageCont.getInstance().findStorage(name);
+	public void updateStorage(Storage s, String name) throws NullPointerException {
 		if(s != null){
 			s.setName(name);
 		} else if(s == null){
