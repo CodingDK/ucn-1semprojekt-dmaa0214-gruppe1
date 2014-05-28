@@ -143,10 +143,7 @@ public class ItemUI extends SuperUI{
 			
 			
 			System.out.println(" 16. Gå tilbage");
-			System.out.print("Valg:");
-			@SuppressWarnings("resource")
-			Scanner k = new Scanner(System.in);
-			choice = k.nextInt();
+			choice = requestInt("Valg", null, false);
 		} catch(InputMismatchException e){
 			System.out.println("Forkert input!");
 		}
