@@ -71,10 +71,10 @@ public class PersonUI extends SuperUI{
 		System.out.println(" 6. Søg medarbejder");
 		if(admin){
 			System.out.println(" 7. Opdater medarbejder" + m);
-			System.out.println("8. Slet medarbejder" + m);
+			System.out.println(" 8. Slet medarbejder" + m);
 		}
 		System.out.println("--------------------------");
-		System.out.println("9. Gå tilbage");
+		System.out.println(" 9. Gå tilbage");
 		choice = requestInt("\nValg", 0, false);
 		return choice;
 	}
