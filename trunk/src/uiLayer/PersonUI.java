@@ -39,7 +39,9 @@ public class PersonUI extends SuperUI{
 				
 			} else if(choice == 9){
 				
-			} 			
+			} else if(choice == 10){
+				exit = true;
+			}	
 		}		
 	}
 	
@@ -48,15 +50,16 @@ public class PersonUI extends SuperUI{
 		int choice = 0;
 		try{
 			System.out.println("## Kunde menu ##");
-			System.out.println(" 1. S¿g privatkunde");
+			System.out.println(" 1. Sï¿½g privatkunde");
 			System.out.println(" 2. Opret privat kunde");
-			System.out.println(" 3. S¿g erhvervskunde");
+			System.out.println(" 3. Sï¿½g erhvervskunde");
 			System.out.println(" 4. Opret erhvervskunde");
-			System.out.println(" 5. Opret s¾lger");
+			System.out.println(" 5. Opret sï¿½lger");
 			System.out.println(" 6. Opret administrator");
-			System.out.println(" 7. S¿g medarbejder (s¾lger eller administrator)");
-			System.out.println(" 8. Opdater s¾lger");
+			System.out.println(" 7. Sï¿½g medarbejder (sï¿½lger eller administrator)");
+			System.out.println(" 8. Opdater sï¿½lger");
 			System.out.println(" 9. Opdater administrator");
+			System.out.println(" 10. Tilbage");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
@@ -119,7 +122,7 @@ public class PersonUI extends SuperUI{
 	 */
 	public void createSeller() {
 		try{
-			System.out.println("## Opret s¾lger ##");
+			System.out.println("## Opret sï¿½lger ##");
 			String employeeNr 	= requestString("Medarbejder nummer", null, null, false);
 			String name			= requestString("Navn", null, null, false);
 			String street		= requestString("Gade", null, null, false);
@@ -166,7 +169,7 @@ public class PersonUI extends SuperUI{
 	 * findCustomer - Find a customer in the system by the name or phone number
 	 */
 	public void findPrivate() {
-		System.out.println("## Søg privatkunde ##");
+		System.out.println("## Sï¿½g privatkunde ##");
 		System.out.print("Indtast kunde navn eller telefon nr: ");
 		Scanner k = new Scanner(System.in);
 		String nameOrPhone = k.nextLine();
@@ -186,7 +189,7 @@ public class PersonUI extends SuperUI{
 		boolean recheck = false;
 		while(!recheck){
 			if(customers.size() > 1){
-				int id = requestInt("Indtast kunde ID for den ¿nskede kunde", null, false);
+				int id = requestInt("Indtast kunde ID for den ï¿½nskede kunde", null, false);
 				for(Customer c : customers){
 					if(id == c.getId()){
 						System.out.println("Navn: " + c.getName() + ", Gade: " + c.getStreet() + ", PostNummer: " + c.getPostCode() + ", By: " + c.getCity() + ", Tlf nr: " + c.getPhoneNr());
@@ -282,7 +285,7 @@ public class PersonUI extends SuperUI{
 	 * @param customer
 	 */
 	private void removePerson(Customer customer) {
-		if(confirm("¯nsker du at slette: ") ){
+		if(confirm("ï¿½nsker du at slette: ") ){
 			int id = customer.getId();
 			CustomerCtr customerCtr = new CustomerCtr();
 			customerCtr.removeCustomer(id);
@@ -298,7 +301,7 @@ public class PersonUI extends SuperUI{
 	 * findBusiness - Search for a business customer
 	 */
 	public void findBusiness(){
-//		System.out.println("## S¿g erhvervskunde ##");
+//		System.out.println("## Sï¿½g erhvervskunde ##");
 //		System.out.print("Indtast virksomhedsnavn: ");
 //		Scanner k = new Scanner(System.in);
 //		String comp = k.nextLine();				
@@ -311,7 +314,7 @@ public class PersonUI extends SuperUI{
 	
 	
 	public void findEmployee(){	
-			System.out.println("## S¿g medarbejder ##");
+			System.out.println("## Sï¿½g medarbejder ##");
 			System.out.print("Indtast medarbejder navn eller medarbejder nr: ");
 			Scanner k = new Scanner(System.in);
 			String nameOrEmpNr = k.nextLine();
@@ -331,7 +334,7 @@ public class PersonUI extends SuperUI{
 			boolean recheck = false;
 			while(!recheck){
 				if(employees.size() > 1){
-					int id = requestInt("Indtast medarbejder ID for den ¿nskede medarbejder", null, false);
+					int id = requestInt("Indtast medarbejder ID for den ï¿½nskede medarbejder", null, false);
 					for(Employee e : employees){
 						if(id == e.getId()){
 							System.out.println("Navn: " + e.getName() + ", Gade: " + e.getStreet() + ", PostNummer: " + e.getPostCode() + ", By: " + e.getCity() + ", Tlf nr: " + e.getPhoneNr());
@@ -443,7 +446,7 @@ public class PersonUI extends SuperUI{
 	 * @param Employee
 	 */
 	private void removeEmploye(Employee employee) {
-		if(confirm("¯nsker du at slette: ") ){
+		if(confirm("ï¿½nsker du at slette: ") ){
 			EmployeeCtr employeeCtr = new EmployeeCtr();
 			employeeCtr.removeEmployee(employee);
 			System.out.println("Personen er nu slettet");
