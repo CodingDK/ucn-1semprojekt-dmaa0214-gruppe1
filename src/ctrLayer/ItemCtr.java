@@ -234,10 +234,37 @@ public class ItemCtr {
 	
 	/**
 	 * removeStorage - Remove a Storage object from the container.
+	 * Allocates all items to the primary Storage
 	 * @param s The Storage object to remove.
 	 */
 	public void removeStorage(Storage s){
-		StorageCont.getInstance().removeStorage(s);
+		StorageCont sCont = StorageCont.getInstance();
+		CategoryCtr cCtr = new CategoryCtr();
+		ArrayList<Category> categories = cCtr.getAllCategories();
+		for(Category c : categories){
+			ItemCont iCont = ItemCont.getInstance(c);
+			ArrayList<Item> items = iCont.getAll();
+			for(Item i : items){
+				if(i.getStorage() == s){
+					i.setStorage(sCont.getPrimary());
+				}
+			}
+		}
+		sCont.removeStorage(s);
+	}
+	
+	/**
+	 * Checks if the Storage is the Primary Storage
+	 * @param Storage
+	 * @return boolean
+	 */
+	public boolean isPrimary(Storage s){
+		boolean ret = false;
+		StorageCont sCont = StorageCont.getInstance();
+		if(s == sCont.getPrimary()){
+			ret = true;
+		}
+		return ret;
 	}
 	
 	/**
@@ -245,9 +272,15 @@ public class ItemCtr {
 	 * @return ArrayList<Storage> A list with all storages.
 	 */
 	public ArrayList<Storage> getAllStorages(){
-		return StorageCont.getInstance().getAll();
+		StorageCont sCont = StorageCont.getInstance();
+		return sCont.getAll();
 	}
 	
+	/**
+	 * searchItem - Returns a list of items based on the requested name
+	 * @param name
+	 * @return ArrayList<Item>
+	 */
 	public ArrayList<Item> searchItem(String name){
 		ArrayList<Item> items = new ArrayList<Item>();
 		CategoryCtr cCtr = new CategoryCtr();
@@ -267,6 +300,11 @@ public class ItemCtr {
 		return items;
 	}
 	
+	/**
+	 * searchStorage - Returns a list of Storages based on the requested name
+	 * @param name
+	 * @return ArrayList<Storage>
+	 */
 	public ArrayList<Storage> searchStorage(String name) {
 		ArrayList<Storage> storages = new ArrayList<Storage>();
 		StorageCont sCont = StorageCont.getInstance();
