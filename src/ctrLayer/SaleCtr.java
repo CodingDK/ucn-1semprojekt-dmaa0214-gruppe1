@@ -25,11 +25,9 @@ public class SaleCtr {
 	
 	/**
 	 * createSale - Create a new sale.
-	 * @return Sale The new sale.
 	 */
-	public Sale createSale(){
+	public void createSale(){
 		this.sale = new Sale();
-		return this.sale;
 	}
 	
 	public void addItem(Item item, int amount) throws NullPointerException, NotEnoughItemsException{
@@ -38,7 +36,7 @@ public class SaleCtr {
 		if(item != null){
 			int availableAmount = iCtr.getAvailableAmount(item);
 			if(availableAmount-amount < 0){
-				throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige på lageret.");
+				throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige pï¿½ lageret.");
 			} else {
 				iCtr.addReserved(item, amount);
 				if(sale != null){
@@ -67,7 +65,7 @@ public class SaleCtr {
 		if(item != null){
 			int availableAmount = iCtr.getAvailableAmount(item);
 			if(availableAmount-amount < 0){
-				throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige på lageret.");
+				throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige pï¿½ lageret.");
 			} else {
 			iCtr.addReserved(item, amount);
 			sale.addPartSale(item, amount);
@@ -94,7 +92,7 @@ public class SaleCtr {
 			if(item != null){
 				int availableAmount = iCtr.getAvailableAmount(item);
 				if(availableAmount-amount < 0){
-					throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige på lageret.");
+					throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige pï¿½ lageret.");
 				} else {
 					iCtr.addReserved(item, amount);
 					sale.addPartSale(item, amount);
