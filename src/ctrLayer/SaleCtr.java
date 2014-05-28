@@ -47,14 +47,12 @@ public class SaleCtr {
 	 * @throws NullPointerException if item object not created.
 	 */
 	public void addItem(Item item, int amount) throws NullPointerException, NotEnoughItemsException{
-		ItemCtr iCtr = new ItemCtr();
-		
 		if(item != null){
-			int availableAmount = iCtr.getAvailableAmount(item);
+			int availableAmount = item.getAmount() - item.getReserved();
 			if(availableAmount-amount < 0){
 				throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige p� lageret.");
 			} else {
-				iCtr.addReserved(item, amount);
+				item.addReserved(amount);
 				if(sale != null){
 					sale.addPartSale(item, amount);
 				}else{
@@ -97,11 +95,10 @@ public class SaleCtr {
 			
 			ArrayList<PartSale> partsales = sale.getPartSales();
 			
-			ItemCtr iCtr = new ItemCtr();
 			for(PartSale ps : partsales){
 				Item item = ps.getItem();
-				iCtr.addReserved(item, -ps.getAmount());
-				iCtr.addAmount(item, -ps.getAmount());
+				item.addReserved(-ps.getAmount());
+				item.addAmount(-ps.getAmount());
 			}
 			sale.setDone(true);
 			SaleCont.getInstance().addSale(sale);
@@ -111,4 +108,28 @@ public class SaleCtr {
 		}
 		
 	}
+	
+	/**
+	 * Cancels the sale and returns the amount, and resets the reserved
+	 */
+	public void cancelSale(){
+		ArrayList<PartSale> partSales = sale.getPartSales();
+		if(partSales != null){
+			for(PartSale p : partSales){
+				Item i = p.getItem();
+				i.addAmount(p.getAmount());
+				i.addReserved(-p.getAmount());
+			}
+		}
+	}
+	
+	/**
+	 * Parks the sale for later use
+	 */
+	public void parkSale(){
+		SaleCont sCont = SaleCont.getInstance();
+		sale.setDone(false);
+		sCont.addSale(sale);
+	}
+	
 }

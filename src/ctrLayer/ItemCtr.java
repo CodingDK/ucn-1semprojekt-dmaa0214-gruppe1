@@ -17,33 +17,6 @@ public class ItemCtr {
 	}
 	
 	/**
-	 * getAvailableAmount Get the available amount of an item.
-	 * @param item The item to get from.
-	 * @return int The available amount.
-	 */
-	public int getAvailableAmount(Item item){
-		return item.getAmount()-item.getReserved();
-	}
-	
-	/**
-	 * addReserved Add reserved amount to an item.
-	 * @param item The item to add to.
-	 * @param amount The amount to add.
-	 */
-	public void addReserved(Item item, int amount){
-		item.addReserved(amount);
-	}
-	
-	/**
-	 * addAmount Add amount to an item.
-	 * @param item The item to add to.
-	 * @param amount The amount to add.
-	 */
-	public void addAmount(Item item, int amount){
-		item.addAmount(amount);
-	}
-	
-	/**
 	 * getItem - Get an item object from an id.
 	 * @param id The id of the Item object.
 	 * @return Item - The founded object or null.
