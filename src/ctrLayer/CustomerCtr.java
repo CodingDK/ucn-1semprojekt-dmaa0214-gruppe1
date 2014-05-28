@@ -50,8 +50,10 @@ public class CustomerCtr {
 	 * @param cprNr
 	 * @param pictureId
 	 */
-	public void createPrivateCustomer(String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String pictureId){
-		cCont.addCustomer(new Private(name, phoneNr, street, email, city, postCode, cprNr, pictureId));
+	public Private createPrivateCustomer(String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String pictureId){
+		Private returnPrivate = new Private(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
+		cCont.addCustomer(returnPrivate);
+		return returnPrivate;
 	}
 	
 	/**
@@ -129,8 +131,10 @@ public class CustomerCtr {
 	 * @param company
 	 * @param cvrNr
 	 */
-	public void createBusinessCustomer(String name, String phoneNr, String street, String email, String city, String postCode, String company, String cvrNr){
-		cCont.addCustomer(new Business(name, phoneNr, street, email, city, postCode, company, cvrNr));
+	public Business createBusinessCustomer(String name, String phoneNr, String street, String email, String city, String postCode, String company, String cvrNr){
+		Business returnBusiness = new Business(name, phoneNr, street, email, city, postCode, company, cvrNr); 
+		cCont.addCustomer(returnBusiness);
+		return returnBusiness;
 	}
 	
 	/**
@@ -144,11 +148,26 @@ public class CustomerCtr {
 		ArrayList<Customer> cust = customerCont.getCustomers();
 		if(cust != null)
 			for(Customer c : cust){
-				if(c.getName().contains(partName) ){
+				if(c.getName().toLowerCase().contains(partName.toLowerCase()) ){
 					foundCustomers.add(c);			
 				}	
 			}
 		return foundCustomers;
+	}
+	
+	public ArrayList<Customer> searchBusiness(String partCompName){
+		ArrayList<Customer> foundBusiness = new ArrayList<Customer>();
+		CustomerCont cCont = CustomerCont.getInstance();
+		ArrayList<Customer> cust = cCont.getCustomers();
+		if(cust != null)
+			for(Customer c : cust){
+				if(c instanceof Business){
+					if(((Business) c).getCompany().toLowerCase().contains(partCompName.toLowerCase()) ){
+						foundBusiness.add(c);	
+					}	
+				}
+			}
+		return foundBusiness;
 	}
 	
 	
