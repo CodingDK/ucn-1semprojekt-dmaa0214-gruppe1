@@ -34,7 +34,6 @@ public class CreateItemUI extends SuperUI {
 					exit = true;
 				}
 			}
-			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -72,6 +71,9 @@ public class CreateItemUI extends SuperUI {
 		return choice;
 	}
 	
+	/**
+	 * createItem - TUI for creating an Item
+	 */
 	private void createItem() {
 		ItemCtr iCtr = new ItemCtr();
 		String name = null;
