@@ -132,4 +132,14 @@ public class SaleCtr {
 		sCont.addSale(sale);
 	}
 	
+	/**
+	 * loadSale - Load a parked sale
+	 * @param sale
+	 */
+	public void loadSale(Sale sale){
+		if(!sale.isDone()){
+			this.sale = sale;
+		}
+	}
+	
 }
