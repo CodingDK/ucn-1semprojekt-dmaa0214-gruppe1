@@ -175,7 +175,10 @@ public class ItemUI extends SuperUI{
 		return choice;
 	}
 	
-	
+	/**
+	 * pickStorage - Possible to search and pick a Storage
+	 * @return Storage
+	 */
 	public Storage pickStorage() {
 		Storage retStorage = null;
 		try{
@@ -217,6 +220,10 @@ public class ItemUI extends SuperUI{
 		
 	}
 
+	/**
+	 * pickCategory - Possible to search and pick a Category
+	 * @return Category
+	 */
 	public Category pickCategory() {
 		Category retCategory = null;
 		try{
@@ -259,6 +266,9 @@ public class ItemUI extends SuperUI{
 		
 	}
 	
+	/**
+	 * createCategory - TUI for creating a Category
+	 */
 	private void createCategory() {
 		try{
 			CategoryCtr cCtr = new CategoryCtr();
@@ -279,6 +289,9 @@ public class ItemUI extends SuperUI{
 		}
 	}
 	
+	/**
+	 * createStorage - TUI for creating a Storage
+	 */
 	private void createStorage() {
 		try{
 			ItemCtr iCtr = new ItemCtr();
@@ -299,6 +312,9 @@ public class ItemUI extends SuperUI{
 		}
 	}
 	
+	/**
+	 * searchItem - Search through Items
+	 */
 	private void searchItem() {
 		try{
 			System.out.println("## Søg Vare ##");
@@ -322,6 +338,10 @@ public class ItemUI extends SuperUI{
 		}
 	}
 	
+	/**
+	 * pickItem - Possible to search and pick a Item
+	 * @return Item
+	 */
 	public Item pickItem() {
 		Item retItem = null;
 		try{
@@ -362,6 +382,9 @@ public class ItemUI extends SuperUI{
 		return retItem;
 	}
 	
+	/**
+	 * searchCategory - Search through Category
+	 */
 	private void searchCategory() {
 		try{
 			System.out.println("## Søg Kategori ##");
@@ -385,6 +408,9 @@ public class ItemUI extends SuperUI{
 		}
 	}
 	
+	/**
+	 * searchStorage - Search through Storage
+	 */
 	private void searchStorage(){
 		try{
 			System.out.println("## Søg Lager ##");
@@ -408,6 +434,9 @@ public class ItemUI extends SuperUI{
 		}
 	}
 	
+	/**
+	 * updateItem - TUI for updating an Item
+	 */
 	private void updateItem() {
 		ItemCtr iCtr = new ItemCtr();
 		System.out.println("## Opdater Vare : " + selectedItem.getName() + " ##");
@@ -440,6 +469,9 @@ public class ItemUI extends SuperUI{
 				bulkSalePrice, bulk, location, storage, max, min, category);
 	}
 	
+	/**
+	 * updateCategory - TUI for updating a Category
+	 */
 	private void updateCategory() {
 		CategoryCtr cCtr = new CategoryCtr();
 		String name = requestString("Navn(" + selectedCategory.getName() + ")", null, null, false);
@@ -447,22 +479,34 @@ public class ItemUI extends SuperUI{
 
 	}
 	
+	/**
+	 * updateStorage - TUI for updating a Storage
+	 */
 	private void updateStorage(){
 		ItemCtr iCtr = new ItemCtr();
 		String name = requestString("Navn(" + selectedStorage.getName() + ")", null, null, false);
 		iCtr.updateStorage(selectedStorage, name);
 	}
 	
+	/**
+	 * removeItem - TUI for removing Items
+	 */
 	private void removeItem() {
 		ItemCtr iCtr = new ItemCtr();
 		iCtr.removeItem(selectedItem);
 	}
 	
+	/**
+	 * removeCategory - TUI for removing a Category
+	 */
 	private void removeCategory() {
 		CategoryCtr cCtr = new CategoryCtr();
 		cCtr.removeCategory(selectedCategory);
 	}
 	
+	/**
+	 * removeStorage - TUI for removing Storage
+	 */
 	private void removeStorage(){
 		ItemCtr iCtr = new ItemCtr();
 		iCtr.removeStorage(selectedStorage);

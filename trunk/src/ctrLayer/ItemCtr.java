@@ -226,7 +226,7 @@ public class ItemCtr {
 		Storage s = StorageCont.getInstance().findStorage(name);
 		if(s != null){
 			s.setName(name);
-		} else {
+		} else if(s == null){
 			throw new NullPointerException("Ukendt lager");
 		}
 	}
