@@ -1,6 +1,12 @@
 package modelLayer;
 import java.util.ArrayList;
 
+/**
+ * Container for objects of Sale
+ * 
+ * @author Group 1 
+ * @version 0.1
+ */
 public class SaleCont {
 	private static SaleCont instance;
 	private ArrayList<Sale> sales; 
