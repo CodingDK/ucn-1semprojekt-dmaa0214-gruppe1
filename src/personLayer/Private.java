@@ -23,6 +23,8 @@ public class Private extends Customer{
 		this.pictureID = pictureID;
 	}
 	
-	
+	public String toString(){
+		return super.toString() + " Navn: " + name;
+	}
 
 }

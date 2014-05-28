@@ -37,8 +37,8 @@ private String company, cvrNr;
 		this.cvrNr = cvrNr;
 	}
 	
+	public String toString(){
+		return super.toString() + " Virksomhed: " + company;
+	}
 	
-	
-	
-
 }
