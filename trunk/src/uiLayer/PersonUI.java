@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import personLayer.Business;
 import personLayer.Customer;
 import personLayer.Employee;
 import ctrLayer.CustomerCtr;
@@ -171,9 +172,8 @@ public class PersonUI extends SuperUI{
 	 */
 	public void findPrivate() {
 		System.out.println("## Søg privatkunde ##");
-		System.out.print("Indtast kunde navn eller telefon nr: ");
-		Scanner k = new Scanner(System.in);
-		String nameOrPhone = k.nextLine();
+		String nameOrPhone = requestString("Indtast kundenavn eller tlf nr.", 1, null, false);
+		
 		
 		CustomerCtr customerCtr = new CustomerCtr();
 		ArrayList<Customer> customers = customerCtr.searchCustomer(nameOrPhone);
@@ -297,17 +297,48 @@ public class PersonUI extends SuperUI{
 			pause();
 		}
 	}
-	
+
 	/**
 	 * findBusiness - Search for a business customer
 	 */
 	public void findBusiness(){
-//		System.out.println("## Søg erhvervskunde ##");
-//		System.out.print("Indtast virksomhedsnavn: ");
-//		Scanner k = new Scanner(System.in);
-//		String comp = k.nextLine();				
+		
+		System.out.println("## Søg erhvervskunde ##");
+		String comp = requestString("Indtast del af virksomhedsnavnet", 1, null, false);
+		CustomerCtr cCtr = new CustomerCtr();
+		ArrayList<Customer> busCusts = cCtr.searchBusiness(comp);
+		if(busCusts != null){
+			String printComp = (busCusts.size() == 1) ? " virksomhed" : " virksomheder"; 
+			System.out.println(busCusts.size() + printComp + " fundet");
+			for(Customer c : busCusts){
+				if(c instanceof Business){
+					System.out.println("ID: " + c.getId() + ", Navn: " + ((Business) c).getCompany() + "Tlf nr.: " + c.getPhoneNr() + ", CVR-nr: " + ((Business) c).getCvrNr());
+				} 
+			}
+		}else{
+			System.out.println("0 virksomheder fundet");
+			pause();
+			return;
+		}
+		boolean recheck = false;
+		while(!recheck){
+			if(busCusts.size() > 1){
+				int id = requestInt("Indtast virksomhedens ID", null, false);
+				for(Customer c : busCusts){
+					if(id == c.getId()){
+						System.out.println("ID: " + c.getId() + ", Navn: " + ((Business) c).getCompany() + "Tlf nr.: " + c.getPhoneNr() + ", CVR-nr: " + ((Business) c).getCvrNr());
+						updateCustomerMenu(c);
+						pause();
+						recheck = true;
+					}
+				}
+			} else if(busCusts.size() == 1){
+				Customer found = busCusts.get(0);				
+				updateCustomerMenu(found);
+			}
+		}
 	}
-	
+
 	public void updateBusiness() {
 		// TODO Auto-generated method stub
 	}
