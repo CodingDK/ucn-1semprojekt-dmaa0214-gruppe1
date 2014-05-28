@@ -132,4 +132,15 @@ public class Sale {
 		this.employee = employee;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "#" + id + " - Total Pris: " + totalPrice + ", Parkeret: " + done
+				+ ", Dato: " + getDateToString();
+	}
+	
+	
+
 }
