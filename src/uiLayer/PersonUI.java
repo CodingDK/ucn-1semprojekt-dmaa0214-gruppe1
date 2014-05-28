@@ -30,7 +30,7 @@ public class PersonUI extends SuperUI{
 			int choice = writeMenu();
 			if(admin){ // Admin access only
 				if(choice == 4){
-					createBusiness();
+					
 				} else if(choice == 8){
 					
 				} else if(choice == 9){
@@ -74,16 +74,18 @@ public class PersonUI extends SuperUI{
 				System.out.println(" 1. Søg privatkunde");
 				System.out.println(" 2. Opret privatkunde");
 				System.out.println(" 3. Opdater privatkunde" + pP);
-				System.out.println("--------------------------");
 			if(admin){ 
 				System.out.println(" 4. Slet privatkunde" + pP); 
 			}
+				System.out.println("--------------------------");
 				System.out.println(" 5. Søg erhvervskunde");
 				System.out.println(" 6. Opret erhvervskunde");
 				System.out.println(" 7. Opdater erhvervskunde" + pB);
-				System.out.println("--------------------------");
 			if(admin){
 				System.out.println(" 8. Slet erhvervskunde" + pB);
+			}
+				System.out.println("--------------------------");
+			if(admin){
 				System.out.println(" 9. Opret sælger");
 				System.out.println(" 10. Opret administrator");
 			}
@@ -110,8 +112,6 @@ public class PersonUI extends SuperUI{
 	 */
 	public Private createPrivate() {
 		Private returnPrivate = null;
-
-		try{
 			System.out.println("\n## Opret privat kunde ##");
 
 			String name 		= requestString("Navn", null, null, false);
@@ -125,10 +125,7 @@ public class PersonUI extends SuperUI{
 
 			CustomerCtr customerCtr = new CustomerCtr();
 			returnPrivate = customerCtr.createPrivateCustomer(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
-
-		} catch(InputMismatchException e){
-			System.out.println("Forket input!");	
-		}	
+	
 		return returnPrivate;
 	}
 
@@ -137,7 +134,7 @@ public class PersonUI extends SuperUI{
 	 */
 	public Business createBusiness() {
 		Business returnBusiness = null;
-		try{
+	
 			System.out.println("\n## Opret erhvervs kunde ##");			
 			String company 	= requestString("Virksomhedsnavn", null, null, false);
 			String street	= requestString("Gade", null, null, false);
@@ -150,10 +147,7 @@ public class PersonUI extends SuperUI{
 			
 			CustomerCtr customerCtr = new CustomerCtr();
 			returnBusiness = customerCtr.createBusinessCustomer(name, phoneNr, street, email, city, postCode, company, cvrNr);
-		
-		} catch(InputMismatchException e){
-			System.out.println("Forkert input!");
-		}	
+			
 		return returnBusiness;
 	}
 	
@@ -161,7 +155,6 @@ public class PersonUI extends SuperUI{
 	 * createSeller - Create a seller
 	 */
 	public void createSeller() {
-		try{
 			System.out.println("\n## Opret sælger ##");
 			String employeeNr 	= requestString("Medarbejder nummer", null, null, false);
 			String name			= requestString("Navn", null, null, false);
@@ -174,10 +167,6 @@ public class PersonUI extends SuperUI{
 			
 			EmployeeCtr employeeCtr = new EmployeeCtr();
 			employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, null, false);
-			
-		} catch(InputMismatchException e){
-			System.out.println("Forkert input!");
-		}
 	}
 
 	
@@ -185,7 +174,6 @@ public class PersonUI extends SuperUI{
 	 * createAdministrator - Create the administrator
 	 */
 	public void createAdministrator() {
-		try{
 			System.out.println("\n## Opret administrator ##");
 			String employeeNr 	= requestString("Medarbejder nummer", null, null, false);
 			String name			= requestString("Navn", null, null, false);
@@ -200,9 +188,6 @@ public class PersonUI extends SuperUI{
 			
 			EmployeeCtr employeeCtr = new EmployeeCtr();
 			employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, password, admin);
-		} catch(InputMismatchException e){
-			System.out.println("Forkert input!");
-		}
 	}
 
 	/**
