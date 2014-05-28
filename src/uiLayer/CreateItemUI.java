@@ -59,7 +59,7 @@ public class CreateItemUI extends SuperUI {
 				System.out.println(" 3. Opret Vare (Lager: " + selectedStorage.getName() + ", Kategori: " + selectedCategory.getName() + ")");
 				System.out.println(" 4. Tilbage");
 			}else{
-				System.out.println(" 4. Tilbage");
+				System.out.println(" 4. Gå tilbage");
 				System.out.println("Lager og Kategori skal vare valgt for at oprette en vare");
 			}
 			System.out.print("Valg:");
