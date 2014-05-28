@@ -126,12 +126,17 @@ public class SaleCtr {
 	/**
 	 * Parks the sale for later use
 	 */
-	public void parkSale(){
-		SaleCont sCont = SaleCont.getInstance();
-		sale.setDone(false);
-		if(!sCont.getAll().contains(sale)){
-			sCont.addSale(sale);
+	public boolean parkSale(){
+		boolean ret = false;
+		if(sale.getCustomer() != null){
+			SaleCont sCont = SaleCont.getInstance();
+			sale.setDone(false);
+			if(!sCont.getAll().contains(sale)){
+				sCont.addSale(sale);
+			}
+			ret = true;
 		}
+		return ret;		
 	}
 	
 	/**
@@ -139,6 +144,9 @@ public class SaleCtr {
 	 * @param sale
 	 */
 	public void loadSale(Sale sale){
+		if(sale.isDone()){
+			System.out.println("HALLØJ!");
+		}
 		if(!sale.isDone()){
 			this.sale = sale;
 		}
