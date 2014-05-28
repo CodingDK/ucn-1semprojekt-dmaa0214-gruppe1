@@ -3,7 +3,6 @@ package jUnit;
 import modelLayer.Category;
 import modelLayer.Storage;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

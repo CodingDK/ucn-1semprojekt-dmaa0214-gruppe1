@@ -1,6 +1,7 @@
 package exceptionLayer;
 
 public class SaleNotCreatedException extends Exception {
+	private static final long serialVersionUID = 1L;
 
 	public SaleNotCreatedException() {
 		super();

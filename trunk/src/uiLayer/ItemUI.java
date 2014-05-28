@@ -144,6 +144,7 @@ public class ItemUI extends SuperUI{
 			
 			System.out.println(" 16. Gå tilbage");
 			System.out.print("Valg:");
+			@SuppressWarnings("resource")
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
