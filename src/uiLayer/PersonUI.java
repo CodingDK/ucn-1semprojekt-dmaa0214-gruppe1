@@ -26,36 +26,26 @@ public class PersonUI extends SuperUI{
 		while(!exit){
 
 			int choice = writeMenu();
-			if(admin){ // Admin access only
-				if(choice == 4){
-
-				} else if(choice == 8){
-
-				} else if(choice == 9){
-
-				} else if(choice == 10){
-
-				} else if(choice == 11){
-					findEmployee();
-				} else if(choice == 12){
-
-				} else if(choice == 13){
-
+			if(admin){ 						// Admin access only
+				if(choice == 4){			//Slet kunde
+					
+				} else if(choice == 7){		//Opdate medarbejder
+					updateEmployee(selectedEmployee);
+				} else if(choice == 8){		//Slet medarbejder
+					removeEmployee(selectedEmployee);					
 				}
-			} // Access for both Admin and Seller
-			if(choice == 1){
+			} 							// Access for both Admin and Seller
+			if(choice == 1){			//Søg kunde
 				findCustomer();
-			} else if(choice == 2){
-				createPrivate();
-			} else if(choice == 3){
-				findBusiness();
-			} else if(choice == 5){
-				createSeller();
-			} else if(choice == 6){
-				createAdministrator();
-			} else if(choice == 7){
+			} else if(choice == 2){		//Opret kunde
+				//createCustomer();
+			} else if(choice == 3){		//Opdater kunde
+				//UpdateCustomer();
+			} else if(choice == 5){		//Opret medarbejder
+				createEmployee();
+			} else if(choice == 6){		//Søg medarbejder
 				findEmployee();
-			} else if(choice == 14){
+			} else if(choice == 9){	//Gå tilbage
 				exit = true;
 			}
 		}		
@@ -68,31 +58,23 @@ public class PersonUI extends SuperUI{
 		String m = selectedEmployee != null ? " (" + selectedEmployee.getName() + ")" : "";
 
 		System.out.println("\n## Person menu ##");
-		System.out.println(" 1. Søg privatkunde");
-		System.out.println(" 2. Opret privatkunde");
-		System.out.println(" 3. Opdater privatkunde" + pP);
+		System.out.println(" 1. Søg kunde");
+		System.out.println(" 2. Opret kunde" + pP);
+		System.out.println(" 3. Opdater kunde" + pB);
 		if(admin){ 
-			System.out.println(" 4. Slet privatkunde" + pP); 
-		}
-		System.out.println("--------------------------");
-		System.out.println(" 5. Søg erhvervskunde");
-		System.out.println(" 6. Opret erhvervskunde");
-		System.out.println(" 7. Opdater erhvervskunde" + pB);
-		if(admin){
-			System.out.println(" 8. Slet erhvervskunde" + pB);
+			System.out.println(" 4. Slet kunde" + pP); 
 		}
 		System.out.println("--------------------------");
 		if(admin){
-			System.out.println(" 9. Opret sælger");
-			System.out.println("10. Opret administrator");
+			System.out.println(" 5. Opret medarbejder");
 		}
-		System.out.println("11. Søg medarbejder (sælger eller administrator)");
+		System.out.println(" 6. Søg medarbejder");
 		if(admin){
-			System.out.println("12. Opdater sælger" + m);
-			System.out.println("13. Opdater administrator" + m);
+			System.out.println(" 7. Opdater medarbejder" + m);
+			System.out.println("8. Slet medarbejder" + m);
 		}
 		System.out.println("--------------------------");
-		System.out.println("14. Gå tilbage");
+		System.out.println("9. Gå tilbage");
 		choice = requestInt("\nValg", 0, false);
 		return choice;
 	}
@@ -145,7 +127,8 @@ public class PersonUI extends SuperUI{
 	/**
 	 * createSeller - Create a seller
 	 */
-	public void createSeller() {
+	public void createEmployee() {
+		boolean rights = false;
 		System.out.println("\n## Opret sælger ##");
 		String employeeNr 	= requestString("Medarbejder nummer", null, null, false);
 		String name			= requestString("Navn", null, null, false);
@@ -155,31 +138,15 @@ public class PersonUI extends SuperUI{
 		String phoneNr		= requestString("Telefon nr", null, null, false);
 		String email		= requestString("E-mail", null, null, false);
 		String cprNr		= requestString("CPR nr", null, null, false);
-
+		
+		if(confirm("Vil du give denne medarbejder administrator rettigheder") ){
+			rights = true;
+		}
+		
 		EmployeeCtr employeeCtr = new EmployeeCtr();
-		employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, null, false);
+		employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, null, rights);
 	}
 
-
-	/**
-	 * createAdministrator - Create the administrator
-	 */
-	public void createAdministrator() {
-		System.out.println("\n## Opret administrator ##");
-		String employeeNr 	= requestString("Medarbejder nummer", null, null, false);
-		String name			= requestString("Navn", null, null, false);
-		String street		= requestString("Gade", null, null, false);
-		String postCode		= requestString("Postnummer", null, null, false);
-		String city			= requestString("By", null, null, false);
-		String phoneNr		= requestString("Telefon nr", null, null, false);
-		String email		= requestString("E-mail", null, null, false);
-		String cprNr		= requestString("CPR nr", null, null, false);
-		String password		= requestString("Kode", null, null, false);
-		Boolean admin		= true;
-
-		EmployeeCtr employeeCtr = new EmployeeCtr();
-		employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, password, admin);
-	}
 
 	/**
 	 * findCustomer - Find a customer in the system by the name or phone number
@@ -337,11 +304,6 @@ public class PersonUI extends SuperUI{
 		}
 	}
 
-	public void updateBusiness() {
-		// TODO Auto-generated method stub
-	}
-
-
 
 	public Employee findEmployee(){	
 		Employee returnEmployee = null;
@@ -383,39 +345,6 @@ public class PersonUI extends SuperUI{
 	}
 
 
-	//	public void updateEmployeeMenu(Employee employee){
-	//		boolean exit = false;
-	//		boolean admin = employee.getAdmin();
-	//		while(!exit){
-	//			int choice = findEmployeeMenu();
-	//			if(choice == 1 && !admin){
-	//				updateSeller(employee);
-	//			} else if(choice == 1 && admin){
-	//				updateAdministrator(employee);
-	//			} else if(choice == 2){
-	//				removeEmployee(employee);
-	//				exit = true;
-	//			} else if(choice == 3){
-	//				exit = true;
-	//			}
-	//		}
-	//	}
-	//	
-	//	private int findEmployeeMenu(){
-	//		int choice = 0;
-	//		try{
-	//			System.out.println("\n## Menu ##");
-	//			System.out.println("1. Opdater medarbejder");
-	//			System.out.println("2. Fjern medarbejder");
-	//			System.out.println("3. Tilbage til medarbejdermenu");
-	//			
-	//			Scanner k = new Scanner(System.in);
-	//			choice = k.nextInt();
-	//		} catch(InputMismatchException e){
-	//			System.out.println("Forkert input!");
-	//		}
-	//		return choice;
-	//	}
 
 
 
