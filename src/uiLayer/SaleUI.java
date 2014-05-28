@@ -21,6 +21,12 @@ public class SaleUI extends SuperUI{
 	 * Constructor for the SaleUI.
 	 */
 	public SaleUI(){
+		SaleCtr sCtr = new SaleCtr();
+		sCtr.cleanUp();
+		menu();
+	}
+	
+	private void menu(){
 		boolean exit = false;
 		while(!exit){
 			int choice = writeSaleMenu();
