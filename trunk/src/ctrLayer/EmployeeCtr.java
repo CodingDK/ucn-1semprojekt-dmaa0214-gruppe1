@@ -113,16 +113,16 @@ public class EmployeeCtr{
     
     /**
 	 * searchEmployee
-	 * @param partName
+	 * @param partNameOrEmpNr
 	 * @return Employee
 	 */
-	public ArrayList<Employee> searchEmployee(String partName){
+	public ArrayList<Employee> searchEmployee(String partNameOrEmpNr){
 		ArrayList<Employee> foundEmployees = new ArrayList<Employee>();
-		EmployeeCont employeeCont = EmployeeCont.getInstance();
-		ArrayList<Employee> emp = employeeCont.getEmployee();
+		EmployeeCont eCont = EmployeeCont.getInstance();
+		ArrayList<Employee> emp = eCont.getEmployee();
 		if(emp != null)
 			for(Employee e : emp){
-				if(e.getName().contains(partName) ){
+				if( (e.getName().toLowerCase().contains(partNameOrEmpNr.toLowerCase()) ) || e.getEmployeeNr().contains(partNameOrEmpNr) ){
 					foundEmployees.add(e);			
 				}	
 			}
