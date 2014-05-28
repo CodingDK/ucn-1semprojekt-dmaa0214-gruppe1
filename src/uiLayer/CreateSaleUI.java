@@ -14,19 +14,19 @@ import exceptionLayer.SaleNotCreatedException;
  * @author Group 1
  * @version 0.1                 
  */
-public class createSaleUI extends SuperUI{
+public class CreateSaleUI extends SuperUI{
 	private SaleCtr sCtr;
 	
 	/**
 	 * Constructor for the SaleUI.
 	 */
-	public createSaleUI(){
+	public CreateSaleUI(){
 		sCtr = new SaleCtr();
 		sCtr.createSale();
 		writeMenu();
 	}
 	
-	public createSaleUI(Sale sale){
+	public CreateSaleUI(Sale sale){
 		sCtr.loadSale(sale);
 		writeMenu();
 	}
