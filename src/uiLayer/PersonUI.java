@@ -327,14 +327,13 @@ public class PersonUI extends SuperUI{
 
 
 	public Employee findEmployee(){	
-		Employee returnEmployee = null;
+		Employee retE = null;
 		System.out.println("\n## Søg medarbejder ##");
-		String nameOrEmpNr = requestString("Indtast medarbejder navn eller medarbejder nr.", 1, null, false);
-
+		String nameOrEmpNr = requestString("Indtast del af medarbejder navn eller nummer", 1, null, false);
 		EmployeeCtr eCtr = new EmployeeCtr();
 		ArrayList<Employee> employees = eCtr.searchEmployee(nameOrEmpNr);
 		if(employees.size() > 0){
-			System.out.println(employees.size() + " medarbejder fundet");
+			System.out.println(employees.size() + " medarbejder(e) fundet");
 			for(Employee e : employees){
 				System.out.println("ID: " + e.getId() + ", Navn: " + e.getName() + ", Gade: " + e.getStreet() + ", PostNummer: " + e.getPostCode() + ", By: " + e.getCity() + ", Tlf nr: " + e.getPhoneNr());
 			}
@@ -343,18 +342,22 @@ public class PersonUI extends SuperUI{
 			while(!recheck){	
 				if(employees.size() > 1){
 					int id = requestInt("Indtast medarbejder ID for den ønskede medarbejder", null, false);
-					for(Employee e : employees){
+					int i = 0;
+					while(retE == null && i < employees.size()){
+						Employee e = employees.get(i);
 						if(id == e.getId()){
-							System.out.println("Navn: " + e.getName() + ", Gade: " + e.getStreet() + ", PostNummer: " + e.getPostCode() + ", By: " + e.getCity() + ", Tlf nr: " + e.getPhoneNr());
+							System.out.println("Valgt - Navn: " + e.getName() + ", medarbejdernr: " + e.getEmployeeNr());
 							pause();
-							returnEmployee = eCtr.findEmployee(id);
-							selectedEmployee = returnEmployee;
+							retE = eCtr.findEmployee(id);
+							selectedEmployee = retE;
 							recheck = true;
 						}
+						i++;
 					}
 				} else if(employees.size() == 1){
-					returnEmployee = employees.get(0);
-					selectedEmployee = returnEmployee;
+					retE = employees.get(0);
+					selectedEmployee = retE;
+					System.out.println("Valgt - Navn: " + retE.getName() + ", medarbejdernr: " + retE.getEmployeeNr());
 					recheck = true;					
 				}
 			}// while
@@ -362,7 +365,7 @@ public class PersonUI extends SuperUI{
 			System.out.println("0 Medarbejdere Fundet");
 			pause();
 		}
-		return returnEmployee;
+		return retE;
 	}
 
 
