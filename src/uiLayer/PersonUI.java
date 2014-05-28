@@ -46,7 +46,7 @@ public class PersonUI extends SuperUI{
 				}
 			} // Access for both Admin and Seller
 				if(choice == 1){
-					findPrivate();
+					findCustomer();
 				} else if(choice == 2){
 					createPrivate();
 				} else if(choice == 3){
@@ -66,55 +66,49 @@ public class PersonUI extends SuperUI{
 	
 	private int writeMenu(){
 		int choice = 0;
-		try{
-			String pB = selectedBusiness != null ? " (" + selectedBusiness.getCompany() + ")" : ""; 
-			String pP = selectedPrivate != null ? " (" + selectedPrivate.getName() + ")" : "";  
+		String pB = selectedBusiness != null ? " (" + selectedBusiness.getCompany() + ")" : ""; 
+		String pP = selectedPrivate != null ? " (" + selectedPrivate.getName() + ")" : "";  
 
-				System.out.println("\n## Person menu ##");
-				System.out.println(" 1. Søg privatkunde");
-				System.out.println(" 2. Opret privatkunde");
-				System.out.println(" 3. Opdater privatkunde" + pP);
-			if(admin){ 
-				System.out.println(" 4. Slet privatkunde" + pP); 
-			}
-				System.out.println("--------------------------");
-				System.out.println(" 5. Søg erhvervskunde");
-				System.out.println(" 6. Opret erhvervskunde");
-				System.out.println(" 7. Opdater erhvervskunde" + pB);
-			if(admin){
-				System.out.println(" 8. Slet erhvervskunde" + pB);
-			}
-				System.out.println("--------------------------");
-			if(admin){
-				System.out.println(" 9. Opret sælger");
-				System.out.println(" 10. Opret administrator");
-			}
-				System.out.println(" 11. Søg medarbejder (sælger eller administrator)");
-			if(admin){
-				System.out.println(" 12. Opdater sælger");
-				System.out.println(" 13. Opdater administrator");
-			}
-				System.out.println("--------------------------");
-				System.out.println(" 14. Gå tilbage");
-			System.out.print("\nValg: ");
-			@SuppressWarnings("resource")
-			Scanner k = new Scanner(System.in);
-			choice = k.nextInt();
-		} catch(InputMismatchException e){
-			System.out.println("Forkert input!");
+		System.out.println("\n## Person menu ##");
+		System.out.println(" 1. Søg privatkunde");
+		System.out.println(" 2. Opret privatkunde");
+		System.out.println(" 3. Opdater privatkunde" + pP);
+		if(admin){ 
+			System.out.println(" 4. Slet privatkunde" + pP); 
 		}
+		System.out.println("--------------------------");
+		System.out.println(" 5. Søg erhvervskunde");
+		System.out.println(" 6. Opret erhvervskunde");
+		System.out.println(" 7. Opdater erhvervskunde" + pB);
+		if(admin){
+			System.out.println(" 8. Slet erhvervskunde" + pB);
+		}
+		System.out.println("--------------------------");
+		if(admin){
+			System.out.println(" 9. Opret sælger");
+			System.out.println(" 10. Opret administrator");
+		}
+		System.out.println(" 11. Søg medarbejder (sælger eller administrator)");
+		if(admin){
+			System.out.println(" 12. Opdater sælger");
+			System.out.println(" 13. Opdater administrator");
+		}
+		System.out.println("--------------------------");
+		System.out.println(" 14. Gå tilbage");
+
+		choice = requestInt("\nValg", 0, false);
 		return choice;
 	}
-	
-	
+
+
 	/**
 	 * createPrivate - Create privat customer
 	 */
 	public Private createPrivate() {
 		Private returnPrivate = null;
-			System.out.println("\n## Opret privat kunde ##");
+		System.out.println("\n## Opret privat kunde ##");
 
-			String name 		= requestString("Navn", null, null, false);
+		String name 		= requestString("Navn", null, null, false);
 			String street 		= requestString("Gade", null, null, false);
 			String postCode 	= requestString("Postnummer", null, null, false);
 			String city 		= requestString("By", null, null, false);
@@ -193,7 +187,7 @@ public class PersonUI extends SuperUI{
 	/**
 	 * findCustomer - Find a customer in the system by the name or phone number
 	 */
-	public Private findPrivate() {
+	public Private findCustomer() {
 		Private returnPrivate = null;
 		System.out.println("\n## Søg privatkunde ##");
 		String nameOrPhone = requestString("Indtast kundenavn eller tlf nr.", 1, null, false);
@@ -247,20 +241,14 @@ public class PersonUI extends SuperUI{
 	 */
 	private int findCustomerMenu(){
 		int choice = 0;
-		try{
-			System.out.println("\n## Menu ##");
-			System.out.println("1. Opdater kunde");
-			System.out.println("2. Fjern kunde");
-			System.out.println("3. Tilbage til kundemenu");
-			@SuppressWarnings("resource")
-			Scanner k = new Scanner(System.in);
-			choice = k.nextInt();
-		} catch(InputMismatchException e){
-			System.out.println("Forkert input!");
-		}
+		System.out.println("\n## Menu ##");
+		System.out.println("1. Opdater kunde");
+		System.out.println("2. Fjern kunde");
+		System.out.println("3. Tilbage til kundemenu");
+		choice = requestInt("Valg ", 0, false);
 		return choice;
 	}
-	
+
 	/**
 	 * updateCustomerMenu
 	 * @param customer
@@ -387,11 +375,8 @@ public class PersonUI extends SuperUI{
 
 	public void findEmployee(){	
 		System.out.println("\n## Søg medarbejder ##");
-		System.out.print("Indtast medarbejder navn eller medarbejder nr: ");
-		@SuppressWarnings("resource")
-		Scanner k = new Scanner(System.in);
-		String nameOrEmpNr = k.nextLine();
-
+		String nameOrEmpNr = requestString("Indtast medarbejder navn eller medarbejder nr", null, null, false);
+		
 		EmployeeCtr employeeCtr = new EmployeeCtr();
 		ArrayList<Employee> employees = employeeCtr.searchEmployee(nameOrEmpNr);
 		if(employees.size() > 0){
@@ -443,25 +428,16 @@ public class PersonUI extends SuperUI{
 			}
 		}
 	}
-	
+
 	private int findEmployeeMenu(){
 		int choice = 0;
-		try{
-			System.out.println("\n## Menu ##");
-			System.out.println("1. Opdater medarbejder");
-			System.out.println("2. Fjern medarbejder");
-			System.out.println("3. Tilbage til medarbejdermenu");
-			
-			Scanner k = new Scanner(System.in);
-			choice = k.nextInt();
-		} catch(InputMismatchException e){
-			System.out.println("Forkert input!");
-		}
+		System.out.println("\n## Menu ##");
+		System.out.println("1. Opdater medarbejder");
+		System.out.println("2. Fjern medarbejder");
+		System.out.println("3. Tilbage til medarbejdermenu");
+		choice = requestInt("Valg", 0, false);
 		return choice;
 	}
-	
-	
-	
 
 	/**
 	 * updateAdministrator
