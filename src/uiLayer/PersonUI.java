@@ -28,27 +28,38 @@ public class PersonUI extends SuperUI{
 		while(!exit){
 			
 			int choice = writeMenu();
-			if(choice == 1){
-				findPrivate();
-			} else if(choice == 2){
-				createPrivate();
-			} else if(choice == 3){
-				findBusiness();
-			} else if(choice == 4){
-				createBusiness();
-			} else if(choice == 5){
-				createSeller();
-			} else if(choice == 6){
-				createAdministrator();
-			} else if(choice == 7){
-				findEmployee();
-			} else if(choice == 8){
-				
-			} else if(choice == 9){
-				
-			} else if(choice == 10){
-				exit = true;
-			}	
+			if(admin){ // Admin access only
+				if(choice == 4){
+					createBusiness();
+				} else if(choice == 8){
+					
+				} else if(choice == 9){
+					
+				} else if(choice == 10){
+					
+				} else if(choice == 11){
+					
+				} else if(choice == 12){
+					
+				} else if(choice == 13){
+					
+				}
+			} // Access for both Admin and Seller
+				if(choice == 1){
+					findPrivate();
+				} else if(choice == 2){
+					createPrivate();
+				} else if(choice == 3){
+					findBusiness();
+				} else if(choice == 5){
+					createSeller();
+				} else if(choice == 6){
+					createAdministrator();
+				} else if(choice == 7){
+					findEmployee();
+				} else if(choice == 14){
+					exit = true;
+				}
 		}		
 	}
 	
@@ -59,21 +70,30 @@ public class PersonUI extends SuperUI{
 			String pB = selectedBusiness != null ? " (" + selectedBusiness.getCompany() + ")" : ""; 
 			String pP = selectedPrivate != null ? " (" + selectedPrivate.getName() + ")" : "";  
 
-			System.out.println("\n## Kunde menu ##");
-			System.out.println(" 1. Søg privatkunde");
-			System.out.println(" 2. Opret privat kunde");
-			System.out.println(" 3. Opdater privatkunde" + pP); 
-			System.out.println(" 4. Slet privatkunde" + pP); 
-			System.out.println(" 5. Søg erhvervskunde");
-			System.out.println(" 6. Opret erhvervskunde");
-			System.out.println(" 7. Opdater erhvervskunde" + pB);
-			System.out.println(" 8. Slet erhvervskunde" + pB);
-			System.out.println(" 9. Opret sælger");
-			System.out.println(" 10. Opret administrator");
-			System.out.println(" 11. Søg medarbejder (sælger eller administrator)");
-			System.out.println(" 12. Opdater sælger");
-			System.out.println(" 13. Opdater administrator");
-			System.out.println(" 14. Tilbage");
+				System.out.println("\n## Person menu ##");
+				System.out.println(" 1. Søg privatkunde");
+				System.out.println(" 2. Opret privatkunde");
+				System.out.println(" 3. Opdater privatkunde" + pP);
+				System.out.println("--------------------------");
+			if(admin){ 
+				System.out.println(" 4. Slet privatkunde" + pP); 
+			}
+				System.out.println(" 5. Søg erhvervskunde");
+				System.out.println(" 6. Opret erhvervskunde");
+				System.out.println(" 7. Opdater erhvervskunde" + pB);
+				System.out.println("--------------------------");
+			if(admin){
+				System.out.println(" 8. Slet erhvervskunde" + pB);
+				System.out.println(" 9. Opret sælger");
+				System.out.println(" 10. Opret administrator");
+			}
+				System.out.println(" 11. Søg medarbejder (sælger eller administrator)");
+			if(admin){
+				System.out.println(" 12. Opdater sælger");
+				System.out.println(" 13. Opdater administrator");
+			}
+				System.out.println("--------------------------");
+				System.out.println(" 14. Gå tilbage");
 			System.out.print("\nValg: ");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
