@@ -129,7 +129,9 @@ public class SaleCtr {
 	public void parkSale(){
 		SaleCont sCont = SaleCont.getInstance();
 		sale.setDone(false);
-		sCont.addSale(sale);
+		if(!sCont.getAll().contains(sale)){
+			sCont.addSale(sale);
+		}
 	}
 	
 	/**
@@ -147,6 +149,35 @@ public class SaleCtr {
 		ArrayList<Sale> sales = sCont.getAll();
 		
 		return sales;
+	}
+	
+	public ArrayList<Sale> getParkedSales(){
+		ArrayList<Sale> retArry = new ArrayList<Sale>();
+		ArrayList<Sale> sales = getSales();
+		for(Sale s : sales){
+			if(!s.isDone()){
+				retArry.add(s);
+			}
+		}
+		
+		return retArry;
+	}
+	
+	public Sale getSale(int id){
+		Sale retSale = null;
+		ArrayList<Sale> sales = getSales();
+		boolean found = false;
+		int i = 0;
+		while(!found && i < sales.size()){
+			Sale s = sales.get(i);
+			if(s.getId() == id){
+				retSale = s;
+				found = true;
+			}
+		}
+		
+		return retSale;
+		
 	}
 	
 }
