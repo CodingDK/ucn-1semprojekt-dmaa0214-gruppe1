@@ -2,7 +2,6 @@ package uiLayer;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 import personLayer.*;
 import modelLayer.*;
