@@ -32,6 +32,12 @@ public class SaleCtr {
 		return this.sale;
 	}
 	
+	
+	// Nick
+	public Sale getSale(){
+		return this.sale;
+	}
+	
 	public void addItem(Item item, int amount) throws NullPointerException, NotEnoughItemsException{
 		ItemCtr iCtr = new ItemCtr();
 		
