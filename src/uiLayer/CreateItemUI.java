@@ -45,13 +45,13 @@ public class CreateItemUI extends SuperUI {
 		try{
 			System.out.println("## Opret Vare ##");
 			if(selectedCategory == null){
-				System.out.println(" 1. Vælg Kategori");
+				System.out.println(" 1. VÃ¦lg Kategori");
 			}else{
 				System.out.println(" 1. Skift Kategori (" + selectedCategory.getName() + ")");
 			}
 			
 			if(selectedStorage == null){
-				System.out.println(" 2. Vælg Lager");
+				System.out.println(" 2. VÃ¦lg Lager");
 			}else{
 				System.out.println(" 2. Skift Lager (" + selectedStorage.getName() + ")");
 			}
@@ -61,8 +61,9 @@ public class CreateItemUI extends SuperUI {
 				System.out.println(" 4. Tilbage");
 			}else{
 				System.out.println(" 4. Tilbage");
-				System.out.println("Lager og Kategori skal være valgt for at oprette en vare");
+				System.out.println("Lager og Kategori skal vare valgt for at oprette en vare");
 			}
+			System.out.print("Valg:");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
@@ -81,7 +82,7 @@ public class CreateItemUI extends SuperUI {
 			while(reCheck){
 				Item i = iCtr.getItem(name);
 				if(iCtr.getItem(name) != null && i.getStorage() == selectedStorage){
-					if(confirm(i.getName() + " eksistere allerede på " + i.getStorage().getName() + ", vil du vælge et andet lager?")){
+					if(confirm(i.getName() + " eksistere allerede pï¿½ " + i.getStorage().getName() + ", vil du vï¿½lge et andet lager?")){
 						ItemUI iUi = new ItemUI("DryRun");
 						selectedStorage = iUi.pickStorage();
 					}else{
@@ -95,7 +96,7 @@ public class CreateItemUI extends SuperUI {
 		}
 		int amount = requestInt("Antal", null, false);
 		double salePrice = requestDouble("Salgs pris", false);
-		double purchasePrice = requestDouble("Købs pris", false);
+		double purchasePrice = requestDouble("Kï¿½bs pris", false);
 		double bulkSalePrice = requestDouble("Bulk pris", false);
 		int bulk = requestInt("Bulk", null, false);
 		String location = requestString("Placering", 4, null, false);

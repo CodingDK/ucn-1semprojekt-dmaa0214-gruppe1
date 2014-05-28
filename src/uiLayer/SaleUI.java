@@ -45,6 +45,7 @@ public class SaleUI extends SuperUI{
 			System.out.println("4. Søg kunde");
 			System.out.println("5. Udfør salg");
 			System.out.println("6. Gå tilbage");
+			System.out.print("Valg:");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();		
 		} catch(InputMismatchException e){
