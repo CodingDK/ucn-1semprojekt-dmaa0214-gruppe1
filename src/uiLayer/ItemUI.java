@@ -295,7 +295,12 @@ public class ItemUI extends SuperUI{
 			if(items != null){
 				System.out.println(items.size() + " Varer Fundet");
 				for(Item i : items){
-					System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + i.getAmount() + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
+					String amount = "(";
+					if(i.getReserved() != 0){
+						amount += i.getReserved() + "/";
+					}
+					amount += i.getAmount() + ")";
+					System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + amount + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
 				}
 				pause();
 			}else{
@@ -327,7 +332,12 @@ public class ItemUI extends SuperUI{
 					System.out.println(items.size() + " Varer Fundet");
 					while(recheck){
 						for(Item i : items){
-							System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + i.getAmount() + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
+							String amount = "(";
+							if(i.getReserved() != 0){
+								amount += i.getReserved() + "/";
+							}
+							amount += i.getAmount() + ")";
+							System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + amount + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
 						}
 						int i = requestInt("VareID", null, false);
 						if(iCtr.getItem(i) != null && items.contains(iCtr.getItem(i))){
