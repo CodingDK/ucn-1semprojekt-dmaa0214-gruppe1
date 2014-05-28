@@ -28,19 +28,19 @@ public class PersonUI extends SuperUI{
 			int choice = writeMenu();
 			if(admin){ // Admin access only
 				if(choice == 4){
-					
+
 				} else if(choice == 8){
-					
+
 				} else if(choice == 9){
-					
+
 				} else if(choice == 10){
-					
+
 				} else if(choice == 11){
 					findEmployee();
 				} else if(choice == 12){
 
 				} else if(choice == 13){
-					
+
 				}
 			} // Access for both Admin and Seller
 			if(choice == 1){
@@ -60,46 +60,13 @@ public class PersonUI extends SuperUI{
 			}
 		}		
 	}
-	
-	
+
 	private int writeMenu(){
 		int choice = 0;
 		String pB = selectedBusiness != null ? " (" + selectedBusiness.getCompany() + ")" : ""; 
 		String pP = selectedCustomer != null ? " (" + selectedCustomer.getName() + ")" : "";  
-			String m = selectedEmployee != null ? " (" + selectedEmployee.getName() + ")" : "";
-			
-				System.out.println("\n## Person menu ##");
-				System.out.println(" 1. Søg privatkunde");
-				System.out.println(" 2. Opret privatkunde");
-				System.out.println(" 3. Opdater privatkunde" + pP);
-			if(admin){ 
-				System.out.println(" 4. Slet privatkunde" + pP); 
-			}
-				System.out.println("--------------------------");
-				System.out.println(" 5. Søg erhvervskunde");
-				System.out.println(" 6. Opret erhvervskunde");
-				System.out.println(" 7. Opdater erhvervskunde" + pB);
-			if(admin){
-				System.out.println(" 8. Slet erhvervskunde" + pB);
-			}
-				System.out.println("--------------------------");
-			if(admin){
-				System.out.println(" 9. Opret sælger");
-				System.out.println("10. Opret administrator");
-			}
-				System.out.println("11. Søg medarbejder (sælger eller administrator)");
-			if(admin){
-				System.out.println("12. Opdater sælger" + m);
-				System.out.println("13. Opdater administrator" + m);
-			}
-				System.out.println("--------------------------");
-				System.out.println("14. Gå tilbage");
-			System.out.print("\nValg: ");
-			@SuppressWarnings("resource")
-			Scanner k = new Scanner(System.in);
-			choice = k.nextInt();
-		} catch(InputMismatchException e){
-			System.out.println("Forkert input!");
+		String m = selectedEmployee != null ? " (" + selectedEmployee.getName() + ")" : "";
+
 		System.out.println("\n## Person menu ##");
 		System.out.println(" 1. Søg privatkunde");
 		System.out.println(" 2. Opret privatkunde");
@@ -117,21 +84,20 @@ public class PersonUI extends SuperUI{
 		System.out.println("--------------------------");
 		if(admin){
 			System.out.println(" 9. Opret sælger");
-			System.out.println(" 10. Opret administrator");
+			System.out.println("10. Opret administrator");
 		}
-		System.out.println(" 11. Søg medarbejder (sælger eller administrator)");
+		System.out.println("11. Søg medarbejder (sælger eller administrator)");
 		if(admin){
-			System.out.println(" 12. Opdater sælger");
-			System.out.println(" 13. Opdater administrator");
+			System.out.println("12. Opdater sælger" + m);
+			System.out.println("13. Opdater administrator" + m);
 		}
 		System.out.println("--------------------------");
-		System.out.println(" 14. Gå tilbage");
-
+		System.out.println("14. Gå tilbage");
 		choice = requestInt("\nValg", 0, false);
 		return choice;
 	}
-	
-	
+
+
 	/**
 	 * createPrivate - Create privat customer
 	 */
@@ -175,7 +141,7 @@ public class PersonUI extends SuperUI{
 
 		return returnBusiness;
 	}
-	
+
 	/**
 	 * createSeller - Create a seller
 	 */
@@ -194,7 +160,7 @@ public class PersonUI extends SuperUI{
 		employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, null, false);
 	}
 
-	
+
 	/**
 	 * createAdministrator - Create the administrator
 	 */
@@ -256,15 +222,15 @@ public class PersonUI extends SuperUI{
 						i++;
 					}
 				} else if(customers.size() == 1){
-						retC = customers.get(0);
-						selectedCustomer = retC;
-						if(retC instanceof Business){
-							Business b = (Business) retC;
-							System.out.println("Virksomhed: " + b.getCompany() + "Tlf: " + b.getPhoneNr() + " valgt");
-						}else{
-							System.out.println("Navn: " + retC.getName() + "Tlf: " + retC.getPhoneNr() + " valgt.");
-						}
-						recheck = true;			
+					retC = customers.get(0);
+					selectedCustomer = retC;
+					if(retC instanceof Business){
+						Business b = (Business) retC;
+						System.out.println("Virksomhed: " + b.getCompany() + "Tlf: " + b.getPhoneNr() + " valgt");
+					}else{
+						System.out.println("Navn: " + retC.getName() + "Tlf: " + retC.getPhoneNr() + " valgt.");
+					}
+					recheck = true;			
 				}
 			}
 		} else{
@@ -279,40 +245,40 @@ public class PersonUI extends SuperUI{
 	 * @param customer
 	 */
 	public void updatePrivate(Customer customer) {
-	
+
 		System.out.println("\n## Opdater privat kunde ##");
 		System.out.println("Skriv ny info ellers tryk enter");
-		
+
 		System.out.println("Navn: (" + customer.getName() + ")" );
 		String name = stringToNull();
-		
+
 		System.out.println("Gade: (" + customer.getStreet() + ")");
 		String street = stringToNull();
-		
+
 		System.out.println("Postnummer: (" + customer.getStreet() + ")");
 		String postCode = stringToNull();
-		
+
 		System.out.println("By: (" + customer.getCity() + ")");
 		String city = stringToNull();
-		
+
 		System.out.println("Telefon nr: (" + customer.getPhoneNr() + ")");
 		String phoneNr = stringToNull();
-		
+
 		System.out.println("E-mail: (" + customer.getEmail() + ")");
 		String email = stringToNull();
-		
+
 		System.out.println("Billede ID:");
 		String pictureID = stringToNull();
-		
+
 		int id = customer.getId();
 		String company = null;
 		String cvrNr = null;
-		
+
 		CustomerCtr customerCtr = new CustomerCtr();
 		customerCtr.updateCustomer(id, name, phoneNr, street, email, city, postCode, pictureID, company, cvrNr);		
 	}
 
-	
+
 	/**
 	 * removePerson - Used to remove a person from the Customer object
 	 * @param customer
@@ -389,7 +355,7 @@ public class PersonUI extends SuperUI{
 			for(Employee e : employees){
 				System.out.println("ID: " + e.getId() + ", Navn: " + e.getName() + ", Gade: " + e.getStreet() + ", PostNummer: " + e.getPostCode() + ", By: " + e.getCity() + ", Tlf nr: " + e.getPhoneNr());
 			}
-			
+
 			boolean recheck = false;
 			while(!recheck){	
 				if(employees.size() > 1){
@@ -415,43 +381,43 @@ public class PersonUI extends SuperUI{
 		}
 		return returnEmployee;
 	}
-	
-	
-//	public void updateEmployeeMenu(Employee employee){
-//		boolean exit = false;
-//		boolean admin = employee.getAdmin();
-//		while(!exit){
-//			int choice = findEmployeeMenu();
-//			if(choice == 1 && !admin){
-//				updateSeller(employee);
-//			} else if(choice == 1 && admin){
-//				updateAdministrator(employee);
-//			} else if(choice == 2){
-//				removeEmployee(employee);
-//				exit = true;
-//			} else if(choice == 3){
-//				exit = true;
-//			}
-//		}
-//	}
-//	
-//	private int findEmployeeMenu(){
-//		int choice = 0;
-//		try{
-//			System.out.println("\n## Menu ##");
-//			System.out.println("1. Opdater medarbejder");
-//			System.out.println("2. Fjern medarbejder");
-//			System.out.println("3. Tilbage til medarbejdermenu");
-//			
-//			Scanner k = new Scanner(System.in);
-//			choice = k.nextInt();
-//		} catch(InputMismatchException e){
-//			System.out.println("Forkert input!");
-//		}
-//		return choice;
-//	}
-	
-	
+
+
+	//	public void updateEmployeeMenu(Employee employee){
+	//		boolean exit = false;
+	//		boolean admin = employee.getAdmin();
+	//		while(!exit){
+	//			int choice = findEmployeeMenu();
+	//			if(choice == 1 && !admin){
+	//				updateSeller(employee);
+	//			} else if(choice == 1 && admin){
+	//				updateAdministrator(employee);
+	//			} else if(choice == 2){
+	//				removeEmployee(employee);
+	//				exit = true;
+	//			} else if(choice == 3){
+	//				exit = true;
+	//			}
+	//		}
+	//	}
+	//	
+	//	private int findEmployeeMenu(){
+	//		int choice = 0;
+	//		try{
+	//			System.out.println("\n## Menu ##");
+	//			System.out.println("1. Opdater medarbejder");
+	//			System.out.println("2. Fjern medarbejder");
+	//			System.out.println("3. Tilbage til medarbejdermenu");
+	//			
+	//			Scanner k = new Scanner(System.in);
+	//			choice = k.nextInt();
+	//		} catch(InputMismatchException e){
+	//			System.out.println("Forkert input!");
+	//		}
+	//		return choice;
+	//	}
+
+
 
 	/**
 	 * Update Empluyee
@@ -460,28 +426,28 @@ public class PersonUI extends SuperUI{
 	private void updateEmployee(Employee employee) {
 		System.out.println("## Opdater medarbejder ##");
 		System.out.println("Skriv ny info ellers tryk enter");
-			
+
 		System.out.println("Medarbejder nr: (" + employee.getEmployeeNr() + ")");
 		String employeeNr = stringToNull();
-		
+
 		System.out.println("Navn: (" + employee.getName() + ")" );
 		String name = stringToNull();
-			
+
 		System.out.println("Gade: (" + employee.getStreet() + ")");
 		String street = stringToNull();
-			
+
 		System.out.println("Postnummer: (" + employee.getStreet() + ")");
 		String postCode = stringToNull();
-			
+
 		System.out.println("By: (" + employee.getCity() + ")");
 		String city = stringToNull();
-			
+
 		System.out.println("Telefon nr: (" + employee.getPhoneNr() + ")");
 		String phoneNr = stringToNull();
-			
+
 		System.out.println("E-mail: (" + employee.getEmail() + ")");
 		String email = stringToNull();
-			
+
 		boolean rights = false;
 		if(admin){
 			if(confirm("Vil du give denne bruger administrator rettigheder") ){
@@ -489,7 +455,7 @@ public class PersonUI extends SuperUI{
 			}
 		}
 		int id = employee.getId();
-				
+
 		EmployeeCtr employeeCtr = new EmployeeCtr();
 		employeeCtr.updateEmployee(id, employeeNr, name, phoneNr, street, email, city, postCode, rights);	
 	}
@@ -509,5 +475,5 @@ public class PersonUI extends SuperUI{
 			pause();
 		}
 	}
-	
+
 }
