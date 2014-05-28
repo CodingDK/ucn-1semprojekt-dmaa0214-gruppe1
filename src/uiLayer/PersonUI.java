@@ -194,7 +194,7 @@ public class PersonUI extends SuperUI{
 		CustomerCtr cCtr = new CustomerCtr();
 		ArrayList<Customer> customers = cCtr.searchCustomer(nameOrPhone);
 		if(customers.size() > 0){
-			System.out.println(customers.size() + " Kunder fundet");
+			System.out.println(customers.size() + " Kunde(r) fundet");
 			for(Customer c : customers){
 				System.out.println("ID: " + c.getId() + ", Navn: " + c.getName() + ", Gade: " + c.getStreet() + ", PostNummer: " + c.getPostCode() + ", By: " + c.getCity() + ", Tlf nr: " + c.getPhoneNr());
 			}
@@ -206,22 +206,30 @@ public class PersonUI extends SuperUI{
 					while(returnPrivate == null && i < customers.size()){
 						Customer c = customers.get(i); 
 						if(c instanceof Private && id == c.getId()){
-							System.out.println("Navn: " + c.getName() + ", Gade: " + c.getStreet() + ", PostNummer: " + c.getPostCode() + ", By: " + c.getCity() + ", Tlf nr: " + c.getPhoneNr());
-							updateCustomerMenu(c);
+							System.out.println(c.getName() + " valgt.");
+							//updateCustomerMenu(c);
 							pause();
+							selectedPrivate = (Private) c;
+							returnPrivate = (Private) c;
 							recheck = true;
 						}
 					}
-					
-					
+
+
 				} else if(customers.size() == 1){
-					returnPrivate = customers.get(0);				
-					updateCustomerMenu(returnPrivate);
-					recheck = true;			
+					if(customers.get(0) instanceof Private){
+						returnPrivate = (Private) customers.get(0);
+						selectedPrivate = returnPrivate;
+						System.out.println(returnPrivate.getName() + " valgt.");
+						//updateCustomerMenu(returnPrivate);
+						recheck = true;			
+					}else{
+
+					}
 				}
 			}
 		} else{
-			System.out.println("0 Kunder Fundet");
+			System.out.println("0 Privatkunder Fundet");
 			pause();
 		}
 		return returnPrivate;
