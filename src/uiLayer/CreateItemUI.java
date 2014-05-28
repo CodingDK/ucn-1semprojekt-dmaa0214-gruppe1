@@ -55,10 +55,7 @@ public class CreateItemUI extends SuperUI {
 				System.out.println("Lager og Kategori skal vare valgt for at oprette en vare");
 			}
 			System.out.println(" 4. Gå tilbage");
-			System.out.print("Valg:");
-			@SuppressWarnings("resource")
-			Scanner k = new Scanner(System.in);
-			choice = k.nextInt();
+			choice = requestInt("Valg", null, false);
 		} catch(InputMismatchException e){
 			System.out.println("Forkert input!");
 		}
