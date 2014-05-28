@@ -156,7 +156,7 @@ public class createSaleUI extends SuperUI{
 		PersonUI pUI = new PersonUI("Dry Run");
 		
 		try {
-			sCtr.setCustomer(pUI.createPrivate());
+			sCtr.setCustomer(pUI.createCustomer());
 		} catch (SaleNotCreatedException e) {
 			e.printStackTrace();
 		}
