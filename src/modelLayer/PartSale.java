@@ -1,5 +1,11 @@
 package modelLayer;
 
+/**
+ * Item holds information of a partsale.
+ * 
+ * @author Group 1
+ * @version 0.1
+ */
 public class PartSale {
 	private int amount;
 	private Item item;
