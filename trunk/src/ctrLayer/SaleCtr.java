@@ -121,6 +121,11 @@ public class SaleCtr {
 				i.addReserved(-p.getAmount());
 			}
 		}
+		
+		SaleCont sCont = SaleCont.getInstance();
+		if(sCont.getAll().contains(sale)){
+			sCont.removeSale(sale);
+		}
 	}
 	
 	/**
@@ -186,6 +191,18 @@ public class SaleCtr {
 		
 		return retSale;
 		
+	}
+	
+	public void cleanUp(){
+		ArrayList<Sale> sales = getParkedSales();
+		Calendar c1 = Calendar.getInstance(), c2 = Calendar.getInstance();
+		for(Sale s : sales){
+			c2.setTime(s.getDate());
+			if(c1.get(Calendar.DAY_OF_YEAR) != c2.get(Calendar.DAY_OF_YEAR)){
+				this.sale = s;
+				cancelSale();
+			}
+		}
 	}
 	
 }
