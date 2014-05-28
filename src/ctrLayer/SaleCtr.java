@@ -28,7 +28,8 @@ public class SaleCtr {
 	 * @return Sale the new sale.
 	 */
 	public Sale createSale(){
-		return this.sale = new Sale();
+		this.sale = new Sale();
+		return this.sale;
 	}
 	
 	public void addItem(Item item, int amount) throws NullPointerException, NotEnoughItemsException{

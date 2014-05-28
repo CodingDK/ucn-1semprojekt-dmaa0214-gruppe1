@@ -30,9 +30,9 @@ public class SaleUI extends SuperUI{
 			} else if(choice == 3){
 				createBusiness();
 			} else if(choice == 4){
-				searchCustomer();
+				//searchCustomer();
 			} else if(choice == 5){
-				finishSale();
+				exit = finishSale();
 			} else if(choice == 6){
 				exit = true;
 			}
@@ -80,7 +80,9 @@ public class SaleUI extends SuperUI{
 			total += price;
 			System.out.println(line);
 		}
-		System.out.println("Total: ");
+		double moms = total*0.25;
+		System.out.println("Moms: " + moms + ",-");
+		System.out.println("Total: " + total+moms + ",-");
 		System.out.println("¤¤ ¤¤ ¤¤ ¤¤");
 	}
 		
@@ -100,7 +102,7 @@ public class SaleUI extends SuperUI{
 		}
 		return ret;
 	}
-	
+	/*
 	private void searchCustomer() {
 		PersonUI pUI = new PersonUI("Dry Run");
 		Customer c = pUI.findCustomer();
@@ -108,7 +110,7 @@ public class SaleUI extends SuperUI{
 			System.out.println("Kunde ikke fundet, søg igen.");
 		}
 	}
-
+*/
 	private void createPrivate() {
 		PersonUI pUI = new PersonUI("Dry Run");
 		customer = null;
@@ -151,10 +153,14 @@ public class SaleUI extends SuperUI{
 						
 			try {
 				sCtr.addItem(i, amount);
+				System.out.println(i.getName() + " tilføjet til salget");
+				pause();
 			} catch (NullPointerException e) {
-				e.printStackTrace();
+				System.out.println(e);
+				pause();
 			} catch (NotEnoughItemsException e) {
 				System.out.println(e);
+				pause();
 			}
 		}
 		
