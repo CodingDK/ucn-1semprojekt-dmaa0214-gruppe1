@@ -41,7 +41,7 @@ public class SaleUI extends SuperUI{
 		int choice = 0;
 		try{
 			System.out.println("## Opret salg ##");
-			if(customer == null){
+			if(customer != null){
 				System.out.println("¤¤ Kunde valgt: " + customer.toString() + " ¤¤");
 			}
 			System.out.println("1. Tilføj vare");
@@ -59,16 +59,21 @@ public class SaleUI extends SuperUI{
 		return choice;
 	}
 		
-	private void finishSale() {
+	private boolean finishSale() {
 		String employeeNr = requestString("Indtast medarbejdernr.", null, null, false);
-		
+		boolean ret = false;
 		try {
 			sCtr.finishSale(employeeNr);
+			System.out.println("Salg udført");
+			ret = true;
 		} catch (NullPointerException e) {
-			System.out.println(e);
+			System.out.println("Prøv igen, " + e.getMessage());
+			pause();
 		} catch (SaleNotCreatedException e) {
-			System.out.println(e);
+			System.out.println(e.getMessage());
+			pause();
 		}
+		return ret;
 	}
 	
 	private void searchCustomer() {
