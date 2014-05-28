@@ -11,24 +11,21 @@ import ctrLayer.EmployeeCtr;
 public class PersonUI extends SuperUI{
 
 	private Customer selectedCustomer;
-	private Business selectedBusiness;
 	private Employee selectedEmployee;
 
 	public PersonUI(String DryRun){
 		selectedCustomer = null;
-		selectedBusiness = null;
 	}
 
 	public PersonUI(){
 		selectedCustomer = null;
-		selectedBusiness = null;
 		boolean exit = false;
 		while(!exit){
 
 			int choice = writeMenu();
 			if(admin){ 						// Admin access only
 				if(choice == 4){			//Slet kunde
-					
+					removeCustomer(selectedCustomer);
 				} else if(choice == 7){		//Opdate medarbejder
 					updateEmployee(selectedEmployee);
 				} else if(choice == 8){		//Slet medarbejder
@@ -53,14 +50,13 @@ public class PersonUI extends SuperUI{
 
 	private int writeMenu(){
 		int choice = 0;
-		String pB = selectedBusiness != null ? " (" + selectedBusiness.getCompany() + ")" : ""; 
 		String pP = selectedCustomer != null ? " (" + selectedCustomer.getName() + ")" : "";  
 		String m = selectedEmployee != null ? " (" + selectedEmployee.getName() + ")" : "";
 
 		System.out.println("\n## Person menu ##");
 		System.out.println(" 1. Søg kunde");
 		System.out.println(" 2. Opret kunde" + pP);
-		System.out.println(" 3. Opdater kunde" + pB);
+		System.out.println(" 3. Opdater kunde" + pP);
 		if(admin){ 
 			System.out.println(" 4. Slet kunde" + pP); 
 		}
@@ -250,7 +246,7 @@ public class PersonUI extends SuperUI{
 	 * removePerson - Used to remove a person from the Customer object
 	 * @param customer
 	 */
-	private void removePerson(Customer customer) {
+	private void removeCustomer(Customer customer) {
 		if(confirm("Ønsker du at slette: ") ){
 			int id = customer.getId();
 			CustomerCtr customerCtr = new CustomerCtr();
@@ -357,10 +353,11 @@ public class PersonUI extends SuperUI{
 	 * @param Employee
 	 */
 	private void removeEmployee(Employee employee) {
-		if(confirm("Ønsker du at slette: ") ){
-			EmployeeCtr employeeCtr = new EmployeeCtr();
-			employeeCtr.removeEmployee(employee);
-			System.out.println("Personen er nu slettet");
+		String name = selectedEmployee.getName();
+		if(confirm("Er du sikker på du vil slette " + name + "? ")){
+			EmployeeCtr eCtr = new EmployeeCtr();
+			eCtr.removeEmployee(employee);
+			System.out.println(name + " er nu slettet");
 			pause();
 		} else{
 			System.out.println("Personen er ikke slettet");
