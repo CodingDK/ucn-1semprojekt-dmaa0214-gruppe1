@@ -173,9 +173,9 @@ public class PersonUI extends SuperUI{
 						if(id == c.getId()){
 							if(c instanceof Business){
 								Business b = (Business) c;
-								System.out.println("Virksomhed: " + b.getCompany() + ", tlf: " + b.getPhoneNr() + " valgt.");
+								System.out.println("Valgt - Virksomhed: " + b.getCompany() + ", tlf: " + b.getPhoneNr());
 							}else{
-								System.out.println("Navn: " + c.getName() + ", tlf: " + c.getPhoneNr() + " valgt.");
+								System.out.println("Valgt - Navn: " + c.getName() + ", tlf: " + c.getPhoneNr());
 							}
 							pause();
 							selectedCustomer = c;
@@ -189,9 +189,9 @@ public class PersonUI extends SuperUI{
 					selectedCustomer = retC;
 					if(retC instanceof Business){
 						Business b = (Business) retC;
-						System.out.println("Virksomhed: " + b.getCompany() + "Tlf: " + b.getPhoneNr() + " valgt");
+						System.out.println("Valgt - Virksomhed: " + b.getCompany() + ", tlf: " + b.getPhoneNr());
 					}else{
-						System.out.println("Navn: " + retC.getName() + "Tlf: " + retC.getPhoneNr() + " valgt.");
+						System.out.println("Valgt - Navn: " + retC.getName() + ", tlf: " + retC.getPhoneNr());
 					}
 					recheck = true;			
 				}
