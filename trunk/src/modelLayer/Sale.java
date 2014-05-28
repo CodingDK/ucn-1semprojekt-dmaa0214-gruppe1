@@ -52,6 +52,7 @@ public class Sale {
 	}
 
 	public void addPartSale(Item i, int amount){
+		totalPrice += i.getSalePrice()*amount;
 		PartSale p = new PartSale(i, amount);
 		partSales.add(p);
 	}
