@@ -116,7 +116,7 @@ public class PersonUI extends SuperUI{
 					retC = cCtr.createPrivateCustomer(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
 					exit = true;
 				}
-				cCtr.createBusinessCustomer(name, phoneNr, street, email, city, postCode, company, cvrNr);
+				retC = cCtr.createBusinessCustomer(name, phoneNr, street, email, city, postCode, company, cvrNr);
 				exit = true;
 			}
 		}
