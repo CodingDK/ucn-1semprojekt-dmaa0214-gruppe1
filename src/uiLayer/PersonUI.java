@@ -60,6 +60,7 @@ public class PersonUI extends SuperUI{
 			System.out.println(" 8. Opdater sælger");
 			System.out.println(" 9. Opdater administrator");
 			System.out.println(" 10. Tilbage");
+			System.out.print("Valg:");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
