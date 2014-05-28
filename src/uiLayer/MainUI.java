@@ -50,7 +50,7 @@ public class MainUI extends SuperUI{
 	private int writeMenu(){
 		int choice = 0;
 		try{
-			System.out.println("1. Kunde UI");
+			System.out.println("1. Person UI");
 			System.out.println("2. Salg UI");
 			System.out.println("3. Vare UI");
 			System.out.println("4. Lav Test");
