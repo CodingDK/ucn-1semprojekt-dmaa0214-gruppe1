@@ -102,7 +102,8 @@ public class PersonUI extends SuperUI{
 	/**
 	 * createBusiness - Create business customer
 	 */
-	public void createBusiness() {
+	public Business createBusiness() {
+		Business returnBusiness = null;
 		try{
 			System.out.println("\n## Opret erhvervs kunde ##");			
 			String company 	= requestString("Virksomhedsnavn", null, null, false);
@@ -115,11 +116,12 @@ public class PersonUI extends SuperUI{
 			String name 	= requestString("Kontakt person", null, null, false);
 			
 			CustomerCtr customerCtr = new CustomerCtr();
-			customerCtr.createBusinessCustomer(name, phoneNr, street, email, city, postCode, company, cvrNr);
+			returnBusiness = customerCtr.createBusinessCustomer(name, phoneNr, street, email, city, postCode, company, cvrNr);
 		
 		} catch(InputMismatchException e){
 			System.out.println("Forkert input!");
-		}		
+		}	
+		return returnBusiness;
 	}
 	
 	/**

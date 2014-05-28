@@ -62,7 +62,7 @@ public class MainUI extends SuperUI{
 				System.out.println("5. Logud");
 			}
 			System.out.println("6. Afslut program");
-			System.out.print("Valg:");
+			System.out.print("\nValg: ");
 			choice = k.nextInt();
 			k.nextLine();
 		} catch(InputMismatchException e){
