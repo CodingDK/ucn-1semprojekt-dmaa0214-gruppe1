@@ -458,7 +458,7 @@ public class PersonUI extends SuperUI{
 	private void updateEmployee(Employee employee, boolean admin) {
 		System.out.println("Skriv ny info ellers tryk enter");
 			
-		System.out.println("Medarbejder nr: (" + employee.getEmployeeNr());
+		System.out.println("Medarbejder nr: (" + employee.getEmployeeNr() + ")");
 		String employeeNr = stringToNull();
 		
 		System.out.println("Navn: (" + employee.getName() + ")" );
