@@ -3,17 +3,20 @@ package uiLayer;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import modelLayer.Item;
-import modelLayer.Sale;
+import personLayer.*;
+import modelLayer.*;
 import ctrLayer.SaleCtr;
 import exceptionLayer.NotEnoughItemsException;
 import exceptionLayer.SaleNotCreatedException;
 
 public class SaleUI extends SuperUI{
-	private Sale sale;
 	private SaleCtr sCtr;
+	private Sale sale;
+	private Customer customer;
 		
 	public SaleUI(){
+		privateCus = null;
+		
 		sCtr = new SaleCtr();
 		this.sale = sCtr.createSale();
 		boolean exit = false;
@@ -39,6 +42,9 @@ public class SaleUI extends SuperUI{
 		int choice = 0;
 		try{
 			System.out.println("## Opret salg ##");
+			if(customer == null){
+				System.out.println("¤¤ Kunde valgt: " + customer.toString() + " ¤¤");
+			}
 			System.out.println("1. Tilføj vare");
 			System.out.println("2. Opret privatkunde");
 			System.out.println("3. Opret erhvervskunde");
@@ -53,15 +59,10 @@ public class SaleUI extends SuperUI{
 		}
 		return choice;
 	}
-	
-	/*
-	private void createSale(){
-	
-	}
-	*/
-	
+		
 	private void finishSale() {
 		String employeeNr = requestString("Indtast medarbejdernr.", null, null, false);
+		
 		try {
 			sCtr.finishSale(employeeNr);
 		} catch (NullPointerException e) {
@@ -70,33 +71,58 @@ public class SaleUI extends SuperUI{
 			System.out.println(e);
 		}
 	}
-
+	
 	private void searchCustomer() {
 		PersonUI pUI = new PersonUI("Dry Run");
-		//pUI.findCustomer();
+		Customer c = pUI.findCustomer();
+		if(c == null){
+			System.out.println("Kunde ikke fundet, søg igen.");
+		}
 	}
 
 	private void createPrivate() {
 		PersonUI pUI = new PersonUI("Dry Run");
-		pUI.createPrivate();
+		customer = pUI.createPrivate();
 	}
 	
 	private void createBusiness(){
 		PersonUI pUI = new PersonUI("Dry Run");
-		pUI.createBusiness();
+		customer = pUI.createBusiness();
 	}
 
 	private void addPartSale() {
 		ItemUI iUi = new ItemUI("Dry Run");
-		Item i = iUi.pickItem();
-		
-		int amount = requestInt("Antal", 1, false);
-		try {
-			sCtr.addItem(i, amount);
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-		} catch (NotEnoughItemsException e) {
-			System.out.println(e);
+		Item i = null;
+		while(i == null){
+			i = iUi.pickItem();
+			if(i == null){
+				System.out.println("Vare ikke fundet, søg igen");
+			}
 		}
+	
+		int aviAmount = i.getAmount()-i.getReserved();
+		
+		if(aviAmount <= 0){
+			System.out.println(i.getName() + " er ikke på lager");
+		}
+		else {
+			int amount = 0;
+			while(aviAmount-amount < 0 || amount<=0){
+				amount = requestInt("Antal", 1, false);
+				if(aviAmount-amount < 0){
+					System.out.println("Vælg et mindre antal. Der er kun " + aviAmount + " på lager");
+				}
+			}
+						
+			try {
+				sCtr.addItem(i, amount);
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			} catch (NotEnoughItemsException e) {
+				System.out.println(e);
+			}
+		}
+		
 	}
+	
 }
