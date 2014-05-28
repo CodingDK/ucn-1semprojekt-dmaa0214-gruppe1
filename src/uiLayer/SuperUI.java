@@ -9,24 +9,18 @@ public abstract class SuperUI {
 	protected static boolean admin;
 	
 	protected void pause(){
+		@SuppressWarnings("resource")
 		Scanner k = new Scanner(System.in);	
 		k.nextLine();
 	}
-	/*
-	protected void emptyTypeIn(String typeIn){
-		if(typeIn.trim().isEmpty()){
-			System.out.println("Feltet må ikke være tomt");
-			pause();
-			return;
-		}
-	}
-	*/
+
 	/**
 	 * stringToNull - used when "" is changed to a null
 	 * @param typeIn 
 	 * @return String
 	 */
 	protected String stringToNull(){
+		@SuppressWarnings("resource")
 		Scanner k = new Scanner(System.in);
 		String n = k.nextLine();
 		String typeOut= null;
@@ -40,6 +34,7 @@ public abstract class SuperUI {
 
 	
 	protected String requestString(String input, Integer minLength, Integer maxLength, boolean allowNull){
+		@SuppressWarnings("resource")
 		Scanner k = new Scanner(System.in);
 		String ret = "";
 		boolean done = false;
@@ -49,20 +44,20 @@ public abstract class SuperUI {
 			String inputData = k.nextLine();
 			if(!allowNull){
 				if(inputData.trim().isEmpty()){
-					System.out.println("Feltet må ikke være tomt");
+					System.out.println("Feltet mï¿½ ikke vï¿½re tomt");
 					pause();
 					error = true;
 				} else if(minLength != null || maxLength != null){
 					if(minLength != null){
 						if(inputData.length() < minLength){
-							System.out.println(input + " skal være længere end " + minLength + " tegn");
+							System.out.println(input + " skal vï¿½re lï¿½ngere end " + minLength + " tegn");
 							pause();
 							error = true;
 						}
 					}
 					if(maxLength != null){
 						if(inputData.length() > maxLength){
-							System.out.println(input + " skal være kortere end " + maxLength + " tegn");
+							System.out.println(input + " skal vï¿½re kortere end " + maxLength + " tegn");
 							pause();
 							error = true;
 						}
@@ -87,6 +82,7 @@ public abstract class SuperUI {
 	}
 	
 	protected int requestInt(String input, Integer min, boolean allowNull){
+		@SuppressWarnings("resource")
 		Scanner k = new Scanner(System.in);
 		int ret = 0;
 		boolean done = false;
@@ -101,7 +97,7 @@ public abstract class SuperUI {
 					ret = Integer.parseInt(inputData);
 					if(min != null){
 						if(ret != min && ret <= min){
-							System.out.println(input + " skal være større end " + min);
+							System.out.println(input + " skal vï¿½re stï¿½rre end " + min);
 						}else{
 							done = true;
 						}
@@ -116,6 +112,7 @@ public abstract class SuperUI {
 	}
 	
 	protected double requestDouble(String input, boolean allowNull){
+		@SuppressWarnings("resource")
 		Scanner k = new Scanner(System.in);
 		double ret = 0;
 		boolean done = false;
@@ -158,7 +155,8 @@ public abstract class SuperUI {
 	
 	protected boolean confirm(String confirmStatement){
         boolean confirm = true;
-        Scanner s = new Scanner(System.in);
+        @SuppressWarnings("resource")
+		Scanner s = new Scanner(System.in);
         boolean exit = false;
         while(!exit){
             System.out.println();
@@ -177,7 +175,6 @@ public abstract class SuperUI {
     }
 	
 	protected void login(){
-		Scanner k = new Scanner(System.in);
 		System.out.println("## Administrator Login ##");
 		String employeeID = requestString("Medarbejder Nummer", null, null, false);
 		String password = requestString("Kodeord", null, null, false);

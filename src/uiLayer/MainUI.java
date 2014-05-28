@@ -50,6 +50,7 @@ public class MainUI extends SuperUI{
 	
 	private int writeMenu(){
 		int choice = 0;
+		@SuppressWarnings("resource")
 		Scanner k = new Scanner(System.in);
 		try{
 			System.out.println("1. Kunde UI");
