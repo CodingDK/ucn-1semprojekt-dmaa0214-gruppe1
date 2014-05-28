@@ -83,11 +83,11 @@ public class ItemUI extends SuperUI{
 			}
 			
 			{ // Seller + Admin adgang
-				if(choice == 5){ // S�g
+				if(choice == 5){ // Søg
 					searchCategory();
-				}else if(choice == 10){ // S�g
+				}else if(choice == 10){ // Søg
 					searchStorage();
-				}else if(choice == 15){ // S�g
+				}else if(choice == 15){ // Søg
 					searchItem();
 				}else if(choice == 16){
 					exit = true;
@@ -166,7 +166,7 @@ public class ItemUI extends SuperUI{
 			
 			
 			System.out.println(" 16. Tilbage");
-			System.out.print("Valg: ");
+			System.out.print("Valg:");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
