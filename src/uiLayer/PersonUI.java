@@ -1,9 +1,6 @@
 package uiLayer;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 import personLayer.Business;
 import personLayer.Customer;
 import personLayer.Employee;
@@ -15,55 +12,55 @@ public class PersonUI extends SuperUI{
 
 	private Private selectedPrivate;
 	private Business selectedBusiness;
-	
+
 	public PersonUI(String DryRun){
 		selectedPrivate = null;
 		selectedBusiness = null;
 	}
-	
+
 	public PersonUI(){
 		selectedPrivate = null;
 		selectedBusiness = null;
 		boolean exit = false;
 		while(!exit){
-			
+
 			int choice = writeMenu();
 			if(admin){ // Admin access only
 				if(choice == 4){
-					
+
 				} else if(choice == 8){
-					
+
 				} else if(choice == 9){
-					
+
 				} else if(choice == 10){
-					
+
 				} else if(choice == 11){
-					
+
 				} else if(choice == 12){
-					
+
 				} else if(choice == 13){
-					
+
 				}
 			} // Access for both Admin and Seller
-				if(choice == 1){
-					findCustomer();
-				} else if(choice == 2){
-					createPrivate();
-				} else if(choice == 3){
-					findBusiness();
-				} else if(choice == 5){
-					createSeller();
-				} else if(choice == 6){
-					createAdministrator();
-				} else if(choice == 7){
-					findEmployee();
-				} else if(choice == 14){
-					exit = true;
-				}
+			if(choice == 1){
+				findCustomer();
+			} else if(choice == 2){
+				createPrivate();
+			} else if(choice == 3){
+				findBusiness();
+			} else if(choice == 5){
+				createSeller();
+			} else if(choice == 6){
+				createAdministrator();
+			} else if(choice == 7){
+				findEmployee();
+			} else if(choice == 14){
+				exit = true;
+			}
 		}		
 	}
-	
-	
+
+
 	private int writeMenu(){
 		int choice = 0;
 		String pB = selectedBusiness != null ? " (" + selectedBusiness.getCompany() + ")" : ""; 
@@ -109,17 +106,17 @@ public class PersonUI extends SuperUI{
 		System.out.println("\n## Opret privat kunde ##");
 
 		String name 		= requestString("Navn", null, null, false);
-			String street 		= requestString("Gade", null, null, false);
-			String postCode 	= requestString("Postnummer", null, null, false);
-			String city 		= requestString("By", null, null, false);
-			String phoneNr 		= requestString("Telefon nr", null, null, false);
-			String email 		= requestString("E-mail", null, null, false);
-			String cprNr 		= requestString("CPR nr", null, null, false);
-			String pictureId 	= requestString("Billede ID", null, null, false);
+		String street 		= requestString("Gade", null, null, false);
+		String postCode 	= requestString("Postnummer", null, null, false);
+		String city 		= requestString("By", null, null, false);
+		String phoneNr 		= requestString("Telefon nr", null, null, false);
+		String email 		= requestString("E-mail", null, null, false);
+		String cprNr 		= requestString("CPR nr", null, null, false);
+		String pictureId 	= requestString("Billede ID", null, null, false);
 
-			CustomerCtr customerCtr = new CustomerCtr();
-			returnPrivate = customerCtr.createPrivateCustomer(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
-	
+		CustomerCtr customerCtr = new CustomerCtr();
+		returnPrivate = customerCtr.createPrivateCustomer(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
+
 		return returnPrivate;
 	}
 
@@ -128,60 +125,60 @@ public class PersonUI extends SuperUI{
 	 */
 	public Business createBusiness() {
 		Business returnBusiness = null;
-	
-			System.out.println("\n## Opret erhvervs kunde ##");			
-			String company 	= requestString("Virksomhedsnavn", null, null, false);
-			String street	= requestString("Gade", null, null, false);
-			String postCode = requestString("Postnummer", null, null, false);
-			String city 	= requestString("By", null, null, false);
-			String phoneNr 	= requestString("Telefon nr", null, null, false);
-			String email 	= requestString("E-mail", null, null, false);
-			String cvrNr 	= requestString("CVR nr", null, null, false);
-			String name 	= requestString("Kontakt person", null, null, false);
-			
-			CustomerCtr customerCtr = new CustomerCtr();
-			returnBusiness = customerCtr.createBusinessCustomer(name, phoneNr, street, email, city, postCode, company, cvrNr);
-			
+
+		System.out.println("\n## Opret erhvervs kunde ##");			
+		String company 	= requestString("Virksomhedsnavn", null, null, false);
+		String street	= requestString("Gade", null, null, false);
+		String postCode = requestString("Postnummer", null, null, false);
+		String city 	= requestString("By", null, null, false);
+		String phoneNr 	= requestString("Telefon nr", null, null, false);
+		String email 	= requestString("E-mail", null, null, false);
+		String cvrNr 	= requestString("CVR nr", null, null, false);
+		String name 	= requestString("Kontakt person", null, null, false);
+
+		CustomerCtr customerCtr = new CustomerCtr();
+		returnBusiness = customerCtr.createBusinessCustomer(name, phoneNr, street, email, city, postCode, company, cvrNr);
+
 		return returnBusiness;
 	}
-	
+
 	/**
 	 * createSeller - Create a seller
 	 */
 	public void createSeller() {
-			System.out.println("\n## Opret sælger ##");
-			String employeeNr 	= requestString("Medarbejder nummer", null, null, false);
-			String name			= requestString("Navn", null, null, false);
-			String street		= requestString("Gade", null, null, false);
-			String postCode		= requestString("Postnummer", null, null, false);
-			String city			= requestString("By", null, null, false);
-			String phoneNr		= requestString("Telefon nr", null, null, false);
-			String email		= requestString("E-mail", null, null, false);
-			String cprNr		= requestString("CPR nr", null, null, false);
-			
-			EmployeeCtr employeeCtr = new EmployeeCtr();
-			employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, null, false);
+		System.out.println("\n## Opret sælger ##");
+		String employeeNr 	= requestString("Medarbejder nummer", null, null, false);
+		String name			= requestString("Navn", null, null, false);
+		String street		= requestString("Gade", null, null, false);
+		String postCode		= requestString("Postnummer", null, null, false);
+		String city			= requestString("By", null, null, false);
+		String phoneNr		= requestString("Telefon nr", null, null, false);
+		String email		= requestString("E-mail", null, null, false);
+		String cprNr		= requestString("CPR nr", null, null, false);
+
+		EmployeeCtr employeeCtr = new EmployeeCtr();
+		employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, null, false);
 	}
 
-	
+
 	/**
 	 * createAdministrator - Create the administrator
 	 */
 	public void createAdministrator() {
-			System.out.println("\n## Opret administrator ##");
-			String employeeNr 	= requestString("Medarbejder nummer", null, null, false);
-			String name			= requestString("Navn", null, null, false);
-			String street		= requestString("Gade", null, null, false);
-			String postCode		= requestString("Postnummer", null, null, false);
-			String city			= requestString("By", null, null, false);
-			String phoneNr		= requestString("Telefon nr", null, null, false);
-			String email		= requestString("E-mail", null, null, false);
-			String cprNr		= requestString("CPR nr", null, null, false);
-			String password		= requestString("Kode", null, null, false);
-			Boolean admin		= true;
-			
-			EmployeeCtr employeeCtr = new EmployeeCtr();
-			employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, password, admin);
+		System.out.println("\n## Opret administrator ##");
+		String employeeNr 	= requestString("Medarbejder nummer", null, null, false);
+		String name			= requestString("Navn", null, null, false);
+		String street		= requestString("Gade", null, null, false);
+		String postCode		= requestString("Postnummer", null, null, false);
+		String city			= requestString("By", null, null, false);
+		String phoneNr		= requestString("Telefon nr", null, null, false);
+		String email		= requestString("E-mail", null, null, false);
+		String cprNr		= requestString("CPR nr", null, null, false);
+		String password		= requestString("Kode", null, null, false);
+		Boolean admin		= true;
+
+		EmployeeCtr employeeCtr = new EmployeeCtr();
+		employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, password, admin);
 	}
 
 	/**
@@ -234,7 +231,7 @@ public class PersonUI extends SuperUI{
 		}
 		return returnPrivate;
 	}
-		
+
 	/**
 	 * findCustomerMenu
 	 * @return choice
@@ -267,46 +264,46 @@ public class PersonUI extends SuperUI{
 			}	
 		}		
 	}
-	
+
 	/**
 	 * updatePrivate - Udates a privat customer
 	 * @param customer
 	 */
 	public void updatePrivate(Customer customer) {
-	
+
 		System.out.println("\n## Opdater privat kunde ##");
 		System.out.println("Skriv ny info ellers tryk enter");
-		
+
 		System.out.println("Navn: (" + customer.getName() + ")" );
 		String name = stringToNull();
-		
+
 		System.out.println("Gade: (" + customer.getStreet() + ")");
 		String street = stringToNull();
-		
+
 		System.out.println("Postnummer: (" + customer.getStreet() + ")");
 		String postCode = stringToNull();
-		
+
 		System.out.println("By: (" + customer.getCity() + ")");
 		String city = stringToNull();
-		
+
 		System.out.println("Telefon nr: (" + customer.getPhoneNr() + ")");
 		String phoneNr = stringToNull();
-		
+
 		System.out.println("E-mail: (" + customer.getEmail() + ")");
 		String email = stringToNull();
-		
+
 		System.out.println("Billede ID:");
 		String pictureID = stringToNull();
-		
+
 		int id = customer.getId();
 		String company = null;
 		String cvrNr = null;
-		
+
 		CustomerCtr customerCtr = new CustomerCtr();
 		customerCtr.updateCustomer(id, name, phoneNr, street, email, city, postCode, pictureID, company, cvrNr);		
 	}
 
-	
+
 	/**
 	 * removePerson - Used to remove a person from the Customer object
 	 * @param customer
@@ -376,7 +373,7 @@ public class PersonUI extends SuperUI{
 	public void findEmployee(){	
 		System.out.println("\n## Søg medarbejder ##");
 		String nameOrEmpNr = requestString("Indtast medarbejder navn eller medarbejder nr", null, null, false);
-		
+
 		EmployeeCtr employeeCtr = new EmployeeCtr();
 		ArrayList<Employee> employees = employeeCtr.searchEmployee(nameOrEmpNr);
 		if(employees.size() > 0){
@@ -409,8 +406,8 @@ public class PersonUI extends SuperUI{
 			return;
 		}
 	}
-	
-	
+
+
 	public void updateEmployeeMenu(Employee employee){
 		boolean exit = false;
 		boolean admin = employee.getAdmin();
@@ -448,7 +445,7 @@ public class PersonUI extends SuperUI{
 		boolean admin = true;
 		updateEmployee(employee, admin);		
 	}
-	
+
 	/**
 	 * updateSeller
 	 * @param employee
@@ -466,30 +463,30 @@ public class PersonUI extends SuperUI{
 	 */
 	private void updateEmployee(Employee employee, boolean admin) {
 		System.out.println("Skriv ny info ellers tryk enter");
-			
+
 		System.out.println("Medarbejder nr: (" + employee.getEmployeeNr() + ")");
 		String employeeNr = stringToNull();
-		
+
 		System.out.println("Navn: (" + employee.getName() + ")" );
 		String name = stringToNull();
-			
+
 		System.out.println("Gade: (" + employee.getStreet() + ")");
 		String street = stringToNull();
-			
+
 		System.out.println("Postnummer: (" + employee.getStreet() + ")");
 		String postCode = stringToNull();
-			
+
 		System.out.println("By: (" + employee.getCity() + ")");
 		String city = stringToNull();
-			
+
 		System.out.println("Telefon nr: (" + employee.getPhoneNr() + ")");
 		String phoneNr = stringToNull();
-			
+
 		System.out.println("E-mail: (" + employee.getEmail() + ")");
 		String email = stringToNull();
-					
+
 		int id = employee.getId();
-				
+
 		EmployeeCtr employeeCtr = new EmployeeCtr();
 		employeeCtr.updateEmployee(id, employeeNr, name, phoneNr, street, email, city, postCode, admin);	
 	}
@@ -509,5 +506,5 @@ public class PersonUI extends SuperUI{
 			pause();
 		}
 	}
-	
+
 }
