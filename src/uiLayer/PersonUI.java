@@ -13,12 +13,17 @@ import ctrLayer.EmployeeCtr;
 
 public class PersonUI extends SuperUI{
 
+	private Private selectedPrivate;
+	private Business selectedBusiness;
+	
 	public PersonUI(String DryRun){
-		
+		selectedPrivate = null;
+		selectedBusiness = null;
 	}
 	
 	public PersonUI(){
-	
+		selectedPrivate = null;
+		selectedBusiness = null;
 		boolean exit = false;
 		while(!exit){
 			
@@ -175,11 +180,12 @@ public class PersonUI extends SuperUI{
 	/**
 	 * findCustomer - Find a customer in the system by the name or phone number
 	 */
-	public void findPrivate() {
+	public Private findPrivate() {
+		Private returnPrivate = null;
 		System.out.println("\n## Søg privatkunde ##");
 		String nameOrPhone = requestString("Indtast kundenavn eller tlf nr.", 1, null, false);
-		CustomerCtr customerCtr = new CustomerCtr();
-		ArrayList<Customer> customers = customerCtr.searchCustomer(nameOrPhone);
+		CustomerCtr cCtr = new CustomerCtr();
+		ArrayList<Customer> customers = cCtr.searchCustomer(nameOrPhone);
 		if(customers.size() > 0){
 			System.out.println(customers.size() + " Kunder fundet");
 			for(Customer c : customers){
@@ -190,17 +196,21 @@ public class PersonUI extends SuperUI{
 			while(!recheck){
 				if(customers.size() > 1){
 					int id = requestInt("Indtast kunde ID for den ønskede kunde", null, false);
-					for(Customer c : customers){
-						if(id == c.getId()){
+					int i = 0;
+					while(returnPrivate == null && i < customers.size()){
+						Customer c = customers.get(i); 
+						if(c instanceof Private && id == c.getId()){
 							System.out.println("Navn: " + c.getName() + ", Gade: " + c.getStreet() + ", PostNummer: " + c.getPostCode() + ", By: " + c.getCity() + ", Tlf nr: " + c.getPhoneNr());
 							updateCustomerMenu(c);
 							pause();
 							recheck = true;
 						}
 					}
+					
+					
 				} else if(customers.size() == 1){
-					Customer found = customers.get(0);				
-					updateCustomerMenu(found);
+					returnPrivate = customers.get(0);				
+					updateCustomerMenu(returnPrivate);
 					recheck = true;			
 				}
 			}
@@ -208,6 +218,7 @@ public class PersonUI extends SuperUI{
 			System.out.println("0 Kunder Fundet");
 			pause();
 		}
+		return returnPrivate;
 	}
 		
 	/**
