@@ -312,7 +312,7 @@ public class PersonUI extends SuperUI{
 			System.out.println(busCusts.size() + printComp + " fundet");
 			for(Customer c : busCusts){
 				if(c instanceof Business){
-					System.out.println("ID: " + c.getId() + ", Navn: " + ((Business) c).getCompany() + "Tlf nr.: " + c.getPhoneNr() + ", CVR-nr: " + ((Business) c).getCvrNr());
+					System.out.println("ID: " + c.getId() + ", Navn: " + ((Business) c).getCompany() + ", Tlf nr.: " + c.getPhoneNr() + ", CVR-nr: " + ((Business) c).getCvrNr());
 				} 
 			}
 		}else{
