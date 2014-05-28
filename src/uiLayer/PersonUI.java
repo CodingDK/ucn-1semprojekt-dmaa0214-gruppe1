@@ -10,16 +10,16 @@ import ctrLayer.EmployeeCtr;
 
 public class PersonUI extends SuperUI{
 
-	private Private selectedPrivate;
+	private Customer selectedCustomer;
 	private Business selectedBusiness;
 
 	public PersonUI(String DryRun){
-		selectedPrivate = null;
+		selectedCustomer = null;
 		selectedBusiness = null;
 	}
 
 	public PersonUI(){
-		selectedPrivate = null;
+		selectedCustomer = null;
 		selectedBusiness = null;
 		boolean exit = false;
 		while(!exit){
@@ -64,7 +64,7 @@ public class PersonUI extends SuperUI{
 	private int writeMenu(){
 		int choice = 0;
 		String pB = selectedBusiness != null ? " (" + selectedBusiness.getCompany() + ")" : ""; 
-		String pP = selectedPrivate != null ? " (" + selectedPrivate.getName() + ")" : "";  
+		String pP = selectedCustomer != null ? " (" + selectedCustomer.getName() + ")" : "";  
 
 		System.out.println("\n## Person menu ##");
 		System.out.println(" 1. Søg privatkunde");
@@ -184,85 +184,60 @@ public class PersonUI extends SuperUI{
 	/**
 	 * findCustomer - Find a customer in the system by the name or phone number
 	 */
-	public Private findCustomer() {
-		Private returnPrivate = null;
-		System.out.println("\n## Søg privatkunde ##");
-		String nameOrPhone = requestString("Indtast kundenavn eller tlf nr.", 1, null, false);
+	public Customer findCustomer() {
+		Customer retC = null;
+		System.out.println("\n## Søg kunde ##");
+		String nameOrPhone = requestString("Indtast kundenavn, virksomhedsnavn eller tlf nr.", 1, null, false);
 		CustomerCtr cCtr = new CustomerCtr();
 		ArrayList<Customer> customers = cCtr.searchCustomer(nameOrPhone);
 		if(customers.size() > 0){
 			System.out.println(customers.size() + " Kunde(r) fundet");
 			for(Customer c : customers){
-				System.out.println("ID: " + c.getId() + ", Navn: " + c.getName() + ", Gade: " + c.getStreet() + ", PostNummer: " + c.getPostCode() + ", By: " + c.getCity() + ", Tlf nr: " + c.getPhoneNr());
+				if(c instanceof Private){
+					System.out.println("ID: " + c.getId() + "\tNavn: " + c.getName() + "\tGade: " + c.getStreet() + "\tPostNummer: " + c.getPostCode() + "\tBy: " + c.getCity() + "\tTlf nr: " + c.getPhoneNr());
+				}else if(c instanceof Business){
+					Business b = (Business) c; 
+					System.out.println("ID: " + b.getId() + "\tVirksomhed: " + b.getCompany() + "\tCVR-nr: " + b.getCvrNr() + "\tPostNummer: " + b.getPostCode() + "\tBy: " + b.getCity() + "\tKontakt: " + b.getName() + "\tTlf. nr.: " + b.getPhoneNr());
+				}
 			}
 			boolean recheck = false;
 			while(!recheck){
+				int i = 0;
 				if(customers.size() > 1){
-					int id = requestInt("Indtast kunde ID for den ønskede kunde", null, false);
-					int i = 0;
-					while(returnPrivate == null && i < customers.size()){
+					int id = requestInt("Indtast ID for den ønskede kunde", null, false);
+					while(retC == null && i < customers.size()){
 						Customer c = customers.get(i); 
-						if(c instanceof Private && id == c.getId()){
-							System.out.println(c.getName() + " valgt.");
-							//updateCustomerMenu(c);
+						if(id == c.getId()){
+							if(c instanceof Business){
+								Business b = (Business) c;
+								System.out.println("Virksomhed: " + b.getCompany() + ", tlf: " + b.getPhoneNr() + " valgt.");
+							}else{
+								System.out.println("Navn: " + c.getName() + ", tlf: " + c.getPhoneNr() + " valgt.");
+							}
 							pause();
-							selectedPrivate = (Private) c;
-							returnPrivate = (Private) c;
+							selectedCustomer = c;
+							retC = c;
 							recheck = true;
 						}
+						i++;
 					}
-
-
 				} else if(customers.size() == 1){
-					if(customers.get(0) instanceof Private){
-						returnPrivate = (Private) customers.get(0);
-						selectedPrivate = returnPrivate;
-						System.out.println(returnPrivate.getName() + " valgt.");
-						//updateCustomerMenu(returnPrivate);
+						retC = customers.get(0);
+						selectedCustomer = retC;
+						if(retC instanceof Business){
+							Business b = (Business) retC;
+							System.out.println("Virksomhed: " + b.getCompany() + "Tlf: " + b.getPhoneNr() + " valgt");
+						}else{
+							System.out.println("Navn: " + retC.getName() + "Tlf: " + retC.getPhoneNr() + " valgt.");
+						}
 						recheck = true;			
-					}else{
-
-					}
 				}
 			}
 		} else{
-			System.out.println("0 Privatkunder Fundet");
+			System.out.println("0 Kunder Fundet");
 			pause();
 		}
-		return returnPrivate;
-	}
-
-	/**
-	 * findCustomerMenu
-	 * @return choice
-	 */
-	private int findCustomerMenu(){
-		int choice = 0;
-		System.out.println("\n## Menu ##");
-		System.out.println("1. Opdater kunde");
-		System.out.println("2. Fjern kunde");
-		System.out.println("3. Tilbage til kundemenu");
-		choice = requestInt("Valg ", 0, false);
-		return choice;
-	}
-
-	/**
-	 * updateCustomerMenu
-	 * @param customer
-	 */
-	public void updateCustomerMenu(Customer customer){
-		boolean exit = false;
-		while(!exit){
-			int choice = findCustomerMenu();
-			if(choice == 1){
-				updatePrivate(customer);
-			} else if(choice == 2){
-				removePerson(customer);
-				exit = true;
-			} else if(choice == 3){
-				exit = true;
-			}	
-		}		
+		return retC;
 	}
 
 	/**
@@ -346,14 +321,12 @@ public class PersonUI extends SuperUI{
 					for(Customer c : busCusts){
 						if(id == c.getId()){
 							System.out.println("ID: " + c.getId() + ", Navn: " + ((Business) c).getCompany() + "Tlf nr.: " + c.getPhoneNr() + ", CVR-nr: " + ((Business) c).getCvrNr());
-							updateCustomerMenu(c);
 							pause();
 							recheck = true;
 						}
 					}
 				} else if(busCusts.size() == 1){
 					Customer found = busCusts.get(0);				
-					updateCustomerMenu(found);
 					recheck = true;
 				}
 			}
