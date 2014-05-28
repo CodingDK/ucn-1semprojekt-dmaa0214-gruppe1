@@ -22,20 +22,27 @@ public class SaleUI extends SuperUI{
 	 */
 	public SaleUI(){
 		sCtr = new SaleCtr();
+		sCtr.createSale();
 		boolean exit = false;
 		while(!exit){
 			int choice = writeSaleMenu();
 			if(choice == 1){
 				addPartSale();
 			} else if(choice == 2){
-				createPrivate();
+				createCustomer();
 			} else if(choice == 3){
-				createBusiness();
-			} else if(choice == 4){
 				searchCustomer();
-			} else if(choice == 5){
+			} else if(choice == 4){
 				exit = finishSale();
+			} else if(choice == 5){
+				sCtr.parkSale();
+				System.out.println("Salget er blevet parkeret");
+				pause();
+				exit = true;
 			} else if(choice == 6){
+				sCtr.cancelSale();
+				System.out.println("Salget er blevet annulleret");
+				pause();
 				exit = true;
 			}
 		}
@@ -60,10 +67,10 @@ public class SaleUI extends SuperUI{
 			printPartSale();
 			System.out.println("1. Tilføj vare");
 			System.out.println("2. Opret privatkunde");
-			System.out.println("3. Opret erhvervskunde");
-			System.out.println("4. Søg kunde");
-			System.out.println("5. Udfør salg");
-			System.out.println("6. Gå tilbage");
+			System.out.println("3. Søg kunde");
+			System.out.println("4. Udfør salg");
+			System.out.println("5. Parker salg");
+			System.out.println("6. Annuller salg");
 			choice = requestInt("Valg", null, false);		
 		} catch(InputMismatchException e){
 			System.out.println("Forkert input!");
@@ -110,11 +117,10 @@ public class SaleUI extends SuperUI{
 			ret = true;
 		} catch (NullPointerException e) {
 			System.out.println("Prøv igen, " + e.getMessage());
-			pause();
 		} catch (SaleNotCreatedException e) {
 			System.out.println(e.getMessage());
-			pause();
 		}
+		pause();
 		return ret;
 	}
 
@@ -135,25 +141,13 @@ public class SaleUI extends SuperUI{
 	}
 
 	/**
-	 * createPrivate - Create a private customer.
+	 * createCustomer - Create a customer.
 	 */
-	private void createPrivate() {
+	private void createCustomer() {
 		PersonUI pUI = new PersonUI("Dry Run");
 		
 		try {
 			sCtr.setCustomer(pUI.createPrivate());
-		} catch (SaleNotCreatedException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * createBusiness - Create a business customer.
-	 */
-	private void createBusiness(){
-		PersonUI pUI = new PersonUI("Dry Run");
-		try {
-			sCtr.setCustomer(pUI.createBusiness());
 		} catch (SaleNotCreatedException e) {
 			e.printStackTrace();
 		}
