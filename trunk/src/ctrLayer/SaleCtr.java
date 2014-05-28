@@ -20,7 +20,15 @@ public class SaleCtr {
      * Constructor for controller SaleCtr.
      */
 	public SaleCtr(){
-		this.sale = new Sale();
+
+	}
+	
+	/**
+	 * Creates the initial sale object
+	 */
+	public void createSale(){
+		Sale sale = new Sale();
+		this.sale = sale;
 	}
 		
 	/**
