@@ -19,7 +19,7 @@ public class EmployeeCtr{
      * Constructor for controller EmployeeCtr.
      */
     public EmployeeCtr(){
-    	eCont = eCont.getInstance();
+    	eCont = EmployeeCont.getInstance();
     }
 	
     /**

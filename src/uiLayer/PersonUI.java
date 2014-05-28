@@ -95,6 +95,7 @@ public class PersonUI extends SuperUI{
 				System.out.println("--------------------------");
 				System.out.println(" 14. Gå tilbage");
 			System.out.print("\nValg: ");
+			@SuppressWarnings("resource")
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
@@ -266,6 +267,7 @@ public class PersonUI extends SuperUI{
 			System.out.println("1. Opdater kunde");
 			System.out.println("2. Fjern kunde");
 			System.out.println("3. Tilbage til kundemenu");
+			@SuppressWarnings("resource")
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
 		} catch(InputMismatchException e){
@@ -401,6 +403,7 @@ public class PersonUI extends SuperUI{
 	public void findEmployee(){	
 		System.out.println("\n## Søg medarbejder ##");
 		System.out.print("Indtast medarbejder navn eller medarbejder nr: ");
+		@SuppressWarnings("resource")
 		Scanner k = new Scanner(System.in);
 		String nameOrEmpNr = k.nextLine();
 

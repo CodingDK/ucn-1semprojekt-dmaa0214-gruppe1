@@ -34,11 +34,9 @@ public class SaleTests {
 		iCtr.createStorage("Test1");
 		iCtr.createStorage("Test2");
 		Storage s1 = iCtr.findStorage("Test1");
-		Storage s2 = iCtr.findStorage("Test2");
 		cCtr.createCategory("Søm");
 		cCtr.createCategory("Hammer");
 		Category c1 = cCtr.findCategory("Søm");
-		Category c2 = cCtr.findCategory("Hammer");
 		
 		iCtr.createItem("S Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
 		iCtr.createItem("S t. Sømpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
@@ -57,11 +55,9 @@ public class SaleTests {
 		iCtr.createStorage("Test1");
 		iCtr.createStorage("Test2");
 		Storage s1 = iCtr.findStorage("Test1");
-		Storage s2 = iCtr.findStorage("Test2");
 		cCtr.createCategory("Søm");
 		cCtr.createCategory("Hammer");
 		Category c1 = cCtr.findCategory("Søm");
-		Category c2 = cCtr.findCategory("Hammer");
 		
 		iCtr.createItem("S Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
 		iCtr.createItem("S t. Sømpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
@@ -95,11 +91,9 @@ public class SaleTests {
 		iCtr.createStorage("Test1");
 		iCtr.createStorage("Test2");
 		Storage s1 = iCtr.findStorage("Test1");
-		Storage s2 = iCtr.findStorage("Test2");
 		cCtr.createCategory("Søm");
 		cCtr.createCategory("Hammer");
 		Category c1 = cCtr.findCategory("Søm");
-		Category c2 = cCtr.findCategory("Hammer");
 		
 		iCtr.createItem("Ss Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
 		iCtr.createItem("S t. Sømpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
