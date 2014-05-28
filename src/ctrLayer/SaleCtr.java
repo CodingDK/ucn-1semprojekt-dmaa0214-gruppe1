@@ -20,24 +20,24 @@ public class SaleCtr {
      * Constructor for controller SaleCtr.
      */
 	public SaleCtr(){
-		this.sale = null;
-	}
-	
-	/**
-	 * createSale - Create a new sale.
-	 * @return Sale the new sale.
-	 */
-	public Sale createSale(){
 		this.sale = new Sale();
-		return this.sale;
 	}
-	
-	
-	// Nick
+		
+	/**
+	 * getSale - Get the sale for the controller.
+	 * @return Sale The Sale object.
+	 */
 	public Sale getSale(){
 		return this.sale;
 	}
 	
+	/**
+	 * addItem - Add an item to the sale.
+	 * @param item The item to add.
+	 * @param amount the amount of the item to add.
+	 * @throws NotEnoughItemsException if amount and reserved in storage is under 0. 
+	 * @throws NullPointerException if item object not created.
+	 */
 	public void addItem(Item item, int amount) throws NullPointerException, NotEnoughItemsException{
 		ItemCtr iCtr = new ItemCtr();
 		
@@ -56,60 +56,6 @@ public class SaleCtr {
 			
 		} else {
 			throw new NullPointerException("Varen blev ikke fundet.");
-		}
-	}
-	
-	/**
-	 * addItem - Add an item to the sale.
-	 * @param id The id of the item to add.
-	 * @param amount the amount of the item to add.
-	 * @throws NotEnoughItemsException if amount and reserved in storage is under 0. 
-	 * @throws NullPointerException if item object not created.
-	 */
-	public void addItem(int id, int amount) throws NotEnoughItemsException, NullPointerException{
-		ItemCtr iCtr = new ItemCtr();
-		Item item = iCtr.getItem(id);
-		
-		if(item != null){
-			int availableAmount = iCtr.getAvailableAmount(item);
-			if(availableAmount-amount < 0){
-				throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige p� lageret.");
-			} else {
-			iCtr.addReserved(item, amount);
-			sale.addPartSale(item, amount);
-			}
-		} else {
-			throw new NullPointerException("Varenr.: " + id + " blev ikke fundet.");
-		}
-		
-	}
-	
-	/**
-	 * addItem - Add an item to the sale.
-	 * @param name The name of the item to add.
-	 * @param amount the amount of the item to add.
-	 * @throws NotEnoughItemsException if amount is under 0. 
-	 * @throws NullPointerException if item object not created.
-	 * @throws SaleNotCreatedException if sale object not created.
-	 */
-	public void addItem(String name, int amount) throws NotEnoughItemsException, NullPointerException, SaleNotCreatedException{
-		if(sale != null){
-			ItemCtr iCtr = new ItemCtr();
-			Item item = iCtr.getItem(name);
-
-			if(item != null){
-				int availableAmount = iCtr.getAvailableAmount(item);
-				if(availableAmount-amount < 0){
-					throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige p� lageret.");
-				} else {
-					iCtr.addReserved(item, amount);
-					sale.addPartSale(item, amount);
-				}
-			} else {
-				throw new NullPointerException("Varenavn: " + name + " blev ikke fundet.");
-			}
-		} else {
-			throw new SaleNotCreatedException("Der er ikke oprettet et salg");
 		}
 	}
 	
