@@ -56,17 +56,24 @@ public class PersonUI extends SuperUI{
 	private int writeMenu(){
 		int choice = 0;
 		try{
+			String pB = selectedBusiness != null ? " (" + selectedBusiness.getCompany() + ")" : ""; 
+			String pP = selectedPrivate != null ? " (" + selectedPrivate.getName() + ")" : "";  
+
 			System.out.println("\n## Kunde menu ##");
 			System.out.println(" 1. Søg privatkunde");
 			System.out.println(" 2. Opret privat kunde");
-			System.out.println(" 3. Søg erhvervskunde");
-			System.out.println(" 4. Opret erhvervskunde");
-			System.out.println(" 5. Opret sælger");
-			System.out.println(" 6. Opret administrator");
-			System.out.println(" 7. Søg medarbejder (sælger eller administrator)");
-			System.out.println(" 8. Opdater sælger");
-			System.out.println(" 9. Opdater administrator");
-			System.out.println(" 10. Tilbage");
+			System.out.println(" 3. Opdater privatkunde" + pP); 
+			System.out.println(" 4. Slet privatkunde" + pP); 
+			System.out.println(" 5. Søg erhvervskunde");
+			System.out.println(" 6. Opret erhvervskunde");
+			System.out.println(" 7. Opdater erhvervskunde" + pB);
+			System.out.println(" 8. Slet erhvervskunde" + pB);
+			System.out.println(" 9. Opret sælger");
+			System.out.println(" 10. Opret administrator");
+			System.out.println(" 11. Søg medarbejder (sælger eller administrator)");
+			System.out.println(" 12. Opdater sælger");
+			System.out.println(" 13. Opdater administrator");
+			System.out.println(" 14. Tilbage");
 			System.out.print("\nValg: ");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
@@ -191,7 +198,6 @@ public class PersonUI extends SuperUI{
 			for(Customer c : customers){
 				System.out.println("ID: " + c.getId() + ", Navn: " + c.getName() + ", Gade: " + c.getStreet() + ", PostNummer: " + c.getPostCode() + ", By: " + c.getCity() + ", Tlf nr: " + c.getPhoneNr());
 			}
-
 			boolean recheck = false;
 			while(!recheck){
 				if(customers.size() > 1){
