@@ -236,6 +236,7 @@ public class PersonUI extends SuperUI{
 				updatePrivate(customer);
 			} else if(choice == 2){
 				removePerson(customer);
+				exit = true;
 			} else if(choice == 3){
 				exit = true;
 			}	
@@ -397,7 +398,8 @@ public class PersonUI extends SuperUI{
 			} else if(choice == 1 && admin){
 				updateAdministrator(employee);
 			} else if(choice == 2){
-				removeEmploye(employee);
+				removeEmployee(employee);
+				exit = true;
 			} else if(choice == 3){
 				exit = true;
 			}
@@ -482,7 +484,7 @@ public class PersonUI extends SuperUI{
 	 * removeEmployee - Used to remove an employee from the Employee object
 	 * @param Employee
 	 */
-	private void removeEmploye(Employee employee) {
+	private void removeEmployee(Employee employee) {
 		if(confirm("Ønsker du at slette: ") ){
 			EmployeeCtr employeeCtr = new EmployeeCtr();
 			employeeCtr.removeEmployee(employee);
