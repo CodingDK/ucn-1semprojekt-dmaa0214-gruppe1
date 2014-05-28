@@ -82,7 +82,7 @@ public class CreateItemUI extends SuperUI {
 			while(reCheck){
 				Item i = iCtr.getItem(name);
 				if(iCtr.getItem(name) != null && i.getStorage() == selectedStorage){
-					if(confirm(i.getName() + " eksistere allerede p� " + i.getStorage().getName() + ", vil du v�lge et andet lager?")){
+					if(confirm(i.getName() + " eksistere allerede på " + i.getStorage().getName() + ", vil du vælge et andet lager?")){
 						ItemUI iUi = new ItemUI("DryRun");
 						selectedStorage = iUi.pickStorage();
 					}else{
@@ -96,10 +96,10 @@ public class CreateItemUI extends SuperUI {
 		}
 		int amount = requestInt("Antal", null, false);
 		double salePrice = requestDouble("Salgs pris", false);
-		double purchasePrice = requestDouble("K�bs pris", false);
+		double purchasePrice = requestDouble("Købs pris", false);
 		double bulkSalePrice = requestDouble("Bulk pris", false);
 		int bulk = requestInt("Bulk", null, false);
-		String location = requestString("Placering", 4, null, false);
+		String location = requestString("Placering", null, null, false);
 		int min = requestInt("Minimum Lagerbeholdning", null, false);
 		int max = requestInt("Maksimal Lagerbeholdning", min, false);
 		iCtr.createItem(name, amount, 0, salePrice, purchasePrice, bulkSalePrice, bulk, location, selectedStorage, max, min, selectedCategory);
