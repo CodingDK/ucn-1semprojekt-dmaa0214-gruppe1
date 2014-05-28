@@ -1,5 +1,6 @@
 package uiLayer;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -11,12 +12,13 @@ import exceptionLayer.SaleNotCreatedException;
 
 public class SaleUI extends SuperUI{
 	private SaleCtr sCtr;
+	private Sale sale;
 	private Customer customer;
 		
 	public SaleUI(){
 		customer = null;
-		
 		sCtr = new SaleCtr();
+		sale = sCtr.createSale();
 		sCtr.createSale();
 		boolean exit = false;
 		while(!exit){
@@ -41,9 +43,14 @@ public class SaleUI extends SuperUI{
 		int choice = 0;
 		try{
 			System.out.println("## Opret salg ##");
+			String ret = "";
 			if(customer != null){
-				System.out.println("¤¤ Kunde valgt: " + customer.toString() + " ¤¤");
+				ret = customer.toString();
+			} else {
+				ret = "Ingen valgt";
 			}
+			System.out.println("¤¤ Kunde: " + ret + " ¤¤");
+			printPartSale();
 			System.out.println("1. Tilføj vare");
 			System.out.println("2. Opret privatkunde");
 			System.out.println("3. Opret erhvervskunde");
@@ -57,6 +64,24 @@ public class SaleUI extends SuperUI{
 			System.out.println("Forkert input!");
 		}
 		return choice;
+	}
+	
+	private void printPartSale(){
+		ArrayList<PartSale> partsales = sale.getPartSales();
+		
+		System.out.println("¤¤ Valgt vare " + partsales.size() + " ¤¤");
+		double total = 0;
+		for(PartSale ps : partsales){
+			String line = "";
+			Item item = ps.getItem();
+			double price = item.getSalePrice()*ps.getAmount();
+			line = ps.getAmount() + " " + item.getName() + " ";
+			line += price + ",- ";
+			total += price;
+			System.out.println(line);
+		}
+		System.out.println("Total: ");
+		System.out.println("¤¤ ¤¤ ¤¤ ¤¤");
 	}
 		
 	private boolean finishSale() {
@@ -86,12 +111,18 @@ public class SaleUI extends SuperUI{
 
 	private void createPrivate() {
 		PersonUI pUI = new PersonUI("Dry Run");
-		customer = pUI.createPrivate();
+		customer = null;
+		while(customer == null){
+			customer = pUI.createPrivate();
+		}
 	}
 	
 	private void createBusiness(){
 		PersonUI pUI = new PersonUI("Dry Run");
-		customer = pUI.createBusiness();
+		customer = null;
+		while(customer == null){
+			customer = pUI.createBusiness();
+		}
 	}
 
 	private void addPartSale() {
