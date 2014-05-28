@@ -25,9 +25,10 @@ public class SaleCtr {
 	
 	/**
 	 * createSale - Create a new sale.
+	 * @return Sale the new sale.
 	 */
-	public void createSale(){
-		this.sale = new Sale();
+	public Sale createSale(){
+		return this.sale = new Sale();
 	}
 	
 	public void addItem(Item item, int amount) throws NullPointerException, NotEnoughItemsException{
