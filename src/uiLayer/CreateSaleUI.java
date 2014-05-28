@@ -44,10 +44,10 @@ public class CreateSaleUI extends SuperUI{
 			} else if(choice == 4){
 				exit = finishSale();
 			} else if(choice == 5){
-				sCtr.parkSale();
-				System.out.println("Salget er blevet parkeret");
-				pause();
-				exit = true;
+				boolean r = parkSale();
+				if(r){
+					exit = true;
+				}
 			} else if(choice == 6){
 				sCtr.cancelSale();
 				System.out.println("Salget er blevet annulleret");
@@ -55,6 +55,22 @@ public class CreateSaleUI extends SuperUI{
 				exit = true;
 			}
 		}
+	}
+
+	private boolean parkSale() {
+		boolean park = sCtr.parkSale();
+		boolean ret = false;
+		if(park){
+			System.out.println("Salget er blevet parkeret");
+			pause();
+			ret = true;
+		}else{
+			System.out.println("Salget kan ikke parkeres uden en Kunde tilknyttet");
+			pause();
+		}
+		
+		return ret;
+		
 	}
 
 	/**

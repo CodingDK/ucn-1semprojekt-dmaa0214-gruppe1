@@ -29,7 +29,7 @@ public class SaleUI extends SuperUI{
 			} else if(choice == 2){
 				Sale s = pickParkedSale();
 				if(s != null){
-					new createSaleUI(s);
+					new CreateSaleUI(s);
 				}else{
 					System.out.println("Genoptag Parkeret Salg kunne ikke startes");
 				}
@@ -40,6 +40,7 @@ public class SaleUI extends SuperUI{
 			}
 		}
 	}
+	
 
 	private void printSales() {
 		System.out.println("## Print Alle Salg ##");

@@ -137,8 +137,15 @@ public class Sale {
 	 */
 	@Override
 	public String toString() {
-		return "#" + id + " - Total Pris: " + totalPrice + ", Parkeret: " + done
-				+ ", Dato: " + getDateToString();
+		String retString = "";
+		if(customer instanceof Business){
+			retString = "#" + id + " Kunde: " + customer.getName() + ", Total Pris: " + totalPrice + ", Parkeret: " + done
+					+ ", Dato: " + getDateToString();
+		}else if(customer instanceof Private){
+			retString = "#" + id + " Kunde: " + ((Business) customer).getCompany() + ", Total Pris: " + totalPrice + ", Parkeret: " + done
+					+ ", Dato: " + getDateToString();
+		}
+		return retString;
 	}
 	
 	
