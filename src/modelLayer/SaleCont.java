@@ -40,4 +40,8 @@ public class SaleCont {
 	public ArrayList<Sale> getAll() {
 		return sales;
 	}
+
+	public void removeSale(Sale sale) {
+		sales.remove(sale);
+	}
 }

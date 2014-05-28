@@ -27,6 +27,7 @@ public class CreateSaleUI extends SuperUI{
 	}
 	
 	public CreateSaleUI(Sale sale){
+		sCtr = new SaleCtr();
 		sCtr.loadSale(sale);
 		writeMenu();
 	}
