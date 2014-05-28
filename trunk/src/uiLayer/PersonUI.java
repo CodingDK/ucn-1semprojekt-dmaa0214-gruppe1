@@ -7,6 +7,7 @@ import java.util.Scanner;
 import personLayer.Business;
 import personLayer.Customer;
 import personLayer.Employee;
+import personLayer.Private;
 import ctrLayer.CustomerCtr;
 import ctrLayer.EmployeeCtr;
 
@@ -74,26 +75,28 @@ public class PersonUI extends SuperUI{
 	/**
 	 * createPrivate - Create privat customer
 	 */
-	public void createPrivate() {
+	public Private createPrivate() {
+		Private returnPrivate = null;
+
 		try{
 			System.out.println("\n## Opret privat kunde ##");
-			
-		 	String name 		= requestString("Navn", null, null, false);
-		 	String street 		= requestString("Gade", null, null, false);
-		 	String postCode 	= requestString("Postnummer", null, null, false);
-		 	String city 		= requestString("By", null, null, false);
-		 	String phoneNr 		= requestString("Telefon nr", null, null, false);
-		 	String email 		= requestString("E-mail", null, null, false);
-		 	String cprNr 		= requestString("CPR nr", null, null, false);
-		 	String pictureId 	= requestString("Billede ID", null, null, false);
-			
+
+			String name 		= requestString("Navn", null, null, false);
+			String street 		= requestString("Gade", null, null, false);
+			String postCode 	= requestString("Postnummer", null, null, false);
+			String city 		= requestString("By", null, null, false);
+			String phoneNr 		= requestString("Telefon nr", null, null, false);
+			String email 		= requestString("E-mail", null, null, false);
+			String cprNr 		= requestString("CPR nr", null, null, false);
+			String pictureId 	= requestString("Billede ID", null, null, false);
+
 			CustomerCtr customerCtr = new CustomerCtr();
-			customerCtr.createPrivateCustomer(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
-		
+			returnPrivate = customerCtr.createPrivateCustomer(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
+
 		} catch(InputMismatchException e){
-			System.out.println("Forket input!");
-			return;
-		}			
+			System.out.println("Forket input!");	
+		}	
+		return returnPrivate;
 	}
 
 	/**
