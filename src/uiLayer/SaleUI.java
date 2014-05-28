@@ -96,7 +96,6 @@ public class SaleUI extends SuperUI{
 			System.out.println(e.getMessage());
 			pause();
 		}
-		Sale sale = sCtr.getSale();
 		return ret;
 	}
 
