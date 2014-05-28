@@ -24,7 +24,7 @@ public class SaleUI extends SuperUI{
 		while(!exit){
 			int choice = writeSaleMenu();
 			if(choice == 1){
-				new createSaleUI();
+				new CreateSaleUI();
 			} else if(choice == 2){
 				pickParkedSale();
 			} else if(choice == 3){
