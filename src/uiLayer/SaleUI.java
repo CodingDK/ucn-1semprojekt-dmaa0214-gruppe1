@@ -19,7 +19,6 @@ public class SaleUI extends SuperUI{
 		customer = null;
 		sCtr = new SaleCtr();
 		sale = sCtr.createSale();
-		sCtr.createSale();
 		boolean exit = false;
 		while(!exit){
 			int choice = writeSaleMenu();
@@ -81,8 +80,9 @@ public class SaleUI extends SuperUI{
 			System.out.println(line);
 		}
 		double moms = total*0.25;
+		total += moms;
 		System.out.println("Moms: " + moms + ",-");
-		System.out.println("Total: " + total+moms + ",-");
+		System.out.println("Total: " + total + ",-");
 		System.out.println("¤¤ ¤¤ ¤¤ ¤¤");
 	}
 		
