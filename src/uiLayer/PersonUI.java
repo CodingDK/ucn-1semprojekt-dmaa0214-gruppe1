@@ -123,27 +123,6 @@ public class PersonUI extends SuperUI{
 		return retC;
 	}
 
-	/**
-	 * createBusiness - Create business customer
-	 */
-	public Business createBusiness() {
-		Business returnBusiness = null;
-
-		System.out.println("\n## Opret erhvervs kunde ##");			
-		String company 	= requestString("Virksomhedsnavn", null, null, false);
-		String street	= requestString("Gade", null, null, false);
-		String postCode = requestString("Postnummer", null, null, false);
-		String city 	= requestString("By", null, null, false);
-		String phoneNr 	= requestString("Telefon nr", null, null, false);
-		String email 	= requestString("E-mail", null, null, false);
-		String cvrNr 	= requestString("CVR nr", null, null, false);
-		String name 	= requestString("Kontakt person", null, null, false);
-
-		CustomerCtr customerCtr = new CustomerCtr();
-		returnBusiness = customerCtr.createBusinessCustomer(name, phoneNr, street, email, city, postCode, company, cvrNr);
-
-		return returnBusiness;
-	}
 
 	/**
 	 * createSeller - Create a seller
@@ -284,46 +263,6 @@ public class PersonUI extends SuperUI{
 		}
 	}
 
-	/**
-	 * findBusiness - Search for a business customer
-	 */
-	public void findBusiness(){
-
-		System.out.println("\n## Søg erhvervskunde ##");
-		String comp = requestString("Indtast del af virksomhedsnavnet", 1, null, false);
-		CustomerCtr cCtr = new CustomerCtr();
-		ArrayList<Customer> busCusts = cCtr.searchBusiness(comp);
-		if(busCusts.size() > 0){
-			String printComp = (busCusts.size() == 1) ? " virksomhed" : " virksomheder"; 
-			System.out.println(busCusts.size() + printComp + " fundet");
-			for(Customer c : busCusts){
-				if(c instanceof Business){
-					System.out.println("ID: " + c.getId() + ", Navn: " + ((Business) c).getCompany() + ", Tlf nr.: " + c.getPhoneNr() + ", CVR-nr: " + ((Business) c).getCvrNr());
-				} 
-			}
-
-			boolean recheck = false;
-			while(!recheck){
-				if(busCusts.size() > 1){
-					int id = requestInt("Indtast virksomhedens ID", null, false);
-					for(Customer c : busCusts){
-						if(id == c.getId()){
-							System.out.println("ID: " + c.getId() + ", Navn: " + ((Business) c).getCompany() + "Tlf nr.: " + c.getPhoneNr() + ", CVR-nr: " + ((Business) c).getCvrNr());
-							pause();
-							recheck = true;
-						}
-					}
-				} else if(busCusts.size() == 1){
-					Customer found = busCusts.get(0);				
-					recheck = true;
-				}
-			}
-		}else{
-			System.out.println("0 virksomheder fundet");
-			pause();
-			return;
-		}
-	}
 
 
 	public Employee findEmployee(){	
