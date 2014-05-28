@@ -165,7 +165,7 @@ public class ItemUI extends SuperUI{
 			
 			
 			
-			System.out.println(" 16. Tilbage");
+			System.out.println(" 16. Gå tilbage");
 			System.out.print("Valg:");
 			Scanner k = new Scanner(System.in);
 			choice = k.nextInt();
