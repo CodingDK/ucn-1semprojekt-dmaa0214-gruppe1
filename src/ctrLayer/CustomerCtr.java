@@ -139,16 +139,16 @@ public class CustomerCtr {
 	
 	/**
 	 * searchCustomer
-	 * @param partName
+	 * @param partNamePhone
 	 * @return Customer
 	 */
-	public ArrayList<Customer> searchCustomer(String partName){
+	public ArrayList<Customer> searchCustomer(String partNamePhone){
 		ArrayList<Customer> foundCustomers = new ArrayList<Customer>();
 		CustomerCont customerCont = CustomerCont.getInstance();
 		ArrayList<Customer> cust = customerCont.getCustomers();
 		if(cust != null)
 			for(Customer c : cust){
-				if(c.getName().toLowerCase().contains(partName.toLowerCase()) ){
+				if((c.getName().toLowerCase().contains(partNamePhone.toLowerCase())) || (c.getPhoneNr().contains(partNamePhone))){
 					foundCustomers.add(c);			
 				}	
 			}
