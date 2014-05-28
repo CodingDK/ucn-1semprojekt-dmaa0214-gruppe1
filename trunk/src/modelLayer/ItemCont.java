@@ -96,6 +96,10 @@ public class ItemCont {
 		items.remove(i);
 	}
 	
+	/**
+	 * removeInstance - Remove an instance of the item container.
+	 * @param c The category object instance to remove
+	 */
 	public static void removeInstance(Category c){
 		instance.remove(getInstance(c));
 	}
