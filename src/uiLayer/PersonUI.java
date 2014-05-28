@@ -79,27 +79,48 @@ public class PersonUI extends SuperUI{
 		return choice;
 	}
 
-
+	
+	
 	/**
-	 * createPrivate - Create privat customer
+	 * createPrivate - Create customer
+	 * @return retC Returns a customer object
 	 */
-	public Private createPrivate() {
-		Private returnPrivate = null;
-		System.out.println("\n## Opret privat kunde ##");
+	public Customer createCustomer() {
+		Customer retC = null;
+		boolean exit = false;
+		CustomerCtr cCtr = new CustomerCtr();
 
-		String name 		= requestString("Navn", null, null, false);
-		String street 		= requestString("Gade", null, null, false);
-		String postCode 	= requestString("Postnummer", null, null, false);
-		String city 		= requestString("By", null, null, false);
-		String phoneNr 		= requestString("Telefon nr", null, null, false);
-		String email 		= requestString("E-mail", null, null, false);
-		String cprNr 		= requestString("CPR nr", null, null, false);
-		String pictureId 	= requestString("Billede ID", null, null, false);
+		while(!exit){
+			System.out.println("\n## Opret kunde ##");
+			System.out.println("1. Erhvervskunde");
+			System.out.println("2. Privatkunde");
+			int choice = requestInt("Valg", null, false);
 
-		CustomerCtr customerCtr = new CustomerCtr();
-		returnPrivate = customerCtr.createPrivateCustomer(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
-
-		return returnPrivate;
+			if(choice == 1 || choice == 2){
+				String company = null;
+				String cvrNr = null;
+				
+				if(choice == 1){
+					company 		= requestString("Virksomheds navn", null, null, false);
+					cvrNr 			= requestString("CVR-nr", null, null, false);
+				}
+				String name 		= requestString("Navn", null, null, false);
+				String street 		= requestString("Gade", null, null, false);
+				String postCode 	= requestString("Postnummer", null, null, false);
+				String city 		= requestString("By", null, null, false);
+				String phoneNr 		= requestString("Telefon nr", null, null, false);
+				String email 		= requestString("E-mail", null, null, false);
+				if(choice == 2){
+					String cprNr 		= requestString("CPR nr", null, null, false);
+					String pictureId 	= requestString("Billede ID", null, null, false);
+					retC = cCtr.createPrivateCustomer(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
+					exit = true;
+				}
+				cCtr.createBusinessCustomer(name, phoneNr, street, email, city, postCode, company, cvrNr);
+				exit = true;
+			}
+		}
+		return retC;
 	}
 
 	/**
@@ -211,7 +232,7 @@ public class PersonUI extends SuperUI{
 	 * updatePrivate - Udates a privat customer
 	 * @param customer
 	 */
-	public void updatePrivate(Customer customer) {
+	public void updateCustomer(Customer customer) {
 
 		System.out.println("\n## Opdater privat kunde ##");
 		System.out.println("Skriv ny info ellers tryk enter");
