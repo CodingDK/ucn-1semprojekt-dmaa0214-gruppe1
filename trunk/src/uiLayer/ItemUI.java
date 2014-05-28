@@ -106,38 +106,22 @@ public class ItemUI extends SuperUI{
 				if(admin){
 					System.out.println("--------------------------");
 					System.out.println(" 1. Opret Kategori");
-					
-					if(selectedCategory != null){
-						System.out.println(" 2. Opdater Kategori (" + selectedCategory.getName() + ")");
-					}else{
-						System.out.println(" 2. Opdater Kategori");
-					}
-					if(selectedCategory != null){
-						System.out.println(" 3. Fjern Kategori (" + selectedCategory.getName() + ")");
-					}else{
-						System.out.println(" 3. Fjern Kategori");
-					}
-				System.out.println(" 4. Vælg Kategori");
+					String category = (selectedCategory != null) ? " (" + selectedCategory.getName() + ")" : "";
+					System.out.println(" 2. Opdater Kategori" + category);
+					System.out.println(" 3. Fjern Kategori" + category);
+					System.out.println(" 4. Vælg Kategori");
 				}
-				
 				System.out.println(" 5. Søg Kategori");
 				System.out.println("--------------------------");
 			}
 			
-			{
 			
+			{
 				if(admin){
 					System.out.println(" 6. Opret Lager");
-					if(selectedStorage != null){
-						System.out.println(" 7. Opdater Lager (" + selectedStorage.getName() + ")");
-					}else{
-						System.out.println(" 7. Opdater Lager");
-					}
-					if(selectedStorage != null){
-						System.out.println(" 8. Fjern Lager (" + selectedStorage.getName() + ")");
-					}else{
-						System.out.println(" 8. Fjern Lager");
-					}
+					String storage = (selectedStorage != null) ? " (" + selectedStorage.getName() + ")" : "";
+					System.out.println(" 7. Opdater Lager" + storage);
+					System.out.println(" 8. Fjern Lager" + storage);
 					System.out.println(" 9. Vælg Lager");
 				}
 				System.out.println(" 10. Søg Lager");
@@ -147,16 +131,9 @@ public class ItemUI extends SuperUI{
 			{
 				if(admin){
 					System.out.println(" 11. Opret Vare");
-					if(selectedItem != null){
-						System.out.println(" 12. Opdater Vare (" + selectedItem.getName() + ")");
-					}else{
-						System.out.println(" 12. Opdater Vare");
-					}
-					if(selectedItem != null){
-						System.out.println(" 13. Fjern Vare (" + selectedItem.getName() + ")");
-					}else{
-						System.out.println(" 13. Fjern Vare");
-					}
+					String item = (selectedItem != null) ? " (" + selectedItem.getName() + ")" : "";
+					System.out.println(" 12. Opdater Vare" + item);
+					System.out.println(" 13. Fjern Vare" + item);
 					System.out.println(" 14. Vælg Vare");
 				}
 				System.out.println(" 15. Søg Vare");
