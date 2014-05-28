@@ -9,9 +9,17 @@ import ctrLayer.SaleCtr;
 import exceptionLayer.NotEnoughItemsException;
 import exceptionLayer.SaleNotCreatedException;
 
+/**
+ * User interface to creation of a sale.
+ * @author Group 1
+ * @version 0.1                 
+ */
 public class SaleUI extends SuperUI{
 	private SaleCtr sCtr;
-		
+	
+	/**
+	 * Constructor for the SaleUI.
+	 */
 	public SaleUI(){
 		sCtr = new SaleCtr();
 		boolean exit = false;
@@ -33,6 +41,10 @@ public class SaleUI extends SuperUI{
 		}
 	}
 
+	/**
+	 * writeSaleMenu - Write the sale menu and get a choice.
+	 * @return The choice by the user.
+	 */
 	private int writeSaleMenu(){
 		int choice = 0;
 		try{
@@ -59,6 +71,9 @@ public class SaleUI extends SuperUI{
 		return choice;
 	}
 	
+	/**
+	 * printPartSale - Print the partsales of a sale.
+	 */
 	private void printPartSale(){
 		Sale sale = sCtr.getSale();
 		ArrayList<PartSale> partsales = sale.getPartSales();
@@ -81,7 +96,11 @@ public class SaleUI extends SuperUI{
 		}
 		System.out.println("## ## ## ## ##");
 	}
-		
+	
+	/**
+	 * finishSale - Finish a sale and add an employee to the sale.
+	 * @return true if sale is created.
+	 */
 	private boolean finishSale() {
 		String employeeNr = requestString("Indtast medarbejdernr.", null, null, false);
 		boolean ret = false;
@@ -99,6 +118,9 @@ public class SaleUI extends SuperUI{
 		return ret;
 	}
 
+	/**
+	 * searchCustomer - Search for a Customer
+	 */
 	private void searchCustomer() {
 		PersonUI pUI = new PersonUI("Dry Run");
 		Customer c = null;
@@ -112,6 +134,9 @@ public class SaleUI extends SuperUI{
 		
 	}
 
+	/**
+	 * createPrivate - Create a private customer.
+	 */
 	private void createPrivate() {
 		PersonUI pUI = new PersonUI("Dry Run");
 		
@@ -122,6 +147,9 @@ public class SaleUI extends SuperUI{
 		}
 	}
 	
+	/**
+	 * createBusiness - Create a business customer.
+	 */
 	private void createBusiness(){
 		PersonUI pUI = new PersonUI("Dry Run");
 		try {
@@ -131,6 +159,9 @@ public class SaleUI extends SuperUI{
 		}
 	}
 
+	/**
+	 * addPartSale - add an item and amount to the sale.
+	 */
 	private void addPartSale() {
 		ItemUI iUi = new ItemUI("Dry Run");
 		Item i = null;
