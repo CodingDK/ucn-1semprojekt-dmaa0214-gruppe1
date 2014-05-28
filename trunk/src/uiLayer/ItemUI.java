@@ -24,69 +24,69 @@ public class ItemUI extends SuperUI{
 		while(!exit){
 			int choice = writeMenu();
 			if(admin){ // Admin adgang
-				if(choice == 1){ // Opret Kategori
+				if(choice == 1){ 
 					createCategory();
-				} else if(choice == 2){ // Opdater
+				} else if(choice == 2){ 
 					if(selectedCategory != null){
 						updateCategory();
 					}else{
 						selectedCategory = pickCategory();
 						updateCategory();
 					}
-				} else if(choice == 3){ // Fjern
+				} else if(choice == 3){ 
 					if(selectedCategory != null){
 						removeCategory();
 					}else{
 						selectedCategory = pickCategory();
 						removeCategory();
 					}
-				} else if(choice == 4){ // Vælg
+				} else if(choice == 4){ 
 					selectedCategory = pickCategory();
-				} else if(choice == 6){ // Opret Lager
+				} else if(choice == 6){
 					createStorage();
-				} else if(choice == 7){ // Opdater
+				} else if(choice == 7){ 
 					if(selectedStorage != null){
 						updateStorage();
 					}else{
 						selectedStorage = pickStorage();
 						updateStorage();
 					}
-				} else if(choice == 8){ // Fjern
+				} else if(choice == 8){
 					if(selectedStorage != null){
 						removeStorage();
 					}else{
 						selectedStorage = pickStorage();
 						removeStorage();
 					}
-				} else if(choice == 9){ // Vælg
+				} else if(choice == 9){
 					selectedStorage = pickStorage();
-				}  else if(choice == 11){ // Opret Vare
+				}  else if(choice == 11){
 					new CreateItemUI(selectedCategory, selectedStorage);
-				} else if(choice == 12){ // Opdater
+				} else if(choice == 12){
 					if(selectedItem != null){
 						updateItem();
 					}else{
 						pickItem();
 						updateItem();
 					}
-				} else if(choice == 13){ // Fjern
+				} else if(choice == 13){
 					if(selectedItem != null){
 						removeItem();
 					}else{
 						pickItem();
 						removeItem();
 					}
-				} else if(choice == 14){ // Vælg
+				} else if(choice == 14){
 					selectedItem = pickItem();
 				}  
 			}
 			
 			{ // Seller + Admin adgang
-				if(choice == 5){ // Søg
+				if(choice == 5){
 					searchCategory();
-				}else if(choice == 10){ // Søg
+				}else if(choice == 10){
 					searchStorage();
-				}else if(choice == 15){ // Søg
+				}else if(choice == 15){
 					searchItem();
 				}else if(choice == 16){
 					exit = true;
@@ -100,7 +100,6 @@ public class ItemUI extends SuperUI{
 		int choice = 0;
 		try{
 			System.out.println("## Item menu ##");
-			
 			{
 				if(admin){
 					System.out.println("--------------------------");
@@ -113,7 +112,6 @@ public class ItemUI extends SuperUI{
 				System.out.println(" 5. Søg Kategori");
 				System.out.println("--------------------------");
 			}
-			
 			
 			{
 				if(admin){
@@ -138,9 +136,6 @@ public class ItemUI extends SuperUI{
 				System.out.println(" 15. Søg Vare");
 				System.out.println("--------------------------");
 			}
-			
-			
-			
 			System.out.println(" 16. Gå tilbage");
 			choice = requestInt("Valg", null, false);
 		} catch(InputMismatchException e){
@@ -251,6 +246,7 @@ public class ItemUI extends SuperUI{
 			String categoryName = requestString("Kategori navn", 1, null, false);
 			if(cCtr.findCategory(categoryName) == null){
 				cCtr.createCategory(categoryName);
+				selectedCategory = cCtr.findCategory(categoryName);
 			}else{
 				System.out.println("Denne Kategori eksistere allerede");
 				if(confirm("Vil du markere denne til senere brug?(Oprettelse af ny vare)")){
@@ -274,6 +270,7 @@ public class ItemUI extends SuperUI{
 			String storageName = requestString("Lager navn", 1, null, false);
 			if(iCtr.findStorage(storageName) == null){
 				iCtr.createStorage(storageName);
+				selectedStorage = iCtr.findStorage(storageName);
 			}else{
 				System.out.println("Dette Lager eksistere allerede");
 				if(confirm("Vil du markere denne til senere brug?(Oprettelse af ny vare)")){
@@ -476,6 +473,7 @@ public class ItemUI extends SuperUI{
 	private void removeCategory() {
 		CategoryCtr cCtr = new CategoryCtr();
 		cCtr.removeCategory(selectedCategory);
+		selectedCategory = null;
 	}
 	
 	/**
@@ -483,7 +481,13 @@ public class ItemUI extends SuperUI{
 	 */
 	private void removeStorage(){
 		ItemCtr iCtr = new ItemCtr();
-		iCtr.removeStorage(selectedStorage);
+		if(!iCtr.isPrimary(selectedStorage)){
+			iCtr.removeStorage(selectedStorage);
+		}else{
+			System.out.println("Dette lager kan ikke slettes");
+			pause();
+		}
+		selectedStorage = null;
 	}
 	
 }

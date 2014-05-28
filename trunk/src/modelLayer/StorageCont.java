@@ -9,6 +9,8 @@ import java.util.ArrayList;
  */
 public class StorageCont{
 	private static StorageCont instance;
+	private static boolean firstRun = true;
+	private static Storage primaryStorage;
 	private ArrayList<Storage> storages;
 	
 	/**
@@ -16,6 +18,12 @@ public class StorageCont{
 	 */
 	private StorageCont(){
 		storages = new ArrayList<Storage>();
+		if(firstRun){
+			primaryStorage = new Storage("Ukendt");
+			addStorage(primaryStorage);
+			firstRun = false;
+		}
+		
 	}
 	
 	/**
@@ -27,6 +35,14 @@ public class StorageCont{
 			instance = new StorageCont();
 		}
 		return instance;
+	}
+	
+	/**
+	 * getPrimary - Returns the Primary Storage
+	 * @return Storage
+	 */
+	public Storage getPrimary(){
+		return primaryStorage;
 	}
 
 	/**
