@@ -11,14 +11,13 @@ import exceptionLayer.SaleNotCreatedException;
 
 public class SaleUI extends SuperUI{
 	private SaleCtr sCtr;
-	private Sale sale;
 	private Customer customer;
 		
 	public SaleUI(){
-		privateCus = null;
+		customer = null;
 		
 		sCtr = new SaleCtr();
-		this.sale = sCtr.createSale();
+		sCtr.createSale();
 		boolean exit = false;
 		while(!exit){
 			int choice = writeSaleMenu();
