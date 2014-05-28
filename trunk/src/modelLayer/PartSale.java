@@ -1,8 +1,6 @@
 package modelLayer;
 
 public class PartSale {
-	private static int idIterator;
-	private int id;
 	private int amount;
 	private Item item;
 	
@@ -12,8 +10,6 @@ public class PartSale {
 	 * @param amount Amount of item.
 	 */
 	public PartSale(Item i, int amount){
-		idIterator++;
-		this.id = idIterator;
 		this.item = i;
 		this.amount = amount;
 	}
