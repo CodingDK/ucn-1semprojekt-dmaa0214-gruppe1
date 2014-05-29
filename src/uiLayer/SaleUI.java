@@ -3,12 +3,8 @@ package uiLayer;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
-import personLayer.*;
 import modelLayer.*;
-import ctrLayer.CategoryCtr;
 import ctrLayer.SaleCtr;
-import exceptionLayer.NotEnoughItemsException;
-import exceptionLayer.SaleNotCreatedException;
 
 /**
  * User interface to creation of a sale.
