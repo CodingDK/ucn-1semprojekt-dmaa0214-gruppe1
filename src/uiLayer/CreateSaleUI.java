@@ -23,16 +23,16 @@ public class CreateSaleUI extends SuperUI{
 	public CreateSaleUI(){
 		sCtr = new SaleCtr();
 		sCtr.createSale();
-		writeMenu();
+		menu();
 	}
 	
 	public CreateSaleUI(Sale sale){
 		sCtr = new SaleCtr();
 		sCtr.loadSale(sale);
-		writeMenu();
+		menu();
 	}
 	
-	public void writeMenu(){
+	private void menu(){
 		boolean exit = false;
 		while(!exit){
 			int choice = writeSaleMenu();
@@ -175,7 +175,7 @@ public class CreateSaleUI extends SuperUI{
 		try {
 			sCtr.setCustomer(pUI.createCustomer());
 		} catch (SaleNotCreatedException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 

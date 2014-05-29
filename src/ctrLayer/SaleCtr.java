@@ -13,7 +13,6 @@ import java.util.*;
  * 
  */
 public class SaleCtr {
-	
 	private Sale sale;
 	
 	/**
@@ -50,7 +49,7 @@ public class SaleCtr {
 		if(item != null){
 			int availableAmount = item.getAmount() - item.getReserved();
 			if(availableAmount-amount < 0){
-				throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige p� lageret.");
+				throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige på lageret.");
 			} else {
 				item.addReserved(amount);
 				if(sale != null){
