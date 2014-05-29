@@ -156,6 +156,10 @@ public class SaleCtr {
 		}
 	}
 	
+	/**
+	 * getSales - Returns all the Sales contained in the SalesContainer
+	 * @return ArrayList<Sale>
+	 */
 	public ArrayList<Sale> getSales(){
 		SaleCont sCont = SaleCont.getInstance();
 		ArrayList<Sale> sales = sCont.getAll();
@@ -163,6 +167,10 @@ public class SaleCtr {
 		return sales;
 	}
 	
+	/**
+	 * getParkedSales - Returns all the Sales that are marked as done = false
+	 * @return ArrayList<Sale>
+	 */
 	public ArrayList<Sale> getParkedSales(){
 		ArrayList<Sale> retArry = new ArrayList<Sale>();
 		ArrayList<Sale> sales = getSales();
@@ -175,6 +183,11 @@ public class SaleCtr {
 		return retArry;
 	}
 	
+	/**
+	 * getSale - Finds and returns a sale based on its ID
+	 * @param id
+	 * @return Sale
+	 */
 	public Sale getSale(int id){
 		Sale retSale = null;
 		ArrayList<Sale> sales = getSales();
@@ -192,6 +205,9 @@ public class SaleCtr {
 		
 	}
 	
+	/**
+	 * cleanUp - Removed parked sales older than a day
+	 */
 	public void cleanUp(){
 		ArrayList<Sale> sales = getParkedSales();
 		Calendar c1 = Calendar.getInstance(), c2 = Calendar.getInstance();
