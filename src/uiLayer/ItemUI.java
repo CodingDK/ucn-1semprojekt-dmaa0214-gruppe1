@@ -340,8 +340,19 @@ public class ItemUI extends SuperUI{
 							System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + amount + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
 						}
 						int i = requestInt("VareID", null, false);
-						if(iCtr.getItem(i) != null && items.contains(iCtr.getItem(i))){
-							retItem = iCtr.getItem(i);
+						
+						boolean found = false;
+						int it = 0;
+						while(it < items.size() && !found){
+							Item checkItem = items.get(it);
+							if(checkItem.getId() == i){
+								retItem = checkItem;
+								found = true;
+							}
+							it++;
+						}
+						
+						if(retItem != null){
 							System.out.println("Vare " + retItem.getName() + " valgt");
 							pause();
 							done = true;
