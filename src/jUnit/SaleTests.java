@@ -23,6 +23,7 @@ public class SaleTests {
 	@Test
 	public void testCreateSale() {
 		SaleCtr sCtr = new SaleCtr();
+		sCtr.createSale();
 		Sale s = sCtr.getSale();
 		assertThat(s, instanceOf(Sale.class));
 	}
@@ -64,6 +65,7 @@ public class SaleTests {
 		
 		Item i = iCtr.getItem("S Flad");
 		SaleCtr sCtr = new SaleCtr();
+		sCtr.createSale();
 		Sale s = sCtr.getSale();
 			
 		sCtr.addItem(i, 150);
@@ -79,6 +81,7 @@ public class SaleTests {
 		cCont.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
 		Customer c = cCont.findCustomer("Bjarne");
 		SaleCtr sCtr = new SaleCtr();
+		sCtr.createSale();
 		Sale s = sCtr.getSale();
 		sCtr.setCustomer(c);
 		assertEquals(s.getCustomer(), c);
@@ -100,6 +103,7 @@ public class SaleTests {
 		
 		Item i = iCtr.getItem("Ss Flad");
 		SaleCtr sCtr = new SaleCtr();
+		sCtr.createSale();
 		Sale s = sCtr.getSale();
 		
 		EmployeeCtr eCtr = new EmployeeCtr();
