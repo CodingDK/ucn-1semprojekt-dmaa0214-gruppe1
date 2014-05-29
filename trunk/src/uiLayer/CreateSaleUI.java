@@ -26,12 +26,19 @@ public class CreateSaleUI extends SuperUI{
 		menu();
 	}
 	
+	/**
+	 * Constructor for the SaleUI, for resuming a parked sale
+	 * @param Parked sale
+	 */
 	public CreateSaleUI(Sale sale){
 		sCtr = new SaleCtr();
 		sCtr.loadSale(sale);
 		menu();
 	}
 	
+	/**
+	 * menu - Handels the selection part of the UI
+	 */
 	private void menu(){
 		boolean exit = false;
 		while(!exit){
@@ -58,6 +65,10 @@ public class CreateSaleUI extends SuperUI{
 		}
 	}
 
+	/**
+	 * parkSale - Parks the current sale if possible
+	 * @return true if the sale has a customer associated
+	 */
 	private boolean parkSale() {
 		boolean park = sCtr.parkSale();
 		boolean ret = false;
