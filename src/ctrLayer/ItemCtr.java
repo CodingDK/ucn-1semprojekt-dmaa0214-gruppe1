@@ -96,7 +96,7 @@ public class ItemCtr {
 	 * @param reserved The reserved of the item.
 	 * @param salePrice The salePrice of the item.
 	 * @param purchasePrice The purchasePrice of the item.
-	 * @param bulkSalePrice The bulkSalePrice of the item.
+	 * @param bulkPercent The bulkSalePrice of the item.
 	 * @param bulk The bulk of the item.
 	 * @param location The location of the item.
 	 * @param storage The storage object of the item.
@@ -106,7 +106,7 @@ public class ItemCtr {
 	 * @throws NullPointerException if id not found.
 	 */
 	public void updateItem(int id, String name, int amount, int reserved,
-			double salePrice, double purchasePrice, double bulkSalePrice,
+			double salePrice, double purchasePrice, double bulkPercent,
 			int bulk, String location, Storage storage, int max, int min, 
 			Category category) throws NullPointerException {
 		Item item = getItem(id);
@@ -126,8 +126,8 @@ public class ItemCtr {
 			if(purchasePrice != -1){
 				item.setPurchasePrice(purchasePrice);
 			}
-			if(bulkSalePrice != -1){
-				item.setBulkSalePrice(bulkSalePrice);
+			if(bulkPercent != -1){
+				item.setBulkPercent(bulkPercent);
 			}
 			if(bulk != -1) {
 				item.setBulk(bulk);

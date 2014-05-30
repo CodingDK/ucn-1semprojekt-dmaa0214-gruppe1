@@ -14,7 +14,7 @@ public class Item{
 	private int reserved;
 	private double salePrice;
 	private double purchasePrice;
-	private double bulkSalePrice;
+	private double bulkPercent;
 	private int bulk;
 	private String location;
 	private Storage storage;
@@ -38,7 +38,7 @@ public class Item{
 	 * @param category The category object of the item.
 	 */
 	public Item(String name, int amount, int reserved,
-			double salePrice, double purchasePrice, double bulkSalePrice,
+			double salePrice, double purchasePrice, double bulkPercent,
 			int bulk, String location, Storage storage, int max, int min,
 			Category category){
 		idIterator++;
@@ -48,7 +48,7 @@ public class Item{
 		this.reserved = reserved;
 		this.salePrice = salePrice;
 		this.purchasePrice = purchasePrice;
-		this.bulkSalePrice = bulkSalePrice;
+		this.bulkPercent = bulkPercent;
 		this.bulk = bulk;
 		this.location = location;
 		this.storage = storage;
@@ -157,16 +157,16 @@ public class Item{
 	 * Get the bulkSalePrice
 	 * @return the bulkSalePrice
 	 */
-	public double getBulkSalePrice() {
-		return bulkSalePrice;
+	public double getBulkPercent() {
+		return bulkPercent;
 	}
 
 	/**
 	 * Set the bulkSalePrice
 	 * @param bulkSalePrice the bulkSalePrice to set
 	 */
-	public void setBulkSalePrice(double bulkSalePrice) {
-		this.bulkSalePrice = bulkSalePrice;
+	public void setBulkPercent(double bulkPercent) {
+		this.bulkPercent = bulkPercent;
 	}
 
 	/**

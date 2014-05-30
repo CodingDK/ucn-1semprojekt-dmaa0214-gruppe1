@@ -92,6 +92,10 @@ public class MainUI extends SuperUI{
 		CustomerCtr cusCont = new CustomerCtr();
 		cusCont.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
 		cusCont.createBusinessCustomer("Kis", "72691867", "Sofiendalsvej 60", "kbha@ucn.dk", "Aalborg", "9000", "UCN A/S", "33556063");
+		
+		DiscountCtr dCtr = new DiscountCtr();
+		dCtr.createDiscount("Håndværker Rabat", 15);
+		dCtr.createDiscount("Person Rabat", 5);
 	}
 	
 }
