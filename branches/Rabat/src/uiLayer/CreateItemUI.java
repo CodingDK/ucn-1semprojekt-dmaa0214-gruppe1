@@ -88,7 +88,7 @@ public class CreateItemUI extends SuperUI {
 		int amount = requestInt("Antal", null, false);
 		double salePrice = requestDouble("Salgs pris", false);
 		double purchasePrice = requestDouble("Købs pris", false);
-		double bulkSalePrice = requestDouble("Bulk pris", false);
+		double bulkSalePrice = requestDouble("Bulk Procent", false);
 		int bulk = requestInt("Bulk", null, false);
 		String location = requestString("Placering", null, null, false);
 		int min = requestInt("Minimum Lagerbeholdning", null, false);
