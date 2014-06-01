@@ -89,8 +89,6 @@ public class ItemUI extends SuperUI{
 				}else if(choice == 15){
 					searchItem();
 				}else if(choice == 16){
-					new DiscountUI();
-				}else if(choice == 17){
 					exit = true;
 				}
 			}
@@ -138,8 +136,7 @@ public class ItemUI extends SuperUI{
 				System.out.println(" 15. SÃ¸g Vare");
 				System.out.println("--------------------------");
 			}
-			System.out.println(" 16. Rabat Menu");
-			System.out.println(" 17. Gå tilbage");
+			System.out.println(" 16. Gå tilbage");
 			choice = requestInt("Valg", null, false);
 		} catch(InputMismatchException e){
 			System.out.println("Forkert input!");

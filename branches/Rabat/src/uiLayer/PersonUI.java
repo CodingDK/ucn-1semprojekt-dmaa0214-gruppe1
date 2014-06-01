@@ -1,6 +1,8 @@
 package uiLayer;
 
 import java.util.ArrayList;
+
+import modelLayer.Discount;
 import personLayer.Business;
 import personLayer.Customer;
 import personLayer.Employee;
@@ -12,6 +14,7 @@ public class PersonUI extends SuperUI{
 
 	private Customer selectedCustomer;
 	private Employee selectedEmployee;
+	private Discount selectedDiscount;
 
 	public PersonUI(String DryRun){
 		selectedCustomer = null;
@@ -30,6 +33,8 @@ public class PersonUI extends SuperUI{
 					updateEmployee(selectedEmployee);
 				} else if(choice == 8){		//Slet medarbejder
 					removeEmployee(selectedEmployee);					
+				}else if(choice == 9){
+					new DiscountUI();
 				}
 			} 							// Access for both Admin and Seller
 			if(choice == 1){			//Søg kunde
@@ -42,10 +47,77 @@ public class PersonUI extends SuperUI{
 				createEmployee();
 			} else if(choice == 6){		//Søg medarbejder
 				findEmployee();
-			} else if(choice == 9){	//Gå tilbage
+			}else if(choice == 10){ // Tilføj Rabat til kunde
+				if(selectedCustomer != null){
+					DiscountUI dUI = new DiscountUI("");
+					selectedDiscount = dUI.pickDiscount();
+					
+					if(selectedDiscount != null){
+						addDiscount();
+					}
+				}else{
+					selectedCustomer = findCustomer();
+					
+					if(selectedCustomer != null){
+						DiscountUI dUI = new DiscountUI("");
+						selectedDiscount = dUI.pickDiscount();
+						
+						if(selectedDiscount != null){
+							addDiscount();
+						}
+					}
+				}
+				
+			}else if(choice == 10){ // Fjern Rabat til kunde
+				if(selectedCustomer != null){
+					DiscountUI dUI = new DiscountUI("");
+					selectedDiscount = dUI.pickDiscount();
+					
+					if(selectedDiscount != null){
+						addDiscount();
+					}
+				}else{
+					selectedCustomer = findCustomer();
+					
+					if(selectedCustomer != null){
+						DiscountUI dUI = new DiscountUI("");
+						selectedDiscount = dUI.pickDiscount();
+						
+						if(selectedDiscount != null){
+							addDiscount();
+						}
+					}
+				}
+				
+			} else if(choice == 11){	//Gå tilbage
 				exit = true;
 			}
 		}		
+	}
+	
+	private void removeDiscount(){
+		
+	}
+
+	private void addDiscount() {
+		if(selectedDiscount != null && selectedCustomer != null){
+			ArrayList<Discount> discounts = selectedCustomer.getDiscounts();
+			String name = "";
+			
+			if(selectedCustomer instanceof Business){
+				name = ((Business) selectedCustomer).getCompany();
+			}else if(selectedCustomer instanceof Private){
+				name = ((Private) selectedCustomer).getName();
+			}
+			
+			if(discounts.contains(selectedDiscount)){
+				System.out.println(name + ", har allerede denne rabat");
+			}else{
+				discounts.add(selectedDiscount);
+				System.out.println(selectedDiscount.getName() + " er tilføjet til " + name);
+			}
+		}
+		
 	}
 
 	private int writeMenu(){
@@ -70,7 +142,12 @@ public class PersonUI extends SuperUI{
 			System.out.println(" 8. Slet medarbejder" + m);
 		}
 		System.out.println("--------------------------");
-		System.out.println(" 9. Gå tilbage");
+		if(admin){
+			System.out.println(" 9. Rabat UI");
+			System.out.println("--------------------------");
+		}
+		System.out.println(" 10. Tilføj Rabat" + pP);
+		System.out.println(" 11. Gå tilbage");
 		choice = requestInt("\nValg", 0, false);
 		return choice;
 	}
