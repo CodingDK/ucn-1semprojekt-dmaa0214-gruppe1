@@ -38,6 +38,24 @@ public class SaleCtr {
 		return this.sale;
 	}
 	
+	public ArrayList<Discount> getDiscounts(){
+		return sale.getDiscounts();
+	}
+	
+	public boolean removeDiscount(Discount d){
+		boolean retB = false;
+		if(d != null){
+			sale.removeDiscount(d);
+			retB = true;
+		}
+		
+		return retB;
+	}
+	
+	public void addDiscount(Discount d){
+		sale.addDiscount(d);
+	}
+	
 	/**
 	 * addItem - Add an item to the sale.
 	 * @param item The item to add.
@@ -72,6 +90,12 @@ public class SaleCtr {
 	public void setCustomer(Customer c) throws SaleNotCreatedException{
 		if(sale != null) {
 			sale.setCustomer(c);
+			ArrayList<Discount> discounts = c.getDiscounts();
+			if(discounts != null && discounts.size() > 0){
+				for(Discount d : discounts){
+					sale.addDiscount(d);
+				}
+			}
 		} else {
 			throw new SaleNotCreatedException("Der er ikke oprettet et salg");
 		}

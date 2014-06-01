@@ -18,6 +18,7 @@ public class Sale {
 	private int id;
 	private Date date;
 	private ArrayList<PartSale> partSales;
+	private ArrayList<Discount> discounts;
 	private static int idIterator;
 	private Customer customer;
 	private Employee employee;
@@ -34,6 +35,7 @@ public class Sale {
 		this.employee = null;
 		this.done = false;
 		this.partSales = new ArrayList<PartSale>();
+		this.discounts = new ArrayList<Discount>();
 	} 
 	
 	/**
@@ -84,9 +86,9 @@ public class Sale {
 	 * @param amount The amount of the item.
 	 */
 	public void addPartSale(Item i, int amount){
-		totalPrice += i.getSalePrice()*amount;
 		PartSale p = new PartSale(i, amount);
 		partSales.add(p);
+		totalPrice += i.getSalePrice()*amount;
 	}
 	
 	/**
@@ -148,6 +150,31 @@ public class Sale {
 		return retString;
 	}
 	
+	public void removeDiscount(Discount d){
+		discounts.remove(d);
+	}
 	
-
+	public void addDiscount(Discount d){
+		discounts.add(d);
+	}
+	
+	public ArrayList<Discount> getDiscounts(){
+		return discounts;
+	}
+	
+	public double getDiscountPercent(){
+		double retD = 0;
+		if(discounts != null && discounts.size() > 0){
+			for(Discount d : discounts){
+				retD += d.getPercent();
+			}
+			if(retD > 20){
+				retD = 20;
+			}
+		}
+		
+		return retD;
+		
+	}
+	
 }

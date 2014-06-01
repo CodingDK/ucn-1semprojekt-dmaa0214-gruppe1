@@ -33,6 +33,16 @@ public class PartSale {
 	public Item getItem() {
 		return item;
 	}
+	
+	public boolean isBulk(){
+		boolean retB = false;
+		
+		if(item.getBulk() <= amount){
+			retB = true;
+		}
+		
+		return retB;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

@@ -79,11 +79,10 @@ public class MainUI extends SuperUI{
 		Category c1 = cCtr.findCategory("Søm");
 		Category c2 = cCtr.findCategory("Hammer");
 		
-		iCtr.createItem("Søm Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
-		iCtr.createItem("Søm t. Sømpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
-		
-		iCtr.createItem("Flad Hammer", 200, 0, 1., 1., 1., 1, "1234", s2, 10, 1, c2);
-		iCtr.createItem("Rund Hammer", 200, 0, 1., 1., 1., 1, "1234", s2, 10, 1, c2);
+		iCtr.createItem("Søm Flad", 200, 0, 1., 1., 1., 50, "1234", s1, 10, 1, c1);
+		iCtr.createItem("Søm t. Sømpistol", 200, 0, 1., 1., 1., 50, "1234", s1, 10, 1, c1);
+		iCtr.createItem("Flad Hammer", 200, 0, 1., 1., 1., 10, "1234", s2, 10, 1, c2);
+		iCtr.createItem("Rund Hammer", 200, 0, 1., 1., 1., 10, "1234", s2, 10, 1, c2);
 		
 		EmployeeCtr eCtr = new EmployeeCtr();
 		eCtr.createEmployee("1", "Ole", "70809010", "Egonsvej 19", "ole@ucn.dk", "Aalborg", "9000", "201050-1043", "1234", true);
@@ -96,6 +95,8 @@ public class MainUI extends SuperUI{
 		DiscountCtr dCtr = new DiscountCtr();
 		dCtr.createDiscount("Håndværker Rabat", 15);
 		dCtr.createDiscount("Person Rabat", 5);
+		dCtr.createDiscount("Afhentnings Rabat", 6);
+		dCtr.createDiscount("Nick Rabat", 5);
 	}
 	
 }

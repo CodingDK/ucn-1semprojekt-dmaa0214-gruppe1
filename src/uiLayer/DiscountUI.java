@@ -14,6 +14,10 @@ public class DiscountUI extends SuperUI{
 		menu();
 	}
 	
+	public DiscountUI(String name){
+		dCtr = new DiscountCtr();
+	}
+	
 	private void menu(){
 		boolean exit = false;
 		while(!exit){

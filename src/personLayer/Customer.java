@@ -1,5 +1,9 @@
 package personLayer;
 
+import java.util.ArrayList;
+
+import modelLayer.Discount;
+
 /**
  * Customer holds information for Customers.
  * 
@@ -9,6 +13,7 @@ package personLayer;
  */
 public class Customer extends Person{
 	protected double credit;
+	protected ArrayList<Discount> discounts;
 	
 	/**
 	 * @param name The name of the Customer.
@@ -20,6 +25,7 @@ public class Customer extends Person{
 	 */
 	public Customer(String name, String phoneNr, String street, String email, String city, String postCode){
 		super(name, phoneNr, street, email, city, postCode);
+		this.discounts = new ArrayList<Discount>();
 	}
 
 	/**
@@ -38,5 +44,17 @@ public class Customer extends Person{
 	
 	public String toString(){
 		return super.toString();
+	}
+	
+	public void addDiscount(Discount d){
+		discounts.add(d);
+	}
+	
+	public void removeDiscount(Discount d){
+		discounts.remove(d);
+	}
+	
+	public ArrayList<Discount> getDiscounts(){
+		return discounts;
 	}
 }
