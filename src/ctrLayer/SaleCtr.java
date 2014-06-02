@@ -32,7 +32,7 @@ public class SaleCtr {
 		
 	/**
 	 * getSale - Get the sale for the controller.
-	 * @return Sale The Sale object.
+	 * @return Sale The current Sale object.
 	 */
 	public Sale getSale(){
 		return this.sale;
@@ -130,6 +130,7 @@ public class SaleCtr {
 	
 	/**
 	 * Parks the sale for later use
+	 * @return boolean true if the sale contains a Customer, false otherwise
 	 */
 	public boolean parkSale(){
 		boolean ret = false;

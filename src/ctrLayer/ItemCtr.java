@@ -12,9 +12,7 @@ import java.util.*;
  */
 public class ItemCtr {
 	
-	public ItemCtr(){
-		
-	}
+	public ItemCtr(){}
 	
 	/**
 	 * getItem - Get an item object from an id.
