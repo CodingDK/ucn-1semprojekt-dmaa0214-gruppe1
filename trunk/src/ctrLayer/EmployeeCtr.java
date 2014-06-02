@@ -23,7 +23,7 @@ public class EmployeeCtr{
     }
     
     /**
-     * findEmployeeNameOrEmpNr - Return Employee object found.
+     * findEmployee - Return Employee object found.
      * @param employeeNr The employeeNr of the Employee object to find.
      * @return Employee - The Employee object of Employee or null.
      */
