@@ -70,7 +70,6 @@ public class EmployeeCont{
     	return retEmployee;
     }
     
-    
     /**
 	 * Finds and returns a EmployeeObj by name or employee number
 	 * @param nameOrPhone

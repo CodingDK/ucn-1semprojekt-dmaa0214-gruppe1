@@ -2,16 +2,25 @@ package modelLayer;
 
 import java.util.ArrayList;
 
+/**
+ * Category Container holds a list of all categories.
+ * 
+ * @author Group 1
+ * @version 0.1
+ */
 public class CategoryCont {
 	private static CategoryCont instance;
 	private ArrayList<Category> categories;
 
+	/**
+	 * Constructor for CategoryCont objects.
+	 */
 	private CategoryCont() {
 		categories = new ArrayList<Category>();
 	}
 	
 	/**
-	 * Returns the instance of CategoryCont
+	 * getInstance - Returns the instance of CategoryCont
 	 * @return CategoryCont
 	 */
 	public static CategoryCont getInstance(){
@@ -23,25 +32,25 @@ public class CategoryCont {
 	}
 	
 	/**
-	 * Adds a Category to the Container
-	 * @param c
+	 * addCategory - Adds a Category to the Container
+	 * @param c The Category object to add.
 	 */
 	public void addCategory(Category c){
 		categories.add(c);
 	}
 	
 	/**
-	 * Returns all the Categories as ArrayList
-	 * @return ArrayList<Category>
+	 * getAll - Returns all the Categories as ArrayList
+	 * @return ArrayList<Category> A list of all categories.
 	 */
 	public ArrayList<Category> getAll(){
 		return categories;
 	}
 	
 	/**
-	 * Finds the Category by name
-	 * @param name
-	 * @return Category
+	 * findCategory - Finds the Category by name
+	 * @param name The name to look for.
+	 * @return The found Category object or null
 	 */
 	public Category findCategory(String name){
 		boolean found = false;
@@ -61,8 +70,8 @@ public class CategoryCont {
 	
 	/**
 	 * Finds the Category by ID
-	 * @param ID
-	 * @return Category
+	 * @param id The of the Category.
+	 * @return Category The found Category object or null.
 	 */
 	public Category findCategory(int id){
 		boolean found = false;
@@ -81,8 +90,8 @@ public class CategoryCont {
 	}
 	
 	/**
-	 * Removes the category
-	 * @param c
+	 * Removes a category
+	 * @param c The Category object to remove.
 	 */
 	public void removeCategory(Category c){
 		categories.remove(c);
