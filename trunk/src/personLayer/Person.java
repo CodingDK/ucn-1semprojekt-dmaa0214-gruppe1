@@ -122,9 +122,7 @@ public class Person {
 		return id;
 	}
 	
-	/**
-	 * @return id of the person.
-	 */
+	
 	public String toString(){
 		return "#"+id + " ";
 	}
