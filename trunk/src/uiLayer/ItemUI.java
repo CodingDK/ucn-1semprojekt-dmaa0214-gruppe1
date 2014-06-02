@@ -20,6 +20,10 @@ public class ItemUI extends SuperUI{
 		selectedStorage = null;
 		selectedItem = null;
 		
+		menu();
+	}
+	
+	private void menu(){	
 		boolean exit = false;
 		while(!exit){
 			int choice = writeMenu();
@@ -92,7 +96,7 @@ public class ItemUI extends SuperUI{
 					exit = true;
 				}
 			}
-		}		
+		}	
 	}
 	
 

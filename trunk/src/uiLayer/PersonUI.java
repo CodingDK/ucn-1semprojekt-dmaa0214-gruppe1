@@ -37,7 +37,7 @@ public class PersonUI extends SuperUI{
 			} else if(choice == 2){		//Opret kunde
 				//createCustomer();
 			} else if(choice == 3){		//Opdater kunde
-				//UpdateCustomer();
+				//updateCustomer();
 			} else if(choice == 5){		//Opret medarbejder
 				createEmployee();
 			} else if(choice == 6){		//Søg medarbejder
