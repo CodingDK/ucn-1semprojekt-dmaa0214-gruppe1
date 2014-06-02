@@ -48,34 +48,13 @@ public class EmployeeCont{
     public void removeEmployee(Employee e){
     	employees.remove(e);
     }
-	
-    /**
-     * findEmployee - Get a Employee object from the employeeNr of the Employee.
-     * @param employeeNr - The employeeNr of the Employee.
-     * @return Employee object of the Employee or null if not found.
-     */
-    public Employee findEmployee(String employeeNr){
-    	
-    	Employee retEmployee = null;
-    	boolean found = false;
-    	int i = 0;
-    	while(i < employees.size() && !found) {
-    		if(employees.get(i).getEmployeeNr().equalsIgnoreCase(employeeNr)) {
-    			retEmployee = employees.get(i);
-    			found = true;
-    		}
-    		i++;
-    	}
-    	
-    	return retEmployee;
-    }
     
     /**
 	 * Finds and returns a EmployeeObj by name or employee number
-	 * @param nameOrPhone
-	 * @return CustomerObj
+	 * @param nameOrEmployeeNr - The employeeNr of the Employee.
+     * @return Employee object of the Employee or null if not found.
 	 */
-	public Employee findEmployeeNameOrEmpNr(String nameOrEmployeeNr){
+	public Employee findEmployee(String nameOrEmployeeNr){
 		boolean found = false;
 		Employee e = null;
 		int i = 0;
