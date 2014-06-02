@@ -50,22 +50,6 @@ public class CategoryCtr {
 		cCont.removeCategory(c);
 	}
 	
-	
-	/**
-	 * Returns boolean true if the category exists
-	 * @param name
-	 * @return boolean
-	 */
-	public boolean exist(String name){
-		boolean ret = false;
-		if(cCont.findCategory(name) != null){
-			ret = true;
-		}
-		
-		return ret;
-	}
-	
-	
 	/**
 	 * Finds the category by name
 	 * @param name
