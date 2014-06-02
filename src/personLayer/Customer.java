@@ -8,7 +8,7 @@ package personLayer;
  * 
  */
 public class Customer extends Person{
-	protected double credit;
+	private double credit;
 	
 	/**
 	 * @param name The name of the Customer.
