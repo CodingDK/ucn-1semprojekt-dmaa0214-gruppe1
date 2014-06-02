@@ -21,25 +21,15 @@ public class EmployeeCtr{
     public EmployeeCtr(){
     	eCont = EmployeeCont.getInstance();
     }
-	
-    /**
-     * findEmployee - Return Employee object found.
-     * @param employeeNr The employeeNr of the Employee object to find.
-     * @return Employee - The Employee object of Employee or null.
-     */
-    public Employee findEmployee(String employeeNr){
-    	return eCont.findEmployee(employeeNr);
-    }
     
     /**
      * findEmployeeNameOrEmpNr - Return Employee object found.
      * @param employeeNr The employeeNr of the Employee object to find.
      * @return Employee - The Employee object of Employee or null.
      */
-    public Employee findEmployeeNameOrEmpNr(String nameOrEmployeeNr){
-    	return eCont.findEmployeeNameOrEmpNr(nameOrEmployeeNr);
+    public Employee findEmployee(String nameOrEmployeeNr){
+    	return eCont.findEmployee(nameOrEmployeeNr);
     }
-    
     
     
     /**
