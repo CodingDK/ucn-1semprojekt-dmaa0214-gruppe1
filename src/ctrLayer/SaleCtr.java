@@ -149,7 +149,7 @@ public class SaleCtr {
 	 */
 	public void loadSale(Sale sale){
 		if(sale.isDone()){
-			System.out.println("Det valgte salg er allerede færdiggjort");
+			System.out.println("Det valgte salg er allerede færdig gjort");
 		}
 		if(!sale.isDone()){
 			this.sale = sale;
