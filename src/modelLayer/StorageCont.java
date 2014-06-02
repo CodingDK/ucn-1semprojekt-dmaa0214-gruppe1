@@ -2,8 +2,8 @@ package modelLayer;
 import java.util.ArrayList;
 
 /**
- * StorageCont contains a list of all storage in the StorageCont.
- * 
+ * StorageCont contains a list of all storage.
+ * Singleton
  * @author Group 1
  * @version 0.1
  */
