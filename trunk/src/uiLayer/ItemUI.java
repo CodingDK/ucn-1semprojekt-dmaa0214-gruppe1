@@ -1,7 +1,6 @@
 package uiLayer;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 import modelLayer.*;
 import ctrLayer.*;
@@ -102,54 +101,52 @@ public class ItemUI extends SuperUI{
 
 	private int writeMenu(){
 		int choice = 0;
-		try{
-			System.out.println("## Item menu ##");
-			{
-				if(admin){
-					System.out.println("--------------------------");
-					System.out.println(" 1. Opret Kategori");
-					String category = (selectedCategory != null) ? " (" + selectedCategory.getName() + ")" : "";
-					System.out.println(" 2. Opdater Kategori" + category);
-					System.out.println(" 3. Fjern Kategori" + category);
-					System.out.println(" 4. Vælg Kategori");
-				}
-				System.out.println(" 5. Søg Kategori");
+		
+		System.out.println("## Item menu ##");
+		{
+			if(admin){
 				System.out.println("--------------------------");
+				System.out.println(" 1. Opret Kategori");
+				String category = (selectedCategory != null) ? " (" + selectedCategory.getName() + ")" : "";
+				System.out.println(" 2. Opdater Kategori" + category);
+				System.out.println(" 3. Fjern Kategori" + category);
+				System.out.println(" 4. Vælg Kategori");
 			}
-			
-			{
-				if(admin){
-					System.out.println(" 6. Opret Lager");
-					String storage = (selectedStorage != null) ? " (" + selectedStorage.getName() + ")" : "";
-					System.out.println(" 7. Opdater Lager" + storage);
-					System.out.println(" 8. Fjern Lager" + storage);
-					System.out.println(" 9. Vælg Lager");
-				}
-				System.out.println(" 10. Søg Lager");
-				System.out.println("--------------------------");
-			}
-
-			{
-				if(admin){
-					System.out.println(" 11. Opret Vare");
-					String item = (selectedItem != null) ? " (" + selectedItem.getName() + ")" : "";
-					System.out.println(" 12. Opdater Vare" + item);
-					System.out.println(" 13. Fjern Vare" + item);
-					System.out.println(" 14. Vælg Vare");
-				}
-				System.out.println(" 15. Søg Vare");
-				System.out.println("--------------------------");
-			}
-			System.out.println(" 16. Gå tilbage");
-			choice = requestInt("Valg", null, false);
-		} catch(InputMismatchException e){
-			System.out.println("Forkert input!");
+			System.out.println(" 5. Søg Kategori");
+			System.out.println("--------------------------");
 		}
+		
+		{
+			if(admin){
+				System.out.println(" 6. Opret Lager");
+				String storage = (selectedStorage != null) ? " (" + selectedStorage.getName() + ")" : "";
+				System.out.println(" 7. Opdater Lager" + storage);
+				System.out.println(" 8. Fjern Lager" + storage);
+				System.out.println(" 9. Vælg Lager");
+			}
+			System.out.println(" 10. Søg Lager");
+			System.out.println("--------------------------");
+		}
+
+		{
+			if(admin){
+				System.out.println(" 11. Opret Vare");
+				String item = (selectedItem != null) ? " (" + selectedItem.getName() + ")" : "";
+				System.out.println(" 12. Opdater Vare" + item);
+				System.out.println(" 13. Fjern Vare" + item);
+				System.out.println(" 14. Vælg Vare");
+			}
+			System.out.println(" 15. Søg Vare");
+			System.out.println("--------------------------");
+		}
+		System.out.println(" 16. Gå tilbage");
+		
+		choice = requestInt("Valg", null, false);
 		return choice;
 	}
 	
 	/**
-	 * pickStorage - Possible to search and pick a Storage
+	 * pickStorage - Search and pick a Storage Object
 	 * @return Storage
 	 */
 	public Storage pickStorage() {
@@ -194,7 +191,7 @@ public class ItemUI extends SuperUI{
 	}
 
 	/**
-	 * pickCategory - Possible to search and pick a Category
+	 * pickCategory - Search and pick a Category Object
 	 * @return Category
 	 */
 	public Category pickCategory() {
@@ -319,7 +316,7 @@ public class ItemUI extends SuperUI{
 	}
 	
 	/**
-	 * pickItem - Possible to search and pick a Item
+	 * pickItem - Search and pick a Item Object
 	 * @return Item
 	 */
 	public Item pickItem() {
