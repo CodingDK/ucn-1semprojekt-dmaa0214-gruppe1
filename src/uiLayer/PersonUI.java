@@ -19,6 +19,11 @@ public class PersonUI extends SuperUI{
 
 	public PersonUI(){
 		selectedCustomer = null;
+		
+		menu();
+	}
+	
+	private void menu(){
 		boolean exit = false;
 		while(!exit){
 
@@ -45,7 +50,7 @@ public class PersonUI extends SuperUI{
 			} else if(choice == 9){	//Gå tilbage
 				exit = true;
 			}
-		}		
+		}
 	}
 
 	private int writeMenu(){
