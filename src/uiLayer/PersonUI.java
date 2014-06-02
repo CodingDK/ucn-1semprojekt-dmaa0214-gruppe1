@@ -25,6 +25,9 @@ public class PersonUI extends SuperUI{
 		menu();
 	}
 	
+	/**
+	 * menu - Handels the selection part of the UI
+	 */
 	private void menu(){
 		boolean exit = false;
 		while(!exit){
@@ -55,6 +58,10 @@ public class PersonUI extends SuperUI{
 		}
 	}
 
+	/**
+	 * writeMenu - Write the Person menu and get a choice.
+	 * @return The choice by the user.
+	 */
 	private int writeMenu(){
 		int choice = 0;
 		String pP = selectedCustomer != null ? " (" + selectedCustomer.getName() + ")" : "";  

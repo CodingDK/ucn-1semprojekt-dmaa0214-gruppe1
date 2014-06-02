@@ -22,6 +22,9 @@ public class ItemUI extends SuperUI{
 		menu();
 	}
 
+	/**
+	 * menu - Handels the selection part of the UI
+	 */
 	private void menu(){	
 		boolean exit = false;
 		while(!exit){
@@ -98,7 +101,10 @@ public class ItemUI extends SuperUI{
 		}	
 	}
 
-
+	/**
+	 * writeMenu - Write the item menu and get a choice.
+	 * @return The choice by the user.
+	 */
 	private int writeMenu(){
 		int choice = 0;
 

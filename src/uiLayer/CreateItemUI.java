@@ -16,6 +16,9 @@ public class CreateItemUI extends SuperUI {
 		menu();
 	}
 	
+	/**
+	 * menu - Handels the selection part of the UI
+	 */
 	private void menu(){
 		boolean exit = false;
 		while(!exit){
@@ -36,6 +39,10 @@ public class CreateItemUI extends SuperUI {
 		}
 	}
 	
+	/**
+	 * writeItemMenu - Write the item menu and get a choice.
+	 * @return The choice by the user.
+	 */
 	private int writeItemMenu(){
 		int choice = 0;
 		System.out.println("## Opret Vare ##");
