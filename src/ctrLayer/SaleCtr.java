@@ -54,11 +54,7 @@ public class SaleCtr {
 					throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige på lageret.");
 				} else {
 					item.addReserved(amount);
-					if(sale != null){
-						sale.addPartSale(item, amount);
-					}else{
-						System.out.println("Der mangler noget :o");
-					}
+					sale.addPartSale(item, amount);
 				}
 				
 			} else {
