@@ -82,8 +82,6 @@ public class ItemUI extends SuperUI{
 					}else{
 						removeItem();
 					}
-				} else if(choice == 14){
-					selectedItem = pickItem();
 				}  
 			}
 
@@ -94,7 +92,16 @@ public class ItemUI extends SuperUI{
 					searchStorage();
 				}else if(choice == 15){
 					searchItem();
+				}else if(choice == 14){
+					selectedItem = pickItem();
 				}else if(choice == 16){
+					if(selectedItem == null){
+						selectedItem = pickItem();
+						addAmountToItem();
+					}else{
+						addAmountToItem();
+					}
+				}else if(choice == 17){
 					exit = true;
 				}
 			}
@@ -135,17 +142,18 @@ public class ItemUI extends SuperUI{
 		}
 
 		{
+			String item = (selectedItem != null) ? " (" + selectedItem.getName() + ")" : "";
 			if(admin){
 				System.out.println(" 11. Opret Vare");
-				String item = (selectedItem != null) ? " (" + selectedItem.getName() + ")" : "";
 				System.out.println(" 12. Opdater Vare" + item);
 				System.out.println(" 13. Fjern Vare" + item);
-				System.out.println(" 14. Vælg Vare");
 			}
+			System.out.println(" 14. Vælg Vare");
 			System.out.println(" 15. Søg Vare");
+			System.out.println(" 16. Tilfør Mængde Til Vare" + item);
 			System.out.println("--------------------------");
 		}
-		System.out.println(" 16. Gå tilbage");
+		System.out.println(" 17. Gå tilbage");
 
 		choice = requestInt("Valg", null, false);
 		return choice;
@@ -309,7 +317,7 @@ public class ItemUI extends SuperUI{
 	private void searchItem() {
 		try{
 			System.out.println("## Søg Vare ##");
-			String name = requestString("Vare navn: ", null, null, false);
+			String name = requestString("Vare navn", null, null, false);
 			ItemCtr iCtr = new ItemCtr();
 			ArrayList<Item> items = iCtr.searchItem(name);
 			if(items != null){
@@ -551,6 +559,19 @@ public class ItemUI extends SuperUI{
 			selectedStorage = null;
 		}else{
 			System.out.println("Et Lager skal være valgt før den kan fjernes");
+		}
+	}
+	
+	/**
+	 * addAmountToItem - TUI for adding amount to an Item Object
+	 */
+	private void addAmountToItem(){
+		if(selectedItem != null){
+			System.out.println("## Tilfør Mængde Til Vare : " + selectedItem.getName() + " ##");
+			int amount = requestInt("Mængde", 0, false);
+			selectedItem.addAmount(amount);
+		}else{
+			System.out.println("Et Vare skal være valgt før der kan tilføres en mængde");
 		}
 	}
 
