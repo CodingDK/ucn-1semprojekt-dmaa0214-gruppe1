@@ -2,6 +2,9 @@ package jUnit;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.instanceOf;
+
+import java.util.ArrayList;
+
 import modelLayer.Category;
 import modelLayer.Item;
 import modelLayer.Sale;
@@ -80,7 +83,18 @@ public class SaleTests {
 	public void testSetCustomer() throws SaleNotCreatedException {
 		CustomerCtr cCont = new CustomerCtr();
 		cCont.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
-		Customer c = cCont.findCustomer("Bjarne");
+		ArrayList<Customer> customers = cCont.searchCustomer("Bjarne");
+		Customer c = null;
+		boolean found = false;
+		int i = 0;
+		while(!found && i < customers.size()){
+			Customer checkC = customers.get(i);
+			if(checkC.getName().equals("Bjarne")){
+				c = checkC;
+				found = true;
+			}
+		}
+		
 		SaleCtr sCtr = new SaleCtr();
 		sCtr.createSale();
 		Sale s = sCtr.getSale();
@@ -113,7 +127,17 @@ public class SaleTests {
 		sCtr.addItem(i, 50);
 		CustomerCtr ccCtr = new CustomerCtr();
 		ccCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
-		Customer c = ccCtr.findCustomer("Bjarne");
+		ArrayList<Customer> customers = ccCtr.searchCustomer("Bjarne");
+		Customer c = null;
+		boolean found = false;
+		int ii = 0;
+		while(!found && ii < customers.size()){
+			Customer checkC = customers.get(ii);
+			if(checkC.getName().equals("Bjarne")){
+				c = checkC;
+				found = true;
+			}
+		}
 		sCtr.setCustomer(c);
 		
 		sCtr.finishSale("2");

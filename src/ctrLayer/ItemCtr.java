@@ -180,16 +180,6 @@ public class ItemCtr {
 	}
 	
 	/**
-     * findStorage - Get a Storage object from the id of the Storage.
-     * @param id - The id of the Storage.
-     * @return Storage object of the Storage or null if not found.
-     */
-	public Storage findStorage(int id){
-		StorageCont cCont = StorageCont.getInstance();
-		return cCont.findStorage(id);
-	}
-	
-	/**
 	 * updateStorage - Update a Storage object.
 	 * @param storage The Storage Object to update.
 	 * @param name The new name of the Storage.
@@ -236,15 +226,6 @@ public class ItemCtr {
 			ret = true;
 		}
 		return ret;
-	}
-	
-	/**
-	 * getAllStorages - Get a list of all Storages.
-	 * @return ArrayList<Storage> A list with all storages.
-	 */
-	public ArrayList<Storage> getAllStorages(){
-		StorageCont sCont = StorageCont.getInstance();
-		return sCont.getAll();
 	}
 	
 	/**
