@@ -58,15 +58,6 @@ public class CategoryCtr {
 	public Category findCategory(String name){
 		return cCont.findCategory(name);
 	} 
-	
-	/**
-	 * Finds the category by ID
-	 * @param name
-	 * @return Category
-	 */
-	public Category findCategory(int id){
-		return cCont.findCategory(id);
-	} 
 
 	/**
 	 * Returns all Categorys as ArrayList

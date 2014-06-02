@@ -295,7 +295,7 @@ public class PersonUI extends SuperUI{
 						if(id == e.getId()){
 							System.out.println("Valgt - Navn: " + e.getName() + ", medarbejdernr: " + e.getEmployeeNr());
 							pause();
-							retE = eCtr.findEmployee(id);
+							retE = e;
 							selectedEmployee = retE;
 							recheck = true;
 						}
