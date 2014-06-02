@@ -32,7 +32,15 @@ public abstract class SuperUI {
 		return typeOut;
 	}	
 
-	
+	/**
+	 * requestString  - Asks for user input (the question being the first parameter, input) 
+	 * and returns the user input as a String.
+	 * @param input What the system should print/ask.
+	 * @param minLength Minimum length of the input from the user.
+	 * @param maxLength Maximum length of the input from the user.
+	 * @param allowNull Whether or not blank input is accepted. 
+	 * @return String Returns a string containing the user input. 
+	 */
 	protected String requestString(String input, Integer minLength, Integer maxLength, boolean allowNull){
 		@SuppressWarnings("resource")
 		Scanner k = new Scanner(System.in);
@@ -81,6 +89,14 @@ public abstract class SuperUI {
 		return ret;
 	}
 	
+	/**
+	 * requestInt  - Asks for user input (the question being the first parameter, input) 
+	 * and returns the user input as an int. 
+	 * @param input What the system should print/ask.
+	 * @param min Minimum size of the integer input from the user.
+	 * @param allowNull Whether or not blank input should be accepted.
+	 * @return int - The int input from the user.
+	 */
 	protected int requestInt(String input, Integer min, boolean allowNull){
 		@SuppressWarnings("resource")
 		Scanner k = new Scanner(System.in);
@@ -97,7 +113,7 @@ public abstract class SuperUI {
 					ret = Integer.parseInt(inputData);
 					if(min != null){
 						if(ret != min && ret <= min){
-							System.out.println(input + " skal v�re st�rre end " + min);
+							System.out.println(input + " skal være større end " + min);
 						}else{
 							done = true;
 						}
@@ -111,6 +127,12 @@ public abstract class SuperUI {
 		return ret;
 	}
 	
+	/**
+	 * requestDouble - Prints a question asking the user to type a double and returns the input.
+	 * @param input What the system should print/ask.
+	 * @param allowNull Whether or not to allow the input to be blank.
+	 * @return double The entered double.
+	 */
 	protected double requestDouble(String input, boolean allowNull){
 		@SuppressWarnings("resource")
 		Scanner k = new Scanner(System.in);
@@ -133,6 +155,11 @@ public abstract class SuperUI {
 		return ret;
 	}
 	
+	/**
+	 * isInteger checks if the input is an integer and returns true/false.
+	 * @param s What the system should check.
+	 * @return boolean True/false depending on whether s is an integer or not.
+	 */
 	private boolean isInteger(String s){
 		try{
 			Integer.parseInt(s);
@@ -143,6 +170,11 @@ public abstract class SuperUI {
 		return true;
 	}
 	
+	/**
+	 * isDouble checks if the input is a double and returns true/false.
+	 * @param s What the system should check.
+	 * @return boolean True/false depending on whether s is a double or not.
+	 */
 	private boolean isDouble(String s){
 		try{
 			Double.parseDouble(s);
@@ -153,6 +185,11 @@ public abstract class SuperUI {
 		return true;
 	}
 	
+	/**
+	 * confirm - Asks the user to confirm his/her choice, by typing y or n.
+	 * @param confirmStatement What should be confirmed.
+	 * @return boolean - True/false depending on whether the user confirmed or not.
+	 */
 	protected boolean confirm(String confirmStatement){
         boolean confirm = true;
         @SuppressWarnings("resource")
@@ -174,6 +211,9 @@ public abstract class SuperUI {
         return confirm;
     }
 	
+	/**
+	 * login - Administrator login. Asks you to enter employee ID and a password.
+	 */
 	protected void login(){
 		System.out.println("## Administrator Login ##");
 		String employeeID = requestString("Medarbejder Nummer", null, null, false);
