@@ -8,6 +8,9 @@ import ctrLayer.EmployeeCtr;
 public abstract class SuperUI {
 	protected static boolean admin;
 	
+	/**
+	 * pause - Used in TUIs to pause, waiting for a user to hit enter to continue
+	 */
 	protected void pause(){
 		@SuppressWarnings("resource")
 		Scanner k = new Scanner(System.in);	

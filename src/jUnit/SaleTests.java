@@ -29,7 +29,7 @@ public class SaleTests {
 	}
 
 	@Test(expected = NotEnoughItemsException.class)
-	public void testAddItemNotEnough() throws NullPointerException, NotEnoughItemsException {
+	public void testAddItemNotEnough() throws NullPointerException, NotEnoughItemsException, SaleNotCreatedException {
 		ItemCtr iCtr = new ItemCtr();
 		CategoryCtr cCtr = new CategoryCtr();
 		iCtr.createStorage("Test1");
@@ -44,13 +44,14 @@ public class SaleTests {
 		
 		Item i = iCtr.getItem("S Flad");
 		SaleCtr sCtr = new SaleCtr();
+		sCtr.createSale();
 		sCtr.getSale();
 			
 		sCtr.addItem(i, 250);
 	}
 	
 	@Test
-	public void testAddItem() throws NullPointerException, NotEnoughItemsException {
+	public void testAddItem() throws NullPointerException, NotEnoughItemsException, SaleNotCreatedException {
 		ItemCtr iCtr = new ItemCtr();
 		CategoryCtr cCtr = new CategoryCtr();
 		iCtr.createStorage("Test1");
@@ -68,7 +69,7 @@ public class SaleTests {
 		sCtr.createSale();
 		Sale s = sCtr.getSale();
 			
-		sCtr.addItem(i, 150);
+		sCtr.addItem(i, 50);
 		double test1 = s.getTotalPrice();
 		double test2 = i.getSalePrice()*150;
 		
@@ -109,7 +110,7 @@ public class SaleTests {
 		EmployeeCtr eCtr = new EmployeeCtr();
 		eCtr.createEmployee("2", "Jens", "40509010", "Hobrovej 29", "jens@ucn.dk", "Vestbjerg", "9380", "100170-2143", null, false);
 			
-		sCtr.addItem(i, 150);
+		sCtr.addItem(i, 50);
 		CustomerCtr ccCtr = new CustomerCtr();
 		ccCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
 		Customer c = ccCtr.findCustomer("Bjarne");
