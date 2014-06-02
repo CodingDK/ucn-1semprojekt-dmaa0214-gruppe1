@@ -35,7 +35,7 @@ public class CategoryCtr {
 	
 	/**
 	 * Removes the selected category
-	 * @throws NoSelectionException
+	 * @param Category
 	 */
 	public void removeCategory(Category c) {
 		ItemCont iContDel = ItemCont.getInstance(c);
@@ -83,9 +83,7 @@ public class CategoryCtr {
 	public Category findCategory(int id){
 		return cCont.findCategory(id);
 	} 
-	
-	
-	
+
 	/**
 	 * Returns all Categorys as ArrayList
 	 * @return ArrayList<Category>
@@ -93,7 +91,12 @@ public class CategoryCtr {
 	public ArrayList<Category> getAllCategories(){
 		return cCont.getAll();
 	}
-
+	
+	/**
+	 * searchCategory - Searches for categories containing the param(name), and returns a list with matches
+	 * @param name
+	 * @return ArrayList<Category>
+	 */
 	public ArrayList<Category> searchCategory(String name) {
 		ArrayList<Category> categories = new ArrayList<Category>();
 		CategoryCtr cCtr = new CategoryCtr();
