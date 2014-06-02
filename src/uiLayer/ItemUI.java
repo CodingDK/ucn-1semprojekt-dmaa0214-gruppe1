@@ -63,7 +63,7 @@ public class ItemUI extends SuperUI{
 				}  else if(choice == 11){
 					new CreateItemUI(selectedCategory, selectedStorage);
 				} else if(choice == 12){
-					if(selectedItem != null){
+					if(selectedItem == null){
 						selectedItem = pickItem();
 						updateItem();
 					}else{
@@ -353,7 +353,6 @@ public class ItemUI extends SuperUI{
 						}
 						
 						if(retItem != null){
-							selectedItem = retItem; //asd
 							System.out.println("Vare " + retItem.getName() + " valgt");
 							pause();
 							done = true;
