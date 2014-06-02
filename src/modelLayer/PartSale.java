@@ -34,10 +34,6 @@ public class PartSale {
 		return item;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
 	public String toString() {
 		return "Vare: " + item.getName() + ", Antal: " + amount;
 	}
