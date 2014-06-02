@@ -14,49 +14,46 @@ public class CreateItemUI extends SuperUI {
 	public CreateItemUI(Category c, Storage s) {
 		this.selectedCategory = c;
 		this.selectedStorage = s;
-
-		try{
-			boolean exit = false;
-			while(!exit){
-				int choice = writeItemMenu();
-				if(choice == 1){
-					ItemUI iUi = new ItemUI("DryRun");
-					selectedCategory = iUi.pickCategory();
-				}else if(choice == 2){
-					ItemUI iUi = new ItemUI("DryRun");
-					selectedStorage = iUi.pickStorage();
-				}else if(choice == 3){
-					if(selectedCategory != null && selectedStorage != null){
-						createItem();
-					}
-				}else if(choice == 4){
-					exit = true;
+		
+		menu();
+	}
+	
+	private void menu(){
+		boolean exit = false;
+		while(!exit){
+			int choice = writeItemMenu();
+			if(choice == 1){
+				ItemUI iUi = new ItemUI("DryRun");
+				selectedCategory = iUi.pickCategory();
+			}else if(choice == 2){
+				ItemUI iUi = new ItemUI("DryRun");
+				selectedStorage = iUi.pickStorage();
+			}else if(choice == 3){
+				if(selectedCategory != null && selectedStorage != null){
+					createItem();
 				}
+			}else if(choice == 4){
+				exit = true;
 			}
-		}catch(Exception e){
-			e.printStackTrace();
 		}
 	}
 	
 	private int writeItemMenu(){
 		int choice = 0;
-		try{
-			System.out.println("## Opret Vare ##");
-			String category = (selectedCategory != null) ? " (" + selectedCategory.getName() + ")" : "";
-			System.out.println(" 1. Vælg Kategori" + category);
-			String storage = (selectedStorage != null) ? " (" + selectedStorage.getName() + ")" : "";
-			System.out.println(" 2. Vælg Lager" + storage);
-			
-			if(selectedStorage != null && selectedCategory != null){
-				System.out.println(" 3. Opret Vare (Lager: " + selectedStorage.getName() + ", Kategori: " + selectedCategory.getName() + ")");
-			}else{
-				System.out.println("Lager og Kategori skal vare valgt for at oprette en vare");
-			}
-			System.out.println(" 4. Gå tilbage");
-			choice = requestInt("Valg", null, false);
-		} catch(InputMismatchException e){
-			System.out.println("Forkert input!");
+		System.out.println("## Opret Vare ##");
+		String category = (selectedCategory != null) ? " (" + selectedCategory.getName() + ")" : "";
+		System.out.println(" 1. Vælg Kategori" + category);
+		String storage = (selectedStorage != null) ? " (" + selectedStorage.getName() + ")" : "";
+		System.out.println(" 2. Vælg Lager" + storage);
+		
+		if(selectedStorage != null && selectedCategory != null){
+			System.out.println(" 3. Opret Vare (Lager: " + selectedStorage.getName() + ", Kategori: " + selectedCategory.getName() + ")");
+		}else{
+			System.out.println("Lager og Kategori skal vare valgt for at oprette en vare");
 		}
+		System.out.println(" 4. Gå tilbage");
+		choice = requestInt("Valg", null, false);
+		
 		return choice;
 	}
 	
