@@ -36,6 +36,9 @@ public class Customer extends Person{
 		this.credit = credit;
 	}
 	
+	/**
+	 * @return superclass toString.
+	 */
 	public String toString(){
 		return super.toString();
 	}

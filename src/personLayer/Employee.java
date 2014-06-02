@@ -64,9 +64,11 @@ public class Employee extends Person{
 		this.admin = admin;
 	}
 
+	/**
+	 * getPassword - Get the password of the employee.
+	 * @return String with password
+	 */
 	public String getPassword() {
 		return password;
 	}
-	
-	
 }

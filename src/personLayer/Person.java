@@ -1,10 +1,25 @@
 package personLayer;
-
+/**
+ * Person holds information for persons in the system.
+ * 
+ * @author Group 1
+ * @version 0.1
+ * 
+ */
 public class Person {
 	private static int idIterator;
 	protected int id;
 	protected String name, phoneNr, street, email, city, postCode;
 	
+	/**
+	 * Constructor for person objects.
+	 * @param name The name of the person.
+     * @param phoneNr The phoneNr of the person.
+     * @param street The Street of the person.
+     * @param email The email of the person.
+     * @param city The city of the person.
+     * @param postCode The postCode of the person.
+	 */
 	public Person(String name, String phoneNr, String street, String email, String city, String postCode){
 		idIterator++;
 		this.id = idIterator;
@@ -43,8 +58,6 @@ public class Person {
 	public void setPhoneNr(String phoneNr) {
 		this.phoneNr = phoneNr;
 	}
-
-	
 
 	/**
 	 * @return the street
@@ -109,6 +122,9 @@ public class Person {
 		return id;
 	}
 	
+	/**
+	 * @return id of the person.
+	 */
 	public String toString(){
 		return "#"+id + " ";
 	}
