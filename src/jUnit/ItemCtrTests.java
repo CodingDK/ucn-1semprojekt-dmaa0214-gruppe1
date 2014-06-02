@@ -59,13 +59,6 @@ public class ItemCtrTests {
 	}
 
 	@Test
-	public void testFindStorageStringAndInt() {
-		ItemCtr iCtr = new ItemCtr();
-		Storage s = iCtr.findStorage("Cookie");
-		assertEquals(iCtr.findStorage(s.getId()).getId(), s.getId());
-	}
-
-	@Test
 	public void testRemoveStorage() {
 		ItemCtr iCtr = new ItemCtr();
 		Storage s = iCtr.findStorage("Cookie2");

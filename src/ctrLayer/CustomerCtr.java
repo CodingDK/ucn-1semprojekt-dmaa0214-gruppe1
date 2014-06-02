@@ -6,38 +6,38 @@ import modelLayer.*;
 
 public class CustomerCtr {
 	private CustomerCont cCont;
-	
+
 	public CustomerCtr(){
 		cCont = CustomerCont.getInstance();
 	}
-	
-	/**
-	 * Finds a Customer by name or phone
-	 * @param nameOrPhone
-	 * @return Customer
-	 */
-	public Customer findCustomer(String nameOrPhone){
-		return cCont.findCustomer(nameOrPhone);
-	}
-	
-	/**
-	 * Finds a Business Customer by Company name
-	 * @param company
-	 * @return Business
-	 */
-	public Business findBusiness(String company){
-		return cCont.findBusiness(company);
-	}
-	
-	/**
-	 * Finds a CustomerObj by ID
-	 * @param id
-	 * @return Customer
-	 */
-	public Customer findCustomer(int id){
-		return cCont.findCustomer(id);
-	}
-	
+
+	//	/**
+	//	 * Finds a Customer by name or phone
+	//	 * @param nameOrPhone
+	//	 * @return Customer
+	//	 */
+	//	public Customer findCustomer(String nameOrPhone){
+	//		return cCont.findCustomer(nameOrPhone);
+	//	}
+	//	
+	//	/**
+	//	 * Finds a Business Customer by Company name
+	//	 * @param company
+	//	 * @return Business
+	//	 */
+	//	public Business findBusiness(String company){
+	//		return cCont.findBusiness(company);
+	//	}
+	//	
+	//	/**
+	//	 * Finds a CustomerObj by ID
+	//	 * @param id
+	//	 * @return Customer
+	//	 */
+	//	public Customer findCustomer(int id){
+	//		return cCont.findCustomer(id);
+	//	}
+
 	/**
 	 * Creates a Private Customer
 	 * 
@@ -55,7 +55,7 @@ public class CustomerCtr {
 		cCont.addCustomer(returnPrivate);
 		return returnPrivate;
 	}
-	
+
 	/**
 	 * Updates a customers data
 	 * 
@@ -111,7 +111,7 @@ public class CustomerCtr {
 			throw new NullPointerException("Kunden eksistere ikke");
 		}
 	}
-	
+
 	/**
 	 * Removes a Customer by ID
 	 * @param id
@@ -119,7 +119,7 @@ public class CustomerCtr {
 	public void removeCustomer(int id){
 		cCont.removeCustomer(cCont.findCustomer(id));
 	}
-	
+
 	/**
 	 * Creates a Business Customer
 	 * @param name
@@ -136,7 +136,7 @@ public class CustomerCtr {
 		cCont.addCustomer(returnBusiness);
 		return returnBusiness;
 	}
-	
+
 	/**
 	 * searchCustomer - Searches for Customers containing the param(partNamePhone), and returns a list of matches
 	 * @param partNamePhone
@@ -154,7 +154,7 @@ public class CustomerCtr {
 			}
 		return foundCustomers;
 	}
-	
+
 	/**
 	 * searchCustomer - Searches for Customers containing the param(partCompName), and returns a list of matches
 	 * @param partNamePhone
