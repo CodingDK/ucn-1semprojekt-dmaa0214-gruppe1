@@ -78,8 +78,8 @@ public class PersonUI extends SuperUI{
 	
 	
 	/**
-	 * createPrivate - Create customer
-	 * @return retC Returns a customer object
+	 * createCustomer - Create a private or business customer
+	 * @return Customer
 	 */
 	public Customer createCustomer() {
 		Customer retC = null;
@@ -146,6 +146,7 @@ public class PersonUI extends SuperUI{
 
 	/**
 	 * findCustomer - Find a customer in the system by the name or phone number
+	 * @return Customer
 	 */
 	public Customer findCustomer() {
 		Customer retC = null;
@@ -204,7 +205,7 @@ public class PersonUI extends SuperUI{
 	}
 
 	/**
-	 * updatePrivate - Udates a privat customer
+	 * updatePrivate - Updates a private customer
 	 * @param customer
 	 */
 	public void updateCustomer(Customer customer) {
@@ -261,7 +262,10 @@ public class PersonUI extends SuperUI{
 	}
 
 
-
+	/**
+	 * findEmployee - Find an employee or administrator in the system
+	 * @return Employee
+	 */
 	public Employee findEmployee(){	
 		Employee retE = null;
 		System.out.println("\n## Søg medarbejder ##");
@@ -309,7 +313,7 @@ public class PersonUI extends SuperUI{
 
 
 	/**
-	 * Update Empluyee
+	 * Update Employee - Update the information about an employee or administrator
 	 * @param employee
 	 */
 	private void updateEmployee(Employee employee) {
@@ -351,7 +355,7 @@ public class PersonUI extends SuperUI{
 
 	/**
 	 * removeEmployee - Used to remove an employee from the Employee object
-	 * @param Employee
+	 * @param employee
 	 */
 	private void removeEmployee(Employee employee) {
 		String name = selectedEmployee.getName();
