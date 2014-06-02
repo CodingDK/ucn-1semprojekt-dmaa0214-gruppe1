@@ -74,26 +74,6 @@ public class StorageCont{
 	}
 	
 	/**
-     * findStorage - Get a Storage object from the id of the Storage.
-     * @param id - The id of the Storage.
-     * @return Storage object of the Storage or null if not found.
-     */
-	public Storage findStorage(int id){
-		Storage retStorage = null;
-    	boolean found = false;
-    	int i = 0;
-    	while(i < storages.size() && !found) {
-    		if(storages.get(i).getId() == id) {
-    			retStorage = storages.get(i);
-    			found = true;
-    		}
-    		i++;
-    	}
-    	
-    	return retStorage;
-	}
-	
-	/**
 	 * removeStorage - Remove a Storage object from the container.
 	 * @param s The Storage object to remove.
 	 */
