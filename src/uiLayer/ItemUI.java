@@ -27,17 +27,17 @@ public class ItemUI extends SuperUI{
 				if(choice == 1){ 
 					createCategory();
 				} else if(choice == 2){ 
-					if(selectedCategory != null){
+					if(selectedCategory == null){
+						selectedCategory = pickCategory();
 						updateCategory();
 					}else{
-						selectedCategory = pickCategory();
 						updateCategory();
 					}
 				} else if(choice == 3){ 
-					if(selectedCategory != null){
+					if(selectedCategory == null){
+						selectedCategory = pickCategory();
 						removeCategory();
 					}else{
-						selectedCategory = pickCategory();
 						removeCategory();
 					}
 				} else if(choice == 4){ 
@@ -45,17 +45,17 @@ public class ItemUI extends SuperUI{
 				} else if(choice == 6){
 					createStorage();
 				} else if(choice == 7){ 
-					if(selectedStorage != null){
+					if(selectedStorage == null){
+						selectedStorage = pickStorage();
 						updateStorage();
 					}else{
-						selectedStorage = pickStorage();
 						updateStorage();
 					}
 				} else if(choice == 8){
-					if(selectedStorage != null){
+					if(selectedStorage == null){
+						selectedStorage = pickStorage();
 						removeStorage();
 					}else{
-						selectedStorage = pickStorage();
 						removeStorage();
 					}
 				} else if(choice == 9){
@@ -64,16 +64,16 @@ public class ItemUI extends SuperUI{
 					new CreateItemUI(selectedCategory, selectedStorage);
 				} else if(choice == 12){
 					if(selectedItem != null){
+						selectedItem = pickItem();
 						updateItem();
 					}else{
-						pickItem();
 						updateItem();
 					}
 				} else if(choice == 13){
-					if(selectedItem != null){
+					if(selectedItem == null){
+						selectedItem = pickItem();
 						removeItem();
 					}else{
-						pickItem();
 						removeItem();
 					}
 				} else if(choice == 14){
@@ -381,7 +381,7 @@ public class ItemUI extends SuperUI{
 	private void searchCategory() {
 		try{
 			System.out.println("## Søg Kategori ##");
-			String name = requestString("Kategori navn: ", null, null, false);
+			String name = requestString("Kategori navn", null, null, false);
 			CategoryCtr cCtr = new CategoryCtr();
 			ArrayList<Category> cats = cCtr.searchCategory(name);
 			if(cats != null){
@@ -431,85 +431,108 @@ public class ItemUI extends SuperUI{
 	 * updateItem - TUI for updating an Item
 	 */
 	private void updateItem() {
-		ItemCtr iCtr = new ItemCtr();
-		System.out.println("## Opdater Vare : " + selectedItem.getName() + " ##");
-		
-		String name = requestString("Navn(" + selectedItem.getName() + ")", null, null, true);
-		int amount = requestInt("Antal(" + selectedItem.getAmount() + ")", null, true);
-		int reserved = requestInt("Reserveret(" + selectedItem.getReserved() + ")", null, true);
-		double salePrice = requestDouble("Salgs Pris(" + selectedItem.getSalePrice() + ")", true);
-		double purchasePrice = requestDouble("K�bs Pris(" + selectedItem.getPurchasePrice() + ")", true);
-		double bulkSalePrice = requestDouble("Bulk Pris(" + selectedItem.getBulkSalePrice() + ")", true);
-		int bulk = requestInt("Bulk(" + selectedItem.getBulk() + ")", null, true);
-		String location = requestString("Placering(" + selectedItem.getLocation() + ")", 0, null, true);
-		int min = requestInt("Minimum Lagerbeholdning(" + selectedItem.getMin() + ")", null, true);
-		int max = requestInt("Maksimal Lagerbeholdning(" + selectedItem.getMax() + ")", min, true);
-		Storage storage = null;
-		Category category = null;
-		
-		if(confirm("Vil du ændre Lager?(" + selectedItem.getStorage().getName() + ")")){
-			while(storage == null){
-				storage = pickStorage();
+		if(selectedItem != null){
+			ItemCtr iCtr = new ItemCtr();
+			System.out.println("## Opdater Vare : " + selectedItem.getName() + " ##");
+			
+			String name = requestString("Navn(" + selectedItem.getName() + ")", null, null, true);
+			int amount = requestInt("Antal(" + selectedItem.getAmount() + ")", null, true);
+			int reserved = requestInt("Reserveret(" + selectedItem.getReserved() + ")", null, true);
+			double salePrice = requestDouble("Salgs Pris(" + selectedItem.getSalePrice() + ")", true);
+			double purchasePrice = requestDouble("K�bs Pris(" + selectedItem.getPurchasePrice() + ")", true);
+			double bulkSalePrice = requestDouble("Bulk Pris(" + selectedItem.getBulkSalePrice() + ")", true);
+			int bulk = requestInt("Bulk(" + selectedItem.getBulk() + ")", null, true);
+			String location = requestString("Placering(" + selectedItem.getLocation() + ")", 0, null, true);
+			int min = requestInt("Minimum Lagerbeholdning(" + selectedItem.getMin() + ")", null, true);
+			int max = requestInt("Maksimal Lagerbeholdning(" + selectedItem.getMax() + ")", min, true);
+			Storage storage = null;
+			Category category = null;
+			
+			if(confirm("Vil du ændre Lager?(" + selectedItem.getStorage().getName() + ")")){
+				while(storage == null){
+					storage = pickStorage();
+				}
 			}
-		}
-		if(confirm("Vil du ændre Kategori?(" + selectedItem.getCategory().getName() + ")")){
-			while(category == null){
-				category = pickCategory();
+			if(confirm("Vil du ændre Kategori?(" + selectedItem.getCategory().getName() + ")")){
+				while(category == null){
+					category = pickCategory();
+				}
 			}
+			
+			iCtr.updateItem(selectedItem.getId(), name, amount, reserved, salePrice, purchasePrice, 
+					bulkSalePrice, bulk, location, storage, max, min, category);
+		}else{
+			System.out.println("En Vare skal være valgt før den kan rettes");
 		}
-		
-		iCtr.updateItem(selectedItem.getId(), name, amount, reserved, salePrice, purchasePrice, 
-				bulkSalePrice, bulk, location, storage, max, min, category);
 	}
 	
 	/**
 	 * updateCategory - TUI for updating a Category
 	 */
 	private void updateCategory() {
-		CategoryCtr cCtr = new CategoryCtr();
-		String name = requestString("Navn(" + selectedCategory.getName() + ")", null, null, false);
-		cCtr.updateCategory(selectedCategory, name);
-
+		if(selectedCategory != null){
+			CategoryCtr cCtr = new CategoryCtr();
+			String name = requestString("Navn(" + selectedCategory.getName() + ")", null, null, false);
+			cCtr.updateCategory(selectedCategory, name);
+		}else{
+			System.out.println("En Kategori skal være valgt før den kan rettes");
+		}
 	}
 	
 	/**
 	 * updateStorage - TUI for updating a Storage
 	 */
 	private void updateStorage(){
-		ItemCtr iCtr = new ItemCtr();
-		String name = requestString("Navn(" + selectedStorage.getName() + ")", null, null, false);
-		iCtr.updateStorage(selectedStorage, name);
+		if(selectedStorage != null){
+			ItemCtr iCtr = new ItemCtr();
+			String name = requestString("Navn(" + selectedStorage.getName() + ")", null, null, false);
+			iCtr.updateStorage(selectedStorage, name);
+		}else{
+			System.out.println("Et Lager skal være valgt før den kan rettes");
+		}
 	}
 	
 	/**
 	 * removeItem - TUI for removing Items
 	 */
 	private void removeItem() {
-		ItemCtr iCtr = new ItemCtr();
-		iCtr.removeItem(selectedItem);
+		if(selectedItem != null){
+			ItemCtr iCtr = new ItemCtr();
+			iCtr.removeItem(selectedItem);
+		}else{
+			System.out.println("En Vare skal være valgt før den kan fjernes");
+		}
 	}
 	
 	/**
 	 * removeCategory - TUI for removing a Category
 	 */
 	private void removeCategory() {
-		CategoryCtr cCtr = new CategoryCtr();
-		cCtr.removeCategory(selectedCategory);
-		selectedCategory = null;
+		if(selectedCategory != null){
+			CategoryCtr cCtr = new CategoryCtr();
+			cCtr.removeCategory(selectedCategory);
+			selectedCategory = null;
+		}else{
+			System.out.println("En Kategori skal være valgt før den kan fjernes");
+		}
 	}
 	
 	/**
 	 * removeStorage - TUI for removing Storage
 	 */
 	private void removeStorage(){
-		ItemCtr iCtr = new ItemCtr();
-		if(!iCtr.isPrimary(selectedStorage)){
-			iCtr.removeStorage(selectedStorage);
+		if(selectedStorage != null){
+			ItemCtr iCtr = new ItemCtr();
+			if(!iCtr.isPrimary(selectedStorage)){
+				iCtr.removeStorage(selectedStorage);
+			}else{
+				System.out.println("Dette lager kan ikke slettes");
+				pause();
+			}
+			selectedStorage = null;
 		}else{
-			System.out.println("Dette lager kan ikke slettes");
-			pause();
+			System.out.println("Et Lager skal være valgt før den kan fjernes");
 		}
-		selectedStorage = null;
 	}
 	
 }
