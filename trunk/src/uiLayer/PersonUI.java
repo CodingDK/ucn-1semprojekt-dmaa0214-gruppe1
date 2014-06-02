@@ -15,10 +15,12 @@ public class PersonUI extends SuperUI{
 
 	public PersonUI(String DryRun){
 		selectedCustomer = null;
+		selectedEmployee = null;
 	}
 
 	public PersonUI(){
 		selectedCustomer = null;
+		selectedEmployee = null;
 		
 		menu();
 	}
