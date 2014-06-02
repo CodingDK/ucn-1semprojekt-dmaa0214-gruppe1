@@ -1,7 +1,5 @@
 package uiLayer;
 
-import java.util.InputMismatchException;
-
 import ctrLayer.ItemCtr;
 import modelLayer.Category;
 import modelLayer.Item;
