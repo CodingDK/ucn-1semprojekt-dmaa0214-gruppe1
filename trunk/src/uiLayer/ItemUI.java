@@ -353,6 +353,7 @@ public class ItemUI extends SuperUI{
 						}
 						
 						if(retItem != null){
+							selectedItem = retItem; //asd
 							System.out.println("Vare " + retItem.getName() + " valgt");
 							pause();
 							done = true;
