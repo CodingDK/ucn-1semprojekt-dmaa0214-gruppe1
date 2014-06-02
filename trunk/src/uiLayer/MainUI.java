@@ -15,6 +15,9 @@ public class MainUI extends SuperUI{
 		menu();
 	}
 	
+	/**
+	 * menu - Handels the selection part of the UI
+	 */
 	private void menu(){
 		boolean exit = false;
 		boolean testCreated = false;
@@ -47,6 +50,10 @@ public class MainUI extends SuperUI{
 		}
 	}
 	
+	/**
+	 * writeMenu - Write the Main menu and get a choice.
+	 * @return The choice by the user.
+	 */
 	private int writeMenu(){
 		int choice = 0;
 		try{
