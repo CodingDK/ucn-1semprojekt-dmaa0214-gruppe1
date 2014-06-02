@@ -222,10 +222,13 @@ public class CreateSaleUI extends SuperUI{
 				System.out.println(i.getName() + " tilføjet til salget");
 				pause();
 			} catch (NullPointerException e) {
-				System.out.println(e);
+				System.out.println(e.getMessage());
 				pause();
 			} catch (NotEnoughItemsException e) {
-				System.out.println(e);
+				System.out.println(e.getMessage());
+				pause();
+			} catch (SaleNotCreatedException e) {
+				System.out.println(e.getMessage());
 				pause();
 			}
 		}
