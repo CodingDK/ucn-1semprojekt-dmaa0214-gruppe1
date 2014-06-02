@@ -138,9 +138,9 @@ public class CustomerCtr {
 	}
 	
 	/**
-	 * searchCustomer
+	 * searchCustomer - Searches for Customers containing the param(partNamePhone), and returns a list of matches
 	 * @param partNamePhone
-	 * @return Customer
+	 * @return ArrayList<Customer>
 	 */
 	public ArrayList<Customer> searchCustomer(String partNamePhone){
 		ArrayList<Customer> foundCustomers = new ArrayList<Customer>();
@@ -155,6 +155,11 @@ public class CustomerCtr {
 		return foundCustomers;
 	}
 	
+	/**
+	 * searchCustomer - Searches for Customers containing the param(partCompName), and returns a list of matches
+	 * @param partNamePhone
+	 * @return ArrayList<Customer>
+	 */
 	public ArrayList<Customer> searchBusiness(String partCompName){
 		ArrayList<Customer> foundBusiness = new ArrayList<Customer>();
 		CustomerCont cCont = CustomerCont.getInstance();
