@@ -12,7 +12,6 @@ import modelLayer.*;
  * 
  */
 public class EmployeeCtr{
-	
 	private EmployeeCont eCont;
 	
 	/**
@@ -24,13 +23,12 @@ public class EmployeeCtr{
     
     /**
      * findEmployee - Return Employee object found.
-     * @param employeeNr The employeeNr of the Employee object to find.
+     * @param employeeNr The name or employeeNr of the Employee object to find.
      * @return Employee - The Employee object of Employee or null.
      */
     public Employee findEmployee(String nameOrEmployeeNr){
     	return eCont.findEmployee(nameOrEmployeeNr);
     }
-    
     
     /**
      * createEmployee - Create a new Employee.
@@ -95,16 +93,16 @@ public class EmployeeCtr{
     
     /**
      * removeEmployee - Remove a Employee object from the Container.
-     * @param e The Employee to remove.
+     * @param Employee The Employee to remove.
      */
     public void removeEmployee(Employee e) {
     	eCont.removeEmployee(e);
     }
     
     /**
-	 * searchEmployee
+	 * searchEmployee - Searches for Employees containing the param(partNameOrEmpNr), and returns a list of matches
 	 * @param partNameOrEmpNr
-	 * @return Employee
+	 * @return ArrayList<Employee>
 	 */
 	public ArrayList<Employee> searchEmployee(String partNameOrEmpNr){
 		ArrayList<Employee> foundEmployees = new ArrayList<Employee>();
