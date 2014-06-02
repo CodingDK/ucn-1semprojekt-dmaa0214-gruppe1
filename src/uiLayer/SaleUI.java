@@ -22,6 +22,9 @@ public class SaleUI extends SuperUI{
 		menu();
 	}
 	
+	/**
+	 * menu - Handels the selection part of the UI
+	 */
 	private void menu(){
 		boolean exit = false;
 		while(!exit){
@@ -42,8 +45,29 @@ public class SaleUI extends SuperUI{
 			}
 		}
 	}
-	
 
+	/**
+	 * writeSaleMenu - Write the sale menu and get a choice.
+	 * @return The choice by the user.
+	 */
+	private int writeSaleMenu(){
+		int choice = 0;
+		try{
+			System.out.println("## Salgs Menu ##");
+			System.out.println("1. Opret Salg");
+			System.out.println("2. Genoptag Parkeret Salg");
+			System.out.println("3. Print Alle Salg");
+			System.out.println("4. Gå tilbage");
+			choice = requestInt("Valg", null, false);		
+		} catch(InputMismatchException e){
+			System.out.println("Forkert input!");
+		}
+		return choice;
+	}
+	
+	/**
+	 * printSales - prints out all the sales
+	 */
 	private void printSales() {
 		System.out.println("## Print Alle Salg ##");
 		SaleCtr sCtr = new SaleCtr();
@@ -63,6 +87,10 @@ public class SaleUI extends SuperUI{
 		}
 	}
 
+	/**
+	 * pickParkedSale - Finds all parkeds sales, and lets the user pick one
+	 * @return Sale
+	 */
 	private Sale pickParkedSale() {
 		Sale retSale = null;
 		try{
@@ -100,24 +128,4 @@ public class SaleUI extends SuperUI{
 		return retSale;
 		
 	}
-
-	/**
-	 * writeSaleMenu - Write the sale menu and get a choice.
-	 * @return The choice by the user.
-	 */
-	private int writeSaleMenu(){
-		int choice = 0;
-		try{
-			System.out.println("## Salgs Menu ##");
-			System.out.println("1. Opret Salg");
-			System.out.println("2. Genoptag Parkeret Salg");
-			System.out.println("3. Print Alle Salg");
-			System.out.println("4. Gå tilbage");
-			choice = requestInt("Valg", null, false);		
-		} catch(InputMismatchException e){
-			System.out.println("Forkert input!");
-		}
-		return choice;
-	}
-	
 }

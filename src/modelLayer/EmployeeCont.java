@@ -50,7 +50,7 @@ public class EmployeeCont{
     }
     
     /**
-	 * Finds and returns a EmployeeObj by name or employee number
+	 * findEmployee - Finds and returns a EmployeeObj by name or employee number
 	 * @param nameOrEmployeeNr - The employeeNr of the Employee.
      * @return Employee object of the Employee or null if not found.
 	 */
