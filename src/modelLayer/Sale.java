@@ -155,5 +155,10 @@ public class Sale {
 	}
 	
 	
+	//** Skal fjernes **// ASD LAU FFS GOGOGOGO Amagawd
+	
+	public void setDate(Date date){
+		this.date = date;
+	}
 
 }

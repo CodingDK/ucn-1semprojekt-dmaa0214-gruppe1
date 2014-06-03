@@ -13,14 +13,21 @@ import ctrLayer.SaleCtr;
 public class SaleUI extends SuperUI{
 	
 	/**
+	 * Constructor for running the SaleUI from other UI's
+	 * @param s
+	 */
+	public SaleUI(String s){
+		
+	}
+	
+	/**
 	 * Constructor for the SaleUI.
 	 */
 	public SaleUI(){
-		SaleCtr sCtr = new SaleCtr();
-		sCtr.cleanUp();
+		cleanUp();
 		menu();
 	}
-	
+
 	/**
 	 * menu - Handels the selection part of the UI
 	 */
@@ -140,5 +147,13 @@ public class SaleUI extends SuperUI{
 		
 		return retSale;
 		
+	}
+	
+	/**
+	 *  cleanUp - Cleans up the parked sales
+	 */
+	public void cleanUp() {
+		SaleCtr sCtr = new SaleCtr();
+		sCtr.cleanUp();
 	}
 }
