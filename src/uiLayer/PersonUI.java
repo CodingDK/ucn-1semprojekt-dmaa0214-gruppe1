@@ -94,8 +94,8 @@ public class PersonUI extends SuperUI{
 		System.out.println(" 2. Opret kunde" + pP);
 		System.out.println(" 3. Opdater kunde" + pP);
 		System.out.println(" 4. Slet kunde" + pP); 
-		System.out.println("--------------------------");
 		if(admin){
+			System.out.println("--------------------------");
 			System.out.println(" 5. Opret medarbejder");
 			System.out.println(" 6. Søg medarbejder");
 			System.out.println(" 7. Opdater medarbejder" + m);
@@ -145,6 +145,7 @@ public class PersonUI extends SuperUI{
 					exit = true;
 				}
 				retC = cCtr.createBusinessCustomer(name, phoneNr, street, email, city, postCode, company, cvrNr);
+				selectedCustomer = retC;
 				exit = true;
 			}
 		}
