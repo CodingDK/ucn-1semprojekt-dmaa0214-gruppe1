@@ -141,7 +141,7 @@ public class PersonUI extends SuperUI{
 				String phoneNr 		= requestString("Telefon nr", 8, 12, false);
 				String email 		= requestString("E-mail", 5, 50, false);
 				if(choice == 2){
-					String cprNr 		= requestString("CPR nr", 10, 11, false);
+					String cprNr 		= requestString("CPR nr", 10, 15, false);
 					String pictureId 	= requestString("Billede ID", null, null, false);
 					retC = cCtr.createPrivateCustomer(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
 					exit = true;
@@ -171,7 +171,7 @@ public class PersonUI extends SuperUI{
 		String city			= requestString("By", 1, 25, false);
 		String phoneNr		= requestString("Telefon nr", 8, 12, false);
 		String email		= requestString("E-mail", 5, 50, false);
-		String cprNr		= requestString("CPR nr", 10, 11, false);
+		String cprNr		= requestString("CPR nr", 10, 15, false);
 		
 		if(confirm("Vil du give denne medarbejder administrator rettigheder") ){
 			rights = true;

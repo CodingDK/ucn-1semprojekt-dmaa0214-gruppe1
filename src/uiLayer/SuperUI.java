@@ -223,6 +223,7 @@ public abstract class SuperUI {
 	 * login - Administrator login. Asks you to enter employee ID and a password.
 	 */
 	protected void login(){
+		flush();
 		System.out.println("## Administrator Login ##");
 		String employeeID = requestString("Medarbejder Nummer", null, null, false);
 		String password = requestString("Kodeord", null, null, false);
@@ -231,15 +232,16 @@ public abstract class SuperUI {
 		Employee e = eCtr.findEmployee(employeeID);
 		if(e != null){
 			if(!e.getAdmin()){
-				System.out.println("Dette mederbajder nummer har ikke administrator rettigheder");
+				System.out.println(nL + "Dette mederbajder nummer har ikke administrator rettigheder");
 				pause();
 			}else if(e.getAdmin() && e.getPassword().equals(password)){
-				System.out.println("Du er nu logget ind som administrator");
+				System.out.println(nL + "Du er nu logget ind som administrator");
 				admin = true;
 				pause();
 			}
 		}else{
-			System.out.println("Denne medarbejder eksistere ikke");
+			System.out.println(nL + "Denne medarbejder eksistere ikke");
+			pause();
 		}
 		
 	}
