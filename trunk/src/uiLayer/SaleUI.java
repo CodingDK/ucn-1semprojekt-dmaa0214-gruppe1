@@ -53,7 +53,7 @@ public class SaleUI extends SuperUI{
 	private int writeSaleMenu(){
 		int choice = 0;
 		try{
-			System.out.println("## Salgs Menu ##");
+			System.out.println("\n## Salgs Menu ##");
 			System.out.println("1. Opret Salg");
 			System.out.println("2. Genoptag Parkeret Salg");
 			System.out.println("3. Print Alle Salg");
@@ -69,7 +69,7 @@ public class SaleUI extends SuperUI{
 	 * printSales - prints out all the sales
 	 */
 	private void printSales() {
-		System.out.println("## Print Alle Salg ##");
+		System.out.println("\n## Print Alle Salg ##");
 		SaleCtr sCtr = new SaleCtr();
 		ArrayList<Sale> sales = sCtr.getSales();
 		if(sales != null && sales.size() > 0){
@@ -96,7 +96,7 @@ public class SaleUI extends SuperUI{
 		try{
 			boolean done = false;
 			while(!done){
-				System.out.println("## Vælg Salg ##");
+				System.out.println("\n## Vælg Salg ##");
 				SaleCtr sCtr = new SaleCtr();
 				ArrayList<Sale> sales = sCtr.getParkedSales();
 				if(sales != null && sales.size() > 0){
