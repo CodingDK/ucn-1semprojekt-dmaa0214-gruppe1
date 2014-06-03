@@ -51,6 +51,7 @@ public class SaleUI extends SuperUI{
 	 * @return The choice by the user.
 	 */
 	private int writeSaleMenu(){
+		flush();
 		int choice = 0;
 		try{
 			System.out.println("\n## Salgs Menu ##");
@@ -80,7 +81,8 @@ public class SaleUI extends SuperUI{
 					System.out.println(" - " + ps);
 				}
 			}
-			System.out.println("/n");
+			System.out.println("");
+			pause();
 		}else{
 			System.out.println("Der er ikke foretaget nogen salg");
 			pause();
