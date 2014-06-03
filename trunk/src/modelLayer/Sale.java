@@ -138,10 +138,10 @@ public class Sale {
 	@Override
 	public String toString() {
 		String retString = "";
-		if(customer instanceof Business){
+		if(customer instanceof Private){
 			retString = "#" + id + " Kunde: " + customer.getName() + ", Total Pris: " + totalPrice + ", Parkeret: " + done
 					+ ", Dato: " + getDateToString();
-		}else if(customer instanceof Private){
+		}else if(customer instanceof Business){
 			retString = "#" + id + " Kunde: " + ((Business) customer).getCompany() + ", Total Pris: " + totalPrice + ", Parkeret: " + done
 					+ ", Dato: " + getDateToString();
 		}
