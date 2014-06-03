@@ -313,11 +313,10 @@ public class ItemUI extends SuperUI{
 		if(items != null){
 			System.out.println(items.size() + " Varer Fundet");
 			for(Item i : items){
-				String amount = "(";
+				String amount = "" + i.getAmount();
 				if(i.getReserved() != 0){
-					amount += i.getReserved() + "/";
+					amount += "(" + i.getReserved() + ")";
 				}
-				amount += i.getAmount() + ")";
 				System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + amount + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
 			}
 			pause();
