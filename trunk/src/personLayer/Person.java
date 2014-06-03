@@ -1,4 +1,5 @@
 package personLayer;
+
 /**
  * Person holds information for persons in the system.
  * 
@@ -10,9 +11,10 @@ public class Person {
 	private static int idIterator;
 	protected int id;
 	protected String name, phoneNr, street, email, city, postCode;
-
+	
 	/**
 	 * Constructor for person objects.
+	 * 
 	 * @param name The name of the person.
 	 * @param phoneNr The phoneNr of the person.
 	 * @param street The Street of the person.
@@ -20,9 +22,9 @@ public class Person {
 	 * @param city The city of the person.
 	 * @param postCode The postCode of the person.
 	 */
-	public Person(String name, String phoneNr, String street, String email, String city, String postCode){
+	public Person(final String name, final String phoneNr, final String street, final String email, final String city, final String postCode) {
 		idIterator++;
-		this.id = idIterator;
+		id = idIterator;
 		this.name = name;
 		this.phoneNr = phoneNr;
 		this.street = street;
@@ -30,101 +32,101 @@ public class Person {
 		this.city = city;
 		this.postCode = postCode;
 	}
-
+	
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
 	 * @param name the name to set
 	 */
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
-
+	
 	/**
 	 * @return the phoneNr
 	 */
 	public String getPhoneNr() {
 		return phoneNr;
 	}
-
+	
 	/**
 	 * @param phoneNr the phoneNr to set
 	 */
-	public void setPhoneNr(String phoneNr) {
+	public void setPhoneNr(final String phoneNr) {
 		this.phoneNr = phoneNr;
 	}
-
+	
 	/**
 	 * @return the street
 	 */
 	public String getStreet() {
 		return street;
 	}
-
+	
 	/**
 	 * @param street the street to set
 	 */
-	public void setStreet(String street) {
+	public void setStreet(final String street) {
 		this.street = street;
 	}
-
+	
 	/**
 	 * @return the email
 	 */
 	public String getEmail() {
 		return email;
 	}
-
+	
 	/**
 	 * @param email the email to set
 	 */
-	public void setEmail(String email) {
+	public void setEmail(final String email) {
 		this.email = email;
 	}
-
+	
 	/**
 	 * @return the city
 	 */
 	public String getCity() {
 		return city;
 	}
-
+	
 	/**
 	 * @param city the city to set
 	 */
-	public void setCity(String city) {
+	public void setCity(final String city) {
 		this.city = city;
 	}
-
+	
 	/**
 	 * @return the postCode
 	 */
 	public String getPostCode() {
 		return postCode;
 	}
-
+	
 	/**
 	 * @param postCode the postCode to set
 	 */
-	public void setPostCode(String postCode) {
+	public void setPostCode(final String postCode) {
 		this.postCode = postCode;
 	}
-
+	
 	/**
 	 * @return the id
 	 */
 	public int getId() {
 		return id;
 	}
-
-
-	public String toString(){
-		return "#"+id + " ";
+	
+	@Override
+	public String toString() {
+		return "#" + id + " ";
 	}
-
+	
 }

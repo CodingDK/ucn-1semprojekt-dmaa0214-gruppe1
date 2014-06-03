@@ -8,37 +8,41 @@ package modelLayer;
  */
 public class Category {
 	private static int idIterator;
-	private int id;
+	private final int id;
 	private String name;
-
+	
 	/**
 	 * Constructor for Category objects.
+	 * 
 	 * @param name The name of the category.
 	 */
-	public Category(String name){
+	public Category(final String name) {
 		idIterator++;
 		this.name = name;
-		this.id = idIterator;		
+		id = idIterator;
 	}
-
+	
 	/**
 	 * Get the name
+	 * 
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
-
+	
 	/**
 	 * Set the name
+	 * 
 	 * @param name the name to set
 	 */
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
-
+	
 	/**
 	 * Get the id
+	 * 
 	 * @return the id
 	 */
 	public int getId() {

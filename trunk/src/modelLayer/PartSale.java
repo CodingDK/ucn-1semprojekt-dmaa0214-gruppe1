@@ -7,36 +7,37 @@ package modelLayer;
  * @version 0.1
  */
 public class PartSale {
-	private int amount;
-	private Item item;
-
+	private final int amount;
+	private final Item item;
+	
 	/**
 	 * Constructor of the class PartSale
+	 * 
 	 * @param i The Item associated with the PartSale.
 	 * @param amount Amount of item.
 	 */
-	public PartSale(Item i, int amount){
-		this.item = i;
+	public PartSale(final Item i, final int amount) {
+		item = i;
 		this.amount = amount;
 	}
-
+	
 	/**
 	 * @return the amount
 	 */
 	public int getAmount() {
 		return amount;
 	}
-
+	
 	/**
 	 * @return the item
 	 */
 	public Item getItem() {
 		return item;
 	}
-
+	
+	@Override
 	public String toString() {
 		return "Vare: " + item.getName() + ", Antal: " + amount;
 	}
-
-
+	
 }
