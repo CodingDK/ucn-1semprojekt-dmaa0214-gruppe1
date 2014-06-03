@@ -307,7 +307,7 @@ public class ItemUI extends SuperUI{
 	private void searchItem() {
 		flush();
 		System.out.println("## Søg Vare ##");
-		String name = requestString("Vare navn", null, null, false);
+		String name = requestString("Varenavn", null, null, false);
 		ItemCtr iCtr = new ItemCtr();
 		ArrayList<Item> items = iCtr.searchItem(name);
 		if(items != null){
@@ -338,12 +338,12 @@ public class ItemUI extends SuperUI{
 			boolean done = false;
 			while(!done){
 				System.out.println(nL + "## Vælg Vare ##");
-				String name = requestString("Vare navn", null, null, false);
+				String name = requestString("Varenavn", null, null, false);
 				ItemCtr iCtr = new ItemCtr();
 				ArrayList<Item> items = iCtr.searchItem(name);
 				if(items != null && items.size() > 0){
 					boolean recheck = true;
-					System.out.println(items.size() + " Varer Fundet");
+					System.out.println(nL + items.size() + " Varer Fundet");
 					while(recheck){
 						for(Item i : items){
 							String amount = "" + i.getAmount();
@@ -352,7 +352,7 @@ public class ItemUI extends SuperUI{
 							}
 							System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + amount + " Stk Pris: " + i.getSalePrice() + "(" + i.getSalePrice()*1.25 + "),-" + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
 						}
-						int i = requestInt("Vare ID", null, false);
+						int i = requestInt(nL + "Vare ID", null, false);
 
 						boolean found = false;
 						int it = 0;
