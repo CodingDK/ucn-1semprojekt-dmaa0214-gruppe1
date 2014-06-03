@@ -178,7 +178,7 @@ public class PersonUI extends SuperUI{
 		}
 		
 		EmployeeCtr employeeCtr = new EmployeeCtr();
-		employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, null, rights);
+		selectedEmployee = employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, null, rights);
 	}
 
 
@@ -239,6 +239,7 @@ public class PersonUI extends SuperUI{
 			pause();
 		} else{
 			System.out.println("0 Kunder Fundet");
+			selectedCustomer = null;
 			pause();
 		}
 		return retC;
@@ -341,7 +342,8 @@ public class PersonUI extends SuperUI{
 					retE = employees.get(0);
 					selectedEmployee = retE;
 					System.out.println("Valgt - Navn: " + retE.getName() + ", medarbejdernr: " + retE.getEmployeeNr());
-					recheck = true;					
+					recheck = true;	
+					pause();
 				}
 			}// while
 		} else{
@@ -407,7 +409,7 @@ public class PersonUI extends SuperUI{
 			selectedEmployee = null;
 			pause();
 		} else{
-			System.out.println(name + "blev ikke slettet");
+			System.out.println(name + " blev ikke slettet");
 			pause();
 		}
 	}
