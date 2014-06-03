@@ -128,7 +128,7 @@ public class CreateSaleUI extends SuperUI{
 			String line = "";
 			Item item = ps.getItem();
 			double price = item.getSalePrice()*ps.getAmount();
-			line = ps.getAmount() + " x " + item.getName() + " ";
+			line = ps.getAmount() + "x " + item.getName() + " ";
 			line += price + ",- ";
 			System.out.println(line);
 		}
@@ -219,7 +219,7 @@ public class CreateSaleUI extends SuperUI{
 						
 			try {
 				sCtr.addItem(i, amount);
-				System.out.println(amount + " x " + i.getName() + " tilføjet til salget");
+				System.out.println(amount + "x " + i.getName() + " tilføjet til salget");
 				pause();
 			} catch (NullPointerException e) {
 				System.out.println(e.getMessage());
