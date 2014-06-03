@@ -106,11 +106,25 @@ public class SaleUI extends SuperUI{
 							System.out.println(s);
 						}
 						int id = requestInt("Salg ID", null, false);
-						if(sCtr.getSale(id) != null && sales.contains(sCtr.getSale(id))){
+						int i = 0;
+						boolean found = false;
+						while(!found && i < sales.size()){
+							Sale checkS = sales.get(i);
+							if(checkS.getId() == id){
+								retSale = checkS;
+								found = true;
+							}
+							i++;
+						}
+						
+						
+						if(retSale != null){
 							retSale = sCtr.getSale(id);
 							done = true;
 							recheck = false;
 						}else{
+							System.out.println("Ugyldigt ID indtastet");
+							pause();
 							recheck = true;
 						}
 					}
