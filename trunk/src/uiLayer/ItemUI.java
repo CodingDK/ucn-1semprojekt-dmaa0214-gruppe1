@@ -555,7 +555,7 @@ public class ItemUI extends SuperUI{
 	private void addAmountToItem(){
 		flush();
 		if(selectedItem != null){
-			System.out.println("## Tilfør Mængde Til Vare : " + selectedItem.getName() + " ##");
+			System.out.println("## Opdater Varebeholdning : " + selectedItem.getName() + " ##");
 			System.out.println("## Nuværende Varebeholdning: " + selectedItem.getAmount() + " ##");
 			int amount = requestInt("Mængde", 0, false);
 			selectedItem.addAmount(amount);
