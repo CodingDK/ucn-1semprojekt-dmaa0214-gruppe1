@@ -125,19 +125,19 @@ public class PersonUI extends SuperUI{
 			if(choice == 1 || choice == 2){
 				String company = null;
 				String cvrNr = null;
-				
+				System.out.println();
 				if(choice == 1){
-					company 		= requestString("Virksomheds navn", null, null, false);
-					cvrNr 			= requestString("CVR-nr", null, null, false);
+					company 		= requestString("Virksomheds navn", 2, 30, false);
+					cvrNr 			= requestString("CVR-nr", 8, 15, false);
 				}
-				String name 		= requestString("Navn", null, null, false);
-				String street 		= requestString("Gade", null, null, false);
-				String postCode 	= requestString("Postnummer", null, null, false);
-				String city 		= requestString("By", null, null, false);
-				String phoneNr 		= requestString("Telefon nr", null, null, false);
-				String email 		= requestString("E-mail", null, null, false);
+				String name 		= requestString("Navn", 2, 100, false);
+				String street 		= requestString("Gade", 5, 100, false);
+				String postCode 	= requestString("Postnummer", 4, 15, false);
+				String city 		= requestString("By", 1, 25, false);
+				String phoneNr 		= requestString("Telefon nr", 8, 12, false);
+				String email 		= requestString("E-mail", 5, 50, false);
 				if(choice == 2){
-					String cprNr 		= requestString("CPR nr", null, null, false);
+					String cprNr 		= requestString("CPR nr", 10, 11, false);
 					String pictureId 	= requestString("Billede ID", null, null, false);
 					retC = cCtr.createPrivateCustomer(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
 					exit = true;
@@ -157,14 +157,14 @@ public class PersonUI extends SuperUI{
 	private void createEmployee() {
 		boolean rights = false;
 		System.out.println("\n## Opret sælger ##");
-		String employeeNr 	= requestString("Medarbejder nummer", null, null, false);
-		String name			= requestString("Navn", null, null, false);
-		String street		= requestString("Gade", null, null, false);
-		String postCode		= requestString("Postnummer", null, null, false);
-		String city			= requestString("By", null, null, false);
-		String phoneNr		= requestString("Telefon nr", null, null, false);
-		String email		= requestString("E-mail", null, null, false);
-		String cprNr		= requestString("CPR nr", null, null, false);
+		String employeeNr 	= requestString("Medarbejder nummer", 1, 25, false);
+		String name			= requestString("Navn", 2, 100, false);
+		String street		= requestString("Gade", 5, 100, false);
+		String postCode		= requestString("Postnummer", 4, 15, false);
+		String city			= requestString("By", 1, 25, false);
+		String phoneNr		= requestString("Telefon nr", 8, 12, false);
+		String email		= requestString("E-mail", 5, 50, false);
+		String cprNr		= requestString("CPR nr", 10, 11, false);
 		
 		if(confirm("Vil du give denne medarbejder administrator rettigheder") ){
 			rights = true;
