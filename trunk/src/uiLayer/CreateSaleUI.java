@@ -128,7 +128,7 @@ public class CreateSaleUI extends SuperUI{
 			String line = "";
 			Item item = ps.getItem();
 			double price = item.getSalePrice()*ps.getAmount();
-			line = ps.getAmount() + " " + item.getName() + " ";
+			line = ps.getAmount() + " x " + item.getName() + " ";
 			line += price + ",- ";
 			System.out.println(line);
 		}
