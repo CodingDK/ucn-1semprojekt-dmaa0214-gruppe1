@@ -217,18 +217,16 @@ public class CreateSaleUI extends SuperUI{
 			try {
 				sCtr.addItem(i, amount);
 				System.out.println(amount + "x " + i.getName() + " tilføjet til salget");
-				pause();
 			} catch (NullPointerException e) {
 				System.out.println(e.getMessage());
-				pause();
 			} catch (NotEnoughItemsException e) {
 				System.out.println(e.getMessage());
-				pause();
 			} catch (SaleNotCreatedException e) {
 				System.out.println(e.getMessage());
-				pause();
 			}
 		}
+		
+		pause();
 		
 	}
 	
