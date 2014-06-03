@@ -115,7 +115,7 @@ public class ItemUI extends SuperUI{
 	private int writeMenu(){
 		int choice = 0;
 
-		System.out.println("\n## Item menu ##");
+		System.out.println("\n## Vare Menu ##");
 		{
 			if(admin){
 				System.out.println("--------------------------");
@@ -155,7 +155,7 @@ public class ItemUI extends SuperUI{
 		}
 		System.out.println(" 17. Gå tilbage");
 
-		choice = requestInt("\nValg", null, false);
+		choice = requestInt("Valg", null, false);
 		return choice;
 	}
 
@@ -346,7 +346,7 @@ public class ItemUI extends SuperUI{
 		try{
 			boolean done = false;
 			while(!done){
-				System.out.println("## Vælg Vare ##");
+				System.out.println("\n## Vælg Vare ##");
 				String name = requestString("Vare navn", null, null, false);
 				ItemCtr iCtr = new ItemCtr();
 				ArrayList<Item> items = iCtr.searchItem(name);
@@ -360,7 +360,7 @@ public class ItemUI extends SuperUI{
 								amount += i.getReserved() + "/";
 							}
 							amount += i.getAmount() + ")";
-							System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + amount + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
+							System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + amount + " Stk Pris: " + i.getSalePrice() + "(" + i.getSalePrice()*1.25 + "),-" + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
 						}
 						int i = requestInt("Vare ID", null, false);
 

@@ -57,9 +57,9 @@ public class MainUI extends SuperUI{
 	private int writeMenu(){
 		int choice = 0;
 		try{
-			System.out.println("\n1. Person UI");
-			System.out.println("2. Salg UI");
-			System.out.println("3. Vare UI");
+			System.out.println("\n1. Person Menu");
+			System.out.println("2. Salgs Menu");
+			System.out.println("3. Vare Menu");
 			System.out.println("4. Lav Test");
 			if(!admin){
 				System.out.println("5. Administrator Login");
