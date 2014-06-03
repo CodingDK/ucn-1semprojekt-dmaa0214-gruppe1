@@ -40,51 +40,7 @@ public class CustomerCont {
 	public void addCustomer(Customer c){
 		customers.add(c);
 	}
-	
-	/**
-	 * Finds and returns a CustomerObj by name or phone number
-	 * @param nameOrPhone The name or phone number to look for.
-	 * @return CustomerObj The found Customer object or null.
-	 */
-	public Customer findCustomer(String nameOrPhone){
-		boolean found = false;
-		Customer c = null;
-		int i = 0;
-		while(i < customers.size() && !found){
-			Customer cu = customers.get(i);
-			if(cu.getName().equalsIgnoreCase(nameOrPhone) || cu.getPhoneNr().equalsIgnoreCase(nameOrPhone)){
-				c = cu;
-				found = true;
-			}
-			i++;
-		}
-		
-		return c;
-	}
-	
-	/**
-	 * Finds a Business Customer by Company name
-	 * @param company The company name to look for
-	 * @return Business the found business object or null
-	 */
-	public Business findBusiness(String company){
-		boolean found = false;
-		Business c = null;
-		Iterator<Customer> it = customers.iterator();
-		while(it.hasNext() && !found){
-			Customer cu = it.next();
-			if(cu instanceof Business){
-				if(((Business) cu).getCompany().equalsIgnoreCase(company)){
-					c = (Business) cu;
-					found = true;
-				}
-			}
-			
-		}
-		
-		return c;
-	}
-	
+
 	/**
 	 * Finds a Customer by ID
 	 * @param id the id of the customer to look for

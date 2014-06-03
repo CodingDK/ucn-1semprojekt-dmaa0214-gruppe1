@@ -117,13 +117,4 @@ public class EmployeeCtr{
 		return foundEmployees;
 	}
 	
-	/**
-	 * Finds a EmployeeObj by ID
-	 * @param id
-	 * @return Employee
-	 */
-	public Employee findEmployee(int id){
-		return eCont.findEmployee(id);
-	}
-	
 }
