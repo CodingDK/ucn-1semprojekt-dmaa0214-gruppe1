@@ -42,8 +42,10 @@ public class EmployeeCtr{
      * @param cprNr The cprNr of the employee.
      * @param admin A boolean value, true for admin.
      */
-    public void createEmployee(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String password, boolean admin){
-    	eCont.addEmployee(new Employee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, password, admin));
+    public Employee createEmployee(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String password, boolean admin){
+    	Employee retE = new Employee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, password, admin);
+    	eCont.addEmployee(retE);
+    	return retE;
     }
     
     /**
