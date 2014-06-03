@@ -1,7 +1,6 @@
 package uiLayer;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 import modelLayer.*;
 import ctrLayer.SaleCtr;
