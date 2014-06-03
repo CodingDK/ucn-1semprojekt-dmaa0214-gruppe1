@@ -151,7 +151,7 @@ public class ItemUI extends SuperUI{
 			}
 			System.out.println("14. Vælg Vare");
 			System.out.println("15. Søg Vare");
-			System.out.println("16. Tilfør Mængde Til Vare" + item);
+			System.out.println("16. Opdater Varebeholdning" + item);
 			System.out.println("--------------------------");
 		}
 		System.out.println("17. Gå tilbage");
@@ -556,6 +556,7 @@ public class ItemUI extends SuperUI{
 		flush();
 		if(selectedItem != null){
 			System.out.println("## Tilfør Mængde Til Vare : " + selectedItem.getName() + " ##");
+			System.out.println("## Nuværende Varebeholdning: " + selectedItem.getAmount() + " ##");
 			int amount = requestInt("Mængde", 0, false);
 			selectedItem.addAmount(amount);
 		}else{
