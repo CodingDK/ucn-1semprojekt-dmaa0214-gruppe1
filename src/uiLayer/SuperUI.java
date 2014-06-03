@@ -238,4 +238,10 @@ public abstract class SuperUI {
 		}
 		
 	}
+	
+	protected void flush(){
+		for(int i = 0; i < 40; i++){
+			System.out.println();
+		}
+	}
 }
