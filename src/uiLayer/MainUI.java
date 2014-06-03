@@ -1,7 +1,5 @@
 package uiLayer;
 
-import java.util.InputMismatchException;
-
 import modelLayer.*;
 import ctrLayer.*;
 
@@ -57,24 +55,20 @@ public class MainUI extends SuperUI{
 	private int writeMenu(){
 		flush();
 		int choice = 0;
-		try{
-			System.out.println("1. Person Menu");
-			System.out.println("2. Salgs Menu");
-			System.out.println("3. Vare Menu");
-			System.out.println("4. Lav Test");
-			if(!admin){
-				System.out.println("5. Administrator Login");
-			}else{
-				System.out.println("5. Logud");
-			}
-			System.out.println("6. Afslut program");
-			choice = requestInt(nL + "Valg", null, false);
-		} catch(InputMismatchException e){
-			System.out.println("Forkert input!");
+		System.out.println("1. Person Menu");
+		System.out.println("2. Salgs Menu");
+		System.out.println("3. Vare Menu");
+		System.out.println("4. Lav Test");
+		if(!admin){
+			System.out.println("5. Administrator Login");
+		}else{
+			System.out.println("5. Log ud");
 		}
+		System.out.println("6. Afslut program");
+		choice = requestInt(nL + "Valg", null, false);
 		return choice;
 	}
-	
+
 	private void makeTest(){
 		ItemCtr iCtr = new ItemCtr();
 		CategoryCtr cCtr = new CategoryCtr();
