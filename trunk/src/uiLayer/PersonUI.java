@@ -89,19 +89,19 @@ public class PersonUI extends SuperUI{
 		
 		flush();
 		System.out.println("## Person menu ##");
-		System.out.println(" 1. Søg kunde");
-		System.out.println(" 2. Opret kunde" + pP);
-		System.out.println(" 3. Opdater kunde" + pP);
-		System.out.println(" 4. Slet kunde" + pP); 
+		System.out.println("1. Søg kunde");
+		System.out.println("2. Opret kunde" + pP);
+		System.out.println("3. Opdater kunde" + pP);
+		System.out.println("4. Slet kunde" + pP); 
 		if(admin){
 			System.out.println("--------------------------");
-			System.out.println(" 5. Opret medarbejder");
-			System.out.println(" 6. Søg medarbejder");
-			System.out.println(" 7. Opdater medarbejder" + m);
-			System.out.println(" 8. Slet medarbejder" + m);
+			System.out.println("5. Opret medarbejder");
+			System.out.println("6. Søg medarbejder");
+			System.out.println("7. Opdater medarbejder" + m);
+			System.out.println("8. Slet medarbejder" + m);
 		}
 		System.out.println("--------------------------");
-		System.out.println(" 9. Gå tilbage");
+		System.out.println("9. Gå tilbage");
 		choice = requestInt(nL + "Valg", 0, false);
 		return choice;
 	}
@@ -118,9 +118,12 @@ public class PersonUI extends SuperUI{
 		CustomerCtr cCtr = new CustomerCtr();
 
 		while(!exit){
+			flush();
 			System.out.println("## Opret kunde ##");
 			System.out.println("1. Erhvervskunde");
 			System.out.println("2. Privatkunde");
+			System.out.println("3. Gå tilbage");
+			
 			int choice = requestInt("Valg", null, false);
 
 			if(choice == 1 || choice == 2){
@@ -146,6 +149,8 @@ public class PersonUI extends SuperUI{
 				retC = cCtr.createBusinessCustomer(name, phoneNr, street, email, city, postCode, company, cvrNr);
 				selectedCustomer = retC;
 				exit = true;
+			} else if(choice == 3){
+				exit = true;
 			}
 		}
 		return retC;
@@ -157,6 +162,7 @@ public class PersonUI extends SuperUI{
 	 */
 	private void createEmployee() {
 		boolean rights = false;
+		flush();
 		System.out.println("## Opret sælger ##");
 		String employeeNr 	= requestString("Medarbejder nummer", 1, 25, false);
 		String name			= requestString("Navn", 2, 100, false);
@@ -182,6 +188,7 @@ public class PersonUI extends SuperUI{
 	 */
 	public Customer findCustomer() {
 		Customer retC = null;
+		flush();
 		System.out.println("## Søg kunde ##");
 		String nameOrPhone = requestString("Indtast kundenavn, virksomhedsnavn eller tlf nr.", 1, 50, false);
 		CustomerCtr cCtr = new CustomerCtr();
@@ -241,7 +248,8 @@ public class PersonUI extends SuperUI{
 	 */
 	public void updateCustomer() {
 		if(selectedCustomer != null){
-			System.out.println("## Opdater privat kunde ##");
+			flush();
+			System.out.println("## Opdater kunde ##");
 			System.out.println("Skriv ny info ellers tryk enter");
 	
 			System.out.println("Navn: (" + selectedCustomer.getName() + ")" );
@@ -280,6 +288,7 @@ public class PersonUI extends SuperUI{
 	 */
 	private void removeCustomer() {
 		String name = selectedCustomer.getName();
+		flush();
 		if(confirm("Ønsker du at slette " + name + "? ") ){
 			int id = selectedCustomer.getId();
 			CustomerCtr customerCtr = new CustomerCtr();
@@ -300,6 +309,7 @@ public class PersonUI extends SuperUI{
 	 */
 	public Employee findEmployee(){	
 		Employee retE = null;
+		flush();
 		System.out.println("## Søg medarbejder ##");
 		String nameOrEmpNr = requestString("Indtast del af medarbejder navn eller nummer", 1, 50, false);
 		EmployeeCtr eCtr = new EmployeeCtr();
