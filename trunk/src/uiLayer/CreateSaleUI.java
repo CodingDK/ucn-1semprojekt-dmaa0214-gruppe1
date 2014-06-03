@@ -1,7 +1,6 @@
 package uiLayer;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 
 import personLayer.*;
 import modelLayer.*;
@@ -91,30 +90,27 @@ public class CreateSaleUI extends SuperUI{
 	 */
 	private int writeSaleMenu(){
 		int choice = 0;
-		try{
-			System.out.println("\n## Opret salg ##");
-			String ret = "";
-			Sale sale = sCtr.getSale();
-			if(sale.getCustomer() != null){
-				ret = sale.getCustomer().toString();
-			} else {
-				ret = "Ingen valgt";
-			}
-			System.out.println("## Kunde: " + ret + " ##");
-			printPartSale();
-			System.out.println("1. Tilføj vare");
-			System.out.println("2. Opret kunde");
-			System.out.println("3. Søg kunde");
-			System.out.println("4. Udfør salg");
-			System.out.println("5. Parker salg");
-			System.out.println("6. Annuller salg");
-			choice = requestInt("Valg", null, false);		
-		} catch(InputMismatchException e){
-			System.out.println("Forkert input!");
+		flush();
+		System.out.println("## Opret salg ##");
+		String ret = "";
+		Sale sale = sCtr.getSale();
+		if(sale.getCustomer() != null){
+			ret = sale.getCustomer().toString();
+		} else {
+			ret = "Ingen valgt";
 		}
+		System.out.println("## Kunde: " + ret + " ##");
+		printPartSale();
+		System.out.println("1. Tilføj vare");
+		System.out.println("2. Opret kunde");
+		System.out.println("3. Søg kunde");
+		System.out.println("4. Udfør salg");
+		System.out.println("5. Parker salg");
+		System.out.println("6. Annuller salg");
+		choice = requestInt("Valg", null, false);		
 		return choice;
 	}
-	
+
 	/**
 	 * printPartSale - Print the partsales of a sale.
 	 */

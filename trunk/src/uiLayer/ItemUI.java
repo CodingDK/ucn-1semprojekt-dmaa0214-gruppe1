@@ -115,47 +115,48 @@ public class ItemUI extends SuperUI{
 	private int writeMenu(){
 		int choice = 0;
 
-		System.out.println("\n## Vare Menu ##");
+		flush();
+		System.out.println("## Vare Menu ##");
 		{
 			if(admin){
 				System.out.println("--------------------------");
-				System.out.println(" 1. Opret Kategori");
+				System.out.println("1. Opret Kategori");
 				String category = (selectedCategory != null) ? " (" + selectedCategory.getName() + ")" : "";
-				System.out.println(" 2. Opdater Kategori" + category);
-				System.out.println(" 3. Fjern Kategori" + category);
-				System.out.println(" 4. Vælg Kategori");
+				System.out.println("2. Opdater Kategori" + category);
+				System.out.println("3. Fjern Kategori" + category);
+				System.out.println("4. Vælg Kategori");
 			}
-			System.out.println(" 5. Søg Kategori");
+			System.out.println("5. Søg Kategori");
 			System.out.println("--------------------------");
 		}
 
 		{
 			if(admin){
-				System.out.println(" 6. Opret Lager");
+				System.out.println("6. Opret Lager");
 				String storage = (selectedStorage != null) ? " (" + selectedStorage.getName() + ")" : "";
-				System.out.println(" 7. Opdater Lager" + storage);
-				System.out.println(" 8. Fjern Lager" + storage);
-				System.out.println(" 9. Vælg Lager");
+				System.out.println("7. Opdater Lager" + storage);
+				System.out.println("8. Fjern Lager" + storage);
+				System.out.println("9. Vælg Lager");
 			}
-			System.out.println(" 10. Søg Lager");
+			System.out.println("10. Søg Lager");
 			System.out.println("--------------------------");
 		}
 
 		{
 			String item = (selectedItem != null) ? " (" + selectedItem.getName() + ")" : "";
 			if(admin){
-				System.out.println(" 11. Opret Vare");
-				System.out.println(" 12. Opdater Vare" + item);
-				System.out.println(" 13. Fjern Vare" + item);
+				System.out.println("11. Opret Vare");
+				System.out.println("12. Opdater Vare" + item);
+				System.out.println("13. Fjern Vare" + item);
 			}
-			System.out.println(" 14. Vælg Vare");
-			System.out.println(" 15. Søg Vare");
-			System.out.println(" 16. Tilfør Mængde Til Vare" + item);
+			System.out.println("14. Vælg Vare");
+			System.out.println("15. Søg Vare");
+			System.out.println("16. Tilfør Mængde Til Vare" + item);
 			System.out.println("--------------------------");
 		}
-		System.out.println(" 17. Gå tilbage");
+		System.out.println("17. Gå tilbage");
 
-		choice = requestInt("Valg", null, false);
+		choice = requestInt("\nValg", null, false);
 		return choice;
 	}
 
@@ -401,6 +402,7 @@ public class ItemUI extends SuperUI{
 	 */
 	private void searchCategory() {
 		try{
+			flush();
 			System.out.println("## Søg Kategori ##");
 			String name = requestString("Kategori navn", null, null, false);
 			CategoryCtr cCtr = new CategoryCtr();
