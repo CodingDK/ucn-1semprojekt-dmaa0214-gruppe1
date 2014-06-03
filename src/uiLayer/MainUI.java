@@ -44,7 +44,7 @@ public class MainUI extends SuperUI{
 					admin = false;
 				}
 			} else if(choice == 6){
-				System.out.println("Program afsluttet.");
+				System.out.println("\nProgram afsluttet.");
 				exit = true;
 			}
 		}
