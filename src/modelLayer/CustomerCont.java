@@ -13,14 +13,14 @@ import personLayer.*;
 public class CustomerCont {
 	private static CustomerCont instance;
 	private ArrayList<Customer> customers;
-	
+
 	/**
 	 * Constructor for CustomerCont objects.
 	 */
 	private CustomerCont(){
 		customers = new ArrayList<Customer>();
 	}
-	
+
 	/**
 	 * getInstance - Returns the instance of CustomerCont
 	 * @return instance get only one instance of the container
@@ -29,10 +29,10 @@ public class CustomerCont {
 		if(instance == null){
 			instance = new CustomerCont();
 		}
-		
+
 		return instance;
 	}
-	
+
 	/**
 	 * Adds a Customer to the Container
 	 * @param c The Customer to add.
@@ -57,10 +57,10 @@ public class CustomerCont {
 				found = true;
 			}
 		}
-		
+
 		return c;
 	}
-	
+
 	/**
 	 * Removes a Customer.
 	 * @param c the Customer to remove
@@ -68,7 +68,7 @@ public class CustomerCont {
 	public void removeCustomer(Customer c){
 		customers.remove(c);
 	}
-	
+
 	/**
 	 * @return ArrayList<Customer> Returns the list of customers.
 	 */

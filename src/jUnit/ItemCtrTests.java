@@ -21,10 +21,10 @@ public class ItemCtrTests {
 		Storage s1 = iCtr.findStorage("Test1");
 		cCtr.createCategory("Søm");
 		Category c1 = cCtr.findCategory("Søm");
-		
+
 		iCtr.createItem("S Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
 		iCtr.createItem("S t. Sømpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
-		
+
 		Item i = iCtr.getItem("S Flad");
 		assertThat(i, instanceOf(Item.class));
 	}
@@ -41,10 +41,10 @@ public class ItemCtrTests {
 		cCtr.createCategory("Hammer");
 		Category c1 = cCtr.findCategory("Søm");
 		Category c2 = cCtr.findCategory("Hammer");
-		
+
 		iCtr.createItem("S Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
 		iCtr.createItem("S t. Sømpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
-		
+
 		Item i = iCtr.getItem("S Flad");
 		int id = i.getId();
 		iCtr.updateItem(id, "Hej", 150, 0, 1., 1., 1., 10, "Hejs", s2, 0, 0, c2);

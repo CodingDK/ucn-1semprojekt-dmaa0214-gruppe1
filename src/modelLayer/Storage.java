@@ -15,32 +15,32 @@ public class Storage{
 	 * Constructor of the class Storage
 	 * @param name The name of the storage.
 	 */
-    public Storage(String name) {
-    	idIterator++;
-    	this.name = name;
-    	this.id = idIterator;
-    }
+	public Storage(String name) {
+		idIterator++;
+		this.name = name;
+		this.id = idIterator;
+	}
 
-    /**
-    * getId - Returns the Id
-	* @return id
-    */
+	/**
+	 * getId - Returns the Id
+	 * @return id
+	 */
 	public int getId(){
 		return id;
 	}
 
-    /**
-    * getName - Returns the Name
-	* @return name
-    */
+	/**
+	 * getName - Returns the Name
+	 * @return name
+	 */
 	public String getName(){
 		return name;
 	}
 
-    /**
-    * setName - sets the Name
-	* @param String name
-    */
+	/**
+	 * setName - sets the Name
+	 * @param String name
+	 */
 	public void setName(String name){
 		this.name = name;
 	}

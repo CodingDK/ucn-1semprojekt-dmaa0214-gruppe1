@@ -266,19 +266,19 @@ public class ItemUI extends SuperUI{
 	 */
 	private void createCategory() {
 		flush();
-			CategoryCtr cCtr = new CategoryCtr();
+		CategoryCtr cCtr = new CategoryCtr();
 
-			System.out.println(" *** Opret Kategori *** ");
-			String categoryName = requestString("Kategori navn", 1, null, false);
-			if(cCtr.findCategory(categoryName) == null){
-				cCtr.createCategory(categoryName);
+		System.out.println(" *** Opret Kategori *** ");
+		String categoryName = requestString("Kategori navn", 1, null, false);
+		if(cCtr.findCategory(categoryName) == null){
+			cCtr.createCategory(categoryName);
+			selectedCategory = cCtr.findCategory(categoryName);
+		}else{
+			System.out.println("Denne Kategori eksistere allerede");
+			if(confirm("Vil du markere denne til senere brug?(Oprettelse af ny vare)")){
 				selectedCategory = cCtr.findCategory(categoryName);
-			}else{
-				System.out.println("Denne Kategori eksistere allerede");
-				if(confirm("Vil du markere denne til senere brug?(Oprettelse af ny vare)")){
-					selectedCategory = cCtr.findCategory(categoryName);
-				}
 			}
+		}
 	}
 
 	/**
@@ -286,19 +286,19 @@ public class ItemUI extends SuperUI{
 	 */
 	private void createStorage() {
 		flush();
-			ItemCtr iCtr = new ItemCtr();
+		ItemCtr iCtr = new ItemCtr();
 
-			System.out.println(" *** Opret Lager *** ");
-			String storageName = requestString("Lager navn", 1, null, false);
-			if(iCtr.findStorage(storageName) == null){
-				iCtr.createStorage(storageName);
+		System.out.println(" *** Opret Lager *** ");
+		String storageName = requestString("Lager navn", 1, null, false);
+		if(iCtr.findStorage(storageName) == null){
+			iCtr.createStorage(storageName);
+			selectedStorage = iCtr.findStorage(storageName);
+		}else{
+			System.out.println("Dette Lager eksistere allerede");
+			if(confirm("Vil du markere denne til senere brug?(Oprettelse af ny vare)")){
 				selectedStorage = iCtr.findStorage(storageName);
-			}else{
-				System.out.println("Dette Lager eksistere allerede");
-				if(confirm("Vil du markere denne til senere brug?(Oprettelse af ny vare)")){
-					selectedStorage = iCtr.findStorage(storageName);
-				}
 			}
+		}
 	}
 
 	/**
@@ -334,51 +334,51 @@ public class ItemUI extends SuperUI{
 	public Item pickItem() {
 		flush();
 		Item retItem = null;
-			boolean done = false;
-			while(!done){
-				System.out.println(nL + "## Vælg Vare ##");
-				String name = requestString("Varenavn", null, null, false);
-				ItemCtr iCtr = new ItemCtr();
-				ArrayList<Item> items = iCtr.searchItem(name);
-				if(items != null && items.size() > 0){
-					boolean recheck = true;
-					System.out.println(nL + items.size() + " Varer Fundet");
-					while(recheck){
-						for(Item i : items){
-							String amount = "" + i.getAmount();
-							if(i.getReserved() != 0){
-								amount += "(" + i.getReserved() + ")";
-							}
-							System.out.println("#" + i.getId() + " - " + i.getName() + ", Antal: " + amount + ", Stk Pris: " + i.getSalePrice() + ",-(" + i.getSalePrice()*1.25 + ",-), Kategori: " + i.getCategory().getName() + ", Lager: " + i.getStorage().getName());
+		boolean done = false;
+		while(!done){
+			System.out.println(nL + "## Vælg Vare ##");
+			String name = requestString("Varenavn", null, null, false);
+			ItemCtr iCtr = new ItemCtr();
+			ArrayList<Item> items = iCtr.searchItem(name);
+			if(items != null && items.size() > 0){
+				boolean recheck = true;
+				System.out.println(nL + items.size() + " Varer Fundet");
+				while(recheck){
+					for(Item i : items){
+						String amount = "" + i.getAmount();
+						if(i.getReserved() != 0){
+							amount += "(" + i.getReserved() + ")";
 						}
-						int i = requestInt(nL + "Vare ID", null, false);
-
-						boolean found = false;
-						int it = 0;
-						while(it < items.size() && !found){
-							Item checkItem = items.get(it);
-							if(checkItem.getId() == i){
-								retItem = checkItem;
-								found = true;
-							}
-							it++;
-						}
-
-						if(retItem != null){
-							System.out.println("Vare " + retItem.getName() + " valgt");
-							pause();
-							done = true;
-							recheck = false;
-						}else{
-							recheck = true;
-						}
+						System.out.println("#" + i.getId() + " - " + i.getName() + ", Antal: " + amount + ", Stk Pris: " + i.getSalePrice() + ",-(" + i.getSalePrice()*1.25 + ",-), Kategori: " + i.getCategory().getName() + ", Lager: " + i.getStorage().getName());
 					}
-				}else{
-					System.out.println("0 Varer Fundet");
-					pause();
-					done = true;
+					int i = requestInt(nL + "Vare ID", null, false);
+
+					boolean found = false;
+					int it = 0;
+					while(it < items.size() && !found){
+						Item checkItem = items.get(it);
+						if(checkItem.getId() == i){
+							retItem = checkItem;
+							found = true;
+						}
+						it++;
+					}
+
+					if(retItem != null){
+						System.out.println("Vare " + retItem.getName() + " valgt");
+						pause();
+						done = true;
+						recheck = false;
+					}else{
+						recheck = true;
+					}
 				}
+			}else{
+				System.out.println("0 Varer Fundet");
+				pause();
+				done = true;
 			}
+		}
 		return retItem;
 	}
 
@@ -386,22 +386,22 @@ public class ItemUI extends SuperUI{
 	 * searchCategory - Search through Category
 	 */
 	private void searchCategory() {
-			flush();
-			System.out.println("## Søg Kategori ##");
-			String name = requestString("Kategori navn", null, null, false);
-			CategoryCtr cCtr = new CategoryCtr();
-			ArrayList<Category> cats = cCtr.searchCategory(name);
-			if(cats != null){
-				System.out.println(cats.size() + " Kategorier Fundet");
-				for(Category c : cats){
-					System.out.println("#" + c.getId() + " - " + c.getName());
-				}
-				pause();
-			}else{
-				System.out.println("0 Kategorier Fundet");
-				pause();
-				return;
+		flush();
+		System.out.println("## Søg Kategori ##");
+		String name = requestString("Kategori navn", null, null, false);
+		CategoryCtr cCtr = new CategoryCtr();
+		ArrayList<Category> cats = cCtr.searchCategory(name);
+		if(cats != null){
+			System.out.println(cats.size() + " Kategorier Fundet");
+			for(Category c : cats){
+				System.out.println("#" + c.getId() + " - " + c.getName());
 			}
+			pause();
+		}else{
+			System.out.println("0 Kategorier Fundet");
+			pause();
+			return;
+		}
 	}
 
 	/**
@@ -409,21 +409,21 @@ public class ItemUI extends SuperUI{
 	 */
 	private void searchStorage(){
 		flush();
-			System.out.println("## Søg Lager ##");
-			String name = requestString("Lager navn", null, null, false);
-			ItemCtr iCtr = new ItemCtr();
-			ArrayList<Storage> storages = iCtr.searchStorage(name);
-			if(storages != null){
-				System.out.println(storages.size() + " Lagre Fundet");
-				for(Storage s : storages){
-					System.out.println("#" + s.getId() + " - " + s.getName());
-				}
-				pause();
-			}else{
-				System.out.println("0 Lagre Fundet");
-				pause();
-				return;
+		System.out.println("## Søg Lager ##");
+		String name = requestString("Lager navn", null, null, false);
+		ItemCtr iCtr = new ItemCtr();
+		ArrayList<Storage> storages = iCtr.searchStorage(name);
+		if(storages != null){
+			System.out.println(storages.size() + " Lagre Fundet");
+			for(Storage s : storages){
+				System.out.println("#" + s.getId() + " - " + s.getName());
 			}
+			pause();
+		}else{
+			System.out.println("0 Lagre Fundet");
+			pause();
+			return;
+		}
 	}
 
 	/**
@@ -534,20 +534,20 @@ public class ItemUI extends SuperUI{
 		flush();
 		if(selectedStorage != null){
 			if(confirm("Er du sikker på du vil slette " + selectedStorage.getName() + "")){
-			ItemCtr iCtr = new ItemCtr();
-			if(!iCtr.isPrimary(selectedStorage)){
-				iCtr.removeStorage(selectedStorage);
-			}else{
-				System.out.println("Dette lager kan ikke slettes");
-				pause();
-			}
-			selectedStorage = null;
+				ItemCtr iCtr = new ItemCtr();
+				if(!iCtr.isPrimary(selectedStorage)){
+					iCtr.removeStorage(selectedStorage);
+				}else{
+					System.out.println("Dette lager kan ikke slettes");
+					pause();
+				}
+				selectedStorage = null;
 			}
 		}else{
 			System.out.println("Et Lager skal være valgt før den kan fjernes");
 		}
 	}
-	
+
 	/**
 	 * addAmountToItem - TUI for adding amount to an Item Object
 	 */

@@ -11,9 +11,9 @@ import java.util.*;
  * 
  */
 public class ItemCtr {
-	
+
 	public ItemCtr(){}
-	
+
 	/**
 	 * getItem - Get an item object from an id.
 	 * @param id The id of the Item object.
@@ -21,7 +21,7 @@ public class ItemCtr {
 	 */
 	public Item getItem(int id){
 		Item retItem = null;
-		
+
 		ArrayList<Category> allCat = new CategoryCtr().getAllCategories();
 		boolean found = false;
 		int iCat = 0;
@@ -39,7 +39,7 @@ public class ItemCtr {
 		}
 		return retItem;
 	}
-	
+
 	/**
 	 * getItem - Get an item object from a name.
 	 * @param name The name of the Item object.
@@ -47,7 +47,7 @@ public class ItemCtr {
 	 */
 	public Item getItem(String name){
 		Item retItem = null;
-		
+
 		ArrayList<Category> allCat = new CategoryCtr().getAllCategories();
 		boolean found = false;
 		int iCat = 0;
@@ -65,7 +65,7 @@ public class ItemCtr {
 		}
 		return retItem;
 	}
-	
+
 	/**
 	 * createItem - Create a new item and add it to the itemContainer.
 	 * @param name The name of the item.
@@ -85,7 +85,7 @@ public class ItemCtr {
 		Item item = new Item(name, amount, reserved, salePrice, purchasePrice, bulkSalePrice, bulk, location, storage, min, min, category);
 		ItemCont.getInstance(category).addItem(item);
 	}
-	
+
 	/**
 	 * updateItem - Update an Item object.
 	 * @param id The id of the item.
@@ -151,7 +151,7 @@ public class ItemCtr {
 			throw new NullPointerException("Ukendt vare");
 		}
 	}
-	
+
 	/**
 	 * removeItem - Remove an item.
 	 * @param i The Item object to remove.
@@ -160,7 +160,7 @@ public class ItemCtr {
 		Category oldCat = i.getCategory();
 		ItemCont.getInstance(oldCat).removeItem(i);
 	}
-	
+
 	/**
 	 * createStorage - Create a new Storage.
 	 * @param name The name of the new Storage.
@@ -168,17 +168,17 @@ public class ItemCtr {
 	public void createStorage(String name){
 		StorageCont.getInstance().addStorage(new Storage(name));
 	}
-	
+
 	/**
-     * findStorage - Get a Storage object from the name of the Storage.
-     * @param name - The name of the Storage.
-     * @return Storage object of the Storage or null if not found.
-     */
+	 * findStorage - Get a Storage object from the name of the Storage.
+	 * @param name - The name of the Storage.
+	 * @return Storage object of the Storage or null if not found.
+	 */
 	public Storage findStorage(String name){
 		StorageCont cCont = StorageCont.getInstance();
 		return cCont.findStorage(name);
 	}
-	
+
 	/**
 	 * updateStorage - Update a Storage object.
 	 * @param storage The Storage Object to update.
@@ -192,7 +192,7 @@ public class ItemCtr {
 			throw new NullPointerException("Ukendt lager");
 		}
 	}
-	
+
 	/**
 	 * removeStorage - Remove a Storage object from the container.
 	 * Allocates all items to the primary Storage
@@ -213,7 +213,7 @@ public class ItemCtr {
 		}
 		sCont.removeStorage(s);
 	}
-	
+
 	/**
 	 * Checks if the Storage is the Primary Storage
 	 * @param Storage
@@ -227,7 +227,7 @@ public class ItemCtr {
 		}
 		return ret;
 	}
-	
+
 	/**
 	 * searchItem - Returns a list of items based on the requested name
 	 * @param name
@@ -251,7 +251,7 @@ public class ItemCtr {
 		}
 		return items;
 	}
-	
+
 	/**
 	 * searchStorage - Returns a list of Storages based on the requested name
 	 * @param name
