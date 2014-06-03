@@ -1,46 +1,48 @@
 package jUnit;
 
-import static org.junit.Assert.*;
-import modelLayer.Category;
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThat;
+import modelLayer.Category;
 
 import org.junit.Test;
 
 import ctrLayer.CategoryCtr;
 
 public class CategoryTests {
-
+	
 	@Test
 	public void testCreateCategory() {
-		CategoryCtr cCtr = new CategoryCtr();
+		final CategoryCtr cCtr = new CategoryCtr();
 		cCtr.createCategory("Cookies");
-		Category c = cCtr.findCategory("Cookies");
+		final Category c = cCtr.findCategory("Cookies");
 		assertNotEquals(c, null);
 	}
-
+	
 	@Test
 	public void testUpdateCategory() {
-		CategoryCtr cCtr = new CategoryCtr();
+		final CategoryCtr cCtr = new CategoryCtr();
 		cCtr.createCategory("Cookies");
-		Category c = cCtr.findCategory("Cookies");
+		final Category c = cCtr.findCategory("Cookies");
 		cCtr.updateCategory(c, "Sko");
 		assertEquals(c.getName(), "Sko");
 	}
-
+	
 	@Test
 	public void testRemoveCategory() {
-		CategoryCtr cCtr = new CategoryCtr();
-		Category c = cCtr.findCategory("Cookies");
+		final CategoryCtr cCtr = new CategoryCtr();
+		final Category c = cCtr.findCategory("Cookies");
 		cCtr.removeCategory(c);
 		assertEquals(cCtr.findCategory("Cookies"), null);
 	}
-
+	
 	@Test
 	public void testFindCategoryString() {
-		CategoryCtr cCtr = new CategoryCtr();
+		final CategoryCtr cCtr = new CategoryCtr();
 		cCtr.createCategory("Cookie");
-		Category c = cCtr.findCategory("Cookies");
+		final Category c = cCtr.findCategory("Cookies");
 		assertThat(c, instanceOf(Category.class));
 	}
-
+	
 }
