@@ -91,7 +91,7 @@ public class CreateSaleUI extends SuperUI{
 	private int writeSaleMenu(){
 		int choice = 0;
 		flush();
-		System.out.println("## Opret salg ##" + nL);
+		System.out.println("## Opret salg ##");
 		String ret = "";
 		Sale sale = sCtr.getSale();
 		if(sale.getCustomer() != null){
@@ -99,9 +99,9 @@ public class CreateSaleUI extends SuperUI{
 		} else {
 			ret = "Ingen valgt";
 		}
-		System.out.println("## Kunde: " + ret + " ##");
+		System.out.println("Kunde: " + ret);
 		printPartSale();
-		System.out.println("1. Tilføj vare");
+		System.out.println(nL + "1. Tilføj vare");
 		System.out.println("2. Opret kunde");
 		System.out.println("3. Søg kunde");
 		System.out.println("4. Udfør salg");
@@ -117,8 +117,7 @@ public class CreateSaleUI extends SuperUI{
 	private void printPartSale(){
 		Sale sale = sCtr.getSale();
 		ArrayList<PartSale> partsales = sale.getPartSales();
-		
-		System.out.println("## Valgt vare " + partsales.size() + " ##");
+		System.out.println("Valgt vare " + partsales.size());
 		if(partsales.size() != 0){
 		for(PartSale ps : partsales){
 			String line = "";
@@ -134,7 +133,6 @@ public class CreateSaleUI extends SuperUI{
 		System.out.println("Moms: " + moms + ",-");
 		System.out.println("Total: " + total + ",-");
 		}
-		System.out.println("## ## ## ## ##");
 	}
 	
 	/**
