@@ -12,8 +12,6 @@ public class PersonUI extends SuperUI{
 
 	private Customer selectedCustomer;
 	private Employee selectedEmployee;
-
-	// Hej LAU!
 	
 	public PersonUI(String DryRun){
 		selectedCustomer = null;
