@@ -79,9 +79,7 @@ public class CreateSaleUI extends SuperUI{
 			System.out.println("Salget kan ikke parkeres uden en Kunde tilknyttet");
 			pause();
 		}
-		
 		return ret;
-		
 	}
 
 	/**
@@ -140,18 +138,23 @@ public class CreateSaleUI extends SuperUI{
 	 * @return true if sale is created.
 	 */
 	private boolean finishSale() {
-		String employeeNr = requestString(nL + "Indtast medarbejdernr", 1, 50, false);
 		boolean ret = false;
-		try {
-			sCtr.finishSale(employeeNr);
-			System.out.println("Salg udført");
-			ret = true;
-		} catch (NullPointerException e) {
-			System.out.println(e.getMessage());
-		} catch (SaleNotCreatedException e) {
-			System.out.println(e.getMessage());
+		if(sCtr.getSale().getPartSales().size() > 0){
+			String employeeNr = requestString(nL + "Indtast medarbejdernr", 1, 50, false);
+			try {
+				sCtr.finishSale(employeeNr);
+				System.out.println("Salg udført");
+				ret = true;
+			} catch (NullPointerException e) {
+				System.out.println(e.getMessage());
+			} catch (SaleNotCreatedException e) {
+				System.out.println(e.getMessage());
+			}
+			pause();
+		}else{
+			System.out.println("Der er ingen vare tilnyttet salget");
+			pause();
 		}
-		pause();
 		return ret;
 	}
 
