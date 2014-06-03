@@ -156,7 +156,7 @@ public class ItemUI extends SuperUI{
 		}
 		System.out.println("17. Gå tilbage");
 
-		choice = requestInt("\nValg", null, false);
+		choice = requestInt(nL + "Valg", null, false);
 		return choice;
 	}
 
@@ -168,7 +168,7 @@ public class ItemUI extends SuperUI{
 		Storage retStorage = null;
 		boolean done = false;
 		while(!done){
-			System.out.println("\n## Vælg Lagre ##");
+			System.out.println(nL + "## Vælg Lagre ##");
 			String name = requestString("Lager navn", null, null, false);
 			ItemCtr iCtr = new ItemCtr();
 			ArrayList<Storage> storages = iCtr.searchStorage(name);
@@ -217,7 +217,7 @@ public class ItemUI extends SuperUI{
 		Category retCategory = null;
 		boolean done = false;
 		while(!done){
-			System.out.println("\n## Vælg Kategori ##");
+			System.out.println(nL + "## Vælg Kategori ##");
 			String name = requestString("Kategori navn", null, null, false);
 			CategoryCtr cCtr = new CategoryCtr();
 			ArrayList<Category> cats = cCtr.searchCategory(name);
@@ -347,7 +347,7 @@ public class ItemUI extends SuperUI{
 		try{
 			boolean done = false;
 			while(!done){
-				System.out.println("\n## Vælg Vare ##");
+				System.out.println(nL + "## Vælg Vare ##");
 				String name = requestString("Vare navn", null, null, false);
 				ItemCtr iCtr = new ItemCtr();
 				ArrayList<Item> items = iCtr.searchItem(name);

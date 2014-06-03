@@ -44,7 +44,7 @@ public class MainUI extends SuperUI{
 					admin = false;
 				}
 			} else if(choice == 6){
-				System.out.println("\nProgram afsluttet.");
+				System.out.println(nL + "Program afsluttet.");
 				exit = true;
 			}
 		}
@@ -58,7 +58,7 @@ public class MainUI extends SuperUI{
 		flush();
 		int choice = 0;
 		try{
-			System.out.println("\n1. Person Menu");
+			System.out.println("1. Person Menu");
 			System.out.println("2. Salgs Menu");
 			System.out.println("3. Vare Menu");
 			System.out.println("4. Lav Test");
@@ -68,7 +68,7 @@ public class MainUI extends SuperUI{
 				System.out.println("5. Logud");
 			}
 			System.out.println("6. Afslut program");
-			choice = requestInt("\nValg", null, false);
+			choice = requestInt(nL + "Valg", null, false);
 		} catch(InputMismatchException e){
 			System.out.println("Forkert input!");
 		}
