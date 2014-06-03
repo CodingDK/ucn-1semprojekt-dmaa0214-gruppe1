@@ -58,7 +58,7 @@ public class CreateItemUI extends SuperUI {
 			System.out.println("Lager og Kategori skal vare valgt for at oprette en vare");
 		}
 		System.out.println("4. Gå tilbage");
-		choice = requestInt("\nValg", null, false);
+		choice = requestInt(nL + "Valg", null, false);
 		
 		return choice;
 	}
