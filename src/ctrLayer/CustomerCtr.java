@@ -22,6 +22,7 @@ public class CustomerCtr {
 	 * @param postCode
 	 * @param cprNr
 	 * @param pictureId
+	 * @return Private Returns the created private customer.
 	 */
 	public Private createPrivateCustomer(String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String pictureId){
 		Private returnPrivate = new Private(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
