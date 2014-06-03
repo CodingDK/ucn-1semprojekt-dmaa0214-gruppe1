@@ -7,15 +7,16 @@ package personLayer;
  * @version 0.1
  * 
  */
-public class Employee extends Person{
+public class Employee extends Person {
 	private String employeeNr;
 	private boolean admin;
 	@SuppressWarnings("unused")
-	private String cprNr;
-	private String password;
-
+	private final String cprNr;
+	private final String password;
+	
 	/**
 	 * Constructor for Employee objects.
+	 * 
 	 * @param employeeNr The employeeNr of the employee.
 	 * @param name The name of the employee.
 	 * @param phoneNr The phoneNr of the employee.
@@ -27,46 +28,49 @@ public class Employee extends Person{
 	 * @param password the admin password
 	 * @param admin A boolean value, true for admin.
 	 */
-	public Employee(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String password, boolean admin){
+	public Employee(final String employeeNr, final String name, final String phoneNr, final String street, final String email, final String city, final String postCode, final String cprNr, final String password, final boolean admin) {
 		super(name, phoneNr, street, email, city, postCode);
 		this.employeeNr = employeeNr;
 		this.admin = admin;
 		this.cprNr = cprNr;
 		this.password = password;
 	}
-
+	
 	/**
 	 * @return the employeeNr
 	 */
 	public String getEmployeeNr() {
 		return employeeNr;
 	}
-
+	
 	/**
 	 * @param employeeNr the employeeNr to set
 	 */
-	public void setEmployeeNr(String employeeNr) {
+	public void setEmployeeNr(final String employeeNr) {
 		this.employeeNr = employeeNr;
 	}
-
+	
 	/**
 	 * getAdmin - Get the boolean value of admin.
+	 * 
 	 * @return boolean true if employee is admin.
 	 */
-	public boolean getAdmin(){
-		return this.admin;
+	public boolean getAdmin() {
+		return admin;
 	}
-
+	
 	/**
 	 * setAdmin - Change the admin status.
+	 * 
 	 * @param admin true if employee is admin.
 	 */
-	public void setAdmin(boolean admin){
+	public void setAdmin(final boolean admin) {
 		this.admin = admin;
 	}
-
+	
 	/**
 	 * getPassword - Get the password of the employee.
+	 * 
 	 * @return String with password
 	 */
 	public String getPassword() {
