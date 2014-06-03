@@ -57,7 +57,7 @@ public class MainUI extends SuperUI{
 	private int writeMenu(){
 		int choice = 0;
 		try{
-			System.out.println("1. Person UI");
+			System.out.println("\n1. Person UI");
 			System.out.println("2. Salg UI");
 			System.out.println("3. Vare UI");
 			System.out.println("4. Lav Test");
@@ -67,7 +67,7 @@ public class MainUI extends SuperUI{
 				System.out.println("5. Logud");
 			}
 			System.out.println("6. Afslut program");
-			choice = requestInt("Valg", null, false);
+			choice = requestInt("\nValg", null, false);
 		} catch(InputMismatchException e){
 			System.out.println("Forkert input!");
 		}
