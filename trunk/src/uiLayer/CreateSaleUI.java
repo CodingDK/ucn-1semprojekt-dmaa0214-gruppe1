@@ -37,7 +37,7 @@ public class CreateSaleUI extends SuperUI{
 	}
 	
 	/**
-	 * menu - Handels the selection part of the UI
+	 * menu - Handle the selection part of the UI
 	 */
 	private void menu(){
 		boolean exit = false;
@@ -219,7 +219,7 @@ public class CreateSaleUI extends SuperUI{
 						
 			try {
 				sCtr.addItem(i, amount);
-				System.out.println(i.getName() + " tilføjet til salget");
+				System.out.println(amount + " x " + i.getName() + " tilføjet til salget");
 				pause();
 			} catch (NullPointerException e) {
 				System.out.println(e.getMessage());
