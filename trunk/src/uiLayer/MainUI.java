@@ -102,9 +102,9 @@ public class MainUI extends SuperUI{
 		CustomerCtr cusCtr = new CustomerCtr();
 		Private p = cusCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
 		cusCtr.createBusinessCustomer("Kis", "72691867", "Sofiendalsvej 60", "kbha@ucn.dk", "Aalborg", "9000", "UCN A/S", "33556063");
-		
+
 		// Test af CleanUp
-		
+
 		SaleCtr ccCtr = new SaleCtr();
 		ccCtr.createSale();
 		try {
@@ -129,12 +129,12 @@ public class MainUI extends SuperUI{
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, -1);
 		Date d = c.getTime();
-		
+
 		Sale s = ccCtr.getSale();
 		s.setDate(d);
-		
+
 		ccCtr.parkSale();
-		
+
 	}
 
 }
