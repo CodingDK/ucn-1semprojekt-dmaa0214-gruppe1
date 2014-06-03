@@ -52,12 +52,12 @@ public class SaleUI extends SuperUI{
 	private int writeSaleMenu(){
 		flush();
 		int choice = 0;
-		System.out.println("## Salgs Menu ##");
+		System.out.println("## Salgs Menu ##" + nL);
 		System.out.println("1. Opret Salg");
 		System.out.println("2. Genoptag Parkeret Salg");
 		System.out.println("3. Print Alle Salg");
 		System.out.println("4. Gå tilbage");
-		choice = requestInt("Valg", null, false);		
+		choice = requestInt(nL + "Valg", null, false);		
 		return choice;
 	}
 
