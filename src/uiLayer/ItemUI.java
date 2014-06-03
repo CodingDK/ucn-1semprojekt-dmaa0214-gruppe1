@@ -205,9 +205,7 @@ public class ItemUI extends SuperUI{
 				done = true;
 			}
 		}
-
 		return retStorage;
-
 	}
 
 	/**
@@ -257,10 +255,7 @@ public class ItemUI extends SuperUI{
 				done = true;
 			}
 		}
-
 		return retCategory;
-
-
 	}
 
 	/**
@@ -524,8 +519,10 @@ public class ItemUI extends SuperUI{
 	 */
 	private void removeItem() {
 		if(selectedItem != null){
-			ItemCtr iCtr = new ItemCtr();
-			iCtr.removeItem(selectedItem);
+			if(confirm("Er du sikker på du vil slette " + selectedItem.getName() + "")){
+				ItemCtr iCtr = new ItemCtr();
+				iCtr.removeItem(selectedItem);
+			}
 		}else{
 			System.out.println("En Vare skal være valgt før den kan fjernes");
 		}
@@ -536,9 +533,11 @@ public class ItemUI extends SuperUI{
 	 */
 	private void removeCategory() {
 		if(selectedCategory != null){
-			CategoryCtr cCtr = new CategoryCtr();
-			cCtr.removeCategory(selectedCategory);
-			selectedCategory = null;
+			if(confirm("Er du sikker på du vil slette " + selectedCategory.getName() + "")){
+				CategoryCtr cCtr = new CategoryCtr();
+				cCtr.removeCategory(selectedCategory);
+				selectedCategory = null;
+			}
 		}else{
 			System.out.println("En Kategori skal være valgt før den kan fjernes");
 		}
@@ -549,6 +548,7 @@ public class ItemUI extends SuperUI{
 	 */
 	private void removeStorage(){
 		if(selectedStorage != null){
+			if(confirm("Er du sikker på du vil slette " + selectedStorage.getName() + "")){
 			ItemCtr iCtr = new ItemCtr();
 			if(!iCtr.isPrimary(selectedStorage)){
 				iCtr.removeStorage(selectedStorage);
@@ -557,6 +557,7 @@ public class ItemUI extends SuperUI{
 				pause();
 			}
 			selectedStorage = null;
+			}
 		}else{
 			System.out.println("Et Lager skal være valgt før den kan fjernes");
 		}
