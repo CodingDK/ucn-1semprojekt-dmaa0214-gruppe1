@@ -7,6 +7,11 @@ import ctrLayer.EmployeeCtr;
 
 public abstract class SuperUI {
 	protected static boolean admin;
+	protected String nL;
+	
+	protected SuperUI(){
+		nL = System.getProperty("line.separator");
+	}
 	
 	/**
 	 * pause - Used in TUIs to pause, waiting for a user to hit enter to continue
