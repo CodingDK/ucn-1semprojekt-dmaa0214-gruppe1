@@ -53,19 +53,16 @@ public class SaleUI extends SuperUI{
 	private int writeSaleMenu(){
 		flush();
 		int choice = 0;
-		try{
-			System.out.println("\n## Salgs Menu ##");
-			System.out.println("1. Opret Salg");
-			System.out.println("2. Genoptag Parkeret Salg");
-			System.out.println("3. Print Alle Salg");
-			System.out.println("4. Gå tilbage");
-			choice = requestInt("Valg", null, false);		
-		} catch(InputMismatchException e){
-			System.out.println("Forkert input!");
-		}
+		flush();
+		System.out.println("\n## Salgs Menu ##");
+		System.out.println("1. Opret Salg");
+		System.out.println("2. Genoptag Parkeret Salg");
+		System.out.println("3. Print Alle Salg");
+		System.out.println("4. Gå tilbage");
+		choice = requestInt("Valg", null, false);		
 		return choice;
 	}
-	
+
 	/**
 	 * printSales - prints out all the sales
 	 */
