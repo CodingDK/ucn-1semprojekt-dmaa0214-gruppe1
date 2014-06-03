@@ -116,7 +116,7 @@ public class ItemUI extends SuperUI{
 		int choice = 0;
 
 		flush();
-		System.out.println("## Vare Menu ##");
+		System.out.println("## Vare Menu ##" + nL);
 		{
 			if(admin){
 				System.out.println("--------------------------");
