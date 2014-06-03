@@ -355,11 +355,10 @@ public class ItemUI extends SuperUI{
 					System.out.println(items.size() + " Varer Fundet");
 					while(recheck){
 						for(Item i : items){
-							String amount = "(";
+							String amount = "" + i.getAmount();
 							if(i.getReserved() != 0){
-								amount += i.getReserved() + "/";
+								amount += "(" + i.getReserved() + ")";
 							}
-							amount += i.getAmount() + ")";
 							System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + amount + " Stk Pris: " + i.getSalePrice() + "(" + i.getSalePrice()*1.25 + "),-" + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
 						}
 						int i = requestInt("Vare ID", null, false);
