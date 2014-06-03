@@ -13,20 +13,20 @@ public class Employee extends Person{
 	@SuppressWarnings("unused")
 	private String cprNr;
 	private String password;
-	
+
 	/**
-     * Constructor for Employee objects.
-     * @param employeeNr The employeeNr of the employee.
-     * @param name The name of the employee.
-     * @param phoneNr The phoneNr of the employee.
-     * @param street The Street of the employee.
-     * @param email The email of the employee.
-     * @param city The city of the employee.
-     * @param postCode The postCode of the employee.
-     * @param cprNr The cprNr of the employee.
-     * @param password the admin password
-     * @param admin A boolean value, true for admin.
-     */
+	 * Constructor for Employee objects.
+	 * @param employeeNr The employeeNr of the employee.
+	 * @param name The name of the employee.
+	 * @param phoneNr The phoneNr of the employee.
+	 * @param street The Street of the employee.
+	 * @param email The email of the employee.
+	 * @param city The city of the employee.
+	 * @param postCode The postCode of the employee.
+	 * @param cprNr The cprNr of the employee.
+	 * @param password the admin password
+	 * @param admin A boolean value, true for admin.
+	 */
 	public Employee(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String password, boolean admin){
 		super(name, phoneNr, street, email, city, postCode);
 		this.employeeNr = employeeNr;
@@ -48,7 +48,7 @@ public class Employee extends Person{
 	public void setEmployeeNr(String employeeNr) {
 		this.employeeNr = employeeNr;
 	}
-	
+
 	/**
 	 * getAdmin - Get the boolean value of admin.
 	 * @return boolean true if employee is admin.
@@ -56,7 +56,7 @@ public class Employee extends Person{
 	public boolean getAdmin(){
 		return this.admin;
 	}
-	
+
 	/**
 	 * setAdmin - Change the admin status.
 	 * @param admin true if employee is admin.

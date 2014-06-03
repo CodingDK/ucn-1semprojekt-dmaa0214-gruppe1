@@ -12,10 +12,10 @@ public class CreateItemUI extends SuperUI {
 	public CreateItemUI(Category c, Storage s) {
 		this.selectedCategory = c;
 		this.selectedStorage = s;
-		
+
 		menu();
 	}
-	
+
 	/**
 	 * menu - Handels the selection part of the UI
 	 */
@@ -38,7 +38,7 @@ public class CreateItemUI extends SuperUI {
 			}
 		}
 	}
-	
+
 	/**
 	 * writeItemMenu - Write the item menu and get a choice.
 	 * @return The choice by the user.
@@ -51,7 +51,7 @@ public class CreateItemUI extends SuperUI {
 		System.out.println("1. Vælg Kategori" + category);
 		String storage = (selectedStorage != null) ? " (" + selectedStorage.getName() + ")" : "";
 		System.out.println("2. Vælg Lager" + storage);
-		
+
 		if(selectedStorage != null && selectedCategory != null){
 			System.out.println("3. Opret Vare (Lager: " + selectedStorage.getName() + ", Kategori: " + selectedCategory.getName() + ")");
 		}else{
@@ -59,10 +59,10 @@ public class CreateItemUI extends SuperUI {
 		}
 		System.out.println("4. Gå tilbage");
 		choice = requestInt(nL + "Valg", null, false);
-		
+
 		return choice;
 	}
-	
+
 	/**
 	 * createItem - TUI for creating an Item
 	 */

@@ -12,7 +12,7 @@ public class PersonUI extends SuperUI{
 
 	private Customer selectedCustomer;
 	private Employee selectedEmployee;
-	
+
 	public PersonUI(String DryRun){
 		selectedCustomer = null;
 		selectedEmployee = null;
@@ -24,7 +24,7 @@ public class PersonUI extends SuperUI{
 
 		menu();
 	}
-	
+
 	/**
 	 * menu - Handels the selection part of the UI
 	 */
@@ -86,7 +86,7 @@ public class PersonUI extends SuperUI{
 		int choice = 0;
 		String pP = selectedCustomer != null ? " (" + selectedCustomer.getName() + ")" : "";  
 		String m = selectedEmployee != null ? " (" + selectedEmployee.getName() + ")" : "";
-		
+
 		flush();
 		System.out.println("## Person menu ##");
 		System.out.println("1. Søg kunde");
@@ -106,8 +106,8 @@ public class PersonUI extends SuperUI{
 		return choice;
 	}
 
-	
-	
+
+
 	/**
 	 * createCustomer - Create a private or business customer
 	 * @return Customer
@@ -123,7 +123,7 @@ public class PersonUI extends SuperUI{
 			System.out.println("1. Erhvervskunde");
 			System.out.println("2. Privatkunde");
 			System.out.println("3. Gå tilbage");
-			
+
 			int choice = requestInt("Valg", null, false);
 
 			if(choice == 1 || choice == 2){
@@ -172,11 +172,11 @@ public class PersonUI extends SuperUI{
 		String phoneNr		= requestString("Telefon nr", 8, 12, false);
 		String email		= requestString("E-mail", 5, 50, false);
 		String cprNr		= requestString("CPR nr", 10, 15, false);
-		
+
 		if(confirm("Vil du give denne medarbejder administrator rettigheder") ){
 			rights = true;
 		}
-		
+
 		EmployeeCtr employeeCtr = new EmployeeCtr();
 		selectedEmployee = employeeCtr.createEmployee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, null, rights);
 	}
@@ -239,7 +239,6 @@ public class PersonUI extends SuperUI{
 			pause();
 		} else{
 			System.out.println("0 Kunder Fundet");
-			selectedCustomer = null;
 			pause();
 		}
 		return retC;
@@ -253,32 +252,32 @@ public class PersonUI extends SuperUI{
 			flush();
 			System.out.println("## Opdater kunde ##");
 			System.out.println("Skriv ny info ellers tryk enter");
-	
+
 			System.out.println("Navn: (" + selectedCustomer.getName() + ")" );
 			String name = stringToNull();
-	
+
 			System.out.println("Gade: (" + selectedCustomer.getStreet() + ")");
 			String street = stringToNull();
-	
+
 			System.out.println("Postnummer: (" + selectedCustomer.getStreet() + ")");
 			String postCode = stringToNull();
-	
+
 			System.out.println("By: (" + selectedCustomer.getCity() + ")");
 			String city = stringToNull();
-	
+
 			System.out.println("Telefon nr: (" + selectedCustomer.getPhoneNr() + ")");
 			String phoneNr = stringToNull();
-	
+
 			System.out.println("E-mail: (" + selectedCustomer.getEmail() + ")");
 			String email = stringToNull();
-	
+
 			System.out.println("Billede ID:");
 			String pictureID = stringToNull();
-	
+
 			int id = selectedCustomer.getId();
 			String company = null;
 			String cvrNr = null;
-	
+
 			CustomerCtr customerCtr = new CustomerCtr();
 			customerCtr.updateCustomer(id, name, phoneNr, street, email, city, postCode, pictureID, company, cvrNr);	
 		}

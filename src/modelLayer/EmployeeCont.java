@@ -10,49 +10,49 @@ import java.util.ArrayList;
  * @version 0.1
  */
 public class EmployeeCont{
-	
+
 	private static EmployeeCont instance;
-    private ArrayList<Employee> employees;
-    
-    /**
-     * Constructor for objects of class EmployeeCont
-     */
-    private EmployeeCont(){
-    	employees = new ArrayList<Employee>();
-    }
-    
-    /**
-     * getInstance - Get only one instance of the EmployeeCont.
-     * @return EmployeeCont - The instance of the EmployeeCont.
-     */
-    public static EmployeeCont getInstance(){
-        if(instance == null){
-            instance = new EmployeeCont();
-        }
-        
-        return instance;
-    }
-    
-    /**
-     * addEmployee - Add a Employee object to the EmployeeCont.
-     * @param e The Employee object to add.
-     */
-    public void addEmployee(Employee e){
-    	employees.add(e);
-    }
-    
-    /**
-     * removeEmployee - Remove a Employee from the EmployeeCont.
-     * @param Employee The Employee object to remove.
-     */
-    public void removeEmployee(Employee e){
-    	employees.remove(e);
-    }
-    
-    /**
+	private ArrayList<Employee> employees;
+
+	/**
+	 * Constructor for objects of class EmployeeCont
+	 */
+	private EmployeeCont(){
+		employees = new ArrayList<Employee>();
+	}
+
+	/**
+	 * getInstance - Get only one instance of the EmployeeCont.
+	 * @return EmployeeCont - The instance of the EmployeeCont.
+	 */
+	public static EmployeeCont getInstance(){
+		if(instance == null){
+			instance = new EmployeeCont();
+		}
+
+		return instance;
+	}
+
+	/**
+	 * addEmployee - Add a Employee object to the EmployeeCont.
+	 * @param e The Employee object to add.
+	 */
+	public void addEmployee(Employee e){
+		employees.add(e);
+	}
+
+	/**
+	 * removeEmployee - Remove a Employee from the EmployeeCont.
+	 * @param Employee The Employee object to remove.
+	 */
+	public void removeEmployee(Employee e){
+		employees.remove(e);
+	}
+
+	/**
 	 * findEmployee - Finds and returns a EmployeeObj by name or employee number
 	 * @param nameOrEmployeeNr - The employeeNr of the Employee.
-     * @return Employee object of the Employee or null if not found.
+	 * @return Employee object of the Employee or null if not found.
 	 */
 	public Employee findEmployee(String nameOrEmployeeNr){
 		boolean found = false;
@@ -67,34 +67,34 @@ public class EmployeeCont{
 			i++;
 		}
 		return e;
+	}
+
+	/**
+	 * findEmployee - Get a Employee object from the id of the Employee.
+	 * @param id - The id of the Employee.
+	 * @return Employee object of the Employee or null if not found.
+	 */
+	public Employee findEmployee(int id){
+
+		Employee retEmployee = null;
+		boolean found = false;
+		int i = 0;
+		while(i < employees.size() && !found) {
+			if(employees.get(i).getId() == id) {
+				retEmployee = employees.get(i);
+				found = true;
+			}
+			i++;
 		}
-	
-    /**
-     * findEmployee - Get a Employee object from the id of the Employee.
-     * @param id - The id of the Employee.
-     * @return Employee object of the Employee or null if not found.
-     */
-    public Employee findEmployee(int id){
-    	
-    	Employee retEmployee = null;
-    	boolean found = false;
-    	int i = 0;
-    	while(i < employees.size() && !found) {
-    		if(employees.get(i).getId() == id) {
-    			retEmployee = employees.get(i);
-    			found = true;
-    		}
-    		i++;
-    	}
-    	
-    	return retEmployee;
-    }
-    
-    /**
+
+		return retEmployee;
+	}
+
+	/**
 	 * @return employee Returns the list of employees.
 	 */
 	public ArrayList<Employee> getEmployee(){
 		return employees;
 	}
-    
+
 }

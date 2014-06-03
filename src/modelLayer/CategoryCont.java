@@ -18,7 +18,7 @@ public class CategoryCont {
 	private CategoryCont() {
 		categories = new ArrayList<Category>();
 	}
-	
+
 	/**
 	 * getInstance - Returns the instance of CategoryCont
 	 * @return CategoryCont
@@ -27,10 +27,10 @@ public class CategoryCont {
 		if(instance == null){
 			instance = new CategoryCont();
 		}
-		
+
 		return instance;
 	}
-	
+
 	/**
 	 * addCategory - Adds a Category to the Container
 	 * @param c The Category object to add.
@@ -38,7 +38,7 @@ public class CategoryCont {
 	public void addCategory(Category c){
 		categories.add(c);
 	}
-	
+
 	/**
 	 * getAll - Returns all the Categories as ArrayList
 	 * @return ArrayList<Category> A list of all categories.
@@ -46,7 +46,7 @@ public class CategoryCont {
 	public ArrayList<Category> getAll(){
 		return categories;
 	}
-	
+
 	/**
 	 * findCategory - Finds the Category by name
 	 * @param name The name to look for.
@@ -64,10 +64,10 @@ public class CategoryCont {
 			}
 			i++;
 		}
-		
+
 		return c;
 	}
-	
+
 	/**
 	 * Removes a category
 	 * @param c The Category object to remove.

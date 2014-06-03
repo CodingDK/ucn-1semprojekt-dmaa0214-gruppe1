@@ -10,15 +10,15 @@ import exceptionLayer.NotEnoughItemsException;
 import exceptionLayer.SaleNotCreatedException;
 
 public class MainUI extends SuperUI{
-	
+
 	public static void main(String[] args){
 		new MainUI();
 	}
-	
+
 	private MainUI(){
 		menu();
 	}
-	
+
 	/**
 	 * menu - Handels the selection part of the UI
 	 */
@@ -55,7 +55,7 @@ public class MainUI extends SuperUI{
 			}
 		}
 	}
-	
+
 	/**
 	 * writeMenu - Write the Main menu and get a choice.
 	 * @return The choice by the user.
@@ -88,17 +88,17 @@ public class MainUI extends SuperUI{
 		cCtr.createCategory("Hammer");
 		Category c1 = cCtr.findCategory("Søm");
 		Category c2 = cCtr.findCategory("Hammer");
-		
+
 		iCtr.createItem("Søm Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
 		iCtr.createItem("Søm t. Sømpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
-		
+
 		iCtr.createItem("Flad Hammer", 200, 0, 1., 1., 1., 1, "1234", s2, 10, 1, c2);
 		iCtr.createItem("Rund Hammer", 200, 0, 1., 1., 1., 1, "1234", s2, 10, 1, c2);
-		
+
 		EmployeeCtr eCtr = new EmployeeCtr();
 		eCtr.createEmployee("1", "Ole", "70809010", "Egonsvej 19", "ole@ucn.dk", "Aalborg", "9000", "201050-1043", "1234", true);
 		eCtr.createEmployee("2", "Jens", "40509010", "Hobrovej 29", "jens@ucn.dk", "Vestbjerg", "9380", "100170-2143", null, false);
-		
+
 		CustomerCtr cusCtr = new CustomerCtr();
 		Private p = cusCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
 		cusCtr.createBusinessCustomer("Kis", "72691867", "Sofiendalsvej 60", "kbha@ucn.dk", "Aalborg", "9000", "UCN A/S", "33556063");
@@ -136,5 +136,5 @@ public class MainUI extends SuperUI{
 		ccCtr.parkSale();
 		
 	}
-	
+
 }

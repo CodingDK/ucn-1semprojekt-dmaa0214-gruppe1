@@ -10,7 +10,7 @@ public class Category {
 	private static int idIterator;
 	private int id;
 	private String name;
-	
+
 	/**
 	 * Constructor for Category objects.
 	 * @param name The name of the category.
