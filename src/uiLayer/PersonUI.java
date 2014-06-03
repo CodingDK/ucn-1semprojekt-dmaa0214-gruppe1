@@ -236,6 +236,7 @@ public class PersonUI extends SuperUI{
 					recheck = true;			
 				}
 			}
+			pause();
 		} else{
 			System.out.println("0 Kunder Fundet");
 			pause();
