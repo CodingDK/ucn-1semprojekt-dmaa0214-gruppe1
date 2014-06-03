@@ -11,7 +11,7 @@ import ctrLayer.SaleCtr;
  * @version 0.1                 
  */
 public class SaleUI extends SuperUI{
-	
+
 	/**
 	 * Constructor for running the SaleUI from other UI's
 	 * @param s
@@ -123,8 +123,8 @@ public class SaleUI extends SuperUI{
 							}
 							i++;
 						}
-						
-						
+
+
 						if(retSale != null){
 							retSale = sCtr.getSale(id);
 							done = true;
@@ -144,9 +144,9 @@ public class SaleUI extends SuperUI{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
+
 		return retSale;
-		
+
 	}
 	
 	/**

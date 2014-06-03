@@ -10,15 +10,15 @@ package personLayer;
 public class Private extends Customer{
 	@SuppressWarnings("unused")
 	private String cprNr, pictureID;
-	
+
 	/**
 	 * Constructor for Private objects.
-     * @param name The name of the privateCustomer.
-     * @param phoneNr The phoneNr of the privateCustomer.
-     * @param street The street of the privateCustomer.
-     * @param email The email of the privateCustomer.
-     * @param city The city of the privateCustomer.
-     * @param postCode The postCode of the privateCustomer.
+	 * @param name The name of the privateCustomer.
+	 * @param phoneNr The phoneNr of the privateCustomer.
+	 * @param street The street of the privateCustomer.
+	 * @param email The email of the privateCustomer.
+	 * @param city The city of the privateCustomer.
+	 * @param postCode The postCode of the privateCustomer.
 	 * @param cprNr The cprNr of the privateCustomer.
 	 * @param pictureID The pictureID of the privateCustomer.
 	 */
@@ -41,7 +41,7 @@ public class Private extends Customer{
 	public void setPictureID(String pictureID) {
 		this.pictureID = pictureID;
 	}
-	
+
 	public String toString(){
 		return super.toString() + " Navn: " + name;
 	}

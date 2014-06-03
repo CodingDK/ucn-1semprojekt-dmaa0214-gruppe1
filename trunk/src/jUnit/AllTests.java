@@ -15,7 +15,7 @@ import ctrLayer.ItemCtr;
 
 @RunWith(Suite.class)
 @SuiteClasses({ BusinessTest.class, CategoryTests.class, ItemCtrTests.class,
-		SaleTests.class })
+	SaleTests.class })
 public class AllTests {
 
 	public AllTests() {

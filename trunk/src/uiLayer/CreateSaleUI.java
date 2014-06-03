@@ -15,7 +15,7 @@ import exceptionLayer.SaleNotCreatedException;
  */
 public class CreateSaleUI extends SuperUI{
 	private SaleCtr sCtr;
-	
+
 	/**
 	 * Constructor for the SaleUI.
 	 */
@@ -24,7 +24,7 @@ public class CreateSaleUI extends SuperUI{
 		sCtr.createSale();
 		menu();
 	}
-	
+
 	/**
 	 * Constructor for the SaleUI, for resuming a parked sale
 	 * @param Parked sale
@@ -34,7 +34,7 @@ public class CreateSaleUI extends SuperUI{
 		sCtr.loadSale(sale);
 		menu();
 	}
-	
+
 	/**
 	 * menu - Handle the selection part of the UI
 	 */
@@ -117,22 +117,22 @@ public class CreateSaleUI extends SuperUI{
 		ArrayList<PartSale> partsales = sale.getPartSales();
 		System.out.println("Valgt vare " + partsales.size());
 		if(partsales.size() != 0){
-		for(PartSale ps : partsales){
-			String line = "";
-			Item item = ps.getItem();
-			double price = item.getSalePrice()*ps.getAmount();
-			line = ps.getAmount() + "x " + item.getName() + " ";
-			line += price + ",- ";
-			System.out.println(line);
-		}
-		double total = sale.getTotalPrice();
-		double moms = total*0.25;
-		total += moms;
-		System.out.println("Moms: " + moms + ",-");
-		System.out.println("Total: " + total + ",-");
+			for(PartSale ps : partsales){
+				String line = "";
+				Item item = ps.getItem();
+				double price = item.getSalePrice()*ps.getAmount();
+				line = ps.getAmount() + "x " + item.getName() + " ";
+				line += price + ",- ";
+				System.out.println(line);
+			}
+			double total = sale.getTotalPrice();
+			double moms = total*0.25;
+			total += moms;
+			System.out.println("Moms: " + moms + ",-");
+			System.out.println("Total: " + total + ",-");
 		}
 	}
-	
+
 	/**
 	 * finishSale - Finish a sale and add an employee to the sale.
 	 * @return true if sale is created.
@@ -163,15 +163,10 @@ public class CreateSaleUI extends SuperUI{
 	 */
 	private void searchCustomer() {
 		PersonUI pUI = new PersonUI("Dry Run");
-		Customer c = null;
-		while(c == null){
-			c = pUI.findCustomer();
-			if(c == null){
-			System.out.println("Kunde ikke fundet, søg igen.");
-			}
+		Customer c = pUI.findCustomer();
+		if(c != null){
+			sCtr.getSale().setCustomer(c);
 		}
-		sCtr.getSale().setCustomer(c);
-		
 	}
 
 	/**
@@ -179,7 +174,7 @@ public class CreateSaleUI extends SuperUI{
 	 */
 	private void createCustomer() {
 		PersonUI pUI = new PersonUI("Dry Run");
-		
+
 		try {
 			sCtr.setCustomer(pUI.createCustomer());
 		} catch (SaleNotCreatedException e) {
@@ -199,9 +194,9 @@ public class CreateSaleUI extends SuperUI{
 				System.out.println("Vare ikke fundet, søg igen");
 			}
 		}
-	
+
 		int aviAmount = i.getAmount()-i.getReserved();
-		
+
 		if(aviAmount <= 0){
 			System.out.println(i.getName() + " er ikke på lager");
 		}
@@ -213,7 +208,7 @@ public class CreateSaleUI extends SuperUI{
 					System.out.println("Vælg et mindre antal. Der er kun " + aviAmount + " på lager");
 				}
 			}
-						
+
 			try {
 				sCtr.addItem(i, amount);
 				System.out.println(amount + "x " + i.getName() + " tilføjet til salget");
@@ -225,9 +220,9 @@ public class CreateSaleUI extends SuperUI{
 				System.out.println(e.getMessage());
 			}
 		}
-		
+
 		pause();
-		
+
 	}
-	
+
 }

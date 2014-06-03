@@ -9,7 +9,7 @@ package modelLayer;
 public class PartSale {
 	private int amount;
 	private Item item;
-	
+
 	/**
 	 * Constructor of the class PartSale
 	 * @param i The Item associated with the PartSale.
@@ -37,6 +37,6 @@ public class PartSale {
 	public String toString() {
 		return "Vare: " + item.getName() + ", Antal: " + amount;
 	}
-	
-	
+
+
 }

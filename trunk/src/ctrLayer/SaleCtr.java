@@ -14,14 +14,14 @@ import java.util.*;
  */
 public class SaleCtr {
 	private Sale sale;
-	
+
 	/**
-     * Constructor for controller SaleCtr.
-     */
+	 * Constructor for controller SaleCtr.
+	 */
 	public SaleCtr(){
 
 	}
-	
+
 	/**
 	 * Creates the initial sale object
 	 */
@@ -29,7 +29,7 @@ public class SaleCtr {
 		Sale sale = new Sale();
 		this.sale = sale;
 	}
-		
+
 	/**
 	 * getSale - Get the sale for the controller.
 	 * @return Sale The current Sale object.
@@ -37,7 +37,7 @@ public class SaleCtr {
 	public Sale getSale(){
 		return this.sale;
 	}
-	
+
 	/**
 	 * addItem - Add an item to the sale.
 	 * @param item The item to add.
@@ -56,7 +56,7 @@ public class SaleCtr {
 					item.addReserved(amount);
 					sale.addPartSale(item, amount);
 				}
-				
+
 			} else {
 				throw new NullPointerException("Varen blev ikke fundet.");
 			}
@@ -64,7 +64,7 @@ public class SaleCtr {
 			throw new SaleNotCreatedException("Der er ikke oprettet et salg");
 		}
 	}
-	
+
 	/**
 	 * setCustomer - Set the customer of a sale.
 	 * @param c The Customer object to add.
@@ -77,7 +77,7 @@ public class SaleCtr {
 			throw new SaleNotCreatedException("Der er ikke oprettet et salg");
 		}
 	}
-	
+
 	/**
 	 * finishSale - Finish a sale and add a employeeNr to the sale.
 	 * @param employeeNr The employerNr of the Employee object to add.
@@ -91,24 +91,24 @@ public class SaleCtr {
 			if(employee == null){
 				throw new NullPointerException("Medarbejdernr.: " + employeeNr + " blev ikke fundet");
 			} else {
-			sale.setEmployee(employee);
-			
-			ArrayList<PartSale> partsales = sale.getPartSales();
-			
-			for(PartSale ps : partsales){
-				Item item = ps.getItem();
-				item.addReserved(-ps.getAmount());
-				item.addAmount(-ps.getAmount());
-			}
-			sale.setDone(true);
-			SaleCont.getInstance().addSale(sale);
+				sale.setEmployee(employee);
+
+				ArrayList<PartSale> partsales = sale.getPartSales();
+
+				for(PartSale ps : partsales){
+					Item item = ps.getItem();
+					item.addReserved(-ps.getAmount());
+					item.addAmount(-ps.getAmount());
+				}
+				sale.setDone(true);
+				SaleCont.getInstance().addSale(sale);
 			}
 		} else {
 			throw new SaleNotCreatedException("Der er ikke oprettet et salg");
 		}
-		
+
 	}
-	
+
 	/**
 	 * Cancels the sale and returns the amount, and resets the reserved
 	 */
@@ -120,13 +120,13 @@ public class SaleCtr {
 				i.addReserved(-p.getAmount());
 			}
 		}
-		
+
 		SaleCont sCont = SaleCont.getInstance();
 		if(sCont.getAll().contains(sale)){
 			sCont.removeSale(sale);
 		}
 	}
-	
+
 	/**
 	 * Parks the sale for later use
 	 * @return boolean true if the sale contains a Customer, false otherwise
@@ -143,7 +143,7 @@ public class SaleCtr {
 		}
 		return ret;		
 	}
-	
+
 	/**
 	 * loadSale - Load a parked sale
 	 * @param sale
@@ -155,7 +155,7 @@ public class SaleCtr {
 			this.sale = sale;
 		}
 	}
-	
+
 	/**
 	 * getSales - Returns all the Sales contained in the SalesContainer
 	 * @return ArrayList<Sale>
@@ -163,10 +163,10 @@ public class SaleCtr {
 	public ArrayList<Sale> getSales(){
 		SaleCont sCont = SaleCont.getInstance();
 		ArrayList<Sale> sales = sCont.getAll();
-		
+
 		return sales;
 	}
-	
+
 	/**
 	 * getParkedSales - Returns all the Sales that are marked as done = false
 	 * @return ArrayList<Sale>
@@ -179,10 +179,10 @@ public class SaleCtr {
 				retArry.add(s);
 			}
 		}
-		
+
 		return retArry;
 	}
-	
+
 	/**
 	 * getSale - Finds and returns a sale based on its ID
 	 * @param id
@@ -200,11 +200,11 @@ public class SaleCtr {
 				found = true;
 			}
 		}
-		
+
 		return retSale;
-		
+
 	}
-	
+
 	/**
 	 * cleanUp - Removed parked sales older than a day
 	 */
@@ -219,5 +219,5 @@ public class SaleCtr {
 			}
 		}
 	}
-	
+
 }

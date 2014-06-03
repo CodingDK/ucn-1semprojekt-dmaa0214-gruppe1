@@ -8,16 +8,16 @@ package personLayer;
  * 
  */
 public class Business extends Customer{
-private String company, cvrNr;
-	
+	private String company, cvrNr;
+
 	/**
 	 * Constructor for Business objects.
-     * @param name The name of the Business.
-     * @param phoneNr The phoneNr of the Business.
-     * @param street The Street of the Business.
-     * @param email The email of the Business.
-     * @param city The city of the Business.
-     * @param postCode The postCode of the Business.
+	 * @param name The name of the Business.
+	 * @param phoneNr The phoneNr of the Business.
+	 * @param street The Street of the Business.
+	 * @param email The email of the Business.
+	 * @param city The city of the Business.
+	 * @param postCode The postCode of the Business.
 	 * @param company The name of the company.
 	 * @param cvrNr The cvrNr of the Business.
 	 */
@@ -54,12 +54,12 @@ private String company, cvrNr;
 	public void setCvrNr(String cvrNr) {
 		this.cvrNr = cvrNr;
 	}
-	
+
 	/**
 	 * @return superclass tostring and the name of the company.
 	 */
 	public String toString(){
 		return super.toString() + " Virksomhed: " + company;
 	}
-	
+
 }

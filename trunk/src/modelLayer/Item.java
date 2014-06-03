@@ -56,7 +56,7 @@ public class Item{
 		this.min = min;
 		this.category = category;
 	}
-	
+
 	/**
 	 * addReserved - Add amount to reserved.
 	 * @param amount The amount to add.

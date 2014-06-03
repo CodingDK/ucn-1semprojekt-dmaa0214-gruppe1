@@ -22,7 +22,7 @@ public class Sale {
 	private Customer customer;
 	private Employee employee;
 	private boolean done;
-	
+
 	/**
 	 * Constructor for Sale objects.
 	 */
@@ -35,12 +35,12 @@ public class Sale {
 		this.done = false;
 		this.partSales = new ArrayList<PartSale>();
 	} 
-	
+
 	/**
 	 * @param totalPrice the totalPrice to sale
 	 */
 	public void setTotalPrice(double totalPrice) {
-		 this.totalPrice = totalPrice;
+		this.totalPrice = totalPrice;
 	}
 	/**
 	 * @return id of the Sale.
@@ -55,7 +55,7 @@ public class Sale {
 	public Date getDate() {
 		return date;
 	}
-	
+
 	/**
 	 * @return String with date of the Sale.
 	 */
@@ -63,14 +63,14 @@ public class Sale {
 		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 		return df.format(date);
 	}
-	
+
 	/**
 	 * @return totalPrice of the Sale.
 	 */
 	public double getTotalPrice() {
 		return totalPrice;
 	}
-	
+
 	/**
 	 * @return list of the partsales.
 	 */
@@ -88,7 +88,7 @@ public class Sale {
 		PartSale p = new PartSale(i, amount);
 		partSales.add(p);
 	}
-	
+
 	/**
 	 * setCustomer - Set the customer of the sale.
 	 * @param c the new customer.
@@ -96,7 +96,7 @@ public class Sale {
 	public void setCustomer(Customer c){
 		this.customer = c;
 	}
-	
+
 	/**
 	 * @return customer object of the sale.
 	 */
@@ -153,8 +153,8 @@ public class Sale {
 		}
 		return retString;
 	}
-	
-	
+
+
 	//** Skal fjernes **// ASD LAU FFS GOGOGOGO Amagawd
 	
 	public void setDate(Date date){

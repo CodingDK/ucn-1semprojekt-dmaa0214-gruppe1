@@ -8,7 +8,7 @@ import modelLayer.ItemCont;
 
 public class CategoryCtr {
 	private CategoryCont cCont;
-	
+
 	public CategoryCtr(){
 		cCont = CategoryCont.getInstance();
 		if(findCategory("U/K") == null){
@@ -16,7 +16,7 @@ public class CategoryCtr {
 			ItemCont.getInstance(findCategory("U/K"));
 		}
 	}
-	
+
 	/**
 	 * Creates a new Category
 	 * @param name
@@ -24,7 +24,7 @@ public class CategoryCtr {
 	public void createCategory(String name){
 		cCont.addCategory(new Category(name));
 	}
-	
+
 	/**
 	 * Updates the name of the Category
 	 * @param newName
@@ -32,7 +32,7 @@ public class CategoryCtr {
 	public void updateCategory(Category c, String newName) {
 		c.setName(newName);
 	}
-	
+
 	/**
 	 * Removes the selected category
 	 * @param Category
@@ -49,7 +49,7 @@ public class CategoryCtr {
 		ItemCont.removeInstance(c);
 		cCont.removeCategory(c);
 	}
-	
+
 	/**
 	 * Finds the category by name
 	 * @param name
@@ -66,7 +66,7 @@ public class CategoryCtr {
 	public ArrayList<Category> getAllCategories(){
 		return cCont.getAll();
 	}
-	
+
 	/**
 	 * searchCategory - Searches for categories containing the param(name), and returns a list with matches
 	 * @param name

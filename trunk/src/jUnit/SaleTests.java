@@ -41,18 +41,18 @@ public class SaleTests {
 		cCtr.createCategory("Søm");
 		cCtr.createCategory("Hammer");
 		Category c1 = cCtr.findCategory("Søm");
-		
+
 		iCtr.createItem("S Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
 		iCtr.createItem("S t. Sømpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
-		
+
 		Item i = iCtr.getItem("S Flad");
 		SaleCtr sCtr = new SaleCtr();
 		sCtr.createSale();
 		sCtr.getSale();
-			
+
 		sCtr.addItem(i, 250);
 	}
-	
+
 	@Test
 	public void testAddItem() throws NullPointerException, NotEnoughItemsException, SaleNotCreatedException {
 		ItemCtr iCtr = new ItemCtr();
@@ -63,19 +63,19 @@ public class SaleTests {
 		cCtr.createCategory("Søm");
 		cCtr.createCategory("Hammer");
 		Category c1 = cCtr.findCategory("Søm");
-		
+
 		iCtr.createItem("S Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
 		iCtr.createItem("S t. Sømpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
-		
+
 		Item i = iCtr.getItem("S Flad");
 		SaleCtr sCtr = new SaleCtr();
 		sCtr.createSale();
 		Sale s = sCtr.getSale();
-			
+
 		sCtr.addItem(i, 50);
 		double test1 = s.getTotalPrice();
 		double test2 = i.getSalePrice()*150;
-		
+
 		assertEquals(test1, test2, test2);
 	}
 
@@ -94,7 +94,7 @@ public class SaleTests {
 				found = true;
 			}
 		}
-		
+
 		SaleCtr sCtr = new SaleCtr();
 		sCtr.createSale();
 		Sale s = sCtr.getSale();
@@ -112,18 +112,18 @@ public class SaleTests {
 		cCtr.createCategory("Søm");
 		cCtr.createCategory("Hammer");
 		Category c1 = cCtr.findCategory("Søm");
-		
+
 		iCtr.createItem("Ss Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
 		iCtr.createItem("S t. Sømpistol", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
-		
+
 		Item i = iCtr.getItem("Ss Flad");
 		SaleCtr sCtr = new SaleCtr();
 		sCtr.createSale();
 		Sale s = sCtr.getSale();
-		
+
 		EmployeeCtr eCtr = new EmployeeCtr();
 		eCtr.createEmployee("2", "Jens", "40509010", "Hobrovej 29", "jens@ucn.dk", "Vestbjerg", "9380", "100170-2143", null, false);
-			
+
 		sCtr.addItem(i, 50);
 		CustomerCtr ccCtr = new CustomerCtr();
 		ccCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
@@ -139,9 +139,9 @@ public class SaleTests {
 			}
 		}
 		sCtr.setCustomer(c);
-		
+
 		sCtr.finishSale("2");
-		
+
 		assertEquals(s.getEmployee(), eCtr.findEmployee("2"));
 	}
 

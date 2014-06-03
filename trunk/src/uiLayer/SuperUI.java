@@ -8,11 +8,11 @@ import ctrLayer.EmployeeCtr;
 public abstract class SuperUI {
 	protected static boolean admin;
 	protected String nL;
-	
+
 	protected SuperUI(){
 		nL = System.getProperty("line.separator");
 	}
-	
+
 	/**
 	 * pause - Used in TUIs to pause, waiting for a user to hit enter to continue
 	 */
@@ -79,7 +79,7 @@ public abstract class SuperUI {
 						}
 					}
 				} 
-				
+
 				if(!error){
 					ret = inputData;
 					done = true;
@@ -93,10 +93,10 @@ public abstract class SuperUI {
 				done = true;
 			}
 		}
-		
+
 		return ret;
 	}
-	
+
 	/**
 	 * requestInt  - Asks for user input (the question being the first parameter, input) 
 	 * and returns the user input as an int. 
@@ -130,11 +130,11 @@ public abstract class SuperUI {
 					}
 				}
 			}
-			
+
 		}
 		return ret;
 	}
-	
+
 	/**
 	 * requestDouble - Prints a question asking the user to type a double and returns the input.
 	 * @param input What the system should print/ask.
@@ -158,11 +158,11 @@ public abstract class SuperUI {
 					done = true;
 				}
 			}
-			
+
 		}
 		return ret;
 	}
-	
+
 	/**
 	 * isInteger checks if the input is an integer and returns true/false.
 	 * @param s What the system should check.
@@ -174,10 +174,10 @@ public abstract class SuperUI {
 		}catch(NumberFormatException e){
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * isDouble checks if the input is a double and returns true/false.
 	 * @param s What the system should check.
@@ -189,36 +189,36 @@ public abstract class SuperUI {
 		}catch(NumberFormatException e){
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * confirm - Asks the user to confirm his/her choice, by typing y or n.
 	 * @param confirmStatement What should be confirmed.
 	 * @return boolean - True/false depending on whether the user confirmed or not.
 	 */
 	protected boolean confirm(String confirmStatement){
-        boolean confirm = true;
-        @SuppressWarnings("resource")
+		boolean confirm = true;
+		@SuppressWarnings("resource")
 		Scanner s = new Scanner(System.in);
-        boolean exit = false;
-        while(!exit){
-            System.out.println();
-            System.out.println(confirmStatement);
-            System.out.println("Confirm - y/n");
-            String conf = s.nextLine();
-            if(conf.toLowerCase().equals("y")){
-                confirm = true;
-                exit = true;
-            }else if(conf.toLowerCase().equals("n")){
-                confirm = false;
-                exit = true;
-            }
-        }
-        return confirm;
-    }
-	
+		boolean exit = false;
+		while(!exit){
+			System.out.println();
+			System.out.println(confirmStatement);
+			System.out.println("Confirm - y/n");
+			String conf = s.nextLine();
+			if(conf.toLowerCase().equals("y")){
+				confirm = true;
+				exit = true;
+			}else if(conf.toLowerCase().equals("n")){
+				confirm = false;
+				exit = true;
+			}
+		}
+		return confirm;
+	}
+
 	/**
 	 * login - Administrator login. Asks you to enter employee ID and a password.
 	 */
@@ -227,7 +227,7 @@ public abstract class SuperUI {
 		System.out.println("## Administrator Login ##");
 		String employeeID = requestString("Medarbejder Nummer", null, null, false);
 		String password = requestString("Kodeord", null, null, false);
-		
+
 		EmployeeCtr eCtr = new EmployeeCtr();
 		Employee e = eCtr.findEmployee(employeeID);
 		if(e != null){
@@ -243,9 +243,9 @@ public abstract class SuperUI {
 			System.out.println(nL + "Denne medarbejder eksistere ikke");
 			pause();
 		}
-		
+
 	}
-	
+
 	protected void flush(){
 		for(int i = 0; i < 40; i++){
 			System.out.println();
