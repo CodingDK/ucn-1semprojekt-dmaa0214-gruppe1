@@ -103,7 +103,7 @@ public class CreateSaleUI extends SuperUI{
 			System.out.println("## Kunde: " + ret + " ##");
 			printPartSale();
 			System.out.println("1. Tilføj vare");
-			System.out.println("2. Opret privatkunde");
+			System.out.println("2. Opret kunde");
 			System.out.println("3. Søg kunde");
 			System.out.println("4. Udfør salg");
 			System.out.println("5. Parker salg");
