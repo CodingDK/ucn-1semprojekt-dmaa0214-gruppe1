@@ -8,6 +8,7 @@ package personLayer;
  * 
  */
 public class Private extends Customer{
+	@SuppressWarnings("unused")
 	private String cprNr, pictureID;
 	
 	/**
