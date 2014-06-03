@@ -86,7 +86,8 @@ public class PersonUI extends SuperUI{
 		int choice = 0;
 		String pP = selectedCustomer != null ? " (" + selectedCustomer.getName() + ")" : "";  
 		String m = selectedEmployee != null ? " (" + selectedEmployee.getName() + ")" : "";
-
+		
+		flush();
 		System.out.println("\n## Person menu ##");
 		System.out.println(" 1. Søg kunde");
 		System.out.println(" 2. Opret kunde" + pP);

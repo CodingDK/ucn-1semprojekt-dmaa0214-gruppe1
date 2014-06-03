@@ -45,19 +45,20 @@ public class CreateItemUI extends SuperUI {
 	 */
 	private int writeItemMenu(){
 		int choice = 0;
+		flush();
 		System.out.println("## Opret Vare ##");
 		String category = (selectedCategory != null) ? " (" + selectedCategory.getName() + ")" : "";
-		System.out.println(" 1. Vælg Kategori" + category);
+		System.out.println("1. Vælg Kategori" + category);
 		String storage = (selectedStorage != null) ? " (" + selectedStorage.getName() + ")" : "";
-		System.out.println(" 2. Vælg Lager" + storage);
+		System.out.println("2. Vælg Lager" + storage);
 		
 		if(selectedStorage != null && selectedCategory != null){
-			System.out.println(" 3. Opret Vare (Lager: " + selectedStorage.getName() + ", Kategori: " + selectedCategory.getName() + ")");
+			System.out.println("3. Opret Vare (Lager: " + selectedStorage.getName() + ", Kategori: " + selectedCategory.getName() + ")");
 		}else{
 			System.out.println("Lager og Kategori skal vare valgt for at oprette en vare");
 		}
-		System.out.println(" 4. Gå tilbage");
-		choice = requestInt("Valg", null, false);
+		System.out.println("4. Gå tilbage");
+		choice = requestInt("\nValg", null, false);
 		
 		return choice;
 	}
