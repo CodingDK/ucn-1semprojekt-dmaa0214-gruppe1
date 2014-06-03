@@ -55,6 +55,7 @@ public class MainUI extends SuperUI{
 	 * @return The choice by the user.
 	 */
 	private int writeMenu(){
+		flush();
 		int choice = 0;
 		try{
 			System.out.println("\n1. Person Menu");

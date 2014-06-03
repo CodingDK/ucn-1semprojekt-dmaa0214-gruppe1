@@ -138,11 +138,17 @@ public class Sale {
 	@Override
 	public String toString() {
 		String retString = "";
+		String parked = "";
+		if(done){
+			parked = "Nej";
+		}else{
+			parked = "Ja";
+		}
 		if(customer instanceof Private){
-			retString = "#" + id + " Kunde: " + customer.getName() + ", Total Pris: " + totalPrice + ", Parkeret: " + done
+			retString = "#" + id + " Kunde: " + customer.getName() + ", Total Pris: " + totalPrice + ", Parkeret: " + parked
 					+ ", Dato: " + getDateToString();
 		}else if(customer instanceof Business){
-			retString = "#" + id + " Kunde: " + ((Business) customer).getCompany() + ", Total Pris: " + totalPrice + ", Parkeret: " + done
+			retString = "#" + id + " Kunde: " + ((Business) customer).getCompany() + ", Total Pris: " + totalPrice + ", Parkeret: " + parked
 					+ ", Dato: " + getDateToString();
 		}
 		return retString;
