@@ -182,7 +182,7 @@ public class PersonUI extends SuperUI{
 	public Customer findCustomer() {
 		Customer retC = null;
 		System.out.println("\n## Søg kunde ##");
-		String nameOrPhone = requestString("Indtast kundenavn, virksomhedsnavn eller tlf nr.", 1, null, false);
+		String nameOrPhone = requestString("Indtast kundenavn, virksomhedsnavn eller tlf nr.", 1, 50, false);
 		CustomerCtr cCtr = new CustomerCtr();
 		ArrayList<Customer> customers = cCtr.searchCustomer(nameOrPhone);
 		if(customers.size() > 0){
@@ -300,7 +300,7 @@ public class PersonUI extends SuperUI{
 	public Employee findEmployee(){	
 		Employee retE = null;
 		System.out.println("\n## Søg medarbejder ##");
-		String nameOrEmpNr = requestString("Indtast del af medarbejder navn eller nummer", 1, null, false);
+		String nameOrEmpNr = requestString("Indtast del af medarbejder navn eller nummer", 1, 50, false);
 		EmployeeCtr eCtr = new EmployeeCtr();
 		ArrayList<Employee> employees = eCtr.searchEmployee(nameOrEmpNr);
 		if(employees.size() > 0){
