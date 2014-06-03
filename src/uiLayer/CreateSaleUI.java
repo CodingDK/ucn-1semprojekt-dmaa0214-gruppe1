@@ -92,7 +92,7 @@ public class CreateSaleUI extends SuperUI{
 	private int writeSaleMenu(){
 		int choice = 0;
 		try{
-			System.out.println("## Opret salg ##");
+			System.out.println("\n## Opret salg ##");
 			String ret = "";
 			Sale sale = sCtr.getSale();
 			if(sale.getCustomer() != null){
@@ -146,9 +146,14 @@ public class CreateSaleUI extends SuperUI{
 	 * @return true if sale is created.
 	 */
 	private boolean finishSale() {
-		String employeeNr = requestString("Indtast medarbejdernr.", null, null, false);
+		String employeeNr = requestString("Indtast medarbejdernr", 1, 50, false);
 		boolean ret = false;
 		try {
+			if(sCtr.getSale().getCustomer() == null){
+				if(!confirm("Vil du udføre salget uden en kunde tilknyttet?")){
+					searchCustomer();
+				}
+			}
 			sCtr.finishSale(employeeNr);
 			System.out.println("Salg udført");
 			ret = true;
