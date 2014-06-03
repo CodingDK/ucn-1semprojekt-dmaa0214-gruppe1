@@ -11,33 +11,6 @@ public class CustomerCtr {
 		cCont = CustomerCont.getInstance();
 	}
 
-	//	/**
-	//	 * Finds a Customer by name or phone
-	//	 * @param nameOrPhone
-	//	 * @return Customer
-	//	 */
-	//	public Customer findCustomer(String nameOrPhone){
-	//		return cCont.findCustomer(nameOrPhone);
-	//	}
-	//	
-	//	/**
-	//	 * Finds a Business Customer by Company name
-	//	 * @param company
-	//	 * @return Business
-	//	 */
-	//	public Business findBusiness(String company){
-	//		return cCont.findBusiness(company);
-	//	}
-	//	
-	//	/**
-	//	 * Finds a CustomerObj by ID
-	//	 * @param id
-	//	 * @return Customer
-	//	 */
-	//	public Customer findCustomer(int id){
-	//		return cCont.findCustomer(id);
-	//	}
-
 	/**
 	 * Creates a Private Customer
 	 * 

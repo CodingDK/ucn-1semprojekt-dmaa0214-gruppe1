@@ -21,7 +21,7 @@ public class PersonUI extends SuperUI{
 	public PersonUI(){
 		selectedCustomer = null;
 		selectedEmployee = null;
-		
+
 		menu();
 	}
 	
@@ -34,24 +34,44 @@ public class PersonUI extends SuperUI{
 
 			int choice = writeMenu();
 			if(admin){ 						// Admin access only
-				if(choice == 4){			//Slet kunde
-					removeCustomer(selectedCustomer);
-				} else if(choice == 7){		//Opdate medarbejder
-					updateEmployee(selectedEmployee);
+				if(choice == 7){		//Opdate medarbejder
+					if(selectedEmployee == null){
+						findEmployee();
+					}
+					if(selectedEmployee != null){
+						updateEmployee();
+					}
 				} else if(choice == 8){		//Slet medarbejder
-					removeEmployee(selectedEmployee);					
+					if(selectedEmployee == null){
+						findEmployee();
+					}
+					if(selectedEmployee != null){
+						removeEmployee();
+					}			
+				} else if(choice == 5){		//Opret medarbejder
+					createEmployee();
+				} else if(choice == 6){		//Søg medarbejder
+					findEmployee();
 				}
 			} 							// Access for both Admin and Seller
 			if(choice == 1){			//Søg kunde
 				findCustomer();
 			} else if(choice == 2){		//Opret kunde
-				//createCustomer();
+				createCustomer();
 			} else if(choice == 3){		//Opdater kunde
-				//updateCustomer();
-			} else if(choice == 5){		//Opret medarbejder
-				createEmployee();
-			} else if(choice == 6){		//Søg medarbejder
-				findEmployee();
+				if(selectedCustomer == null){
+					findCustomer();
+				}
+				if(selectedCustomer != null){
+					updateCustomer();
+				}
+			}else if(choice == 4){			//Slet kunde
+				if(selectedCustomer == null){
+					findCustomer();
+				}
+				if(selectedCustomer != null){
+					removeCustomer();
+				}
 			} else if(choice == 9){	//Gå tilbage
 				exit = true;
 			}
@@ -71,15 +91,11 @@ public class PersonUI extends SuperUI{
 		System.out.println(" 1. Søg kunde");
 		System.out.println(" 2. Opret kunde" + pP);
 		System.out.println(" 3. Opdater kunde" + pP);
-		if(admin){ 
-			System.out.println(" 4. Slet kunde" + pP); 
-		}
+		System.out.println(" 4. Slet kunde" + pP); 
 		System.out.println("--------------------------");
 		if(admin){
 			System.out.println(" 5. Opret medarbejder");
-		}
-		System.out.println(" 6. Søg medarbejder");
-		if(admin){
+			System.out.println(" 6. Søg medarbejder");
 			System.out.println(" 7. Opdater medarbejder" + m);
 			System.out.println(" 8. Slet medarbejder" + m);
 		}
@@ -137,7 +153,7 @@ public class PersonUI extends SuperUI{
 	/**
 	 * createEmployee - Create a seller or administrator
 	 */
-	public void createEmployee() {
+	private void createEmployee() {
 		boolean rights = false;
 		System.out.println("\n## Opret sælger ##");
 		String employeeNr 	= requestString("Medarbejder nummer", null, null, false);
@@ -220,54 +236,54 @@ public class PersonUI extends SuperUI{
 
 	/**
 	 * updateCustomer - Updates a Customer
-	 * @param Customer
 	 */
-	public void updateCustomer(Customer customer) {
-
-		System.out.println("\n## Opdater privat kunde ##");
-		System.out.println("Skriv ny info ellers tryk enter");
-
-		System.out.println("Navn: (" + customer.getName() + ")" );
-		String name = stringToNull();
-
-		System.out.println("Gade: (" + customer.getStreet() + ")");
-		String street = stringToNull();
-
-		System.out.println("Postnummer: (" + customer.getStreet() + ")");
-		String postCode = stringToNull();
-
-		System.out.println("By: (" + customer.getCity() + ")");
-		String city = stringToNull();
-
-		System.out.println("Telefon nr: (" + customer.getPhoneNr() + ")");
-		String phoneNr = stringToNull();
-
-		System.out.println("E-mail: (" + customer.getEmail() + ")");
-		String email = stringToNull();
-
-		System.out.println("Billede ID:");
-		String pictureID = stringToNull();
-
-		int id = customer.getId();
-		String company = null;
-		String cvrNr = null;
-
-		CustomerCtr customerCtr = new CustomerCtr();
-		customerCtr.updateCustomer(id, name, phoneNr, street, email, city, postCode, pictureID, company, cvrNr);		
+	public void updateCustomer() {
+		if(selectedCustomer != null){
+			System.out.println("\n## Opdater privat kunde ##");
+			System.out.println("Skriv ny info ellers tryk enter");
+	
+			System.out.println("Navn: (" + selectedCustomer.getName() + ")" );
+			String name = stringToNull();
+	
+			System.out.println("Gade: (" + selectedCustomer.getStreet() + ")");
+			String street = stringToNull();
+	
+			System.out.println("Postnummer: (" + selectedCustomer.getStreet() + ")");
+			String postCode = stringToNull();
+	
+			System.out.println("By: (" + selectedCustomer.getCity() + ")");
+			String city = stringToNull();
+	
+			System.out.println("Telefon nr: (" + selectedCustomer.getPhoneNr() + ")");
+			String phoneNr = stringToNull();
+	
+			System.out.println("E-mail: (" + selectedCustomer.getEmail() + ")");
+			String email = stringToNull();
+	
+			System.out.println("Billede ID:");
+			String pictureID = stringToNull();
+	
+			int id = selectedCustomer.getId();
+			String company = null;
+			String cvrNr = null;
+	
+			CustomerCtr customerCtr = new CustomerCtr();
+			customerCtr.updateCustomer(id, name, phoneNr, street, email, city, postCode, pictureID, company, cvrNr);	
+		}
 	}
 
 
 	/**
 	 * removeCustomer - Used to remove a Customer from the Container
-	 * @param Customer
 	 */
-	private void removeCustomer(Customer customer) {
+	private void removeCustomer() {
 		String name = selectedCustomer.getName();
 		if(confirm("Ønsker du at slette " + name + "? ") ){
-			int id = customer.getId();
+			int id = selectedCustomer.getId();
 			CustomerCtr customerCtr = new CustomerCtr();
 			customerCtr.removeCustomer(id);
 			System.out.println(name + " blev slettet");
+			selectedCustomer = null;
 			pause();
 		} else{
 			System.out.println(name + "blev ikke slettet");
@@ -328,31 +344,30 @@ public class PersonUI extends SuperUI{
 
 	/**
 	 * updateEmployee - Update the information about a seller or administrator
-	 * @param Employee
 	 */
-	private void updateEmployee(Employee employee) {
+	private void updateEmployee() {
 		System.out.println("## Opdater medarbejder ##");
 		System.out.println("Skriv ny info ellers tryk enter");
 
-		System.out.println("Medarbejder nr: (" + employee.getEmployeeNr() + ")");
+		System.out.println("Medarbejder nr: (" + selectedEmployee.getEmployeeNr() + ")");
 		String employeeNr = stringToNull();
 
-		System.out.println("Navn: (" + employee.getName() + ")" );
+		System.out.println("Navn: (" + selectedEmployee.getName() + ")" );
 		String name = stringToNull();
 
-		System.out.println("Gade: (" + employee.getStreet() + ")");
+		System.out.println("Gade: (" + selectedEmployee.getStreet() + ")");
 		String street = stringToNull();
 
-		System.out.println("Postnummer: (" + employee.getStreet() + ")");
+		System.out.println("Postnummer: (" + selectedEmployee.getStreet() + ")");
 		String postCode = stringToNull();
 
-		System.out.println("By: (" + employee.getCity() + ")");
+		System.out.println("By: (" + selectedEmployee.getCity() + ")");
 		String city = stringToNull();
 
-		System.out.println("Telefon nr: (" + employee.getPhoneNr() + ")");
+		System.out.println("Telefon nr: (" + selectedEmployee.getPhoneNr() + ")");
 		String phoneNr = stringToNull();
 
-		System.out.println("E-mail: (" + employee.getEmail() + ")");
+		System.out.println("E-mail: (" + selectedEmployee.getEmail() + ")");
 		String email = stringToNull();
 
 		boolean rights = false;
@@ -361,7 +376,7 @@ public class PersonUI extends SuperUI{
 				rights = true;
 			}
 		}
-		int id = employee.getId();
+		int id = selectedEmployee.getId();
 
 		EmployeeCtr employeeCtr = new EmployeeCtr();
 		employeeCtr.updateEmployee(id, employeeNr, name, phoneNr, street, email, city, postCode, rights);	
@@ -369,14 +384,14 @@ public class PersonUI extends SuperUI{
 
 	/**
 	 * removeEmployee - Used to remove an Employee object from the Container
-	 * @param Employee
 	 */
-	private void removeEmployee(Employee employee) {
+	private void removeEmployee() {
 		String name = selectedEmployee.getName();
 		if(confirm("Ønsker du at slette " + name + "? ") ){			
 			EmployeeCtr eCtr = new EmployeeCtr();
-			eCtr.removeEmployee(employee);
+			eCtr.removeEmployee(selectedEmployee);
 			System.out.println(name + " blev slettet");
+			selectedEmployee = null;
 			pause();
 		} else{
 			System.out.println(name + "blev ikke slettet");
