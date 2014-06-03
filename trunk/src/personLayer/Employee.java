@@ -10,6 +10,7 @@ package personLayer;
 public class Employee extends Person{
 	private String employeeNr;
 	private boolean admin;
+	@SuppressWarnings("unused")
 	private String cprNr;
 	private String password;
 	
