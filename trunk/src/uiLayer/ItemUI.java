@@ -180,7 +180,7 @@ public class ItemUI extends SuperUI{
 					for(Storage s : storages){
 						System.out.println("#" + s.getId() + " - " + s.getName());
 					}
-					int id = requestInt("LagerID", null, false);
+					int id = requestInt("Lager ID", null, false);
 
 					boolean found = false;
 					int i = 0;
@@ -230,7 +230,7 @@ public class ItemUI extends SuperUI{
 					for(Category c : cats){
 						System.out.println("#" + c.getId() + " - " + c.getName());
 					}
-					int id = requestInt("KategoriID", null, false);
+					int id = requestInt("Kategori ID", null, false);
 
 					boolean found = false;
 					int i = 0;

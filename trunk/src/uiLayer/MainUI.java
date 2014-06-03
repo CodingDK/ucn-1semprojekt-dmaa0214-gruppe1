@@ -1,7 +1,14 @@
 package uiLayer;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.InputMismatchException;
+
+import personLayer.Private;
 import modelLayer.*;
 import ctrLayer.*;
+import exceptionLayer.NotEnoughItemsException;
+import exceptionLayer.SaleNotCreatedException;
 
 public class MainUI extends SuperUI{
 	
@@ -20,6 +27,8 @@ public class MainUI extends SuperUI{
 		boolean exit = false;
 		boolean testCreated = false;
 		while(!exit){
+			SaleUI sUI = new SaleUI("");
+			sUI.cleanUp();
 			int choice = writeMenu();
 			if(choice == 1){
 				new PersonUI();
@@ -91,9 +100,42 @@ public class MainUI extends SuperUI{
 		eCtr.createEmployee("1", "Ole", "70809010", "Egonsvej 19", "ole@ucn.dk", "Aalborg", "9000", "201050-1043", "1234", true);
 		eCtr.createEmployee("2", "Jens", "40509010", "Hobrovej 29", "jens@ucn.dk", "Vestbjerg", "9380", "100170-2143", null, false);
 		
-		CustomerCtr cusCont = new CustomerCtr();
-		cusCont.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
-		cusCont.createBusinessCustomer("Kis", "72691867", "Sofiendalsvej 60", "kbha@ucn.dk", "Aalborg", "9000", "UCN A/S", "33556063");
+		CustomerCtr cusCtr = new CustomerCtr();
+		Private p = cusCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
+		cusCtr.createBusinessCustomer("Kis", "72691867", "Sofiendalsvej 60", "kbha@ucn.dk", "Aalborg", "9000", "UCN A/S", "33556063");
+		
+		// Test af CleanUp
+		
+		SaleCtr ccCtr = new SaleCtr();
+		ccCtr.createSale();
+		try {
+			ccCtr.setCustomer(p);
+		} catch (SaleNotCreatedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Item i = iCtr.getItem("Flad Hammer");
+		try {
+			ccCtr.addItem(i, 100);
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotEnoughItemsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SaleNotCreatedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DATE, -1);
+		Date d = c.getTime();
+		
+		Sale s = ccCtr.getSale();
+		s.setDate(d);
+		
+		ccCtr.parkSale();
+		
 	}
 	
 }

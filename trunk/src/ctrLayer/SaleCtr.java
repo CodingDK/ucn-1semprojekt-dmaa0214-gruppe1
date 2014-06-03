@@ -117,7 +117,6 @@ public class SaleCtr {
 		if(partSales != null){
 			for(PartSale p : partSales){
 				Item i = p.getItem();
-				i.addAmount(p.getAmount());
 				i.addReserved(-p.getAmount());
 			}
 		}
