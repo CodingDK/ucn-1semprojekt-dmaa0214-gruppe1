@@ -17,9 +17,9 @@ public class SaleUI extends SuperUI{
 	 * @param s
 	 */
 	public SaleUI(String s){
-		
+
 	}
-	
+
 	/**
 	 * Constructor for the SaleUI.
 	 */
@@ -148,7 +148,7 @@ public class SaleUI extends SuperUI{
 		return retSale;
 
 	}
-	
+
 	/**
 	 *  cleanUp - Cleans up the parked sales
 	 */
