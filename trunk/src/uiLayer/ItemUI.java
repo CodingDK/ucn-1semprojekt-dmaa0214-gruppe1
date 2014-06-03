@@ -362,7 +362,7 @@ public class ItemUI extends SuperUI{
 							amount += i.getAmount() + ")";
 							System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + amount + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
 						}
-						int i = requestInt("VareID", null, false);
+						int i = requestInt("Vare ID", null, false);
 
 						boolean found = false;
 						int it = 0;
