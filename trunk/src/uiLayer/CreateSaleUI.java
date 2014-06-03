@@ -107,7 +107,7 @@ public class CreateSaleUI extends SuperUI{
 		System.out.println("4. Udfør salg");
 		System.out.println("5. Parker salg");
 		System.out.println("6. Annuller salg");
-		choice = requestInt("Valg", null, false);		
+		choice = requestInt(nL + "Valg", null, false);		
 		return choice;
 	}
 
@@ -142,7 +142,7 @@ public class CreateSaleUI extends SuperUI{
 	 * @return true if sale is created.
 	 */
 	private boolean finishSale() {
-		String employeeNr = requestString("Indtast medarbejdernr", 1, 50, false);
+		String employeeNr = requestString(nL + "Indtast medarbejdernr", 1, 50, false);
 		boolean ret = false;
 		try {
 			if(sCtr.getSale().getCustomer() == null){
@@ -154,7 +154,7 @@ public class CreateSaleUI extends SuperUI{
 			System.out.println("Salg udført");
 			ret = true;
 		} catch (NullPointerException e) {
-			System.out.println("Prøv igen, " + e.getMessage());
+			System.out.println(e.getMessage());
 		} catch (SaleNotCreatedException e) {
 			System.out.println(e.getMessage());
 		}

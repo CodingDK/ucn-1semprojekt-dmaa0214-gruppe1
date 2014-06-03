@@ -67,6 +67,8 @@ public class CreateItemUI extends SuperUI {
 	 * createItem - TUI for creating an Item
 	 */
 	private void createItem() {
+		flush();
+		System.out.println("## Opret Vare ##");
 		ItemCtr iCtr = new ItemCtr();
 		String name = null;
 		boolean done = false;

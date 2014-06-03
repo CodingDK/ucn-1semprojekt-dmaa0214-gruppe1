@@ -165,6 +165,7 @@ public class ItemUI extends SuperUI{
 	 * @return Storage
 	 */
 	public Storage pickStorage() {
+		flush();
 		Storage retStorage = null;
 		boolean done = false;
 		while(!done){
@@ -214,6 +215,7 @@ public class ItemUI extends SuperUI{
 	 * @return Category
 	 */
 	public Category pickCategory() {
+		flush();
 		Category retCategory = null;
 		boolean done = false;
 		while(!done){
@@ -263,7 +265,7 @@ public class ItemUI extends SuperUI{
 	 * createCategory - TUI for creating a Category
 	 */
 	private void createCategory() {
-		try{
+		flush();
 			CategoryCtr cCtr = new CategoryCtr();
 
 			System.out.println(" *** Opret Kategori *** ");
@@ -277,17 +279,13 @@ public class ItemUI extends SuperUI{
 					selectedCategory = cCtr.findCategory(categoryName);
 				}
 			}
-
-		}catch(Exception e){
-			e.printStackTrace();
-		}
 	}
 
 	/**
 	 * createStorage - TUI for creating a Storage
 	 */
 	private void createStorage() {
-		try{
+		flush();
 			ItemCtr iCtr = new ItemCtr();
 
 			System.out.println(" *** Opret Lager *** ");
@@ -301,40 +299,32 @@ public class ItemUI extends SuperUI{
 					selectedStorage = iCtr.findStorage(storageName);
 				}
 			}
-
-		}catch(Exception e){
-			e.printStackTrace();
-		}
 	}
 
 	/**
 	 * searchItem - Search through Items
 	 */
 	private void searchItem() {
-		try{
-			System.out.println("## Søg Vare ##");
-			String name = requestString("Vare navn", null, null, false);
-			ItemCtr iCtr = new ItemCtr();
-			ArrayList<Item> items = iCtr.searchItem(name);
-			if(items != null){
-				System.out.println(items.size() + " Varer Fundet");
-				for(Item i : items){
-					String amount = "(";
-					if(i.getReserved() != 0){
-						amount += i.getReserved() + "/";
-					}
-					amount += i.getAmount() + ")";
-					System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + amount + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
+		flush();
+		System.out.println("## Søg Vare ##");
+		String name = requestString("Vare navn", null, null, false);
+		ItemCtr iCtr = new ItemCtr();
+		ArrayList<Item> items = iCtr.searchItem(name);
+		if(items != null){
+			System.out.println(items.size() + " Varer Fundet");
+			for(Item i : items){
+				String amount = "(";
+				if(i.getReserved() != 0){
+					amount += i.getReserved() + "/";
 				}
-				pause();
-			}else{
-				System.out.println("0 Varer Fundet");
-				pause();
-				return;
+				amount += i.getAmount() + ")";
+				System.out.println("#" + i.getId() + " - " + i.getName() + " Antal: " + amount + " Kategori: " + i.getCategory().getName() + " Lager: " + i.getStorage().getName());
 			}
-
-		}catch(Exception e){
-			e.printStackTrace();
+			pause();
+		}else{
+			System.out.println("0 Varer Fundet");
+			pause();
+			return;
 		}
 	}
 
@@ -343,8 +333,8 @@ public class ItemUI extends SuperUI{
 	 * @return Item
 	 */
 	public Item pickItem() {
+		flush();
 		Item retItem = null;
-		try{
 			boolean done = false;
 			while(!done){
 				System.out.println(nL + "## Vælg Vare ##");
@@ -390,10 +380,6 @@ public class ItemUI extends SuperUI{
 					done = true;
 				}
 			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-
 		return retItem;
 	}
 
@@ -401,7 +387,6 @@ public class ItemUI extends SuperUI{
 	 * searchCategory - Search through Category
 	 */
 	private void searchCategory() {
-		try{
 			flush();
 			System.out.println("## Søg Kategori ##");
 			String name = requestString("Kategori navn", null, null, false);
@@ -418,17 +403,13 @@ public class ItemUI extends SuperUI{
 				pause();
 				return;
 			}
-
-		}catch(Exception e){
-			e.printStackTrace();
-		}
 	}
 
 	/**
 	 * searchStorage - Search through Storage
 	 */
 	private void searchStorage(){
-		try{
+		flush();
 			System.out.println("## Søg Lager ##");
 			String name = requestString("Lager navn", null, null, false);
 			ItemCtr iCtr = new ItemCtr();
@@ -444,16 +425,13 @@ public class ItemUI extends SuperUI{
 				pause();
 				return;
 			}
-
-		}catch(Exception e){
-			e.printStackTrace();
-		}
 	}
 
 	/**
 	 * updateItem - TUI for updating an Item
 	 */
 	private void updateItem() {
+		flush();
 		if(selectedItem != null){
 			ItemCtr iCtr = new ItemCtr();
 			System.out.println("## Opdater Vare : " + selectedItem.getName() + " ##");
@@ -493,6 +471,8 @@ public class ItemUI extends SuperUI{
 	 * updateCategory - TUI for updating a Category
 	 */
 	private void updateCategory() {
+		flush();
+		System.out.println("## Opdater Kategori ##");
 		if(selectedCategory != null){
 			CategoryCtr cCtr = new CategoryCtr();
 			String name = requestString("Navn(" + selectedCategory.getName() + ")", null, null, false);
@@ -506,6 +486,8 @@ public class ItemUI extends SuperUI{
 	 * updateStorage - TUI for updating a Storage
 	 */
 	private void updateStorage(){
+		flush();
+		System.out.println("## Opdater Lager ##");
 		if(selectedStorage != null){
 			ItemCtr iCtr = new ItemCtr();
 			String name = requestString("Navn(" + selectedStorage.getName() + ")", null, null, false);
@@ -519,6 +501,7 @@ public class ItemUI extends SuperUI{
 	 * removeItem - TUI for removing Items
 	 */
 	private void removeItem() {
+		flush();
 		if(selectedItem != null){
 			if(confirm("Er du sikker på du vil slette " + selectedItem.getName() + "")){
 				ItemCtr iCtr = new ItemCtr();
@@ -533,6 +516,7 @@ public class ItemUI extends SuperUI{
 	 * removeCategory - TUI for removing a Category
 	 */
 	private void removeCategory() {
+		flush();
 		if(selectedCategory != null){
 			if(confirm("Er du sikker på du vil slette " + selectedCategory.getName() + "")){
 				CategoryCtr cCtr = new CategoryCtr();
@@ -548,6 +532,7 @@ public class ItemUI extends SuperUI{
 	 * removeStorage - TUI for removing Storage
 	 */
 	private void removeStorage(){
+		flush();
 		if(selectedStorage != null){
 			if(confirm("Er du sikker på du vil slette " + selectedStorage.getName() + "")){
 			ItemCtr iCtr = new ItemCtr();
@@ -568,6 +553,7 @@ public class ItemUI extends SuperUI{
 	 * addAmountToItem - TUI for adding amount to an Item Object
 	 */
 	private void addAmountToItem(){
+		flush();
 		if(selectedItem != null){
 			System.out.println("## Tilfør Mængde Til Vare : " + selectedItem.getName() + " ##");
 			int amount = requestInt("Mængde", 0, false);
