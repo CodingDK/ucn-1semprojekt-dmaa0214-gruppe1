@@ -11,8 +11,8 @@ public class Employee extends Person {
 	private String employeeNr;
 	private boolean admin;
 	@SuppressWarnings("unused")
-	private final String cprNr;
-	private final String password;
+	private String cprNr;
+	private String password;
 	
 	/**
 	 * Constructor for Employee objects.

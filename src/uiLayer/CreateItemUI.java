@@ -22,12 +22,12 @@ public class CreateItemUI extends SuperUI {
 	private void menu() {
 		boolean exit = false;
 		while (!exit) {
-			final int choice = writeItemMenu();
+			int choice = writeItemMenu();
 			if (choice == 1) {
-				final ItemUI iUi = new ItemUI("DryRun");
+				ItemUI iUi = new ItemUI("DryRun");
 				selectedCategory = iUi.pickCategory();
 			} else if (choice == 2) {
-				final ItemUI iUi = new ItemUI("DryRun");
+				ItemUI iUi = new ItemUI("DryRun");
 				selectedStorage = iUi.pickStorage();
 			} else if (choice == 3) {
 				if (selectedCategory != null && selectedStorage != null) {
@@ -48,9 +48,9 @@ public class CreateItemUI extends SuperUI {
 		int choice = 0;
 		flush();
 		System.out.println("## Opret Vare ##");
-		final String category = (selectedCategory != null) ? " (" + selectedCategory.getName() + ")" : "";
+		String category = (selectedCategory != null) ? " (" + selectedCategory.getName() + ")" : "";
 		System.out.println("1. Vælg Kategori" + category);
-		final String storage = (selectedStorage != null) ? " (" + selectedStorage.getName() + ")" : "";
+		String storage = (selectedStorage != null) ? " (" + selectedStorage.getName() + ")" : "";
 		System.out.println("2. Vælg Lager" + storage);
 		
 		if (selectedStorage != null && selectedCategory != null) {
@@ -70,17 +70,17 @@ public class CreateItemUI extends SuperUI {
 	private void createItem() {
 		flush();
 		System.out.println("## Opret Vare ##");
-		final ItemCtr iCtr = new ItemCtr();
+		ItemCtr iCtr = new ItemCtr();
 		String name = null;
 		boolean done = false;
 		while (!done) {
 			name = requestString("Navn", 1, null, false);
 			boolean reCheck = true;
 			while (reCheck) {
-				final Item i = iCtr.getItem(name);
+				Item i = iCtr.getItem(name);
 				if (iCtr.getItem(name) != null && i.getStorage() == selectedStorage) {
 					if (confirm(i.getName() + " eksistere allerede på " + i.getStorage().getName() + ", vil du vælge et andet lager?")) {
-						final ItemUI iUi = new ItemUI("DryRun");
+						ItemUI iUi = new ItemUI("DryRun");
 						selectedStorage = iUi.pickStorage();
 					} else {
 						return;
@@ -91,14 +91,14 @@ public class CreateItemUI extends SuperUI {
 				}
 			}
 		}
-		final int amount = requestInt("Antal", 0, false);
-		final double salePrice = requestDouble("Salgs pris", false);
-		final double purchasePrice = requestDouble("Købs pris", false);
-		final double bulkSalePrice = requestDouble("Bulk pris", false);
-		final int bulk = requestInt("Bulk", 0, false);
-		final String location = requestString("Placering", null, null, false);
-		final int min = requestInt("Minimum Lagerbeholdning", 0, false);
-		final int max = requestInt("Maksimal Lagerbeholdning", min, false);
+		int amount = requestInt("Antal", 0, false);
+		double salePrice = requestDouble("Salgs pris", false);
+		double purchasePrice = requestDouble("Købs pris", false);
+		double bulkSalePrice = requestDouble("Bulk pris", false);
+		int bulk = requestInt("Bulk", 0, false);
+		String location = requestString("Placering", null, null, false);
+		int min = requestInt("Minimum Lagerbeholdning", 0, false);
+		int max = requestInt("Maksimal Lagerbeholdning", min, false);
 		iCtr.createItem(name, amount, 0, salePrice, purchasePrice, bulkSalePrice, bulk, location, selectedStorage, max, min, selectedCategory);
 	}
 	

@@ -18,9 +18,9 @@ import personLayer.Private;
  */
 public class Sale {
 	private double totalPrice;
-	private final int id;
+	private int id;
 	private Date date;
-	private final ArrayList<PartSale> partSales;
+	private ArrayList<PartSale> partSales;
 	private static int idIterator;
 	private Customer customer;
 	private Employee employee;
@@ -64,7 +64,7 @@ public class Sale {
 	 * @return String with date of the Sale.
 	 */
 	public String getDateToString() {
-		final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 		return df.format(date);
 	}
 	
@@ -90,7 +90,7 @@ public class Sale {
 	 */
 	public void addPartSale(Item i, int amount) {
 		totalPrice += i.getSalePrice() * amount;
-		final PartSale p = new PartSale(i, amount);
+		PartSale p = new PartSale(i, amount);
 		partSales.add(p);
 	}
 	

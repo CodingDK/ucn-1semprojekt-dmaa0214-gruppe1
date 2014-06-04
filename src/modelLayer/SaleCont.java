@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class SaleCont {
 	private static SaleCont instance;
-	private final ArrayList<Sale> sales;
+	private ArrayList<Sale> sales;
 	
 	/**
 	 * Singleton container of the container class SaleCont.

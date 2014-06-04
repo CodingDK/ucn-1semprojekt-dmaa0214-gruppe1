@@ -8,7 +8,7 @@ import personLayer.Customer;
 import personLayer.Private;
 
 public class CustomerCtr {
-	private final CustomerCont cCont;
+	private CustomerCont cCont;
 	
 	public CustomerCtr() {
 		cCont = CustomerCont.getInstance();
@@ -28,7 +28,7 @@ public class CustomerCtr {
 	 * @return Private Returns the created private customer.
 	 */
 	public Private createPrivateCustomer(String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String pictureId) {
-		final Private returnPrivate = new Private(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
+		Private returnPrivate = new Private(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
 		cCont.addCustomer(returnPrivate);
 		return returnPrivate;
 	}
@@ -49,7 +49,7 @@ public class CustomerCtr {
 	 * @throws NullPointerException if Customer does not exist
 	 */
 	public void updateCustomer(int id, String name, String phoneNr, String street, String email, String city, String postCode, String pictureID, String company, String cvrNr) throws NullPointerException {
-		final Customer c = cCont.findCustomer(id);
+		Customer c = cCont.findCustomer(id);
 		if (c != null) {
 			if (name != null) {
 				c.setName(name);
@@ -71,12 +71,12 @@ public class CustomerCtr {
 			}
 			
 			if (c instanceof Private) {
-				final Private p = (Private) c;
+				Private p = (Private) c;
 				if (pictureID != null) {
 					p.setPictureID(pictureID);
 				}
 			} else if (c instanceof Business) {
-				final Business b = (Business) c;
+				Business b = (Business) c;
 				if (company != null) {
 					b.setCompany(company);
 				}
@@ -111,7 +111,7 @@ public class CustomerCtr {
 	 * @param cvrNr
 	 */
 	public Business createBusinessCustomer(String name, String phoneNr, String street, String email, String city, String postCode, String company, String cvrNr) {
-		final Business returnBusiness = new Business(name, phoneNr, street, email, city, postCode, company, cvrNr);
+		Business returnBusiness = new Business(name, phoneNr, street, email, city, postCode, company, cvrNr);
 		cCont.addCustomer(returnBusiness);
 		return returnBusiness;
 	}
@@ -123,11 +123,11 @@ public class CustomerCtr {
 	 * @return ArrayList<Customer>
 	 */
 	public ArrayList<Customer> searchCustomer(String partNamePhone) {
-		final ArrayList<Customer> foundCustomers = new ArrayList<Customer>();
-		final CustomerCont customerCont = CustomerCont.getInstance();
-		final ArrayList<Customer> cust = customerCont.getCustomers();
+		ArrayList<Customer> foundCustomers = new ArrayList<Customer>();
+		CustomerCont customerCont = CustomerCont.getInstance();
+		ArrayList<Customer> cust = customerCont.getCustomers();
 		if (cust != null)
-			for (final Customer c : cust) {
+			for (Customer c : cust) {
 				if ((c.getName().toLowerCase().contains(partNamePhone.toLowerCase())) || (c.getPhoneNr().contains(partNamePhone))) {
 					foundCustomers.add(c);
 				}
@@ -142,11 +142,11 @@ public class CustomerCtr {
 	 * @return ArrayList<Customer>
 	 */
 	public ArrayList<Customer> searchBusiness(String partCompName) {
-		final ArrayList<Customer> foundBusiness = new ArrayList<Customer>();
-		final CustomerCont cCont = CustomerCont.getInstance();
-		final ArrayList<Customer> cust = cCont.getCustomers();
+		ArrayList<Customer> foundBusiness = new ArrayList<Customer>();
+		CustomerCont cCont = CustomerCont.getInstance();
+		ArrayList<Customer> cust = cCont.getCustomers();
 		if (cust != null)
-			for (final Customer c : cust) {
+			for (Customer c : cust) {
 				if (c instanceof Business) {
 					if (((Business) c).getCompany().toLowerCase().contains(partCompName.toLowerCase())) {
 						foundBusiness.add(c);

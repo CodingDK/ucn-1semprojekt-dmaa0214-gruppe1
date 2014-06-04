@@ -31,7 +31,7 @@ public class ItemUI extends SuperUI {
 	private void menu() {
 		boolean exit = false;
 		while (!exit) {
-			final int choice = writeMenu();
+			int choice = writeMenu();
 			if (admin) { // Admin adgang
 				if (choice == 1) {
 					createCategory();
@@ -125,7 +125,7 @@ public class ItemUI extends SuperUI {
 			if (admin) {
 				System.out.println("--------------------------");
 				System.out.println("1. Opret Kategori");
-				final String category = (selectedCategory != null) ? " (" + selectedCategory.getName() + ")" : "";
+				String category = (selectedCategory != null) ? " (" + selectedCategory.getName() + ")" : "";
 				System.out.println("2. Opdater Kategori" + category);
 				System.out.println("3. Fjern Kategori" + category);
 				System.out.println("4. Vælg Kategori");
@@ -137,7 +137,7 @@ public class ItemUI extends SuperUI {
 		{
 			if (admin) {
 				System.out.println("6. Opret Lager");
-				final String storage = (selectedStorage != null) ? " (" + selectedStorage.getName() + ")" : "";
+				String storage = (selectedStorage != null) ? " (" + selectedStorage.getName() + ")" : "";
 				System.out.println("7. Opdater Lager" + storage);
 				System.out.println("8. Fjern Lager" + storage);
 				System.out.println("9. Vælg Lager");
@@ -147,7 +147,7 @@ public class ItemUI extends SuperUI {
 		}
 		
 		{
-			final String item = (selectedItem != null) ? " (" + selectedItem.getName() + ")" : "";
+			String item = (selectedItem != null) ? " (" + selectedItem.getName() + ")" : "";
 			if (admin) {
 				System.out.println("11. Opret Vare");
 				System.out.println("12. Opdater Vare" + item);
@@ -175,22 +175,22 @@ public class ItemUI extends SuperUI {
 		boolean done = false;
 		while (!done) {
 			System.out.println(nL + "## Vælg Lagre ##");
-			final String name = requestString("Lager navn", null, null, false);
-			final ItemCtr iCtr = new ItemCtr();
-			final ArrayList<Storage> storages = iCtr.searchStorage(name);
+			String name = requestString("Lager navn", null, null, false);
+			ItemCtr iCtr = new ItemCtr();
+			ArrayList<Storage> storages = iCtr.searchStorage(name);
 			if (storages != null && storages.size() > 0) {
 				boolean recheck = true;
 				System.out.println(storages.size() + " Lagre Fundet");
 				while (recheck) {
-					for (final Storage s : storages) {
+					for (Storage s : storages) {
 						System.out.println("#" + s.getId() + " - " + s.getName());
 					}
-					final int id = requestInt("Lager ID", null, false);
+					int id = requestInt("Lager ID", null, false);
 					
 					boolean found = false;
 					int i = 0;
 					while (!found && i < storages.size()) {
-						final Storage checkStorage = storages.get(i);
+						Storage checkStorage = storages.get(i);
 						if (checkStorage.getId() == id) {
 							retStorage = checkStorage;
 							found = true;
@@ -227,22 +227,22 @@ public class ItemUI extends SuperUI {
 		boolean done = false;
 		while (!done) {
 			System.out.println(nL + "## Vælg Kategori ##");
-			final String name = requestString("Kategori navn", null, null, false);
-			final CategoryCtr cCtr = new CategoryCtr();
-			final ArrayList<Category> cats = cCtr.searchCategory(name);
+			String name = requestString("Kategori navn", null, null, false);
+			CategoryCtr cCtr = new CategoryCtr();
+			ArrayList<Category> cats = cCtr.searchCategory(name);
 			if (cats != null && cats.size() > 0) {
 				boolean recheck = true;
 				System.out.println(cats.size() + " Kategorier Fundet");
 				while (recheck) {
-					for (final Category c : cats) {
+					for (Category c : cats) {
 						System.out.println("#" + c.getId() + " - " + c.getName());
 					}
-					final int id = requestInt("Kategori ID", null, false);
+					int id = requestInt("Kategori ID", null, false);
 					
 					boolean found = false;
 					int i = 0;
 					while (!found && i < cats.size()) {
-						final Category checkCat = cats.get(i);
+						Category checkCat = cats.get(i);
 						if (checkCat.getId() == id) {
 							retCategory = checkCat;
 							found = true;
@@ -273,10 +273,10 @@ public class ItemUI extends SuperUI {
 	 */
 	private void createCategory() {
 		flush();
-		final CategoryCtr cCtr = new CategoryCtr();
+		CategoryCtr cCtr = new CategoryCtr();
 		
 		System.out.println(" *** Opret Kategori *** ");
-		final String categoryName = requestString("Kategori navn", 1, null, false);
+		String categoryName = requestString("Kategori navn", 1, null, false);
 		if (cCtr.findCategory(categoryName) == null) {
 			cCtr.createCategory(categoryName);
 			selectedCategory = cCtr.findCategory(categoryName);
@@ -293,10 +293,10 @@ public class ItemUI extends SuperUI {
 	 */
 	private void createStorage() {
 		flush();
-		final ItemCtr iCtr = new ItemCtr();
+		ItemCtr iCtr = new ItemCtr();
 		
 		System.out.println(" *** Opret Lager *** ");
-		final String storageName = requestString("Lager navn", 1, null, false);
+		String storageName = requestString("Lager navn", 1, null, false);
 		if (iCtr.findStorage(storageName) == null) {
 			iCtr.createStorage(storageName);
 			selectedStorage = iCtr.findStorage(storageName);
@@ -314,12 +314,12 @@ public class ItemUI extends SuperUI {
 	private void searchItem() {
 		flush();
 		System.out.println("## Søg Vare ##");
-		final String name = requestString("Varenavn", null, null, false);
-		final ItemCtr iCtr = new ItemCtr();
-		final ArrayList<Item> items = iCtr.searchItem(name);
+		String name = requestString("Varenavn", null, null, false);
+		ItemCtr iCtr = new ItemCtr();
+		ArrayList<Item> items = iCtr.searchItem(name);
 		if (items != null) {
 			System.out.println(items.size() + " Varer Fundet");
-			for (final Item i : items) {
+			for (Item i : items) {
 				String amount = "" + i.getAmount();
 				if (i.getReserved() != 0) {
 					amount += "(" + i.getReserved() + ")";
@@ -345,26 +345,26 @@ public class ItemUI extends SuperUI {
 		boolean done = false;
 		while (!done) {
 			System.out.println(nL + "## Vælg Vare ##");
-			final String name = requestString("Varenavn", null, null, false);
-			final ItemCtr iCtr = new ItemCtr();
-			final ArrayList<Item> items = iCtr.searchItem(name);
+			String name = requestString("Varenavn", null, null, false);
+			ItemCtr iCtr = new ItemCtr();
+			ArrayList<Item> items = iCtr.searchItem(name);
 			if (items != null && items.size() > 0) {
 				boolean recheck = true;
 				System.out.println(nL + items.size() + " Varer Fundet");
 				while (recheck) {
-					for (final Item i : items) {
+					for (Item i : items) {
 						String amount = "" + i.getAmount();
 						if (i.getReserved() != 0) {
 							amount += "(" + i.getReserved() + ")";
 						}
 						System.out.println("#" + i.getId() + " - " + i.getName() + ", Antal: " + amount + ", Stk Pris: " + i.getSalePrice() + ",-(" + i.getSalePrice() * 1.25 + ",-), Kategori: " + i.getCategory().getName() + ", Lager: " + i.getStorage().getName());
 					}
-					final int i = requestInt(nL + "Vare ID", null, false);
+					int i = requestInt(nL + "Vare ID", null, false);
 					
 					boolean found = false;
 					int it = 0;
 					while (it < items.size() && !found) {
-						final Item checkItem = items.get(it);
+						Item checkItem = items.get(it);
 						if (checkItem.getId() == i) {
 							retItem = checkItem;
 							found = true;
@@ -396,12 +396,12 @@ public class ItemUI extends SuperUI {
 	private void searchCategory() {
 		flush();
 		System.out.println("## Søg Kategori ##");
-		final String name = requestString("Kategori navn", null, null, false);
-		final CategoryCtr cCtr = new CategoryCtr();
-		final ArrayList<Category> cats = cCtr.searchCategory(name);
+		String name = requestString("Kategori navn", null, null, false);
+		CategoryCtr cCtr = new CategoryCtr();
+		ArrayList<Category> cats = cCtr.searchCategory(name);
 		if (cats != null) {
 			System.out.println(cats.size() + " Kategorier Fundet");
-			for (final Category c : cats) {
+			for (Category c : cats) {
 				System.out.println("#" + c.getId() + " - " + c.getName());
 			}
 			pause();
@@ -418,12 +418,12 @@ public class ItemUI extends SuperUI {
 	private void searchStorage() {
 		flush();
 		System.out.println("## Søg Lager ##");
-		final String name = requestString("Lager navn", null, null, false);
-		final ItemCtr iCtr = new ItemCtr();
-		final ArrayList<Storage> storages = iCtr.searchStorage(name);
+		String name = requestString("Lager navn", null, null, false);
+		ItemCtr iCtr = new ItemCtr();
+		ArrayList<Storage> storages = iCtr.searchStorage(name);
 		if (storages != null) {
 			System.out.println(storages.size() + " Lagre Fundet");
-			for (final Storage s : storages) {
+			for (Storage s : storages) {
 				System.out.println("#" + s.getId() + " - " + s.getName());
 			}
 			pause();
@@ -440,19 +440,19 @@ public class ItemUI extends SuperUI {
 	private void updateItem() {
 		flush();
 		if (selectedItem != null) {
-			final ItemCtr iCtr = new ItemCtr();
+			ItemCtr iCtr = new ItemCtr();
 			System.out.println("## Opdater Vare : " + selectedItem.getName() + " ##");
 			
-			final String name = requestString("Navn(" + selectedItem.getName() + ")", null, null, true);
-			final int amount = requestInt("Antal(" + selectedItem.getAmount() + ")", null, true);
-			final int reserved = requestInt("Reserveret(" + selectedItem.getReserved() + ")", null, true);
-			final double salePrice = requestDouble("Salgs Pris(" + selectedItem.getSalePrice() + ")", true);
-			final double purchasePrice = requestDouble("K�bs Pris(" + selectedItem.getPurchasePrice() + ")", true);
-			final double bulkSalePrice = requestDouble("Bulk Pris(" + selectedItem.getBulkSalePrice() + ")", true);
-			final int bulk = requestInt("Bulk(" + selectedItem.getBulk() + ")", null, true);
-			final String location = requestString("Placering(" + selectedItem.getLocation() + ")", 0, null, true);
-			final int min = requestInt("Minimum Lagerbeholdning(" + selectedItem.getMin() + ")", null, true);
-			final int max = requestInt("Maksimal Lagerbeholdning(" + selectedItem.getMax() + ")", min, true);
+			String name = requestString("Navn(" + selectedItem.getName() + ")", null, null, true);
+			int amount = requestInt("Antal(" + selectedItem.getAmount() + ")", null, true);
+			int reserved = requestInt("Reserveret(" + selectedItem.getReserved() + ")", null, true);
+			double salePrice = requestDouble("Salgs Pris(" + selectedItem.getSalePrice() + ")", true);
+			double purchasePrice = requestDouble("K�bs Pris(" + selectedItem.getPurchasePrice() + ")", true);
+			double bulkSalePrice = requestDouble("Bulk Pris(" + selectedItem.getBulkSalePrice() + ")", true);
+			int bulk = requestInt("Bulk(" + selectedItem.getBulk() + ")", null, true);
+			String location = requestString("Placering(" + selectedItem.getLocation() + ")", 0, null, true);
+			int min = requestInt("Minimum Lagerbeholdning(" + selectedItem.getMin() + ")", null, true);
+			int max = requestInt("Maksimal Lagerbeholdning(" + selectedItem.getMax() + ")", min, true);
 			Storage storage = null;
 			Category category = null;
 			
@@ -481,8 +481,8 @@ public class ItemUI extends SuperUI {
 		flush();
 		System.out.println("## Opdater Kategori ##");
 		if (selectedCategory != null) {
-			final CategoryCtr cCtr = new CategoryCtr();
-			final String name = requestString("Navn(" + selectedCategory.getName() + ")", null, null, false);
+			CategoryCtr cCtr = new CategoryCtr();
+			String name = requestString("Navn(" + selectedCategory.getName() + ")", null, null, false);
 			cCtr.updateCategory(selectedCategory, name);
 		} else {
 			System.out.println("En Kategori skal være valgt før den kan rettes");
@@ -496,8 +496,8 @@ public class ItemUI extends SuperUI {
 		flush();
 		System.out.println("## Opdater Lager ##");
 		if (selectedStorage != null) {
-			final ItemCtr iCtr = new ItemCtr();
-			final String name = requestString("Navn(" + selectedStorage.getName() + ")", null, null, false);
+			ItemCtr iCtr = new ItemCtr();
+			String name = requestString("Navn(" + selectedStorage.getName() + ")", null, null, false);
 			iCtr.updateStorage(selectedStorage, name);
 		} else {
 			System.out.println("Et Lager skal være valgt før den kan rettes");
@@ -511,7 +511,7 @@ public class ItemUI extends SuperUI {
 		flush();
 		if (selectedItem != null) {
 			if (confirm("Er du sikker på du vil slette " + selectedItem.getName() + "")) {
-				final ItemCtr iCtr = new ItemCtr();
+				ItemCtr iCtr = new ItemCtr();
 				iCtr.removeItem(selectedItem);
 			}
 		} else {
@@ -526,7 +526,7 @@ public class ItemUI extends SuperUI {
 		flush();
 		if (selectedCategory != null) {
 			if (confirm("Er du sikker på du vil slette " + selectedCategory.getName() + "")) {
-				final CategoryCtr cCtr = new CategoryCtr();
+				CategoryCtr cCtr = new CategoryCtr();
 				cCtr.removeCategory(selectedCategory);
 				selectedCategory = null;
 			}
@@ -542,7 +542,7 @@ public class ItemUI extends SuperUI {
 		flush();
 		if (selectedStorage != null) {
 			if (confirm("Er du sikker på du vil slette " + selectedStorage.getName() + "")) {
-				final ItemCtr iCtr = new ItemCtr();
+				ItemCtr iCtr = new ItemCtr();
 				if (!iCtr.isPrimary(selectedStorage)) {
 					iCtr.removeStorage(selectedStorage);
 				} else {
@@ -564,7 +564,7 @@ public class ItemUI extends SuperUI {
 		if (selectedItem != null) {
 			System.out.println("## Opdater Varebeholdning : " + selectedItem.getName() + " ##");
 			System.out.println("## Nuværende Varebeholdning: " + selectedItem.getAmount() + " ##");
-			final int amount = requestInt("Mængde", 0, false);
+			int amount = requestInt("Mængde", 0, false);
 			selectedItem.addAmount(amount);
 		} else {
 			System.out.println("Et Vare skal være valgt før der kan tilføres en mængde");
