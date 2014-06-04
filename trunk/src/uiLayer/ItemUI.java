@@ -357,7 +357,9 @@ public class ItemUI extends SuperUI {
 						if (i.getReserved() != 0) {
 							amount += "(" + i.getReserved() + ")";
 						}
-						System.out.println("#" + i.getId() + " - " + i.getName() + ", Antal: " + amount + ", Stk Pris: " + i.getSalePrice() + ",-(" + i.getSalePrice() * 1.25 + ",-), Kategori: " + i.getCategory().getName() + ", Lager: " + i.getStorage().getName());
+						System.out.println("#" + i.getId() + " - " + i.getName() + ", Antal: " + amount + ", Stk Pris: " 
+						+ i.getSalePrice() + ",-(" + i.getSalePrice() * 1.25 
+						+ ",-), Kategori: " + i.getCategory().getName() + ", Lager: " + i.getStorage().getName());
 					}
 					int i = requestInt(nL + "Vare ID", null, false);
 					

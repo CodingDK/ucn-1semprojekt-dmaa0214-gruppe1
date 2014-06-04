@@ -254,7 +254,7 @@ public abstract class SuperUI {
 	}
 	
 	protected void flush() {
-		for (int i = 0; i < 40; i++) {
+		for (int i = 0; i < 50; i++) {
 			System.out.println();
 		}
 	}
