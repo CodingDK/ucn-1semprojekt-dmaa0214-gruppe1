@@ -23,7 +23,7 @@ public class CategoryCtr {
 	 * 
 	 * @param name
 	 */
-	public void createCategory(final String name) {
+	public void createCategory(String name) {
 		cCont.addCategory(new Category(name));
 	}
 	
@@ -32,7 +32,7 @@ public class CategoryCtr {
 	 * 
 	 * @param newName
 	 */
-	public void updateCategory(final Category c, final String newName) {
+	public void updateCategory(Category c, String newName) {
 		c.setName(newName);
 	}
 	
@@ -41,7 +41,7 @@ public class CategoryCtr {
 	 * 
 	 * @param Category
 	 */
-	public void removeCategory(final Category c) {
+	public void removeCategory(Category c) {
 		final ItemCont iContDel = ItemCont.getInstance(c);
 		final ArrayList<Item> items = iContDel.getAll();
 		final Category cat = findCategory("U/K");
@@ -60,7 +60,7 @@ public class CategoryCtr {
 	 * @param name
 	 * @return Category
 	 */
-	public Category findCategory(final String name) {
+	public Category findCategory(String name) {
 		return cCont.findCategory(name);
 	}
 	
@@ -79,7 +79,7 @@ public class CategoryCtr {
 	 * @param name
 	 * @return ArrayList<Category>
 	 */
-	public ArrayList<Category> searchCategory(final String name) {
+	public ArrayList<Category> searchCategory(String name) {
 		final ArrayList<Category> categories = new ArrayList<Category>();
 		final CategoryCtr cCtr = new CategoryCtr();
 		final ArrayList<Category> cats = cCtr.getAllCategories();

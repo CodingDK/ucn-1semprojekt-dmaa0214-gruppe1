@@ -33,7 +33,7 @@ public class CreateSaleUI extends SuperUI {
 	 * 
 	 * @param Parked sale
 	 */
-	public CreateSaleUI(final Sale sale) {
+	public CreateSaleUI(Sale sale) {
 		sCtr = new SaleCtr();
 		sCtr.loadSale(sale);
 		menu();

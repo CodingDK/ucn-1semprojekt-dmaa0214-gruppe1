@@ -13,7 +13,7 @@ public class ItemUI extends SuperUI {
 	private Storage selectedStorage;
 	private Item selectedItem;
 	
-	public ItemUI(final String dryRun) {
+	public ItemUI(String dryRun) {
 		
 	}
 	

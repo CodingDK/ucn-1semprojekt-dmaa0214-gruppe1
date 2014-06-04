@@ -25,7 +25,7 @@ public class ItemCtr {
 	 * @param id The id of the Item object.
 	 * @return Item - The founded object or null.
 	 */
-	public Item getItem(final int id) {
+	public Item getItem(int id) {
 		Item retItem = null;
 		
 		final ArrayList<Category> allCat = new CategoryCtr().getAllCategories();
@@ -52,7 +52,7 @@ public class ItemCtr {
 	 * @param name The name of the Item object.
 	 * @return Item - The founded object or null.
 	 */
-	public Item getItem(final String name) {
+	public Item getItem(String name) {
 		Item retItem = null;
 		
 		final ArrayList<Category> allCat = new CategoryCtr().getAllCategories();
@@ -89,7 +89,7 @@ public class ItemCtr {
 	 * @param min The min amount of the item.
 	 * @param category The category object of the item.
 	 */
-	public void createItem(final String name, final int amount, final int reserved, final double salePrice, final double purchasePrice, final double bulkSalePrice, final int bulk, final String location, final Storage storage, final int max, final int min, final Category category) {
+	public void createItem(String name, int amount, int reserved, double salePrice, double purchasePrice, double bulkSalePrice, int bulk, String location, Storage storage, int max, int min, Category category) {
 		final Item item = new Item(name, amount, reserved, salePrice, purchasePrice, bulkSalePrice, bulk, location, storage, min, min, category);
 		ItemCont.getInstance(category).addItem(item);
 	}
@@ -112,10 +112,10 @@ public class ItemCtr {
 	 * @param category The category object of the item.
 	 * @throws NullPointerException if id not found.
 	 */
-	public void updateItem(final int id, final String name, final int amount, final int reserved,
-			final double salePrice, final double purchasePrice, final double bulkSalePrice,
-			final int bulk, final String location, final Storage storage, final int max, final int min,
-			final Category category) throws NullPointerException {
+	public void updateItem(int id, String name, int amount, int reserved,
+			double salePrice, double purchasePrice, double bulkSalePrice,
+			int bulk, String location, Storage storage, int max, int min,
+			Category category) throws NullPointerException {
 		final Item item = getItem(id);
 		if (item != null) {
 			if (name != null) {
@@ -166,7 +166,7 @@ public class ItemCtr {
 	 * 
 	 * @param i The Item object to remove.
 	 */
-	public void removeItem(final Item i) {
+	public void removeItem(Item i) {
 		final Category oldCat = i.getCategory();
 		ItemCont.getInstance(oldCat).removeItem(i);
 	}
@@ -176,7 +176,7 @@ public class ItemCtr {
 	 * 
 	 * @param name The name of the new Storage.
 	 */
-	public void createStorage(final String name) {
+	public void createStorage(String name) {
 		StorageCont.getInstance().addStorage(new Storage(name));
 	}
 	
@@ -186,7 +186,7 @@ public class ItemCtr {
 	 * @param name - The name of the Storage.
 	 * @return Storage object of the Storage or null if not found.
 	 */
-	public Storage findStorage(final String name) {
+	public Storage findStorage(String name) {
 		final StorageCont cCont = StorageCont.getInstance();
 		return cCont.findStorage(name);
 	}
@@ -198,7 +198,7 @@ public class ItemCtr {
 	 * @param name The new name of the Storage.
 	 * @throws NullPointerException If Storage object not found.
 	 */
-	public void updateStorage(final Storage s, final String name) throws NullPointerException {
+	public void updateStorage(Storage s, String name) throws NullPointerException {
 		if (s != null) {
 			s.setName(name);
 		} else if (s == null) {
@@ -212,7 +212,7 @@ public class ItemCtr {
 	 * 
 	 * @param s The Storage object to remove.
 	 */
-	public void removeStorage(final Storage s) {
+	public void removeStorage(Storage s) {
 		final StorageCont sCont = StorageCont.getInstance();
 		final CategoryCtr cCtr = new CategoryCtr();
 		final ArrayList<Category> categories = cCtr.getAllCategories();
@@ -234,7 +234,7 @@ public class ItemCtr {
 	 * @param Storage
 	 * @return boolean
 	 */
-	public boolean isPrimary(final Storage s) {
+	public boolean isPrimary(Storage s) {
 		boolean ret = false;
 		final StorageCont sCont = StorageCont.getInstance();
 		if (s == sCont.getPrimary()) {
@@ -249,7 +249,7 @@ public class ItemCtr {
 	 * @param name
 	 * @return ArrayList<Item>
 	 */
-	public ArrayList<Item> searchItem(final String name) {
+	public ArrayList<Item> searchItem(String name) {
 		final ArrayList<Item> items = new ArrayList<Item>();
 		final CategoryCtr cCtr = new CategoryCtr();
 		final ArrayList<Category> cats = cCtr.getAllCategories();
@@ -274,7 +274,7 @@ public class ItemCtr {
 	 * @param name
 	 * @return ArrayList<Storage>
 	 */
-	public ArrayList<Storage> searchStorage(final String name) {
+	public ArrayList<Storage> searchStorage(String name) {
 		final ArrayList<Storage> storages = new ArrayList<Storage>();
 		final StorageCont sCont = StorageCont.getInstance();
 		final ArrayList<Storage> stor = sCont.getAll();

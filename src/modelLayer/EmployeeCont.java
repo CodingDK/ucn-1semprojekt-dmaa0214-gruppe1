@@ -40,7 +40,7 @@ public class EmployeeCont {
 	 * 
 	 * @param e The Employee object to add.
 	 */
-	public void addEmployee(final Employee e) {
+	public void addEmployee(Employee e) {
 		employees.add(e);
 	}
 	
@@ -49,7 +49,7 @@ public class EmployeeCont {
 	 * 
 	 * @param Employee The Employee object to remove.
 	 */
-	public void removeEmployee(final Employee e) {
+	public void removeEmployee(Employee e) {
 		employees.remove(e);
 	}
 	
@@ -59,7 +59,7 @@ public class EmployeeCont {
 	 * @param nameOrEmployeeNr - The employeeNr of the Employee.
 	 * @return Employee object of the Employee or null if not found.
 	 */
-	public Employee findEmployee(final String nameOrEmployeeNr) {
+	public Employee findEmployee(String nameOrEmployeeNr) {
 		boolean found = false;
 		Employee e = null;
 		int i = 0;
@@ -80,7 +80,7 @@ public class EmployeeCont {
 	 * @param id - The id of the Employee.
 	 * @return Employee object of the Employee or null if not found.
 	 */
-	public Employee findEmployee(final int id) {
+	public Employee findEmployee(int id) {
 		
 		Employee retEmployee = null;
 		boolean found = false;

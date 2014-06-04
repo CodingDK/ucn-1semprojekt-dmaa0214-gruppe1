@@ -22,7 +22,7 @@ public class Business extends Customer {
 	 * @param company The name of the company.
 	 * @param cvrNr The cvrNr of the Business.
 	 */
-	public Business(final String name, final String phoneNr, final String street, final String email, final String city, final String postCode, final String company, final String cvrNr) {
+	public Business(String name, String phoneNr, String street, String email, String city, String postCode, String company, String cvrNr) {
 		super(name, phoneNr, street, email, city, postCode);
 		this.company = company;
 		this.cvrNr = cvrNr;
@@ -45,14 +45,14 @@ public class Business extends Customer {
 	/**
 	 * @param company the company to set
 	 */
-	public void setCompany(final String company) {
+	public void setCompany(String company) {
 		this.company = company;
 	}
 	
 	/**
 	 * @param cvrNr the cvrNr to set
 	 */
-	public void setCvrNr(final String cvrNr) {
+	public void setCvrNr(String cvrNr) {
 		this.cvrNr = cvrNr;
 	}
 	

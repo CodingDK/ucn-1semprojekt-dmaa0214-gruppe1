@@ -9,7 +9,7 @@ public class CreateItemUI extends SuperUI {
 	private Category selectedCategory;
 	private Storage selectedStorage;
 	
-	public CreateItemUI(final Category c, final Storage s) {
+	public CreateItemUI(Category c, Storage s) {
 		selectedCategory = c;
 		selectedStorage = s;
 		
