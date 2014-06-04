@@ -16,7 +16,7 @@ public class PartSale {
 	 * @param i The Item associated with the PartSale.
 	 * @param amount Amount of item.
 	 */
-	public PartSale(final Item i, final int amount) {
+	public PartSale(Item i, int amount) {
 		item = i;
 		this.amount = amount;
 	}

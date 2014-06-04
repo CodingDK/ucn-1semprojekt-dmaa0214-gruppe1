@@ -42,7 +42,7 @@ public class Sale {
 	/**
 	 * @param totalPrice the totalPrice to sale
 	 */
-	public void setTotalPrice(final double totalPrice) {
+	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 	
@@ -88,7 +88,7 @@ public class Sale {
 	 * @param i The item object to make a partsale of.
 	 * @param amount The amount of the item.
 	 */
-	public void addPartSale(final Item i, final int amount) {
+	public void addPartSale(Item i, int amount) {
 		totalPrice += i.getSalePrice() * amount;
 		final PartSale p = new PartSale(i, amount);
 		partSales.add(p);
@@ -99,7 +99,7 @@ public class Sale {
 	 * 
 	 * @param c the new customer.
 	 */
-	public void setCustomer(final Customer c) {
+	public void setCustomer(Customer c) {
 		customer = c;
 	}
 	
@@ -120,7 +120,7 @@ public class Sale {
 	/**
 	 * @param done the done to set
 	 */
-	public void setDone(final boolean done) {
+	public void setDone(boolean done) {
 		this.done = done;
 	}
 	
@@ -134,7 +134,7 @@ public class Sale {
 	/**
 	 * @param employee the employee to set
 	 */
-	public void setEmployee(final Employee employee) {
+	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
 	
@@ -162,7 +162,7 @@ public class Sale {
 	
 	//** Skal fjernes **// ASD LAU FFS GOGOGOGO Amagawd
 	
-	public void setDate(final Date date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	

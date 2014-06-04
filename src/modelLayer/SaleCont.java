@@ -36,7 +36,7 @@ public class SaleCont {
 	 * 
 	 * @param s Sale object.
 	 */
-	public void addSale(final Sale s) {
+	public void addSale(Sale s) {
 		sales.add(s);
 	}
 	
@@ -54,7 +54,7 @@ public class SaleCont {
 	 * 
 	 * @param sale The sale to remove
 	 */
-	public void removeSale(final Sale sale) {
+	public void removeSale(Sale sale) {
 		sales.remove(sale);
 	}
 }

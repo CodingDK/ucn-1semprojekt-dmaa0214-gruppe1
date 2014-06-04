@@ -22,7 +22,7 @@ public class Person {
 	 * @param city The city of the person.
 	 * @param postCode The postCode of the person.
 	 */
-	public Person(final String name, final String phoneNr, final String street, final String email, final String city, final String postCode) {
+	public Person(String name, String phoneNr, String street, String email, String city, String postCode) {
 		idIterator++;
 		id = idIterator;
 		this.name = name;
@@ -43,7 +43,7 @@ public class Person {
 	/**
 	 * @param name the name to set
 	 */
-	public void setName(final String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	
@@ -57,7 +57,7 @@ public class Person {
 	/**
 	 * @param phoneNr the phoneNr to set
 	 */
-	public void setPhoneNr(final String phoneNr) {
+	public void setPhoneNr(String phoneNr) {
 		this.phoneNr = phoneNr;
 	}
 	
@@ -71,7 +71,7 @@ public class Person {
 	/**
 	 * @param street the street to set
 	 */
-	public void setStreet(final String street) {
+	public void setStreet(String street) {
 		this.street = street;
 	}
 	
@@ -85,7 +85,7 @@ public class Person {
 	/**
 	 * @param email the email to set
 	 */
-	public void setEmail(final String email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 	
@@ -99,7 +99,7 @@ public class Person {
 	/**
 	 * @param city the city to set
 	 */
-	public void setCity(final String city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
 	
@@ -113,7 +113,7 @@ public class Person {
 	/**
 	 * @param postCode the postCode to set
 	 */
-	public void setPostCode(final String postCode) {
+	public void setPostCode(String postCode) {
 		this.postCode = postCode;
 	}
 	

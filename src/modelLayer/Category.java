@@ -16,7 +16,7 @@ public class Category {
 	 * 
 	 * @param name The name of the category.
 	 */
-	public Category(final String name) {
+	public Category(String name) {
 		idIterator++;
 		this.name = name;
 		id = idIterator;
@@ -36,7 +36,7 @@ public class Category {
 	 * 
 	 * @param name the name to set
 	 */
-	public void setName(final String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	

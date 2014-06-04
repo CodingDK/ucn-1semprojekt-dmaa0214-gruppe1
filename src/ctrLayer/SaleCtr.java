@@ -55,7 +55,7 @@ public class SaleCtr {
 	 * @throws NullPointerException if item object not created.
 	 * @throws SaleNotCreatedException if a sale object is not created
 	 */
-	public void addItem(final Item item, final int amount) throws NullPointerException, NotEnoughItemsException, SaleNotCreatedException {
+	public void addItem(Item item, int amount) throws NullPointerException, NotEnoughItemsException, SaleNotCreatedException {
 		if (sale != null) {
 			if (item != null) {
 				final int availableAmount = item.getAmount() - item.getReserved();
@@ -80,7 +80,7 @@ public class SaleCtr {
 	 * @param c The Customer object to add.
 	 * @throws SaleNotCreatedException if sale object not created.
 	 */
-	public void setCustomer(final Customer c) throws SaleNotCreatedException {
+	public void setCustomer(Customer c) throws SaleNotCreatedException {
 		if (sale != null) {
 			sale.setCustomer(c);
 		} else {
@@ -95,7 +95,7 @@ public class SaleCtr {
 	 * @throws SaleNotCreatedException if sale object not created.
 	 * @throws NullPointerException if employeeNr not found.
 	 */
-	public void finishSale(final String employeeNr) throws SaleNotCreatedException, NullPointerException {
+	public void finishSale(String employeeNr) throws SaleNotCreatedException, NullPointerException {
 		if (sale != null) {
 			final EmployeeCtr eCtr = new EmployeeCtr();
 			final Employee employee = eCtr.findEmployee(employeeNr);
@@ -161,7 +161,7 @@ public class SaleCtr {
 	 * 
 	 * @param sale
 	 */
-	public void loadSale(final Sale sale) {
+	public void loadSale(Sale sale) {
 		if (sale.isDone()) {
 			System.out.println("Det valgte salg er allerede færdig gjort");
 		} else if (!sale.isDone()) {
@@ -204,7 +204,7 @@ public class SaleCtr {
 	 * @param id
 	 * @return Sale
 	 */
-	public Sale getSale(final int id) {
+	public Sale getSale(int id) {
 		Sale retSale = null;
 		final ArrayList<Sale> sales = getSales();
 		boolean found = false;

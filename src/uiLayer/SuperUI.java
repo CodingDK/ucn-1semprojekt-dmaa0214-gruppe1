@@ -51,7 +51,7 @@ public abstract class SuperUI {
 	 * @param allowNull Whether or not blank input is accepted.
 	 * @return String Returns a string containing the user input.
 	 */
-	protected String requestString(final String input, final Integer minLength, final Integer maxLength, final boolean allowNull) {
+	protected String requestString(String input, Integer minLength, Integer maxLength, boolean allowNull) {
 		@SuppressWarnings("resource")
 		final Scanner k = new Scanner(System.in);
 		String ret = "";
@@ -108,7 +108,7 @@ public abstract class SuperUI {
 	 * @param allowNull Whether or not blank input should be accepted.
 	 * @return int - The int input from the user.
 	 */
-	protected int requestInt(final String input, final Integer min, final boolean allowNull) {
+	protected int requestInt(String input, Integer min, boolean allowNull) {
 		@SuppressWarnings("resource")
 		final Scanner k = new Scanner(System.in);
 		int ret = 0;
@@ -145,7 +145,7 @@ public abstract class SuperUI {
 	 * @param allowNull Whether or not to allow the input to be blank.
 	 * @return double The entered double.
 	 */
-	protected double requestDouble(final String input, final boolean allowNull) {
+	protected double requestDouble(String input, boolean allowNull) {
 		@SuppressWarnings("resource")
 		final Scanner k = new Scanner(System.in);
 		double ret = 0;
@@ -173,7 +173,7 @@ public abstract class SuperUI {
 	 * @param s What the system should check.
 	 * @return boolean True/false depending on whether s is an integer or not.
 	 */
-	private boolean isInteger(final String s) {
+	private boolean isInteger(String s) {
 		try {
 			Integer.parseInt(s);
 		} catch (final NumberFormatException e) {
@@ -189,7 +189,7 @@ public abstract class SuperUI {
 	 * @param s What the system should check.
 	 * @return boolean True/false depending on whether s is a double or not.
 	 */
-	private boolean isDouble(final String s) {
+	private boolean isDouble(String s) {
 		try {
 			Double.parseDouble(s);
 		} catch (final NumberFormatException e) {
@@ -205,7 +205,7 @@ public abstract class SuperUI {
 	 * @param confirmStatement What should be confirmed.
 	 * @return boolean - True/false depending on whether the user confirmed or not.
 	 */
-	protected boolean confirm(final String confirmStatement) {
+	protected boolean confirm(String confirmStatement) {
 		boolean confirm = true;
 		@SuppressWarnings("resource")
 		final Scanner s = new Scanner(System.in);

@@ -18,7 +18,7 @@ import exceptionLayer.SaleNotCreatedException;
 
 public class MainUI extends SuperUI {
 	
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 		new MainUI();
 	}
 	

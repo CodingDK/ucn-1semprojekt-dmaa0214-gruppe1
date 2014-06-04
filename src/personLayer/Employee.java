@@ -28,7 +28,7 @@ public class Employee extends Person {
 	 * @param password the admin password
 	 * @param admin A boolean value, true for admin.
 	 */
-	public Employee(final String employeeNr, final String name, final String phoneNr, final String street, final String email, final String city, final String postCode, final String cprNr, final String password, final boolean admin) {
+	public Employee(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String password, boolean admin) {
 		super(name, phoneNr, street, email, city, postCode);
 		this.employeeNr = employeeNr;
 		this.admin = admin;
@@ -46,7 +46,7 @@ public class Employee extends Person {
 	/**
 	 * @param employeeNr the employeeNr to set
 	 */
-	public void setEmployeeNr(final String employeeNr) {
+	public void setEmployeeNr(String employeeNr) {
 		this.employeeNr = employeeNr;
 	}
 	
@@ -64,7 +64,7 @@ public class Employee extends Person {
 	 * 
 	 * @param admin true if employee is admin.
 	 */
-	public void setAdmin(final boolean admin) {
+	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
 	

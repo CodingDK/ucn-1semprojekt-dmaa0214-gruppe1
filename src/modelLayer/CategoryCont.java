@@ -37,7 +37,7 @@ public class CategoryCont {
 	 * 
 	 * @param c The Category object to add.
 	 */
-	public void addCategory(final Category c) {
+	public void addCategory(Category c) {
 		categories.add(c);
 	}
 	
@@ -56,7 +56,7 @@ public class CategoryCont {
 	 * @param name The name to look for.
 	 * @return The found Category object or null
 	 */
-	public Category findCategory(final String name) {
+	public Category findCategory(String name) {
 		boolean found = false;
 		Category c = null;
 		int i = 0;
@@ -77,7 +77,7 @@ public class CategoryCont {
 	 * 
 	 * @param c The Category object to remove.
 	 */
-	public void removeCategory(final Category c) {
+	public void removeCategory(Category c) {
 		categories.remove(c);
 	}
 }

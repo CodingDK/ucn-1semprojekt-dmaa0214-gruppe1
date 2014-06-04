@@ -27,7 +27,7 @@ public class ItemCont {
 	 * @param c The Category object to look in.
 	 * @return ItemCont - The instance of the ItemCont.
 	 */
-	public static ItemCont getInstance(final Category c) {
+	public static ItemCont getInstance(Category c) {
 		
 		if (instance.get(c) == null) {
 			instance.put(c, new ItemCont());
@@ -42,7 +42,7 @@ public class ItemCont {
 	 * 
 	 * @param i The Item object to add.
 	 */
-	public void addItem(final Item i) {
+	public void addItem(Item i) {
 		items.add(i);
 	}
 	
@@ -52,7 +52,7 @@ public class ItemCont {
 	 * @param id The id of the Item object.
 	 * @return Item - The founded item or null.
 	 */
-	public Item getItem(final int id) {
+	public Item getItem(int id) {
 		Item retItem = null;
 		boolean found = false;
 		int i = 0;
@@ -72,7 +72,7 @@ public class ItemCont {
 	 * @param name The name of the Item object.
 	 * @return Item - The founded item or null.
 	 */
-	public Item getItem(final String name) {
+	public Item getItem(String name) {
 		Item retItem = null;
 		boolean found = false;
 		int i = 0;
@@ -100,7 +100,7 @@ public class ItemCont {
 	 * 
 	 * @param i The Item object to remove.
 	 */
-	public void removeItem(final Item i) {
+	public void removeItem(Item i) {
 		items.remove(i);
 	}
 	
@@ -109,7 +109,7 @@ public class ItemCont {
 	 * 
 	 * @param c The category object instance to remove
 	 */
-	public static void removeInstance(final Category c) {
+	public static void removeInstance(Category c) {
 		instance.remove(getInstance(c));
 	}
 }
