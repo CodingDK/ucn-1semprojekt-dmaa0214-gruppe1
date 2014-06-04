@@ -88,10 +88,10 @@ public class MainUI extends SuperUI {
 	private void makeTest() {
 		ItemCtr iCtr = new ItemCtr();
 		CategoryCtr cCtr = new CategoryCtr();
-		iCtr.createStorage("Lager1");
-		iCtr.createStorage("Lager2");
-		Storage s1 = iCtr.findStorage("Lager1");
-		Storage s2 = iCtr.findStorage("Lager2");
+		iCtr.createStorage("Trælast");
+		iCtr.createStorage("Byggecenter");
+		Storage s1 = iCtr.findStorage("Trælast");
+		Storage s2 = iCtr.findStorage("Byggecenter");
 		cCtr.createCategory("Søm");
 		cCtr.createCategory("Hammer");
 		Category c1 = cCtr.findCategory("Søm");
