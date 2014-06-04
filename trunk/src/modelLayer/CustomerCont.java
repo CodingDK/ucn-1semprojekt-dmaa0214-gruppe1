@@ -13,7 +13,7 @@ import personLayer.Customer;
  */
 public class CustomerCont {
 	private static CustomerCont instance;
-	private final ArrayList<Customer> customers;
+	private ArrayList<Customer> customers;
 	
 	/**
 	 * Constructor for CustomerCont objects.
@@ -53,9 +53,9 @@ public class CustomerCont {
 	public Customer findCustomer(int id) {
 		boolean found = false;
 		Customer c = null;
-		final Iterator<Customer> it = customers.iterator();
+		Iterator<Customer> it = customers.iterator();
 		while (it.hasNext() && !found) {
-			final Customer cu = it.next();
+			Customer cu = it.next();
 			if (cu.getId() == id) {
 				c = cu;
 				found = true;

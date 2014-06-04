@@ -37,11 +37,11 @@ public class SaleUI extends SuperUI {
 	private void menu() {
 		boolean exit = false;
 		while (!exit) {
-			final int choice = writeSaleMenu();
+			int choice = writeSaleMenu();
 			if (choice == 1) {
 				new CreateSaleUI();
 			} else if (choice == 2) {
-				final Sale s = pickParkedSale();
+				Sale s = pickParkedSale();
 				if (s != null) {
 					new CreateSaleUI(s);
 				} else {
@@ -78,13 +78,13 @@ public class SaleUI extends SuperUI {
 	private void printSales() {
 		flush();
 		System.out.println("## Print Alle Salg ##");
-		final SaleCtr sCtr = new SaleCtr();
-		final ArrayList<Sale> sales = sCtr.getSales();
+		SaleCtr sCtr = new SaleCtr();
+		ArrayList<Sale> sales = sCtr.getSales();
 		if (sales != null && sales.size() > 0) {
-			for (final Sale s : sales) {
+			for (Sale s : sales) {
 				System.out.println(s);
-				final ArrayList<PartSale> partSales = s.getPartSales();
-				for (final PartSale ps : partSales) {
+				ArrayList<PartSale> partSales = s.getPartSales();
+				for (PartSale ps : partSales) {
 					System.out.println(" - " + ps);
 				}
 			}
@@ -108,20 +108,20 @@ public class SaleUI extends SuperUI {
 			boolean done = false;
 			while (!done) {
 				System.out.println("## Vælg Salg ##");
-				final SaleCtr sCtr = new SaleCtr();
-				final ArrayList<Sale> sales = sCtr.getParkedSales();
+				SaleCtr sCtr = new SaleCtr();
+				ArrayList<Sale> sales = sCtr.getParkedSales();
 				if (sales != null && sales.size() > 0) {
 					boolean recheck = true;
 					System.out.println(sales.size() + " Parkeret Salg Fundet");
 					while (recheck) {
-						for (final Sale s : sales) {
+						for (Sale s : sales) {
 							System.out.println(s);
 						}
-						final int id = requestInt("Salg ID", null, false);
+						int id = requestInt("Salg ID", null, false);
 						int i = 0;
 						boolean found = false;
 						while (!found && i < sales.size()) {
-							final Sale checkS = sales.get(i);
+							Sale checkS = sales.get(i);
 							if (checkS.getId() == id) {
 								retSale = checkS;
 								found = true;
@@ -145,7 +145,7 @@ public class SaleUI extends SuperUI {
 					done = true;
 				}
 			}
-		} catch (final Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -157,7 +157,7 @@ public class SaleUI extends SuperUI {
 	 * cleanUp - Cleans up the parked sales
 	 */
 	public void cleanUp() {
-		final SaleCtr sCtr = new SaleCtr();
+		SaleCtr sCtr = new SaleCtr();
 		sCtr.cleanUp();
 	}
 }

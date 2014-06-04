@@ -14,14 +14,14 @@ public class BusinessTest {
 	
 	@Test
 	public void testGetCompany() {
-		final CustomerCtr cCtr = new CustomerCtr();
-		final ArrayList<Customer> customers = cCtr.searchBusiness("UCN A/S");
+		CustomerCtr cCtr = new CustomerCtr();
+		ArrayList<Customer> customers = cCtr.searchBusiness("UCN A/S");
 		boolean found = false;
 		int i = 0;
 		Business b = null;
 		while (!found && i < customers.size()) {
 			if (customers.get(i) instanceof Business) {
-				final Business checkB = (Business) customers.get(i);
+				Business checkB = (Business) customers.get(i);
 				if (checkB.getCompany().equals("UCN A/S")) {
 					b = checkB;
 					found = true;
@@ -34,14 +34,14 @@ public class BusinessTest {
 	
 	@Test
 	public void testGetCvrNr() {
-		final CustomerCtr cCtr = new CustomerCtr();
-		final ArrayList<Customer> customers = cCtr.searchBusiness("UCN A/S");
+		CustomerCtr cCtr = new CustomerCtr();
+		ArrayList<Customer> customers = cCtr.searchBusiness("UCN A/S");
 		boolean found = false;
 		int i = 0;
 		Business b = null;
 		while (!found && i < customers.size()) {
 			if (customers.get(i) instanceof Business) {
-				final Business checkB = (Business) customers.get(i);
+				Business checkB = (Business) customers.get(i);
 				if (checkB.getCompany().equals("UCN A/S")) {
 					b = checkB;
 					found = true;

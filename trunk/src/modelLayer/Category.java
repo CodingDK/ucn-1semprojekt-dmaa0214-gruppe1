@@ -8,7 +8,7 @@ package modelLayer;
  */
 public class Category {
 	private static int idIterator;
-	private final int id;
+	private int id;
 	private String name;
 	
 	/**

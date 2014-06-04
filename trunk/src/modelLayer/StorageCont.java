@@ -13,7 +13,7 @@ public class StorageCont {
 	private static StorageCont instance;
 	private static boolean firstRun = true;
 	private static Storage primaryStorage;
-	private final ArrayList<Storage> storages;
+	private ArrayList<Storage> storages;
 	
 	/**
 	 * Constructor for objects of class StorageCont

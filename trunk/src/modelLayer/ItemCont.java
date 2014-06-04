@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class ItemCont {
 	
 	private static HashMap<Category, ItemCont> instance = new HashMap<Category, ItemCont>();
-	private final ArrayList<Item> items;
+	private ArrayList<Item> items;
 	
 	/**
 	 * Constructor for objects of class ItemCont

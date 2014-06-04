@@ -8,7 +8,7 @@ package modelLayer;
  */
 public class Item {
 	private static int idIterator;
-	private final int id;
+	private int id;
 	private String name;
 	private int amount;
 	private int reserved;
