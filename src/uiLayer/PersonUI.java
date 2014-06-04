@@ -92,7 +92,7 @@ public class PersonUI extends SuperUI {
 		flush();
 		System.out.println("## Person menu ##");
 		System.out.println("1. Søg kunde");
-		System.out.println("2. Opret kunde" + pP);
+		System.out.println("2. Opret kunde");
 		System.out.println("3. Opdater kunde" + pP);
 		System.out.println("4. Slet kunde" + pP);
 		if (admin) {
