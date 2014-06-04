@@ -28,7 +28,7 @@ public class EmployeeCtr {
 	 * @param employeeNr The name or employeeNr of the Employee object to find.
 	 * @return Employee - The Employee object of Employee or null.
 	 */
-	public Employee findEmployee(final String nameOrEmployeeNr) {
+	public Employee findEmployee(String nameOrEmployeeNr) {
 		return eCont.findEmployee(nameOrEmployeeNr);
 	}
 	
@@ -45,7 +45,7 @@ public class EmployeeCtr {
 	 * @param cprNr The cprNr of the employee.
 	 * @param admin A boolean value, true for admin.
 	 */
-	public Employee createEmployee(final String employeeNr, final String name, final String phoneNr, final String street, final String email, final String city, final String postCode, final String cprNr, final String password, final boolean admin) {
+	public Employee createEmployee(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String password, boolean admin) {
 		final Employee retE = new Employee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, password, admin);
 		eCont.addEmployee(retE);
 		return retE;
@@ -65,7 +65,7 @@ public class EmployeeCtr {
 	 * @param admin The new value or null if not changed.
 	 * @throws NullPointerException Employee not exits.
 	 */
-	public void updateEmployee(final int id, final String employeeNr, final String name, final String phoneNr, final String street, final String email, final String city, final String postCode, final Boolean admin) throws NullPointerException {
+	public void updateEmployee(int id, String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, Boolean admin) throws NullPointerException {
 		final Employee e = eCont.findEmployee(id);
 		if (e != null) {
 			if (employeeNr != null) {
@@ -102,7 +102,7 @@ public class EmployeeCtr {
 	 * 
 	 * @param Employee The Employee to remove.
 	 */
-	public void removeEmployee(final Employee e) {
+	public void removeEmployee(Employee e) {
 		eCont.removeEmployee(e);
 	}
 	
@@ -112,7 +112,7 @@ public class EmployeeCtr {
 	 * @param partNameOrEmpNr
 	 * @return ArrayList<Employee>
 	 */
-	public ArrayList<Employee> searchEmployee(final String partNameOrEmpNr) {
+	public ArrayList<Employee> searchEmployee(String partNameOrEmpNr) {
 		final ArrayList<Employee> foundEmployees = new ArrayList<Employee>();
 		final EmployeeCont eCont = EmployeeCont.getInstance();
 		final ArrayList<Employee> emp = eCont.getEmployee();

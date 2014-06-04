@@ -23,7 +23,7 @@ public class Private extends Customer {
 	 * @param cprNr The cprNr of the privateCustomer.
 	 * @param pictureID The pictureID of the privateCustomer.
 	 */
-	public Private(final String name, final String phoneNr, final String street, final String email, final String city, final String postCode, final String cprNr, final String pictureID) {
+	public Private(String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String pictureID) {
 		super(name, phoneNr, street, email, city, postCode);
 		this.cprNr = cprNr;
 		this.pictureID = pictureID;
@@ -32,14 +32,14 @@ public class Private extends Customer {
 	/**
 	 * @param cprNr the cprNr to set
 	 */
-	public void setCprNr(final String cprNr) {
+	public void setCprNr(String cprNr) {
 		this.cprNr = cprNr;
 	}
 	
 	/**
 	 * @param pictureID the pictureID to set
 	 */
-	public void setPictureID(final String pictureID) {
+	public void setPictureID(String pictureID) {
 		this.pictureID = pictureID;
 	}
 	

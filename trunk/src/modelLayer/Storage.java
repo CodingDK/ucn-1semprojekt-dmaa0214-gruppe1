@@ -16,7 +16,7 @@ public class Storage {
 	 * 
 	 * @param name The name of the storage.
 	 */
-	public Storage(final String name) {
+	public Storage(String name) {
 		idIterator++;
 		this.name = name;
 		id = idIterator;
@@ -45,7 +45,7 @@ public class Storage {
 	 * 
 	 * @param String name
 	 */
-	public void setName(final String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 }

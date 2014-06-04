@@ -19,7 +19,7 @@ public class SaleUI extends SuperUI {
 	 * 
 	 * @param s
 	 */
-	public SaleUI(final String s) {
+	public SaleUI(String s) {
 		
 	}
 	

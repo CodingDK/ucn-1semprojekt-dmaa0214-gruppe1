@@ -54,7 +54,7 @@ public class StorageCont {
 	 * 
 	 * @param s The Storage object to add.
 	 */
-	public void addStorage(final Storage s) {
+	public void addStorage(Storage s) {
 		storages.add(s);
 	}
 	
@@ -64,7 +64,7 @@ public class StorageCont {
 	 * @param name - The name of the Storage.
 	 * @return Storage object of the Storage or null if not found.
 	 */
-	public Storage findStorage(final String name) {
+	public Storage findStorage(String name) {
 		Storage retStorage = null;
 		boolean found = false;
 		int i = 0;
@@ -84,7 +84,7 @@ public class StorageCont {
 	 * 
 	 * @param s The Storage object to remove.
 	 */
-	public void removeStorage(final Storage s) {
+	public void removeStorage(Storage s) {
 		storages.remove(s);
 	}
 	

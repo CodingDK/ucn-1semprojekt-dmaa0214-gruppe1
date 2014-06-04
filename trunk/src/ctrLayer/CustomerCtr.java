@@ -27,7 +27,7 @@ public class CustomerCtr {
 	 * @param pictureId
 	 * @return Private Returns the created private customer.
 	 */
-	public Private createPrivateCustomer(final String name, final String phoneNr, final String street, final String email, final String city, final String postCode, final String cprNr, final String pictureId) {
+	public Private createPrivateCustomer(String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String pictureId) {
 		final Private returnPrivate = new Private(name, phoneNr, street, email, city, postCode, cprNr, pictureId);
 		cCont.addCustomer(returnPrivate);
 		return returnPrivate;
@@ -48,7 +48,7 @@ public class CustomerCtr {
 	 * @param cvrNr
 	 * @throws NullPointerException if Customer does not exist
 	 */
-	public void updateCustomer(final int id, final String name, final String phoneNr, final String street, final String email, final String city, final String postCode, final String pictureID, final String company, final String cvrNr) throws NullPointerException {
+	public void updateCustomer(int id, String name, String phoneNr, String street, String email, String city, String postCode, String pictureID, String company, String cvrNr) throws NullPointerException {
 		final Customer c = cCont.findCustomer(id);
 		if (c != null) {
 			if (name != null) {
@@ -94,7 +94,7 @@ public class CustomerCtr {
 	 * 
 	 * @param id
 	 */
-	public void removeCustomer(final int id) {
+	public void removeCustomer(int id) {
 		cCont.removeCustomer(cCont.findCustomer(id));
 	}
 	
@@ -110,7 +110,7 @@ public class CustomerCtr {
 	 * @param company
 	 * @param cvrNr
 	 */
-	public Business createBusinessCustomer(final String name, final String phoneNr, final String street, final String email, final String city, final String postCode, final String company, final String cvrNr) {
+	public Business createBusinessCustomer(String name, String phoneNr, String street, String email, String city, String postCode, String company, String cvrNr) {
 		final Business returnBusiness = new Business(name, phoneNr, street, email, city, postCode, company, cvrNr);
 		cCont.addCustomer(returnBusiness);
 		return returnBusiness;
@@ -122,7 +122,7 @@ public class CustomerCtr {
 	 * @param partNamePhone
 	 * @return ArrayList<Customer>
 	 */
-	public ArrayList<Customer> searchCustomer(final String partNamePhone) {
+	public ArrayList<Customer> searchCustomer(String partNamePhone) {
 		final ArrayList<Customer> foundCustomers = new ArrayList<Customer>();
 		final CustomerCont customerCont = CustomerCont.getInstance();
 		final ArrayList<Customer> cust = customerCont.getCustomers();
@@ -141,7 +141,7 @@ public class CustomerCtr {
 	 * @param partNamePhone
 	 * @return ArrayList<Customer>
 	 */
-	public ArrayList<Customer> searchBusiness(final String partCompName) {
+	public ArrayList<Customer> searchBusiness(String partCompName) {
 		final ArrayList<Customer> foundBusiness = new ArrayList<Customer>();
 		final CustomerCont cCont = CustomerCont.getInstance();
 		final ArrayList<Customer> cust = cCont.getCustomers();

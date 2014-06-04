@@ -18,7 +18,7 @@ public class Customer extends Person {
 	 * @param city The city of the Customer.
 	 * @param postCode The postCode of the Customer.
 	 */
-	public Customer(final String name, final String phoneNr, final String street, final String email, final String city, final String postCode) {
+	public Customer(String name, String phoneNr, String street, String email, String city, String postCode) {
 		super(name, phoneNr, street, email, city, postCode);
 	}
 	
@@ -32,7 +32,7 @@ public class Customer extends Person {
 	/**
 	 * @param credit the credit to set
 	 */
-	public void setCredit(final double credit) {
+	public void setCredit(double credit) {
 		this.credit = credit;
 	}
 	

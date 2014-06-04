@@ -40,7 +40,7 @@ public class CustomerCont {
 	 * 
 	 * @param c The Customer to add.
 	 */
-	public void addCustomer(final Customer c) {
+	public void addCustomer(Customer c) {
 		customers.add(c);
 	}
 	
@@ -50,7 +50,7 @@ public class CustomerCont {
 	 * @param id the id of the customer to look for
 	 * @return Customer The found Customer or null
 	 */
-	public Customer findCustomer(final int id) {
+	public Customer findCustomer(int id) {
 		boolean found = false;
 		Customer c = null;
 		final Iterator<Customer> it = customers.iterator();
@@ -70,7 +70,7 @@ public class CustomerCont {
 	 * 
 	 * @param c the Customer to remove
 	 */
-	public void removeCustomer(final Customer c) {
+	public void removeCustomer(Customer c) {
 		customers.remove(c);
 	}
 	

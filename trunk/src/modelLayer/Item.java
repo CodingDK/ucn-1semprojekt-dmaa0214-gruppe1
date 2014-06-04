@@ -38,10 +38,10 @@ public class Item {
 	 * @param min The min amount of the item.
 	 * @param category The category object of the item.
 	 */
-	public Item(final String name, final int amount, final int reserved,
-			final double salePrice, final double purchasePrice, final double bulkSalePrice,
-			final int bulk, final String location, final Storage storage, final int max, final int min,
-			final Category category) {
+	public Item(String name, int amount, int reserved,
+			double salePrice, double purchasePrice, double bulkSalePrice,
+			int bulk, String location, Storage storage, int max, int min,
+			Category category) {
 		idIterator++;
 		id = idIterator;
 		this.name = name;
@@ -63,7 +63,7 @@ public class Item {
 	 * 
 	 * @param amount The amount to add.
 	 */
-	public void addReserved(final int amount) {
+	public void addReserved(int amount) {
 		reserved += amount;
 	}
 	
@@ -72,7 +72,7 @@ public class Item {
 	 * 
 	 * @param amount The amount to add.
 	 */
-	public void addAmount(final int amount) {
+	public void addAmount(int amount) {
 		this.amount += amount;
 	}
 	
@@ -90,7 +90,7 @@ public class Item {
 	 * 
 	 * @param name the name to set
 	 */
-	public void setName(final String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	
@@ -108,7 +108,7 @@ public class Item {
 	 * 
 	 * @param amount the amount to set
 	 */
-	public void setAmount(final int amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 	
@@ -126,7 +126,7 @@ public class Item {
 	 * 
 	 * @param reserved the reserved to set
 	 */
-	public void setReserved(final int reserved) {
+	public void setReserved(int reserved) {
 		this.reserved = reserved;
 	}
 	
@@ -144,7 +144,7 @@ public class Item {
 	 * 
 	 * @param salePrice the salePrice to set
 	 */
-	public void setSalePrice(final double salePrice) {
+	public void setSalePrice(double salePrice) {
 		this.salePrice = salePrice;
 	}
 	
@@ -162,7 +162,7 @@ public class Item {
 	 * 
 	 * @param purchasePrice the purchasePrice to set
 	 */
-	public void setPurchasePrice(final double purchasePrice) {
+	public void setPurchasePrice(double purchasePrice) {
 		this.purchasePrice = purchasePrice;
 	}
 	
@@ -180,7 +180,7 @@ public class Item {
 	 * 
 	 * @param bulkSalePrice the bulkSalePrice to set
 	 */
-	public void setBulkSalePrice(final double bulkSalePrice) {
+	public void setBulkSalePrice(double bulkSalePrice) {
 		this.bulkSalePrice = bulkSalePrice;
 	}
 	
@@ -198,7 +198,7 @@ public class Item {
 	 * 
 	 * @param bulk the bulk to set
 	 */
-	public void setBulk(final int bulk) {
+	public void setBulk(int bulk) {
 		this.bulk = bulk;
 	}
 	
@@ -216,7 +216,7 @@ public class Item {
 	 * 
 	 * @param location the location to set
 	 */
-	public void setLocation(final String location) {
+	public void setLocation(String location) {
 		this.location = location;
 	}
 	
@@ -234,7 +234,7 @@ public class Item {
 	 * 
 	 * @param storage the storage to set
 	 */
-	public void setStorage(final Storage storage) {
+	public void setStorage(Storage storage) {
 		this.storage = storage;
 	}
 	
@@ -252,7 +252,7 @@ public class Item {
 	 * 
 	 * @param max the max to set
 	 */
-	public void setMax(final int max) {
+	public void setMax(int max) {
 		this.max = max;
 	}
 	
@@ -270,7 +270,7 @@ public class Item {
 	 * 
 	 * @param min the min to set
 	 */
-	public void setMin(final int min) {
+	public void setMin(int min) {
 		this.min = min;
 	}
 	
@@ -288,7 +288,7 @@ public class Item {
 	 * 
 	 * @param category the category to set
 	 */
-	public void setCategory(final Category category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 	
