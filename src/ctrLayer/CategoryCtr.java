@@ -8,7 +8,7 @@ import modelLayer.Item;
 import modelLayer.ItemCont;
 
 public class CategoryCtr {
-	private final CategoryCont cCont;
+	private CategoryCont cCont;
 	
 	public CategoryCtr() {
 		cCont = CategoryCont.getInstance();
@@ -42,11 +42,11 @@ public class CategoryCtr {
 	 * @param Category
 	 */
 	public void removeCategory(Category c) {
-		final ItemCont iContDel = ItemCont.getInstance(c);
-		final ArrayList<Item> items = iContDel.getAll();
-		final Category cat = findCategory("U/K");
-		final ItemCont iContAll = ItemCont.getInstance(findCategory("U/K"));
-		for (final Item i : items) {
+		ItemCont iContDel = ItemCont.getInstance(c);
+		ArrayList<Item> items = iContDel.getAll();
+		Category cat = findCategory("U/K");
+		ItemCont iContAll = ItemCont.getInstance(findCategory("U/K"));
+		for (Item i : items) {
 			i.setCategory(cat);
 			iContAll.addItem(i);
 		}
@@ -80,11 +80,11 @@ public class CategoryCtr {
 	 * @return ArrayList<Category>
 	 */
 	public ArrayList<Category> searchCategory(String name) {
-		final ArrayList<Category> categories = new ArrayList<Category>();
-		final CategoryCtr cCtr = new CategoryCtr();
-		final ArrayList<Category> cats = cCtr.getAllCategories();
+		ArrayList<Category> categories = new ArrayList<Category>();
+		CategoryCtr cCtr = new CategoryCtr();
+		ArrayList<Category> cats = cCtr.getAllCategories();
 		if (cats != null) {
-			for (final Category cat : cats) {
+			for (Category cat : cats) {
 				if (cat.getName().toLowerCase().contains(name.toLowerCase())) {
 					categories.add(cat);
 				}

@@ -17,7 +17,7 @@ import exceptionLayer.SaleNotCreatedException;
  * @version 0.1
  */
 public class CreateSaleUI extends SuperUI {
-	private final SaleCtr sCtr;
+	private SaleCtr sCtr;
 	
 	/**
 	 * Constructor for the SaleUI.
@@ -45,7 +45,7 @@ public class CreateSaleUI extends SuperUI {
 	private void menu() {
 		boolean exit = false;
 		while (!exit) {
-			final int choice = writeSaleMenu();
+			int choice = writeSaleMenu();
 			if (choice == 1) {
 				addPartSale();
 			} else if (choice == 2) {
@@ -55,7 +55,7 @@ public class CreateSaleUI extends SuperUI {
 			} else if (choice == 4) {
 				exit = finishSale();
 			} else if (choice == 5) {
-				final boolean r = parkSale();
+				boolean r = parkSale();
 				if (r) {
 					exit = true;
 				}
@@ -74,7 +74,7 @@ public class CreateSaleUI extends SuperUI {
 	 * @return true if the sale has a customer associated
 	 */
 	private boolean parkSale() {
-		final boolean park = sCtr.parkSale();
+		boolean park = sCtr.parkSale();
 		boolean ret = false;
 		if (park) {
 			System.out.println("Salget er blevet parkeret");
@@ -97,7 +97,7 @@ public class CreateSaleUI extends SuperUI {
 		flush();
 		System.out.println("## Opret salg ##");
 		String ret = "";
-		final Sale sale = sCtr.getSale();
+		Sale sale = sCtr.getSale();
 		if (sale.getCustomer() != null) {
 			ret = sale.getCustomer().toString();
 		} else {
@@ -119,20 +119,20 @@ public class CreateSaleUI extends SuperUI {
 	 * printPartSale - Print the partsales of a sale.
 	 */
 	private void printPartSale() {
-		final Sale sale = sCtr.getSale();
-		final ArrayList<PartSale> partsales = sale.getPartSales();
+		Sale sale = sCtr.getSale();
+		ArrayList<PartSale> partsales = sale.getPartSales();
 		System.out.println("Valgt vare " + partsales.size());
 		if (partsales.size() != 0) {
-			for (final PartSale ps : partsales) {
+			for (PartSale ps : partsales) {
 				String line = "";
-				final Item item = ps.getItem();
-				final double price = item.getSalePrice() * ps.getAmount();
+				Item item = ps.getItem();
+				double price = item.getSalePrice() * ps.getAmount();
 				line = ps.getAmount() + "x " + item.getName() + " ";
 				line += price + ",- ";
 				System.out.println(line);
 			}
 			double total = sale.getTotalPrice();
-			final double moms = total * 0.25;
+			double moms = total * 0.25;
 			total += moms;
 			System.out.println("Moms: " + moms + ",-");
 			System.out.println("Total: " + total + ",-");
@@ -147,14 +147,14 @@ public class CreateSaleUI extends SuperUI {
 	private boolean finishSale() {
 		boolean ret = false;
 		if (sCtr.getSale().getPartSales().size() > 0) {
-			final String employeeNr = requestString(nL + "Indtast medarbejdernr", 1, 50, false);
+			String employeeNr = requestString(nL + "Indtast medarbejdernr", 1, 50, false);
 			try {
 				sCtr.finishSale(employeeNr);
 				System.out.println("Salg udført");
 				ret = true;
-			} catch (final NullPointerException e) {
+			} catch (NullPointerException e) {
 				System.out.println(e.getMessage());
-			} catch (final SaleNotCreatedException e) {
+			} catch (SaleNotCreatedException e) {
 				System.out.println(e.getMessage());
 			}
 			pause();
@@ -169,8 +169,8 @@ public class CreateSaleUI extends SuperUI {
 	 * searchCustomer - Search for a Customer
 	 */
 	private void searchCustomer() {
-		final PersonUI pUI = new PersonUI("Dry Run");
-		final Customer c = pUI.findCustomer();
+		PersonUI pUI = new PersonUI("Dry Run");
+		Customer c = pUI.findCustomer();
 		if (c != null) {
 			sCtr.getSale().setCustomer(c);
 		}
@@ -180,11 +180,11 @@ public class CreateSaleUI extends SuperUI {
 	 * createCustomer - Create a customer.
 	 */
 	private void createCustomer() {
-		final PersonUI pUI = new PersonUI("Dry Run");
+		PersonUI pUI = new PersonUI("Dry Run");
 		
 		try {
 			sCtr.setCustomer(pUI.createCustomer());
-		} catch (final SaleNotCreatedException e) {
+		} catch (SaleNotCreatedException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -193,7 +193,7 @@ public class CreateSaleUI extends SuperUI {
 	 * addPartSale - add an item and amount to the sale.
 	 */
 	private void addPartSale() {
-		final ItemUI iUi = new ItemUI("Dry Run");
+		ItemUI iUi = new ItemUI("Dry Run");
 		Item i = null;
 		while (i == null) {
 			i = iUi.pickItem();
@@ -202,7 +202,7 @@ public class CreateSaleUI extends SuperUI {
 			}
 		}
 		
-		final int aviAmount = i.getAmount() - i.getReserved();
+		int aviAmount = i.getAmount() - i.getReserved();
 		
 		if (aviAmount <= 0) {
 			System.out.println(i.getName() + " er ikke på lager");
@@ -219,11 +219,11 @@ public class CreateSaleUI extends SuperUI {
 			try {
 				sCtr.addItem(i, amount);
 				System.out.println(amount + "x " + i.getName() + " tilføjet til salget");
-			} catch (final NullPointerException e) {
+			} catch (NullPointerException e) {
 				System.out.println(e.getMessage());
-			} catch (final NotEnoughItemsException e) {
+			} catch (NotEnoughItemsException e) {
 				System.out.println(e.getMessage());
-			} catch (final SaleNotCreatedException e) {
+			} catch (SaleNotCreatedException e) {
 				System.out.println(e.getMessage());
 			}
 		}

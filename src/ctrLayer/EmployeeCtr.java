@@ -13,7 +13,7 @@ import personLayer.Employee;
  * 
  */
 public class EmployeeCtr {
-	private final EmployeeCont eCont;
+	private EmployeeCont eCont;
 	
 	/**
 	 * Constructor for controller EmployeeCtr.
@@ -46,7 +46,7 @@ public class EmployeeCtr {
 	 * @param admin A boolean value, true for admin.
 	 */
 	public Employee createEmployee(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String password, boolean admin) {
-		final Employee retE = new Employee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, password, admin);
+		Employee retE = new Employee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, password, admin);
 		eCont.addEmployee(retE);
 		return retE;
 	}
@@ -66,7 +66,7 @@ public class EmployeeCtr {
 	 * @throws NullPointerException Employee not exits.
 	 */
 	public void updateEmployee(int id, String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, Boolean admin) throws NullPointerException {
-		final Employee e = eCont.findEmployee(id);
+		Employee e = eCont.findEmployee(id);
 		if (e != null) {
 			if (employeeNr != null) {
 				e.setEmployeeNr(employeeNr);
@@ -113,11 +113,11 @@ public class EmployeeCtr {
 	 * @return ArrayList<Employee>
 	 */
 	public ArrayList<Employee> searchEmployee(String partNameOrEmpNr) {
-		final ArrayList<Employee> foundEmployees = new ArrayList<Employee>();
-		final EmployeeCont eCont = EmployeeCont.getInstance();
-		final ArrayList<Employee> emp = eCont.getEmployee();
+		ArrayList<Employee> foundEmployees = new ArrayList<Employee>();
+		EmployeeCont eCont = EmployeeCont.getInstance();
+		ArrayList<Employee> emp = eCont.getEmployee();
 		if (emp != null)
-			for (final Employee e : emp) {
+			for (Employee e : emp) {
 				if ((e.getName().toLowerCase().contains(partNameOrEmpNr.toLowerCase())) || e.getEmployeeNr().contains(partNameOrEmpNr)) {
 					foundEmployees.add(e);
 				}

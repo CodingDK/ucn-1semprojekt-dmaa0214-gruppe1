@@ -14,34 +14,34 @@ public class CategoryTests {
 	
 	@Test
 	public void testCreateCategory() {
-		final CategoryCtr cCtr = new CategoryCtr();
+		CategoryCtr cCtr = new CategoryCtr();
 		cCtr.createCategory("Cookies");
-		final Category c = cCtr.findCategory("Cookies");
+		Category c = cCtr.findCategory("Cookies");
 		assertNotEquals(c, null);
 	}
 	
 	@Test
 	public void testUpdateCategory() {
-		final CategoryCtr cCtr = new CategoryCtr();
+		CategoryCtr cCtr = new CategoryCtr();
 		cCtr.createCategory("Cookies");
-		final Category c = cCtr.findCategory("Cookies");
+		Category c = cCtr.findCategory("Cookies");
 		cCtr.updateCategory(c, "Sko");
 		assertEquals(c.getName(), "Sko");
 	}
 	
 	@Test
 	public void testRemoveCategory() {
-		final CategoryCtr cCtr = new CategoryCtr();
-		final Category c = cCtr.findCategory("Cookies");
+		CategoryCtr cCtr = new CategoryCtr();
+		Category c = cCtr.findCategory("Cookies");
 		cCtr.removeCategory(c);
 		assertEquals(cCtr.findCategory("Cookies"), null);
 	}
 	
 	@Test
 	public void testFindCategoryString() {
-		final CategoryCtr cCtr = new CategoryCtr();
+		CategoryCtr cCtr = new CategoryCtr();
 		cCtr.createCategory("Cookie");
-		final Category c = cCtr.findCategory("Cookies");
+		Category c = cCtr.findCategory("Cookies");
 		assertThat(c, instanceOf(Category.class));
 	}
 	

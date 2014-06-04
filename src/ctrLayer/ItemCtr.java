@@ -28,12 +28,12 @@ public class ItemCtr {
 	public Item getItem(int id) {
 		Item retItem = null;
 		
-		final ArrayList<Category> allCat = new CategoryCtr().getAllCategories();
+		ArrayList<Category> allCat = new CategoryCtr().getAllCategories();
 		boolean found = false;
 		int iCat = 0;
 		while (iCat < allCat.size() && !found) {
 			int i = 0;
-			final ArrayList<Item> items = ItemCont.getInstance(allCat.get(iCat)).getAll();
+			ArrayList<Item> items = ItemCont.getInstance(allCat.get(iCat)).getAll();
 			iCat++;
 			while (i < items.size() && !found) {
 				if (items.get(i).getId() == id) {
@@ -55,12 +55,12 @@ public class ItemCtr {
 	public Item getItem(String name) {
 		Item retItem = null;
 		
-		final ArrayList<Category> allCat = new CategoryCtr().getAllCategories();
+		ArrayList<Category> allCat = new CategoryCtr().getAllCategories();
 		boolean found = false;
 		int iCat = 0;
 		while (iCat < allCat.size() && !found) {
 			int i = 0;
-			final ArrayList<Item> items = ItemCont.getInstance(allCat.get(iCat)).getAll();
+			ArrayList<Item> items = ItemCont.getInstance(allCat.get(iCat)).getAll();
 			iCat++;
 			while (i < items.size() && !found) {
 				if (items.get(i).getName().equalsIgnoreCase(name)) {
@@ -90,7 +90,7 @@ public class ItemCtr {
 	 * @param category The category object of the item.
 	 */
 	public void createItem(String name, int amount, int reserved, double salePrice, double purchasePrice, double bulkSalePrice, int bulk, String location, Storage storage, int max, int min, Category category) {
-		final Item item = new Item(name, amount, reserved, salePrice, purchasePrice, bulkSalePrice, bulk, location, storage, min, min, category);
+		Item item = new Item(name, amount, reserved, salePrice, purchasePrice, bulkSalePrice, bulk, location, storage, min, min, category);
 		ItemCont.getInstance(category).addItem(item);
 	}
 	
@@ -116,7 +116,7 @@ public class ItemCtr {
 			double salePrice, double purchasePrice, double bulkSalePrice,
 			int bulk, String location, Storage storage, int max, int min,
 			Category category) throws NullPointerException {
-		final Item item = getItem(id);
+		Item item = getItem(id);
 		if (item != null) {
 			if (name != null) {
 				item.setName(name);
@@ -167,7 +167,7 @@ public class ItemCtr {
 	 * @param i The Item object to remove.
 	 */
 	public void removeItem(Item i) {
-		final Category oldCat = i.getCategory();
+		Category oldCat = i.getCategory();
 		ItemCont.getInstance(oldCat).removeItem(i);
 	}
 	
@@ -187,7 +187,7 @@ public class ItemCtr {
 	 * @return Storage object of the Storage or null if not found.
 	 */
 	public Storage findStorage(String name) {
-		final StorageCont cCont = StorageCont.getInstance();
+		StorageCont cCont = StorageCont.getInstance();
 		return cCont.findStorage(name);
 	}
 	
@@ -213,13 +213,13 @@ public class ItemCtr {
 	 * @param s The Storage object to remove.
 	 */
 	public void removeStorage(Storage s) {
-		final StorageCont sCont = StorageCont.getInstance();
-		final CategoryCtr cCtr = new CategoryCtr();
-		final ArrayList<Category> categories = cCtr.getAllCategories();
-		for (final Category c : categories) {
-			final ItemCont iCont = ItemCont.getInstance(c);
-			final ArrayList<Item> items = iCont.getAll();
-			for (final Item i : items) {
+		StorageCont sCont = StorageCont.getInstance();
+		CategoryCtr cCtr = new CategoryCtr();
+		ArrayList<Category> categories = cCtr.getAllCategories();
+		for (Category c : categories) {
+			ItemCont iCont = ItemCont.getInstance(c);
+			ArrayList<Item> items = iCont.getAll();
+			for (Item i : items) {
 				if (i.getStorage() == s) {
 					i.setStorage(sCont.getPrimary());
 				}
@@ -236,7 +236,7 @@ public class ItemCtr {
 	 */
 	public boolean isPrimary(Storage s) {
 		boolean ret = false;
-		final StorageCont sCont = StorageCont.getInstance();
+		StorageCont sCont = StorageCont.getInstance();
 		if (s == sCont.getPrimary()) {
 			ret = true;
 		}
@@ -250,14 +250,14 @@ public class ItemCtr {
 	 * @return ArrayList<Item>
 	 */
 	public ArrayList<Item> searchItem(String name) {
-		final ArrayList<Item> items = new ArrayList<Item>();
-		final CategoryCtr cCtr = new CategoryCtr();
-		final ArrayList<Category> cats = cCtr.getAllCategories();
+		ArrayList<Item> items = new ArrayList<Item>();
+		CategoryCtr cCtr = new CategoryCtr();
+		ArrayList<Category> cats = cCtr.getAllCategories();
 		if (cats != null) {
-			for (final Category cat : cats) {
-				final ArrayList<Item> list = ItemCont.getInstance(cat).getAll();
+			for (Category cat : cats) {
+				ArrayList<Item> list = ItemCont.getInstance(cat).getAll();
 				if (list != null) {
-					for (final Item i : list) {
+					for (Item i : list) {
 						if (i.getName().toLowerCase().contains(name.toLowerCase())) {
 							items.add(i);
 						}
@@ -275,11 +275,11 @@ public class ItemCtr {
 	 * @return ArrayList<Storage>
 	 */
 	public ArrayList<Storage> searchStorage(String name) {
-		final ArrayList<Storage> storages = new ArrayList<Storage>();
-		final StorageCont sCont = StorageCont.getInstance();
-		final ArrayList<Storage> stor = sCont.getAll();
+		ArrayList<Storage> storages = new ArrayList<Storage>();
+		StorageCont sCont = StorageCont.getInstance();
+		ArrayList<Storage> stor = sCont.getAll();
 		if (stor != null) {
-			for (final Storage s : stor) {
+			for (Storage s : stor) {
 				if (s.getName().toLowerCase().contains(name.toLowerCase())) {
 					storages.add(s);
 				}

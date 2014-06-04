@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class CategoryCont {
 	private static CategoryCont instance;
-	private final ArrayList<Category> categories;
+	private ArrayList<Category> categories;
 	
 	/**
 	 * Constructor for CategoryCont objects.
@@ -61,7 +61,7 @@ public class CategoryCont {
 		Category c = null;
 		int i = 0;
 		while (i < categories.size() && !found) {
-			final Category ca = categories.get(i);
+			Category ca = categories.get(i);
 			if (ca.getName().equalsIgnoreCase(name)) {
 				c = ca;
 				found = true;

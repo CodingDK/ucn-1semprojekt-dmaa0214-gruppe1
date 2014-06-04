@@ -13,7 +13,7 @@ import personLayer.Employee;
 public class EmployeeCont {
 	
 	private static EmployeeCont instance;
-	private final ArrayList<Employee> employees;
+	private ArrayList<Employee> employees;
 	
 	/**
 	 * Constructor for objects of class EmployeeCont
@@ -64,7 +64,7 @@ public class EmployeeCont {
 		Employee e = null;
 		int i = 0;
 		while (i < employees.size() && !found) {
-			final Employee em = employees.get(i);
+			Employee em = employees.get(i);
 			if (em.getName().equalsIgnoreCase(nameOrEmployeeNr) || em.getEmployeeNr().equalsIgnoreCase(nameOrEmployeeNr)) {
 				e = em;
 				found = true;

@@ -33,7 +33,7 @@ public class SaleCtr {
 	 * Creates the initial sale object
 	 */
 	public void createSale() {
-		final Sale sale = new Sale();
+		Sale sale = new Sale();
 		this.sale = sale;
 	}
 	
@@ -58,7 +58,7 @@ public class SaleCtr {
 	public void addItem(Item item, int amount) throws NullPointerException, NotEnoughItemsException, SaleNotCreatedException {
 		if (sale != null) {
 			if (item != null) {
-				final int availableAmount = item.getAmount() - item.getReserved();
+				int availableAmount = item.getAmount() - item.getReserved();
 				if (availableAmount - amount < 0) {
 					throw new NotEnoughItemsException("Der er kun " + availableAmount + " af " + item.getName() + " ledige på lageret.");
 				} else {
@@ -97,17 +97,17 @@ public class SaleCtr {
 	 */
 	public void finishSale(String employeeNr) throws SaleNotCreatedException, NullPointerException {
 		if (sale != null) {
-			final EmployeeCtr eCtr = new EmployeeCtr();
-			final Employee employee = eCtr.findEmployee(employeeNr);
+			EmployeeCtr eCtr = new EmployeeCtr();
+			Employee employee = eCtr.findEmployee(employeeNr);
 			if (employee == null) {
 				throw new NullPointerException("Medarbejdernr.: " + employeeNr + " blev ikke fundet");
 			} else {
 				sale.setEmployee(employee);
 				
-				final ArrayList<PartSale> partsales = sale.getPartSales();
+				ArrayList<PartSale> partsales = sale.getPartSales();
 				
-				for (final PartSale ps : partsales) {
-					final Item item = ps.getItem();
+				for (PartSale ps : partsales) {
+					Item item = ps.getItem();
 					item.addReserved(-ps.getAmount());
 					item.addAmount(-ps.getAmount());
 				}
@@ -124,15 +124,15 @@ public class SaleCtr {
 	 * Cancels the sale and returns the amount, and resets the reserved
 	 */
 	public void cancelSale() {
-		final ArrayList<PartSale> partSales = sale.getPartSales();
+		ArrayList<PartSale> partSales = sale.getPartSales();
 		if (partSales != null) {
-			for (final PartSale p : partSales) {
-				final Item i = p.getItem();
+			for (PartSale p : partSales) {
+				Item i = p.getItem();
 				i.addReserved(-p.getAmount());
 			}
 		}
 		
-		final SaleCont sCont = SaleCont.getInstance();
+		SaleCont sCont = SaleCont.getInstance();
 		if (sCont.getAll().contains(sale)) {
 			sCont.removeSale(sale);
 		}
@@ -146,7 +146,7 @@ public class SaleCtr {
 	public boolean parkSale() {
 		boolean ret = false;
 		if (sale.getCustomer() != null) {
-			final SaleCont sCont = SaleCont.getInstance();
+			SaleCont sCont = SaleCont.getInstance();
 			sale.setDone(false);
 			if (!sCont.getAll().contains(sale)) {
 				sCont.addSale(sale);
@@ -175,8 +175,8 @@ public class SaleCtr {
 	 * @return ArrayList<Sale>
 	 */
 	public ArrayList<Sale> getSales() {
-		final SaleCont sCont = SaleCont.getInstance();
-		final ArrayList<Sale> sales = sCont.getAll();
+		SaleCont sCont = SaleCont.getInstance();
+		ArrayList<Sale> sales = sCont.getAll();
 		
 		return sales;
 	}
@@ -187,9 +187,9 @@ public class SaleCtr {
 	 * @return ArrayList<Sale>
 	 */
 	public ArrayList<Sale> getParkedSales() {
-		final ArrayList<Sale> retArry = new ArrayList<Sale>();
-		final ArrayList<Sale> sales = getSales();
-		for (final Sale s : sales) {
+		ArrayList<Sale> retArry = new ArrayList<Sale>();
+		ArrayList<Sale> sales = getSales();
+		for (Sale s : sales) {
 			if (!s.isDone()) {
 				retArry.add(s);
 			}
@@ -206,11 +206,11 @@ public class SaleCtr {
 	 */
 	public Sale getSale(int id) {
 		Sale retSale = null;
-		final ArrayList<Sale> sales = getSales();
+		ArrayList<Sale> sales = getSales();
 		boolean found = false;
-		final int i = 0;
+		int i = 0;
 		while (!found && i < sales.size()) {
-			final Sale s = sales.get(i);
+			Sale s = sales.get(i);
 			if (s.getId() == id) {
 				retSale = s;
 				found = true;
@@ -225,9 +225,9 @@ public class SaleCtr {
 	 * cleanUp - Removed parked sales older than a day
 	 */
 	public void cleanUp() {
-		final ArrayList<Sale> sales = getParkedSales();
-		final Calendar c1 = Calendar.getInstance(), c2 = Calendar.getInstance();
-		for (final Sale s : sales) {
+		ArrayList<Sale> sales = getParkedSales();
+		Calendar c1 = Calendar.getInstance(), c2 = Calendar.getInstance();
+		for (Sale s : sales) {
 			c2.setTime(s.getDate());
 			if (c1.get(Calendar.DAY_OF_YEAR) != c2.get(Calendar.DAY_OF_YEAR)) {
 				sale = s;

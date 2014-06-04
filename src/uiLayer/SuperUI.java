@@ -18,7 +18,7 @@ public abstract class SuperUI {
 	 */
 	protected void pause() {
 		@SuppressWarnings("resource")
-		final Scanner k = new Scanner(System.in);
+		Scanner k = new Scanner(System.in);
 		k.nextLine();
 	}
 	
@@ -30,8 +30,8 @@ public abstract class SuperUI {
 	 */
 	protected String stringToNull() {
 		@SuppressWarnings("resource")
-		final Scanner k = new Scanner(System.in);
-		final String n = k.nextLine();
+		Scanner k = new Scanner(System.in);
+		String n = k.nextLine();
 		String typeOut = null;
 		if (n.equals("")) {
 			typeOut = null;
@@ -53,13 +53,13 @@ public abstract class SuperUI {
 	 */
 	protected String requestString(String input, Integer minLength, Integer maxLength, boolean allowNull) {
 		@SuppressWarnings("resource")
-		final Scanner k = new Scanner(System.in);
+		Scanner k = new Scanner(System.in);
 		String ret = "";
 		boolean done = false;
 		while (!done) {
 			boolean error = false;
 			System.out.print(input + ": ");
-			final String inputData = k.nextLine();
+			String inputData = k.nextLine();
 			if (!allowNull) {
 				if (inputData.trim().isEmpty()) {
 					System.out.println("Feltet må ikke være tomt");
@@ -110,12 +110,12 @@ public abstract class SuperUI {
 	 */
 	protected int requestInt(String input, Integer min, boolean allowNull) {
 		@SuppressWarnings("resource")
-		final Scanner k = new Scanner(System.in);
+		Scanner k = new Scanner(System.in);
 		int ret = 0;
 		boolean done = false;
 		while (!done) {
 			System.out.print(input + ": ");
-			final String inputData = k.nextLine();
+			String inputData = k.nextLine();
 			if (allowNull && inputData.trim().isEmpty()) {
 				ret = -1;
 				done = true;
@@ -147,12 +147,12 @@ public abstract class SuperUI {
 	 */
 	protected double requestDouble(String input, boolean allowNull) {
 		@SuppressWarnings("resource")
-		final Scanner k = new Scanner(System.in);
+		Scanner k = new Scanner(System.in);
 		double ret = 0;
 		boolean done = false;
 		while (!done) {
 			System.out.print(input + ": ");
-			final String inputData = k.nextLine();
+			String inputData = k.nextLine();
 			if (allowNull && inputData.trim().isEmpty()) {
 				ret = -1;
 				done = true;
@@ -176,7 +176,7 @@ public abstract class SuperUI {
 	private boolean isInteger(String s) {
 		try {
 			Integer.parseInt(s);
-		} catch (final NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			return false;
 		}
 		
@@ -192,7 +192,7 @@ public abstract class SuperUI {
 	private boolean isDouble(String s) {
 		try {
 			Double.parseDouble(s);
-		} catch (final NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			return false;
 		}
 		
@@ -208,13 +208,13 @@ public abstract class SuperUI {
 	protected boolean confirm(String confirmStatement) {
 		boolean confirm = true;
 		@SuppressWarnings("resource")
-		final Scanner s = new Scanner(System.in);
+		Scanner s = new Scanner(System.in);
 		boolean exit = false;
 		while (!exit) {
 			System.out.println();
 			System.out.println(confirmStatement);
 			System.out.println("Confirm - y/n");
-			final String conf = s.nextLine();
+			String conf = s.nextLine();
 			if (conf.toLowerCase().equals("y")) {
 				confirm = true;
 				exit = true;
@@ -232,11 +232,11 @@ public abstract class SuperUI {
 	protected void login() {
 		flush();
 		System.out.println("## Administrator Login ##");
-		final String employeeID = requestString("Medarbejder Nummer", null, null, false);
-		final String password = requestString("Kodeord", null, null, false);
+		String employeeID = requestString("Medarbejder Nummer", null, null, false);
+		String password = requestString("Kodeord", null, null, false);
 		
-		final EmployeeCtr eCtr = new EmployeeCtr();
-		final Employee e = eCtr.findEmployee(employeeID);
+		EmployeeCtr eCtr = new EmployeeCtr();
+		Employee e = eCtr.findEmployee(employeeID);
 		if (e != null) {
 			if (!e.getAdmin()) {
 				System.out.println(nL + "Dette mederbajder nummer har ikke administrator rettigheder");

@@ -7,8 +7,8 @@ package modelLayer;
  * @version 0.1
  */
 public class PartSale {
-	private final int amount;
-	private final Item item;
+	private int amount;
+	private Item item;
 	
 	/**
 	 * Constructor of the class PartSale
