@@ -449,7 +449,7 @@ public class ItemUI extends SuperUI {
 			int amount = requestInt("Antal(" + selectedItem.getAmount() + ")", null, true);
 			int reserved = requestInt("Reserveret(" + selectedItem.getReserved() + ")", null, true);
 			double salePrice = requestDouble("Salgs Pris(" + selectedItem.getSalePrice() + ")", true);
-			double purchasePrice = requestDouble("K�bs Pris(" + selectedItem.getPurchasePrice() + ")", true);
+			double purchasePrice = requestDouble("Købs Pris(" + selectedItem.getPurchasePrice() + ")", true);
 			double bulkSalePrice = requestDouble("Bulk Pris(" + selectedItem.getBulkSalePrice() + ")", true);
 			int bulk = requestInt("Bulk(" + selectedItem.getBulk() + ")", null, true);
 			String location = requestString("Placering(" + selectedItem.getLocation() + ")", 0, null, true);
