@@ -16,6 +16,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 public class MainGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
+	private boolean admin = true;
 	
 	/**
 	 * Launch the application.
@@ -71,6 +72,12 @@ public class MainGUI extends JFrame{
 		JPanel Order = new JPanel();
 		tabbedPane.addTab("Ordre", null, Order, null);
 		tabbedPane.setMnemonicAt(3, KeyEvent.VK_O);
+		
+		if(admin){
+			JPanel Employee = new JPanel();
+			tabbedPane.addTab("Medarbejder", null, Employee, null);
+			tabbedPane.setMnemonicAt(4, KeyEvent.VK_M);
+		}
 	}
 	
 }
