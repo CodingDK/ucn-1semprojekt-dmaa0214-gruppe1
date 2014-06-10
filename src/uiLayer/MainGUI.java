@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
@@ -16,6 +19,8 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import personLayer.Private;
 import ctrLayer.CustomerCtr;
+
+import javax.swing.JMenuBar;
 
 public class MainGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -73,17 +78,46 @@ public class MainGUI extends JFrame{
 		tabbedPane.addTab("Ordre", null, Order, null);
 		tabbedPane.setMnemonicAt(3, KeyEvent.VK_O);
 		
-		if(!admin){
 			JPanel Login = new JPanel();
 			tabbedPane.addTab("Login", null, Login, null);
 			tabbedPane.setMnemonicAt(4, KeyEvent.VK_O);
-		}
 		
-		if(admin){
 			JPanel Employee = new JPanel();
 			tabbedPane.addTab("Medarbejder", null, Employee, null);
 			tabbedPane.setMnemonicAt(5, KeyEvent.VK_M);
-		}
+			
+			JMenuBar menuBar = new JMenuBar();
+			setJMenuBar(menuBar);
+			
+			JMenu mnFile = new JMenu("File");
+			menuBar.add(mnFile);
+			
+			JMenuItem mntmSave = new JMenuItem("Save");
+			mnFile.add(mntmSave);
+			
+			JMenuItem mntmLoad = new JMenuItem("Load");
+			mnFile.add(mntmLoad);
+			
+			JMenuItem mntmInsertTestData = new JMenuItem("Insert test data");
+			mnFile.add(mntmInsertTestData);
+			
+			JSeparator separator = new JSeparator();
+			mnFile.add(separator);
+			
+			JMenuItem mntmLogin = new JMenuItem("Login");
+			mnFile.add(mntmLogin);
+			
+			JSeparator separator_1 = new JSeparator();
+			mnFile.add(separator_1);
+			
+			JMenuItem mntmExit = new JMenuItem("Exit");
+			mnFile.add(mntmExit);
+			
+			JMenu mnHelp = new JMenu("Help");
+			menuBar.add(mnHelp);
+			
+			JMenuItem mntmHelp = new JMenuItem("Help");
+			mnHelp.add(mntmHelp);
 	}
 	
 }
