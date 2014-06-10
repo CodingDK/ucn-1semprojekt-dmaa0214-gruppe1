@@ -25,12 +25,14 @@ public class MainGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					/*
 					for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				        if ("Nimbus".equals(info.getName())) {
 				            UIManager.setLookAndFeel(info.getClassName());
 				            break;
 				        }
 				    }
+				    */
 					MainGUI window = new MainGUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
