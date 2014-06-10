@@ -14,6 +14,9 @@ import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import personLayer.Private;
+import ctrLayer.CustomerCtr;
+
 public class MainGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private boolean admin = true;
@@ -25,7 +28,9 @@ public class MainGUI extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
+					CustomerCtr cCtr = new CustomerCtr();
+					cCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
+					cCtr.createBusinessCustomer("Kis", "72691867", "Sofiendalsvej 60", "kbha@ucn.dk", "Aalborg", "9000", "UCN A/S", "33556063");
 					MainGUI window = new MainGUI();
 					window.setVisible(true);
 				} catch (Exception e) {
