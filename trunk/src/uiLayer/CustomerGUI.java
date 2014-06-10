@@ -40,8 +40,9 @@ public class CustomerGUI extends JPanel {
 	public CustomerGUI() {
 		setLayout(null);
 		c = new ArrayList<Customer>();
-		model = new CustomerTableModel();
-		table = new JTable(model);		
+		
+		model = new CustomerTableModel(c);
+		table = new JTable(model);
 		table.setBounds(51, 103, 480, 226);
 		add(table);
 		
@@ -57,7 +58,7 @@ public class CustomerGUI extends JPanel {
 		
 		JLabel lblNavn = new JLabel("Navn");
 		
-		txtName = new JTextField();
+		txtName = new JTextField("Bjarne");
 		txtName.setColumns(10);
 		
 		JLabel lblTlfN = new JLabel("Tlf");
@@ -106,7 +107,6 @@ public class CustomerGUI extends JPanel {
 				findCustomer();
 			}
 		});
-
 	}
 	
 	protected void findCustomer() {
@@ -122,6 +122,13 @@ public class CustomerGUI extends JPanel {
 		} else if(company != null && !company.trim().isEmpty()){
 			c = cCtr.searchCustomer(company);
 		} 
+		
+		try {
+	        model.refresh(c);
+	    } catch (Exception e1) {
+	        e1.printStackTrace();  
+	    }
+		
 		model.fireTableDataChanged();
 		
 	}
@@ -129,7 +136,15 @@ public class CustomerGUI extends JPanel {
 	public class CustomerTableModel extends AbstractTableModel{
 
 		private static final long serialVersionUID = 1L;
-		ArrayList<Customer> customers = c;
+		private ArrayList<Customer> customers;
+		
+		public CustomerTableModel(ArrayList<Customer> cust){
+			this.customers = cust;
+		}
+
+		public void refresh(ArrayList<Customer> c) {
+			this.customers = c;
+		}
 
 		public int getColumnCount() {
 			return 6;
@@ -158,8 +173,8 @@ public class CustomerGUI extends JPanel {
 			return value;
 		}	
 		
-		public String getColumName(int collIndex){
-			String value = null;
+		public String getColumnName(int collIndex){
+			String value = "??";
 			if(collIndex == 0){
 				value = "Navn";
 			} else if(collIndex == 1){
@@ -172,7 +187,8 @@ public class CustomerGUI extends JPanel {
 				value = "Tlf nr";
 			} else if(collIndex == 5){
 				value = "E-mail";
-			} 
+			}
+			
 			return value;
 		}
 	}
