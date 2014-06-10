@@ -30,6 +30,11 @@ public class MainGUI extends JFrame{
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -119,5 +124,4 @@ public class MainGUI extends JFrame{
 			JMenuItem mntmHelp = new JMenuItem("Help");
 			mnHelp.add(mntmHelp);
 	}
-	
 }
