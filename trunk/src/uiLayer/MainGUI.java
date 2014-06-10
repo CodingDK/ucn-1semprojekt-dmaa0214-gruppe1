@@ -19,7 +19,7 @@ import ctrLayer.CustomerCtr;
 
 public class MainGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
-	private boolean admin = true;
+	private boolean admin = false;
 	
 	/**
 	 * Launch the application.
@@ -73,10 +73,16 @@ public class MainGUI extends JFrame{
 		tabbedPane.addTab("Ordre", null, Order, null);
 		tabbedPane.setMnemonicAt(3, KeyEvent.VK_O);
 		
+		if(!admin){
+			JPanel Login = new JPanel();
+			tabbedPane.addTab("Login", null, Login, null);
+			tabbedPane.setMnemonicAt(4, KeyEvent.VK_O);
+		}
+		
 		if(admin){
 			JPanel Employee = new JPanel();
 			tabbedPane.addTab("Medarbejder", null, Employee, null);
-			tabbedPane.setMnemonicAt(4, KeyEvent.VK_M);
+			tabbedPane.setMnemonicAt(5, KeyEvent.VK_M);
 		}
 	}
 	
