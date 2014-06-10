@@ -1,6 +1,7 @@
 package uiLayer;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import java.awt.Color;
@@ -27,6 +28,7 @@ import ctrLayer.CustomerCtr;
 import personLayer.Customer;
 
 public class CustomerGUI extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private JTextField txtCompany;
 	private JTextField txtName;
@@ -128,13 +130,12 @@ public class CustomerGUI extends JPanel {
 	    } catch (Exception e1) {
 	        e1.printStackTrace();  
 	    }
-		
 		model.fireTableDataChanged();
+		
 		
 	}
 
 	public class CustomerTableModel extends AbstractTableModel{
-
 		private static final long serialVersionUID = 1L;
 		private ArrayList<Customer> customers;
 		
@@ -174,7 +175,9 @@ public class CustomerGUI extends JPanel {
 		}	
 		
 		public String getColumnName(int collIndex){
+			
 			String value = "??";
+			
 			if(collIndex == 0){
 				value = "Navn";
 			} else if(collIndex == 1){
