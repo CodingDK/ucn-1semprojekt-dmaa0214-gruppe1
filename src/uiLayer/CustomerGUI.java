@@ -49,7 +49,7 @@ public class CustomerGUI extends JPanel {
 	private void makeSearchPanel() {
 		searchPanel = new JPanel();
 		searchPanel.setBorder(new TitledBorder(null, "Find kunde", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		searchPanel.setBounds(520, 23, 304, 132);
+		searchPanel.setBounds(520, 23, 313, 140);
 		JLabel lblVirksomhedsnavn = new JLabel("Virksomhedsnavn");
 		
 		txtCompany = new JTextField();
