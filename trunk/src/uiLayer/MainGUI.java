@@ -1,9 +1,11 @@
 package uiLayer;
 
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
 import java.awt.BorderLayout;
@@ -58,7 +60,8 @@ public class MainGUI {
 		
 		JPanel Sale = new JPanel();
 		tabbedPane.addTab("Salg", null, Sale, null);
-		tabbedPane.setMnemonicAt(0, KeyEvent.VK_S);
+		KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+		tabbedPane.setMnemonicAt(0, stroke.getKeyCode());
 		
 		JPanel Item = new JPanel();
 		tabbedPane.addTab("Varer", null, Item, null);
