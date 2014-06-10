@@ -25,12 +25,7 @@ public class MainGUI extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-				        if ("Nimbus".equals(info.getName())) {
-				            UIManager.setLookAndFeel(info.getClassName());
-				            break;
-				        }
-				    }
+					
 					MainGUI window = new MainGUI();
 					window.setVisible(true);
 				} catch (Exception e) {
@@ -51,7 +46,7 @@ public class MainGUI extends JFrame{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		this.setBounds(100, 100, 450, 300);
+		this.setBounds(100, 100, 1280, 768);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -65,7 +60,7 @@ public class MainGUI extends JFrame{
 		tabbedPane.addTab("Varer", null, Item, null);
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_V);
 		
-		JPanel Customer = new JPanel();
+		JPanel Customer = new CustomerGUI();
 		tabbedPane.addTab("Kunde", null, Customer, null);
 		tabbedPane.setMnemonicAt(2, KeyEvent.VK_K);
 		
