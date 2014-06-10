@@ -24,7 +24,7 @@ import personLayer.Customer;
 
 public class CustomerGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private JPanel searchPane;
+	private JPanel searchPanel;
 	private JScrollPane tablePane;
 	private JTable table;
 	private JTextField txtCompany;
@@ -42,14 +42,14 @@ public class CustomerGUI extends JPanel {
 		makeTablePane();
 		add(tablePane);
 		
-		makeSearchPane();
-		add(searchPane);
+		makeSearchPanel();
+		add(searchPanel);
 	}
 	
-	private void makeSearchPane() {
-		searchPane = new JPanel();
-		searchPane.setBorder(new TitledBorder(null, "Find kunde", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		searchPane.setBounds(520, 23, 304, 132);
+	private void makeSearchPanel() {
+		searchPanel = new JPanel();
+		searchPanel.setBorder(new TitledBorder(null, "Find kunde", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		searchPanel.setBounds(520, 23, 304, 132);
 		JLabel lblVirksomhedsnavn = new JLabel("Virksomhedsnavn");
 		
 		txtCompany = new JTextField();
@@ -66,9 +66,14 @@ public class CustomerGUI extends JPanel {
 		txtTlf.setColumns(10);
 		
 		JButton btnClear = new JButton("Nulstil");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				clearSearch();
+			}
+		});	
 		
 		JButton btnFind = new JButton("Søg");
-		GroupLayout gl_searchPane = new GroupLayout(searchPane);
+		GroupLayout gl_searchPane = new GroupLayout(searchPanel);
 		gl_searchPane.setHorizontalGroup(
 			gl_searchPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_searchPane.createSequentialGroup()
@@ -100,12 +105,23 @@ public class CustomerGUI extends JPanel {
 						.addComponent(btnClear, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnFind, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
 		);
-		searchPane.setLayout(gl_searchPane);
+		searchPanel.setLayout(gl_searchPane);
 		btnFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				findCustomer();
 			}
 		});		
+	}
+
+	protected void clearSearch() {
+		txtCompany.setText("");
+		txtName.setText("");
+		txtTlf.setText("");
+		
+		c.clear();
+		
+		model.refresh(c);
+	    model.fireTableDataChanged();
 	}
 
 	private void makeTablePane() {
