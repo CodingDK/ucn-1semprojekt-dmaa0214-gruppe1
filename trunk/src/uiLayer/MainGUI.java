@@ -14,9 +14,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-public class MainGUI {
-	
-	private JFrame frame;
+public class MainGUI extends JFrame{
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Launch the application.
@@ -25,16 +24,14 @@ public class MainGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					/*
 					for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				        if ("Nimbus".equals(info.getName())) {
 				            UIManager.setLookAndFeel(info.getClassName());
 				            break;
 				        }
 				    }
-				    */
 					MainGUI window = new MainGUI();
-					window.frame.setVisible(true);
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -53,17 +50,15 @@ public class MainGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(100, 100, 450, 300);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		JPanel Sale = new JPanel();
 		tabbedPane.addTab("Salg", null, Sale, null);
-		KeyStroke stroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
-		tabbedPane.setMnemonicAt(0, stroke.getKeyCode());
+		tabbedPane.setMnemonicAt(0, KeyEvent.VK_S);
 		
 		JPanel Item = new JPanel();
 		tabbedPane.addTab("Varer", null, Item, null);
