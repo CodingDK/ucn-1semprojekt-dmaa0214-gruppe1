@@ -45,12 +45,14 @@ public class CustomerGUI extends JPanel {
 		
 		model = new CustomerTableModel(c);
 		table = new JTable(model);
-		table.setBounds(51, 103, 480, 226);
-		add(table);
+		JScrollPane p = new JScrollPane();
+		p.setBounds(20, 25, 480, 226);
+		p.setViewportView(table);
+		add(p);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Find kunde", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(555, 101, 304, 132);
+		panel.setBounds(520, 23, 304, 132);
 		add(panel);
 		
 		JLabel lblVirksomhedsnavn = new JLabel("Virksomhedsnavn");
