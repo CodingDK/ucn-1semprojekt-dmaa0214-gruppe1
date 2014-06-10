@@ -128,21 +128,17 @@ public class CustomerGUI extends JPanel {
 
 	public class CustomerTableModel extends AbstractTableModel{
 
+		private static final long serialVersionUID = 1L;
 		ArrayList<Customer> customers = c;
-		
-		@Override
+
 		public int getColumnCount() {
-			// TODO Auto-generated method stub
 			return 6;
 		}
 
-		@Override
 		public int getRowCount() {
-			// TODO Auto-generated method stub
 			return customers.size();
 		}
 
-		@Override
 		public Object getValueAt(int rowIndex, int collIndex) {
 			Customer c  = customers.get(rowIndex);
 			Object value = null;
