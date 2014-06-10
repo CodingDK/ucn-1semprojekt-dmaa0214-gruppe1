@@ -4,10 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import java.awt.Color;
-
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -16,10 +13,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
 
-import java.awt.GridLayout;
 import java.util.ArrayList;
 
-import javax.swing.SwingConstants;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.TitledBorder;
@@ -29,6 +24,8 @@ import personLayer.Customer;
 
 public class CustomerGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
+	private JPanel searchPane;
+	private JScrollPane tablePane;
 	private JTable table;
 	private JTextField txtCompany;
 	private JTextField txtName;
@@ -41,20 +38,18 @@ public class CustomerGUI extends JPanel {
 	 */
 	public CustomerGUI() {
 		setLayout(null);
-		c = new ArrayList<Customer>();
 		
-		model = new CustomerTableModel(c);
-		table = new JTable(model);
-		JScrollPane p = new JScrollPane();
-		p.setBounds(20, 25, 480, 226);
-		p.setViewportView(table);
-		add(p);
+		makeTablePane();
+		add(tablePane);
 		
-		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Find kunde", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(520, 23, 304, 132);
-		add(panel);
-		
+		makeSearchPane();
+		add(searchPane);
+	}
+	
+	private void makeSearchPane() {
+		searchPane = new JPanel();
+		searchPane.setBorder(new TitledBorder(null, "Find kunde", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		searchPane.setBounds(520, 23, 304, 132);
 		JLabel lblVirksomhedsnavn = new JLabel("Virksomhedsnavn");
 		
 		txtCompany = new JTextField();
@@ -62,7 +57,7 @@ public class CustomerGUI extends JPanel {
 		
 		JLabel lblNavn = new JLabel("Navn");
 		
-		txtName = new JTextField("Bjarne");
+		txtName = new JTextField();
 		txtName.setColumns(10);
 		
 		JLabel lblTlfN = new JLabel("Tlf");
@@ -73,47 +68,56 @@ public class CustomerGUI extends JPanel {
 		JButton btnClear = new JButton("Nulstil");
 		
 		JButton btnFind = new JButton("Søg");
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
+		GroupLayout gl_searchPane = new GroupLayout(searchPane);
+		gl_searchPane.setHorizontalGroup(
+			gl_searchPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_searchPane.createSequentialGroup()
 					.addComponent(lblVirksomhedsnavn, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
 					.addComponent(txtCompany, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panel.createSequentialGroup()
+				.addGroup(gl_searchPane.createSequentialGroup()
 					.addComponent(lblNavn, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
 					.addComponent(txtName, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panel.createSequentialGroup()
+				.addGroup(gl_searchPane.createSequentialGroup()
 					.addComponent(lblTlfN, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
 					.addComponent(txtTlf, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_panel.createSequentialGroup()
+				.addGroup(gl_searchPane.createSequentialGroup()
 					.addComponent(btnClear, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
 					.addComponent(btnFind, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE))
 		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+		gl_searchPane.setVerticalGroup(
+			gl_searchPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_searchPane.createSequentialGroup()
+					.addGroup(gl_searchPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblVirksomhedsnavn, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtCompany, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_searchPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNavn, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtName, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_searchPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblTlfN, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtTlf, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_searchPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnClear, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnFind, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
 		);
-		panel.setLayout(gl_panel);
+		searchPane.setLayout(gl_searchPane);
 		btnFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				findCustomer();
 			}
-		});
+		});		
 	}
-	
-	protected void findCustomer() {
+
+	private void makeTablePane() {
+		c = new ArrayList<Customer>();
+		model = new CustomerTableModel(c);
+		table = new JTable(model);
+		tablePane = new JScrollPane();
+		tablePane.setBounds(20, 25, 480, 226);
+		tablePane.setViewportView(table);
+	}
+
+	private void findCustomer() {
 		CustomerCtr cCtr = new CustomerCtr();
 		String phone = txtTlf.getText();
 		String name = txtName.getText();
@@ -126,75 +130,7 @@ public class CustomerGUI extends JPanel {
 		} else if(company != null && !company.trim().isEmpty()){
 			c = cCtr.searchCustomer(company);
 		} 
-		
-		try {
-	        model.refresh(c);
-	    } catch (Exception e1) {
-	        e1.printStackTrace();  
-	    }
-		model.fireTableDataChanged();
-		
-		
-	}
-
-	public class CustomerTableModel extends AbstractTableModel{
-		private static final long serialVersionUID = 1L;
-		private ArrayList<Customer> customers;
-		
-		public CustomerTableModel(ArrayList<Customer> cust){
-			this.customers = cust;
-		}
-
-		public void refresh(ArrayList<Customer> c) {
-			this.customers = c;
-		}
-
-		public int getColumnCount() {
-			return 6;
-		}
-
-		public int getRowCount() {
-			return customers.size();
-		}
-
-		public Object getValueAt(int rowIndex, int collIndex) {
-			Customer c  = customers.get(rowIndex);
-			Object value = null;
-			if(collIndex == 0){
-				value = c.getName();
-			} else if(collIndex == 1){
-				value = c.getStreet();
-			} else if(collIndex == 2){
-				value = c.getCity();
-			} else if(collIndex == 3){
-				value = c.getPostCode();
-			} else if(collIndex == 4){
-				value = c.getPhoneNr();
-			} else if(collIndex == 5){
-				value = c.getEmail();
-			} 
-			return value;
-		}	
-		
-		public String getColumnName(int collIndex){
-			
-			String value = "??";
-			
-			if(collIndex == 0){
-				value = "Navn";
-			} else if(collIndex == 1){
-				value = "Gade";
-			} else if(collIndex == 2){
-				value = "By";
-			} else if(collIndex == 3){
-				value = "Postnummer";
-			} else if(collIndex == 4){
-				value = "Tlf nr";
-			} else if(collIndex == 5){
-				value = "E-mail";
-			}
-			
-			return value;
-		}
+	    model.refresh(c);
+	    model.fireTableDataChanged();
 	}
 }
