@@ -1,10 +1,12 @@
 package uiLayer;
 
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 import javax.swing.table.AbstractTableModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.NumberFormatter;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -13,6 +15,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
 
+import java.text.Format;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
