@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import ctrLayer.CategoryCtr;
 import exceptionLayer.CategoryExistException;
+import exceptionLayer.MainCategoryException;
 
 public class CategoryTests {
 	
@@ -44,7 +45,12 @@ public class CategoryTests {
 	public void testRemoveCategory() {
 		CategoryCtr cCtr = new CategoryCtr();
 		Category c = cCtr.findCategory("Cookies");
-		cCtr.removeCategory(c);
+		try {
+			cCtr.removeCategory(c);
+		} catch (MainCategoryException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		assertEquals(cCtr.findCategory("Cookies"), null);
 	}
 	

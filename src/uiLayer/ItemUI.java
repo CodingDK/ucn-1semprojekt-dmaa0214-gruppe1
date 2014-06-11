@@ -8,6 +8,7 @@ import modelLayer.Storage;
 import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
 import exceptionLayer.CategoryExistException;
+import exceptionLayer.MainCategoryException;
 
 public class ItemUI extends SuperUI {
 	private Category selectedCategory;
@@ -535,7 +536,12 @@ public class ItemUI extends SuperUI {
 		if (selectedCategory != null) {
 			if (confirm("Er du sikker på du vil slette " + selectedCategory.getName() + "")) {
 				CategoryCtr cCtr = new CategoryCtr();
-				cCtr.removeCategory(selectedCategory);
+				try {
+					cCtr.removeCategory(selectedCategory);
+				} catch (MainCategoryException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				selectedCategory = null;
 			}
 		} else {
