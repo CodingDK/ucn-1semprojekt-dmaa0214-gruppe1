@@ -1,5 +1,6 @@
 package guiLayer;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -20,6 +21,7 @@ import ctrLayer.Demo;
 import javax.swing.JMenuBar;
 import javax.swing.event.MenuKeyListener;
 import javax.swing.event.MenuKeyEvent;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
@@ -62,6 +64,7 @@ public class MainGUI extends JFrame{
 	 */
 	private void initialize() {
 		this.setBounds(100, 100, 900, 515);
+		this.setMinimumSize(new Dimension(900, 515));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
