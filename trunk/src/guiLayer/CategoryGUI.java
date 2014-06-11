@@ -7,6 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.BorderLayout;
 
+import javax.swing.JDialog;
+import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.JLabel;
@@ -17,22 +19,14 @@ import java.awt.FlowLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.TitledBorder;
-
-import java.awt.GridLayout;
-
 import javax.swing.JTextField;
 
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 
-import java.awt.Component;
 import java.util.ArrayList;
-
-import javax.swing.JMenuItem;
 
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -41,6 +35,7 @@ import com.jgoodies.forms.factories.FormFactory;
 
 import ctrLayer.CategoryCtr;
 import exceptionLayer.CategoryExistException;
+import exceptionLayer.MainCategoryException;
 import extensions.CategoryTableModel;
 import extensions.JBlinkLabel;
 
@@ -50,10 +45,13 @@ import modelLayer.Category;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.SwingConstants;
 
 public class CategoryGUI extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Category> categories;
 	private JTextField txtName;
 	private CategoryTableModel model;
@@ -96,6 +94,42 @@ public class CategoryGUI extends JPanel {
 		
 		model = new CategoryTableModel(categories);
 		table = new JTable(model);
+		table.addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseReleased(MouseEvent e) {
+		        int r = table.rowAtPoint(e.getPoint());
+		        if (r >= 0 && r < table.getRowCount()) {
+		            table.setRowSelectionInterval(r, r);
+		        } else {
+		            table.clearSelection();
+		        }
+
+		        final int rowindex = table.getSelectedRow();
+		        if (rowindex < 0)
+		            return;
+		        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+		        	JPopupMenu popupMenu = new JPopupMenu();
+		    		JMenuItem mntmDelete = new JMenuItem("Slet");
+		    		mntmDelete.addActionListener(new ActionListener() {
+		    			public void actionPerformed(ActionEvent arg0) {
+		    				String name = (String) table.getValueAt(rowindex, 1);
+		    				removeCategory(name);
+		    			}
+		    		});
+		    		JMenuItem mntmUpdate = new JMenuItem("Ret Kategori");
+		    		mntmUpdate.addActionListener(new ActionListener() {
+		    			public void actionPerformed(ActionEvent arg0) {
+		    				int id = (Integer) table.getValueAt(rowindex, 0);
+		    				String name = (String) table.getValueAt(rowindex, 1);
+		    				updateCategory(id, name);
+		    			}
+		    		});
+		    		popupMenu.add(mntmDelete);
+		    		popupMenu.add(mntmUpdate);
+		    		popupMenu.show(e.getComponent(), e.getX(), e.getY());
+		        }
+		    }
+		});
 		table.getColumnModel().getColumn(0).setMaxWidth(25);
 		scrollPane.setViewportView(table);
 		
@@ -181,20 +215,25 @@ public class CategoryGUI extends JPanel {
 		lblState.setHorizontalAlignment(SwingConstants.CENTER);
 		lblState.setBounds(0, 6, 250, 16);
 		panel_1.add(lblState);
-		
+		model.fireTableDataChanged();
 	}
 	protected void createCategory() {
 		CategoryCtr cCtr = new CategoryCtr();
-		try {
-			cCtr.createCategory(txtName.getText());
-			categories = cCtr.getAllCategories();
-			model.refresh(categories);
-			model.fireTableDataChanged();
-			lblState.setText(txtName.getText() + " er oprettet");
-			lblState.startBlinking(true, false);
-			Clear();
-		} catch (CategoryExistException e) {
-			lblState.setText(e.getMessage());
+		if(txtName.getText() != null && !txtName.getText().trim().isEmpty()){
+			try {
+				cCtr.createCategory(txtName.getText());
+				categories = cCtr.getAllCategories();
+				model.refresh(categories);
+				model.fireTableDataChanged();
+				lblState.setText(txtName.getText() + " er oprettet");
+				lblState.startBlinking(true, false);
+				Clear();
+			} catch (CategoryExistException e) {
+				lblState.setText(e.getMessage());
+				lblState.startBlinking(true, true);
+			}
+		}else{
+			lblState.setText("Kategoriens navn kan ikke være tomt");
 			lblState.startBlinking(true, true);
 		}
 		
@@ -202,5 +241,32 @@ public class CategoryGUI extends JPanel {
 	
 	protected void Clear() {
 		txtName.setText("");
+	}
+	
+	protected void removeCategory(String name) {
+		try {
+			CategoryCtr cCtr = new CategoryCtr();
+			cCtr.removeCategory(cCtr.findCategory(name));
+			categories = cCtr.getAllCategories();
+			model.refresh(categories);
+			model.fireTableDataChanged();
+			lblState.setText(name + " er slettet");
+			lblState.startBlinking(true, false);
+		} catch (MainCategoryException e) {
+			lblState.setText(e.getMessage());
+			lblState.startBlinking(true, true);
+		}
+	}
+	
+	protected void updateCategory(int id, String name) {
+		if(!name.equals("U/K")){
+			JDialog update = new UpdateCategory(null, id, name);
+			CategoryCtr cCtr = new CategoryCtr();
+			model.refresh(cCtr.getAllCategories());
+			model.fireTableDataChanged();
+		}else{
+			lblState.setText(name + " kan ikke ændres");
+			lblState.startBlinking(true, true);
+		}
 	}
 }

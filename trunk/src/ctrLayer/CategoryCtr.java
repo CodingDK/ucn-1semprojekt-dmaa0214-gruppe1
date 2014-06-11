@@ -3,6 +3,7 @@ package ctrLayer;
 import java.util.ArrayList;
 
 import exceptionLayer.CategoryExistException;
+import exceptionLayer.MainCategoryException;
 import modelLayer.Category;
 import modelLayer.CategoryCont;
 import modelLayer.Item;
@@ -50,18 +51,23 @@ public class CategoryCtr {
 	 * Removes the selected category
 	 * 
 	 * @param Category
+	 * @throws MainCategoryException 
 	 */
-	public void removeCategory(Category c) {
-		ItemCont iContDel = ItemCont.getInstance(c);
-		ArrayList<Item> items = iContDel.getAll();
-		Category cat = findCategory("U/K");
-		ItemCont iContAll = ItemCont.getInstance(findCategory("U/K"));
-		for (Item i : items) {
-			i.setCategory(cat);
-			iContAll.addItem(i);
+	public void removeCategory(Category c) throws MainCategoryException {
+		if(c.getName() != findCategory("U/K").getName()){
+			ItemCont iContDel = ItemCont.getInstance(c);
+			ArrayList<Item> items = iContDel.getAll();
+			Category cat = findCategory("U/K");
+			ItemCont iContAll = ItemCont.getInstance(findCategory("U/K"));
+			for (Item i : items) {
+				i.setCategory(cat);
+				iContAll.addItem(i);
+			}
+			ItemCont.removeInstance(c);
+			cCont.removeCategory(c);
+		}else{
+			throw new MainCategoryException("Hovede kategorien kan ikke slettes");
 		}
-		ItemCont.removeInstance(c);
-		cCont.removeCategory(c);
 	}
 	
 	/**

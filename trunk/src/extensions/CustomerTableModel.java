@@ -17,7 +17,7 @@ public class CustomerTableModel extends AbstractTableModel{
 	}
 
 	public int getColumnCount() {
-		return 6;
+		return 7;
 	}
 
 	public int getRowCount() {
@@ -28,16 +28,18 @@ public class CustomerTableModel extends AbstractTableModel{
 		Customer c  = customers.get(rowIndex);
 		Object value = null;
 		if(collIndex == 0){
-			value = c.getName();
+			value = c.getId();
 		} else if(collIndex == 1){
-			value = c.getStreet();
+			value = c.getName();
 		} else if(collIndex == 2){
-			value = c.getCity();
+			value = c.getStreet();
 		} else if(collIndex == 3){
-			value = c.getPostCode();
+			value = c.getCity();
 		} else if(collIndex == 4){
-			value = c.getPhoneNr();
+			value = c.getPostCode();
 		} else if(collIndex == 5){
+			value = c.getPhoneNr();
+		} else if(collIndex == 6){
 			value = c.getEmail();
 		} 
 		return value;
@@ -48,16 +50,18 @@ public class CustomerTableModel extends AbstractTableModel{
 		String value = "??";
 		
 		if(collIndex == 0){
-			value = "Navn";
+			value = "ID";
 		} else if(collIndex == 1){
-			value = "Gade";
+			value = "Navn";
 		} else if(collIndex == 2){
-			value = "By";
+			value = "Gade";
 		} else if(collIndex == 3){
-			value = "Postnummer";
+			value = "By";
 		} else if(collIndex == 4){
-			value = "Tlf nr";
+			value = "Postnummer";
 		} else if(collIndex == 5){
+			value = "Tlf nr";
+		} else if(collIndex == 6){
 			value = "E-mail";
 		}
 		
