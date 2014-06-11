@@ -67,7 +67,7 @@ public class MainGUI extends JFrame{
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		JPanel Sale = new JPanel();
+		JPanel Sale = new SaleGUI();
 		tabbedPane.addTab("Salg", null, Sale, null);
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_S);
 		
