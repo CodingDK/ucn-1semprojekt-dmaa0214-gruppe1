@@ -1,4 +1,4 @@
-package uiLayer;
+package guiLayer;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
