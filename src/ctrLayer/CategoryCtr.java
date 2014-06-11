@@ -14,14 +14,14 @@ public class CategoryCtr {
 	
 	public CategoryCtr() {
 		cCont = CategoryCont.getInstance();
-		if (findCategory("U/K") == null) {
+		if (findCategory("Alle") == null) {
 			try {
-				createCategory("U/K");
+				createCategory("Alle");
 			} catch (CategoryExistException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ItemCont.getInstance(findCategory("U/K"));
+			ItemCont.getInstance(findCategory("Alle"));
 		}
 	}
 	
@@ -54,11 +54,11 @@ public class CategoryCtr {
 	 * @throws MainCategoryException 
 	 */
 	public void removeCategory(Category c) throws MainCategoryException {
-		if(c.getName() != findCategory("U/K").getName()){
+		if(c.getName() != findCategory("Alle").getName()){
 			ItemCont iContDel = ItemCont.getInstance(c);
 			ArrayList<Item> items = iContDel.getAll();
-			Category cat = findCategory("U/K");
-			ItemCont iContAll = ItemCont.getInstance(findCategory("U/K"));
+			Category cat = findCategory("Alle");
+			ItemCont iContAll = ItemCont.getInstance(findCategory("Alle"));
 			for (Item i : items) {
 				i.setCategory(cat);
 				iContAll.addItem(i);
