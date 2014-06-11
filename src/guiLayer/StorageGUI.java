@@ -1,4 +1,4 @@
-package uiLayer;
+package guiLayer;
 
 import javax.swing.JPanel;
 
