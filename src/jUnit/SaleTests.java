@@ -19,6 +19,7 @@ import ctrLayer.CustomerCtr;
 import ctrLayer.EmployeeCtr;
 import ctrLayer.ItemCtr;
 import ctrLayer.SaleCtr;
+import exceptionLayer.CategoryExistException;
 import exceptionLayer.NotEnoughItemsException;
 import exceptionLayer.SaleNotCreatedException;
 
@@ -39,8 +40,14 @@ public class SaleTests {
 		iCtr.createStorage("Test1");
 		iCtr.createStorage("Test2");
 		Storage s1 = iCtr.findStorage("Test1");
-		cCtr.createCategory("Søm");
-		cCtr.createCategory("Hammer");
+		try {
+			cCtr.createCategory("Søm");
+			cCtr.createCategory("Hammer");
+		} catch (CategoryExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		Category c1 = cCtr.findCategory("Søm");
 		
 		iCtr.createItem("S Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
@@ -61,8 +68,13 @@ public class SaleTests {
 		iCtr.createStorage("Test1");
 		iCtr.createStorage("Test2");
 		Storage s1 = iCtr.findStorage("Test1");
-		cCtr.createCategory("Søm");
-		cCtr.createCategory("Hammer");
+		try {
+			cCtr.createCategory("Søm");
+			cCtr.createCategory("Hammer");
+		} catch (CategoryExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Category c1 = cCtr.findCategory("Søm");
 		
 		iCtr.createItem("S Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
@@ -110,8 +122,13 @@ public class SaleTests {
 		iCtr.createStorage("Test1");
 		iCtr.createStorage("Test2");
 		Storage s1 = iCtr.findStorage("Test1");
-		cCtr.createCategory("Søm");
-		cCtr.createCategory("Hammer");
+		try {
+			cCtr.createCategory("Søm");
+			cCtr.createCategory("Hammer");
+		} catch (CategoryExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Category c1 = cCtr.findCategory("Søm");
 		
 		iCtr.createItem("Ss Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);

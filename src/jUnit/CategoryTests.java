@@ -9,13 +9,19 @@ import modelLayer.Category;
 import org.junit.Test;
 
 import ctrLayer.CategoryCtr;
+import exceptionLayer.CategoryExistException;
 
 public class CategoryTests {
 	
 	@Test
 	public void testCreateCategory() {
 		CategoryCtr cCtr = new CategoryCtr();
-		cCtr.createCategory("Cookies");
+		try {
+			cCtr.createCategory("Cookies");
+		} catch (CategoryExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Category c = cCtr.findCategory("Cookies");
 		assertNotEquals(c, null);
 	}
@@ -23,7 +29,12 @@ public class CategoryTests {
 	@Test
 	public void testUpdateCategory() {
 		CategoryCtr cCtr = new CategoryCtr();
-		cCtr.createCategory("Cookies");
+		try {
+			cCtr.createCategory("Cookies");
+		} catch (CategoryExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Category c = cCtr.findCategory("Cookies");
 		cCtr.updateCategory(c, "Sko");
 		assertEquals(c.getName(), "Sko");
@@ -40,7 +51,12 @@ public class CategoryTests {
 	@Test
 	public void testFindCategoryString() {
 		CategoryCtr cCtr = new CategoryCtr();
-		cCtr.createCategory("Cookie");
+		try {
+			cCtr.createCategory("Cookie");
+		} catch (CategoryExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Category c = cCtr.findCategory("Cookies");
 		assertThat(c, instanceOf(Category.class));
 	}

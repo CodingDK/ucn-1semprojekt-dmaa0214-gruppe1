@@ -7,6 +7,7 @@ import modelLayer.Item;
 import modelLayer.Storage;
 import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
+import exceptionLayer.CategoryExistException;
 
 public class ItemUI extends SuperUI {
 	private Category selectedCategory;
@@ -278,8 +279,13 @@ public class ItemUI extends SuperUI {
 		System.out.println(" *** Opret Kategori *** ");
 		String categoryName = requestString("Kategori navn", 1, null, false);
 		if (cCtr.findCategory(categoryName) == null) {
-			cCtr.createCategory(categoryName);
-			selectedCategory = cCtr.findCategory(categoryName);
+			try {
+				cCtr.createCategory(categoryName);
+				selectedCategory = cCtr.findCategory(categoryName);
+			} catch (CategoryExistException e) {
+				System.out.println(e.getMessage());
+			}
+			
 		} else {
 			System.out.println("Denne Kategori eksistere allerede");
 			if (confirm("Vil du markere denne til senere brug?(Oprettelse af ny vare)")) {

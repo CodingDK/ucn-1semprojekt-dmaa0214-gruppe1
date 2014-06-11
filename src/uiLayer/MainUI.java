@@ -13,6 +13,7 @@ import ctrLayer.CustomerCtr;
 import ctrLayer.EmployeeCtr;
 import ctrLayer.ItemCtr;
 import ctrLayer.SaleCtr;
+import exceptionLayer.CategoryExistException;
 import exceptionLayer.NotEnoughItemsException;
 import exceptionLayer.SaleNotCreatedException;
 
@@ -92,8 +93,13 @@ public class MainUI extends SuperUI {
 		iCtr.createStorage("Byggecenter");
 		Storage s1 = iCtr.findStorage("Trælast");
 		Storage s2 = iCtr.findStorage("Byggecenter");
-		cCtr.createCategory("Søm");
-		cCtr.createCategory("Hammer");
+		try {
+			cCtr.createCategory("Søm");
+			cCtr.createCategory("Hammer");
+		} catch (CategoryExistException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		Category c1 = cCtr.findCategory("Søm");
 		Category c2 = cCtr.findCategory("Hammer");
 		

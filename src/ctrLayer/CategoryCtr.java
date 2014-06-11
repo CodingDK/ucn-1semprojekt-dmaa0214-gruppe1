@@ -2,6 +2,7 @@ package ctrLayer;
 
 import java.util.ArrayList;
 
+import exceptionLayer.CategoryExistException;
 import modelLayer.Category;
 import modelLayer.CategoryCont;
 import modelLayer.Item;
@@ -13,7 +14,12 @@ public class CategoryCtr {
 	public CategoryCtr() {
 		cCont = CategoryCont.getInstance();
 		if (findCategory("U/K") == null) {
-			createCategory("U/K");
+			try {
+				createCategory("U/K");
+			} catch (CategoryExistException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			ItemCont.getInstance(findCategory("U/K"));
 		}
 	}
@@ -23,8 +29,12 @@ public class CategoryCtr {
 	 * 
 	 * @param name
 	 */
-	public void createCategory(String name) {
-		cCont.addCategory(new Category(name));
+	public void createCategory(String name) throws CategoryExistException{
+		if(cCont.findCategory(name) == null){
+			cCont.addCategory(new Category(name));
+		} else {
+			throw new CategoryExistException("Kategorien eksistere allerede");
+		}
 	}
 	
 	/**
