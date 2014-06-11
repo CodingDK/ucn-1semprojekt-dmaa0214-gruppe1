@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.BorderLayout;
 
+import javax.swing.Box;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
@@ -243,6 +244,24 @@ public class SaleGUI extends JPanel {
 	}
 	
 	public void makeAddItem(){
+		
+		JTextField txtItemNr = new JTextField(5);
+		JTextField txtAmount = new JTextField(5);
+
+		JPanel myPanel = new JPanel();
+		myPanel.add(new JLabel("Varenummer:"));
+		myPanel.add(txtItemNr);
+		myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+		myPanel.add(new JLabel("Antal:"));
+		myPanel.add(txtAmount);
+
+		int result = JOptionPane.showConfirmDialog(null, myPanel, 
+           "Tilføj vare", JOptionPane.OK_CANCEL_OPTION);
+		if (result == JOptionPane.OK_OPTION) {
+			System.out.println("varenummer: " + txtItemNr.getText());
+			System.out.println("antal: " + txtAmount.getText());
+		}
+		
 		//String postnr = JOptionPane.showInputDialog(this, "soeg efter kunder med postnummer:");
 	}
 }
