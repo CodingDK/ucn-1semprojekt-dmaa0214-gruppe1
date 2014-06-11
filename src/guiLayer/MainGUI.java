@@ -100,16 +100,16 @@ public class MainGUI extends JFrame{
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnFile = new JMenu("File");
+		JMenu mnFile = new JMenu("Fil");
 		menuBar.add(mnFile);
 		
-		JMenuItem mntmSave = new JMenuItem("Save");
+		JMenuItem mntmSave = new JMenuItem("Gem");
 		mnFile.add(mntmSave);
 		
-		JMenuItem mntmLoad = new JMenuItem("Load");
+		JMenuItem mntmLoad = new JMenuItem("Hent");
 		mnFile.add(mntmLoad);
 		
-		JMenuItem mntmInsertTestData = new JMenuItem("Insert test data");
+		JMenuItem mntmInsertTestData = new JMenuItem("Indsæt Test Data");
 		mntmInsertTestData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new Demo().runDemo();
@@ -120,7 +120,7 @@ public class MainGUI extends JFrame{
 		JSeparator separator = new JSeparator();
 		mnFile.add(separator);
 		
-		JMenuItem mntmLogin = new JMenuItem("Login");
+		JMenuItem mntmLogin = new JMenuItem("Administrator Login");
 		mnFile.add(mntmLogin);
 		
 		JSeparator separator_1 = new JSeparator();
@@ -129,10 +129,10 @@ public class MainGUI extends JFrame{
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mnFile.add(mntmExit);
 		
-		JMenu mnHelp = new JMenu("Help");
+		JMenu mnHelp = new JMenu("Hjælp");
 		menuBar.add(mnHelp);
 		
-		JMenuItem mntmHelp = new JMenuItem("Help");
+		JMenuItem mntmHelp = new JMenuItem("Hjælp");
 		mnHelp.add(mntmHelp);
 	}
 }
