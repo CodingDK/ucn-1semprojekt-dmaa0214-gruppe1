@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
+import exceptionLayer.CategoryExistException;
 
 public class ItemCtrTests {
 	
@@ -20,7 +21,12 @@ public class ItemCtrTests {
 		CategoryCtr cCtr = new CategoryCtr();
 		iCtr.createStorage("Test1");
 		Storage s1 = iCtr.findStorage("Test1");
-		cCtr.createCategory("Søm");
+		try {
+			cCtr.createCategory("Søm");
+		} catch (CategoryExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Category c1 = cCtr.findCategory("Søm");
 		
 		iCtr.createItem("S Flad", 200, 0, 1., 1., 1., 1, "1234", s1, 10, 1, c1);
@@ -38,8 +44,14 @@ public class ItemCtrTests {
 		iCtr.createStorage("Test2");
 		Storage s1 = iCtr.findStorage("Test1");
 		Storage s2 = iCtr.findStorage("Test2");
-		cCtr.createCategory("Søm");
-		cCtr.createCategory("Hammer");
+		try {
+			cCtr.createCategory("Søm");
+			cCtr.createCategory("Hammer");
+		} catch (CategoryExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		Category c1 = cCtr.findCategory("Søm");
 		Category c2 = cCtr.findCategory("Hammer");
 		
