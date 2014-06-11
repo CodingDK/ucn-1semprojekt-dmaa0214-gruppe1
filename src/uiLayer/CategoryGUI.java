@@ -106,7 +106,7 @@ public class CategoryGUI extends JPanel {
 		add(panel_1, gbc_panel_1);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "Opret Kategory", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
+		panel_3.setBorder(new TitledBorder(null, "Opret Kategori", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
 		panel_3.setBounds(0, 25, 250, 106);
 		panel_1.add(panel_3);
 		
@@ -161,10 +161,15 @@ public class CategoryGUI extends JPanel {
 			new RowSpec[] {
 				RowSpec.decode("30px"),}));
 		
-		JLabel lblName = new JLabel("Navn");
+		JLabel lblName = new JLabel("Kategori");
 		panel_4.add(lblName, "1, 1, fill, fill");
 		
 		txtName = new JTextField();
+		txtName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				createCategory();
+			}
+		});
 		panel_4.add(txtName, "2, 1, fill, fill");
 		txtName.setColumns(10);
 		panel_3.setLayout(gl_panel_3);
@@ -179,18 +184,20 @@ public class CategoryGUI extends JPanel {
 		CategoryCtr cCtr = new CategoryCtr();
 		try {
 			cCtr.createCategory(txtName.getText());
+			categories = cCtr.getAllCategories();
+			model.refresh(categories);
+			model.fireTableDataChanged();
+			lblState.setText(txtName.getText() + " er oprettet");
+			lblState.startBlinking(true, false);
+			Clear();
 		} catch (CategoryExistException e) {
 			lblState.setText(e.getMessage());
-			lblState.startBlinking(true, false);
+			lblState.startBlinking(true, true);
 		}
 		
 	}
 	
 	protected void Clear() {
 		txtName.setText("");
-		
-		categories.clear();
-		model.refresh(categories);
-		model.fireTableDataChanged();
 	}
 }
