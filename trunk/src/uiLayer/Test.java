@@ -17,6 +17,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.TitledBorder;
 
 import ctrLayer.CustomerCtr;
+import extensions.CustomerTableModel;
 import personLayer.Customer;
 
 import java.awt.BorderLayout;

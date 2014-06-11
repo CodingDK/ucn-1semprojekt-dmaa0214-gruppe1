@@ -41,6 +41,8 @@ import com.jgoodies.forms.factories.FormFactory;
 
 import ctrLayer.CategoryCtr;
 import exceptionLayer.CategoryExistException;
+import extensions.CategoryTableModel;
+import extensions.JBlinkLabel;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -48,6 +50,7 @@ import modelLayer.Category;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.SwingConstants;
 
 public class CategoryGUI extends JPanel {
