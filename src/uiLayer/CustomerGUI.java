@@ -4,8 +4,10 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -25,11 +27,19 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
+import java.awt.Font;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import com.jgoodies.forms.factories.FormFactory;
 
 public class CustomerGUI extends JPanel {
 	private JTable table;
@@ -47,7 +57,7 @@ public class CustomerGUI extends JPanel {
 	 */
 	public CustomerGUI() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{406, 238, 0};
+		gridBagLayout.columnWidths = new int[]{562, 250, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
@@ -65,6 +75,30 @@ public class CustomerGUI extends JPanel {
 		c = new ArrayList<Customer>();
 		model = new CustomerTableModel(c);
 		table = new JTable(model);
+		table.addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseReleased(MouseEvent e) {
+		        int r = table.rowAtPoint(e.getPoint());
+		        if (r >= 0 && r < table.getRowCount()) {
+		            table.setRowSelectionInterval(r, r);
+		        } else {
+		            table.clearSelection();
+		        }
+
+		        int rowindex = table.getSelectedRow();
+		        if (rowindex < 0)
+		            return;
+		        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+		        	JPopupMenu popupMenu = new JPopupMenu();
+		    		//addPopup(tablePanel, popupMenu);
+		    		JMenuItem mntmDelete = new JMenuItem("Slet");
+		    		JMenuItem mntmUpdate = new JMenuItem("Ret Kundeoplysninger");
+		    		popupMenu.add(mntmDelete);
+		    		popupMenu.add(mntmUpdate);
+		    		popupMenu.show(e.getComponent(), e.getX(), e.getY());
+		        }
+		    }
+		});
 		tablePanel.add(new JScrollPane(table), BorderLayout.CENTER);
 		
 		JPanel panel_4 = new JPanel();
@@ -73,6 +107,7 @@ public class CustomerGUI extends JPanel {
 		tablePanel.add(panel_4, BorderLayout.NORTH);
 		
 		JLabel lblTest = new JLabel("Kunder");
+		lblTest.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel_4.add(lblTest);
 		
 		JPanel searchPanel_1 = new JPanel();
@@ -85,30 +120,74 @@ public class CustomerGUI extends JPanel {
 		
 		JPanel searchGroupPanel = new JPanel();
 		searchGroupPanel.setBorder(new TitledBorder(null, "Find kunde", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
-		searchGroupPanel.setBounds(10, 22, 222, 144);
+		searchGroupPanel.setBounds(10, 22, 240, 162);
 		searchPanel_1.add(searchGroupPanel);
 		
 		JPanel searchGridPanel = new JPanel();
+		
+		JPanel panel = new JPanel();
 		GroupLayout gl_searchGroupPanel = new GroupLayout(searchGroupPanel);
 		gl_searchGroupPanel.setHorizontalGroup(
 			gl_searchGroupPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(searchGridPanel, GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+				.addComponent(searchGridPanel, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+				.addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
 		);
 		gl_searchGroupPanel.setVerticalGroup(
 			gl_searchGroupPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(searchGridPanel, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+				.addGroup(gl_searchGroupPanel.createSequentialGroup()
+					.addComponent(searchGridPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
-		searchGridPanel.setLayout(new GridLayout(0, 2, 0, 0));
+		panel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.GROWING_BUTTON_COLSPEC,
+				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
+				FormFactory.GROWING_BUTTON_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.LINE_GAP_ROWSPEC,
+				RowSpec.decode("28px"),}));
 		
-		JLabel lblCompany = new JLabel("Virksomhedsnavn");
-		searchGridPanel.add(lblCompany);
+		JButton btnClear = new JButton("Nulstil");
+		panel.add(btnClear, "1, 2, fill, top");
+		
+		JButton btnFind = new JButton("Søg");
+		panel.add(btnFind, "3, 2, fill, top");
+		btnFind.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				findCustomer();
+			}
+		});
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				clearSearch();
+			}
+		});
+		searchGridPanel.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("100px"),
+				ColumnSpec.decode("110px:grow"),},
+			new RowSpec[] {
+				RowSpec.decode("28px"),
+				RowSpec.decode("28px"),
+				RowSpec.decode("28px"),}));
+		
+		JLabel lblCompany = new JLabel("Virksomhed");
+		searchGridPanel.add(lblCompany, "1, 1, fill, fill");
 		
 		txtCompany = new JTextField();
-		searchGridPanel.add(txtCompany);
+		txtCompany.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if(KeyEvent.VK_ENTER == arg0.getKeyCode()){
+					findCustomer();
+				}
+			}
+		});
+		searchGridPanel.add(txtCompany, "2, 1, fill, fill");
 		txtCompany.setColumns(10);
 		
 		JLabel lblName = new JLabel("Navn");
-		searchGridPanel.add(lblName);
+		searchGridPanel.add(lblName, "1, 2, fill, fill");
 		
 		txtName = new JTextField();
 		txtName.addKeyListener(new KeyAdapter() {
@@ -120,31 +199,45 @@ public class CustomerGUI extends JPanel {
 			}
 		});
 		txtName.setColumns(10);
-		searchGridPanel.add(txtName);
+		searchGridPanel.add(txtName, "2, 2, fill, fill");
 		
 		JLabel lblTlf = new JLabel("Tlf");
-		searchGridPanel.add(lblTlf);
+		searchGridPanel.add(lblTlf, "1, 3, fill, fill");
 		
 		txtTlf = new JTextField();
 		txtTlf.setColumns(10);
-		searchGridPanel.add(txtTlf);
-		
-		JButton btnClear = new JButton("Nulstil");
-		searchGridPanel.add(btnClear);
-		btnClear.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				clearSearch();
+		txtTlf.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if(KeyEvent.VK_ENTER == arg0.getKeyCode()){
+					findCustomer();
+				}
 			}
 		});
-		
-		JButton btnFind = new JButton("Søg");
-		btnFind.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				findCustomer();
-			}
-		});	
-		searchGridPanel.add(btnFind);
+		searchGridPanel.add(txtTlf, "2, 3, fill, fill");
 		searchGroupPanel.setLayout(gl_searchGroupPanel);	
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "Opret Kunde", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(10, 184, 234, 58);
+		searchPanel_1.add(panel_1);
+		
+		JButton btnOpretKunde = new JButton("Opret Kunde");
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(45)
+					.addComponent(btnOpretKunde, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+					.addGap(43))
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addComponent(btnOpretKunde)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panel_1.setLayout(gl_panel_1);
 		//this.getRootPane().setDefaultButton(btnFind);
 	}
 	
@@ -170,8 +263,15 @@ public class CustomerGUI extends JPanel {
 		} else if(name != null && !name.trim().isEmpty()){
 			c = cCtr.searchCustomer(name);
 		} else if(company != null && !company.trim().isEmpty()){
-			c = cCtr.searchCustomer(company);
+			c = cCtr.searchBusiness(company);
 		} 
+		
+		if(c != null && !c.isEmpty()){
+			txtCompany.setText("");
+			txtName.setText("");
+			txtTlf.setText("");
+		}
+		
 	    model.refresh(c);
 	    model.fireTableDataChanged();
 	}
