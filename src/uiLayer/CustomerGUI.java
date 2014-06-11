@@ -35,11 +35,16 @@ import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.Font;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import com.jgoodies.forms.factories.FormFactory;
+
+import extensions.CustomerTableModel;
 
 public class CustomerGUI extends JPanel {
 	private JTable table;

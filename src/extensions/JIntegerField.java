@@ -1,4 +1,4 @@
-package uiLayer;
+package extensions;
 
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
