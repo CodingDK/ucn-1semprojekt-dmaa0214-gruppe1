@@ -259,7 +259,7 @@ public class CategoryGUI extends JPanel {
 	}
 	
 	protected void updateCategory(int id, String name) {
-		if(!name.equals("U/K")){
+		if(!name.equals("Alle")){
 			JDialog update = new UpdateCategory(null, id, name);
 			CategoryCtr cCtr = new CategoryCtr();
 			model.refresh(cCtr.getAllCategories());
