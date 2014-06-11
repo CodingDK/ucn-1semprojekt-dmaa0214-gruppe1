@@ -1,19 +1,21 @@
-package uiLayer;
+package extensions;
 
 import java.util.ArrayList;
-import javax.swing.table.AbstractTableModel;
-import personLayer.Customer;
 
-public class CustomerTableModel extends AbstractTableModel{
+import javax.swing.table.AbstractTableModel;
+
+import modelLayer.Storage;
+
+public class StorageTableModel extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Customer> customers;
+	private ArrayList<Storage> storages;
 	
-	public CustomerTableModel(ArrayList<Customer> cust){
-		this.customers = cust;
+	public StorageTableModel(ArrayList<Storage> stor){
+		this.storages = stor;
 	}
 
-	public void refresh(ArrayList<Customer> c) {
-		this.customers = c;
+	public void refresh(ArrayList<Storage> s) {
+		this.storages = s;
 	}
 
 	public int getColumnCount() {
@@ -21,24 +23,24 @@ public class CustomerTableModel extends AbstractTableModel{
 	}
 
 	public int getRowCount() {
-		return customers.size();
+		return storages.size();
 	}
 
 	public Object getValueAt(int rowIndex, int collIndex) {
-		Customer c  = customers.get(rowIndex);
+		Storage s  = storages.get(rowIndex);
 		Object value = null;
 		if(collIndex == 0){
-			value = c.getName();
+			value = s.getId();
 		} else if(collIndex == 1){
-			value = c.getStreet();
+			value = s.getName();
 		} else if(collIndex == 2){
-			value = c.getCity();
+			value = "";
 		} else if(collIndex == 3){
-			value = c.getPostCode();
+			value = "";
 		} else if(collIndex == 4){
-			value = c.getPhoneNr();
+			value = "";
 		} else if(collIndex == 5){
-			value = c.getEmail();
+			value = "";
 		} 
 		return value;
 	}	
@@ -48,17 +50,17 @@ public class CustomerTableModel extends AbstractTableModel{
 		String value = "??";
 		
 		if(collIndex == 0){
-			value = "Navn";
+			value = "ID";
 		} else if(collIndex == 1){
-			value = "Gade";
+			value = "Navn";
 		} else if(collIndex == 2){
-			value = "By";
+			value = "Gade";
 		} else if(collIndex == 3){
-			value = "Postnummer";
+			value = "By";
 		} else if(collIndex == 4){
-			value = "Tlf nr";
+			value = "Postnummer";
 		} else if(collIndex == 5){
-			value = "E-mail";
+			value = "Tlf nr";
 		}
 		
 		return value;
