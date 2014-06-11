@@ -21,6 +21,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.TitledBorder;
 
 import ctrLayer.CustomerCtr;
+import ctrLayer.Demo;
 import personLayer.Customer;
 
 import java.awt.BorderLayout;
@@ -80,6 +81,7 @@ public class CustomerGUI extends JPanel {
 		c = new ArrayList<Customer>();
 		model = new CustomerTableModel(c);
 		table = new JTable(model);
+		table.getColumnModel().getColumn(0).setMaxWidth(25);
 		table.addMouseListener(new MouseAdapter() {
 		    @Override
 		    public void mouseReleased(MouseEvent e) {
@@ -90,14 +92,24 @@ public class CustomerGUI extends JPanel {
 		            table.clearSelection();
 		        }
 
-		        int rowindex = table.getSelectedRow();
+		        final int rowindex = table.getSelectedRow();
 		        if (rowindex < 0)
 		            return;
 		        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
 		        	JPopupMenu popupMenu = new JPopupMenu();
 		    		//addPopup(tablePanel, popupMenu);
 		    		JMenuItem mntmDelete = new JMenuItem("Slet");
+		    		mntmDelete.addActionListener(new ActionListener() {
+		    			public void actionPerformed(ActionEvent arg0) {
+		    				int id = (Integer) table.getValueAt(rowindex, 0);
+		    			}
+		    		});
 		    		JMenuItem mntmUpdate = new JMenuItem("Ret Kundeoplysninger");
+		    		mntmUpdate.addActionListener(new ActionListener() {
+		    			public void actionPerformed(ActionEvent arg0) {
+		    				int id = (Integer) table.getValueAt(rowindex, 0);
+		    			}
+		    		});
 		    		popupMenu.add(mntmDelete);
 		    		popupMenu.add(mntmUpdate);
 		    		popupMenu.show(e.getComponent(), e.getX(), e.getY());
