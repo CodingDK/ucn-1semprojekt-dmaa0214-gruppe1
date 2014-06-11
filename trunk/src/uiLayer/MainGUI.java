@@ -1,27 +1,29 @@
 package uiLayer;
 
 import java.awt.EventQueue;
-import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
-import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JPanel;
-import javax.swing.UIManager.LookAndFeelInfo;
 
-import personLayer.Private;
 import ctrLayer.CustomerCtr;
+import ctrLayer.Demo;
 
 import javax.swing.JMenuBar;
-import com.sun.java.swing.plaf.nimbus.*;
+import javax.swing.event.MenuKeyListener;
+import javax.swing.event.MenuKeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -39,9 +41,6 @@ public class MainGUI extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CustomerCtr cCtr = new CustomerCtr();
-					cCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
-					cCtr.createBusinessCustomer("Kis", "72691867", "Sofiendalsvej 60", "kbha@ucn.dk", "Aalborg", "9000", "UCN A/S", "33556063");
 					MainGUI window = new MainGUI();
 					window.setVisible(true);
 				} catch (Exception e) {
@@ -84,51 +83,56 @@ public class MainGUI extends JFrame{
 		tabbedPane.addTab("Ordre", null, Order, null);
 		tabbedPane.setMnemonicAt(3, KeyEvent.VK_O);
 		
-			JPanel Login = new JPanel();
-			tabbedPane.addTab("Login", null, Login, null);
-			tabbedPane.setMnemonicAt(4, KeyEvent.VK_O);
+		JPanel Login = new JPanel();
+		tabbedPane.addTab("Login", null, Login, null);
+		tabbedPane.setMnemonicAt(4, KeyEvent.VK_L);
+	
+		JPanel Employee = new JPanel();
+		tabbedPane.addTab("Medarbejder", null, Employee, null);
+		tabbedPane.setMnemonicAt(5, KeyEvent.VK_M);
 		
-			JPanel Employee = new JPanel();
-			tabbedPane.addTab("Medarbejder", null, Employee, null);
-			tabbedPane.setMnemonicAt(5, KeyEvent.VK_M);
-			
-			JPanel Category = new JPanel();
-			tabbedPane.addTab("Kategori", null, Category, null);
-			
-			JPanel Storage = new JPanel();
-			tabbedPane.addTab("Lager", null, Storage, null);
-			
-			JMenuBar menuBar = new JMenuBar();
-			setJMenuBar(menuBar);
-			
-			JMenu mnFile = new JMenu("File");
-			menuBar.add(mnFile);
-			
-			JMenuItem mntmSave = new JMenuItem("Save");
-			mnFile.add(mntmSave);
-			
-			JMenuItem mntmLoad = new JMenuItem("Load");
-			mnFile.add(mntmLoad);
-			
-			JMenuItem mntmInsertTestData = new JMenuItem("Insert test data");
-			mnFile.add(mntmInsertTestData);
-			
-			JSeparator separator = new JSeparator();
-			mnFile.add(separator);
-			
-			JMenuItem mntmLogin = new JMenuItem("Login");
-			mnFile.add(mntmLogin);
-			
-			JSeparator separator_1 = new JSeparator();
-			mnFile.add(separator_1);
-			
-			JMenuItem mntmExit = new JMenuItem("Exit");
-			mnFile.add(mntmExit);
-			
-			JMenu mnHelp = new JMenu("Help");
-			menuBar.add(mnHelp);
-			
-			JMenuItem mntmHelp = new JMenuItem("Help");
-			mnHelp.add(mntmHelp);
+		JPanel Category = new CategoryGUI();
+		tabbedPane.addTab("Kategori", null, Category, null);
+		
+		JPanel Storage = new JPanel();
+		tabbedPane.addTab("Lager", null, Storage, null);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+		
+		JMenuItem mntmSave = new JMenuItem("Save");
+		mnFile.add(mntmSave);
+		
+		JMenuItem mntmLoad = new JMenuItem("Load");
+		mnFile.add(mntmLoad);
+		
+		JMenuItem mntmInsertTestData = new JMenuItem("Insert test data");
+		mntmInsertTestData.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new Demo().runDemo();
+			}
+		});
+		mnFile.add(mntmInsertTestData);
+		
+		JSeparator separator = new JSeparator();
+		mnFile.add(separator);
+		
+		JMenuItem mntmLogin = new JMenuItem("Login");
+		mnFile.add(mntmLogin);
+		
+		JSeparator separator_1 = new JSeparator();
+		mnFile.add(separator_1);
+		
+		JMenuItem mntmExit = new JMenuItem("Exit");
+		mnFile.add(mntmExit);
+		
+		JMenu mnHelp = new JMenu("Help");
+		menuBar.add(mnHelp);
+		
+		JMenuItem mntmHelp = new JMenuItem("Help");
+		mnHelp.add(mntmHelp);
 	}
 }
