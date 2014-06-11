@@ -42,7 +42,7 @@ public class CategoryTableModel extends AbstractTableModel{
 		if(collIndex == 0){
 			value = "ID";
 		} else if(collIndex == 1){
-			value = "Navn";
+			value = "Kategori";
 		}		
 		return value;
 	}

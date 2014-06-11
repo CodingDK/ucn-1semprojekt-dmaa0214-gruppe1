@@ -19,16 +19,16 @@ public class JBlinkLabel extends JLabel {
 	}
 	
 	public void startBlinking(boolean flag, boolean isError) {
-		this.blinkingOn = flag;
 		this.state = isError;
+		this.blinkingOn = flag;
 	}
 	
 	private void setBlinking(boolean flag){
 		this.blinkingOn = flag;
 	}
 	
-	public boolean getBlinking(boolean flag) {
-		return this.blinkingOn;
+	private boolean getState(){
+		return this.state;
 	}
 	
 	private class TimerListener implements ActionListener {
@@ -41,14 +41,14 @@ public class JBlinkLabel extends JLabel {
 		public TimerListener(JBlinkLabel bl) {
 			this.bl = bl;
 			fg = Color.BLACK;
-			if(state){
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			if(bl.getState()){
 				bg = Color.RED;
 			}else{
 				bg = Color.GREEN;
 			}
-		}
-		
-		public void actionPerformed(ActionEvent e) {
 			if (bl.blinkingOn) {	
 				interval++;
 				if (isForeground) {
