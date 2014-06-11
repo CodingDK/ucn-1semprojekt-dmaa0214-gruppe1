@@ -21,6 +21,7 @@ import personLayer.Private;
 import ctrLayer.CustomerCtr;
 
 import javax.swing.JMenuBar;
+import com.sun.java.swing.plaf.nimbus.*;
 
 public class MainGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -31,7 +32,7 @@ public class MainGUI extends JFrame{
 	 */
 	public static void main(String[] args) {
 		try {
-			UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
@@ -90,6 +91,12 @@ public class MainGUI extends JFrame{
 			JPanel Employee = new JPanel();
 			tabbedPane.addTab("Medarbejder", null, Employee, null);
 			tabbedPane.setMnemonicAt(5, KeyEvent.VK_M);
+			
+			JPanel Category = new JPanel();
+			tabbedPane.addTab("Kategori", null, Category, null);
+			
+			JPanel Storage = new JPanel();
+			tabbedPane.addTab("Lager", null, Storage, null);
 			
 			JMenuBar menuBar = new JMenuBar();
 			setJMenuBar(menuBar);
