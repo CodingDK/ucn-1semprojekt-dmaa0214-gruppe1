@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 import java.awt.FlowLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
@@ -23,6 +25,8 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 
+import ctrLayer.ItemCtr;
+
 import extensions.StorageTableModel;
 
 import javax.swing.JButton;
@@ -30,6 +34,9 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 import modelLayer.Storage;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class StorageGUI extends JPanel {
 	private JTextField txtStreet;
@@ -155,10 +162,42 @@ public class StorageGUI extends JPanel {
 				RowSpec.decode("27px"),}));
 		
 		JButton btnNulstil = new JButton("Nulstil");
+		btnNulstil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clearTypein();
+			}
+		});
 		panel_6.add(btnNulstil, "1, 2, fill, top");
 		
 		JButton btnOpret = new JButton("Opret");
+		btnOpret.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createStorage();
+			}
+		});
 		panel_6.add(btnOpret, "2, 2, fill, top");
 
+		
+	}
+
+	
+	
+	protected void clearTypein() {
+		txtStorageName.setText("");
+		txtStreet.setText("");
+		txtPostalcode.setText("");
+		txtCity.setText("");
+		txtTlf.setText("");	
+	}
+
+
+
+	private void createStorage() {
+		ItemCtr iCtr = new ItemCtr();
+		String name = txtStorageName.getText();
+		if(name != null && name.trim().isEmpty() ){
+			iCtr.createStorage(name);
+		}
+		
 	}
 }

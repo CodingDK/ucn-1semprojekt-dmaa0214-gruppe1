@@ -94,7 +94,7 @@ public class MainGUI extends JFrame{
 		JPanel Category = new CategoryGUI();
 		tabbedPane.addTab("Kategori", null, Category, null);
 		
-		JPanel Storage = new JPanel();
+		JPanel Storage = new StorageGUI();
 		tabbedPane.addTab("Lager", null, Storage, null);
 		
 		JMenuBar menuBar = new JMenuBar();
