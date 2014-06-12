@@ -99,7 +99,7 @@ public class CategoryGUI extends JPanel {
 		    @Override
 		    public void mouseReleased(MouseEvent e) {
 		    	System.out.println(e.getButton());
-		    	if(e.getButton() == MouseEvent.BUTTON3 || e.isControlDown()){
+		    	if(e.getButton() == 3 || e.isControlDown()){
 			        int r = table.rowAtPoint(e.getPoint());
 			        if (r >= 0 && r < table.getRowCount()) {
 			            table.setRowSelectionInterval(r, r);
