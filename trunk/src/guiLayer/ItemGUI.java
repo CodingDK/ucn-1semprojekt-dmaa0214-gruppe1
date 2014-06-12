@@ -39,6 +39,7 @@ import ctrLayer.ItemCtr;
 import extensions.ItemTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.SystemColor;
 
 public class ItemGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -46,11 +47,14 @@ public class ItemGUI extends JPanel {
 	public JTextField txtName;
 	private ArrayList<Item> items;
 	private ItemTableModel model;
+	private MainGUI parent;
 
 	/**
 	 * Create the panel.
+	 * @param mainGUI 
 	 */
-	public ItemGUI() {
+	public ItemGUI(MainGUI mainGUI) {
+		this.parent = mainGUI;
 		items = new ArrayList<Item>();
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 250, 0};
@@ -83,6 +87,12 @@ public class ItemGUI extends JPanel {
 		JLabel lblItems = new JLabel("Varer");
 		lblItems.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel_2.add(lblItems);
+		
+		JLabel label = new JLabel("?");
+		label.setToolTipText("Her ses de søgte varer");
+		label.setFont(new Font("SansSerif", Font.BOLD, 12));
+		label.setForeground(SystemColor.activeCaption);
+		panel_2.add(label);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -139,9 +149,11 @@ public class ItemGUI extends JPanel {
 		panel_4.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblName = new JLabel("Vare");
+		lblName.setToolTipText("Her indtastes det ønskede vare navn");
 		panel_4.add(lblName);
 		
 		txtName = new JTextField();
+		txtName.setToolTipText("Her indtastes det ønskede vare navn");
 		txtName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				searchItem();
@@ -174,6 +186,11 @@ public class ItemGUI extends JPanel {
 		);
 		
 		JButton btnOpretVare = new JButton("Opret Vare");
+		btnOpretVare.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				parent.createItem();
+			}
+		});
 		panel_7.add(btnOpretVare);
 		panel_6.setLayout(gl_panel_6);
 		

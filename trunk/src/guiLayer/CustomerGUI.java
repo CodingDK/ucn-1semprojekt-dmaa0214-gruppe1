@@ -55,7 +55,7 @@ public class CustomerGUI extends JPanel {
 	private ArrayList<Customer> c;
 	private CustomerTableModel model;
 	private JTextField txtCompany;
-	private JTextField txtName;
+	public JTextField txtName;
 	private JTextField txtTlf;
 	
 	/**
