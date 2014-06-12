@@ -260,7 +260,7 @@ public class CategoryGUI extends JPanel {
 	
 	protected void updateCategory(int id, String name) {
 		if(!name.equals("Alle")){
-			JDialog update = new UpdateCategory(null, id, name);
+			JDialog update = new UpdateCategoryDialog(null, id, name);
 			CategoryCtr cCtr = new CategoryCtr();
 			model.refresh(cCtr.getAllCategories());
 			model.fireTableDataChanged();

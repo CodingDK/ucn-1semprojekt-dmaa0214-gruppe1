@@ -19,6 +19,15 @@ import java.awt.event.ActionEvent;
 public class MainGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private boolean admin = false;
+	private JMenuItem mntmLogin;
+	private JTabbedPane tabbedPane;
+	private JPanel Sale;
+	private JPanel Item;
+	private JPanel Customer;
+	private JPanel Order;
+	private JPanel Employee;
+	private JPanel Storage;
+	private JPanel Category;
 	
 	/**
 	 * Launch the application.
@@ -56,33 +65,28 @@ public class MainGUI extends JFrame{
 		this.setMinimumSize(new Dimension(900, 515));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		JPanel Sale = new SaleGUI();
+		Sale = new SaleGUI();
+		Item = new JPanel();
+		Customer = new CustomerGUI();
+		Order = new JPanel();
+		Employee = new JPanel();
+		Category = new CategoryGUI();
+		Storage = new StorageGUI();
+		
 		tabbedPane.addTab("Salg", null, Sale, null);
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_S);
-		
-		JPanel Item = new JPanel();
 		tabbedPane.addTab("Varer", null, Item, null);
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_V);
-		
-		JPanel Customer = new CustomerGUI();
 		tabbedPane.addTab("Kunde", null, Customer, null);
 		tabbedPane.setMnemonicAt(2, KeyEvent.VK_K);
-		
-		JPanel Order = new JPanel();
 		tabbedPane.addTab("Ordre", null, Order, null);
 		tabbedPane.setMnemonicAt(3, KeyEvent.VK_O);
-	
-		JPanel Employee = new JPanel();
 		tabbedPane.addTab("Medarbejder", null, Employee, null);
 		tabbedPane.setMnemonicAt(4, KeyEvent.VK_M);
-		
-		JPanel Category = new CategoryGUI();
-		tabbedPane.addTab("Kategori", null, Category, null);
-		
-		JPanel Storage = new StorageGUI();
+		//tabbedPane.addTab("Kategori", null, Category, null);
 		tabbedPane.addTab("Lager", null, Storage, null);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -108,8 +112,14 @@ public class MainGUI extends JFrame{
 		JSeparator separator = new JSeparator();
 		mnFile.add(separator);
 		
-		JMenuItem mntmLogin = new JMenuItem("Administrator Login");
+		mntmLogin = new JMenuItem("Administrator Login");
+		mntmLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				login();
+			}
+		});
 		mnFile.add(mntmLogin);
+		
 		
 		JSeparator separator_1 = new JSeparator();
 		mnFile.add(separator_1);
@@ -122,5 +132,38 @@ public class MainGUI extends JFrame{
 		
 		JMenuItem mntmHelp = new JMenuItem("Hjælp");
 		mnHelp.add(mntmHelp);
+	}
+
+	protected void login() {
+		if(!admin){
+			LoginDialog dialog = new LoginDialog(null, this);
+			if(admin){
+				grantAccess();
+			}
+		}else if(admin){
+			revokeAccess();
+		}
+	}
+	
+	protected void grantAccess(){
+		mntmLogin.setText("Logud");
+		tabbedPane.insertTab("Kategori", null, Category, "Kategori", 5);
+		revalidate();
+	}
+	
+	protected void revokeAccess(){
+		mntmLogin.setText("Administrator Login");
+		tabbedPane.remove(Category);
+		admin = false;
+		revalidate();
+	}
+	
+	public void setAdmin(boolean flag){
+		this.admin = flag;
+	}
+	
+	protected void reDraw(){
+		revalidate();
+		repaint();
 	}
 }
