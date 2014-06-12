@@ -287,4 +287,9 @@ public class ItemCtr {
 		}
 		return storages;
 	}
+
+	public ArrayList<Storage> getAllStorage() {
+		StorageCont sCont = StorageCont.getInstance();
+		return sCont.getAll();
+	}
 }
