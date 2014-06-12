@@ -98,7 +98,7 @@ public class CategoryGUI extends JPanel {
 		table.addMouseListener(new MouseAdapter() {
 		    @Override
 		    public void mouseReleased(MouseEvent e) {
-		    	if(e.getButton() == 3 || e.isControlDown()){
+		    	if(e.getButton() == 3){
 		    		System.out.println(e.getButton());
 			        int r = table.rowAtPoint(e.getPoint());
 			        if (r >= 0 && r < table.getRowCount()) {
@@ -110,7 +110,7 @@ public class CategoryGUI extends JPanel {
 			        final int rowindex = table.getSelectedRow();
 			        if (rowindex < 0)
 			            return;
-			        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+			        if (e.getComponent() instanceof JTable ) {
 			        	JPopupMenu popupMenu = new JPopupMenu();
 			    		JMenuItem mntmDelete = new JMenuItem("Slet");
 			    		mntmDelete.addActionListener(new ActionListener() {
