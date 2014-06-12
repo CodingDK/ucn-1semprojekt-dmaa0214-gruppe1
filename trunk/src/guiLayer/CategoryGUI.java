@@ -12,6 +12,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
 import java.awt.Font;
 import java.awt.FlowLayout;
@@ -96,38 +97,40 @@ public class CategoryGUI extends JPanel {
 		table = new JTable(model);
 		table.addMouseListener(new MouseAdapter() {
 		    @Override
-		    public void mouseReleased(MouseEvent e) {
-		        int r = table.rowAtPoint(e.getPoint());
-		        if (r >= 0 && r < table.getRowCount()) {
-		            table.setRowSelectionInterval(r, r);
-		        } else {
-		            table.clearSelection();
-		        }
-
-		        final int rowindex = table.getSelectedRow();
-		        if (rowindex < 0)
-		            return;
-		        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
-		        	JPopupMenu popupMenu = new JPopupMenu();
-		    		JMenuItem mntmDelete = new JMenuItem("Slet");
-		    		mntmDelete.addActionListener(new ActionListener() {
-		    			public void actionPerformed(ActionEvent arg0) {
-		    				String name = (String) table.getValueAt(rowindex, 1);
-		    				removeCategory(name);
-		    			}
-		    		});
-		    		JMenuItem mntmUpdate = new JMenuItem("Ret Kategori");
-		    		mntmUpdate.addActionListener(new ActionListener() {
-		    			public void actionPerformed(ActionEvent arg0) {
-		    				int id = (Integer) table.getValueAt(rowindex, 0);
-		    				String name = (String) table.getValueAt(rowindex, 1);
-		    				updateCategory(id, name);
-		    			}
-		    		});
-		    		popupMenu.add(mntmDelete);
-		    		popupMenu.add(mntmUpdate);
-		    		popupMenu.show(e.getComponent(), e.getX(), e.getY());
-		        }
+		    public void mouseClicked(MouseEvent e) {
+		    	if(SwingUtilities.isRightMouseButton(e)){
+			        int r = table.rowAtPoint(e.getPoint());
+			        if (r >= 0 && r < table.getRowCount()) {
+			            table.setRowSelectionInterval(r, r);
+			        } else {
+			            table.clearSelection();
+			        }
+	
+			        final int rowindex = table.getSelectedRow();
+			        if (rowindex < 0)
+			            return;
+			        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+			        	JPopupMenu popupMenu = new JPopupMenu();
+			    		JMenuItem mntmDelete = new JMenuItem("Slet");
+			    		mntmDelete.addActionListener(new ActionListener() {
+			    			public void actionPerformed(ActionEvent arg0) {
+			    				String name = (String) table.getValueAt(rowindex, 1);
+			    				removeCategory(name);
+			    			}
+			    		});
+			    		JMenuItem mntmUpdate = new JMenuItem("Ret Kategori");
+			    		mntmUpdate.addActionListener(new ActionListener() {
+			    			public void actionPerformed(ActionEvent arg0) {
+			    				int id = (Integer) table.getValueAt(rowindex, 0);
+			    				String name = (String) table.getValueAt(rowindex, 1);
+			    				updateCategory(id, name);
+			    			}
+			    		});
+			    		popupMenu.add(mntmDelete);
+			    		popupMenu.add(mntmUpdate);
+			    		popupMenu.show(e.getComponent(), e.getX(), e.getY());
+			        }
+		    	}
 		    }
 		});
 		table.getColumnModel().getColumn(0).setMaxWidth(25);
