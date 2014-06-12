@@ -28,7 +28,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class UpdateCategory extends JDialog {
+public class UpdateCategoryDialog extends JDialog {
 	
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCategory;
@@ -37,13 +37,8 @@ public class UpdateCategory extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public UpdateCategory(Frame parent, int id, String name) {
+	public UpdateCategoryDialog(Frame parent, int id, String name) {
 		super(parent, name, true);
-	    if (parent != null) {
-	      Dimension parentSize = parent.getSize(); 
-	      Point p = parent.getLocation(); 
-	      setLocation(p.x + parentSize.width / 4, p.y + parentSize.height / 4);
-	    }
 		this.name = name;
 		setBounds(100, 100, 286, 152);
 		getContentPane().setLayout(new BorderLayout());
