@@ -1,30 +1,45 @@
 package guiLayer;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.GridLayout;
+
 import javax.swing.JTextField;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.util.ArrayList;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+
+import ctrLayer.CategoryCtr;
+import ctrLayer.ItemCtr;
+import extensions.JDoubleField;
+import extensions.JIntegerField;
+
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 
+import modelLayer.Category;
+import modelLayer.Storage;
+
 public class CreateItemGUI extends JPanel {
-	private JTextField txtAmount;
-	private JTextField txtSalePrice;
-	private JTextField txtPurchasePrice;
-	private JTextField txtBulk;
-	private JTextField txtBulkPrice;
+	private JIntegerField txtAmount;
+	private JDoubleField txtSalePrice;
+	private JDoubleField txtPurchasePrice;
+	private JIntegerField txtBulk;
+	private JDoubleField txtBulkPrice;
 	private JTextField txtLocation;
-	private JTextField txtMax;
-	private JTextField txtMin;
+	private JIntegerField txtMax;
+	private JIntegerField txtMin;
 	public JTextField txtName;
 	
 	/**
@@ -79,35 +94,35 @@ public class CreateItemGUI extends JPanel {
 		JLabel lblAmount = new JLabel("Mængde");
 		panel_2.add(lblAmount, "2, 2, fill, fill");
 		
-		txtAmount = new JTextField();
+		txtAmount = new JIntegerField();
 		txtAmount.setColumns(10);
 		panel_2.add(txtAmount, "4, 2, fill, fill");
 		
 		JLabel lblSalePrice = new JLabel("Salgs Pris");
 		panel_2.add(lblSalePrice, "2, 3, fill, fill");
 		
-		txtSalePrice = new JTextField();
+		txtSalePrice = new JDoubleField();
 		txtSalePrice.setColumns(10);
 		panel_2.add(txtSalePrice, "4, 3, fill, fill");
 		
 		JLabel lblPurchasePrice = new JLabel("Indkøbs Pris");
 		panel_2.add(lblPurchasePrice, "2, 4, fill, fill");
 		
-		txtPurchasePrice = new JTextField();
+		txtPurchasePrice = new JDoubleField();
 		txtPurchasePrice.setColumns(10);
 		panel_2.add(txtPurchasePrice, "4, 4, fill, fill");
 		
 		JLabel lblBulk = new JLabel("Bulk");
 		panel_2.add(lblBulk, "2, 5, fill, fill");
 		
-		txtBulk = new JTextField();
+		txtBulk = new JIntegerField();
 		txtBulk.setColumns(10);
 		panel_2.add(txtBulk, "4, 5, fill, fill");
 		
 		JLabel lblBulkPrice = new JLabel("Bulk Pris");
 		panel_2.add(lblBulkPrice, "2, 6, fill, fill");
 		
-		txtBulkPrice = new JTextField();
+		txtBulkPrice = new JDoubleField();
 		txtBulkPrice.setColumns(10);
 		panel_2.add(txtBulkPrice, "4, 6, fill, fill");
 		
@@ -121,28 +136,34 @@ public class CreateItemGUI extends JPanel {
 		JLabel lblStorage = new JLabel("Lager");
 		panel_2.add(lblStorage, "2, 8, left, fill");
 		
-		JComboBox cmbStorage = new JComboBox();
+		JComboBox<Storage> cmbStorage = new JComboBox<Storage>();
+		ItemCtr iCtr = new ItemCtr();
+		ArrayList<Storage> stors = iCtr.getAllStorage();
+		cmbStorage.setModel(new DefaultComboBoxModel(stors.toArray()));
 		panel_2.add(cmbStorage, "4, 8, fill, default");
 		
 		JLabel lblMax = new JLabel("Max Lagerbeholdning");
 		panel_2.add(lblMax, "2, 9, fill, fill");
 		
-		txtMax = new JTextField();
+		txtMax = new JIntegerField();
 		txtMax.setColumns(10);
 		panel_2.add(txtMax, "4, 9, fill, fill");
 		
 		JLabel lblMin = new JLabel("Min Lagerbeholdning");
 		panel_2.add(lblMin, "2, 10, fill, fill");
 		
-		txtMin = new JTextField();
+		txtMin = new JIntegerField();
 		txtMin.setColumns(10);
 		panel_2.add(txtMin, "4, 10, fill, fill");
 		
 		JLabel lblCategory = new JLabel("Kategori");
 		panel_2.add(lblCategory, "2, 11, left, fill");
 		
-		JComboBox comboBox = new JComboBox();
-		panel_2.add(comboBox, "4, 11, fill, default");
+		JComboBox<Category> cmbCategory = new JComboBox<Category>();
+		CategoryCtr cCtr = new CategoryCtr();
+		ArrayList<Category> cats = cCtr.getAllCategories();
+		cmbCategory.setModel(new DefaultComboBoxModel(cats.toArray()));
+		panel_2.add(cmbCategory, "4, 11, fill, default");
 		
 		JPanel panel_4 = new JPanel();
 		panel_2.add(panel_4, "2, 12, 3, 1, fill, fill");
