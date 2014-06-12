@@ -102,6 +102,7 @@ public class CustomerGUI extends JPanel {
 		    		mntmDelete.addActionListener(new ActionListener() {
 		    			public void actionPerformed(ActionEvent arg0) {
 		    				int id = (Integer) table.getValueAt(rowindex, 0);
+		    				removePerson(id);
 		    			}
 		    		});
 		    		JMenuItem mntmUpdate = new JMenuItem("Ret Kundeoplysninger");
@@ -291,5 +292,25 @@ public class CustomerGUI extends JPanel {
 		
 	    model.refresh(c);
 	    model.fireTableDataChanged();
+	}
+	
+	private void removePerson(int id) {
+		CustomerCtr cCtr = new CustomerCtr();
+		cCtr.removeCustomer(id);
+		
+		boolean removed = false;
+		int i = 0;
+		while(i < c.size() && !removed){
+			Customer customer = c.get(i);
+			if(customer.getId() == id){
+				c.remove(customer);
+				removed = true;
+			}
+			i++;
+		}
+		
+		model.refresh(c);
+		model.fireTableDataChanged();
+		
 	}
 }
