@@ -1,18 +1,27 @@
 package guiLayer;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
+
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JPanel;
+
 import ctrLayer.Demo;
+
 import javax.swing.JMenuBar;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -22,12 +31,12 @@ public class MainGUI extends JFrame{
 	private JMenuItem mntmLogin;
 	private JTabbedPane tabbedPane;
 	private JPanel Sale;
-	private JPanel Item;
+	private ItemGUI Item;
 	private JPanel Customer;
 	private JPanel Order;
 	private JPanel Employee;
 	private JPanel Storage;
-	private JPanel Category;
+	private CategoryGUI Category;
 	
 	/**
 	 * Launch the application.
@@ -69,7 +78,7 @@ public class MainGUI extends JFrame{
 		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		Sale = new SaleGUI();
-		Item = new JPanel();
+		Item = new ItemGUI();
 		Customer = new CustomerGUI();
 		Order = new JPanel();
 		Employee = new JPanel();
@@ -133,6 +142,17 @@ public class MainGUI extends JFrame{
 		
 		JMenuItem mntmHelp = new JMenuItem("Hjælp");
 		mnHelp.add(mntmHelp);
+		
+		tabbedPane.addChangeListener(new ChangeListener(){
+			public void stateChanged(ChangeEvent e){
+				Component comp = tabbedPane.getSelectedComponent();
+				if (comp.equals(Item)){
+					Item.txtName.requestFocusInWindow();
+				} else if(comp.equals(Category)){
+					Category.txtName.requestFocusInWindow();
+				}
+			}
+		});
 	}
 
 	protected void login() {

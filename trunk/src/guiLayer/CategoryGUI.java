@@ -54,7 +54,7 @@ import javax.swing.SwingConstants;
 public class CategoryGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Category> categories;
-	private JTextField txtName;
+	public JTextField txtName;
 	private CategoryTableModel model;
 	private JTable table;
 	private JBlinkLabel lblState;
