@@ -88,6 +88,7 @@ public class MainGUI extends JFrame{
 		tabbedPane.setMnemonicAt(4, KeyEvent.VK_M);
 		//tabbedPane.addTab("Kategori", null, Category, null);
 		tabbedPane.addTab("Lager", null, Storage, null);
+		tabbedPane.insertTab("Kategori", null, Category, "Kategori", 5);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -147,7 +148,7 @@ public class MainGUI extends JFrame{
 	
 	protected void grantAccess(){
 		mntmLogin.setText("Logud");
-		tabbedPane.insertTab("Kategori", null, Category, "Kategori", 5);
+		
 		revalidate();
 	}
 	
