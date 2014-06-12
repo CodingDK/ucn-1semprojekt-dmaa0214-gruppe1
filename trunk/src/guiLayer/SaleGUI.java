@@ -8,10 +8,12 @@ import java.awt.Insets;
 import java.awt.BorderLayout;
 
 import javax.swing.Box;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import java.awt.Font;
 import java.awt.FlowLayout;
@@ -32,12 +34,15 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 
+import ctrLayer.CategoryCtr;
+import ctrLayer.SaleCtr;
 import extensions.SaleItemTableModel;
 
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import modelLayer.PartSale;
+import modelLayer.Sale;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -49,12 +54,17 @@ public class SaleGUI extends JPanel {
 	private JLabel txtTotal;
 	private JTable table;
 	private ArrayList<PartSale> partSales;
+	private SaleItemTableModel model;
+	private SaleCtr saleCtr;
 
 	/**
 	 * Create the panel.
 	 */
 	public SaleGUI() {
 		partSales = new ArrayList<PartSale>();
+		saleCtr = new SaleCtr();
+		saleCtr.createSale();
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{360, 250, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
@@ -144,7 +154,7 @@ public class SaleGUI extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
 		
-		SaleItemTableModel model = new SaleItemTableModel(partSales);
+		model = new SaleItemTableModel(partSales);
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
 		
@@ -235,6 +245,11 @@ public class SaleGUI extends JPanel {
 		panel_9.setLayout(new GridLayout(3, 0, 0, 12));
 		
 		JButton button = new JButton("Nulstil");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cancelSale();
+			}
+		});
 		panel_9.add(button);
 		
 		JButton button_1 = new JButton("Parker");
@@ -245,25 +260,16 @@ public class SaleGUI extends JPanel {
 
 	}
 	
+	private void cancelSale() {
+		saleCtr.cancelSale();
+		
+	}
+
 	public void makeAddItem(){
+		JDialog addDialog = new SaleAddItem(null, saleCtr);
 		
-		JTextField txtItemNr = new JTextField(5);
-		JTextField txtAmount = new JTextField(5);
-
-		JPanel myPanel = new JPanel();
-		myPanel.add(new JLabel("Varenummer:"));
-		myPanel.add(txtItemNr);
-		myPanel.add(Box.createHorizontalStrut(15)); // a spacer
-		myPanel.add(new JLabel("Antal:"));
-		myPanel.add(txtAmount);
-
-		int result = JOptionPane.showConfirmDialog(null, myPanel, 
-           "Tilføj vare", JOptionPane.OK_CANCEL_OPTION);
-		if (result == JOptionPane.OK_OPTION) {
-			System.out.println("varenummer: " + txtItemNr.getText());
-			System.out.println("antal: " + txtAmount.getText());
-		}
+		model.refresh(saleCtr.getSale().getPartSales());
+		model.fireTableDataChanged();
 		
-		//String postnr = JOptionPane.showInputDialog(this, "soeg efter kunder med postnummer:");
 	}
 }
