@@ -56,6 +56,7 @@ public class SaleGUI extends JPanel {
 	private ArrayList<PartSale> partSales;
 	private SaleItemTableModel model;
 	private SaleCtr saleCtr;
+	public JButton btnAddItem;
 
 	/**
 	 * Create the panel.
@@ -103,7 +104,7 @@ public class SaleGUI extends JPanel {
 		JPanel panel_6 = new JPanel();
 		panel_3.add(panel_6, "1, 1, left, fill");
 		
-		JButton btnAddItem = new JButton("Tilføj Vare");
+		btnAddItem = new JButton("Tilføj Vare");
 		btnAddItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				makeAddItem();

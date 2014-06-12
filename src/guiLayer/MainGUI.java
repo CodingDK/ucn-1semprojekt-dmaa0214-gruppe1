@@ -22,17 +22,18 @@ import javax.swing.JMenuBar;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import extensions.CloseButtonTabbedPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 public class MainGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private boolean admin = false;
 	private JMenuItem mntmLogin;
-	private JTabbedPane tabbedPane;
-	private JPanel Sale;
+	private CloseButtonTabbedPane tabbedPane;
+	private SaleGUI Sale;
 	private ItemGUI Item;
-	private JPanel Customer;
+	private CustomerGUI Customer;
 	private JPanel Order;
 	private JPanel Employee;
 	private JPanel Storage;
@@ -74,29 +75,29 @@ public class MainGUI extends JFrame{
 		this.setMinimumSize(new Dimension(900, 515));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new CloseButtonTabbedPane();
 		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		Sale = new SaleGUI();
-		Item = new ItemGUI();
+		Item = new ItemGUI(this);
 		Customer = new CustomerGUI();
 		Order = new JPanel();
 		Employee = new JPanel();
 		Category = new CategoryGUI();
 		Storage = new StorageGUI();
 		
-		tabbedPane.addTab("Salg", null, Sale, null);
+		tabbedPane.insertTab("Salg", null, Sale, null, 0);
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_S);
-		tabbedPane.addTab("Varer", null, Item, null);
+		tabbedPane.insertTab("Varer", null, Item, null, 1);
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_V);
-		tabbedPane.addTab("Kunde", null, Customer, null);
+		tabbedPane.insertTab("Kunde", null, Customer, null, 2);
 		tabbedPane.setMnemonicAt(2, KeyEvent.VK_K);
-		tabbedPane.addTab("Ordre", null, Order, null);
+		tabbedPane.insertTab("Ordre", null, Order, null, 3);
 		tabbedPane.setMnemonicAt(3, KeyEvent.VK_O);
-		tabbedPane.addTab("Medarbejder", null, Employee, null);
+		tabbedPane.insertTab("Medarbejder", null, Employee, null, 4);
 		tabbedPane.setMnemonicAt(4, KeyEvent.VK_M);
 		//tabbedPane.addTab("Kategori", null, Category, null);
-		tabbedPane.addTab("Lager", null, Storage, null);
+		tabbedPane.insertTab("Lager", null, Storage, null, 5);
 		tabbedPane.insertTab("Kategori", null, Category, "Kategori", 5);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -150,6 +151,10 @@ public class MainGUI extends JFrame{
 					Item.txtName.requestFocusInWindow();
 				} else if(comp.equals(Category)){
 					Category.txtName.requestFocusInWindow();
+				} else if(comp.equals(Sale)){
+					Sale.btnAddItem.requestFocusInWindow();
+				} else if(comp.equals(Customer)){
+					Customer.txtName.requestFocusInWindow();
 				}
 			}
 		});
@@ -186,5 +191,12 @@ public class MainGUI extends JFrame{
 	protected void reDraw(){
 		revalidate();
 		repaint();
+	}
+	
+	public void createItem(){
+		CreateItemGUI item = new CreateItemGUI();
+		tabbedPane.addTab("Opret Vare", null, item, null);
+		tabbedPane.setSelectedComponent(item);
+		item.txtName.requestFocusInWindow();
 	}
 }
