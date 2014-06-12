@@ -97,8 +97,8 @@ public class CategoryGUI extends JPanel {
 		table = new JTable(model);
 		table.addMouseListener(new MouseAdapter() {
 		    @Override
-		    public void mouseClicked(MouseEvent e) {
-		    	if(SwingUtilities.isRightMouseButton(e)){
+		    public void mouseReleased(MouseEvent e) {
+		    	if(SwingUtilities.isRightMouseButton(e) || e.isControlDown()){
 			        int r = table.rowAtPoint(e.getPoint());
 			        if (r >= 0 && r < table.getRowCount()) {
 			            table.setRowSelectionInterval(r, r);
@@ -129,7 +129,7 @@ public class CategoryGUI extends JPanel {
 			    		popupMenu.add(mntmDelete);
 			    		popupMenu.add(mntmUpdate);
 			    		popupMenu.show(e.getComponent(), e.getX(), e.getY());
-			        }
+			       }
 		    	}
 		    }
 		});
