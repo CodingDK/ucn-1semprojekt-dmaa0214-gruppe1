@@ -30,7 +30,8 @@ import extensions.CloseButtonTabbedPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
-public class MainGUI extends JFrame implements KeyListener{
+import java.awt.event.KeyAdapter;
+public class MainGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
 	public boolean admin = false;
 	private JMenuItem mntmLogin;
@@ -68,6 +69,14 @@ public class MainGUI extends JFrame implements KeyListener{
 	 * Create the application.
 	 */
 	public MainGUI() {
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_E, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+				System.out.println(arg0.getKeyCode());
+				System.out.println(k.getKeyCode());
+			}
+		});
 		initialize();
 	}
 	
@@ -91,7 +100,7 @@ public class MainGUI extends JFrame implements KeyListener{
 		Storage = new StorageGUI();
 		
 		tabbedPane.insertTab("Salg", null, Sale, null, 0);
-		tabbedPane.setMnemonicAt(0, KeyEvent.VK_S);
+		//tabbedPane.setMnemonicAt(0, KeyEvent.VK_S);
 		
 		tabbedPane.insertTab("Varer", null, Item, null, 1);
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_V);
@@ -170,6 +179,8 @@ public class MainGUI extends JFrame implements KeyListener{
 					Sale.btnAddItem.requestFocusInWindow();
 				} else if(comp.equals(Customer)){
 					Customer.txtName.requestFocusInWindow();
+				} else if(comp.equals(Customer)){
+					Employee.txtName.requestFocusInWindow();
 				}
 			}
 		});
@@ -236,23 +247,5 @@ public class MainGUI extends JFrame implements KeyListener{
 		tabbedPane.insertTab("Salg", null, Sale, null, 0);
 		tabbedPane.setSelectedComponent(Sale);
 		reDraw();
-	}
-
-	public void keyPressed(KeyEvent arg0) {
-		KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.META_DOWN_MASK);
-		System.out.println(arg0.getKeyCode());
-		if(arg0.equals(k)){
-			tabbedPane.setSelectedComponent(Sale);
-		}
-	}
-
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 }
