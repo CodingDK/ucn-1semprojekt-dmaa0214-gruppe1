@@ -139,8 +139,8 @@ public class MainGUI extends JFrame{
 		mnFile.add(separator);
 	
 		mntmLogin = new JMenuItem("Administrator Login");
-		mntmLogin.setMnemonic(KeyEvent.VK_A);
-		mntmLogin.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); //Event.CTRL_MASK));
+		mntmLogin.setMnemonic(KeyEvent.VK_L);
+		mntmLogin.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); //Event.CTRL_MASK));
 		mntmLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				login();
