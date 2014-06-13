@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.Box;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
@@ -41,6 +42,7 @@ import extensions.SaleItemTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import modelLayer.Item;
 import modelLayer.PartSale;
 import modelLayer.Sale;
 
@@ -57,11 +59,13 @@ public class SaleGUI extends JPanel {
 	private SaleItemTableModel model;
 	private SaleCtr saleCtr;
 	public JButton btnAddItem;
+	private MainGUI mainGUI;
 
 	/**
 	 * Create the panel.
 	 */
-	public SaleGUI() {
+	public SaleGUI(MainGUI mainGUI) {
+		this.mainGUI = mainGUI;
 		partSales = new ArrayList<PartSale>();
 		saleCtr = new SaleCtr();
 		saleCtr.createSale();
@@ -94,15 +98,10 @@ public class SaleGUI extends JPanel {
 		
 		JPanel panel_3 = new JPanel();
 		panel.add(panel_3, BorderLayout.SOUTH);
-		panel_3.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("92px"),
-				ColumnSpec.decode("20px"),
-				ColumnSpec.decode("244px"),},
-			new RowSpec[] {
-				RowSpec.decode("91px:grow"),}));
+		panel_3.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_6 = new JPanel();
-		panel_3.add(panel_6, "1, 1, left, fill");
+		panel_3.add(panel_6, BorderLayout.WEST);
 		
 		btnAddItem = new JButton("Tilføj Vare");
 		btnAddItem.addActionListener(new ActionListener() {
@@ -112,15 +111,19 @@ public class SaleGUI extends JPanel {
 		});
 		panel_6.add(btnAddItem);
 		
+		JPanel panel_10 = new JPanel();
+		panel_3.add(panel_10, BorderLayout.EAST);
+		
 		JPanel panel_5 = new JPanel();
-		panel_3.add(panel_5, "3, 1, right, top");
-		panel_5.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("88px"),
-				ColumnSpec.decode("default:grow"),},
+		panel_10.add(panel_5);
+		FormLayout fl_panel_5 = new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("50px"),
+				ColumnSpec.decode("80px"),},
 			new RowSpec[] {
 				RowSpec.decode("30px"),
 				RowSpec.decode("30px"),
-				RowSpec.decode("30px"),}));
+				RowSpec.decode("30px"),});
+		panel_5.setLayout(fl_panel_5);
 		
 		JLabel lblSubtotal = new JLabel("Subtotal: ");
 		lblSubtotal.setHorizontalAlignment(SwingConstants.LEFT);
@@ -128,7 +131,7 @@ public class SaleGUI extends JPanel {
 		
 		txtSubtotal = new JLabel();
 		txtSubtotal.setHorizontalAlignment(SwingConstants.RIGHT);
-		txtSubtotal.setText("100 ,-");
+		txtSubtotal.setText("0 ,-");
 		lblSubtotal.setLabelFor(txtSubtotal);
 		panel_5.add(txtSubtotal, "2, 1, fill, fill");
 		
@@ -257,20 +260,62 @@ public class SaleGUI extends JPanel {
 		panel_9.add(button_1);
 		
 		JButton button_2 = new JButton("Udfør");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FinishSale();
+			}
+		});
 		panel_9.add(button_2);
 
 	}
 	
-	private void cancelSale() {
-		saleCtr.cancelSale();
-		//asd
+	private void FinishSale() {
+		JFrame frame = new JFrame();
+		String[] options = new String[2];
+		options[0] = new String("Nulstil");
+		options[1] = new String("Annuller");
+		int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Er du sikker på du vil nulstille salget?","Nulstil Salg", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
+		if(choice == 1){ // annuller
+			
+			System.out.println(choice);
+		} else { //nulstil
+			
+		}
 	}
 
-	public void makeAddItem(){
+	private void cancelSale() {
+		JFrame frame = new JFrame();
+		String[] options = new String[2];
+		options[0] = new String("Nulstil");
+		options[1] = new String("Annuller");
+		int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Er du sikker på du vil nulstille salget?","Nulstil Salg", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
+		System.out.println(choice);
+		if(choice == 0){
+			
+			saleCtr.cancelSale();
+			mainGUI.cancelSale();
+		}
+	}
+
+	private void makeAddItem(){
 		JDialog addDialog = new SaleAddItem(null, saleCtr);
 		
-		model.refresh(saleCtr.getSale().getPartSales());
+		partSales = saleCtr.getSale().getPartSales();
+		model.refresh(partSales);
 		model.fireTableDataChanged();
-		
+		updatePrices();
+	}
+	
+	private void updatePrices(){
+		double subtotal = 0;
+		double moms = 0;
+		for(PartSale ps : partSales){
+			Item i = ps.getItem();
+			subtotal += i.getSalePrice()*ps.getAmount();
+		}
+		moms = subtotal*0.25;
+		txtSubtotal.setText(subtotal + " ,-");
+		txtMoms.setText(moms + " ,-");
+		txtTotal.setText(subtotal+moms + " ,-");
 	}
 }
