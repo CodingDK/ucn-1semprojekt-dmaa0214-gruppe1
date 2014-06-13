@@ -263,7 +263,7 @@ public class SaleGUI extends JPanel {
 	
 	private void cancelSale() {
 		saleCtr.cancelSale();
-		
+		//asd
 	}
 
 	public void makeAddItem(){
