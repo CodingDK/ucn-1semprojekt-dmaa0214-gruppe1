@@ -104,7 +104,6 @@ public class MainGUI extends JFrame implements KeyListener{
 		//tabbedPane.addTab("Kategori", null, Category, null);
 		tabbedPane.insertTab("Lager", null, Storage, null, 5);
 		tabbedPane.insertTab("Kategori", null, Category, "Kategori", 5);
-		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -240,7 +239,10 @@ public class MainGUI extends JFrame implements KeyListener{
 	}
 
 	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+		KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
+		if(KeyEvent.KEY_PRESSED == k.getKeyCode()){
+			tabbedPane.setSelectedComponent(Sale);
+		}
 	}
 
 	public void keyReleased(KeyEvent arg0) {
