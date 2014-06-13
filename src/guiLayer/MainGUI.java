@@ -30,7 +30,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 public class MainGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
-	private boolean admin = false;
+	public boolean admin = false;
 	private JMenuItem mntmLogin;
 	private CloseButtonTabbedPane tabbedPane;
 	private SaleGUI Sale;
@@ -84,7 +84,7 @@ public class MainGUI extends JFrame{
 		Item = new ItemGUI(this);
 		Customer = new CustomerGUI(this);
 		Order = new JPanel();
-		Employee = new EmployeeGUI();
+		Employee = new EmployeeGUI(this);
 		Category = new CategoryGUI();
 		Storage = new StorageGUI();
 		
