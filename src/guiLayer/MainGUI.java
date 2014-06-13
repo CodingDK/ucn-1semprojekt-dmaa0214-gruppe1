@@ -128,6 +128,8 @@ public class MainGUI extends JFrame{
 		JSeparator separator = new JSeparator();
 		mnFile.add(separator);
 		
+		mntmLogin.setMnemonic(KeyEvent.VK_A);
+		mntmLogin.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, Event.CTRL_MASK));
 		mntmLogin = new JMenuItem("Administrator Login");
 		mntmLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
