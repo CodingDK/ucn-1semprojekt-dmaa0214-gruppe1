@@ -179,7 +179,7 @@ public class MainGUI extends JFrame{
 					Sale.btnAddItem.requestFocusInWindow();
 				} else if(comp.equals(Customer)){
 					Customer.txtName.requestFocusInWindow();
-				} else if(comp.equals(Customer)){
+				} else if(comp.equals(Employee)){
 					Employee.txtName.requestFocusInWindow();
 				}
 			}
