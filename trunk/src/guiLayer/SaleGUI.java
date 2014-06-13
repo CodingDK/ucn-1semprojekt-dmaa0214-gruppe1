@@ -312,6 +312,13 @@ public class SaleGUI extends JPanel {
 
 	}
 	
+	public void setCustomer(Customer c){
+		if(c != null){
+			saleCtr.getSale().setCustomer(c);
+			updateCustomer();
+		}
+	}
+	
 	private void updateCustomer(){
 		Sale sale = saleCtr.getSale();
 		Customer cus = sale.getCustomer();
