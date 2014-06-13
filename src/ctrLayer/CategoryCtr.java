@@ -66,7 +66,7 @@ public class CategoryCtr {
 			ItemCont.removeInstance(c);
 			cCont.removeCategory(c);
 		}else{
-			throw new MainCategoryException("Hovede kategorien kan ikke slettes");
+			throw new MainCategoryException("Hovedkategorien kan ikke slettes");
 		}
 	}
 	

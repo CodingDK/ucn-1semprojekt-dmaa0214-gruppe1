@@ -2,6 +2,7 @@ package guiLayer;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Event;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -9,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
 import java.awt.BorderLayout;
@@ -82,7 +84,7 @@ public class MainGUI extends JFrame{
 		Item = new ItemGUI(this);
 		Customer = new CustomerGUI(this);
 		Order = new JPanel();
-		Employee = new JPanel();
+		Employee = new EmployeeGUI();
 		Category = new CategoryGUI();
 		Storage = new StorageGUI();
 		
@@ -113,6 +115,8 @@ public class MainGUI extends JFrame{
 		mnFile.add(mntmLoad);
 		
 		JMenuItem mntmInsertTestData = new JMenuItem("Indsæt Test Data");
+		mntmInsertTestData.setMnemonic(KeyEvent.VK_D);
+		mntmInsertTestData.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, Event.CTRL_MASK));
 		mntmInsertTestData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new Demo().runDemo();
@@ -136,6 +140,13 @@ public class MainGUI extends JFrame{
 		mnFile.add(separator_1);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.setMnemonic(KeyEvent.VK_E);
+		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, Event.CTRL_MASK));
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		mnFile.add(mntmExit);
 		
 		JMenu mnHelp = new JMenu("Hjælp");

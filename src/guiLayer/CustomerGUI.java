@@ -243,6 +243,10 @@ public class CustomerGUI extends JPanel {
 		searchPanel_1.add(panel_1);
 		
 		JPanel panel_2 = new JPanel();
+		btnOpretKunde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.TRAILING)
