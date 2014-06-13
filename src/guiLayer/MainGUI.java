@@ -78,7 +78,7 @@ public class MainGUI extends JFrame{
 		tabbedPane = new CloseButtonTabbedPane();
 		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		Sale = new SaleGUI();
+		Sale = new SaleGUI(this);
 		Item = new ItemGUI(this);
 		Customer = new CustomerGUI(this);
 		Order = new JPanel();
@@ -212,5 +212,13 @@ public class MainGUI extends JFrame{
 		tabbedPane.addTab("Opret Erhvervs Kunde", item);
 		tabbedPane.setSelectedComponent(item);
 		item.txtName.requestFocusInWindow();		
+	}
+	
+	public void cancelSale(){
+		tabbedPane.remove(Sale);
+		Sale = new SaleGUI(this);
+		tabbedPane.insertTab("Salg", null, Sale, null, 0);
+		tabbedPane.setSelectedComponent(Sale);
+		reDraw();
 	}
 }
