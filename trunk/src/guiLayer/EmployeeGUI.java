@@ -135,6 +135,11 @@ public class EmployeeGUI extends JPanel {
 				RowSpec.decode("29px"),}));
 		
 		JButton btnClear = new JButton("Nulstil");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clear();
+			}
+		});
 		panel_5.add(btnClear, "1, 2, fill, top");
 		JButton btnFind = new JButton("Søg");
 		btnFind.addActionListener(new ActionListener() {
@@ -226,5 +231,12 @@ public class EmployeeGUI extends JPanel {
 		} else if(!admin){
 			panel_6.setVisible(false);
 		}
+	}
+	
+	private void clear(){
+		txtName.setText("");
+		txtEmpNr.setText("");
+		employees.clear();
+		model.fireTableDataChanged();
 	}
 }
