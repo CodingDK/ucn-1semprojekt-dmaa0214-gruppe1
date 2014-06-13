@@ -37,7 +37,7 @@ public class MainGUI extends JFrame{
 	private ItemGUI Item;
 	private CustomerGUI Customer;
 	private JPanel Order;
-	private JPanel Employee;
+	private EmployeeGUI Employee;
 	private JPanel Storage;
 	private CategoryGUI Category;
 	
@@ -90,6 +90,7 @@ public class MainGUI extends JFrame{
 		
 		tabbedPane.insertTab("Salg", null, Sale, null, 0);
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_S);
+		
 		tabbedPane.insertTab("Varer", null, Item, null, 1);
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_V);
 		tabbedPane.insertTab("Kunde", null, Customer, null, 2);
@@ -184,15 +185,16 @@ public class MainGUI extends JFrame{
 	
 	protected void grantAccess(){
 		mntmLogin.setText("Logud");
-		
-		revalidate();
+		Employee.setAdmin(true);
+		reDraw();
 	}
 	
 	protected void revokeAccess(){
 		mntmLogin.setText("Administrator Login");
-		tabbedPane.remove(Category);
+		//tabbedPane.remove(Category);
+		Employee.setAdmin(false);
 		admin = false;
-		revalidate();
+		reDraw();
 	}
 	
 	public void setAdmin(boolean flag){
