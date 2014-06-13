@@ -83,7 +83,7 @@ public class CustomerGUI extends JPanel {
 		c = new ArrayList<Customer>();
 		model = new CustomerTableModel(c);
 		table = new JTable(model);
-		table.getColumnModel().getColumn(0).setMaxWidth(25);
+		table.getColumnModel().getColumn(0).setMaxWidth(50);
 		table.addMouseListener(new MouseAdapter() {
 		    @Override
 		    public void mouseReleased(MouseEvent e) {
