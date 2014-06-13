@@ -241,7 +241,7 @@ public class MainGUI extends JFrame{
 		item.txtName.requestFocusInWindow();		
 	}
 	
-	public void cancelSale(){
+	public void resetSale(){
 		tabbedPane.remove(Sale);
 		Sale = new SaleGUI(this);
 		tabbedPane.insertTab("Salg", null, Sale, null, 0);
