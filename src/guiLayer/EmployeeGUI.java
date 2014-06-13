@@ -51,11 +51,13 @@ public class EmployeeGUI extends JPanel {
 	private JTextField txtName;
 	private JTextField txtEmpNr;
 	private EmployeeTableModel model;
-
+	private MainGUI parent;
+	
 	/**
 	 * Create the panel.
 	 */
-	public EmployeeGUI() {
+	public EmployeeGUI(MainGUI parent) {
+		this.parent = parent;
 		employees = new ArrayList<Employee>();
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {562, 250, 0};
@@ -169,6 +171,7 @@ public class EmployeeGUI extends JPanel {
 		panel_6.setBounds(10, 185, 240, 58);
 		panel.add(panel_6);
 		
+		
 		JButton btnOpretMedarbejder = new JButton("Opret Medarbejder");
 		btnOpretMedarbejder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -191,6 +194,10 @@ public class EmployeeGUI extends JPanel {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel_6.setLayout(gl_panel_6);
+		
+		if(!parent.admin){
+			panel_6.setVisible(false);
+		}
 
 	}
 	
