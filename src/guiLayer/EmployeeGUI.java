@@ -197,6 +197,8 @@ public class EmployeeGUI extends JPanel {
 		
 		if(!parent.admin){
 			panel_6.setVisible(false);
+		} else{
+			panel_6.setVisible(true);
 		}
 
 	}
