@@ -104,7 +104,7 @@ public class ItemGUI extends JPanel {
 		add(panel, gbc_panel);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "S\u00F8g Vare", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_3.setBorder(new TitledBorder(null, "Søg Vare", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_3.setBounds(6, 26, 238, 99);
 		panel.add(panel_3);
 		
@@ -114,22 +114,28 @@ public class ItemGUI extends JPanel {
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-				.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+				.addGroup(gl_panel_3.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 214, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+							.addGap(6))))
 		);
 		gl_panel_3.setVerticalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
 					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+					.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
 		);
 		panel_5.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.GROWING_BUTTON_COLSPEC,
-				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 				FormFactory.GROWING_BUTTON_COLSPEC,},
 			new RowSpec[] {
-				FormFactory.LINE_GAP_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("28px"),}));
 		
 		JButton btnNewButton = new JButton("Nulstil");
@@ -146,7 +152,7 @@ public class ItemGUI extends JPanel {
 				searchItem();
 			}
 		});
-		panel_5.add(btnSg, "3, 2, fill, top");
+		panel_5.add(btnSg, "2, 2, fill, top");
 		panel_4.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblName = new JLabel("Vare");
