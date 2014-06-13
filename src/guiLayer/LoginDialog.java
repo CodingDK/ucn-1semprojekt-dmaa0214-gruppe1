@@ -32,6 +32,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import extensions.JBlinkLabel;
 
 import javax.swing.SwingConstants;
+import java.awt.event.KeyAdapter;
 
 public class LoginDialog extends JDialog {
 	

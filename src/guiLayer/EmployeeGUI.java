@@ -18,6 +18,8 @@ import javax.swing.SwingConstants;
 
 import personLayer.Employee;
 import extensions.EmployeeTableModel;
+import extensions.JBlinkLabel;
+import extensions.JIntegerField;
 
 import java.awt.FlowLayout;
 import java.util.ArrayList;
@@ -48,11 +50,13 @@ import java.awt.event.ActionEvent;
 public class EmployeeGUI extends JPanel {
 	private JTable table;
 	private ArrayList<Employee> employees;
+	private ArrayList<Employee> employees2;
 	public JTextField txtName;
 	private JTextField txtEmpNr;
 	private EmployeeTableModel model;
 	private MainGUI parent;
 	private JPanel panel_6;
+	private JBlinkLabel errLabel;
 	
 	/**
 	 * Create the panel.
@@ -60,6 +64,7 @@ public class EmployeeGUI extends JPanel {
 	public EmployeeGUI(MainGUI parent) {
 		this.parent = parent;
 		employees = new ArrayList<Employee>();
+		employees2 = new ArrayList<Employee>();
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {562, 250, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
@@ -103,7 +108,7 @@ public class EmployeeGUI extends JPanel {
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Find medarbejder", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_3.setBounds(10, 22, 240, 162);
+		panel_3.setBounds(10, 22, 240, 125);
 		panel.add(panel_3);
 		
 		JPanel panel_4 = new JPanel();
@@ -115,17 +120,17 @@ public class EmployeeGUI extends JPanel {
 				.addGroup(gl_panel_3.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-						.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE))
+						.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_panel_3.setVerticalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(42, Short.MAX_VALUE))
 		);
 		panel_5.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.GROWING_BUTTON_COLSPEC,
@@ -172,7 +177,7 @@ public class EmployeeGUI extends JPanel {
 		JLabel lblEmpNr = new JLabel("Medarbejder ID");
 		panel_4.add(lblEmpNr, "1, 2, fill, fill");
 		
-		txtEmpNr = new JTextField();
+		txtEmpNr = new JIntegerField();
 		txtEmpNr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				findCustomer();
@@ -184,7 +189,7 @@ public class EmployeeGUI extends JPanel {
 		
 		panel_6 = new JPanel();
 		panel_6.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Opret Medarbejder", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_6.setBounds(10, 185, 240, 58);
+		panel_6.setBounds(10, 146, 240, 58);
 		panel.add(panel_6);
 		
 		
@@ -210,6 +215,10 @@ public class EmployeeGUI extends JPanel {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel_6.setLayout(gl_panel_6);
+		
+		errLabel = new JBlinkLabel("");
+		errLabel.setBounds(10, 6, 240, 16);
+		panel.add(errLabel);
 		panel_6.setVisible(false);
 	}
 	
@@ -219,11 +228,17 @@ public class EmployeeGUI extends JPanel {
 		String empNr = txtEmpNr.getText();
 		if(name.trim().length() > 0){
 			employees = eCtr.searchEmployee(name);
-		} else if(empNr.trim().length() > 0){
-			employees = eCtr.searchEmployee(empNr);
 		}
+		if(empNr.trim().length() > 0){
+			employees2 = eCtr.searchEmployee(empNr);
+		}
+		employees.addAll(employees2);
 		model.refresh(employees);
 		model.fireTableDataChanged();
+		if(employees.size() == 0){
+			errLabel.setText("0 medarbejdere fundet.");
+			errLabel.startBlinking(true, true);
+		}
 	}
 	public void setAdmin(boolean admin){
 		if(admin){
