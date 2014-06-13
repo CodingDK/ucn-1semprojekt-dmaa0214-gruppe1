@@ -29,7 +29,8 @@ import extensions.CloseButtonTabbedPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-public class MainGUI extends JFrame{
+import java.awt.event.KeyListener;
+public class MainGUI extends JFrame implements KeyListener{
 	private static final long serialVersionUID = 1L;
 	public boolean admin = false;
 	private JMenuItem mntmLogin;
@@ -236,5 +237,19 @@ public class MainGUI extends JFrame{
 		tabbedPane.insertTab("Salg", null, Sale, null, 0);
 		tabbedPane.setSelectedComponent(Sale);
 		reDraw();
+	}
+
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+	}
+
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
