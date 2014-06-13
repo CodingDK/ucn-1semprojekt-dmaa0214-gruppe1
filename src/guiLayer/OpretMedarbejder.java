@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class OpretMedarbejder extends JPanel {
 	private JTextField txtName;
@@ -22,16 +23,17 @@ public class OpretMedarbejder extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public OpretMedarbejder(boolean admin) {
-		this.admin = admin;
+	public OpretMedarbejder() {
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{30, 0, 30, 0};
+		gridBagLayout.columnWidths = new int[]{0, 0, 30, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblNewLabel = new JLabel("Opret Medarbejder");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 0;
