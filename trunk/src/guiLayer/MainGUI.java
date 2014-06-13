@@ -240,7 +240,7 @@ public class MainGUI extends JFrame implements KeyListener{
 
 	public void keyPressed(KeyEvent arg0) {
 		KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
-		if(KeyEvent.KEY_PRESSED == k.getKeyCode()){
+		if(arg0.equals(k)){
 			tabbedPane.setSelectedComponent(Sale);
 		}
 	}
