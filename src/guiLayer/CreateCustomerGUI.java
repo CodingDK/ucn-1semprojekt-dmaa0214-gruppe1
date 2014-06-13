@@ -1,49 +1,30 @@
 package guiLayer;
 
-import javax.swing.JPanel;
-
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-
-import javax.swing.JLabel;
-
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.FlowLayout;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.border.TitledBorder;
-import javax.swing.JSplitPane;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.JInternalFrame;
-import javax.swing.BoxLayout;
-
-import personLayer.Customer;
-import ctrLayer.CustomerCtr;
-
-import java.awt.GridLayout;
-import java.awt.SystemColor;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Rectangle;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
+
+import extensions.JBlinkLabel;
+import java.awt.GridLayout;
 
 public class CreateCustomerGUI extends JPanel {
-	private JTextField txtStreet;
 	public JTextField txtName;
 	private JTextField txtPostCode;
 	private JTextField txtPhone;
 	private JTextField txtEmail;
-	
-	private JTextField txtPictureId;
-	private JTextField txtCprNr;
 	private JTextField txtTown;
 	
 	private JLabel lblStreet;
@@ -51,18 +32,24 @@ public class CreateCustomerGUI extends JPanel {
 	private JLabel lblPostCode;
 	private JLabel lblPhoneNr;
 	private JLabel lblEmail;
-	private JLabel lblPictureId;
-	private JLabel lblCpr;
 	private JLabel lblName;
-	private JLabel lblCompany;
-	private JLabel lblCvr;
+	private boolean business;
+	private JPanel panel;
+	private JPanel panel_1;
+	private JBlinkLabel lblError;
+	private JTextField txtStreet;
+	private JPanel panel_2;
+	private JPanel privatePanel;
+	private JLabel lblPictureID;
+	private JTextField txtPictureID;
+	private JLabel lblCpr;
+	private JTextField txtCpr;
+	private JPanel companyPanel;
 	private JTextField txtCompany;
 	private JTextField txtCvr;
-	private JLabel lblNewLabel;
-	private boolean business;
-	private JLabel lblError;
-	private JPanel panel;
-
+	private JLabel lblCvr;
+	private JLabel lblCompany;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -70,313 +57,241 @@ public class CreateCustomerGUI extends JPanel {
 		this.business = business;
 		setBounds(new Rectangle(0, 0, 0, 5));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{155, 164, 66, 0};
-		gridBagLayout.rowHeights = new int[]{29, 28, 28, 28, 28, 28, 28, 28, 0, 0, 0, 0, 28, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] {318, 145, 0};
+		gridBagLayout.rowHeights = new int[] {5, 0};
+		gridBagLayout.columnWeights = new double[] {0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[] {1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		lblNewLabel = new JLabel("Opret Kunde");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblNewLabel.gridwidth = 2;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 0;
-		add(lblNewLabel, gbc_lblNewLabel);
+		panel_1 = new JPanel();
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 0;
+		gbc_panel_1.gridy = 0;
+		add(panel_1, gbc_panel_1);
+		panel_1.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("156px:grow"),
+				ColumnSpec.decode("156px:grow"),},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("28px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("28px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("28px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("28px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("28px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("28px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("28px"),
+				FormFactory.RELATED_GAP_ROWSPEC,// 16
+				RowSpec.decode("28px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("28px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("28px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("32px:grow"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),}));
 		
 		lblName = new JLabel("Navn");
-		GridBagConstraints gbc_lblName = new GridBagConstraints();
-		gbc_lblName.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblName.gridx = 0;
-		gbc_lblName.gridy = 1;
-		add(lblName, gbc_lblName);
+		panel_1.add(lblName, "2, 2, fill, fill");
 		
-				txtName = new JTextField();
-				GridBagConstraints gbc_txtName = new GridBagConstraints();
-				gbc_txtName.fill = GridBagConstraints.HORIZONTAL;
-				gbc_txtName.insets = new Insets(0, 0, 5, 5);
-				gbc_txtName.gridx = 1;
-				gbc_txtName.gridy = 1;
-				add(txtName, gbc_txtName);
-		
+		txtName = new JTextField();
+		panel_1.add(txtName, "3, 2, fill, fill");
 		
 		lblStreet = new JLabel("Gade");
-		GridBagConstraints gbc_lblStreet = new GridBagConstraints();
-		gbc_lblStreet.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblStreet.insets = new Insets(0, 0, 5, 5);
-		gbc_lblStreet.gridx = 0;
-		gbc_lblStreet.gridy = 2;
-		add(lblStreet, gbc_lblStreet);
-		
-		
+		panel_1.add(lblStreet, "2, 4, left, fill");
 		
 		txtStreet = new JTextField();
-		GridBagConstraints gbc_txtStreet = new GridBagConstraints();
-		gbc_txtStreet.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtStreet.insets = new Insets(0, 0, 5, 5);
-		gbc_txtStreet.gridx = 1;
-		gbc_txtStreet.gridy = 2;
-		add(txtStreet, gbc_txtStreet);
+		panel_1.add(txtStreet, "3, 4, fill, fill");
+		txtStreet.setColumns(10);
 		
 		lblTown = new JLabel("By");
-		GridBagConstraints gbc_lblTown = new GridBagConstraints();
-		gbc_lblTown.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblTown.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTown.gridx = 0;
-		gbc_lblTown.gridy = 3;
-		add(lblTown, gbc_lblTown);
+		panel_1.add(lblTown, "2, 6, fill, fill");
 		
 		txtTown = new JTextField();
-		GridBagConstraints gbc_txtTown = new GridBagConstraints();
-		gbc_txtTown.insets = new Insets(0, 0, 5, 5);
-		gbc_txtTown.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtTown.gridx = 1;
-		gbc_txtTown.gridy = 3;
-		add(txtTown, gbc_txtTown);
+		panel_1.add(txtTown, "3, 6, fill, fill");
 		txtTown.setColumns(10);
-		GridBagConstraints gbc_lblPostCode = new GridBagConstraints();
-		gbc_lblPostCode.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblPostCode.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPostCode.gridx = 0;
-		gbc_lblPostCode.gridy = 4;
 		
 		lblPostCode = new JLabel("PostNr");
-		gbc_lblPostCode.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPostCode.gridx = 0;
-		gbc_lblPostCode.gridy = 4;
-		add(lblPostCode, gbc_lblPostCode);
+		panel_1.add(lblPostCode, "2, 8, fill, fill");
 		
 		txtPostCode = new JTextField();
-		GridBagConstraints gbc_txtPostCode = new GridBagConstraints();
-		gbc_txtPostCode.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtPostCode.insets = new Insets(0, 0, 5, 5);
-		gbc_txtPostCode.gridx = 1;
-		gbc_txtPostCode.gridy = 4;
-		add(txtPostCode, gbc_txtPostCode);
+		panel_1.add(txtPostCode, "3, 8, fill, fill");
 		txtPostCode.setColumns(10);
 		
 		lblPhoneNr = new JLabel("Tlf");
-		GridBagConstraints gbc_lblPhoneNr = new GridBagConstraints();
-		gbc_lblPhoneNr.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblPhoneNr.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPhoneNr.gridx = 0;
-		gbc_lblPhoneNr.gridy = 5;
-		add(lblPhoneNr, gbc_lblPhoneNr);
+		panel_1.add(lblPhoneNr, "2, 10, fill, fill");
 		
 		txtPhone = new JTextField();
-		GridBagConstraints gbc_txtPhone = new GridBagConstraints();
-		gbc_txtPhone.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtPhone.insets = new Insets(0, 0, 5, 5);
-		gbc_txtPhone.gridx = 1;
-		gbc_txtPhone.gridy = 5;
-		add(txtPhone, gbc_txtPhone);
+		panel_1.add(txtPhone, "3, 10, fill, fill");
 		txtPhone.setColumns(10);
 		
 		lblEmail = new JLabel("E-mail");
-		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
-		gbc_lblEmail.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEmail.gridx = 0;
-		gbc_lblEmail.gridy = 6;
-		add(lblEmail, gbc_lblEmail);
+		panel_1.add(lblEmail, "2, 12, fill, fill");
 		
 		txtEmail = new JTextField();
-		GridBagConstraints gbc_txtEmail = new GridBagConstraints();
-		gbc_txtEmail.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_txtEmail.gridx = 1;
-		gbc_txtEmail.gridy = 6;
-		add(txtEmail, gbc_txtEmail);
+		panel_1.add(txtEmail, "3, 12, fill, fill");
 		txtEmail.setColumns(10);
+		/**
+		privatePanel = new JPanel();
+		panel_1.add(privatePanel, "2, 14, 2, 3, fill, fill");
+		privatePanel.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("156px"),
+				ColumnSpec.decode("156px"),},
+			new RowSpec[] {
+				RowSpec.decode("28px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("28px"),}));
 		
-		lblPictureId = new JLabel("Billed-Id");
-		GridBagConstraints gbc_lblPictureId = new GridBagConstraints();
-		gbc_lblPictureId.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblPictureId.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPictureId.gridx = 0;
-		gbc_lblPictureId.gridy = 7;
-		add(lblPictureId, gbc_lblPictureId);
-			//if(!business){
-				lblCpr = new JLabel("Cpr-nummer");
-				GridBagConstraints gbc_lblCpr = new GridBagConstraints();
-				gbc_lblCpr.fill = GridBagConstraints.HORIZONTAL;
-				gbc_lblCpr.insets = new Insets(0, 0, 5, 5);
-				gbc_lblCpr.gridx = 0;
-				gbc_lblCpr.gridy = 8;
-				add(lblCpr, gbc_lblCpr);
-		//}
+		lblPictureID = new JLabel("Billed-Id");
+		privatePanel.add(lblPictureID, "1, 1, fill, fill");
 		
-		txtPictureId = new JTextField();
-		GridBagConstraints gbc_txtPictureId = new GridBagConstraints();
-		gbc_txtPictureId.insets = new Insets(0, 0, 5, 5);
-		gbc_txtPictureId.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtPictureId.gridx = 1;
-		gbc_txtPictureId.gridy = 7;
-		add(txtPictureId, gbc_txtPictureId);
-		txtPictureId.setColumns(10);
+		txtPictureID = new JTextField();
+		txtPictureID.setColumns(10);
+		privatePanel.add(txtPictureID, "2, 1, fill, fill");
 		
-		txtCprNr = new JTextField();
-		GridBagConstraints gbc_txtCprNr = new GridBagConstraints();
-		gbc_txtCprNr.insets = new Insets(0, 0, 5, 5);
-		gbc_txtCprNr.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtCprNr.gridx = 1;
-		gbc_txtCprNr.gridy = 8;
-		add(txtCprNr, gbc_txtCprNr);
-		txtCprNr.setColumns(10);
+		lblCpr = new JLabel("Cpr-nummer");
+		privatePanel.add(lblCpr, "1, 3, fill, fill");
+		
+		txtCpr = new JTextField();
+		txtCpr.setColumns(10);
+		privatePanel.add(txtCpr, "2, 3, fill, fill");
+		*/
+		companyPanel = new JPanel();
+		panel_1.add(companyPanel, "2, 18, 2, 3, fill, fill");
+		companyPanel.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("156px"),
+				ColumnSpec.decode("156px"),},
+			new RowSpec[] {
+				RowSpec.decode("28px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("28px"),}));
+		
 		lblCompany = new JLabel("Firma Navn");
-		GridBagConstraints gbc_lblCompany = new GridBagConstraints();
-		gbc_lblCompany.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblCompany.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCompany.gridx = 0;
-		gbc_lblCompany.gridy = 9;
-		add(lblCompany, gbc_lblCompany);
+		companyPanel.add(lblCompany, "1, 1, fill, fill");
 		
 		txtCompany = new JTextField();
-		GridBagConstraints gbc_txtCompany = new GridBagConstraints();
-		gbc_txtCompany.insets = new Insets(0, 0, 5, 5);
-		gbc_txtCompany.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtCompany.gridx = 1;
-		gbc_txtCompany.gridy = 9;
-		add(txtCompany, gbc_txtCompany);
 		txtCompany.setColumns(10);
+		companyPanel.add(txtCompany, "2, 1, fill, fill");
 		
 		lblCvr = new JLabel("Cvr nummer");
-		GridBagConstraints gbc_lblCvr = new GridBagConstraints();
-		gbc_lblCvr.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblCvr.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCvr.gridx = 0;
-		gbc_lblCvr.gridy = 10;
-		add(lblCvr, gbc_lblCvr);
+		companyPanel.add(lblCvr, "1, 3, fill, fill");
 		
 		txtCvr = new JTextField();
-		GridBagConstraints gbc_txtCvr = new GridBagConstraints();
-		gbc_txtCvr.insets = new Insets(0, 0, 5, 5);
-		gbc_txtCvr.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtCvr.gridx = 1;
-		gbc_txtCvr.gridy = 10;
-		add(txtCvr, gbc_txtCvr);
 		txtCvr.setColumns(10);
-		
-		lblError = new JLabel("");
-		GridBagConstraints gbc_lblError = new GridBagConstraints();
-		gbc_lblError.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblError.gridwidth = 3;
-		gbc_lblError.insets = new Insets(0, 0, 5, 0);
-		gbc_lblError.gridx = 0;
-		gbc_lblError.gridy = 11;
-		add(lblError, gbc_lblError);
+		companyPanel.add(txtCvr, "2, 3, fill, fill");
 		
 		panel = new JPanel();
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.gridwidth = 2;
-		gbc_panel.insets = new Insets(0, 0, 5, 5);
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 12;
-		add(panel, gbc_panel);
+		panel_1.add(panel, "2, 22, 2, 1, fill, fill");
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.GROWING_BUTTON_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.GROWING_BUTTON_COLSPEC,},
 			new RowSpec[] {
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),}));
+				RowSpec.decode("fill:28px"),}));
 		
 		JButton btnOpret = new JButton("Opret ");
-		panel.add(btnOpret, "1, 2, fill, fill");
+		panel.add(btnOpret, "1, 1, fill, fill");
 		
 		JButton btn = new JButton("Anuller");
-		panel.add(btn, "3, 2, fill, fill");
+		panel.add(btn, "3, 1, fill, fill");
+		
+		panel_2 = new JPanel();
+		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
+		gbc_panel_2.fill = GridBagConstraints.BOTH;
+		gbc_panel_2.gridx = 1;
+		gbc_panel_2.gridy = 0;
+		add(panel_2, gbc_panel_2);
+		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
 		btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
+			public void actionPerformed(ActionEvent e) {}
 		});
 		btnOpret.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				createCustomer();
 			}
-				
 			
 		});
 		
-
+		customerType(business);
+		
 	}
-
+	
 	protected void createCustomer() {
+		String errorMsg = "feltet må ikke være tomt";
 		String name = txtName.getText();
 		if (name == null || name.trim().isEmpty()) {
-				lblError.setText("feltet m� ikke v�re tomt");
-				return;
+			lblError.setText(errorMsg);
+			return;
 		}
 		
-	    
-	 String street = txtStreet.getText();
+		String street = txtStreet.getText();
 		if (street == null || street.trim().isEmpty()) {
-				lblError.setText("feltet m� ikke v�re tomt");
-				return;
+			lblError.setText(errorMsg);
+			return;
 		}
 		
-	    String town = txtTown.getText();
-	   
+		String town = txtTown.getText();
+		
 		if (town == null || town.trim().isEmpty()) {
-				lblError.setText("feltet m� ikke v�re tomt");
-				return;
+			lblError.setText(errorMsg);
+			return;
 		}
-	    
-	 
-	
-	    String phone = txtPhone.getText();
-	    if (phone == null || phone.trim().isEmpty()) {
-			lblError.setText("feltet m� ikke v�re tomt");
-			return;
-	}
-    
-	    String email = txtEmail.getText();
-	    if (email == null || email.trim().isEmpty()) {
-			lblError.setText("feltet m� ikke v�re tomt");
-			return;
-	}
-    
-	    String pictureId = txtPictureId.getText();
-	    if (pictureId == null || pictureId.trim().isEmpty()) {
-			lblError.setText("feltet m� ikke v�re tomt");
-			return;
-	}
-    
-	    String cprNr = txtCprNr.getText();
-	    if (cprNr == null || cprNr.trim().isEmpty()) {
-			lblError.setText("feltet m� ikke v�re tomt");
-			return;
-	}
-    
-	    
-	    String company = txtCompany.getText();
-	    if (company == null || company.trim().isEmpty()) {
-			lblError.setText("feltet m� ikke v�re tomt");
-			return;
-	}
-    
-	    String cvr = txtCvr.getText();
-	    if (cvr == null || cvr.trim().isEmpty()) {
-			lblError.setText("feltet m� ikke v�re tomt");
-			return;
-	}
-	}
-	
-	
-	 
-	
-
-	
-	
-	    
-	    
-	    
 		
+		String phone = txtPhone.getText();
+		if (phone == null || phone.trim().isEmpty()) {
+			lblError.setText(errorMsg);
+			return;
+		}
+		
+		String email = txtEmail.getText();
+		if (email == null || email.trim().isEmpty()) {
+			lblError.setText(errorMsg);
+			return;
+		}
+		
+		String pictureId = txtPictureID.getText();
+		if (pictureId == null || pictureId.trim().isEmpty()) {
+			lblError.setText(errorMsg);
+			return;
+		}
+		
+		String cprNr = txtCpr.getText();
+		if (cprNr == null || cprNr.trim().isEmpty()) {
+			lblError.setText(errorMsg);
+			return;
+		}
+		
+		String company = txtCompany.getText();
+		if (company == null || company.trim().isEmpty()) {
+			lblError.setText(errorMsg);
+			return;
+		}
+		
+		String cvr = txtCvr.getText();
+		if (cvr == null || cvr.trim().isEmpty()) {
+			lblError.setText(errorMsg);
+			return;
+		}
 	}
-
+	
+	private void customerType(boolean business){
+		if(business){
+			companyPanel.setVisible(true);
+			privatePanel.setVisible(false);
+		}else if(!business){
+			companyPanel.setVisible(false);
+			privatePanel.setVisible(true);
+		}
+	}
+	
+}
