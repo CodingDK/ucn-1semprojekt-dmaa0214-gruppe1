@@ -1,5 +1,8 @@
 package ctrLayer;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import exceptionLayer.CategoryExistException;
 import modelLayer.Category;
 import modelLayer.Storage;
@@ -36,8 +39,18 @@ public class Demo {
 			iCtr.createItem("Flad Hammer", 200, 0, 1., 1., 1., 1, "1234", s2, 10, 1, c2);
 			iCtr.createItem("Rund Hammer", 200, 0, 1., 1., 1., 1, "1234", s2, 10, 1, c2);
 			
+			ArrayList<Category> catList = new ArrayList<Category>();
+			catList.add(c1);
+			catList.add(c2);
+			ArrayList<Storage> storList = new ArrayList<Storage>();
+			storList.add(s1);
+			storList.add(s2);
+			Random rand = new Random();
+			
 			for(int i = 0; i<50; i++){
-				iCtr.createItem("Test ting "+i, 5+i, 0, 220+i, 230+i, 100+i, 3+i, "På Lageret!", s2, 43+i, 3+i, c1);
+				int c = rand.nextInt(catList.size());
+				int z = rand.nextInt(storList.size());
+				iCtr.createItem("Test ting "+i, 5+i, 0, 220+i, 230+i, 100+i, 3+i, "På Lageret!", storList.get(z), 43+i, 3+i, catList.get(c));
 			}
 			
 			EmployeeCtr eCtr = new EmployeeCtr();
