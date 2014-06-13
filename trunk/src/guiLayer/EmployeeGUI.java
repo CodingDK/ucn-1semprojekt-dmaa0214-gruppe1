@@ -48,7 +48,7 @@ import java.awt.event.ActionEvent;
 public class EmployeeGUI extends JPanel {
 	private JTable table;
 	private ArrayList<Employee> employees;
-	private JTextField txtName;
+	public JTextField txtName;
 	private JTextField txtEmpNr;
 	private EmployeeTableModel model;
 	private MainGUI parent;
