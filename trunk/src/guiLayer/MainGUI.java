@@ -2,16 +2,17 @@ package guiLayer;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Event;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
-import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
@@ -30,7 +31,6 @@ import extensions.CloseButtonTabbedPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.KeyAdapter;
 public class MainGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -101,14 +101,15 @@ public class MainGUI extends JFrame{
 		Storage = new StorageGUI();
 		
 		tabbedPane.insertTab("Salg", null, Sale, null, 0);
-		//tabbedPane.setMnemonicAt(0, KeyEvent.VK_S);
-		
+		tabbedPane.setMnemonicAt(0, KeyEvent.VK_S);
 		tabbedPane.insertTab("Varer", null, Item, null, 1);
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_V);
 		tabbedPane.insertTab("Kunde", null, Customer, null, 2);
 		tabbedPane.setMnemonicAt(2, KeyEvent.VK_K);
 		tabbedPane.insertTab("Ordre", null, Order, null, 3);
 		tabbedPane.setMnemonicAt(3, KeyEvent.VK_O);
+		
+		makeTabbedPaneSwitcher();
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -183,9 +184,69 @@ public class MainGUI extends JFrame{
 		});
 	}
 
+	private void makeTabbedPaneSwitcher() {
+		InputMap im = tabbedPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "ctrl-s");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "ctrl-v");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_K, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "ctrl-k");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "ctrl-o");
+		ActionMap am = tabbedPane.getActionMap();
+		am.put("ctrl-s", new AbstractAction() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
+				tp.setSelectedIndex(0);
+			}
+		});
+		
+		am.put("ctrl-v", new AbstractAction() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
+				tp.setSelectedIndex(1);
+			}
+		});
+		
+		am.put("ctrl-k", new AbstractAction() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
+				tp.setSelectedIndex(2);
+			}
+		});
+		
+		am.put("ctrl-o", new AbstractAction() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
+				tp.setSelectedIndex(3);
+			}
+		});
+	}
+
 	protected void login() {
 		if(!admin){
-			LoginDialog dialog = new LoginDialog(null, this);
+			new LoginDialog(null, this);
 			if(admin){
 				grantAccess();
 				
