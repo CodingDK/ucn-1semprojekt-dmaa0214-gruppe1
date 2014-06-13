@@ -52,6 +52,7 @@ public class EmployeeGUI extends JPanel {
 	private JTextField txtEmpNr;
 	private EmployeeTableModel model;
 	private MainGUI parent;
+	private JPanel panel_6;
 	
 	/**
 	 * Create the panel.
@@ -166,7 +167,7 @@ public class EmployeeGUI extends JPanel {
 		panel_4.add(txtEmpNr, "2, 2, fill, fill");
 		panel_3.setLayout(gl_panel_3);
 		
-		JPanel panel_6 = new JPanel();
+		panel_6 = new JPanel();
 		panel_6.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Opret Medarbejder", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_6.setBounds(10, 185, 240, 58);
 		panel.add(panel_6);
@@ -194,13 +195,6 @@ public class EmployeeGUI extends JPanel {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel_6.setLayout(gl_panel_6);
-		
-		if(!parent.admin){
-			panel_6.setVisible(false);
-		} else{
-			panel_6.setVisible(true);
-		}
-
 	}
 	
 	private void findCustomer() {
@@ -211,7 +205,13 @@ public class EmployeeGUI extends JPanel {
 			model.refresh(employees);
 			model.fireTableDataChanged();
 		} else if(txtEmpNr.getText().trim().length() > 0){
-			
+		}
+	}
+	public void setAdmin(boolean admin){
+		if(admin){
+			panel_6.setVisible(true);
+		} else if(!admin){
+			panel_6.setVisible(false);
 		}
 	}
 }
