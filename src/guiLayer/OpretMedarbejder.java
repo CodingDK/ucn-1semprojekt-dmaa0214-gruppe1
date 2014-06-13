@@ -19,6 +19,7 @@ public class OpretMedarbejder extends JPanel {
 	private JTextField txtCprNr;
 	private JTextField txtEmployeeNr;
 	private JTextField txtPassWord;
+	private JLabel lblError;
 
 	/**
 	 * Create the panel.
@@ -178,28 +179,28 @@ public class OpretMedarbejder extends JPanel {
 	    
 		String name = txtName.getText();
 		if (name == null || name.trim().isEmpty()) {
-			//lblError.setText("feltet m� ikke v�re tomt");
+			lblError.setText("feltet m� ikke v�re tomt");
 			return;
 	}
 	
 		String street= txtStreet.getText();
 		if (street== null || street.trim().isEmpty()) {
-			//lblError.setText("feltet m� ikke v�re tomt");
+			lblError.setText("feltet m� ikke v�re tomt");
 			return;
 	}
 		String town = txtTown.getText();
 		if (town == null || town.trim().isEmpty()) {
-			//lblError.setText("feltet m� ikke v�re tomt");
+			lblError.setText("feltet m� ikke v�re tomt");
 			return;
 	}
 		String cprNr = txtCprNr.getText();
 		if (cprNr == null || cprNr.trim().isEmpty()) {
-			//lblError.setText("feltet m� ikke v�re tomt");
+			lblError.setText("feltet m� ikke v�re tomt");
 			return;
 	}
 		String employeeNr = txtEmployeeNr.getText();
 		if (employeeNr == null || employeeNr.trim().isEmpty()) {
-			//lblError.setText("feltet m� ikke v�re tomt");
+			lblError.setText("feltet m� ikke v�re tomt");
 			return;
 	
 	}
