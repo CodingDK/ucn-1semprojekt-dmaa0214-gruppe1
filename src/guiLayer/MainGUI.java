@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Event;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -117,7 +118,7 @@ public class MainGUI extends JFrame{
 		
 		JMenuItem mntmInsertTestData = new JMenuItem("Indsæt Test Data");
 		mntmInsertTestData.setMnemonic(KeyEvent.VK_D);
-		mntmInsertTestData.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, Event.CTRL_MASK));
+		mntmInsertTestData.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		mntmInsertTestData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new Demo().runDemo();
@@ -130,7 +131,7 @@ public class MainGUI extends JFrame{
 	
 		mntmLogin = new JMenuItem("Administrator Login");
 		mntmLogin.setMnemonic(KeyEvent.VK_A);
-		mntmLogin.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, Event.CTRL_MASK));
+		mntmLogin.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); //Event.CTRL_MASK));
 		mntmLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				login();
@@ -144,7 +145,7 @@ public class MainGUI extends JFrame{
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.setMnemonic(KeyEvent.VK_E);
-		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, Event.CTRL_MASK));
+		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		mntmExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);

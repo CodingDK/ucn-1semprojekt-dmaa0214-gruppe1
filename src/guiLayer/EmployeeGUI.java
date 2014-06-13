@@ -156,6 +156,11 @@ public class EmployeeGUI extends JPanel {
 		panel_4.add(lblName, "1, 1, fill, fill");
 		
 		txtName = new JTextField();
+		txtName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				findCustomer();
+			}
+		});
 		panel_4.add(txtName, "2, 1, fill, fill");
 		txtName.setColumns(10);
 		
@@ -163,6 +168,11 @@ public class EmployeeGUI extends JPanel {
 		panel_4.add(lblEmpNr, "1, 2, fill, fill");
 		
 		txtEmpNr = new JTextField();
+		txtEmpNr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				findCustomer();
+			}
+		});
 		txtEmpNr.setColumns(10);
 		panel_4.add(txtEmpNr, "2, 2, fill, fill");
 		panel_3.setLayout(gl_panel_3);
@@ -201,12 +211,14 @@ public class EmployeeGUI extends JPanel {
 	private void findCustomer() {
 		EmployeeCtr eCtr = new EmployeeCtr();
 		String name = txtName.getText();
+		String empNr = txtEmpNr.getText();
 		if(name.trim().length() > 0){
 			employees = eCtr.searchEmployee(name);
-			model.refresh(employees);
-			model.fireTableDataChanged();
-		} else if(txtEmpNr.getText().trim().length() > 0){
+		} else if(empNr.trim().length() > 0){
+			employees = eCtr.searchEmployee(empNr);
 		}
+		model.refresh(employees);
+		model.fireTableDataChanged();
 	}
 	public void setAdmin(boolean admin){
 		if(admin){
