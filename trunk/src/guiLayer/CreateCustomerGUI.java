@@ -345,6 +345,8 @@ public class CreateCustomerGUI extends JPanel {
 				saleGUI.setCustomer(c);
 			}
 		}
+		
+		mainGUI.killMe(this);
 	}
 	
 	private void customerType(boolean business){
