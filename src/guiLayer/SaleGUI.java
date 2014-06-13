@@ -42,8 +42,8 @@ import extensions.SaleItemTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import personLayer.Business;
 import personLayer.Customer;
+import personLayer.Business;
 import modelLayer.Item;
 import modelLayer.PartSale;
 import modelLayer.Sale;
@@ -76,19 +76,11 @@ public class SaleGUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public SaleGUI(MainGUI mainGUI, Sale sale) {
+	public SaleGUI(MainGUI mainGUI) {
 		this.mainGUI = mainGUI;
-		
+		partSales = new ArrayList<PartSale>();
 		saleCtr = new SaleCtr();
-		if (sale != null){
-			saleCtr.loadSale(sale);
-			updateCustomer();
-		}
-		else {
-			saleCtr.createSale();
-		}
-		Sale saleObj = saleCtr.getSale();
-		partSales = saleObj.getPartSales();
+		saleCtr.createSale();
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{360, 250, 0};
@@ -205,77 +197,60 @@ public class SaleGUI extends JPanel {
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_4.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_4.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel_7, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-						.addComponent(panel_8, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+						.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		gl_panel_4.setVerticalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_4.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addGap(21)
+					.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		);
 		
 		JButton bntFind = new JButton("Find Kunde");
-		bntFind.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				findCustomer();
-			}
-		});
 		panel_8.add(bntFind);
 		
 		JButton btnCreate = new JButton("Opret kunde");
-		btnCreate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				createCustomer();
-			}
-		});
 		panel_8.add(btnCreate);
 		panel_7.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("80px"),
+				ColumnSpec.decode("60px"),
 				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
 				FormFactory.NARROW_LINE_GAP_ROWSPEC,
 				RowSpec.decode("18px"),
 				RowSpec.decode("18px"),
 				RowSpec.decode("18px"),
-				RowSpec.decode("18px"),
 				RowSpec.decode("18px"),}));
 		
-		lblBusiness = new JLabel("Virksomhed: ");
-		panel_7.add(lblBusiness, "1, 2");
+		JLabel lblName = new JLabel("Navn: ");
+		panel_7.add(lblName, "1, 2, fill, fill");
 		
-		txtLblBusiness = new JLabel(" ");
-		lblBusiness.setLabelFor(txtLblBusiness);
-		panel_7.add(txtLblBusiness, "2, 2");
-		
-		lblName = new JLabel("Navn: ");
-		panel_7.add(lblName, "1, 3, fill, fill");
-		lblName.setLabelFor(txtLblName);
 		
 		txtLblName = new JLabel("");
 		panel_7.add(txtLblName, "2, 3, fill, fill");
 		
-		lblPhone = new JLabel("TLF nr.: ");
-		panel_7.add(lblPhone, "1, 4, fill, fill");
+		JLabel lblPhone = new JLabel("TLF nr.: ");
+		panel_7.add(lblPhone, "1, 3, fill, fill");
 		
-		txtLblPhone = new JLabel("");
-		panel_7.add(txtLblPhone, "2, 4, fill, fill");
-		lblPhone.setLabelFor(txtLblPhone);
+		txtPhone = new JLabel("12345678");
+		panel_7.add(txtPhon, "2, 4, fill, fill");
+		lblPhone.setLabelFor(txtPhon);
 		
-		lblCustomerNr = new JLabel("Kunde nr.: ");
-		panel_7.add(lblCustomerNr, "1, 5, fill, fill");
+		JLabel lblCustomerNr = new JLabel("Kunde nr.: ");
+		panel_7.add(lblCustomerNr, "1, 4, fill, fill");
 		
+	
 		txtLblCustomerNr = new JLabel("");
 		panel_7.add(txtLblCustomerNr, "2, 5, fill, fill");
 		lblCustomerNr.setLabelFor(txtLblCustomerNr);
 		
-		lblCredit = new JLabel("Kredit: ");
-		panel_7.add(lblCredit, "1, 6, fill, fill");
-		lblCredit.setLabelFor(txtLblCredit);
+		JLabel lblCredit = new JLabel("Kredit: ");
+		panel_7.add(lblCredit, "1, 5, fill, fill");
+		
 		
 		txtLblCredit = new JLabel("");
 		panel_7.add(txtLblCredit, "2, 6, fill, fill");
@@ -312,65 +287,12 @@ public class SaleGUI extends JPanel {
 
 	}
 	
-	private void updateCustomer(){
-		Sale sale = saleCtr.getSale();
-		Customer cus = sale.getCustomer();
-		String business = " ";
-		String name = " ";
-		String phone = " ";
-		String customerNr = " ";
-		String credit = " ";
-		if (cus != null){
-			if (cus instanceof Business){
-				Business b = (Business) cus;
-				business = b.getCompany();
-				lblBusiness.setVisible(true);
-				txtLblBusiness.setVisible(true);
-			}
-			else {
-				lblBusiness.setVisible(false);
-				txtLblBusiness.setVisible(false);
-			}
-			name = cus.getName();
-			phone = cus.getPhoneNr();
-			customerNr = "#"+cus.getId();
-			credit = cus.getCredit() + " ,-";
-		}
-		txtLblBusiness.setText(business);
-		txtLblName.setText(name);
-		txtLblPhone.setText(phone);
-		txtLblCustomerNr.setText(customerNr);
-		txtLblCredit.setText(credit);
-		
-	}
-	
-	private void findCustomer() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void createCustomer() {
-		JFrame frame = new JFrame();
-		String[] options = new String[3];
-		options[0] = new String("Privat");
-		options[1] = new String("Erhverv");
-		options[2] = new String("Annuller");
-		int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Vælg Kundetype","Opret Kunde", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
-		//System.out.println(choice);
-		if(choice == 0){
-			mainGUI.createPrivateCustomer();
-		}
-		else if(choice == 1){
-			mainGUI.createBusinesssCustomer();
-		}
-	}
-
 	private void finishSale() {
-		SaleFinishGUI finishDialog = new SaleFinishGUI(null, saleCtr);
-		if (finishDialog.isDone()){
+		SaleFinishGUI addDialog = new SaleFinishGUI(null, saleCtr);
+		if (addDialog.isDone()){
 			mainGUI.resetSale();
 		}
-		finishDialog.dispose();
+		addDialog.dispose();
 	}
 	
 	private void parkSale() {
@@ -437,5 +359,13 @@ public class SaleGUI extends JPanel {
 		txtSubtotal.setText(subtotal + " ,-");
 		txtMoms.setText(moms + " ,-");
 		txtTotal.setText(subtotal+moms + " ,-");
+	}
+	
+	public void setCustomer(Customer c){
+		this.customer = customer;
+		txtName.setText(customer.getName());
+		txtPhone.setText(customer.getPhoneNr());
+		txtCustomerNr.setText("" + customer.getId());
+		txtCredit.setText(customer.getCredit() + "");
 	}
 }
