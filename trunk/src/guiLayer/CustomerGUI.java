@@ -57,11 +57,13 @@ public class CustomerGUI extends JPanel {
 	private JTextField txtCompany;
 	public JTextField txtName;
 	private JTextField txtTlf;
+	private MainGUI parent;
 	
 	/**
 	 * Create the panel.
 	 */
-	public CustomerGUI() {
+	public CustomerGUI(MainGUI mainGUI) {
+		this.parent = mainGUI;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{562, 250, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
@@ -240,21 +242,37 @@ public class CustomerGUI extends JPanel {
 		panel_1.setBounds(10, 184, 234, 58);
 		searchPanel_1.add(panel_1);
 		
-		JButton btnOpretKunde = new JButton("Opret Kunde");
+		JPanel panel_2 = new JPanel();
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(45)
-					.addComponent(btnOpretKunde, GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-					.addGap(43))
+				.addComponent(panel_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addComponent(btnOpretKunde)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
 		);
+		panel_2.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.GROWING_BUTTON_COLSPEC,
+				FormFactory.GROWING_BUTTON_COLSPEC,},
+			new RowSpec[] {
+				RowSpec.decode("fill:default:grow"),}));
+		
+		JButton btnPrivate = new JButton("Privat");
+		btnPrivate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				parent.createPrivateCustomer();
+			}
+		});
+		panel_2.add(btnPrivate, "1, 1");
+		
+		JButton btnBusiness = new JButton("Erhverv");
+		btnBusiness.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				parent.createBusinesssCustomer();
+			}
+		});
+		panel_2.add(btnBusiness, "2, 1");
 		panel_1.setLayout(gl_panel_1);
 		//this.getRootPane().setDefaultButton(btnFind);
 	}

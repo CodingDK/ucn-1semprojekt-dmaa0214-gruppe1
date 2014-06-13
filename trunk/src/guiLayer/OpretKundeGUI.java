@@ -33,7 +33,7 @@ import java.awt.Rectangle;
 
 public class OpretKundeGUI extends JPanel {
 	private JTextField txtStreet;
-	private JTextField txtName;
+	public JTextField txtName;
 	private JTextField txtPostCode;
 	private JTextField txtPhone;
 	private JTextField txtEmail;
@@ -183,68 +183,7 @@ public class OpretKundeGUI extends JPanel {
 		btnOpret.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-				
-					
-				
-				String name = txtName.getText();
-					if (name == null || name.trim().isEmpty()) {
-							lblError.setText("feltet må ikke være tomt");
-							return;
-					}
-					
-				    
-				 String street = txtStreet.getText();
-					if (street == null || street.trim().isEmpty()) {
-							lblError.setText("feltet må ikke være tomt");
-							return;
-					}
-					
-				    String town = txtTown.getText();
-				   
-					if (town == null || town.trim().isEmpty()) {
-							lblError.setText("feltet må ikke være tomt");
-							return;
-					}
-				    
-				 
-				
-				    String phone = txtPhone.getText();
-				    if (phone == null || phone.trim().isEmpty()) {
-						lblError.setText("feltet må ikke være tomt");
-						return;
-				}
-			    
-				    String email = txtEmail.getText();
-				    if (email == null || email.trim().isEmpty()) {
-						lblError.setText("feltet må ikke være tomt");
-						return;
-				}
-			    
-				    String pictureId = txtPictureId.getText();
-				    if (pictureId == null || pictureId.trim().isEmpty()) {
-						lblError.setText("feltet må ikke være tomt");
-						return;
-				}
-			    
-				    String cprNr = txtCprNr.getText();
-				    if (cprNr == null || cprNr.trim().isEmpty()) {
-						lblError.setText("feltet må ikke være tomt");
-						return;
-				}
-			    
-				    
-				    String company = txtCompany.getText();
-				    if (company == null || company.trim().isEmpty()) {
-						lblError.setText("feltet må ikke være tomt");
-						return;
-				}
-			    
-				    String cvr = txtCvr.getText();
-				    if (cvr == null || cvr.trim().isEmpty()) {
-						lblError.setText("feltet må ikke være tomt");
-						return;
-				}
-			    
+				createCustomer();
 			}
 				
 			
@@ -265,23 +204,23 @@ public class OpretKundeGUI extends JPanel {
 		gbc_txtPictureId.gridy = 7;
 		add(txtPictureId, gbc_txtPictureId);
 		txtPictureId.setColumns(10);
-		
-		lblCpr = new JLabel("Cpr-nummer");
-		GridBagConstraints gbc_lblCpr = new GridBagConstraints();
-		gbc_lblCpr.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCpr.gridx = 1;
-		gbc_lblCpr.gridy = 8;
-		add(lblCpr, gbc_lblCpr);
-		
-		txtCprNr = new JTextField();
-		GridBagConstraints gbc_txtCprNr = new GridBagConstraints();
-		gbc_txtCprNr.insets = new Insets(0, 0, 5, 0);
-		gbc_txtCprNr.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtCprNr.gridx = 3;
-		gbc_txtCprNr.gridy = 8;
-		add(txtCprNr, gbc_txtCprNr);
-		txtCprNr.setColumns(10);
-		
+		if(!business){
+			lblCpr = new JLabel("Cpr-nummer");
+			GridBagConstraints gbc_lblCpr = new GridBagConstraints();
+			gbc_lblCpr.insets = new Insets(0, 0, 5, 5);
+			gbc_lblCpr.gridx = 1;
+			gbc_lblCpr.gridy = 8;
+			add(lblCpr, gbc_lblCpr);
+			
+			txtCprNr = new JTextField();
+			GridBagConstraints gbc_txtCprNr = new GridBagConstraints();
+			gbc_txtCprNr.insets = new Insets(0, 0, 5, 0);
+			gbc_txtCprNr.fill = GridBagConstraints.HORIZONTAL;
+			gbc_txtCprNr.gridx = 3;
+			gbc_txtCprNr.gridy = 8;
+			add(txtCprNr, gbc_txtCprNr);
+			txtCprNr.setColumns(10);
+		}
 		lblCompany = new JLabel("Firma Navn");
 		GridBagConstraints gbc_lblCompany = new GridBagConstraints();
 		gbc_lblCompany.insets = new Insets(0, 0, 5, 5);
@@ -339,6 +278,67 @@ public class OpretKundeGUI extends JPanel {
 		add(btn, gbc_btn);
 		
 
+	}
+
+	protected void createCustomer() {
+		String name = txtName.getText();
+		if (name == null || name.trim().isEmpty()) {
+				lblError.setText("feltet mï¿½ ikke vï¿½re tomt");
+				return;
+		}
+		
+	    
+	 String street = txtStreet.getText();
+		if (street == null || street.trim().isEmpty()) {
+				lblError.setText("feltet mï¿½ ikke vï¿½re tomt");
+				return;
+		}
+		
+	    String town = txtTown.getText();
+	   
+		if (town == null || town.trim().isEmpty()) {
+				lblError.setText("feltet mï¿½ ikke vï¿½re tomt");
+				return;
+		}
+	    
+	 
+	
+	    String phone = txtPhone.getText();
+	    if (phone == null || phone.trim().isEmpty()) {
+			lblError.setText("feltet mï¿½ ikke vï¿½re tomt");
+			return;
+	}
+    
+	    String email = txtEmail.getText();
+	    if (email == null || email.trim().isEmpty()) {
+			lblError.setText("feltet mï¿½ ikke vï¿½re tomt");
+			return;
+	}
+    
+	    String pictureId = txtPictureId.getText();
+	    if (pictureId == null || pictureId.trim().isEmpty()) {
+			lblError.setText("feltet mï¿½ ikke vï¿½re tomt");
+			return;
+	}
+    
+	    String cprNr = txtCprNr.getText();
+	    if (cprNr == null || cprNr.trim().isEmpty()) {
+			lblError.setText("feltet mï¿½ ikke vï¿½re tomt");
+			return;
+	}
+    
+	    
+	    String company = txtCompany.getText();
+	    if (company == null || company.trim().isEmpty()) {
+			lblError.setText("feltet mï¿½ ikke vï¿½re tomt");
+			return;
+	}
+    
+	    String cvr = txtCvr.getText();
+	    if (cvr == null || cvr.trim().isEmpty()) {
+			lblError.setText("feltet mï¿½ ikke vï¿½re tomt");
+			return;
+	}
 	}
 	
 	

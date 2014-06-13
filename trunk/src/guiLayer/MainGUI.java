@@ -80,7 +80,7 @@ public class MainGUI extends JFrame{
 		
 		Sale = new SaleGUI();
 		Item = new ItemGUI(this);
-		Customer = new CustomerGUI();
+		Customer = new CustomerGUI(this);
 		Order = new JPanel();
 		Employee = new JPanel();
 		Category = new CategoryGUI();
@@ -198,5 +198,19 @@ public class MainGUI extends JFrame{
 		tabbedPane.addTab("Opret Vare", null, item, null);
 		tabbedPane.setSelectedComponent(item);
 		item.txtName.requestFocusInWindow();
+	}
+	
+	public void createPrivateCustomer(){
+		OpretKundeGUI item = new OpretKundeGUI(false);
+		tabbedPane.addTab("Opret Privat Kunde", item);
+		tabbedPane.setSelectedComponent(item);
+		item.txtName.requestFocusInWindow();		
+	}
+	
+	public void createBusinesssCustomer(){
+		OpretKundeGUI item = new OpretKundeGUI(true);
+		tabbedPane.addTab("Opret Erhvervs Kunde", item);
+		tabbedPane.setSelectedComponent(item);
+		item.txtName.requestFocusInWindow();		
 	}
 }
