@@ -54,8 +54,10 @@ public class CreateCustomerGUI extends JPanel {
 	private JLabel lblCvr;
 	private JLabel lblCompany;
 	private SaleGUI saleGUI;
+	private MainGUI mainGUI;
 	
-	public CreateCustomerGUI(boolean business, SaleGUI saleGUI){
+	public CreateCustomerGUI(boolean business, SaleGUI saleGUI, MainGUI mainGUI){
+		this.mainGUI = mainGUI;
 		this.saleGUI = saleGUI;
 		this.business = business;
 		buildPanel();
@@ -246,6 +248,10 @@ public class CreateCustomerGUI extends JPanel {
 	}
 	
 	protected void createCustomer() {
+		String cprNr = null;
+		String pictureId = null;
+		String company = null;
+		String cvr = null;
 		String errorMsg = " må ikke være tomt";
 		String name = txtName.getText();
 		if (name == null || name.trim().isEmpty()) {
@@ -290,33 +296,36 @@ public class CreateCustomerGUI extends JPanel {
 			lblError.startBlinking(true, true);
 			return;
 		}
-		
-		String pictureId = txtPictureID.getText();
-		if (pictureId == null || pictureId.trim().isEmpty()) {
-			lblError.setText("Billede ID" + errorMsg);
-			lblError.startBlinking(true, true);
-			return;
+		if(!business){
+			pictureId = txtPictureID.getText();
+			if (pictureId == null || pictureId.trim().isEmpty()) {
+				lblError.setText("Billede ID" + errorMsg);
+				lblError.startBlinking(true, true);
+				return;
+			}
+			
+			cprNr = txtCpr.getText();
+			if (cprNr == null || cprNr.trim().isEmpty()) {
+				lblError.setText("Cpr nr" + errorMsg);
+				lblError.startBlinking(true, true);
+				return;
+			}
 		}
 		
-		String cprNr = txtCpr.getText();
-		if (cprNr == null || cprNr.trim().isEmpty()) {
-			lblError.setText("Cpr nr" + errorMsg);
-			lblError.startBlinking(true, true);
-			return;
-		}
-		
-		String company = txtCompany.getText();
-		if (company == null || company.trim().isEmpty()) {
-			lblError.setText("Virksomhedsnavn" + errorMsg);
-			lblError.startBlinking(true, true);
-			return;
-		}
-		
-		String cvr = txtCvr.getText();
-		if (cvr == null || cvr.trim().isEmpty()) {
-			lblError.setText("CVR" + errorMsg);
-			lblError.startBlinking(true, true);
-			return;
+		if(business){
+			company = txtCompany.getText();
+			if (company == null || company.trim().isEmpty()) {
+				lblError.setText("Virksomhedsnavn" + errorMsg);
+				lblError.startBlinking(true, true);
+				return;
+			}
+			
+			cvr = txtCvr.getText();
+			if (cvr == null || cvr.trim().isEmpty()) {
+				lblError.setText("CVR" + errorMsg);
+				lblError.startBlinking(true, true);
+				return;
+			}
 		}
 		
 		
