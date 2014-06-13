@@ -65,7 +65,7 @@ public class OpretKundeGUI extends JPanel {
 		this.business = business;
 		setBounds(new Rectangle(0, 0, 0, 5));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{30, 73, 66, 181, 0};
+		gridBagLayout.columnWidths = new int[]{30, 112, 66, 181, 0};
 		gridBagLayout.rowHeights = new int[]{29, 28, 28, 28, 28, 28, 28, 35, 0, 0, 0, 0, 28, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -74,8 +74,8 @@ public class OpretKundeGUI extends JPanel {
 		lblNewLabel = new JLabel("Opret Kunde");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel.gridx = 3;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 0;
 		add(lblNewLabel, gbc_lblNewLabel);
 		
@@ -224,15 +224,15 @@ public class OpretKundeGUI extends JPanel {
 		lblCompany = new JLabel("Firma Navn");
 		GridBagConstraints gbc_lblCompany = new GridBagConstraints();
 		gbc_lblCompany.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCompany.gridx = 1;
+		gbc_lblCompany.gridx = 0;
 		gbc_lblCompany.gridy = 9;
 		add(lblCompany, gbc_lblCompany);
 		
 		txtCompany = new JTextField();
 		GridBagConstraints gbc_txtCompany = new GridBagConstraints();
-		gbc_txtCompany.insets = new Insets(0, 0, 5, 0);
+		gbc_txtCompany.insets = new Insets(0, 0, 5, 5);
 		gbc_txtCompany.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtCompany.gridx = 3;
+		gbc_txtCompany.gridx = 1;
 		gbc_txtCompany.gridy = 9;
 		add(txtCompany, gbc_txtCompany);
 		txtCompany.setColumns(10);
@@ -240,15 +240,15 @@ public class OpretKundeGUI extends JPanel {
 		lblCvr = new JLabel("Cvr nummer");
 		GridBagConstraints gbc_lblCvr = new GridBagConstraints();
 		gbc_lblCvr.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCvr.gridx = 1;
+		gbc_lblCvr.gridx = 0;
 		gbc_lblCvr.gridy = 10;
 		add(lblCvr, gbc_lblCvr);
 		
 		txtCvr = new JTextField();
 		GridBagConstraints gbc_txtCvr = new GridBagConstraints();
-		gbc_txtCvr.insets = new Insets(0, 0, 5, 0);
+		gbc_txtCvr.insets = new Insets(0, 0, 5, 5);
 		gbc_txtCvr.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtCvr.gridx = 3;
+		gbc_txtCvr.gridx = 1;
 		gbc_txtCvr.gridy = 10;
 		add(txtCvr, gbc_txtCvr);
 		txtCvr.setColumns(10);
