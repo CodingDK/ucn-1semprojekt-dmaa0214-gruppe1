@@ -195,6 +195,7 @@ public class EmployeeGUI extends JPanel {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel_6.setLayout(gl_panel_6);
+		panel_6.setVisible(false);
 	}
 	
 	private void findCustomer() {
