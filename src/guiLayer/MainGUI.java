@@ -228,14 +228,14 @@ public class MainGUI extends JFrame{
 	}
 	
 	public void createPrivateCustomer(){
-		OpretKundeGUI item = new OpretKundeGUI(false);
+		CreateCustomerGUI item = new CreateCustomerGUI(false);
 		tabbedPane.addTab("Opret Privat Kunde", item);
 		tabbedPane.setSelectedComponent(item);
 		item.txtName.requestFocusInWindow();		
 	}
 	
 	public void createBusinesssCustomer(){
-		OpretKundeGUI item = new OpretKundeGUI(true);
+		CreateCustomerGUI item = new CreateCustomerGUI(true);
 		tabbedPane.addTab("Opret Erhvervs Kunde", item);
 		tabbedPane.setSelectedComponent(item);
 		item.txtName.requestFocusInWindow();		
