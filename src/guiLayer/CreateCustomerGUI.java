@@ -23,6 +23,10 @@ import com.jgoodies.forms.layout.RowSpec;
 import ctrLayer.CustomerCtr;
 import extensions.JBlinkLabel;
 import extensions.JIntegerField;
+import extensions.JTextFieldLimit;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class CreateCustomerGUI extends JPanel {
 	public JTextField txtName;
@@ -47,7 +51,6 @@ public class CreateCustomerGUI extends JPanel {
 	private JLabel lblPictureID;
 	private JIntegerField txtPictureID;
 	private JLabel lblCpr;
-	private JTextField txtCpr;
 	private JPanel companyPanel;
 	private JTextField txtCompany;
 	private JIntegerField txtCvr;
@@ -55,6 +58,10 @@ public class CreateCustomerGUI extends JPanel {
 	private JLabel lblCompany;
 	private SaleGUI saleGUI;
 	private MainGUI mainGUI;
+	private JPanel panel_3;
+	private JTextField txtCpr2;
+	private JTextField txtCpr1;
+	private JLabel label;
 	
 	public CreateCustomerGUI(boolean business, SaleGUI saleGUI, MainGUI mainGUI) {
 		this.mainGUI = mainGUI;
@@ -165,11 +172,11 @@ public class CreateCustomerGUI extends JPanel {
 		panel_1.add(privatePanel, "2, 14, 2, 3, fill, fill");
 		privatePanel.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("156px"),
-				ColumnSpec.decode("156px"),},
-				new RowSpec[] {
-						RowSpec.decode("28px"),
-						FormFactory.RELATED_GAP_ROWSPEC,
-						RowSpec.decode("28px"),}));
+				ColumnSpec.decode("156px:grow"),},
+			new RowSpec[] {
+				RowSpec.decode("28px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("28px:grow"),}));
 		
 		lblPictureID = new JLabel("Billed-Id");
 		privatePanel.add(lblPictureID, "1, 1, fill, fill");
@@ -181,9 +188,45 @@ public class CreateCustomerGUI extends JPanel {
 		lblCpr = new JLabel("Cpr-nummer");
 		privatePanel.add(lblCpr, "1, 3, fill, fill");
 		
-		txtCpr = new JTextField();
-		txtCpr.setColumns(10);
-		privatePanel.add(txtCpr, "2, 3, fill, fill");
+		panel_3 = new JPanel();
+		privatePanel.add(panel_3, "2, 3, fill, fill");
+		panel_3.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("88px:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		txtCpr1 = new JTextField();
+		txtCpr1.setDocument(new JTextFieldLimit(6));
+		txtCpr1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				if(txtCpr1.getText().length() > 5){
+					txtCpr2.requestFocusInWindow();
+				}
+			}
+		});
+		panel_3.add(txtCpr1, "1, 1, fill, default");
+		txtCpr1.setColumns(10);
+		
+		label = new JLabel("-");
+		panel_3.add(label, "3, 1, right, default");
+		
+		txtCpr2 = new JTextField();
+		txtCpr2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				if(arg0.getKeyCode() == KeyEvent.VK_BACK_SPACE && txtCpr2.getText().length() == 0){
+					txtCpr1.requestFocusInWindow();
+				}
+			}
+		});
+		txtCpr2.setDocument(new JTextFieldLimit(4));
+		panel_3.add(txtCpr2, "5, 1, fill, default");
+		txtCpr2.setColumns(10);
 		
 		companyPanel = new JPanel();
 		panel_1.add(companyPanel, "2, 18, 2, 3, fill, fill");
@@ -305,7 +348,7 @@ public class CreateCustomerGUI extends JPanel {
 				return;
 			}
 			
-			cprNr = txtCpr.getText();
+			cprNr = txtCpr1.getText();
 			if (cprNr == null || cprNr.trim().isEmpty()) {
 				lblError.setText("Cpr nr" + errorMsg);
 				lblError.startBlinking(true, true);
