@@ -121,16 +121,6 @@ public class LoginDialog extends JDialog {
 				buttonPane.add(cancelButton, "4, 4, fill, top");
 			}
 			setVisible(true);
-			
-			ActionListener actionListener = new ActionListener() {
-				public void actionPerformed(ActionEvent actionEvent) {
-				   setVisible(false);
-				   dispose();
-				}
-			};
-			
-			KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
-			//this.registerKeyboardAction(actionListener, k, JComponent.WHEN_IN_FOCUSED_WINDOW);
 		}
 	}
 
