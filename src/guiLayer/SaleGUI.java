@@ -42,8 +42,8 @@ import extensions.SaleItemTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import personLayer.Customer;
 import personLayer.Business;
+import personLayer.Customer;
 import modelLayer.Item;
 import modelLayer.PartSale;
 import modelLayer.Sale;
@@ -76,11 +76,19 @@ public class SaleGUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public SaleGUI(MainGUI mainGUI) {
+	public SaleGUI(MainGUI mainGUI, Sale sale) {
 		this.mainGUI = mainGUI;
-		partSales = new ArrayList<PartSale>();
+		
 		saleCtr = new SaleCtr();
-		saleCtr.createSale();
+		if (sale != null){
+			saleCtr.loadSale(sale);
+			updateCustomer();
+		}
+		else {
+			saleCtr.createSale();
+		}
+		Sale saleObj = saleCtr.getSale();
+		partSales = saleObj.getPartSales();
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{360, 250, 0};
@@ -197,60 +205,77 @@ public class SaleGUI extends JPanel {
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_4.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-						.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panel_4.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel_7, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+						.addComponent(panel_8, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		gl_panel_4.setVerticalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_4.createSequentialGroup()
-					.addGap(21)
-					.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, gl_panel_4.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		);
 		
 		JButton bntFind = new JButton("Find Kunde");
+		bntFind.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				findCustomer();
+			}
+		});
 		panel_8.add(bntFind);
 		
 		JButton btnCreate = new JButton("Opret kunde");
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				createCustomer();
+			}
+		});
 		panel_8.add(btnCreate);
 		panel_7.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("60px"),
+				ColumnSpec.decode("80px"),
 				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
 				FormFactory.NARROW_LINE_GAP_ROWSPEC,
 				RowSpec.decode("18px"),
 				RowSpec.decode("18px"),
 				RowSpec.decode("18px"),
+				RowSpec.decode("18px"),
 				RowSpec.decode("18px"),}));
 		
-		JLabel lblName = new JLabel("Navn: ");
-		panel_7.add(lblName, "1, 2, fill, fill");
+		lblBusiness = new JLabel("Virksomhed: ");
+		panel_7.add(lblBusiness, "1, 2");
 		
+		txtLblBusiness = new JLabel(" ");
+		lblBusiness.setLabelFor(txtLblBusiness);
+		panel_7.add(txtLblBusiness, "2, 2");
+		
+		lblName = new JLabel("Navn: ");
+		panel_7.add(lblName, "1, 3, fill, fill");
+		lblName.setLabelFor(txtLblName);
 		
 		txtLblName = new JLabel("");
 		panel_7.add(txtLblName, "2, 3, fill, fill");
 		
-		JLabel lblPhone = new JLabel("TLF nr.: ");
-		panel_7.add(lblPhone, "1, 3, fill, fill");
+		lblPhone = new JLabel("TLF nr.: ");
+		panel_7.add(lblPhone, "1, 4, fill, fill");
 		
-		JLabel txtPhone = new JLabel("12345678");
-		panel_7.add(txtPhone, "2, 4, fill, fill");
-		lblPhone.setLabelFor(txtPhone);
+		txtLblPhone = new JLabel("");
+		panel_7.add(txtLblPhone, "2, 4, fill, fill");
+		lblPhone.setLabelFor(txtLblPhone);
 		
-		JLabel lblCustomerNr = new JLabel("Kunde nr.: ");
-		panel_7.add(lblCustomerNr, "1, 4, fill, fill");
+		lblCustomerNr = new JLabel("Kunde nr.: ");
+		panel_7.add(lblCustomerNr, "1, 5, fill, fill");
 		
-	
 		txtLblCustomerNr = new JLabel("");
 		panel_7.add(txtLblCustomerNr, "2, 5, fill, fill");
 		lblCustomerNr.setLabelFor(txtLblCustomerNr);
 		
-		JLabel lblCredit = new JLabel("Kredit: ");
-		panel_7.add(lblCredit, "1, 5, fill, fill");
-		
+		lblCredit = new JLabel("Kredit: ");
+		panel_7.add(lblCredit, "1, 6, fill, fill");
+		lblCredit.setLabelFor(txtLblCredit);
 		
 		txtLblCredit = new JLabel("");
 		panel_7.add(txtLblCredit, "2, 6, fill, fill");
@@ -285,13 +310,6 @@ public class SaleGUI extends JPanel {
 		});
 		panel_9.add(btnFinish);
 
-	}
-	
-	public void setCustomer(Customer c){
-		if(c != null){
-			saleCtr.getSale().setCustomer(c);
-			updateCustomer();
-		}
 	}
 	
 	private void updateCustomer(){
@@ -348,11 +366,11 @@ public class SaleGUI extends JPanel {
 	}
 
 	private void finishSale() {
-		SaleFinishGUI addDialog = new SaleFinishGUI(null, saleCtr);
-		if (addDialog.isDone()){
+		SaleFinishGUI finishDialog = new SaleFinishGUI(null, saleCtr);
+		if (finishDialog.isDone()){
 			mainGUI.resetSale();
 		}
-		addDialog.dispose();
+		finishDialog.dispose();
 	}
 	
 	private void parkSale() {
