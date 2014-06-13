@@ -30,6 +30,10 @@ import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Rectangle;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
 
 public class OpretKundeGUI extends JPanel {
 	private JTextField txtStreet;
@@ -57,6 +61,7 @@ public class OpretKundeGUI extends JPanel {
 	private JLabel lblNewLabel;
 	private boolean business;
 	private JLabel lblError;
+	private JPanel panel;
 
 	/**
 	 * Create the panel.
@@ -65,15 +70,18 @@ public class OpretKundeGUI extends JPanel {
 		this.business = business;
 		setBounds(new Rectangle(0, 0, 0, 5));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{30, 112, 66, 181, 0};
-		gridBagLayout.rowHeights = new int[]{29, 28, 28, 28, 28, 28, 28, 35, 0, 0, 0, 0, 28, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{155, 164, 66, 0};
+		gridBagLayout.rowHeights = new int[]{29, 28, 28, 28, 28, 28, 28, 28, 0, 0, 0, 0, 28, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		lblNewLabel = new JLabel("Opret Kunde");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblNewLabel.gridwidth = 2;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 0;
 		gbc_lblNewLabel.gridy = 0;
@@ -81,6 +89,7 @@ public class OpretKundeGUI extends JPanel {
 		
 		lblName = new JLabel("Navn");
 		GridBagConstraints gbc_lblName = new GridBagConstraints();
+		gbc_lblName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblName.gridx = 0;
 		gbc_lblName.gridy = 1;
@@ -97,6 +106,7 @@ public class OpretKundeGUI extends JPanel {
 		
 		lblStreet = new JLabel("Gade");
 		GridBagConstraints gbc_lblStreet = new GridBagConstraints();
+		gbc_lblStreet.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblStreet.insets = new Insets(0, 0, 5, 5);
 		gbc_lblStreet.gridx = 0;
 		gbc_lblStreet.gridy = 2;
@@ -114,6 +124,7 @@ public class OpretKundeGUI extends JPanel {
 		
 		lblTown = new JLabel("By");
 		GridBagConstraints gbc_lblTown = new GridBagConstraints();
+		gbc_lblTown.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblTown.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTown.gridx = 0;
 		gbc_lblTown.gridy = 3;
@@ -128,6 +139,7 @@ public class OpretKundeGUI extends JPanel {
 		add(txtTown, gbc_txtTown);
 		txtTown.setColumns(10);
 		GridBagConstraints gbc_lblPostCode = new GridBagConstraints();
+		gbc_lblPostCode.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblPostCode.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPostCode.gridx = 0;
 		gbc_lblPostCode.gridy = 4;
@@ -149,6 +161,7 @@ public class OpretKundeGUI extends JPanel {
 		
 		lblPhoneNr = new JLabel("Tlf");
 		GridBagConstraints gbc_lblPhoneNr = new GridBagConstraints();
+		gbc_lblPhoneNr.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblPhoneNr.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPhoneNr.gridx = 0;
 		gbc_lblPhoneNr.gridy = 5;
@@ -165,20 +178,11 @@ public class OpretKundeGUI extends JPanel {
 		
 		lblEmail = new JLabel("E-mail");
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
+		gbc_lblEmail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEmail.gridx = 0;
 		gbc_lblEmail.gridy = 6;
 		add(lblEmail, gbc_lblEmail);
-		
-		JButton btnOpret = new JButton("Opret ");
-		btnOpret.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-				createCustomer();
-			}
-				
-			
-		});
 		
 		txtEmail = new JTextField();
 		GridBagConstraints gbc_txtEmail = new GridBagConstraints();
@@ -191,27 +195,20 @@ public class OpretKundeGUI extends JPanel {
 		
 		lblPictureId = new JLabel("Billed-Id");
 		GridBagConstraints gbc_lblPictureId = new GridBagConstraints();
+		gbc_lblPictureId.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblPictureId.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPictureId.gridx = 0;
 		gbc_lblPictureId.gridy = 7;
 		add(lblPictureId, gbc_lblPictureId);
-		if(!business){
-			lblCpr = new JLabel("Cpr-nummer");
-			GridBagConstraints gbc_lblCpr = new GridBagConstraints();
-			gbc_lblCpr.insets = new Insets(0, 0, 5, 5);
-			gbc_lblCpr.gridx = 1;
-			gbc_lblCpr.gridy = 8;
-			add(lblCpr, gbc_lblCpr);
-			
-			txtCprNr = new JTextField();
-			GridBagConstraints gbc_txtCprNr = new GridBagConstraints();
-			gbc_txtCprNr.insets = new Insets(0, 0, 5, 0);
-			gbc_txtCprNr.fill = GridBagConstraints.HORIZONTAL;
-			gbc_txtCprNr.gridx = 3;
-			gbc_txtCprNr.gridy = 8;
-			add(txtCprNr, gbc_txtCprNr);
-			txtCprNr.setColumns(10);
-		}
+			//if(!business){
+				lblCpr = new JLabel("Cpr-nummer");
+				GridBagConstraints gbc_lblCpr = new GridBagConstraints();
+				gbc_lblCpr.fill = GridBagConstraints.HORIZONTAL;
+				gbc_lblCpr.insets = new Insets(0, 0, 5, 5);
+				gbc_lblCpr.gridx = 0;
+				gbc_lblCpr.gridy = 8;
+				add(lblCpr, gbc_lblCpr);
+		//}
 		
 		txtPictureId = new JTextField();
 		GridBagConstraints gbc_txtPictureId = new GridBagConstraints();
@@ -221,8 +218,18 @@ public class OpretKundeGUI extends JPanel {
 		gbc_txtPictureId.gridy = 7;
 		add(txtPictureId, gbc_txtPictureId);
 		txtPictureId.setColumns(10);
+		
+		txtCprNr = new JTextField();
+		GridBagConstraints gbc_txtCprNr = new GridBagConstraints();
+		gbc_txtCprNr.insets = new Insets(0, 0, 5, 5);
+		gbc_txtCprNr.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtCprNr.gridx = 1;
+		gbc_txtCprNr.gridy = 8;
+		add(txtCprNr, gbc_txtCprNr);
+		txtCprNr.setColumns(10);
 		lblCompany = new JLabel("Firma Navn");
 		GridBagConstraints gbc_lblCompany = new GridBagConstraints();
+		gbc_lblCompany.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblCompany.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCompany.gridx = 0;
 		gbc_lblCompany.gridy = 9;
@@ -239,6 +246,7 @@ public class OpretKundeGUI extends JPanel {
 		
 		lblCvr = new JLabel("Cvr nummer");
 		GridBagConstraints gbc_lblCvr = new GridBagConstraints();
+		gbc_lblCvr.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblCvr.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCvr.gridx = 0;
 		gbc_lblCvr.gridy = 10;
@@ -255,27 +263,46 @@ public class OpretKundeGUI extends JPanel {
 		
 		lblError = new JLabel("");
 		GridBagConstraints gbc_lblError = new GridBagConstraints();
-		gbc_lblError.gridwidth = 4;
+		gbc_lblError.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblError.gridwidth = 3;
 		gbc_lblError.insets = new Insets(0, 0, 5, 0);
 		gbc_lblError.gridx = 0;
 		gbc_lblError.gridy = 11;
 		add(lblError, gbc_lblError);
-		GridBagConstraints gbc_btnOpret = new GridBagConstraints();
-		gbc_btnOpret.insets = new Insets(0, 0, 0, 5);
-		gbc_btnOpret.gridx = 1;
-		gbc_btnOpret.gridy = 12;
-		add(btnOpret, gbc_btnOpret);
+		
+		panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.gridwidth = 2;
+		gbc_panel.insets = new Insets(0, 0, 5, 5);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 12;
+		add(panel, gbc_panel);
+		panel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.GROWING_BUTTON_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.GROWING_BUTTON_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("28px"),}));
+		
+		JButton btnOpret = new JButton("Opret ");
+		panel.add(btnOpret, "1, 2, fill, fill");
 		
 		JButton btn = new JButton("Anuller");
+		panel.add(btn, "3, 2, fill, fill");
 		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		GridBagConstraints gbc_btn = new GridBagConstraints();
-		gbc_btn.insets = new Insets(0, 0, 0, 5);
-		gbc_btn.gridx = 2;
-		gbc_btn.gridy = 12;
-		add(btn, gbc_btn);
+		btnOpret.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				createCustomer();
+			}
+				
+			
+		});
 		
 
 	}
