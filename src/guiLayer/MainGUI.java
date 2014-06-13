@@ -270,5 +270,6 @@ public class MainGUI extends JFrame{
 	
 	public void killMe(JComponent c){
 		tabbedPane.remove(c);
+		tabbedPane.setSelectedComponent(Sale);
 	}
 }

@@ -2,6 +2,7 @@ package guiLayer;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -21,13 +22,12 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.CustomerCtr;
 import extensions.JBlinkLabel;
-
-import java.awt.GridLayout;
+import extensions.JIntegerField;
 
 public class CreateCustomerGUI extends JPanel {
 	public JTextField txtName;
 	private JTextField txtPostCode;
-	private JTextField txtPhone;
+	private JIntegerField txtPhone;
 	private JTextField txtEmail;
 	private JTextField txtTown;
 	
@@ -45,18 +45,18 @@ public class CreateCustomerGUI extends JPanel {
 	private JPanel panel_2;
 	private JPanel privatePanel;
 	private JLabel lblPictureID;
-	private JTextField txtPictureID;
+	private JIntegerField txtPictureID;
 	private JLabel lblCpr;
 	private JTextField txtCpr;
 	private JPanel companyPanel;
 	private JTextField txtCompany;
-	private JTextField txtCvr;
+	private JIntegerField txtCvr;
 	private JLabel lblCvr;
 	private JLabel lblCompany;
 	private SaleGUI saleGUI;
 	private MainGUI mainGUI;
 	
-	public CreateCustomerGUI(boolean business, SaleGUI saleGUI, MainGUI mainGUI){
+	public CreateCustomerGUI(boolean business, SaleGUI saleGUI, MainGUI mainGUI) {
 		this.mainGUI = mainGUI;
 		this.saleGUI = saleGUI;
 		this.business = business;
@@ -65,6 +65,7 @@ public class CreateCustomerGUI extends JPanel {
 	
 	/**
 	 * Create the panel.
+	 * 
 	 * @wbp.parser.constructor
 	 */
 	public CreateCustomerGUI(boolean business) {
@@ -93,31 +94,31 @@ public class CreateCustomerGUI extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("156px:grow"),
 				ColumnSpec.decode("156px:grow"),},
-			new RowSpec[] {
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.PREF_ROWSPEC,
-				RowSpec.decode("32px:grow"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),}));
+				new RowSpec[] {
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.PREF_ROWSPEC,
+						RowSpec.decode("32px:grow"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("default:grow"),}));
 		
 		lblName = new JLabel("Navn");
 		panel_1.add(lblName, "2, 2, fill, fill");
@@ -149,7 +150,7 @@ public class CreateCustomerGUI extends JPanel {
 		lblPhoneNr = new JLabel("Tlf");
 		panel_1.add(lblPhoneNr, "2, 10, fill, fill");
 		
-		txtPhone = new JTextField();
+		txtPhone = new JIntegerField();
 		panel_1.add(txtPhone, "3, 10, fill, fill");
 		txtPhone.setColumns(10);
 		
@@ -165,15 +166,15 @@ public class CreateCustomerGUI extends JPanel {
 		privatePanel.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("156px"),
 				ColumnSpec.decode("156px"),},
-			new RowSpec[] {
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),}));
+				new RowSpec[] {
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),}));
 		
 		lblPictureID = new JLabel("Billed-Id");
 		privatePanel.add(lblPictureID, "1, 1, fill, fill");
 		
-		txtPictureID = new JTextField();
+		txtPictureID = new JIntegerField();
 		txtPictureID.setColumns(10);
 		privatePanel.add(txtPictureID, "2, 1, fill, fill");
 		
@@ -189,10 +190,10 @@ public class CreateCustomerGUI extends JPanel {
 		companyPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("156px"),
 				ColumnSpec.decode("156px"),},
-			new RowSpec[] {
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),}));
+				new RowSpec[] {
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),}));
 		
 		lblCompany = new JLabel("Firma Navn");
 		companyPanel.add(lblCompany, "1, 1, fill, fill");
@@ -204,7 +205,7 @@ public class CreateCustomerGUI extends JPanel {
 		lblCvr = new JLabel("Cvr nummer");
 		companyPanel.add(lblCvr, "1, 3, fill, fill");
 		
-		txtCvr = new JTextField();
+		txtCvr = new JIntegerField();
 		txtCvr.setColumns(10);
 		companyPanel.add(txtCvr, "2, 3, fill, fill");
 		
@@ -217,8 +218,8 @@ public class CreateCustomerGUI extends JPanel {
 				FormFactory.GROWING_BUTTON_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.GROWING_BUTTON_COLSPEC,},
-			new RowSpec[] {
-				RowSpec.decode("fill:28px"),}));
+				new RowSpec[] {
+						RowSpec.decode("fill:28px"),}));
 		
 		JButton btnOpret = new JButton("Opret ");
 		panel.add(btnOpret, "1, 1, fill, fill");
@@ -296,7 +297,7 @@ public class CreateCustomerGUI extends JPanel {
 			lblError.startBlinking(true, true);
 			return;
 		}
-		if(!business){
+		if (!business) {
 			pictureId = txtPictureID.getText();
 			if (pictureId == null || pictureId.trim().isEmpty()) {
 				lblError.setText("Billede ID" + errorMsg);
@@ -312,7 +313,7 @@ public class CreateCustomerGUI extends JPanel {
 			}
 		}
 		
-		if(business){
+		if (business) {
 			company = txtCompany.getText();
 			if (company == null || company.trim().isEmpty()) {
 				lblError.setText("Virksomhedsnavn" + errorMsg);
@@ -328,20 +329,18 @@ public class CreateCustomerGUI extends JPanel {
 			}
 		}
 		
-		
-		
-		if(!business){
+		if (!business) {
 			CustomerCtr cCtr = new CustomerCtr();
 			Customer c = cCtr.createPrivateCustomer(name, phone, street, email, town, post, cprNr, pictureId);
 			
-			if(saleGUI != null){
+			if (saleGUI != null) {
 				saleGUI.setCustomer(c);
 			}
-		}else if(business){
+		} else if (business) {
 			CustomerCtr cCtr = new CustomerCtr();
 			Customer c = cCtr.createBusinessCustomer(name, phone, street, email, town, post, company, cvr);
 			
-			if(saleGUI != null){
+			if (saleGUI != null) {
 				saleGUI.setCustomer(c);
 			}
 		}
@@ -349,11 +348,11 @@ public class CreateCustomerGUI extends JPanel {
 		mainGUI.killMe(this);
 	}
 	
-	private void customerType(boolean business){
-		if(business){
+	private void customerType(boolean business) {
+		if (business) {
 			companyPanel.setVisible(true);
 			privatePanel.setVisible(false);
-		}else if(!business){
+		} else if (!business) {
 			companyPanel.setVisible(false);
 			privatePanel.setVisible(true);
 		}
