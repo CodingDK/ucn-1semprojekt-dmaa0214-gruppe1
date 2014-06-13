@@ -75,6 +75,7 @@ public class ItemGUI extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		model = new ItemTableModel(items);
 		table = new JTable(model);
+		table.setAutoCreateRowSorter(true);
 		table.getColumnModel().getColumn(0).setMaxWidth(25);
 		scrollPane.setViewportView(table);
 		panel_1.add(scrollPane, BorderLayout.CENTER);

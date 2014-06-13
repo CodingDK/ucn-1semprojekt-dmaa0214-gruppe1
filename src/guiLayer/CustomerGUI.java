@@ -83,6 +83,7 @@ public class CustomerGUI extends JPanel {
 		c = new ArrayList<Customer>();
 		model = new CustomerTableModel(c);
 		table = new JTable(model);
+		table.setAutoCreateRowSorter(true);
 		table.getColumnModel().getColumn(0).setMaxWidth(50);
 		table.addMouseListener(new MouseAdapter() {
 		    @Override
