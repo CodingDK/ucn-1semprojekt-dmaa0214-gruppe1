@@ -43,6 +43,7 @@ public class Demo {
 			CustomerCtr cusCtr = new CustomerCtr();
 			cusCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
 			cusCtr.createBusinessCustomer("Kis", "72691867", "Sofiendalsvej 60", "kbha@ucn.dk", "Aalborg", "9000", "UCN A/S", "33556063");
-			}
+			firstRun = false;
+		}
 	}
 }
