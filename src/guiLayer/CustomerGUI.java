@@ -150,11 +150,14 @@ public class CustomerGUI extends JPanel {
 		GroupLayout gl_searchGroupPanel = new GroupLayout(searchGroupPanel);
 		gl_searchGroupPanel.setHorizontalGroup(
 			gl_searchGroupPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(searchGridPanel, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-				.addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+				.addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+				.addGroup(gl_searchGroupPanel.createSequentialGroup()
+					.addGap(6)
+					.addComponent(searchGridPanel, GroupLayout.PREFERRED_SIZE, 222, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		gl_searchGroupPanel.setVerticalGroup(
-			gl_searchGroupPanel.createParallelGroup(Alignment.LEADING)
+			gl_searchGroupPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_searchGroupPanel.createSequentialGroup()
 					.addComponent(searchGridPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -185,8 +188,10 @@ public class CustomerGUI extends JPanel {
 			}
 		});
 		searchGridPanel.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("100px"),
-				ColumnSpec.decode("110px:grow"),},
+				FormFactory.GROWING_BUTTON_COLSPEC,
+				ColumnSpec.decode("55dlu"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,},
 			new RowSpec[] {
 				RowSpec.decode("28px"),
 				RowSpec.decode("28px"),

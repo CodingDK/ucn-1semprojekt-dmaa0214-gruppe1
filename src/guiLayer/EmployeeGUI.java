@@ -57,7 +57,7 @@ public class EmployeeGUI extends JPanel {
 	private MainGUI parent;
 	private JPanel panel_6;
 	private JBlinkLabel errLabel;
-	
+
 	/**
 	 * Create the panel.
 	 */
@@ -71,7 +71,7 @@ public class EmployeeGUI extends JPanel {
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
-		
+
 		JPanel panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 0, 5);
@@ -80,24 +80,24 @@ public class EmployeeGUI extends JPanel {
 		gbc_panel_1.gridy = 0;
 		add(panel_1, gbc_panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
-		
+
 		model = new EmployeeTableModel(employees);
 		table = new JTable(model);
 		JScrollPane scrollPane = new JScrollPane();
 		table.getColumnModel().getColumn(1).setMaxWidth(250);
 		scrollPane.setViewportView(table);
 		panel_1.add(scrollPane, BorderLayout.CENTER);
-		
+
 		JPanel panel_2 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panel_1.add(panel_2, BorderLayout.NORTH);
-		
+
 		JLabel lblMedarbejder = new JLabel("Medarbejder");
 		lblMedarbejder.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMedarbejder.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel_2.add(lblMedarbejder);
-		
+
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -105,14 +105,14 @@ public class EmployeeGUI extends JPanel {
 		gbc_panel.gridx = 1;
 		gbc_panel.gridy = 0;
 		add(panel, gbc_panel);
-		
+
 		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Find medarbejder", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_3.setBorder(new TitledBorder(null, "Find medarbejder", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_3.setBounds(10, 22, 240, 125);
 		panel.add(panel_3);
-		
+
 		JPanel panel_4 = new JPanel();
-		
+
 		JPanel panel_5 = new JPanel();
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
@@ -120,17 +120,19 @@ public class EmployeeGUI extends JPanel {
 				.addGroup(gl_panel_3.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
-					.addContainerGap())
+						.addGroup(gl_panel_3.createSequentialGroup()
+							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(0))
+						.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
+							.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+							.addContainerGap())))
 		);
 		gl_panel_3.setVerticalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
 					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(42, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		);
 		panel_5.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.GROWING_BUTTON_COLSPEC,
@@ -138,7 +140,7 @@ public class EmployeeGUI extends JPanel {
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("29px"),}));
-		
+
 		JButton btnClear = new JButton("Nulstil");
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -152,19 +154,19 @@ public class EmployeeGUI extends JPanel {
 				findCustomer();
 			}
 
-			
+
 		});
 		panel_5.add(btnFind, "2, 2, fill, top");
 		panel_4.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("100px:grow"),
 				ColumnSpec.decode("110px:grow"),},
-			new RowSpec[] {
+				new RowSpec[] {
 				RowSpec.decode("28px"),
 				RowSpec.decode("28px"),}));
-		
+
 		JLabel lblName = new JLabel("Navn");
 		panel_4.add(lblName, "1, 1, fill, fill");
-		
+
 		txtName = new JTextField();
 		txtName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -173,10 +175,10 @@ public class EmployeeGUI extends JPanel {
 		});
 		panel_4.add(txtName, "2, 1, fill, fill");
 		txtName.setColumns(10);
-		
+
 		JLabel lblEmpNr = new JLabel("Medarbejder ID");
 		panel_4.add(lblEmpNr, "1, 2, fill, fill");
-		
+
 		txtEmpNr = new JIntegerField();
 		txtEmpNr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -186,42 +188,43 @@ public class EmployeeGUI extends JPanel {
 		txtEmpNr.setColumns(10);
 		panel_4.add(txtEmpNr, "2, 2, fill, fill");
 		panel_3.setLayout(gl_panel_3);
-		
+
 		panel_6 = new JPanel();
-		panel_6.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Opret Medarbejder", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_6.setBorder(new TitledBorder(null, "Opret Medarbejder", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_6.setBounds(10, 146, 240, 58);
 		panel.add(panel_6);
-		
-		
+
+
 		JButton btnOpretMedarbejder = new JButton("Opret Medarbejder");
 		btnOpretMedarbejder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new CreateEmployee();
 			}
 		});
 		GroupLayout gl_panel_6 = new GroupLayout(panel_6);
 		gl_panel_6.setHorizontalGroup(
-			gl_panel_6.createParallelGroup(Alignment.TRAILING)
+				gl_panel_6.createParallelGroup(Alignment.TRAILING)
 				.addGap(0, 234, Short.MAX_VALUE)
 				.addGroup(gl_panel_6.createSequentialGroup()
-					.addGap(45)
-					.addComponent(btnOpretMedarbejder, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-					.addGap(43))
-		);
+						.addGap(45)
+						.addComponent(btnOpretMedarbejder, GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+						.addGap(43))
+				);
 		gl_panel_6.setVerticalGroup(
-			gl_panel_6.createParallelGroup(Alignment.LEADING)
+				gl_panel_6.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 58, Short.MAX_VALUE)
 				.addGroup(gl_panel_6.createSequentialGroup()
-					.addComponent(btnOpretMedarbejder)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+						.addComponent(btnOpretMedarbejder)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
 		panel_6.setLayout(gl_panel_6);
-		
+
 		errLabel = new JBlinkLabel("");
 		errLabel.setBounds(10, 6, 240, 16);
 		panel.add(errLabel);
 		panel_6.setVisible(false);
 	}
-	
+
 	private void findCustomer() {
 		EmployeeCtr eCtr = new EmployeeCtr();
 		String name = txtName.getText();
@@ -247,7 +250,7 @@ public class EmployeeGUI extends JPanel {
 			panel_6.setVisible(false);
 		}
 	}
-	
+
 	private void clear(){
 		txtName.setText("");
 		txtEmpNr.setText("");
