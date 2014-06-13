@@ -59,7 +59,7 @@ public class Demo {
 			eCtr.createEmployee("3", "Bjarne", "12345678", "Hobrovej 26", "bjarne@ucn.dk", "Vestbjerg", "9380", "100170-2141", null, false);
 			
 			for(int i = 0; i < 25; i++){
-				eCtr.createEmployee(""+i, "Testper"+i, "" +i+i+i+i+i+i+i+i, "Testvej", "test@ucn.dk", "Testbjerg", "8888", "141010-2040", null, false);
+				eCtr.createEmployee(""+i, "Testper"+i, "1231"+i, "Testvej", "test@ucn.dk", "Testbjerg", "8888", "141010-2040", null, false);
 
 			}
 			
