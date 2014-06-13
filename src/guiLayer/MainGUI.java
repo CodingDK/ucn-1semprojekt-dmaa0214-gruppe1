@@ -113,6 +113,7 @@ public class MainGUI extends JFrame{
 		//tabbedPane.addTab("Kategori", null, Category, null);
 		tabbedPane.insertTab("Lager", null, Storage, null, 5);
 		tabbedPane.insertTab("Kategori", null, Category, "Kategori", 5);
+		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
