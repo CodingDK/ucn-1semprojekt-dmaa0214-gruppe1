@@ -239,7 +239,7 @@ public class MainGUI extends JFrame implements KeyListener{
 	}
 
 	public void keyPressed(KeyEvent arg0) {
-		KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.ALT_MASK);
+		KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK);
 		if(arg0.equals(k)){
 			tabbedPane.setSelectedComponent(Sale);
 		}
