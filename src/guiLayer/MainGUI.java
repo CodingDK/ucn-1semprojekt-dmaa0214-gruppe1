@@ -6,6 +6,7 @@ import java.awt.Event;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -235,8 +236,22 @@ public class MainGUI extends JFrame{
 		item.txtName.requestFocusInWindow();		
 	}
 	
+	public void createPrivateCustomer(SaleGUI sGUI){
+		CreateCustomerGUI item = new CreateCustomerGUI(false, sGUI, this);
+		tabbedPane.addTab("Opret Privat Kunde", item);
+		tabbedPane.setSelectedComponent(item);
+		item.txtName.requestFocusInWindow();		
+	}
+	
 	public void createBusinesssCustomer(){
 		CreateCustomerGUI item = new CreateCustomerGUI(true);
+		tabbedPane.addTab("Opret Erhvervs Kunde", item);
+		tabbedPane.setSelectedComponent(item);
+		item.txtName.requestFocusInWindow();		
+	}
+	
+	public void createBusinesssCustomer(SaleGUI sGUI){
+		CreateCustomerGUI item = new CreateCustomerGUI(true, sGUI, this);
 		tabbedPane.addTab("Opret Erhvervs Kunde", item);
 		tabbedPane.setSelectedComponent(item);
 		item.txtName.requestFocusInWindow();		
@@ -248,5 +263,9 @@ public class MainGUI extends JFrame{
 		tabbedPane.insertTab("Salg", null, Sale, null, 0);
 		tabbedPane.setSelectedComponent(Sale);
 		reDraw();
+	}
+	
+	public void killMe(JComponent c){
+		tabbedPane.remove(c);
 	}
 }

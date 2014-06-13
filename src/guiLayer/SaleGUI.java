@@ -365,10 +365,10 @@ public class SaleGUI extends JPanel {
 		int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Vælg Kundetype","Opret Kunde", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
 		//System.out.println(choice);
 		if(choice == 0){
-			mainGUI.createPrivateCustomer();
+			mainGUI.createPrivateCustomer(this);
 		}
 		else if(choice == 1){
-			mainGUI.createBusinesssCustomer();
+			mainGUI.createBusinesssCustomer(this);
 		}
 	}
 
