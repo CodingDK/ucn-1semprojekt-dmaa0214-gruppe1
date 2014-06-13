@@ -35,7 +35,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 
-public class OpretKundeGUI extends JPanel {
+public class CreateCustomerGUI extends JPanel {
 	private JTextField txtStreet;
 	public JTextField txtName;
 	private JTextField txtPostCode;
@@ -66,7 +66,7 @@ public class OpretKundeGUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public OpretKundeGUI(boolean business) {
+	public CreateCustomerGUI(boolean business) {
 		this.business = business;
 		setBounds(new Rectangle(0, 0, 0, 5));
 		GridBagLayout gridBagLayout = new GridBagLayout();
