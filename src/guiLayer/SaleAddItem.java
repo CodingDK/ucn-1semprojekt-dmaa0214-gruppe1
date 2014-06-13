@@ -138,7 +138,7 @@ public class SaleAddItem extends JDialog {
 				getRootPane().setDefaultButton(bntAdd);
 			}
 			{
-				JButton bntCancel = new JButton("Anuller");
+				JButton bntCancel = new JButton("Annuller");
 				bntCancel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						setVisible(false); 
