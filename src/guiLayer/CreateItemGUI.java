@@ -82,10 +82,10 @@ public class CreateItemGUI extends JPanel {
 				RowSpec.decode("28px"),
 				RowSpec.decode("28px"),
 				RowSpec.decode("28px"),
-				RowSpec.decode("28px:grow"),}));
+				RowSpec.decode("28px"),}));
 		
 		JLabel lblName = new JLabel("Navn");
-		panel_2.add(lblName, "2, 1, fill, fill");
+		panel_2.add(lblName, "2, 1, left, fill");
 		
 		txtName = new JTextField();
 		txtName.setColumns(10);
@@ -175,7 +175,7 @@ public class CreateItemGUI extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,}));
+				RowSpec.decode("20px"),}));
 		
 		JButton btnClear = new JButton("Nulstil");
 		panel_4.add(btnClear, "2, 2");

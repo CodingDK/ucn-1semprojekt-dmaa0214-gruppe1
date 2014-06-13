@@ -265,7 +265,6 @@ public class CustomerGUI extends JPanel {
 			}
 		});
 		panel_2.add(btnPrivate, "1, 1");
-		
 		JButton btnBusiness = new JButton("Erhverv");
 		btnBusiness.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
