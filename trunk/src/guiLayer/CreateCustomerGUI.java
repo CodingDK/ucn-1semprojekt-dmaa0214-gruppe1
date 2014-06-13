@@ -12,12 +12,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import personLayer.Customer;
+
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
+import ctrLayer.CustomerCtr;
 import extensions.JBlinkLabel;
+
 import java.awt.GridLayout;
 
 public class CreateCustomerGUI extends JPanel {
@@ -49,12 +53,25 @@ public class CreateCustomerGUI extends JPanel {
 	private JTextField txtCvr;
 	private JLabel lblCvr;
 	private JLabel lblCompany;
+	private SaleGUI saleGUI;
+	
+	public CreateCustomerGUI(boolean business, SaleGUI saleGUI){
+		this.saleGUI = saleGUI;
+		this.business = business;
+		buildPanel();
+	}
 	
 	/**
 	 * Create the panel.
+	 * @wbp.parser.constructor
 	 */
 	public CreateCustomerGUI(boolean business) {
 		this.business = business;
+		buildPanel();
+	}
+	
+	private void buildPanel() {
+		
 		setBounds(new Rectangle(0, 0, 0, 5));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {318, 145, 0};
@@ -89,13 +106,13 @@ public class CreateCustomerGUI extends JPanel {
 				RowSpec.decode("28px"),
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,// 16
-				RowSpec.decode("28px"),
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("28px"),
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("28px"),
 				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("28px"),
+				FormFactory.PREF_ROWSPEC,
 				RowSpec.decode("32px:grow"),
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("default:grow"),}));
@@ -140,7 +157,7 @@ public class CreateCustomerGUI extends JPanel {
 		txtEmail = new JTextField();
 		panel_1.add(txtEmail, "3, 12, fill, fill");
 		txtEmail.setColumns(10);
-		/**
+		
 		privatePanel = new JPanel();
 		panel_1.add(privatePanel, "2, 14, 2, 3, fill, fill");
 		privatePanel.setLayout(new FormLayout(new ColumnSpec[] {
@@ -164,7 +181,7 @@ public class CreateCustomerGUI extends JPanel {
 		txtCpr = new JTextField();
 		txtCpr.setColumns(10);
 		privatePanel.add(txtCpr, "2, 3, fill, fill");
-		*/
+		
 		companyPanel = new JPanel();
 		panel_1.add(companyPanel, "2, 18, 2, 3, fill, fill");
 		companyPanel.setLayout(new FormLayout(new ColumnSpec[] {
@@ -188,6 +205,9 @@ public class CreateCustomerGUI extends JPanel {
 		txtCvr = new JTextField();
 		txtCvr.setColumns(10);
 		companyPanel.add(txtCvr, "2, 3, fill, fill");
+		
+		lblError = new JBlinkLabel("");
+		panel_1.add(lblError, "2, 21, 2, 1, center, center");
 		
 		panel = new JPanel();
 		panel_1.add(panel, "2, 22, 2, 1, fill, fill");
@@ -215,7 +235,6 @@ public class CreateCustomerGUI extends JPanel {
 			public void actionPerformed(ActionEvent e) {}
 		});
 		btnOpret.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent arg0) {
 				createCustomer();
 			}
@@ -227,60 +246,95 @@ public class CreateCustomerGUI extends JPanel {
 	}
 	
 	protected void createCustomer() {
-		String errorMsg = "feltet må ikke være tomt";
+		String errorMsg = " må ikke være tomt";
 		String name = txtName.getText();
 		if (name == null || name.trim().isEmpty()) {
-			lblError.setText(errorMsg);
+			lblError.setText("Navn" + errorMsg);
+			lblError.startBlinking(true, true);
 			return;
 		}
 		
 		String street = txtStreet.getText();
 		if (street == null || street.trim().isEmpty()) {
-			lblError.setText(errorMsg);
+			lblError.setText("Gade" + errorMsg);
+			lblError.startBlinking(true, true);
 			return;
 		}
 		
 		String town = txtTown.getText();
 		
 		if (town == null || town.trim().isEmpty()) {
-			lblError.setText(errorMsg);
+			lblError.setText("By" + errorMsg);
+			lblError.startBlinking(true, true);
+			return;
+		}
+		
+		String post = txtPostCode.getText();
+		
+		if (post == null || post.trim().isEmpty()) {
+			lblError.setText("Post nr" + errorMsg);
+			lblError.startBlinking(true, true);
 			return;
 		}
 		
 		String phone = txtPhone.getText();
 		if (phone == null || phone.trim().isEmpty()) {
-			lblError.setText(errorMsg);
+			lblError.setText("Tlf nr" + errorMsg);
+			lblError.startBlinking(true, true);
 			return;
 		}
 		
 		String email = txtEmail.getText();
 		if (email == null || email.trim().isEmpty()) {
-			lblError.setText(errorMsg);
+			lblError.setText("Email" + errorMsg);
+			lblError.startBlinking(true, true);
 			return;
 		}
 		
 		String pictureId = txtPictureID.getText();
 		if (pictureId == null || pictureId.trim().isEmpty()) {
-			lblError.setText(errorMsg);
+			lblError.setText("Billede ID" + errorMsg);
+			lblError.startBlinking(true, true);
 			return;
 		}
 		
 		String cprNr = txtCpr.getText();
 		if (cprNr == null || cprNr.trim().isEmpty()) {
-			lblError.setText(errorMsg);
+			lblError.setText("Cpr nr" + errorMsg);
+			lblError.startBlinking(true, true);
 			return;
 		}
 		
 		String company = txtCompany.getText();
 		if (company == null || company.trim().isEmpty()) {
-			lblError.setText(errorMsg);
+			lblError.setText("Virksomhedsnavn" + errorMsg);
+			lblError.startBlinking(true, true);
 			return;
 		}
 		
 		String cvr = txtCvr.getText();
 		if (cvr == null || cvr.trim().isEmpty()) {
-			lblError.setText(errorMsg);
+			lblError.setText("CVR" + errorMsg);
+			lblError.startBlinking(true, true);
 			return;
+		}
+		
+		
+		
+		if(!business){
+			CustomerCtr cCtr = new CustomerCtr();
+			Customer c = cCtr.createPrivateCustomer(name, phone, street, email, town, post, cprNr, pictureId);
+			
+			if(saleGUI != null){
+				saleGUI.setCustomer(c);
+			}
+		}else if(business){
+			CustomerCtr cCtr = new CustomerCtr();
+			Customer c = cCtr.createBusinessCustomer(name, phone, street, email, town, post, company, cvr);
+			
+			if(saleGUI != null){
+				saleGUI.setCustomer(c);
+			}
 		}
 	}
 	

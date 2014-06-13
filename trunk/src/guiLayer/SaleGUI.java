@@ -236,9 +236,9 @@ public class SaleGUI extends JPanel {
 		JLabel lblPhone = new JLabel("TLF nr.: ");
 		panel_7.add(lblPhone, "1, 3, fill, fill");
 		
-		txtPhone = new JLabel("12345678");
-		panel_7.add(txtPhon, "2, 4, fill, fill");
-		lblPhone.setLabelFor(txtPhon);
+		JLabel txtPhone = new JLabel("12345678");
+		panel_7.add(txtPhone, "2, 4, fill, fill");
+		lblPhone.setLabelFor(txtPhone);
 		
 		JLabel lblCustomerNr = new JLabel("Kunde nr.: ");
 		panel_7.add(lblCustomerNr, "1, 4, fill, fill");
@@ -287,6 +287,66 @@ public class SaleGUI extends JPanel {
 
 	}
 	
+	public void setCustomer(Customer c){
+		if(c != null){
+			saleCtr.getSale().setCustomer(c);
+			updateCustomer();
+		}
+	}
+	
+	private void updateCustomer(){
+		Sale sale = saleCtr.getSale();
+		Customer cus = sale.getCustomer();
+		String business = " ";
+		String name = " ";
+		String phone = " ";
+		String customerNr = " ";
+		String credit = " ";
+		if (cus != null){
+			if (cus instanceof Business){
+				Business b = (Business) cus;
+				business = b.getCompany();
+				lblBusiness.setVisible(true);
+				txtLblBusiness.setVisible(true);
+			}
+			else {
+				lblBusiness.setVisible(false);
+				txtLblBusiness.setVisible(false);
+			}
+			name = cus.getName();
+			phone = cus.getPhoneNr();
+			customerNr = "#"+cus.getId();
+			credit = cus.getCredit() + " ,-";
+		}
+		txtLblBusiness.setText(business);
+		txtLblName.setText(name);
+		txtLblPhone.setText(phone);
+		txtLblCustomerNr.setText(customerNr);
+		txtLblCredit.setText(credit);
+		
+	}
+	
+	private void findCustomer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void createCustomer() {
+		JFrame frame = new JFrame();
+		String[] options = new String[3];
+		options[0] = new String("Privat");
+		options[1] = new String("Erhverv");
+		options[2] = new String("Annuller");
+		int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Vælg Kundetype","Opret Kunde", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
+		//System.out.println(choice);
+		if(choice == 0){
+			mainGUI.createPrivateCustomer();
+		}
+		else if(choice == 1){
+			mainGUI.createBusinesssCustomer();
+		}
+	}
+
 	private void finishSale() {
 		SaleFinishGUI addDialog = new SaleFinishGUI(null, saleCtr);
 		if (addDialog.isDone()){
@@ -359,13 +419,5 @@ public class SaleGUI extends JPanel {
 		txtSubtotal.setText(subtotal + " ,-");
 		txtMoms.setText(moms + " ,-");
 		txtTotal.setText(subtotal+moms + " ,-");
-	}
-	
-	public void setCustomer(Customer c){
-		this.customer = customer;
-		txtName.setText(customer.getName());
-		txtPhone.setText(customer.getPhoneNr());
-		txtCustomerNr.setText("" + customer.getId());
-		txtCredit.setText(customer.getCredit() + "");
 	}
 }
