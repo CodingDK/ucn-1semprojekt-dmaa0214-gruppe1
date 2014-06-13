@@ -109,11 +109,6 @@ public class MainGUI extends JFrame{
 		tabbedPane.setMnemonicAt(2, KeyEvent.VK_K);
 		tabbedPane.insertTab("Ordre", null, Order, null, 3);
 		tabbedPane.setMnemonicAt(3, KeyEvent.VK_O);
-		tabbedPane.insertTab("Medarbejder", null, Employee, null, 4);
-		tabbedPane.setMnemonicAt(4, KeyEvent.VK_M);
-		//tabbedPane.addTab("Kategori", null, Category, null);
-		tabbedPane.insertTab("Lager", null, Storage, null, 5);
-		tabbedPane.insertTab("Kategori", null, Category, "Kategori", 5);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -193,6 +188,7 @@ public class MainGUI extends JFrame{
 			LoginDialog dialog = new LoginDialog(null, this);
 			if(admin){
 				grantAccess();
+				
 			}
 		}else if(admin){
 			revokeAccess();
@@ -202,6 +198,10 @@ public class MainGUI extends JFrame{
 	protected void grantAccess(){
 		mntmLogin.setText("Logud");
 		Employee.setAdmin(true);
+		tabbedPane.insertTab("Medarbejder", null, Employee, null, 4);
+		tabbedPane.setMnemonicAt(4, KeyEvent.VK_M);
+		tabbedPane.insertTab("Lager", null, Storage, null, 5);
+		tabbedPane.insertTab("Kategori", null, Category, "Kategori", 5);
 		reDraw();
 	}
 	
@@ -210,6 +210,9 @@ public class MainGUI extends JFrame{
 		//tabbedPane.remove(Category);
 		Employee.setAdmin(false);
 		admin = false;
+		tabbedPane.remove(Employee);
+		tabbedPane.remove(Storage);
+		tabbedPane.remove(Category);
 		reDraw();
 	}
 	

@@ -66,7 +66,7 @@ public class EmployeeTableModel extends AbstractTableModel{
 		} else if(collIndex == 4){
 			value = "Postnummer";
 		} else if(collIndex == 5){
-			value = "Tlf nr";
+			value = "Tlf nr.";
 		} else if(collIndex == 6){
 			value = "E-mail";
 		} else if(collIndex == 7){

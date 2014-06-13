@@ -259,14 +259,14 @@ public class SaleGUI extends JPanel {
 		txtLblName = new JLabel("");
 		panel_7.add(txtLblName, "2, 3, fill, fill");
 		
-		lblPhone = new JLabel("TLF nr.: ");
+		lblPhone = new JLabel("Tlf nr.: ");
 		panel_7.add(lblPhone, "1, 4, fill, fill");
 		
 		txtLblPhone = new JLabel("");
 		panel_7.add(txtLblPhone, "2, 4, fill, fill");
 		lblPhone.setLabelFor(txtLblPhone);
 		
-		lblCustomerNr = new JLabel("Kunde nr.: ");
+		lblCustomerNr = new JLabel("Kundenr.: ");
 		panel_7.add(lblCustomerNr, "1, 5, fill, fill");
 		
 		txtLblCustomerNr = new JLabel("");
@@ -359,12 +359,12 @@ public class SaleGUI extends JPanel {
 	private void createCustomer() {
 		JFrame frame = new JFrame();
 		String[] options = new String[3];
-		options[0] = new String("Privat");
+		options[2] = new String("Privat");
 		options[1] = new String("Erhverv");
-		options[2] = new String("Annuller");
+		options[0] = new String("Annuller");
 		int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Vælg Kundetype","Opret Kunde", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
 		//System.out.println(choice);
-		if(choice == 0){
+		if(choice == 2){
 			mainGUI.createPrivateCustomer(this);
 		}
 		else if(choice == 1){

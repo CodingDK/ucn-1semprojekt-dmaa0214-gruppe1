@@ -9,6 +9,7 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
 
@@ -32,6 +33,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import extensions.JBlinkLabel;
 
 import javax.swing.SwingConstants;
+
 import java.awt.event.KeyAdapter;
 
 public class LoginDialog extends JDialog {
@@ -75,7 +77,7 @@ public class LoginDialog extends JDialog {
 			contentPanel.add(lblPassword, "1, 2, fill, fill");
 		}
 		{
-			txtPassword = new JTextField();
+			txtPassword = new JPasswordField();
 			contentPanel.add(txtPassword, "2, 2, fill, fill");
 			txtPassword.setColumns(10);
 		}
