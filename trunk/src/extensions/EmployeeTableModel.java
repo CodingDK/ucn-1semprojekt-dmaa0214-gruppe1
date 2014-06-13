@@ -42,7 +42,11 @@ public class EmployeeTableModel extends AbstractTableModel{
 		} else if(collIndex == 6){
 			value = e.getEmail();
 		} else if(collIndex == 7){
-			value = e.getAdmin();
+			if(e.getAdmin()){
+				value = "Ja";
+			} else{
+				value = "Nej";
+			}
 		}
 		return value;
 	}	
