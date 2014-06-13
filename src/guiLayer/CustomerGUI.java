@@ -58,6 +58,7 @@ public class CustomerGUI extends JPanel {
 	public JTextField txtName;
 	private JTextField txtTlf;
 	private MainGUI parent;
+	private JButton btnOpretKunde;
 	
 	/**
 	 * Create the panel.
