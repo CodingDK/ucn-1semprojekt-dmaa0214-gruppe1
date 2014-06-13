@@ -117,7 +117,7 @@ public class SaleGUI extends JPanel {
 		JPanel panel_5 = new JPanel();
 		panel_10.add(panel_5);
 		FormLayout fl_panel_5 = new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("50px"),
+				ColumnSpec.decode("60px"),
 				ColumnSpec.decode("80px"),},
 			new RowSpec[] {
 				RowSpec.decode("30px"),
@@ -248,52 +248,73 @@ public class SaleGUI extends JPanel {
 		panel_1.add(panel_9);
 		panel_9.setLayout(new GridLayout(3, 0, 0, 12));
 		
-		JButton button = new JButton("Nulstil");
-		button.addActionListener(new ActionListener() {
+		JButton bntCancel = new JButton("Nulstil");
+		bntCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cancelSale();
 			}
 		});
-		panel_9.add(button);
+		panel_9.add(bntCancel);
 		
-		JButton button_1 = new JButton("Parker");
-		panel_9.add(button_1);
-		
-		JButton button_2 = new JButton("Udfør");
-		button_2.addActionListener(new ActionListener() {
+		JButton bntPark = new JButton("Parker");
+		bntPark.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				FinishSale();
+				parkSale();
 			}
 		});
-		panel_9.add(button_2);
+		panel_9.add(bntPark);
+		
+		JButton btnFinish = new JButton("Afslut");
+		btnFinish.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				finishSale();
+			}
+		});
+		panel_9.add(btnFinish);
 
 	}
 	
-	private void FinishSale() {
-		JFrame frame = new JFrame();
-		String[] options = new String[2];
-		options[0] = new String("Nulstil");
-		options[1] = new String("Annuller");
-		int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Er du sikker på du vil nulstille salget?","Nulstil Salg", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
-		if(choice == 1){ // annuller
-			
-			System.out.println(choice);
-		} else { //nulstil
-			
+	private void finishSale() {
+		SaleFinishGUI addDialog = new SaleFinishGUI(null, saleCtr);
+		if (addDialog.isDone()){
+			mainGUI.resetSale();
 		}
+		addDialog.dispose();
+	}
+	
+	private void parkSale() {
+		if(isSaleEmpty()){
+			JOptionPane.showMessageDialog(null, "Du kan ikke parkere et tomt salg","Advarsel",JOptionPane.ERROR_MESSAGE);
+		} else{
+			JFrame frame = new JFrame();
+			String[] options = new String[2];
+			options[0] = new String("Parker");
+			options[1] = new String("Annuller");
+			int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Er du sikker på du vil parkere salget?","Parker Salg", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
+			//System.out.println(choice);
+			if(choice == 0){
+				
+				saleCtr.parkSale();
+				mainGUI.resetSale();
+			}	
+		}	
 	}
 
 	private void cancelSale() {
-		JFrame frame = new JFrame();
-		String[] options = new String[2];
-		options[0] = new String("Nulstil");
-		options[1] = new String("Annuller");
-		int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Er du sikker på du vil nulstille salget?","Nulstil Salg", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
-		System.out.println(choice);
-		if(choice == 0){
-			
-			saleCtr.cancelSale();
-			mainGUI.cancelSale();
+		if(isSaleEmpty()){
+			JOptionPane.showMessageDialog(null, "Du kan ikke parkere et tomt salg","Advarsel",JOptionPane.ERROR_MESSAGE);
+		} else{
+			JFrame frame = new JFrame();
+			String[] options = new String[2];
+			options[0] = new String("Nulstil");
+			options[1] = new String("Annuller");
+			int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Er du sikker på du vil nulstille salget?","Nulstil Salg", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
+			//System.out.println(choice);
+			if(choice == 0){
+				
+				saleCtr.cancelSale();
+				mainGUI.resetSale();
+			}
 		}
 	}
 
@@ -304,6 +325,14 @@ public class SaleGUI extends JPanel {
 		model.refresh(partSales);
 		model.fireTableDataChanged();
 		updatePrices();
+	}
+	
+	public boolean isSaleEmpty(){
+		boolean ret = true;
+		if (partSales.size() > 0){
+			ret = false;
+		}
+		return ret;
 	}
 	
 	private void updatePrices(){
