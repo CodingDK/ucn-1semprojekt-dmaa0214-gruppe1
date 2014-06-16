@@ -40,7 +40,7 @@ public class OrderGUI extends JPanel {
 	private ArrayList<Sale> sales;
 	public JTextField txtName;
 	private JTextField txtID;
-	public JButton btnSøg;
+	public JButton btnSearch;
 	private JComboBox<String> comboBox;
 
 	/**
@@ -121,7 +121,7 @@ public class OrderGUI extends JPanel {
 				update();
 			}
 		});
-		String[] options = {"Parkeret salg", "Alle salg"};
+		String[] options = {"Parkeret salg", "Afsluttet salg", "Alle salg"};
 		comboBox.setModel(new DefaultComboBoxModel<String>(options));
 		
 		panel_6.add(comboBox);
@@ -148,22 +148,22 @@ public class OrderGUI extends JPanel {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		
-		btnSøg = new JButton("Søg");
-		btnSøg.addActionListener(new ActionListener() {
+		btnSearch = new JButton("Søg");
+		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				searchCustomer();
 				clearInput();
 			}
 		});
-		panel_5.add(btnSøg);
+		panel_5.add(btnSearch);
 		
-		JButton btnNulstil = new JButton("Nulstil");
-		btnNulstil.addActionListener(new ActionListener() {
+		JButton btnClear = new JButton("Nulstil");
+		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clearInput();
 			}
 		});
-		panel_5.add(btnNulstil);
+		panel_5.add(btnClear);
 		panel_4.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
@@ -198,6 +198,8 @@ public class OrderGUI extends JPanel {
 		SaleCtr sCtr = new SaleCtr();
 		if(i == 0){
 			sales = sCtr.getParkedSales();
+		}else if(i == 1){
+			System.out.println("sup");
 		}else{
 			sales = sCtr.getSales();
 		}
