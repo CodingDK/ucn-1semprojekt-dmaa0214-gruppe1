@@ -144,16 +144,16 @@ public class StorageGUI extends JPanel {
 		panel.add(panel_2, gbc_panel_2);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(0, 48, 250, 251);
+		panel_4.setBounds(0, 26, 250, 103);
 		panel_4.setBorder(new TitledBorder(null, "Opret Lager", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		panel_2.add(panel_4);
 		panel_4.setLayout(null);
 		
 		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(16, 43, 209, 32);
+		panel_5.setBounds(16, 18, 209, 32);
 		panel_4.add(panel_5);
 		panel_5.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("100px"),
+				ColumnSpec.decode("75px"),
 				ColumnSpec.decode("110px:grow"),},
 			new RowSpec[] {
 				RowSpec.decode("30px"),}));
@@ -166,7 +166,7 @@ public class StorageGUI extends JPanel {
 		txtStorageName.setColumns(10);
 		
 		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(16, 87, 209, 32);
+		panel_6.setBounds(16, 50, 209, 32);
 		panel_4.add(panel_6);
 		panel_6.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("max(50dlu;pref):grow"),
@@ -193,7 +193,7 @@ public class StorageGUI extends JPanel {
 		
 		lblState = new JBlinkLabel("");
 		lblState.setHorizontalAlignment(SwingConstants.CENTER);
-		lblState.setBounds(0, 20, 250, 16);
+		lblState.setBounds(0, 6, 250, 16);
 		panel_2.add(lblState);
 	}
 	
@@ -214,6 +214,8 @@ public class StorageGUI extends JPanel {
 			lblState.startBlinking(true, true);
 		} else{
 			iCtr.createStorage(name);
+			lblState.setText(name + " er oprettet");
+			lblState.startBlinking(true, false);
 		}
 		model.fireTableDataChanged();
 		storages = iCtr.getAllStorage();
