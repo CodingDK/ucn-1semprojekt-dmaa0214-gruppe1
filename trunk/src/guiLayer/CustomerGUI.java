@@ -116,11 +116,11 @@ public class CustomerGUI extends JPanel {
 		table.addMouseListener(new MouseAdapter() {
 		    @Override
 		    public void mouseReleased(MouseEvent e) {
-		        mouseListenerTable(e);
+		        mouseListenerTable(e, "released");
 		    }
 		    @Override
 		    public void mouseClicked(MouseEvent e) {
-		        mouseListenerTable(e);
+		        mouseListenerTable(e, "pressed");
 		    }
 		});
 		tablePanel.add(new JScrollPane(table), BorderLayout.CENTER);
@@ -285,7 +285,7 @@ public class CustomerGUI extends JPanel {
 		//this.getRootPane().setDefaultButton(btnFind);
 	}
 	
-	private void mouseListenerTable(MouseEvent e) {
+	private void mouseListenerTable(MouseEvent e, String s) {
 		int r = table.rowAtPoint(e.getPoint());
         if (r >= 0 && r < table.getRowCount()) {
             table.setRowSelectionInterval(r, r);
@@ -300,11 +300,12 @@ public class CustomerGUI extends JPanel {
         	
     		popupMenu.show(e.getComponent(), e.getX(), e.getY());
         } 
-        //else if(e.getClickCount() == 2 && e.getComponent() instanceof JTable) {
-        	//Customer c = 
-        //	parent.setSelectedToSale(true);
-        //}
-		
+        else if(e.getClickCount() == 2 && e.getComponent() instanceof JTable) {
+	        System.out.println("2 gange " + s);
+        	//CustomerCtr cusCtr = new CustomerCtr();
+	        //Customer c = cusCtr.findCustomer(table.getSelectedRow());
+	        //	parent.setSelectedToSale(true);
+	    }
 	}
 
 	protected void clearSearch() {
