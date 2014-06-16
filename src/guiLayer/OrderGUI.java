@@ -23,6 +23,8 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.TitledBorder;
 
+import personLayer.Business;
+import personLayer.Customer;
 import modelLayer.Sale;
 
 import com.jgoodies.forms.factories.FormFactory;
@@ -199,7 +201,14 @@ public class OrderGUI extends JPanel {
 		if(i == 0){
 			sales = sCtr.getParkedSales();
 		}else if(i == 1){
-			System.out.println("sup");
+			sales = sCtr.getSales();
+			ArrayList<Sale> sales1 = new ArrayList<Sale>();
+			for(Sale s : sales){
+				if(s.isDone()){
+					sales1.add(s);
+				}
+				sales = sales1;
+			}
 		}else{
 			sales = sCtr.getSales();
 		}
@@ -213,9 +222,42 @@ public class OrderGUI extends JPanel {
 	}
 	
 	private void searchCustomer(){
-//		for(Sale s : sales){
-//			CustomerCtr cCtr = new CustomerCtr();
-//			cCtr.se
+		String name = txtName.getText();
+		int id = Integer.parseInt(txtID.getText());
+		SaleCtr sCtr = new SaleCtr();
+		sales = sCtr.getSales();
+		ArrayList<Sale> sales1 = new ArrayList<Sale>;
+		CustomerCtr cCtr = new CustomerCtr();
+
+		for(Sale s : sales){
+			Customer c = s.getCustomer();
+			if(name != null && !name.trim().isEmpty()){
+				if(c instanceof Business){
+					sales1.addAll(cCtr.searchBusiness(name));
+				}
+				sales1.addAll(cCtr.searchCustomer(name));
+			}
+
+		}
+		boolean found = false;
+//		for(int i = 0; i <= sales.size(); i++){
+//			Sale s = sales.get(i);
+//			if(id != 0){
+//				if(s.getId() == id){
+//					sales1.add(s);
+//					found = true;
+//				}
+//			}
 //		}
+		int i = 1;
+		while(!found || i <= sales.size()){
+			Sale s = sales.get(i);
+			if(id != 0){
+				if(s.getId() == id){
+					sales1.add(s);
+					found = true;
+				}
+			}
+		}
 	}
 }
