@@ -47,7 +47,7 @@ public class OrderGUI extends JPanel {
 	 */
 	public OrderGUI() {
 		SaleCtr sCtr = new SaleCtr();
-
+		sales = sCtr.getSales();
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{211, 121, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
