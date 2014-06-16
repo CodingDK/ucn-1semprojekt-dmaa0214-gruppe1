@@ -12,8 +12,6 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 import java.awt.FlowLayout;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -30,12 +28,10 @@ import com.jgoodies.forms.factories.FormFactory;
 import ctrLayer.ItemCtr;
 import extensions.JBlinkLabel;
 import extensions.StorageTableModel;
-import extensions.JBlinkLabel;
 
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
@@ -45,11 +41,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class StorageGUI extends JPanel {
+	
+	private static final long serialVersionUID = 1;
+	
 	public JTextField txtStorageName;
 	private JTable table;
 	private ArrayList<Storage> storages;
 	private StorageTableModel model;
-	private JBlinkLabel errLabel;
 	public JButton btnOpret;
 	private JBlinkLabel lblState;
 
