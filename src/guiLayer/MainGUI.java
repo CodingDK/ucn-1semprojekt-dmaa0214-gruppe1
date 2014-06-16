@@ -118,6 +118,7 @@ public class MainGUI extends JFrame{
 		mntmInsertTestData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new Demo().runDemo();
+				order.update();
 			}
 		});
 		mnFile.add(mntmInsertTestData);
@@ -168,13 +169,16 @@ public class MainGUI extends JFrame{
 					item.txtName.requestFocusInWindow();
 				} else if(comp.equals(category)){
 					category.txtName.requestFocusInWindow();
+					getRootPane().setDefaultButton(category.btnCreate);
 				} else if(comp.equals(sale)){
 					sale.btnAddItem.requestFocusInWindow();
+					getRootPane().setDefaultButton(sale.btnAddItem);
 				} else if(comp.equals(customer)){
 					customer.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(customer.btnFind);
 				} else if(comp.equals(employee)){
 					employee.txtName.requestFocusInWindow();
+					getRootPane().setDefaultButton(employee.btnFind);
 				} else if(comp.equals(storage)){
 					storage.txtStorageName.requestFocusInWindow();
 					getRootPane().setDefaultButton(storage.btnOpret);

@@ -43,7 +43,7 @@ public class OrderTableModel extends AbstractTableModel{
 			if(s.getEmployee() == null){
 				value = "-";
 			}else{
-				value = s.getEmployee().getName();
+				value = s.getEmployee().getId();
 			}
 		}else if(collIndex == 4){
 			value = s.getDateToString();
