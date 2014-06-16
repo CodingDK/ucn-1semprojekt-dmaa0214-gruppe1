@@ -87,7 +87,7 @@ public class CustomerGUI extends JPanel {
 		table.getColumnModel().getColumn(0).setMaxWidth(50);
 		table.addMouseListener(new MouseAdapter() {
 		    @Override
-		    public void mouseReleased(MouseEvent e) {
+		    public void mousePressed(MouseEvent e) {
 		        int r = table.rowAtPoint(e.getPoint());
 		        if (r >= 0 && r < table.getRowCount()) {
 		            table.setRowSelectionInterval(r, r);
@@ -118,7 +118,11 @@ public class CustomerGUI extends JPanel {
 		    		popupMenu.add(mntmDelete);
 		    		popupMenu.add(mntmUpdate);
 		    		popupMenu.show(e.getComponent(), e.getX(), e.getY());
-		        }
+		        } 
+		        //else if(e.getClickCount() == 2 && e.getComponent() instanceof JTable) {
+		        	//Customer c = 
+		        //	parent.setSelectedToSale(true);
+		        //}
 		    }
 		});
 		tablePanel.add(new JScrollPane(table), BorderLayout.CENTER);
