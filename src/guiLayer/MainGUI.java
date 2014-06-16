@@ -177,6 +177,8 @@ public class MainGUI extends JFrame{
 					getRootPane().setDefaultButton(storage.btnOpret);
 				} else if(comp.equals(order)){
 					//TODO
+					order.txtName.requestFocusInWindow();
+					getRootPane().setDefaultButton(order.btnSøg);
 				}
 			}
 			
