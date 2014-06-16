@@ -223,23 +223,28 @@ public class OrderGUI extends JPanel {
 	
 	private void searchCustomer(){
 		String name = txtName.getText();
-		int id = Integer.parseInt(txtID.getText());
+
+		//int id = Integer.parseInt(txtID.getText());
+		
 		SaleCtr sCtr = new SaleCtr();
 		sales = sCtr.getSales();
 		ArrayList<Sale> sales1 = new ArrayList<Sale>();
 		CustomerCtr cCtr = new CustomerCtr();
-
-		for(Sale s : sales){
-			Customer c = s.getCustomer();
-			if(name != null && !name.trim().isEmpty()){
-				if(c instanceof Business){
-					sales1.addAll(cCtr.searchBusiness(name));
+		ArrayList<Customer> customers = cCtr.searchBusiness(name);
+		customers.addAll(cCtr.searchCustomer(name));
+		if(name != null && !name.trim().isEmpty()){
+			for(Sale s : sales){
+				Customer c = s.getCustomer();
+				if(customers.contains(c)){
+					sales1.add(s);
 				}
-				sales1.addAll(cCtr.searchCustomer(name));
 			}
-
 		}
-
+		
+		sales = sales1;
+		model.refresh(sales);
+		model.fireTableDataChanged();
+		/*
 		boolean found = false;
 		int i = 0;
 		if(id != 0){
@@ -253,9 +258,8 @@ public class OrderGUI extends JPanel {
 				}
 				i++;
 			}
-			sales = sales1;
-			model.refresh(sales);
-			model.fireTableDataChanged();
+			
 		}
+		*/
 	}
 }
