@@ -19,7 +19,7 @@ public class OrderTableModel extends AbstractTableModel{
 	}
 
 	public int getColumnCount() {
-		return 2;
+		return 6;
 	}
 
 	public int getRowCount() {
@@ -44,8 +44,16 @@ public class OrderTableModel extends AbstractTableModel{
 		if(collIndex == 0){
 			value = "ID";
 		} else if(collIndex == 1){
-			value = "Navn";
-		}		
+			value = "Kundenavn";
+		}else if(collIndex == 2){
+			value = "Dato";
+		}else if(collIndex == 3){
+			value = "Totalpris";
+		}else if(collIndex == 4){
+			value = "Parkeret";
+		}else if(collIndex == 5){
+			value = "Dato";
+		}			
 		return value;
 	}
 }
