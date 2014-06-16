@@ -1,32 +1,29 @@
 package uiLayer;
 
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.BoxLayout;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
-import javax.swing.JTable;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.border.TitledBorder;
-
-import ctrLayer.CustomerCtr;
-import extensions.CustomerTableModel;
-import personLayer.Customer;
-
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
-import java.awt.Color;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
+
+import personLayer.Customer;
+import ctrLayer.CustomerCtr;
+import extensions.CustomerTableModel;
 
 public class Test extends JPanel {
 	private JTable table;

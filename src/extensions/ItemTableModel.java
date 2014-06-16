@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 import modelLayer.Item;
-import personLayer.Customer;
 
 public class ItemTableModel extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
