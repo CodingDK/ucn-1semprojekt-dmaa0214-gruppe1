@@ -58,6 +58,7 @@ public class CustomerGUI extends JPanel {
 	public JTextField txtName;
 	private JTextField txtTlf;
 	private MainGUI parent;
+	private JPopupMenu popupMenu;
 	public JButton btnFind;
 	
 	/**
@@ -86,6 +87,32 @@ public class CustomerGUI extends JPanel {
 		table = new JTable(model);
 		table.setAutoCreateRowSorter(true);
 		table.getColumnModel().getColumn(0).setMaxWidth(50);
+		
+		//added
+		popupMenu = new JPopupMenu();
+		//addPopup(tablePanel, popupMenu);
+		JMenuItem mntmDelete = new JMenuItem("Slet");
+		mntmDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int rowindex = table.getSelectedRow();
+				int id = (Integer) table.getValueAt(rowindex, 0);
+				removePerson(id);
+			}
+		});
+		JMenuItem mntmUpdate = new JMenuItem("Ret Kundeoplysninger");
+		mntmUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int rowindex = table.getSelectedRow();
+				int id = (Integer) table.getValueAt(rowindex, 0);
+				updateCustomer(id);
+			}
+		});
+		popupMenu.add(mntmDelete);
+		popupMenu.add(mntmUpdate);
+		table.setComponentPopupMenu(popupMenu);
+		//added
+		
+		
 		table.addMouseListener(new MouseAdapter() {
 		    @Override
 		    public void mouseReleased(MouseEvent e) {
@@ -151,7 +178,7 @@ public class CustomerGUI extends JPanel {
 		JButton btnClear = new JButton("Nulstil");
 		panel.add(btnClear, "1, 2, fill, top");
 		
-		btnFind = new JButton("Søg");
+		JButton btnFind = new JButton("Søg");
 		panel.add(btnFind, "3, 2, fill, top");
 		btnFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -270,24 +297,7 @@ public class CustomerGUI extends JPanel {
         if (rowindex < 0)
             return;
         if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
-        	JPopupMenu popupMenu = new JPopupMenu();
-    		//addPopup(tablePanel, popupMenu);
-    		JMenuItem mntmDelete = new JMenuItem("Slet");
-    		mntmDelete.addActionListener(new ActionListener() {
-    			public void actionPerformed(ActionEvent arg0) {
-    				int id = (Integer) table.getValueAt(rowindex, 0);
-    				removePerson(id);
-    			}
-    		});
-    		JMenuItem mntmUpdate = new JMenuItem("Ret Kundeoplysninger");
-    		mntmUpdate.addActionListener(new ActionListener() {
-    			public void actionPerformed(ActionEvent arg0) {
-    				int id = (Integer) table.getValueAt(rowindex, 0);
-    				updateCustomer(id);
-    			}
-    		});
-    		popupMenu.add(mntmDelete);
-    		popupMenu.add(mntmUpdate);
+        	
     		popupMenu.show(e.getComponent(), e.getX(), e.getY());
         } 
         //else if(e.getClickCount() == 2 && e.getComponent() instanceof JTable) {
