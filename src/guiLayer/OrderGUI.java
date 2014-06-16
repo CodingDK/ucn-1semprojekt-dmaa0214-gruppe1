@@ -19,6 +19,9 @@ import javax.swing.JScrollPane;
 import ctrLayer.SaleCtr;
 import modelLayer.Sale;
 import extensions.OrderTableModel;
+import javax.swing.JButton;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class OrderGUI extends JPanel {
 	private JTable table;
@@ -29,8 +32,19 @@ public class OrderGUI extends JPanel {
 	 * Create the panel.
 	 */
 	public OrderGUI() {
+		SaleCtr sCtr = new SaleCtr();
+
+		addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				SaleCtr sCtr = new SaleCtr();
+				sales = sCtr.getSales();
+				model.refresh(sales);
+				model.fireTableDataChanged();
+			}
+		});
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{382, 121, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
@@ -57,10 +71,10 @@ public class OrderGUI extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
 		
-		SaleCtr sCtr = new SaleCtr();
 		sales = sCtr.getSales();
 		model = new OrderTableModel(sales);
 		table = new JTable(model);
+		table.getColumnModel().getColumn(0).setMaxWidth(30);
 		scrollPane.setViewportView(table);
 	
 		
