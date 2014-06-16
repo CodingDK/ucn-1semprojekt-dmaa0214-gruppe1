@@ -12,11 +12,18 @@ import javax.swing.JLabel;
 
 import java.awt.Font;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 
+import ctrLayer.SaleCtr;
+import modelLayer.Sale;
+import extensions.OrderTableModel;
+
 public class OrderGUI extends JPanel {
 	private JTable table;
+	private OrderTableModel model;
+	private ArrayList<Sale> sales;
 
 	/**
 	 * Create the panel.
@@ -50,7 +57,10 @@ public class OrderGUI extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
 		
-		table = new JTable();
+		SaleCtr sCtr = new SaleCtr();
+		sales = sCtr.getSales();
+		model = new OrderTableModel(sales);
+		table = new JTable(model);
 		scrollPane.setViewportView(table);
 	
 		
@@ -60,6 +70,9 @@ public class OrderGUI extends JPanel {
 		gbc_panel_1.gridx = 1;
 		gbc_panel_1.gridy = 0;
 		add(panel_1, gbc_panel_1);
+		
+		model.refresh(sales);
+		model.fireTableDataChanged();
 
 	}
 
