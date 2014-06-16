@@ -270,14 +270,14 @@ public class CustomerGUI extends JPanel {
 		JButton btnPrivate = new JButton("Privat");
 		btnPrivate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				parent.createPrivateCustomer();
+				parent.createPrivateCustomer(CustomerGUI.this);
 			}
 		});
 		panel_2.add(btnPrivate, "1, 1");
 		JButton btnBusiness = new JButton("Erhverv");
 		btnBusiness.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				parent.createBusinesssCustomer();
+				parent.createBusinesssCustomer(CustomerGUI.this);
 			}
 		});
 		panel_2.add(btnBusiness, "2, 1");
@@ -378,8 +378,8 @@ public class CustomerGUI extends JPanel {
 		
 		if(updateCust != null){
 			if(parent != null){
-				CreateCustomerGUI cGUI = new CreateCustomerGUI(updateCust, this);
-				parent.addPaneToTabe(cGUI, "Ret Kunde");
+				CreateCustomerGUI cGUI = new CreateCustomerGUI(updateCust, this, parent);
+				parent.addPaneToTab(cGUI, "Ret Kunde");
 			}
 		}
 	}

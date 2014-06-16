@@ -277,33 +277,36 @@ public class MainGUI extends JFrame{
 	
 	public void createItem(){
 		CreateItemGUI comp = new CreateItemGUI();
-		addPaneToTabe(comp, "Opret Vare");
+		addPaneToTab(comp, "Opret Vare");
 	}
 
-	public void createPrivateCustomer(){
-		CreateCustomerGUI comp = new CreateCustomerGUI(false);
-		addPaneToTabe(comp, "Opret Privat Kunde");
+	public void createPrivateCustomer(Component c){
+		CreateCustomerGUI comp = new CreateCustomerGUI(false, c, this);
+		addPaneToTab(comp, "Opret Privat Kunde");
 	}
 
 	public void createPrivateCustomer(SaleGUI sGUI){
-		CreateCustomerGUI comp = new CreateCustomerGUI(false, sGUI);
-		addPaneToTabe(comp, "Opret Privat Kunde");
+		CreateCustomerGUI comp = new CreateCustomerGUI(false, sGUI, this);
+		addPaneToTab(comp, "Opret Privat Kunde");
 	}
 
-	public void createBusinesssCustomer(){
-		CreateCustomerGUI comp = new CreateCustomerGUI(true);
-		addPaneToTabe(comp, "Opret Erhvervs Kunde");
+	public void createBusinesssCustomer(Component c){
+		CreateCustomerGUI comp = new CreateCustomerGUI(true, c, this);
+		addPaneToTab(comp, "Opret Erhvervs Kunde");
 	}
 	
 	public void createBusinesssCustomer(SaleGUI sGUI){
-		CreateCustomerGUI comp = new CreateCustomerGUI(true, sGUI);
-		addPaneToTabe(comp, "Opret Erhvervs Kunde");
+		CreateCustomerGUI comp = new CreateCustomerGUI(true, sGUI, this);
+		addPaneToTab(comp, "Opret Erhvervs Kunde");
 	}
 	
-	public void addPaneToTabe(Component c, String title){
+	public void addPaneToTab(Component c, String title){
 		tabbedPane.addTab(title, c);
 		tabbedPane.setSelectedComponent(c);
-		
+	}
+	
+	public void switchPane(Component c){
+		tabbedPane.setSelectedComponent(c);
 	}
 		
 	public void setSelectedToSale(boolean b){
@@ -320,10 +323,5 @@ public class MainGUI extends JFrame{
 		tabbedPane.insertTab("Salg", null, sale, null, 0);
 		tabbedPane.setSelectedComponent(sale);
 		reDraw();
-	}
-	
-	public void killMe(JComponent c){
-		tabbedPane.remove(c);
-		tabbedPane.setSelectedComponent(sale);
 	}
 }
