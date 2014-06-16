@@ -42,7 +42,6 @@ public class MainGUI extends JFrame{
 	private EmployeeGUI employee;
 	private StorageGUI storage;
 	private CategoryGUI category;
-	public JRootPane rootPane;
 	
 	/**
 	 * Launch the application.
