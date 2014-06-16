@@ -118,7 +118,6 @@ public class MainGUI extends JFrame{
 		mntmInsertTestData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new Demo().runDemo();
-				order.update();
 			}
 		});
 		mnFile.add(mntmInsertTestData);
@@ -185,7 +184,7 @@ public class MainGUI extends JFrame{
 				} else if(comp.equals(order)){
 					//TODO
 					order.txtName.requestFocusInWindow();
-					getRootPane().setDefaultButton(order.btnSøg);
+					getRootPane().setDefaultButton(order.btnSearch);
 					order.update();
 				}
 			}
