@@ -16,6 +16,7 @@ import ctrLayer.SaleCtr;
 import exceptionLayer.CategoryExistException;
 import exceptionLayer.NotEnoughItemsException;
 import exceptionLayer.SaleNotCreatedException;
+import exceptionLayer.StorageExistException;
 
 public class MainUI extends SuperUI {
 	
@@ -89,8 +90,13 @@ public class MainUI extends SuperUI {
 	private void makeTest() {
 		ItemCtr iCtr = new ItemCtr();
 		CategoryCtr cCtr = new CategoryCtr();
-		iCtr.createStorage("Trælast");
-		iCtr.createStorage("Byggecenter");
+		try {
+			iCtr.createStorage("Trælast");
+			iCtr.createStorage("Byggecenter");
+		} catch (StorageExistException e3) {
+			// TODO Auto-generated catch block
+			e3.printStackTrace();
+		}
 		Storage s1 = iCtr.findStorage("Trælast");
 		Storage s2 = iCtr.findStorage("Byggecenter");
 		try {

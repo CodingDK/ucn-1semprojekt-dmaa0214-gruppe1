@@ -2,6 +2,7 @@ package ctrLayer;
 
 import java.util.ArrayList;
 
+import exceptionLayer.StorageExistException;
 import modelLayer.Category;
 import modelLayer.Item;
 import modelLayer.ItemCont;
@@ -16,8 +17,11 @@ import modelLayer.StorageCont;
  * 
  */
 public class ItemCtr {
+	private StorageCont sCont;
 	
-	public ItemCtr() {}
+	public ItemCtr() {
+		sCont = StorageCont.getInstance();
+	}
 	
 	/**
 	 * getItem - Get an item object from an id.
@@ -176,8 +180,12 @@ public class ItemCtr {
 	 * 
 	 * @param name The name of the new Storage.
 	 */
-	public void createStorage(String name) {
-		StorageCont.getInstance().addStorage(new Storage(name));
+	public void createStorage(String name) throws StorageExistException{
+		if(sCont.findStorage(name) == null){
+			sCont.addStorage(new Storage(name));
+		} else {
+			throw new StorageExistException("Lageret eksistere allerede");
+		}
 	}
 	
 	/**

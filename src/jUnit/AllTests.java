@@ -13,6 +13,7 @@ import ctrLayer.CustomerCtr;
 import ctrLayer.EmployeeCtr;
 import ctrLayer.ItemCtr;
 import exceptionLayer.CategoryExistException;
+import exceptionLayer.StorageExistException;
 
 @RunWith(Suite.class)
 @SuiteClasses({BusinessTest.class, CategoryTests.class, ItemCtrTests.class,
@@ -27,8 +28,13 @@ public class AllTests {
 	public static void makeTest() {
 		ItemCtr iCtr = new ItemCtr();
 		CategoryCtr cCtr = new CategoryCtr();
-		iCtr.createStorage("Lager1");
-		iCtr.createStorage("Lager2");
+		try {
+			iCtr.createStorage("Lager1");
+			iCtr.createStorage("Lager2");
+		} catch (StorageExistException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Storage s1 = iCtr.findStorage("Lager1");
 		Storage s2 = iCtr.findStorage("Lager2");
 		try {
