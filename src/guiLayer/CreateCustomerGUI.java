@@ -59,22 +59,24 @@ public class CreateCustomerGUI extends JPanel {
 	private JIntegerField txtCvr;
 	private JLabel lblCvr;
 	private JLabel lblCompany;
-	private SaleGUI saleGUI;
 	private JPanel panel_3;
 	private JTextField txtCpr2;
 	private JTextField txtCpr1;
 	private JLabel label;
 	private Customer updateCust;
 	private Component creator;
+	private MainGUI parent;
 	private boolean isUpdate = false;
 	
-	public CreateCustomerGUI(boolean business, SaleGUI saleGUI) {
-		this.saleGUI = saleGUI;
+	public CreateCustomerGUI(boolean business, Component creator, MainGUI parent) {
+		this.parent = parent;
+		this.creator = creator;
 		this.business = business;
 		buildPanel();
 	}
 	
-	public CreateCustomerGUI(Customer updateCust, Component creator) {
+	public CreateCustomerGUI(Customer updateCust, Component creator, MainGUI parent) {
+		this.parent = parent;
 		this.creator = creator;
 		if(updateCust != null){
 			if(updateCust instanceof Business){
@@ -92,15 +94,6 @@ public class CreateCustomerGUI extends JPanel {
 			getParent().remove(this);
 		}
 	}
-	
-	/**
-	 * Create the panel.
-	 */
-	public CreateCustomerGUI(boolean business) {
-		this.business = business;
-		buildPanel();
-	}
-	
 	private void buildPanel() {
 		setBounds(new Rectangle(0, 0, 0, 5));
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -339,6 +332,8 @@ public class CreateCustomerGUI extends JPanel {
 			String cvr = txtCvr.getText();
 			cCtr.updateCustomer(updateCust.getId(), name, phone, street, email, city, post, null, company, cvr);
 		}
+
+		parent.switchPane(creator);
 		getParent().remove(this);
 	}
 
@@ -356,9 +351,9 @@ public class CreateCustomerGUI extends JPanel {
 			String cpr = txtCpr1.getText() + "-" + txtCpr2.getText();
 			String pictureId = txtPictureID.getText();
 			Customer c = cCtr.createPrivateCustomer(name, phone, street, email, city, post, cpr, pictureId);
-			
-			if (saleGUI != null) {
-				saleGUI.setCustomer(c);
+			if(creator instanceof SaleGUI){
+				SaleGUI sGUI = (SaleGUI)creator;
+				sGUI.setCustomer(c);
 			}
 		} else if (business) {
 			CustomerCtr cCtr = new CustomerCtr();
@@ -366,13 +361,14 @@ public class CreateCustomerGUI extends JPanel {
 			String cvr = txtCvr.getText();
 			Customer c = cCtr.createBusinessCustomer(name, phone, street, email, city, post, company, cvr);
 			
-			if (saleGUI != null) {
-				saleGUI.setCustomer(c);
+			if(creator instanceof SaleGUI){
+				SaleGUI sGUI = (SaleGUI)creator;
+				sGUI.setCustomer(c);
 			}
 		}
 		
-		MainGUI m = (MainGUI)getParent();
-		m.killMe(this);
+		parent.switchPane(creator);
+		getParent().remove(this);
 	}
 	
 	private void validateFields(){
