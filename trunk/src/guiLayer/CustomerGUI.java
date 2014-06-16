@@ -377,10 +377,9 @@ public class CustomerGUI extends JPanel {
 		}
 		
 		if(updateCust != null){
-			if(getParent() instanceof MainGUI){
-				MainGUI m = (MainGUI)getParent();
+			if(parent != null){
 				CreateCustomerGUI cGUI = new CreateCustomerGUI(updateCust, this);
-				m.addPaneToTabe(cGUI, "Ret Kunde");
+				parent.addPaneToTabe(cGUI, "Ret Kunde");
 			}
 		}
 	}
