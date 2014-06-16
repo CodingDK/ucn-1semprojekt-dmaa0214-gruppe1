@@ -192,7 +192,7 @@ public class SaleGUI extends JPanel {
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new TitledBorder(null, "Kunde", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_4.setBounds(6, 23, 238, 171);
+		panel_4.setBounds(6, 23, 238, 174);
 		panel_1.add(panel_4);
 		
 		JPanel panel_7 = new JPanel();
@@ -205,18 +205,19 @@ public class SaleGUI extends JPanel {
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_4.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_4.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel_7, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-						.addComponent(panel_8, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 213, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+						.addComponent(panel_8, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
+					.addGap(3))
 		);
 		gl_panel_4.setVerticalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_4.createSequentialGroup()
+				.addGroup(gl_panel_4.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		
 		JButton bntFind = new JButton("Find Kunde");
@@ -317,6 +318,10 @@ public class SaleGUI extends JPanel {
 			saleCtr.getSale().setCustomer(c);
 		}
 		updateCustomer();
+	}
+	
+	private void changeCustomerBnt(){
+		
 	}
 	
 	private void updateCustomer(){
