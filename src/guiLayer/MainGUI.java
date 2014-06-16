@@ -35,13 +35,13 @@ public class MainGUI extends JFrame{
 	public boolean admin = false;
 	private JMenuItem mntmLogin;
 	private CloseButtonTabbedPane tabbedPane;
-	private SaleGUI Sale;
-	private ItemGUI Item;
-	private CustomerGUI Customer;
-	private JPanel Order;
-	private EmployeeGUI Employee;
-	private JPanel Storage;
-	private CategoryGUI Category;
+	private SaleGUI sale;
+	private ItemGUI item;
+	private CustomerGUI customer;
+	private JPanel order;
+	private EmployeeGUI employee;
+	private JPanel storage;
+	private CategoryGUI category;
 	
 	/**
 	 * Launch the application.
@@ -90,21 +90,21 @@ public class MainGUI extends JFrame{
 		tabbedPane = new CloseButtonTabbedPane();
 		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		Sale = new SaleGUI(this, null);
-		Item = new ItemGUI(this);
-		Customer = new CustomerGUI(this);
-		Order = new JPanel();
-		Employee = new EmployeeGUI(this);
-		Category = new CategoryGUI();
-		Storage = new StorageGUI();
+		sale = new SaleGUI(this, null);
+		item = new ItemGUI(this);
+		customer = new CustomerGUI(this);
+		order = new JPanel();
+		employee = new EmployeeGUI(this);
+		category = new CategoryGUI();
+		storage = new StorageGUI();
 		
-		tabbedPane.insertTab("Salg", null, Sale, null, 0);
+		tabbedPane.insertTab("Salg", null, sale, null, 0);
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_S);
-		tabbedPane.insertTab("Varer", null, Item, null, 1);
+		tabbedPane.insertTab("Varer", null, item, null, 1);
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_V);
-		tabbedPane.insertTab("Kunde", null, Customer, null, 2);
+		tabbedPane.insertTab("Kunde", null, customer, null, 2);
 		tabbedPane.setMnemonicAt(2, KeyEvent.VK_K);
-		tabbedPane.insertTab("Ordre", null, Order, null, 3);
+		tabbedPane.insertTab("Ordre", null, order, null, 3);
 		tabbedPane.setMnemonicAt(3, KeyEvent.VK_O);
 		
 		makeTabbedPaneSwitcher();
@@ -167,16 +167,16 @@ public class MainGUI extends JFrame{
 		tabbedPane.addChangeListener(new ChangeListener(){
 			public void stateChanged(ChangeEvent e){
 				Component comp = tabbedPane.getSelectedComponent();
-				if (comp.equals(Item)){
-					Item.txtName.requestFocusInWindow();
-				} else if(comp.equals(Category)){
-					Category.txtName.requestFocusInWindow();
-				} else if(comp.equals(Sale)){
-					Sale.btnAddItem.requestFocusInWindow();
-				} else if(comp.equals(Customer)){
-					Customer.txtName.requestFocusInWindow();
-				} else if(comp.equals(Employee)){
-					Employee.txtName.requestFocusInWindow();
+				if (comp.equals(item)){
+					item.txtName.requestFocusInWindow();
+				} else if(comp.equals(category)){
+					category.txtName.requestFocusInWindow();
+				} else if(comp.equals(sale)){
+					sale.btnAddItem.requestFocusInWindow();
+				} else if(comp.equals(customer)){
+					customer.txtName.requestFocusInWindow();
+				} else if(comp.equals(employee)){
+					employee.txtName.requestFocusInWindow();
 				}
 			}
 		});
@@ -240,22 +240,22 @@ public class MainGUI extends JFrame{
 	
 	protected void grantAccess(){
 		mntmLogin.setText("Logud");
-		Employee.setAdmin(true);
-		tabbedPane.insertTab("Medarbejder", null, Employee, null, 4);
+		employee.setAdmin(true);
+		tabbedPane.insertTab("Medarbejder", null, employee, null, 4);
 		tabbedPane.setMnemonicAt(4, KeyEvent.VK_M);
-		tabbedPane.insertTab("Lager", null, Storage, null, 5);
-		tabbedPane.insertTab("Kategori", null, Category, "Kategori", 5);
+		tabbedPane.insertTab("Lager", null, storage, null, 5);
+		tabbedPane.insertTab("Kategori", null, category, "Kategori", 5);
 		reDraw();
 	}
 	
 	protected void revokeAccess(){
 		mntmLogin.setText("Administrator Login");
 		//tabbedPane.remove(Category);
-		Employee.setAdmin(false);
+		employee.setAdmin(false);
 		admin = false;
-		tabbedPane.remove(Employee);
-		tabbedPane.remove(Storage);
-		tabbedPane.remove(Category);
+		tabbedPane.remove(employee);
+		tabbedPane.remove(storage);
+		tabbedPane.remove(category);
 		reDraw();
 	}
 	
@@ -305,22 +305,22 @@ public class MainGUI extends JFrame{
 		
 	public void setSelectedToSale(boolean b){
 		if(b){
-			tabbedPane.setSelectedComponent(Sale);
+			tabbedPane.setSelectedComponent(sale);
 		} else {
-			tabbedPane.setSelectedComponent(Customer);
+			tabbedPane.setSelectedComponent(customer);
 		}
 	}
 	
 	public void resetSale(){
-		tabbedPane.remove(Sale);
-		Sale = new SaleGUI(this, null);
-		tabbedPane.insertTab("Salg", null, Sale, null, 0);
-		tabbedPane.setSelectedComponent(Sale);
+		tabbedPane.remove(sale);
+		sale = new SaleGUI(this, null);
+		tabbedPane.insertTab("Salg", null, sale, null, 0);
+		tabbedPane.setSelectedComponent(sale);
 		reDraw();
 	}
 	
 	public void killMe(JComponent c){
 		tabbedPane.remove(c);
-		tabbedPane.setSelectedComponent(Sale);
+		tabbedPane.setSelectedComponent(sale);
 	}
 }
