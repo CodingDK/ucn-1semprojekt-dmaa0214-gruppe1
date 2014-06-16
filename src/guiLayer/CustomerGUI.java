@@ -58,6 +58,7 @@ public class CustomerGUI extends JPanel {
 	public JTextField txtName;
 	private JTextField txtTlf;
 	private MainGUI parent;
+	public JButton btnFind;
 	
 	/**
 	 * Create the panel.
@@ -150,7 +151,7 @@ public class CustomerGUI extends JPanel {
 		JButton btnClear = new JButton("Nulstil");
 		panel.add(btnClear, "1, 2, fill, top");
 		
-		JButton btnFind = new JButton("Søg");
+		btnFind = new JButton("Søg");
 		panel.add(btnFind, "3, 2, fill, top");
 		btnFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

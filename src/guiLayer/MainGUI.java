@@ -15,6 +15,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JRootPane;
 import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
@@ -25,7 +26,6 @@ import javax.swing.event.ChangeListener;
 
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
@@ -42,6 +42,7 @@ public class MainGUI extends JFrame{
 	private EmployeeGUI employee;
 	private StorageGUI storage;
 	private CategoryGUI category;
+	public JRootPane rootPane;
 	
 	/**
 	 * Launch the application.
@@ -175,10 +176,12 @@ public class MainGUI extends JFrame{
 					sale.btnAddItem.requestFocusInWindow();
 				} else if(comp.equals(customer)){
 					customer.txtName.requestFocusInWindow();
+					getRootPane().setDefaultButton(customer.btnFind);
 				} else if(comp.equals(employee)){
 					employee.txtName.requestFocusInWindow();
 				} else if(comp.equals(storage)){
 					storage.txtStorageName.requestFocusInWindow();
+					getRootPane().setDefaultButton(storage.btnOpret);
 				} 
 			}
 		});
