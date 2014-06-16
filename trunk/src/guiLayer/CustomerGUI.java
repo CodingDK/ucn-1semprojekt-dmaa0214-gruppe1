@@ -87,42 +87,12 @@ public class CustomerGUI extends JPanel {
 		table.getColumnModel().getColumn(0).setMaxWidth(50);
 		table.addMouseListener(new MouseAdapter() {
 		    @Override
-		    public void mousePressed(MouseEvent e) {
-		        int r = table.rowAtPoint(e.getPoint());
-		        if (r >= 0 && r < table.getRowCount()) {
-		            table.setRowSelectionInterval(r, r);
-		        } else {
-		            table.clearSelection();
-		        }
-
-		        final int rowindex = table.getSelectedRow();
-		        if (rowindex < 0)
-		            return;
-		        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
-		        	JPopupMenu popupMenu = new JPopupMenu();
-		    		//addPopup(tablePanel, popupMenu);
-		    		JMenuItem mntmDelete = new JMenuItem("Slet");
-		    		mntmDelete.addActionListener(new ActionListener() {
-		    			public void actionPerformed(ActionEvent arg0) {
-		    				int id = (Integer) table.getValueAt(rowindex, 0);
-		    				removePerson(id);
-		    			}
-		    		});
-		    		JMenuItem mntmUpdate = new JMenuItem("Ret Kundeoplysninger");
-		    		mntmUpdate.addActionListener(new ActionListener() {
-		    			public void actionPerformed(ActionEvent arg0) {
-		    				int id = (Integer) table.getValueAt(rowindex, 0);
-		    				updateCustomer(id);
-		    			}
-		    		});
-		    		popupMenu.add(mntmDelete);
-		    		popupMenu.add(mntmUpdate);
-		    		popupMenu.show(e.getComponent(), e.getX(), e.getY());
-		        } 
-		        //else if(e.getClickCount() == 2 && e.getComponent() instanceof JTable) {
-		        	//Customer c = 
-		        //	parent.setSelectedToSale(true);
-		        //}
+		    public void mouseReleased(MouseEvent e) {
+		        mouseListenerTable(e);
+		    }
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		        mouseListenerTable(e);
 		    }
 		});
 		tablePanel.add(new JScrollPane(table), BorderLayout.CENTER);
@@ -287,6 +257,45 @@ public class CustomerGUI extends JPanel {
 		//this.getRootPane().setDefaultButton(btnFind);
 	}
 	
+	private void mouseListenerTable(MouseEvent e) {
+		int r = table.rowAtPoint(e.getPoint());
+        if (r >= 0 && r < table.getRowCount()) {
+            table.setRowSelectionInterval(r, r);
+        } else {
+            table.clearSelection();
+        }
+
+        final int rowindex = table.getSelectedRow();
+        if (rowindex < 0)
+            return;
+        if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
+        	JPopupMenu popupMenu = new JPopupMenu();
+    		//addPopup(tablePanel, popupMenu);
+    		JMenuItem mntmDelete = new JMenuItem("Slet");
+    		mntmDelete.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent arg0) {
+    				int id = (Integer) table.getValueAt(rowindex, 0);
+    				removePerson(id);
+    			}
+    		});
+    		JMenuItem mntmUpdate = new JMenuItem("Ret Kundeoplysninger");
+    		mntmUpdate.addActionListener(new ActionListener() {
+    			public void actionPerformed(ActionEvent arg0) {
+    				int id = (Integer) table.getValueAt(rowindex, 0);
+    				updateCustomer(id);
+    			}
+    		});
+    		popupMenu.add(mntmDelete);
+    		popupMenu.add(mntmUpdate);
+    		popupMenu.show(e.getComponent(), e.getX(), e.getY());
+        } 
+        //else if(e.getClickCount() == 2 && e.getComponent() instanceof JTable) {
+        	//Customer c = 
+        //	parent.setSelectedToSale(true);
+        //}
+		
+	}
+
 	protected void clearSearch() {
 		txtCompany.setText("");
 		txtName.setText("");
