@@ -2,14 +2,14 @@ package uiLayer;
 
 import modelLayer.Category;
 import modelLayer.Item;
-import modelLayer.Order;
+import modelLayer.Storage;
 import ctrLayer.ItemCtr;
 
 public class CreateItemUI extends SuperUI {
 	private Category selectedCategory;
-	private Order selectedStorage;
+	private Storage selectedStorage;
 	
-	public CreateItemUI(Category c, Order s) {
+	public CreateItemUI(Category c, Storage s) {
 		selectedCategory = c;
 		selectedStorage = s;
 		

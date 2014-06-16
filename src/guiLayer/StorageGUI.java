@@ -33,7 +33,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
-import modelLayer.Order;
+import modelLayer.Storage;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -41,7 +41,7 @@ import java.awt.event.ActionEvent;
 public class StorageGUI extends JPanel {
 	public JTextField txtStorageName;
 	private JTable table;
-	private ArrayList<Order> s;
+	private ArrayList<Storage> s;
 	private StorageTableModel model;
 	private JBlinkLabel errLabel;
 	public JButton btnOpret;

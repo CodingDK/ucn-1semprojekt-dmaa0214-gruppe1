@@ -5,7 +5,7 @@ import java.util.Random;
 
 import exceptionLayer.CategoryExistException;
 import modelLayer.Category;
-import modelLayer.Order;
+import modelLayer.Storage;
 import personLayer.Private;
 
 public class Demo {
@@ -20,8 +20,8 @@ public class Demo {
 			CategoryCtr cCtr = new CategoryCtr();
 			iCtr.createStorage("Trælast");
 			iCtr.createStorage("Byggecenter");
-			Order s1 = iCtr.findStorage("Trælast");
-			Order s2 = iCtr.findStorage("Byggecenter");
+			Storage s1 = iCtr.findStorage("Trælast");
+			Storage s2 = iCtr.findStorage("Byggecenter");
 			try {
 				cCtr.createCategory("Søm");
 				cCtr.createCategory("Hammer");
@@ -42,7 +42,7 @@ public class Demo {
 			ArrayList<Category> catList = new ArrayList<Category>();
 			catList.add(c1);
 			catList.add(c2);
-			ArrayList<Order> storList = new ArrayList<Order>();
+			ArrayList<Storage> storList = new ArrayList<Storage>();
 			storList.add(s1);
 			storList.add(s2);
 			Random rand = new Random();

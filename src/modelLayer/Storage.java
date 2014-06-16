@@ -6,7 +6,7 @@ package modelLayer;
  * @author Group 1
  * @version 0.1
  */
-public class Order {
+public class Storage {
 	private static int idIterator;
 	private int id;
 	private String name;
@@ -16,7 +16,7 @@ public class Order {
 	 * 
 	 * @param name The name of the storage.
 	 */
-	public Order(String name) {
+	public Storage(String name) {
 		idIterator++;
 		this.name = name;
 		id = idIterator;
