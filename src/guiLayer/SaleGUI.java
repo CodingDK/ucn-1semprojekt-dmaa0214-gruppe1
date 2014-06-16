@@ -352,8 +352,7 @@ public class SaleGUI extends JPanel {
 	}
 	
 	private void findCustomer() {
-		// TODO Auto-generated method stub
-		
+		mainGUI.setSelectedToSale(false);
 	}
 
 	private void createCustomer() {
