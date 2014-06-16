@@ -226,7 +226,7 @@ public class OrderGUI extends JPanel {
 		int id = Integer.parseInt(txtID.getText());
 		SaleCtr sCtr = new SaleCtr();
 		sales = sCtr.getSales();
-		ArrayList<Sale> sales1 = new ArrayList<Sale>;
+		ArrayList<Sale> sales1 = new ArrayList<Sale>();
 		CustomerCtr cCtr = new CustomerCtr();
 
 		for(Sale s : sales){
@@ -239,25 +239,23 @@ public class OrderGUI extends JPanel {
 			}
 
 		}
+
 		boolean found = false;
-//		for(int i = 0; i <= sales.size(); i++){
-//			Sale s = sales.get(i);
-//			if(id != 0){
-//				if(s.getId() == id){
-//					sales1.add(s);
-//					found = true;
-//				}
-//			}
-//		}
-		int i = 1;
-		while(!found || i <= sales.size()){
-			Sale s = sales.get(i);
-			if(id != 0){
-				if(s.getId() == id){
-					sales1.add(s);
-					found = true;
+		int i = 0;
+		if(id != 0){
+			while(!found && i < sales.size()){
+				Sale s = sales.get(i);
+				if(id != 0){
+					if(s.getId() == id){
+						sales1.add(s);
+						found = true;
+					}
 				}
+				i++;
 			}
+			sales = sales1;
+			model.refresh(sales);
+			model.fireTableDataChanged();
 		}
 	}
 }
