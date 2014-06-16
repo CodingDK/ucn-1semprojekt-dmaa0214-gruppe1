@@ -57,23 +57,31 @@ public class CreateCustomerGUI extends JPanel {
 	private JLabel lblCvr;
 	private JLabel lblCompany;
 	private SaleGUI saleGUI;
-	private MainGUI mainGUI;
 	private JPanel panel_3;
 	private JTextField txtCpr2;
 	private JTextField txtCpr1;
 	private JLabel label;
+	private Customer updateCust;
 	
-	public CreateCustomerGUI(boolean business, SaleGUI saleGUI, MainGUI mainGUI) {
-		this.mainGUI = mainGUI;
+	public CreateCustomerGUI(boolean business, SaleGUI saleGUI) {
 		this.saleGUI = saleGUI;
 		this.business = business;
 		buildPanel();
 	}
 	
+	public CreateCustomerGUI(boolean business, Customer updateCust) {
+		if(updateCust != null){
+			this.saleGUI = saleGUI;
+			this.business = business;
+			this.updateCust = updateCust;
+			buildPanel();
+		}else{
+			getParent().remove(this);
+		}
+	}
+	
 	/**
 	 * Create the panel.
-	 * 
-	 * @wbp.parser.constructor
 	 */
 	public CreateCustomerGUI(boolean business) {
 		this.business = business;
@@ -81,7 +89,6 @@ public class CreateCustomerGUI extends JPanel {
 	}
 	
 	private void buildPanel() {
-		
 		setBounds(new Rectangle(0, 0, 0, 5));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {318, 145, 0};
@@ -296,6 +303,7 @@ public class CreateCustomerGUI extends JPanel {
 		String pictureId = null;
 		String company = null;
 		String cvr = null;
+		String cprNr2 = null;
 		String errorMsg = " må ikke være tomt";
 		String name = txtName.getText();
 		if (name == null || name.trim().isEmpty()) {
@@ -354,6 +362,13 @@ public class CreateCustomerGUI extends JPanel {
 				lblError.startBlinking(true, true);
 				return;
 			}
+			
+			cprNr2 = txtCpr2.getText();
+			if (cprNr2 == null || cprNr2.trim().isEmpty()) {
+				lblError.setText("Cpr nr" + errorMsg);
+				lblError.startBlinking(true, true);
+				return;
+			}
 		}
 		
 		if (business) {
@@ -374,7 +389,8 @@ public class CreateCustomerGUI extends JPanel {
 		
 		if (!business) {
 			CustomerCtr cCtr = new CustomerCtr();
-			Customer c = cCtr.createPrivateCustomer(name, phone, street, email, town, post, cprNr, pictureId);
+			String cpr = cprNr + "-" + cprNr2;
+			Customer c = cCtr.createPrivateCustomer(name, phone, street, email, town, post, cpr, pictureId);
 			
 			if (saleGUI != null) {
 				saleGUI.setCustomer(c);
@@ -387,8 +403,7 @@ public class CreateCustomerGUI extends JPanel {
 				saleGUI.setCustomer(c);
 			}
 		}
-		
-		mainGUI.killMe(this);
+		getParent().remove(this);
 	}
 	
 	private void customerType(boolean business) {
@@ -399,6 +414,10 @@ public class CreateCustomerGUI extends JPanel {
 			companyPanel.setVisible(false);
 			privatePanel.setVisible(true);
 		}
+	}
+	
+	private void insertUpdateDate(){
+		
 	}
 	
 }
