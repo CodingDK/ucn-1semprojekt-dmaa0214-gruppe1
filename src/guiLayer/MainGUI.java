@@ -24,6 +24,8 @@ import javax.swing.JMenuBar;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import personLayer.Customer;
+
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
@@ -68,14 +70,6 @@ public class MainGUI extends JFrame{
 	 * Create the application.
 	 */
 	public MainGUI() {
-		addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				KeyStroke k = KeyStroke.getKeyStroke(KeyEvent.VK_E, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
-				System.out.println(arg0.getKeyCode());
-				System.out.println(k.getKeyCode());
-			}
-		});
 		initialize();
 	}
 	
@@ -309,9 +303,12 @@ public class MainGUI extends JFrame{
 		tabbedPane.setSelectedComponent(c);
 	}
 		
-	public void setSelectedToSale(boolean b){
+	public void setSelectedToSale(boolean b, Customer selectedCus){
 		if(b){
 			tabbedPane.setSelectedComponent(sale);
+			if (selectedCus != null){
+				sale.setCustomer(selectedCus);
+			}
 		} else {
 			tabbedPane.setSelectedComponent(customer);
 		}
