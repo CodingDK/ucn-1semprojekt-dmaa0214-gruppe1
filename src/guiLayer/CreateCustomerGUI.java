@@ -305,7 +305,11 @@ public class CreateCustomerGUI extends JPanel {
 		});
 		btnOpret.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				createCustomer();
+				if(!isUpdate){
+					createCustomer();
+				}else if(isUpdate){
+					updateCustomer();
+				}
 			}
 			
 		});
@@ -314,6 +318,11 @@ public class CreateCustomerGUI extends JPanel {
 		
 	}
 	
+	protected void updateCustomer() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	protected void createCustomer() {
 		String cprNr = null;
 		String pictureId = null;
