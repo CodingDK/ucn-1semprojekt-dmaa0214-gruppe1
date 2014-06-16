@@ -296,7 +296,9 @@ public class CreateCustomerGUI extends JPanel {
 		add(panel_2, gbc_panel_2);
 		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
 		btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {}
+			public void actionPerformed(ActionEvent e) {
+				cancel();
+			}
 		});
 		btnOpret.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -313,6 +315,11 @@ public class CreateCustomerGUI extends JPanel {
 		
 	}
 	
+	protected void cancel() {
+		parent.switchPane(creator);
+		getParent().remove(this);
+	}
+
 	protected void updateCustomer() {
 		validateFields();
 		String name = txtName.getText();
