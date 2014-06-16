@@ -26,7 +26,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 
 import ctrLayer.ItemCtr;
-
+import extensions.JBlinkLabel;
 import extensions.StorageTableModel;
 
 import javax.swing.JButton;
@@ -39,10 +39,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class StorageGUI extends JPanel {
-	private JTextField txtStorageName;
+	public JTextField txtStorageName;
 	private JTable table;
 	private ArrayList<Storage> s;
 	private StorageTableModel model;
+	private JBlinkLabel errLabel;
+	public JButton btnOpret;
 
 	/**
 	 * Create the panel.
@@ -80,7 +82,9 @@ public class StorageGUI extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		panel_1.add(scrollPane, BorderLayout.CENTER);
 		
-		s = new ArrayList<Storage>();
+		ItemCtr iCtr = new ItemCtr();
+		s = iCtr.getAllStorage();
+		
 		model = new StorageTableModel(s);
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
@@ -112,6 +116,11 @@ public class StorageGUI extends JPanel {
 		panel_5.add(lblStorageName, "1, 1, fill, fill");
 		
 		txtStorageName = new JTextField();
+		txtStorageName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createStorage();
+			}
+		});
 		panel_5.add(txtStorageName, "2, 1, fill, fill");
 		txtStorageName.setColumns(10);
 		
@@ -128,36 +137,46 @@ public class StorageGUI extends JPanel {
 		JButton btnNulstil = new JButton("Nulstil");
 		btnNulstil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				clearTypein();
+				clear();
 			}
 		});
 		panel_6.add(btnNulstil, "1, 2, fill, top");
 		
-		JButton btnOpret = new JButton("Opret");
+		btnOpret = new JButton("Opret");
 		btnOpret.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				createStorage();
 			}
 		});
 		panel_6.add(btnOpret, "2, 2, fill, top");
-
 		
+		errLabel = new JBlinkLabel("");
+		errLabel.setBounds(16, 131, 209, 16);
+		panel_4.add(errLabel);
 	}
-
 	
+	protected void clear() {
+		txtStorageName.setText("");
+		s.clear();
+	}
 	
-	protected void clearTypein() {
-		txtStorageName.setText("");	
+	protected void clearInput(){
+		txtStorageName.setText("");
 	}
 
 	private void createStorage() {
 		ItemCtr iCtr = new ItemCtr();
 		String name = txtStorageName.getText();
-		//if(name != null && !name.trim().isEmpty()){
+		if(name == null || name.trim().isEmpty()){
+			errLabel.setText("Navnet må ikke være tomt");
+			errLabel.startBlinking(true, true);
+		} else{
 			iCtr.createStorage(name);
-	//	}
-			model.fireTableDataChanged();
-			model.refresh(s);
-		
+		}
+		model.fireTableDataChanged();
+		s = iCtr.getAllStorage();
+		model.refresh(s);
+		clearInput();
+
 	}
 }

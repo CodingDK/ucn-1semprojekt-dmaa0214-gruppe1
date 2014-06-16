@@ -40,7 +40,7 @@ public class MainGUI extends JFrame{
 	private CustomerGUI customer;
 	private JPanel order;
 	private EmployeeGUI employee;
-	private JPanel storage;
+	private StorageGUI storage;
 	private CategoryGUI category;
 	
 	/**
@@ -177,7 +177,9 @@ public class MainGUI extends JFrame{
 					customer.txtName.requestFocusInWindow();
 				} else if(comp.equals(employee)){
 					employee.txtName.requestFocusInWindow();
-				}
+				} else if(comp.equals(storage)){
+					storage.txtStorageName.requestFocusInWindow();
+				} 
 			}
 		});
 	}
