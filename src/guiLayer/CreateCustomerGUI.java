@@ -319,11 +319,62 @@ public class CreateCustomerGUI extends JPanel {
 	}
 	
 	protected void updateCustomer() {
-		// TODO Auto-generated method stub
+		validateFields();
+		String name = txtName.getText();
+		String street = txtStreet.getText();
+		String phone = txtPhone.getText();
+		String email = txtEmail.getText();
+		String city = txtCity.getText();
+		String post = txtPostCode.getText();
 		
+		if (!business) {
+			CustomerCtr cCtr = new CustomerCtr();
+			String cpr = txtCpr1.getText() + "-" + txtCpr2.getText();
+			String pictureId = txtPictureID.getText();
+			cCtr.updateCustomer(updateCust.getId(), name, phone, street, email, city, post, pictureId, null, null);
+		} else if (business) {
+			CustomerCtr cCtr = new CustomerCtr();
+			String company = txtCompany.getText();
+			String cvr = txtCvr.getText();
+			cCtr.updateCustomer(updateCust.getId(), name, phone, street, email, city, post, null, company, cvr);
+		}
+		getParent().remove(this);
 	}
 
 	protected void createCustomer() {
+		validateFields();
+		String name = txtName.getText();
+		String street = txtStreet.getText();
+		String phone = txtPhone.getText();
+		String email = txtEmail.getText();
+		String city = txtCity.getText();
+		String post = txtPostCode.getText();
+		
+		if (!business) {
+			CustomerCtr cCtr = new CustomerCtr();
+			String cpr = txtCpr1.getText() + "-" + txtCpr2.getText();
+			String pictureId = txtPictureID.getText();
+			Customer c = cCtr.createPrivateCustomer(name, phone, street, email, city, post, cpr, pictureId);
+			
+			if (saleGUI != null) {
+				saleGUI.setCustomer(c);
+			}
+		} else if (business) {
+			CustomerCtr cCtr = new CustomerCtr();
+			String company = txtCompany.getText();
+			String cvr = txtCvr.getText();
+			Customer c = cCtr.createBusinessCustomer(name, phone, street, email, city, post, company, cvr);
+			
+			if (saleGUI != null) {
+				saleGUI.setCustomer(c);
+			}
+		}
+		
+		MainGUI m = (MainGUI)getParent();
+		m.killMe(this);
+	}
+	
+	private void validateFields(){
 		String cprNr = null;
 		String pictureId = null;
 		String company = null;
@@ -411,24 +462,6 @@ public class CreateCustomerGUI extends JPanel {
 				return;
 			}
 		}
-		
-		if (!business) {
-			CustomerCtr cCtr = new CustomerCtr();
-			String cpr = cprNr + "-" + cprNr2;
-			Customer c = cCtr.createPrivateCustomer(name, phone, street, email, town, post, cpr, pictureId);
-			
-			if (saleGUI != null) {
-				saleGUI.setCustomer(c);
-			}
-		} else if (business) {
-			CustomerCtr cCtr = new CustomerCtr();
-			Customer c = cCtr.createBusinessCustomer(name, phone, street, email, town, post, company, cvr);
-			
-			if (saleGUI != null) {
-				saleGUI.setCustomer(c);
-			}
-		}
-		getParent().remove(this);
 	}
 	
 	private void customerType(boolean business) {
