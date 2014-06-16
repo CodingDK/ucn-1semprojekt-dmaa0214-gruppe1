@@ -19,7 +19,7 @@ public class ItemTableModel extends AbstractTableModel{
 	}
 
 	public int getColumnCount() {
-		return 7;
+		return 8;
 	}
 
 	public int getRowCount() {
@@ -43,6 +43,8 @@ public class ItemTableModel extends AbstractTableModel{
 			value = i.getLocation();
 		} else if(collIndex == 6){
 			value = i.getStorage().getName();
+		} else if(collIndex == 7){
+			value = i.getCategory().getName();
 		}
 		return value;
 	}	
@@ -65,6 +67,8 @@ public class ItemTableModel extends AbstractTableModel{
 			value = "Lokation";
 		} else if(collIndex == 6){
 			value = "Lager";
+		} else if(collIndex == 7){
+			value = "Kategori";
 		}
 		
 		return value;
