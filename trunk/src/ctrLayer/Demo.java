@@ -83,7 +83,10 @@ public class Demo {
 			}
 
 			cusCtr.createBusinessCustomer("Kis", "72691867", "Sofiendalsvej 60", "kbha@ucn.dk", "Aalborg", "9000", "UCN A/S", "33556063");
-
+			
+			for(int i = 0; i < 10; i++) {
+				cusCtr.createBusinessCustomer("TestB"+i, "12345678", "Testgade "+i, "Btest"+i+"@test "+i+".dk", "Aalborg", "9000", "Test "+i+" A/S", "1"+i+i+i+i+i);
+			}
 			try {
 				for(int i = 1; i<15; i++){
 					SaleCtr sCtr = new SaleCtr();
