@@ -39,11 +39,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class StorageGUI extends JPanel {
-	private JTextField txtStreet;
 	private JTextField txtStorageName;
-	private JTextField txtPostalcode;
-	private JTextField txtCity;
-	private JTextField txtTlf;
 	private JTable table;
 	private ArrayList<Storage> s;
 	private StorageTableModel model;
@@ -104,16 +100,12 @@ public class StorageGUI extends JPanel {
 		panel_4.setLayout(null);
 		
 		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(16, 43, 209, 150);
+		panel_5.setBounds(16, 43, 209, 32);
 		panel_4.add(panel_5);
 		panel_5.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("100px"),
 				ColumnSpec.decode("110px:grow"),},
 			new RowSpec[] {
-				RowSpec.decode("30px"),
-				RowSpec.decode("30px"),
-				RowSpec.decode("30px"),
-				RowSpec.decode("30px"),
 				RowSpec.decode("30px"),}));
 		
 		JLabel lblStorageName = new JLabel("Lagernavn");
@@ -123,36 +115,8 @@ public class StorageGUI extends JPanel {
 		panel_5.add(txtStorageName, "2, 1, fill, fill");
 		txtStorageName.setColumns(10);
 		
-		JLabel lblStreet = new JLabel("Gade");
-		panel_5.add(lblStreet, "1, 2, fill, fill");
-		
-		txtStreet = new JTextField();
-		panel_5.add(txtStreet, "2, 2, fill, fill");
-		txtStreet.setColumns(10);
-		
-		JLabel lblPostalcode = new JLabel("Postnummer");
-		panel_5.add(lblPostalcode, "1, 3, fill, fill");
-		
-		txtPostalcode = new JTextField();
-		txtPostalcode.setColumns(10);
-		panel_5.add(txtPostalcode, "2, 3, fill, fill");
-		
-		JLabel lblCity = new JLabel("By");
-		panel_5.add(lblCity, "1, 4, fill, fill");
-		
-		txtCity = new JTextField();
-		txtCity.setColumns(10);
-		panel_5.add(txtCity, "2, 4, fill, fill");
-		
-		JLabel lblTlf = new JLabel("Tlf");
-		panel_5.add(lblTlf, "1, 5, left, default");
-		
-		txtTlf = new JTextField();
-		panel_5.add(txtTlf, "2, 5, left, top");
-		txtTlf.setColumns(10);
-		
 		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(16, 197, 209, 32);
+		panel_6.setBounds(16, 87, 209, 32);
 		panel_4.add(panel_6);
 		panel_6.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("max(50dlu;pref):grow"),
@@ -183,21 +147,17 @@ public class StorageGUI extends JPanel {
 	
 	
 	protected void clearTypein() {
-		txtStorageName.setText("");
-		txtStreet.setText("");
-		txtPostalcode.setText("");
-		txtCity.setText("");
-		txtTlf.setText("");	
+		txtStorageName.setText("");	
 	}
-
-
 
 	private void createStorage() {
 		ItemCtr iCtr = new ItemCtr();
 		String name = txtStorageName.getText();
-		if(name != null && name.trim().isEmpty() ){
+		//if(name != null && !name.trim().isEmpty()){
 			iCtr.createStorage(name);
-		}
+	//	}
+			model.fireTableDataChanged();
+			model.refresh(s);
 		
 	}
 }

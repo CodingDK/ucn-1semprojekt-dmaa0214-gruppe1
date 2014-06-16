@@ -19,7 +19,7 @@ public class StorageTableModel extends AbstractTableModel{
 	}
 
 	public int getColumnCount() {
-		return 6;
+		return 2;
 	}
 
 	public int getRowCount() {
@@ -33,15 +33,7 @@ public class StorageTableModel extends AbstractTableModel{
 			value = s.getId();
 		} else if(collIndex == 1){
 			value = s.getName();
-		} else if(collIndex == 2){
-			value = "";
-		} else if(collIndex == 3){
-			value = "";
-		} else if(collIndex == 4){
-			value = "";
-		} else if(collIndex == 5){
-			value = "";
-		} 
+		}
 		return value;
 	}	
 	
@@ -53,16 +45,7 @@ public class StorageTableModel extends AbstractTableModel{
 			value = "ID";
 		} else if(collIndex == 1){
 			value = "Navn";
-		} else if(collIndex == 2){
-			value = "Gade";
-		} else if(collIndex == 3){
-			value = "By";
-		} else if(collIndex == 4){
-			value = "Postnummer";
-		} else if(collIndex == 5){
-			value = "Tlf nr";
-		}
-		
+		}		
 		return value;
 	}
 }
