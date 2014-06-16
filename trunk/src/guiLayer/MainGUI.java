@@ -269,38 +269,34 @@ public class MainGUI extends JFrame{
 	}
 	
 	public void createItem(){
-		CreateItemGUI item = new CreateItemGUI();
-		tabbedPane.addTab("Opret Vare", null, item, null);
-		tabbedPane.setSelectedComponent(item);
-		item.txtName.requestFocusInWindow();
+		CreateItemGUI comp = new CreateItemGUI();
+		addPaneToTabe(comp, "Opret Vare");
 	}
 
 	public void createPrivateCustomer(){
-		CreateCustomerGUI item = new CreateCustomerGUI(false);
-		tabbedPane.addTab("Opret Privat Kunde", item);
-		tabbedPane.setSelectedComponent(item);
-		item.txtName.requestFocusInWindow();		
+		CreateCustomerGUI comp = new CreateCustomerGUI(false);
+		addPaneToTabe(comp, "Opret Privat Kunde");
 	}
 
 	public void createPrivateCustomer(SaleGUI sGUI){
-		CreateCustomerGUI item = new CreateCustomerGUI(false, sGUI);
-		tabbedPane.addTab("Opret Privat Kunde", item);
-		tabbedPane.setSelectedComponent(item);
-		item.txtName.requestFocusInWindow();		
+		CreateCustomerGUI comp = new CreateCustomerGUI(false, sGUI);
+		addPaneToTabe(comp, "Opret Privat Kunde");
 	}
 
 	public void createBusinesssCustomer(){
-		CreateCustomerGUI item = new CreateCustomerGUI(true);
-		tabbedPane.addTab("Opret Erhvervs Kunde", item);
-		tabbedPane.setSelectedComponent(item);
-		item.txtName.requestFocusInWindow();		
+		CreateCustomerGUI comp = new CreateCustomerGUI(true);
+		addPaneToTabe(comp, "Opret Erhvervs Kunde");
 	}
 	
 	public void createBusinesssCustomer(SaleGUI sGUI){
-		CreateCustomerGUI item = new CreateCustomerGUI(true, sGUI);
-		tabbedPane.addTab("Opret Erhvervs Kunde", item);
-		tabbedPane.setSelectedComponent(item);
-		item.txtName.requestFocusInWindow();		
+		CreateCustomerGUI comp = new CreateCustomerGUI(true, sGUI);
+		addPaneToTabe(comp, "Opret Erhvervs Kunde");
+	}
+	
+	public void addPaneToTabe(Component c, String title){
+		tabbedPane.addTab(title, c);
+		tabbedPane.setSelectedComponent(c);
+		
 	}
 		
 	public void setSelectedToSale(boolean b){
