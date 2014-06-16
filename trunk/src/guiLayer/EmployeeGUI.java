@@ -44,6 +44,7 @@ public class EmployeeGUI extends JPanel {
 	private MainGUI parent;
 	private JPanel panel_6;
 	private JBlinkLabel errLabel;
+	public JButton btnFind;
 
 	/**
 	 * Create the panel.
@@ -135,7 +136,7 @@ public class EmployeeGUI extends JPanel {
 			}
 		});
 		panel_5.add(btnClear, "1, 2, fill, top");
-		JButton btnFind = new JButton("Søg");
+		btnFind = new JButton("Søg");
 		btnFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				findCustomer();

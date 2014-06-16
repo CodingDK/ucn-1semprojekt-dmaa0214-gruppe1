@@ -168,11 +168,11 @@ public class CustomerGUI extends JPanel {
 		
 		JButton btnFind = new JButton("Søg");
 		panel.add(btnFind, "3, 2, fill, top");
-		btnFind.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				findCustomer();
-			}
-		});
+//		btnFind.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				findCustomer();
+//			}
+//		});
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				clearSearch();
@@ -192,14 +192,14 @@ public class CustomerGUI extends JPanel {
 		searchGridPanel.add(lblCompany, "1, 1, fill, fill");
 		
 		txtCompany = new JTextField();
-		txtCompany.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				if(KeyEvent.VK_ENTER == arg0.getKeyCode()){
-					findCustomer();
-				}
-			}
-		});
+//		txtCompany.addKeyListener(new KeyAdapter() {
+//			@Override
+//			public void keyPressed(KeyEvent arg0) {
+//				if(KeyEvent.VK_ENTER == arg0.getKeyCode()){
+//					findCustomer();
+//				}
+//			}
+//		});
 		searchGridPanel.add(txtCompany, "2, 1, fill, fill");
 		txtCompany.setColumns(10);
 		
@@ -207,14 +207,14 @@ public class CustomerGUI extends JPanel {
 		searchGridPanel.add(lblName, "1, 2, fill, fill");
 		
 		txtName = new JTextField();
-		txtName.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				if(KeyEvent.VK_ENTER == arg0.getKeyCode()){
-					findCustomer();
-				}
-			}
-		});
+//		txtName.addKeyListener(new KeyAdapter() {
+//			@Override
+//			public void keyPressed(KeyEvent arg0) {
+//				if(KeyEvent.VK_ENTER == arg0.getKeyCode()){
+//					findCustomer();
+//				}
+//			}
+//		});
 		txtName.setColumns(10);
 		searchGridPanel.add(txtName, "2, 2, fill, fill");
 		
@@ -223,14 +223,14 @@ public class CustomerGUI extends JPanel {
 		
 		txtTlf = new JTextField();
 		txtTlf.setColumns(10);
-		txtTlf.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				if(KeyEvent.VK_ENTER == arg0.getKeyCode()){
-					findCustomer();
-				}
-			}
-		});
+//		txtTlf.addKeyListener(new KeyAdapter() {
+//			@Override
+//			public void keyPressed(KeyEvent arg0) {
+//				if(KeyEvent.VK_ENTER == arg0.getKeyCode()){
+//					findCustomer();
+//				}
+//			}
+//		});
 		searchGridPanel.add(txtTlf, "2, 3, fill, fill");
 		searchGroupPanel.setLayout(gl_searchGroupPanel);	
 		

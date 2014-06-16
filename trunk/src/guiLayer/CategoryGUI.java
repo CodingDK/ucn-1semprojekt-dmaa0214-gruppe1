@@ -48,6 +48,7 @@ public class CategoryGUI extends JPanel {
 	private CategoryTableModel model;
 	private JTable table;
 	private JBlinkLabel lblState;
+	public JButton btnCreate;
 	
 	/**
 	 * Create the panel.
@@ -178,7 +179,7 @@ public class CategoryGUI extends JPanel {
 		});
 		panel_5.add(btnClear, "1, 2, fill, top");
 		
-		JButton btnCreate = new JButton("Opret");
+		btnCreate = new JButton("Opret");
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				createCategory();
