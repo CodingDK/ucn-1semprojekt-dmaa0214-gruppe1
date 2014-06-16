@@ -315,8 +315,8 @@ public class SaleGUI extends JPanel {
 	public void setCustomer(Customer c){
 		if(c != null){
 			saleCtr.getSale().setCustomer(c);
-			updateCustomer();
 		}
+		updateCustomer();
 	}
 	
 	private void updateCustomer(){
@@ -373,11 +373,15 @@ public class SaleGUI extends JPanel {
 	}
 
 	private void finishSale() {
-		SaleFinishGUI finishDialog = new SaleFinishGUI(null, saleCtr);
-		if (finishDialog.isDone()){
-			mainGUI.resetSale();
+		if(isSaleEmpty()){
+			JOptionPane.showMessageDialog(null, "Du kan ikke lave et tomt salg","Advarsel",JOptionPane.ERROR_MESSAGE);
+		} else{
+			SaleFinishGUI finishDialog = new SaleFinishGUI(null, saleCtr);
+			if (finishDialog.isDone()){
+				mainGUI.resetSale();
+			}
+			finishDialog.dispose();
 		}
-		finishDialog.dispose();
 	}
 	
 	private void parkSale() {
@@ -394,14 +398,13 @@ public class SaleGUI extends JPanel {
 				
 				saleCtr.parkSale();
 				mainGUI.resetSale();
+				updateCustomer();
 			}	
 		}	
 	}
 
 	private void cancelSale() {
-		if(isSaleEmpty()){
-			JOptionPane.showMessageDialog(null, "Du kan ikke parkere et tomt salg","Advarsel",JOptionPane.ERROR_MESSAGE);
-		} else{
+		
 			JFrame frame = new JFrame();
 			String[] options = new String[2];
 			options[0] = new String("Nulstil");
@@ -412,8 +415,8 @@ public class SaleGUI extends JPanel {
 				
 				saleCtr.cancelSale();
 				mainGUI.resetSale();
+				updateCustomer();
 			}
-		}
 	}
 
 	private void makeAddItem(){
