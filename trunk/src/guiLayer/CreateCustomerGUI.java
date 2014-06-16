@@ -13,7 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import personLayer.Business;
 import personLayer.Customer;
+import personLayer.Private;
 
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -33,7 +35,7 @@ public class CreateCustomerGUI extends JPanel {
 	private JTextField txtPostCode;
 	private JIntegerField txtPhone;
 	private JTextField txtEmail;
-	private JTextField txtTown;
+	private JTextField txtCity;
 	
 	private JLabel lblStreet;
 	private JLabel lblTown;
@@ -71,10 +73,10 @@ public class CreateCustomerGUI extends JPanel {
 	
 	public CreateCustomerGUI(boolean business, Customer updateCust) {
 		if(updateCust != null){
-			this.saleGUI = saleGUI;
 			this.business = business;
 			this.updateCust = updateCust;
 			buildPanel();
+			insertUpdateDate();
 		}else{
 			getParent().remove(this);
 		}
@@ -150,9 +152,9 @@ public class CreateCustomerGUI extends JPanel {
 		lblTown = new JLabel("By");
 		panel_1.add(lblTown, "2, 6, fill, fill");
 		
-		txtTown = new JTextField();
-		panel_1.add(txtTown, "3, 6, fill, fill");
-		txtTown.setColumns(10);
+		txtCity = new JTextField();
+		panel_1.add(txtCity, "3, 6, fill, fill");
+		txtCity.setColumns(10);
 		
 		lblPostCode = new JLabel("PostNr");
 		panel_1.add(lblPostCode, "2, 8, fill, fill");
@@ -319,7 +321,7 @@ public class CreateCustomerGUI extends JPanel {
 			return;
 		}
 		
-		String town = txtTown.getText();
+		String town = txtCity.getText();
 		
 		if (town == null || town.trim().isEmpty()) {
 			lblError.setText("By" + errorMsg);
@@ -417,7 +419,22 @@ public class CreateCustomerGUI extends JPanel {
 	}
 	
 	private void insertUpdateDate(){
-		
+		txtName.setText(updateCust.getName());
+		txtStreet.setText(updateCust.getStreet());
+		txtCity.setText(updateCust.getCity());
+		txtPostCode.setText(updateCust.getPostCode());
+		txtPhone.setText(updateCust.getPhoneNr());
+		txtEmail.setText(updateCust.getEmail());
+		if(updateCust instanceof Business){
+			Business b = (Business)updateCust;
+			txtCompany.setText(b.getCompany());
+			txtCvr.setText(b.getCvrNr());
+		}else if(updateCust instanceof Private){
+			Private p = (Private)updateCust;
+			txtPictureID.setText(p.getPictureID());
+			String[] cpr = p.getCpr().split("-");
+			txtCpr1.setText(cpr[0]);
+			txtCpr2.setText(cpr[1]);
+		}
 	}
-	
 }
