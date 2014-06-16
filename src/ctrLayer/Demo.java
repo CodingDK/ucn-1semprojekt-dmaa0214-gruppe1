@@ -6,6 +6,7 @@ import java.util.Random;
 import exceptionLayer.CategoryExistException;
 import exceptionLayer.NotEnoughItemsException;
 import exceptionLayer.SaleNotCreatedException;
+import exceptionLayer.StorageExistException;
 import modelLayer.Category;
 import modelLayer.Item;
 import modelLayer.Storage;
@@ -23,8 +24,13 @@ public class Demo {
 			ItemCtr iCtr = new ItemCtr();
 			CategoryCtr cCtr = new CategoryCtr();
 
-			iCtr.createStorage("Trælast");
-			iCtr.createStorage("Byggecenter");
+			try {
+				iCtr.createStorage("Trælast");
+				iCtr.createStorage("Byggecenter");
+			} catch (StorageExistException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			Storage s1 = iCtr.findStorage("Trælast");
 			Storage s2 = iCtr.findStorage("Byggecenter");
 			try {

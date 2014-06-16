@@ -28,6 +28,7 @@ import com.jgoodies.forms.factories.FormFactory;
 import ctrLayer.ItemCtr;
 import extensions.JBlinkLabel;
 import extensions.StorageTableModel;
+import exceptionLayer.StorageExistException;
 
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
@@ -208,21 +209,28 @@ public class StorageGUI extends JPanel {
 
 	private void createStorage() {
 		ItemCtr iCtr = new ItemCtr();
-		String name = txtStorageName.getText();
-		if(name == null || name.trim().isEmpty()){
+		if(txtStorageName.getText() != null || !txtStorageName.getText().trim().isEmpty()){
+			try{
+				iCtr.createStorage(txtStorageName.getText());
+				model.fireTableDataChanged();
+				storages = iCtr.getAllStorage();
+				model.refresh(storages);
+				clearInput();
+				lblState.setText(txtStorageName.getText() + " er oprettet");
+				lblState.startBlinking(true, false);
+			} catch (StorageExistException e){
+				lblState.setText(e.getMessage());
+				lblState.startBlinking(true, true);
+			}
+		} else {		
 			lblState.setText("Navnet må ikke være tomt");
 			lblState.startBlinking(true, true);
-		} else{
-			iCtr.createStorage(name);
-			lblState.setText(name + " er oprettet");
-			lblState.startBlinking(true, false);
 		}
-		model.fireTableDataChanged();
-		storages = iCtr.getAllStorage();
-		model.refresh(storages);
-		clearInput();
 	}
-	
+		
+		
+		
+		
 	private void removeStorage(String name) {
 		ItemCtr iCtr = new ItemCtr();
 		if(!name.equals("Ukendt") ){
