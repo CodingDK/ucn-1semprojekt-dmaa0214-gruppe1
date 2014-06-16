@@ -86,6 +86,8 @@ public class CreateCustomerGUI extends JPanel {
 			this.updateCust = updateCust;
 			buildPanel();
 			insertUpdateDate();
+			this.txtCpr1.setEditable(false);
+			this.txtCpr2.setEditable(false);
 		}else{
 			getParent().remove(this);
 		}
@@ -329,7 +331,6 @@ public class CreateCustomerGUI extends JPanel {
 		
 		if (!business) {
 			CustomerCtr cCtr = new CustomerCtr();
-			String cpr = txtCpr1.getText() + "-" + txtCpr2.getText();
 			String pictureId = txtPictureID.getText();
 			cCtr.updateCustomer(updateCust.getId(), name, phone, street, email, city, post, pictureId, null, null);
 		} else if (business) {
