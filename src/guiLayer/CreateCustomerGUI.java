@@ -1,5 +1,6 @@
 package guiLayer;
 
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -64,6 +65,8 @@ public class CreateCustomerGUI extends JPanel {
 	private JTextField txtCpr1;
 	private JLabel label;
 	private Customer updateCust;
+	private Component creator;
+	private boolean isUpdate = false;
 	
 	public CreateCustomerGUI(boolean business, SaleGUI saleGUI) {
 		this.saleGUI = saleGUI;
@@ -71,9 +74,15 @@ public class CreateCustomerGUI extends JPanel {
 		buildPanel();
 	}
 	
-	public CreateCustomerGUI(boolean business, Customer updateCust) {
+	public CreateCustomerGUI(Customer updateCust, Component creator) {
+		this.creator = creator;
 		if(updateCust != null){
-			this.business = business;
+			if(updateCust instanceof Business){
+				this.business = true;
+			}else{
+				this.business = false;
+			}
+			this.isUpdate = true;
 			this.updateCust = updateCust;
 			buildPanel();
 			insertUpdateDate();
@@ -273,7 +282,12 @@ public class CreateCustomerGUI extends JPanel {
 				new RowSpec[] {
 						RowSpec.decode("fill:28px"),}));
 		
-		JButton btnOpret = new JButton("Opret ");
+		JButton btnOpret = new JButton();
+		if(isUpdate){
+			btnOpret.setText("Ret");
+		}else{
+			btnOpret.setText("Opret");
+		}
 		panel.add(btnOpret, "1, 1, fill, fill");
 		
 		JButton btn = new JButton("Anuller");
