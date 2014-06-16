@@ -75,5 +75,7 @@ public class Demo {
 			
 			firstRun = false;
 		}
+		
+		// Æ Ø Å
 	}
 }
