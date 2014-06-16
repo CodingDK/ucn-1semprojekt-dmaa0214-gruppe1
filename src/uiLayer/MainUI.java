@@ -6,7 +6,7 @@ import java.util.Date;
 import modelLayer.Category;
 import modelLayer.Item;
 import modelLayer.Sale;
-import modelLayer.Storage;
+import modelLayer.Order;
 import personLayer.Private;
 import ctrLayer.CategoryCtr;
 import ctrLayer.CustomerCtr;
@@ -91,8 +91,8 @@ public class MainUI extends SuperUI {
 		CategoryCtr cCtr = new CategoryCtr();
 		iCtr.createStorage("Trælast");
 		iCtr.createStorage("Byggecenter");
-		Storage s1 = iCtr.findStorage("Trælast");
-		Storage s2 = iCtr.findStorage("Byggecenter");
+		Order s1 = iCtr.findStorage("Trælast");
+		Order s2 = iCtr.findStorage("Byggecenter");
 		try {
 			cCtr.createCategory("Søm");
 			cCtr.createCategory("Hammer");

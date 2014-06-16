@@ -12,16 +12,16 @@ import java.util.ArrayList;
 public class StorageCont {
 	private static StorageCont instance;
 	private static boolean firstRun = true;
-	private static Storage primaryStorage;
-	private ArrayList<Storage> storages;
+	private static Order primaryStorage;
+	private ArrayList<Order> storages;
 	
 	/**
 	 * Constructor for objects of class StorageCont
 	 */
 	private StorageCont() {
-		storages = new ArrayList<Storage>();
+		storages = new ArrayList<Order>();
 		if (firstRun) {
-			primaryStorage = new Storage("Ukendt");
+			primaryStorage = new Order("Ukendt");
 			addStorage(primaryStorage);
 			firstRun = false;
 		}
@@ -45,7 +45,7 @@ public class StorageCont {
 	 * 
 	 * @return Storage
 	 */
-	public Storage getPrimary() {
+	public Order getPrimary() {
 		return primaryStorage;
 	}
 	
@@ -54,7 +54,7 @@ public class StorageCont {
 	 * 
 	 * @param s The Storage object to add.
 	 */
-	public void addStorage(Storage s) {
+	public void addStorage(Order s) {
 		storages.add(s);
 	}
 	
@@ -64,8 +64,8 @@ public class StorageCont {
 	 * @param name - The name of the Storage.
 	 * @return Storage object of the Storage or null if not found.
 	 */
-	public Storage findStorage(String name) {
-		Storage retStorage = null;
+	public Order findStorage(String name) {
+		Order retStorage = null;
 		boolean found = false;
 		int i = 0;
 		while (i < storages.size() && !found) {
@@ -84,7 +84,7 @@ public class StorageCont {
 	 * 
 	 * @param s The Storage object to remove.
 	 */
-	public void removeStorage(Storage s) {
+	public void removeStorage(Order s) {
 		storages.remove(s);
 	}
 	
@@ -93,7 +93,7 @@ public class StorageCont {
 	 * 
 	 * @return ArrayList<Storage> A list with all storages.
 	 */
-	public ArrayList<Storage> getAll() {
+	public ArrayList<Order> getAll() {
 		return storages;
 	}
 }

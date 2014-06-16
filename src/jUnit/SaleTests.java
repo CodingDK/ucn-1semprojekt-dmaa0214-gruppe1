@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import modelLayer.Category;
 import modelLayer.Item;
 import modelLayer.Sale;
-import modelLayer.Storage;
+import modelLayer.Order;
 
 import org.junit.Test;
 
@@ -39,7 +39,7 @@ public class SaleTests {
 		CategoryCtr cCtr = new CategoryCtr();
 		iCtr.createStorage("Test1");
 		iCtr.createStorage("Test2");
-		Storage s1 = iCtr.findStorage("Test1");
+		Order s1 = iCtr.findStorage("Test1");
 		try {
 			cCtr.createCategory("Søm");
 			cCtr.createCategory("Hammer");
@@ -67,7 +67,7 @@ public class SaleTests {
 		CategoryCtr cCtr = new CategoryCtr();
 		iCtr.createStorage("Test1");
 		iCtr.createStorage("Test2");
-		Storage s1 = iCtr.findStorage("Test1");
+		Order s1 = iCtr.findStorage("Test1");
 		try {
 			cCtr.createCategory("Søm");
 			cCtr.createCategory("Hammer");
@@ -121,7 +121,7 @@ public class SaleTests {
 		CategoryCtr cCtr = new CategoryCtr();
 		iCtr.createStorage("Test1");
 		iCtr.createStorage("Test2");
-		Storage s1 = iCtr.findStorage("Test1");
+		Order s1 = iCtr.findStorage("Test1");
 		try {
 			cCtr.createCategory("Søm");
 			cCtr.createCategory("Hammer");
