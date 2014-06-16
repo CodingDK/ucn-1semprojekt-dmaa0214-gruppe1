@@ -1,35 +1,31 @@
 package guiLayer;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.GridLayout;
-
-import javax.swing.JTextField;
-
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import modelLayer.Category;
+import modelLayer.Storage;
+
 import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
 import extensions.JDoubleField;
 import extensions.JIntegerField;
-
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-
-import modelLayer.Category;
-import modelLayer.Storage;
 
 public class CreateItemGUI extends JPanel {
 	private JIntegerField txtAmount;

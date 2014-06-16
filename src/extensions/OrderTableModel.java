@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 import modelLayer.Sale;
-import modelLayer.Storage;
 
 public class OrderTableModel extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;

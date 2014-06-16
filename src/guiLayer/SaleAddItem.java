@@ -3,28 +3,24 @@ package guiLayer;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.GridLayout;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
 import modelLayer.Item;
-import modelLayer.Sale;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.ItemCtr;
@@ -32,9 +28,6 @@ import ctrLayer.SaleCtr;
 import exceptionLayer.NotEnoughItemsException;
 import exceptionLayer.SaleNotCreatedException;
 import extensions.JIntegerField;
-
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 public class SaleAddItem extends JDialog {
 
