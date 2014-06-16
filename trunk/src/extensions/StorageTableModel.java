@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import modelLayer.Order;
+import modelLayer.Storage;
 
 public class StorageTableModel extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Order> storages;
+	private ArrayList<Storage> storages;
 	
-	public StorageTableModel(ArrayList<Order> stor){
+	public StorageTableModel(ArrayList<Storage> stor){
 		this.storages = stor;
 	}
 
-	public void refresh(ArrayList<Order> s) {
+	public void refresh(ArrayList<Storage> s) {
 		this.storages = s;
 	}
 
@@ -27,7 +27,7 @@ public class StorageTableModel extends AbstractTableModel{
 	}
 
 	public Object getValueAt(int rowIndex, int collIndex) {
-		Order s  = storages.get(rowIndex);
+		Storage s  = storages.get(rowIndex);
 		Object value = null;
 		if(collIndex == 0){
 			value = s.getId();

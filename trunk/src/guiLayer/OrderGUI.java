@@ -1,16 +1,22 @@
 package guiLayer;
 
 import javax.swing.JPanel;
+import javax.swing.JTable;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.BorderLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.awt.FlowLayout;
+
 import javax.swing.JScrollPane;
 
 public class OrderGUI extends JPanel {
+	private JTable table;
 
 	/**
 	 * Create the panel.
@@ -43,6 +49,10 @@ public class OrderGUI extends JPanel {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+	
 		
 		JPanel panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();

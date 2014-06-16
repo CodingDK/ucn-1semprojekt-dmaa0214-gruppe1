@@ -1,7 +1,7 @@
 package jUnit;
 
 import modelLayer.Category;
-import modelLayer.Order;
+import modelLayer.Storage;
 
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -29,8 +29,8 @@ public class AllTests {
 		CategoryCtr cCtr = new CategoryCtr();
 		iCtr.createStorage("Lager1");
 		iCtr.createStorage("Lager2");
-		Order s1 = iCtr.findStorage("Lager1");
-		Order s2 = iCtr.findStorage("Lager2");
+		Storage s1 = iCtr.findStorage("Lager1");
+		Storage s2 = iCtr.findStorage("Lager2");
 		try {
 			cCtr.createCategory("Søm");
 			cCtr.createCategory("Hammer");
