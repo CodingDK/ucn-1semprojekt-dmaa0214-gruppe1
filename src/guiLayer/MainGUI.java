@@ -302,6 +302,14 @@ public class MainGUI extends JFrame{
 		tabbedPane.setSelectedComponent(item);
 		item.txtName.requestFocusInWindow();		
 	}
+		
+	public void setSelectedToSale(boolean b){
+		if(b){
+			tabbedPane.setSelectedComponent(Sale);
+		} else {
+			tabbedPane.setSelectedComponent(Customer);
+		}
+	}
 	
 	public void resetSale(){
 		tabbedPane.remove(Sale);
