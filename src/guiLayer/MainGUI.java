@@ -181,6 +181,7 @@ public class MainGUI extends JFrame{
 					//TODO
 					order.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(order.btnSøg);
+					order.update();
 				}
 			}
 			
