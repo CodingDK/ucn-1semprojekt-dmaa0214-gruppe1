@@ -28,7 +28,6 @@ public class Demo {
 				iCtr.createStorage("Trælast");
 				iCtr.createStorage("Byggecenter");
 			} catch (StorageExistException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			Storage s1 = iCtr.findStorage("Trælast");
@@ -37,7 +36,6 @@ public class Demo {
 				cCtr.createCategory("Søm");
 				cCtr.createCategory("Hammer");
 			} catch (CategoryExistException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -96,6 +94,16 @@ public class Demo {
 					Customer c = cusCtr.findCustomer(i);
 					sCtr.setCustomer(c);
 					sCtr.finishSale("1");
+				}
+				
+				for(int i = 30; i<35; i++){
+					SaleCtr sCtr = new SaleCtr();
+					sCtr.createSale();
+					Item itemi = iCtr.getItem(i);
+					sCtr.addItem(itemi, 1);
+					Customer c = cusCtr.findCustomer(i);
+					sCtr.setCustomer(c);
+					sCtr.parkSale();
 				}
 			} catch (NullPointerException e) {
 				e.printStackTrace();

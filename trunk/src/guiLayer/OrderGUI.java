@@ -20,25 +20,16 @@ import javax.swing.JScrollPane;
 import ctrLayer.SaleCtr;
 import modelLayer.Sale;
 import extensions.OrderTableModel;
-
 import javax.swing.JButton;
-
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.TitledBorder;
-
 import com.jgoodies.forms.factories.FormFactory;
-
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -87,7 +78,6 @@ public class OrderGUI extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
 		
-		sales = sCtr.getSales();
 		model = new OrderTableModel(sales);
 		table = new JTable(model);
 		table.getColumnModel().getColumn(0).setMaxWidth(30);
@@ -188,10 +178,7 @@ public class OrderGUI extends JPanel {
 		txtID.setColumns(10);
 		panel_3.setLayout(gl_panel_3);
 		panel_1.setLayout(gl_panel_1);
-		
-		model.refresh(sales);
-		model.fireTableDataChanged();
-
+		update();
 	}
 	
 	public void update(){
@@ -208,5 +195,14 @@ public class OrderGUI extends JPanel {
 		}
 		model.refresh(sales);
 		model.fireTableDataChanged();
+	}
+	
+	private void clearInput(){
+		txtID.setText("");
+		txtName.setText("");
+	}
+	
+	private void searchCustomer(){
+		clearInput();
 	}
 }
