@@ -12,8 +12,6 @@ import javax.swing.border.EmptyBorder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
-
 import ctrLayer.ItemCtr;
 
 import javax.swing.JLabel;
@@ -25,6 +23,8 @@ import java.awt.event.ActionEvent;
 
 public class UpdateStorageDialog extends JDialog {
 
+	private static final long serialVersionUID = 1;
+	
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtStorageName;
 	private String name;
