@@ -59,6 +59,7 @@ public class MainGUI extends JFrame{
 				try {
 					MainGUI window = new MainGUI();
 					window.setVisible(true);
+					window.setTitle("Vestbjerg Byggecenter A/S");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
