@@ -190,12 +190,8 @@ public class MainGUI extends JFrame{
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "ctrl-o");
 		ActionMap am = tabbedPane.getActionMap();
 		am.put("ctrl-s", new AbstractAction() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
 				tp.setSelectedIndex(0);
@@ -203,12 +199,8 @@ public class MainGUI extends JFrame{
 		});
 		
 		am.put("ctrl-v", new AbstractAction() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
 				tp.setSelectedIndex(1);
@@ -216,12 +208,8 @@ public class MainGUI extends JFrame{
 		});
 		
 		am.put("ctrl-k", new AbstractAction() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
 				tp.setSelectedIndex(2);
@@ -229,12 +217,8 @@ public class MainGUI extends JFrame{
 		});
 		
 		am.put("ctrl-o", new AbstractAction() {
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
 				tp.setSelectedIndex(3);
