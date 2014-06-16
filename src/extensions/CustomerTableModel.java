@@ -1,7 +1,10 @@
 package extensions;
 
 import java.util.ArrayList;
+
 import javax.swing.table.AbstractTableModel;
+
+import personLayer.Business;
 import personLayer.Customer;
 
 public class CustomerTableModel extends AbstractTableModel{
@@ -17,7 +20,7 @@ public class CustomerTableModel extends AbstractTableModel{
 	}
 
 	public int getColumnCount() {
-		return 7;
+		return 8;
 	}
 
 	public int getRowCount() {
@@ -30,16 +33,24 @@ public class CustomerTableModel extends AbstractTableModel{
 		if(collIndex == 0){
 			value = c.getId();
 		} else if(collIndex == 1){
-			value = c.getName();
+			if(c instanceof Business){
+				Business b = (Business) c;
+				value = b.getCompany();
+			} else {
+				value = " ";
+			}
+			
 		} else if(collIndex == 2){
-			value = c.getStreet();
+			value = c.getName();
 		} else if(collIndex == 3){
-			value = c.getCity();
+			value = c.getStreet();
 		} else if(collIndex == 4){
-			value = c.getPostCode();
+			value = c.getCity();
 		} else if(collIndex == 5){
-			value = c.getPhoneNr();
+			value = c.getPostCode();
 		} else if(collIndex == 6){
+			value = c.getPhoneNr();
+		} else if(collIndex == 7){
 			value = c.getEmail();
 		} 
 		return value;
@@ -52,16 +63,18 @@ public class CustomerTableModel extends AbstractTableModel{
 		if(collIndex == 0){
 			value = "ID";
 		} else if(collIndex == 1){
-			value = "Navn";
+			value = "Virksomhed";
 		} else if(collIndex == 2){
-			value = "Gade";
+			value = "Navn";
 		} else if(collIndex == 3){
-			value = "By";
+			value = "Gade";
 		} else if(collIndex == 4){
-			value = "Postnummer";
+			value = "By";
 		} else if(collIndex == 5){
-			value = "Tlf nr.";
+			value = "Postnummer";
 		} else if(collIndex == 6){
+			value = "Tlf nr.";
+		} else if(collIndex == 7){
 			value = "E-mail";
 		}
 		
