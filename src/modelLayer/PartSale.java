@@ -29,6 +29,13 @@ public class PartSale {
 	}
 	
 	/**
+	 * @param amount the amount to set
+	 */
+	public void addAmount(int amount) {
+		this.amount += amount;
+	}
+
+	/**
 	 * @return the item
 	 */
 	public Item getItem() {
