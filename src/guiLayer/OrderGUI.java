@@ -30,6 +30,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
+import ctrLayer.CustomerCtr;
 import ctrLayer.SaleCtr;
 import extensions.OrderTableModel;
 
@@ -46,10 +47,9 @@ public class OrderGUI extends JPanel {
 	 * Create the panel.
 	 */
 	public OrderGUI() {
-		SaleCtr sCtr = new SaleCtr();
 		sales = new ArrayList<Sale>();
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{211, 121, 0};
+		gridBagLayout.columnWidths = new int[]{555, 121, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
@@ -121,7 +121,7 @@ public class OrderGUI extends JPanel {
 				update();
 			}
 		});
-		String[] options = {"Parkeret salg", "Færdige salg", "Alle salg"};
+		String[] options = {"Parkeret salg", "Alle salg"};
 		comboBox.setModel(new DefaultComboBoxModel<String>(options));
 		
 		panel_6.add(comboBox);
@@ -149,7 +149,21 @@ public class OrderGUI extends JPanel {
 		);
 		
 		btnSøg = new JButton("Søg");
+		btnSøg.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				searchCustomer();
+				clearInput();
+			}
+		});
 		panel_5.add(btnSøg);
+		
+		JButton btnNulstil = new JButton("Nulstil");
+		btnNulstil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clearInput();
+			}
+		});
+		panel_5.add(btnNulstil);
 		panel_4.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
@@ -184,12 +198,8 @@ public class OrderGUI extends JPanel {
 		SaleCtr sCtr = new SaleCtr();
 		if(i == 0){
 			sales = sCtr.getParkedSales();
-		}else if(i == 1){
-			sales = sCtr.getSales();
-
 		}else{
-			sales = sCtr.getParkedSales();
-			sales.addAll(sCtr.getSales());			
+			sales = sCtr.getSales();
 		}
 		model.refresh(sales);
 		model.fireTableDataChanged();
@@ -201,6 +211,9 @@ public class OrderGUI extends JPanel {
 	}
 	
 	private void searchCustomer(){
-		clearInput();
+//		for(Sale s : sales){
+//			CustomerCtr cCtr = new CustomerCtr();
+//			cCtr.se
+//		}
 	}
 }
