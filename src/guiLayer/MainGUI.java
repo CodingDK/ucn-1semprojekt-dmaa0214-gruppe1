@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
@@ -152,6 +153,11 @@ public class MainGUI extends JFrame{
 		menuBar.add(mnHelp);
 		
 		JMenuItem mntmHelp = new JMenuItem("Hjælp");
+		mntmHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				help();
+			}
+		});
 		mnHelp.add(mntmHelp);
 		
 		tabbedPane.addChangeListener(new ChangeListener(){
@@ -181,6 +187,10 @@ public class MainGUI extends JFrame{
 			}
 			
 		});
+	}
+
+	private void help() {
+		JOptionPane.showMessageDialog(null, "Du er helt alene.. ingen hjælp her :(","Advarsel",JOptionPane.WARNING_MESSAGE);
 	}
 
 	private void makeTabbedPaneSwitcher() {
