@@ -17,7 +17,7 @@ public class Item {
 	private double bulkSalePrice;
 	private int bulk;
 	private String location;
-	private Storage storage;
+	private Order storage;
 	private int max;
 	private int min;
 	private Category category;
@@ -40,7 +40,7 @@ public class Item {
 	 */
 	public Item(String name, int amount, int reserved,
 			double salePrice, double purchasePrice, double bulkSalePrice,
-			int bulk, String location, Storage storage, int max, int min,
+			int bulk, String location, Order storage, int max, int min,
 			Category category) {
 		idIterator++;
 		id = idIterator;
@@ -225,7 +225,7 @@ public class Item {
 	 * 
 	 * @return the storage
 	 */
-	public Storage getStorage() {
+	public Order getStorage() {
 		return storage;
 	}
 	
@@ -234,7 +234,7 @@ public class Item {
 	 * 
 	 * @param storage the storage to set
 	 */
-	public void setStorage(Storage storage) {
+	public void setStorage(Order storage) {
 		this.storage = storage;
 	}
 	

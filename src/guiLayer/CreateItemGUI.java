@@ -29,7 +29,7 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 
 import modelLayer.Category;
-import modelLayer.Storage;
+import modelLayer.Order;
 
 public class CreateItemGUI extends JPanel {
 	private JIntegerField txtAmount;
@@ -136,9 +136,9 @@ public class CreateItemGUI extends JPanel {
 		JLabel lblStorage = new JLabel("Lager");
 		panel_2.add(lblStorage, "2, 8, left, fill");
 		
-		JComboBox<Storage> cmbStorage = new JComboBox<Storage>();
+		JComboBox<Order> cmbStorage = new JComboBox<Order>();
 		ItemCtr iCtr = new ItemCtr();
-		ArrayList<Storage> stors = iCtr.getAllStorage();
+		ArrayList<Order> stors = iCtr.getAllStorage();
 		cmbStorage.setModel(new DefaultComboBoxModel(stors.toArray()));
 		panel_2.add(cmbStorage, "4, 8, fill, default");
 		

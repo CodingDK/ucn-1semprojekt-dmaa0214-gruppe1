@@ -38,7 +38,7 @@ public class MainGUI extends JFrame{
 	private SaleGUI sale;
 	private ItemGUI item;
 	private CustomerGUI customer;
-	private JPanel order;
+	private OrderGUI order;
 	private EmployeeGUI employee;
 	private StorageGUI storage;
 	private CategoryGUI category;
@@ -94,7 +94,7 @@ public class MainGUI extends JFrame{
 		sale = new SaleGUI(this, null);
 		item = new ItemGUI(this);
 		customer = new CustomerGUI(this);
-		order = new JPanel();
+		order = new OrderGUI();
 		employee = new EmployeeGUI(this);
 		category = new CategoryGUI();
 		storage = new StorageGUI();
@@ -182,7 +182,9 @@ public class MainGUI extends JFrame{
 				} else if(comp.equals(storage)){
 					storage.txtStorageName.requestFocusInWindow();
 					getRootPane().setDefaultButton(storage.btnOpret);
-				} 
+				} else if(comp.equals(order)){
+					//TODO
+				}
 			}
 			
 		});

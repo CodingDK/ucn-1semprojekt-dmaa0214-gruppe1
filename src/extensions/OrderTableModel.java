@@ -6,16 +6,16 @@ import javax.swing.table.AbstractTableModel;
 
 import modelLayer.Order;
 
-public class StorageTableModel extends AbstractTableModel{
+public class OrderTableModel extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Order> storages;
+	private ArrayList<Order> orders;
 	
-	public StorageTableModel(ArrayList<Order> stor){
-		this.storages = stor;
+	public OrderTableModel(ArrayList<Order> orders){
+		this.orders = orders;
 	}
 
-	public void refresh(ArrayList<Order> s) {
-		this.storages = s;
+	public void refresh(ArrayList<Order> ords) {
+		this.orders = ords;
 	}
 
 	public int getColumnCount() {
@@ -23,16 +23,16 @@ public class StorageTableModel extends AbstractTableModel{
 	}
 
 	public int getRowCount() {
-		return storages.size();
+		return orders.size();
 	}
 
 	public Object getValueAt(int rowIndex, int collIndex) {
-		Order s  = storages.get(rowIndex);
+		Order o  = orders.get(rowIndex);
 		Object value = null;
 		if(collIndex == 0){
-			value = s.getId();
+			value = o.getId();
 		} else if(collIndex == 1){
-			value = s.getName();
+			value = o.getName();
 		}
 		return value;
 	}	
