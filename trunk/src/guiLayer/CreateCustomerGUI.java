@@ -8,6 +8,8 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -27,9 +29,6 @@ import ctrLayer.CustomerCtr;
 import extensions.JBlinkLabel;
 import extensions.JIntegerField;
 import extensions.JTextFieldLimit;
-
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class CreateCustomerGUI extends JPanel {
 	public JTextField txtName;

@@ -3,15 +3,14 @@ package ctrLayer;
 import java.util.ArrayList;
 import java.util.Random;
 
-import exceptionLayer.CategoryExistException;
-import exceptionLayer.NotEnoughItemsException;
-import exceptionLayer.SaleNotCreatedException;
-import exceptionLayer.StorageExistException;
 import modelLayer.Category;
 import modelLayer.Item;
 import modelLayer.Storage;
 import personLayer.Customer;
-import personLayer.Private;
+import exceptionLayer.CategoryExistException;
+import exceptionLayer.NotEnoughItemsException;
+import exceptionLayer.SaleNotCreatedException;
+import exceptionLayer.StorageExistException;
 
 public class Demo {
 	private static boolean firstRun = true;

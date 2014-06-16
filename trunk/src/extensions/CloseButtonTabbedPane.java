@@ -13,8 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.UIManager;
-import javax.swing.plaf.metal.MetalIconFactory;
 
 public class CloseButtonTabbedPane extends JTabbedPane {
 	public CloseButtonTabbedPane() {

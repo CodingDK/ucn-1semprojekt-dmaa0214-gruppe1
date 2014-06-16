@@ -1,7 +1,9 @@
 package extensions;
 
 import java.util.ArrayList;
+
 import javax.swing.table.AbstractTableModel;
+
 import personLayer.Employee;
 
 public class EmployeeTableModel extends AbstractTableModel{
