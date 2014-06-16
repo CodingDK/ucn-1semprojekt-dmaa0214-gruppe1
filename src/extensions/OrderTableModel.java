@@ -4,18 +4,19 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+import modelLayer.Sale;
 import modelLayer.Storage;
 
 public class OrderTableModel extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Storage> orders;
+	private ArrayList<Sale> sales;
 	
-	public OrderTableModel(ArrayList<Storage> orders){
-		this.orders = orders;
+	public OrderTableModel(ArrayList<Sale> sales){
+		this.sales = sales;
 	}
 
-	public void refresh(ArrayList<Storage> ords) {
-		this.orders = ords;
+	public void refresh(ArrayList<Sale> sales) {
+		this.sales = sales;
 	}
 
 	public int getColumnCount() {
@@ -23,16 +24,24 @@ public class OrderTableModel extends AbstractTableModel{
 	}
 
 	public int getRowCount() {
-		return orders.size();
+		return sales.size();
 	}
 
 	public Object getValueAt(int rowIndex, int collIndex) {
-		Storage o  = orders.get(rowIndex);
+		Sale s  = sales.get(rowIndex);
 		Object value = null;
 		if(collIndex == 0){
-			value = o.getId();
-		} else if(collIndex == 1){
-			value = o.getName();
+			value = s.getId();
+		}else if(collIndex == 1){
+			value = s.getCustomer().getName();
+		}else if(collIndex == 2){
+			value = s.getTotalPrice();
+		}else if(collIndex == 3){
+			value = s.getEmployee().getName();
+		}else if(collIndex == 4){
+			value = s.getDate();
+		}else if(collIndex == 5){
+			value = s.isDone();
 		}
 		return value;
 	}	
@@ -46,14 +55,12 @@ public class OrderTableModel extends AbstractTableModel{
 		} else if(collIndex == 1){
 			value = "Kundenavn";
 		}else if(collIndex == 2){
-			value = "Dato";
-		}else if(collIndex == 3){
 			value = "Totalpris";
-		}else if(collIndex == 4){
+		}else if(collIndex == 3){
 			value = "Ekspedient";
-		}else if(collIndex == 5){
+		}else if(collIndex == 4){
 			value = "Dato";
-		}else if(collIndex == 6){
+		}else if(collIndex == 5){
 			value = "Parkeret";
 		}			
 		return value;
