@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import modelLayer.Category;
 import modelLayer.Item;
 import modelLayer.ItemCont;
-import modelLayer.Storage;
+import modelLayer.Order;
 import modelLayer.StorageCont;
 
 /**
@@ -89,7 +89,7 @@ public class ItemCtr {
 	 * @param min The min amount of the item.
 	 * @param category The category object of the item.
 	 */
-	public void createItem(String name, int amount, int reserved, double salePrice, double purchasePrice, double bulkSalePrice, int bulk, String location, Storage storage, int max, int min, Category category) {
+	public void createItem(String name, int amount, int reserved, double salePrice, double purchasePrice, double bulkSalePrice, int bulk, String location, Order storage, int max, int min, Category category) {
 		Item item = new Item(name, amount, reserved, salePrice, purchasePrice, bulkSalePrice, bulk, location, storage, min, min, category);
 		ItemCont.getInstance(category).addItem(item);
 	}
@@ -114,7 +114,7 @@ public class ItemCtr {
 	 */
 	public void updateItem(int id, String name, int amount, int reserved,
 			double salePrice, double purchasePrice, double bulkSalePrice,
-			int bulk, String location, Storage storage, int max, int min,
+			int bulk, String location, Order storage, int max, int min,
 			Category category) throws NullPointerException {
 		Item item = getItem(id);
 		if (item != null) {
@@ -177,7 +177,7 @@ public class ItemCtr {
 	 * @param name The name of the new Storage.
 	 */
 	public void createStorage(String name) {
-		StorageCont.getInstance().addStorage(new Storage(name));
+		StorageCont.getInstance().addStorage(new Order(name));
 	}
 	
 	/**
@@ -186,7 +186,7 @@ public class ItemCtr {
 	 * @param name - The name of the Storage.
 	 * @return Storage object of the Storage or null if not found.
 	 */
-	public Storage findStorage(String name) {
+	public Order findStorage(String name) {
 		StorageCont cCont = StorageCont.getInstance();
 		return cCont.findStorage(name);
 	}
@@ -198,7 +198,7 @@ public class ItemCtr {
 	 * @param name The new name of the Storage.
 	 * @throws NullPointerException If Storage object not found.
 	 */
-	public void updateStorage(Storage s, String name) throws NullPointerException {
+	public void updateStorage(Order s, String name) throws NullPointerException {
 		if (s != null) {
 			s.setName(name);
 		} else if (s == null) {
@@ -212,7 +212,7 @@ public class ItemCtr {
 	 * 
 	 * @param s The Storage object to remove.
 	 */
-	public void removeStorage(Storage s) {
+	public void removeStorage(Order s) {
 		StorageCont sCont = StorageCont.getInstance();
 		CategoryCtr cCtr = new CategoryCtr();
 		ArrayList<Category> categories = cCtr.getAllCategories();
@@ -231,10 +231,10 @@ public class ItemCtr {
 	/**
 	 * Checks if the Storage is the Primary Storage
 	 * 
-	 * @param Storage
+	 * @param Order
 	 * @return boolean
 	 */
-	public boolean isPrimary(Storage s) {
+	public boolean isPrimary(Order s) {
 		boolean ret = false;
 		StorageCont sCont = StorageCont.getInstance();
 		if (s == sCont.getPrimary()) {
@@ -274,12 +274,12 @@ public class ItemCtr {
 	 * @param name
 	 * @return ArrayList<Storage>
 	 */
-	public ArrayList<Storage> searchStorage(String name) {
-		ArrayList<Storage> storages = new ArrayList<Storage>();
+	public ArrayList<Order> searchStorage(String name) {
+		ArrayList<Order> storages = new ArrayList<Order>();
 		StorageCont sCont = StorageCont.getInstance();
-		ArrayList<Storage> stor = sCont.getAll();
+		ArrayList<Order> stor = sCont.getAll();
 		if (stor != null) {
-			for (Storage s : stor) {
+			for (Order s : stor) {
 				if (s.getName().toLowerCase().contains(name.toLowerCase())) {
 					storages.add(s);
 				}
@@ -288,7 +288,7 @@ public class ItemCtr {
 		return storages;
 	}
 
-	public ArrayList<Storage> getAllStorage() {
+	public ArrayList<Order> getAllStorage() {
 		StorageCont sCont = StorageCont.getInstance();
 		return sCont.getAll();
 	}

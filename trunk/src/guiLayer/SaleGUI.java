@@ -411,11 +411,11 @@ public class SaleGUI extends JPanel {
 		
 			JFrame frame = new JFrame();
 			String[] options = new String[2];
-			options[0] = new String("Nulstil");
-			options[1] = new String("Annuller");
+			options[1] = new String("Nulstil");
+			options[0] = new String("Annuller");
 			int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Er du sikker på du vil nulstille salget?","Nulstil Salg", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
 			//System.out.println(choice);
-			if(choice == 0){
+			if(choice == 1){
 				
 				saleCtr.cancelSale();
 				mainGUI.resetSale();

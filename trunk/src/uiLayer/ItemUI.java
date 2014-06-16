@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import modelLayer.Category;
 import modelLayer.Item;
-import modelLayer.Storage;
+import modelLayer.Order;
 import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
 import exceptionLayer.CategoryExistException;
@@ -12,7 +12,7 @@ import exceptionLayer.MainCategoryException;
 
 public class ItemUI extends SuperUI {
 	private Category selectedCategory;
-	private Storage selectedStorage;
+	private Order selectedStorage;
 	private Item selectedItem;
 	
 	public ItemUI(String dryRun) {
@@ -171,20 +171,20 @@ public class ItemUI extends SuperUI {
 	 * 
 	 * @return Storage
 	 */
-	public Storage pickStorage() {
+	public Order pickStorage() {
 		flush();
-		Storage retStorage = null;
+		Order retStorage = null;
 		boolean done = false;
 		while (!done) {
 			System.out.println(nL + "## Vælg Lagre ##");
 			String name = requestString("Lager navn", null, null, false);
 			ItemCtr iCtr = new ItemCtr();
-			ArrayList<Storage> storages = iCtr.searchStorage(name);
+			ArrayList<Order> storages = iCtr.searchStorage(name);
 			if (storages != null && storages.size() > 0) {
 				boolean recheck = true;
 				System.out.println(storages.size() + " Lagre Fundet");
 				while (recheck) {
-					for (Storage s : storages) {
+					for (Order s : storages) {
 						System.out.println("#" + s.getId() + " - " + s.getName());
 					}
 					int id = requestInt("Lager ID", null, false);
@@ -192,7 +192,7 @@ public class ItemUI extends SuperUI {
 					boolean found = false;
 					int i = 0;
 					while (!found && i < storages.size()) {
-						Storage checkStorage = storages.get(i);
+						Order checkStorage = storages.get(i);
 						if (checkStorage.getId() == id) {
 							retStorage = checkStorage;
 							found = true;
@@ -429,10 +429,10 @@ public class ItemUI extends SuperUI {
 		System.out.println("## Søg Lager ##");
 		String name = requestString("Lager navn", null, null, false);
 		ItemCtr iCtr = new ItemCtr();
-		ArrayList<Storage> storages = iCtr.searchStorage(name);
+		ArrayList<Order> storages = iCtr.searchStorage(name);
 		if (storages != null) {
 			System.out.println(storages.size() + " Lagre Fundet");
-			for (Storage s : storages) {
+			for (Order s : storages) {
 				System.out.println("#" + s.getId() + " - " + s.getName());
 			}
 			pause();
@@ -462,7 +462,7 @@ public class ItemUI extends SuperUI {
 			String location = requestString("Placering(" + selectedItem.getLocation() + ")", 0, null, true);
 			int min = requestInt("Minimum Lagerbeholdning(" + selectedItem.getMin() + ")", null, true);
 			int max = requestInt("Maksimal Lagerbeholdning(" + selectedItem.getMax() + ")", min, true);
-			Storage storage = null;
+			Order storage = null;
 			Category category = null;
 			
 			if (confirm("Vil du ændre Lager?(" + selectedItem.getStorage().getName() + ")")) {
