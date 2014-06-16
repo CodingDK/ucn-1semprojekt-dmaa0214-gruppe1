@@ -274,21 +274,21 @@ public class MainGUI extends JFrame{
 		tabbedPane.setSelectedComponent(item);
 		item.txtName.requestFocusInWindow();
 	}
-	
+
 	public void createPrivateCustomer(){
 		CreateCustomerGUI item = new CreateCustomerGUI(false);
 		tabbedPane.addTab("Opret Privat Kunde", item);
 		tabbedPane.setSelectedComponent(item);
 		item.txtName.requestFocusInWindow();		
 	}
-	
+
 	public void createPrivateCustomer(SaleGUI sGUI){
-		CreateCustomerGUI item = new CreateCustomerGUI(false, sGUI, this);
+		CreateCustomerGUI item = new CreateCustomerGUI(false, sGUI);
 		tabbedPane.addTab("Opret Privat Kunde", item);
 		tabbedPane.setSelectedComponent(item);
 		item.txtName.requestFocusInWindow();		
 	}
-	
+
 	public void createBusinesssCustomer(){
 		CreateCustomerGUI item = new CreateCustomerGUI(true);
 		tabbedPane.addTab("Opret Erhvervs Kunde", item);
@@ -297,7 +297,7 @@ public class MainGUI extends JFrame{
 	}
 	
 	public void createBusinesssCustomer(SaleGUI sGUI){
-		CreateCustomerGUI item = new CreateCustomerGUI(true, sGUI, this);
+		CreateCustomerGUI item = new CreateCustomerGUI(true, sGUI);
 		tabbedPane.addTab("Opret Erhvervs Kunde", item);
 		tabbedPane.setSelectedComponent(item);
 		item.txtName.requestFocusInWindow();		
