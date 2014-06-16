@@ -90,8 +90,21 @@ public class Sale {
 	 */
 	public void addPartSale(Item i, int amount) {
 		totalPrice += i.getSalePrice() * amount;
-		PartSale p = new PartSale(i, amount);
-		partSales.add(p);
+		int index = 0;
+		PartSale ps = null;
+		
+		while(index < partSales.size() && ps == null){
+			if(partSales.get(index).getItem() == i){
+				ps = partSales.get(index);
+			}
+			index++;
+		}
+		if (ps != null){
+			ps.addAmount(amount);
+		} else {
+			PartSale p = new PartSale(i, amount);
+			partSales.add(p);
+		}
 	}
 	
 	/**
