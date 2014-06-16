@@ -184,6 +184,7 @@ public class MainGUI extends JFrame{
 					getRootPane().setDefaultButton(storage.btnOpret);
 				} 
 			}
+			
 		});
 	}
 
