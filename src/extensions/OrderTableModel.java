@@ -33,13 +33,19 @@ public class OrderTableModel extends AbstractTableModel{
 		if(collIndex == 0){
 			value = s.getId();
 		}else if(collIndex == 1){
-		//	value = s.getCustomer().getName();
-			//TODO
+			if(s.getCustomer() == null){
+				value = "-";
+			}else{
+				value = s.getCustomer().getName();
+			}
 		}else if(collIndex == 2){
 			value = s.getTotalPrice()+",-";
 		}else if(collIndex == 3){
-			//value = s.getEmployee().getName();
-			//TODO
+			if(s.getEmployee() == null){
+				value = "-";
+			}else{
+				value = s.getEmployee().getName();
+			}
 		}else if(collIndex == 4){
 			value = s.getDateToString();
 		}else if(collIndex == 5){
