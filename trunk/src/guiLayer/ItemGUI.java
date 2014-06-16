@@ -11,6 +11,7 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -22,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.RowFilter;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
@@ -52,18 +54,25 @@ public class ItemGUI extends JPanel {
 	private ArrayList<Category> categories;
 	private ArrayList<Storage> storages;
 	private TableRowSorter<ItemTableModel> sorter;
+	private List<RowFilter<ItemTableModel,Object>> filters;
+	private RowFilter<ItemTableModel, Object> rowFilterCompound;
+	private RowFilter<ItemTableModel, Object> rfCategory;
+	private RowFilter<ItemTableModel, Object> rfStorage;
 
 	/**
 	 * Create the panel.
 	 * @param mainGUI 
 	 */
 	public ItemGUI(MainGUI mainGUI) {
-		
 		this.parent = mainGUI;
+		filters = new ArrayList<RowFilter<ItemTableModel,Object>>();
 		CategoryCtr cCtr = new CategoryCtr();
 		categories = cCtr.getAllCategories();
 		ItemCtr iCtr = new ItemCtr();
-		storages = iCtr.getAllStorage();
+		storages = new ArrayList<Storage>();
+		Storage st = new Storage("Alle");
+		storages.add(st);
+		storages.addAll(iCtr.getAllStorage());
 		items = new ArrayList<Item>();
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 250, 0};
@@ -84,8 +93,6 @@ public class ItemGUI extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		model = new ItemTableModel(items);
 		table = new JTable(model);
-		sorter = new TableRowSorter<ItemTableModel>(model);
-		table.setRowSorter(sorter);
 		table.getColumnModel().getColumn(0).setMaxWidth(30);
 		scrollPane.setViewportView(table);
 		panel_1.add(scrollPane, BorderLayout.CENTER);
@@ -109,6 +116,11 @@ public class ItemGUI extends JPanel {
 		panel_2.add(lblLager);
 		
 		cmbStorage = new JComboBox<Storage>();
+		cmbStorage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				changeFiltering();
+			}
+		});
 		cmbStorage.setModel(new DefaultComboBoxModel(storages.toArray()));
 		panel_2.add(cmbStorage);
 		
@@ -116,6 +128,11 @@ public class ItemGUI extends JPanel {
 		panel_2.add(lblKategori);
 		
 		cmbCategory = new JComboBox<Category>();
+		cmbCategory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				changeFiltering();
+			}
+		});
 		cmbCategory.setModel(new DefaultComboBoxModel(categories.toArray()));
 		panel_2.add(cmbCategory);
 		
@@ -226,7 +243,28 @@ public class ItemGUI extends JPanel {
 		panel_6.setLayout(gl_panel_6);
 		
 	}
-	
+
+	protected void changeFiltering() {
+		filters = new ArrayList<RowFilter<ItemTableModel,Object>>();
+		if(!cmbStorage.getSelectedItem().toString().equals("Alle")){
+			rfStorage = RowFilter.regexFilter(cmbStorage.getSelectedItem().toString(), 6);
+		}else{
+			rfStorage = RowFilter.notFilter(rfStorage = RowFilter.regexFilter(" ", 6));
+		}
+		if(!cmbCategory.getSelectedItem().toString().equals("Alle")){
+			rfCategory = RowFilter.regexFilter(cmbCategory.getSelectedItem().toString(), 7);
+		}else{
+			rfCategory = RowFilter.notFilter(rfCategory = RowFilter.regexFilter(" ", 7));
+		}
+		filters.add(rfCategory);
+		filters.add(rfStorage);
+		rowFilterCompound = RowFilter.andFilter(filters);
+		sorter = new TableRowSorter<ItemTableModel>(model);
+		sorter.setRowFilter(rowFilterCompound);
+		table.setRowSorter(sorter);
+		
+	}
+
 	protected void clear(){
 		txtName.setText("");
 		items.clear();
@@ -248,7 +286,10 @@ public class ItemGUI extends JPanel {
 	
 	public void update(){
 		ItemCtr iCtr = new ItemCtr();
-		storages = iCtr.getAllStorage();
+		storages = new ArrayList<Storage>();
+		Storage st = new Storage("Alle");
+		storages.add(st);
+		storages.addAll(iCtr.getAllStorage());
 		CategoryCtr cCtr = new CategoryCtr();
 		categories = cCtr.getAllCategories();
 		
