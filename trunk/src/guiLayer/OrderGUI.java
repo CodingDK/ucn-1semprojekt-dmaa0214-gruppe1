@@ -34,6 +34,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.CustomerCtr;
 import ctrLayer.SaleCtr;
+import extensions.JBlinkLabel;
 import extensions.OrderTableModel;
 
 public class OrderGUI extends JPanel {
@@ -44,6 +45,7 @@ public class OrderGUI extends JPanel {
 	private JTextField txtID;
 	public JButton btnSearch;
 	private JComboBox<String> comboBox;
+	private JBlinkLabel errLabel;
 
 	/**
 	 * Create the panel.
@@ -95,16 +97,21 @@ public class OrderGUI extends JPanel {
 		panel_3.setBorder(new TitledBorder(null, "Find kunde", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
 		JPanel panel_6 = new JPanel();
+		
+		errLabel = new JBlinkLabel("");
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGap(6)
-							.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE))
-						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addComponent(errLabel, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
+								.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE))
+							.addGap(8)))
 					.addContainerGap())
 		);
 		gl_panel_1.setVerticalGroup(
@@ -113,8 +120,10 @@ public class OrderGUI extends JPanel {
 					.addContainerGap()
 					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(168, Short.MAX_VALUE))
+					.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(errLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(237, Short.MAX_VALUE))
 		);
 		
 		comboBox = new JComboBox<String>();
@@ -223,8 +232,7 @@ public class OrderGUI extends JPanel {
 	
 	private void searchCustomer(){
 		String name = txtName.getText();
-
-		//int id = Integer.parseInt(txtID.getText());
+		String strID = txtID.getText();
 		
 		SaleCtr sCtr = new SaleCtr();
 		sales = sCtr.getSales();
@@ -240,16 +248,12 @@ public class OrderGUI extends JPanel {
 				}
 			}
 		}
-		
-		sales = sales1;
-		model.refresh(sales);
-		model.fireTableDataChanged();
-		/*
 		boolean found = false;
 		int i = 0;
-		if(id != 0){
+		if(strID != null & !strID.trim().isEmpty()){
 			while(!found && i < sales.size()){
 				Sale s = sales.get(i);
+				int id = Integer.parseInt(strID);
 				if(id != 0){
 					if(s.getId() == id){
 						sales1.add(s);
@@ -258,8 +262,13 @@ public class OrderGUI extends JPanel {
 				}
 				i++;
 			}
-			
 		}
-		*/
+		sales = sales1;
+		if(sales == null || sales.isEmpty()){
+			errLabel.setText("0 kunder fundet");
+			errLabel.startBlinking(true, true);
+		}
+		model.refresh(sales);
+		model.fireTableDataChanged();
 	}
 }
