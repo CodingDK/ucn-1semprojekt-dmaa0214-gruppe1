@@ -163,6 +163,7 @@ public class MainGUI extends JFrame{
 			public void stateChanged(ChangeEvent e){
 				Component comp = tabbedPane.getSelectedComponent();
 				if (comp.equals(item)){
+					item.update();
 					item.txtName.requestFocusInWindow();
 				} else if(comp.equals(category)){
 					category.txtName.requestFocusInWindow();
