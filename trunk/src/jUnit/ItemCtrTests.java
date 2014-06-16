@@ -12,6 +12,7 @@ import org.junit.Test;
 import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
 import exceptionLayer.CategoryExistException;
+import exceptionLayer.StorageExistException;
 
 public class ItemCtrTests {
 	
@@ -19,7 +20,12 @@ public class ItemCtrTests {
 	public void testCreateItem() {
 		ItemCtr iCtr = new ItemCtr();
 		CategoryCtr cCtr = new CategoryCtr();
-		iCtr.createStorage("Test1");
+		try {
+			iCtr.createStorage("Test1");
+		} catch (StorageExistException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Storage s1 = iCtr.findStorage("Test1");
 		try {
 			cCtr.createCategory("Søm");
@@ -40,8 +46,13 @@ public class ItemCtrTests {
 	public void testUpdateItem() {
 		ItemCtr iCtr = new ItemCtr();
 		CategoryCtr cCtr = new CategoryCtr();
-		iCtr.createStorage("Test1");
-		iCtr.createStorage("Test2");
+		try {
+			iCtr.createStorage("Test1");
+			iCtr.createStorage("Test2");
+		} catch (StorageExistException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		Storage s1 = iCtr.findStorage("Test1");
 		Storage s2 = iCtr.findStorage("Test2");
 		try {
@@ -68,7 +79,12 @@ public class ItemCtrTests {
 	@Test
 	public void testCreateStorage() {
 		ItemCtr iCtr = new ItemCtr();
-		iCtr.createStorage("Cookie");
+		try {
+			iCtr.createStorage("Cookie");
+		} catch (StorageExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Test

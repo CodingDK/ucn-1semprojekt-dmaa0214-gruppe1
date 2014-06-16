@@ -9,6 +9,7 @@ import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
 import exceptionLayer.CategoryExistException;
 import exceptionLayer.MainCategoryException;
+import exceptionLayer.StorageExistException;
 
 public class ItemUI extends SuperUI {
 	private Category selectedCategory;
@@ -305,7 +306,12 @@ public class ItemUI extends SuperUI {
 		System.out.println(" *** Opret Lager *** ");
 		String storageName = requestString("Lager navn", 1, null, false);
 		if (iCtr.findStorage(storageName) == null) {
-			iCtr.createStorage(storageName);
+			try {
+				iCtr.createStorage(storageName);
+			} catch (StorageExistException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			selectedStorage = iCtr.findStorage(storageName);
 		} else {
 			System.out.println("Dette Lager eksistere allerede");
