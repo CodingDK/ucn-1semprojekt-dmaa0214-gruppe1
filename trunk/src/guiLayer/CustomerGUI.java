@@ -11,10 +11,13 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Point;
 
 import javax.swing.JTable;
 import javax.swing.GroupLayout.Alignment;
@@ -109,18 +112,44 @@ public class CustomerGUI extends JPanel {
 		});
 		popupMenu.add(mntmDelete);
 		popupMenu.add(mntmUpdate);
-		table.setComponentPopupMenu(popupMenu);
+		//table.setComponentPopupMenu(popupMenu);
 		//added
 		
 		
 		table.addMouseListener(new MouseAdapter() {
-		    @Override
+		    /*
+			@Override
 		    public void mouseReleased(MouseEvent e) {
-		        mouseListenerTable(e, "released");
+			    //if(SwingUtilities.isRightMouseButton(e)){
+					int rowNumber = table.rowAtPoint(e.getPoint());
+					System.out.println(rowNumber);
+					ListSelectionModel modell = table.getSelectionModel();
+					//model.clearSelection();
+					modell.setSelectionInterval(rowNumber, rowNumber);
+				//}
+		        //mouseListenerTable(e);
+		        
+		        if(e.getClickCount() == 2 && e.getComponent() instanceof JTable) {
+			        //System.out.println("tryk");
+		        	CustomerCtr cusCtr = new CustomerCtr();
+			        Customer c = cusCtr.findCustomer(table.getSelectedRow());
+			        parent.setSelectedToSale(true);
+			    }
+			    
 		    }
+		*/
 		    @Override
 		    public void mouseClicked(MouseEvent e) {
-		        mouseListenerTable(e, "pressed");
+		    	//
+					Point p = e.getPoint();
+					int rowNumber = table.rowAtPoint(p);
+					System.out.println(rowNumber);
+					table.setRowSelectionInterval(rowNumber, rowNumber);
+					if(SwingUtilities.isRightMouseButton(e)){
+						popupMenu.show(table, e.getX(), e.getY());
+					}
+				//}
+		        //mouseListenerTable(e);
 		    }
 		});
 		tablePanel.add(new JScrollPane(table), BorderLayout.CENTER);
@@ -285,27 +314,24 @@ public class CustomerGUI extends JPanel {
 		//this.getRootPane().setDefaultButton(btnFind);
 	}
 	
-	private void mouseListenerTable(MouseEvent e, String s) {
+	private void mouseListenerTable(MouseEvent e) {
+		
 		int r = table.rowAtPoint(e.getPoint());
         if (r >= 0 && r < table.getRowCount()) {
             table.setRowSelectionInterval(r, r);
         } else {
-            table.clearSelection();
+        	table.clearSelection();
         }
 
         final int rowindex = table.getSelectedRow();
+        
         if (rowindex < 0)
             return;
         if (e.isPopupTrigger() && e.getComponent() instanceof JTable ) {
         	
     		popupMenu.show(e.getComponent(), e.getX(), e.getY());
-        } 
-        else if(e.getClickCount() == 2 && e.getComponent() instanceof JTable) {
-	        System.out.println("2 gange " + s);
-        	//CustomerCtr cusCtr = new CustomerCtr();
-	        //Customer c = cusCtr.findCustomer(table.getSelectedRow());
-	        //	parent.setSelectedToSale(true);
-	    }
+        	
+        }
 	}
 
 	protected void clearSearch() {
