@@ -27,8 +27,7 @@ public class SaleFinishGUI extends JDialog {
 	 * Create the dialog.
 	 */
 	public SaleFinishGUI(Frame f, SaleCtr sCtr) {
-		super(f, "Tilføj vare", true);
-		setTitle("Afslut salg");
+		super(f, "Afslut salg", true);
 		done = false;
 		this.saleCtr = sCtr;
 		setResizable(false);
