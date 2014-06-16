@@ -116,11 +116,6 @@ public class StorageGUI extends JPanel {
 		panel_5.add(lblStorageName, "1, 1, fill, fill");
 		
 		txtStorageName = new JTextField();
-		txtStorageName.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				createStorage();
-			}
-		});
 		panel_5.add(txtStorageName, "2, 1, fill, fill");
 		txtStorageName.setColumns(10);
 		
