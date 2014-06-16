@@ -297,7 +297,7 @@ public class CustomerGUI extends JPanel {
 			int id = (Integer) table.getValueAt(rowindex, 0);
 			Customer c = cCtr.findCustomer(id);
 			parent.setSelectedToSale(true, c);
-			System.out.println("venstre klik!");
+			//System.out.println("venstre klik!");
 		}
 		
 		/*
