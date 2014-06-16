@@ -19,22 +19,28 @@ import java.awt.FlowLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 
+import modelLayer.Category;
 import modelLayer.Item;
+import modelLayer.Storage;
 
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
 
+import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
 import ctrLayer.SaleCtr;
 import extensions.ItemTableModel;
@@ -45,6 +51,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.SystemColor;
 
+import javax.swing.JComboBox;
+
 public class ItemGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTable table;
@@ -52,6 +60,11 @@ public class ItemGUI extends JPanel {
 	private ArrayList<Item> items;
 	private ItemTableModel model;
 	private MainGUI parent;
+	private JComboBox<Storage> cmbStorage;
+	private JComboBox<Category> cmbCategory;
+	private ArrayList<Category> categories;
+	private ArrayList<Storage> storages;
+	private TableRowSorter<ItemTableModel> sorter;
 
 	/**
 	 * Create the panel.
@@ -60,6 +73,10 @@ public class ItemGUI extends JPanel {
 	public ItemGUI(MainGUI mainGUI) {
 		
 		this.parent = mainGUI;
+		CategoryCtr cCtr = new CategoryCtr();
+		categories = cCtr.getAllCategories();
+		ItemCtr iCtr = new ItemCtr();
+		storages = iCtr.getAllStorage();
 		items = new ArrayList<Item>();
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 250, 0};
@@ -80,7 +97,8 @@ public class ItemGUI extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		model = new ItemTableModel(items);
 		table = new JTable(model);
-		table.setAutoCreateRowSorter(true);
+		sorter = new TableRowSorter<ItemTableModel>(model);
+		table.setRowSorter(sorter);
 		table.getColumnModel().getColumn(0).setMaxWidth(30);
 		scrollPane.setViewportView(table);
 		panel_1.add(scrollPane, BorderLayout.CENTER);
@@ -99,6 +117,20 @@ public class ItemGUI extends JPanel {
 		label.setFont(new Font("SansSerif", Font.BOLD, 12));
 		label.setForeground(SystemColor.activeCaption);
 		panel_2.add(label);
+		
+		JLabel lblLager = new JLabel("Lager");
+		panel_2.add(lblLager);
+		
+		cmbStorage = new JComboBox<Storage>();
+		cmbStorage.setModel(new DefaultComboBoxModel(storages.toArray()));
+		panel_2.add(cmbStorage);
+		
+		JLabel lblKategori = new JLabel("Kategori");
+		panel_2.add(lblKategori);
+		
+		cmbCategory = new JComboBox<Category>();
+		cmbCategory.setModel(new DefaultComboBoxModel(categories.toArray()));
+		panel_2.add(cmbCategory);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -225,5 +257,15 @@ public class ItemGUI extends JPanel {
 		model.refresh(items);
 		model.fireTableDataChanged();
 		
+	}
+	
+	public void update(){
+		ItemCtr iCtr = new ItemCtr();
+		storages = iCtr.getAllStorage();
+		CategoryCtr cCtr = new CategoryCtr();
+		categories = cCtr.getAllCategories();
+		
+		cmbStorage.setModel(new DefaultComboBoxModel(storages.toArray()));
+		cmbCategory.setModel(new DefaultComboBoxModel(categories.toArray()));
 	}
 }
