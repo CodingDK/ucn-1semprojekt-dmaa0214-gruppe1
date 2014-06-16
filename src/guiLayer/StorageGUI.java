@@ -14,6 +14,8 @@ import java.awt.Font;
 import java.awt.FlowLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
@@ -28,10 +30,14 @@ import com.jgoodies.forms.factories.FormFactory;
 import ctrLayer.ItemCtr;
 import extensions.JBlinkLabel;
 import extensions.StorageTableModel;
+import extensions.JBlinkLabel;
 
 import javax.swing.JButton;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 import modelLayer.Storage;
 
@@ -41,10 +47,11 @@ import java.awt.event.ActionEvent;
 public class StorageGUI extends JPanel {
 	public JTextField txtStorageName;
 	private JTable table;
-	private ArrayList<Storage> s;
+	private ArrayList<Storage> storages;
 	private StorageTableModel model;
 	private JBlinkLabel errLabel;
 	public JButton btnOpret;
+	private JBlinkLabel lblState;
 
 	/**
 	 * Create the panel.
@@ -83,10 +90,51 @@ public class StorageGUI extends JPanel {
 		panel_1.add(scrollPane, BorderLayout.CENTER);
 		
 		ItemCtr iCtr = new ItemCtr();
-		s = iCtr.getAllStorage();
+		storages = iCtr.getAllStorage();
 		
-		model = new StorageTableModel(s);
+		model = new StorageTableModel(storages);
 		table = new JTable(model);
+		
+		table.addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseReleased(MouseEvent e) {
+		    	if(e.getButton() == MouseEvent.BUTTON3){
+			        int r = table.rowAtPoint(e.getPoint());
+			        if (r >= 0 && r < table.getRowCount()) {
+			            table.setRowSelectionInterval(r, r);
+			        } else {
+			            table.clearSelection();
+			        }
+	
+			        final int rowindex = table.getSelectedRow();
+			        if (rowindex < 0)
+			            return;
+			        if (e.getComponent() instanceof JTable ) {
+			        	JPopupMenu popupMenu = new JPopupMenu();
+			    		JMenuItem mntmDelete = new JMenuItem("Slet");
+			    		mntmDelete.addActionListener(new ActionListener() {
+			    			public void actionPerformed(ActionEvent arg0) {
+			    				String name = (String) table.getValueAt(rowindex, 1);
+			    				removeStorage(name);
+			    			}
+			    		});
+			    		JMenuItem mntmUpdate = new JMenuItem("Ret Kategori");
+			    		mntmUpdate.addActionListener(new ActionListener() {
+			    			public void actionPerformed(ActionEvent arg0) {
+			    				int id = (Integer) table.getValueAt(rowindex, 0);
+			    				String name = (String) table.getValueAt(rowindex, 1);
+			    				updateStorage(id, name);
+			    			}
+			    		});
+			    		popupMenu.add(mntmDelete);
+			    		popupMenu.add(mntmUpdate);
+			    		popupMenu.show(e.getComponent(), e.getX(), e.getY());
+			       }
+		    	}
+		    }
+		});
+
+		
 		scrollPane.setViewportView(table);
 		
 		JPanel panel_2 = new JPanel();
@@ -98,13 +146,13 @@ public class StorageGUI extends JPanel {
 		panel.add(panel_2, gbc_panel_2);
 		
 		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(0, 48, 250, 127);
+		panel_4.setBounds(0, 48, 250, 251);
 		panel_4.setBorder(new TitledBorder(null, "Opret Lager", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		panel_2.add(panel_4);
 		panel_4.setLayout(null);
 		
 		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(16, 28, 209, 32);
+		panel_5.setBounds(16, 43, 209, 32);
 		panel_4.add(panel_5);
 		panel_5.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("100px"),
@@ -120,7 +168,7 @@ public class StorageGUI extends JPanel {
 		txtStorageName.setColumns(10);
 		
 		JPanel panel_6 = new JPanel();
-		panel_6.setBounds(16, 72, 209, 32);
+		panel_6.setBounds(16, 87, 209, 32);
 		panel_4.add(panel_6);
 		panel_6.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("max(50dlu;pref):grow"),
@@ -145,14 +193,15 @@ public class StorageGUI extends JPanel {
 		});
 		panel_6.add(btnOpret, "2, 2, fill, top");
 		
-		errLabel = new JBlinkLabel("");
-		errLabel.setBounds(16, 131, 209, 16);
-		panel_4.add(errLabel);
+		lblState = new JBlinkLabel("");
+		lblState.setHorizontalAlignment(SwingConstants.CENTER);
+		lblState.setBounds(0, 20, 250, 16);
+		panel_2.add(lblState);
 	}
 	
 	protected void clear() {
 		txtStorageName.setText("");
-		s.clear();
+		storages.clear();
 	}
 	
 	protected void clearInput(){
@@ -163,15 +212,41 @@ public class StorageGUI extends JPanel {
 		ItemCtr iCtr = new ItemCtr();
 		String name = txtStorageName.getText();
 		if(name == null || name.trim().isEmpty()){
-			errLabel.setText("Navnet må ikke være tomt");
-			errLabel.startBlinking(true, true);
+			lblState.setText("Navnet må ikke være tomt");
+			lblState.startBlinking(true, true);
 		} else{
 			iCtr.createStorage(name);
 		}
 		model.fireTableDataChanged();
-		s = iCtr.getAllStorage();
-		model.refresh(s);
+		storages = iCtr.getAllStorage();
+		model.refresh(storages);
 		clearInput();
-
 	}
+	
+	private void removeStorage(String name) {
+		ItemCtr iCtr = new ItemCtr();
+		if(!name.equals("Ukendt") ){
+			iCtr.removeStorage(iCtr.findStorage(name) );
+			model.refresh(storages);
+			model.fireTableDataChanged();
+			lblState.setText(name + " er nu slettet");
+			lblState.startBlinking(true, false);
+		} else{
+			lblState.setText(name + " kan ikke slettes");
+			lblState.startBlinking(true, true);
+		}
+	}
+	
+	protected void updateStorage(int id, String name) {
+		if(!name.equals("Ukendt") ){
+			new UpdateStorageDialog(null, id, name);
+			ItemCtr iCtr = new ItemCtr();
+			model.refresh(iCtr.getAllStorage() );
+			model.fireTableDataChanged();
+		} else{
+			lblState.setText(name + " kan ikke ændres");
+			lblState.startBlinking(true, true);
+		}
+		
+	}	
 }
