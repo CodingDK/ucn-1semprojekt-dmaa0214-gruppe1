@@ -113,43 +113,12 @@ public class CustomerGUI extends JPanel {
 		popupMenu.add(mntmDelete);
 		popupMenu.add(mntmUpdate);
 		//table.setComponentPopupMenu(popupMenu);
-		//added
-		
-		
+
 		table.addMouseListener(new MouseAdapter() {
-		    /*
-			@Override
-		    public void mouseReleased(MouseEvent e) {
-			    //if(SwingUtilities.isRightMouseButton(e)){
-					int rowNumber = table.rowAtPoint(e.getPoint());
-					System.out.println(rowNumber);
-					ListSelectionModel modell = table.getSelectionModel();
-					//model.clearSelection();
-					modell.setSelectionInterval(rowNumber, rowNumber);
-				//}
-		        //mouseListenerTable(e);
-		        
-		        if(e.getClickCount() == 2 && e.getComponent() instanceof JTable) {
-			        //System.out.println("tryk");
-		        	CustomerCtr cusCtr = new CustomerCtr();
-			        Customer c = cusCtr.findCustomer(table.getSelectedRow());
-			        parent.setSelectedToSale(true);
-			    }
-			    
-		    }
-		*/
+
 		    @Override
 		    public void mouseClicked(MouseEvent e) {
-		    	//
-					Point p = e.getPoint();
-					int rowNumber = table.rowAtPoint(p);
-					System.out.println(rowNumber);
-					table.setRowSelectionInterval(rowNumber, rowNumber);
-					if(SwingUtilities.isRightMouseButton(e)){
-						popupMenu.show(table, e.getX(), e.getY());
-					}
-				//}
-		        //mouseListenerTable(e);
+		    	mouseListenerTable(e);
 		    }
 		});
 		tablePanel.add(new JScrollPane(table), BorderLayout.CENTER);
@@ -315,7 +284,23 @@ public class CustomerGUI extends JPanel {
 	}
 	
 	private void mouseListenerTable(MouseEvent e) {
+		Point p = e.getPoint();
+		int rowNumber = table.rowAtPoint(p);
+		table.setRowSelectionInterval(rowNumber, rowNumber);
+		if(SwingUtilities.isRightMouseButton(e)){
+			//System.out.println(rowNumber);
+			popupMenu.show(table, e.getX(), e.getY());
+		} 
+		else if(SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2){
+			CustomerCtr cCtr = new CustomerCtr();
+			int rowindex = table.getSelectedRow();
+			int id = (Integer) table.getValueAt(rowindex, 0);
+			Customer c = cCtr.findCustomer(id);
+			parent.setSelectedToSale(true, c);
+			System.out.println("venstre klik!");
+		}
 		
+		/*
 		int r = table.rowAtPoint(e.getPoint());
         if (r >= 0 && r < table.getRowCount()) {
             table.setRowSelectionInterval(r, r);
@@ -332,6 +317,7 @@ public class CustomerGUI extends JPanel {
     		popupMenu.show(e.getComponent(), e.getX(), e.getY());
         	
         }
+        */
 	}
 
 	protected void clearSearch() {

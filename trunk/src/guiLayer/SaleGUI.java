@@ -357,7 +357,7 @@ public class SaleGUI extends JPanel {
 	}
 	
 	private void findCustomer() {
-		mainGUI.setSelectedToSale(false);
+		mainGUI.setSelectedToSale(false, null);
 	}
 
 	private void createCustomer() {
