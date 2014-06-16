@@ -112,6 +112,7 @@ public class CustomerGUI extends JPanel {
 		    		mntmUpdate.addActionListener(new ActionListener() {
 		    			public void actionPerformed(ActionEvent arg0) {
 		    				int id = (Integer) table.getValueAt(rowindex, 0);
+		    				updateCustomer(id);
 		    			}
 		    		});
 		    		popupMenu.add(mntmDelete);
@@ -335,5 +336,24 @@ public class CustomerGUI extends JPanel {
 		model.refresh(c);
 		model.fireTableDataChanged();
 		
+	}
+	
+	private void updateCustomer(int id) {
+		Customer updateCust = null;
+		
+		int i = 0;
+		boolean found = false;
+		while(i < c.size() && !found){
+			Customer customer = c.get(i);
+			if(customer.getId() == id){
+				updateCust = customer;
+				found = true;
+			}
+			i++;
+		}
+		
+		if(updateCust != null){
+			
+		}
 	}
 }

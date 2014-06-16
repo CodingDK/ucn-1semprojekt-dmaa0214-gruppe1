@@ -47,5 +47,13 @@ public class Private extends Customer {
 	public String toString() {
 		return super.toString() + " Navn: " + name;
 	}
+
+	public String getPictureID() {
+		return pictureID;
+	}
+
+	public String getCpr() {
+		return cprNr;
+	}
 	
 }
