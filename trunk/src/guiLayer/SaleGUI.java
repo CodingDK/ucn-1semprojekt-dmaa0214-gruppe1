@@ -69,7 +69,7 @@ public class SaleGUI extends JPanel {
 		partSales = saleObj.getPartSales();
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{360, 250, 0};
+		gridBagLayout.columnWidths = new int[]{313, 250, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
@@ -115,8 +115,8 @@ public class SaleGUI extends JPanel {
 		JPanel panel_5 = new JPanel();
 		panel_10.add(panel_5);
 		FormLayout fl_panel_5 = new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("60px"),
-				ColumnSpec.decode("80px"),},
+				ColumnSpec.decode("61px"),
+				ColumnSpec.decode("max(51dlu;pref):grow"),},
 			new RowSpec[] {
 				RowSpec.decode("30px"),
 				RowSpec.decode("30px"),
@@ -124,6 +124,7 @@ public class SaleGUI extends JPanel {
 		panel_5.setLayout(fl_panel_5);
 		
 		JLabel lblSubtotal = new JLabel("Subtotal: ");
+		lblSubtotal.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblSubtotal.setHorizontalAlignment(SwingConstants.LEFT);
 		panel_5.add(lblSubtotal, "1, 1, fill, fill");
 		
@@ -134,6 +135,7 @@ public class SaleGUI extends JPanel {
 		panel_5.add(txtSubtotal, "2, 1, fill, fill");
 		
 		JLabel lblMoms = new JLabel("Moms: ");
+		lblMoms.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMoms.setHorizontalAlignment(SwingConstants.LEFT);
 		panel_5.add(lblMoms, "1, 2, fill, fill");
 		
@@ -144,13 +146,14 @@ public class SaleGUI extends JPanel {
 		panel_5.add(txtMoms, "2, 2, fill, fill");
 		
 		JLabel lblTotal = new JLabel("Total: ");
+		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTotal.setToolTipText("");
 		panel_5.add(lblTotal, "1, 3, fill, fill");
 		
 		txtTotal = new JLabel();
 		txtTotal.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblTotal.setLabelFor(txtTotal);
-		txtTotal.setText("0 ,-");
+		txtTotal.setText("100.000 ,-");
 		panel_5.add(txtTotal, "2, 3, fill, fill");
 		
 		JScrollPane scrollPane = new JScrollPane();
