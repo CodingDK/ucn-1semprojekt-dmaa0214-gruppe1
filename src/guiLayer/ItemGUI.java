@@ -68,7 +68,7 @@ public class ItemGUI extends JPanel {
 	private RowFilter<ItemTableModel, Object> rfCategory;
 	private RowFilter<ItemTableModel, Object> rfStorage;
 	private JPopupMenu popupMenu;
-	public JButton btnSg;
+	public JButton btnSearch;
 
 	/**
 	 * Create the panel.
@@ -228,13 +228,13 @@ public class ItemGUI extends JPanel {
 		});
 		panel_5.add(btnNewButton, "1, 2, fill, top");
 		
-		btnSg = new JButton("Søg");
-		btnSg.addActionListener(new ActionListener() {
+		btnSearch = new JButton("Søg");
+		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				searchItem();
 			}
 		});
-		panel_5.add(btnSg, "2, 2, fill, top");
+		panel_5.add(btnSearch, "2, 2, fill, top");
 		panel_4.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblName = new JLabel("Vare");
