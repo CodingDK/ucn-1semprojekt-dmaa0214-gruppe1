@@ -344,40 +344,41 @@ public class CreateCustomerGUI extends JPanel {
 	}
 
 	protected void createCustomer() {
-		validateFields();
-		String name = txtName.getText();
-		String street = txtStreet.getText();
-		String phone = txtPhone.getText();
-		String email = txtEmail.getText();
-		String city = txtCity.getText();
-		String post = txtPostCode.getText();
-		
-		if (!business) {
-			CustomerCtr cCtr = new CustomerCtr();
-			String cpr = txtCpr1.getText() + "-" + txtCpr2.getText();
-			String pictureId = txtPictureID.getText();
-			Customer c = cCtr.createPrivateCustomer(name, phone, street, email, city, post, cpr, pictureId);
-			if(creator instanceof SaleGUI){
-				SaleGUI sGUI = (SaleGUI)creator;
-				sGUI.setCustomer(c);
-			}
-		} else if (business) {
-			CustomerCtr cCtr = new CustomerCtr();
-			String company = txtCompany.getText();
-			String cvr = txtCvr.getText();
-			Customer c = cCtr.createBusinessCustomer(name, phone, street, email, city, post, company, cvr);
+		if(validateFields()){
+			String name = txtName.getText();
+			String street = txtStreet.getText();
+			String phone = txtPhone.getText();
+			String email = txtEmail.getText();
+			String city = txtCity.getText();
+			String post = txtPostCode.getText();
 			
-			if(creator instanceof SaleGUI){
-				SaleGUI sGUI = (SaleGUI)creator;
-				sGUI.setCustomer(c);
+			if (!business) {
+				CustomerCtr cCtr = new CustomerCtr();
+				String cpr = txtCpr1.getText() + "-" + txtCpr2.getText();
+				String pictureId = txtPictureID.getText();
+				Customer c = cCtr.createPrivateCustomer(name, phone, street, email, city, post, cpr, pictureId);
+				if(creator instanceof SaleGUI){
+					SaleGUI sGUI = (SaleGUI)creator;
+					sGUI.setCustomer(c);
+				}
+			} else if (business) {
+				CustomerCtr cCtr = new CustomerCtr();
+				String company = txtCompany.getText();
+				String cvr = txtCvr.getText();
+				Customer c = cCtr.createBusinessCustomer(name, phone, street, email, city, post, company, cvr);
+				
+				if(creator instanceof SaleGUI){
+					SaleGUI sGUI = (SaleGUI)creator;
+					sGUI.setCustomer(c);
+				}
 			}
+			
+			parent.switchPane(creator);
+			getParent().remove(this);
 		}
-		
-		parent.switchPane(creator);
-		getParent().remove(this);
 	}
 	
-	private void validateFields(){
+	private boolean validateFields(){
 		String cprNr = null;
 		String pictureId = null;
 		String company = null;
@@ -388,14 +389,14 @@ public class CreateCustomerGUI extends JPanel {
 		if (name == null || name.trim().isEmpty()) {
 			lblError.setText("Navn" + errorMsg);
 			lblError.startBlinking(true, true);
-			return;
+			return false;
 		}
 		
 		String street = txtStreet.getText();
 		if (street == null || street.trim().isEmpty()) {
 			lblError.setText("Gade" + errorMsg);
 			lblError.startBlinking(true, true);
-			return;
+			return false;
 		}
 		
 		String town = txtCity.getText();
@@ -403,7 +404,7 @@ public class CreateCustomerGUI extends JPanel {
 		if (town == null || town.trim().isEmpty()) {
 			lblError.setText("By" + errorMsg);
 			lblError.startBlinking(true, true);
-			return;
+			return false;
 		}
 		
 		String post = txtPostCode.getText();
@@ -411,42 +412,42 @@ public class CreateCustomerGUI extends JPanel {
 		if (post == null || post.trim().isEmpty()) {
 			lblError.setText("Post nr" + errorMsg);
 			lblError.startBlinking(true, true);
-			return;
+			return false;
 		}
 		
 		String phone = txtPhone.getText();
 		if (phone == null || phone.trim().isEmpty()) {
 			lblError.setText("Tlf nr" + errorMsg);
 			lblError.startBlinking(true, true);
-			return;
+			return false;
 		}
 		
 		String email = txtEmail.getText();
 		if (email == null || email.trim().isEmpty()) {
 			lblError.setText("Email" + errorMsg);
 			lblError.startBlinking(true, true);
-			return;
+			return false;
 		}
 		if (!business) {
 			pictureId = txtPictureID.getText();
 			if (pictureId == null || pictureId.trim().isEmpty()) {
 				lblError.setText("Billede ID" + errorMsg);
 				lblError.startBlinking(true, true);
-				return;
+				return false;
 			}
 			
 			cprNr = txtCpr1.getText();
 			if (cprNr == null || cprNr.trim().isEmpty()) {
 				lblError.setText("Cpr nr" + errorMsg);
 				lblError.startBlinking(true, true);
-				return;
+				return false;
 			}
 			
 			cprNr2 = txtCpr2.getText();
 			if (cprNr2 == null || cprNr2.trim().isEmpty()) {
 				lblError.setText("Cpr nr" + errorMsg);
 				lblError.startBlinking(true, true);
-				return;
+				return false;
 			}
 		}
 		
@@ -455,16 +456,18 @@ public class CreateCustomerGUI extends JPanel {
 			if (company == null || company.trim().isEmpty()) {
 				lblError.setText("Virksomhedsnavn" + errorMsg);
 				lblError.startBlinking(true, true);
-				return;
+				return false;
 			}
 			
 			cvr = txtCvr.getText();
 			if (cvr == null || cvr.trim().isEmpty()) {
 				lblError.setText("CVR" + errorMsg);
 				lblError.startBlinking(true, true);
-				return;
+				return false;
 			}
 		}
+		
+		return true;
 	}
 	
 	private void customerType(boolean business) {
