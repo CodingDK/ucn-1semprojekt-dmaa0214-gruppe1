@@ -298,11 +298,6 @@ public class CustomerGUI extends JPanel {
 	}
 
 	private void findCustomer() {
-		ArrayList<Customer> nameArray = new ArrayList<Customer>();
-		ArrayList<Customer> phoneArray = new ArrayList<Customer>();
-		ArrayList<Customer> temp1Array = new ArrayList<Customer>();
-		ArrayList<Customer> temp2Array = new ArrayList<Customer>();
-
 		CustomerCtr cCtr = new CustomerCtr();
 		String company = txtCompany.getText();
 		String name = txtName.getText();
@@ -313,7 +308,6 @@ public class CustomerGUI extends JPanel {
 		ArrayList<Customer> fin = new ArrayList<Customer>();
 		
 		if(company != null && !company.trim().isEmpty()){
-			//c.addAll(cCtr.searchBusiness(company));
 			fin.addAll(cCtr.searchBusiness(company));
 		}
 		
