@@ -184,7 +184,7 @@ public class ItemCtr {
 		if(sCont.findStorage(name) == null){
 			sCont.addStorage(new Storage(name));
 		} else {
-			throw new StorageExistException("Lageret eksistere allerede");
+			throw new StorageExistException("Lageret eksisterer allerede");
 		}
 	}
 	
