@@ -105,7 +105,11 @@ public class Demo {
 			Random rand = new Random();
 			
 			String[] lokArray = {"Hylde 2", "Lok A", "Lok B", "Lok C", "På loftet", "På lageret", "Række 27", "Bagved", "Spørg Bjarne"};
+			String[] navnArray = {"Hans T.", "Grethe T.", "Flemming T.", "Birthe T.", "Åse T.", "Arne T.", "Henriette Birgitte Hansen T.", "Ib T.", "Mads", "Svend", "Poul", "Anders", "Rene", "Signe", "Marie", "Kristian"};
+			String[] vejArray = {"Rosenvej", "Vesterbro", "Østerbro", "Niels Lykkes Gade", "Zieglersvej", "Kronprinsens Alle", "Østergade", "Engvej", "Ferskenvej", "Solvej", "Vestbjerg", "Søndergade", "Norden Alle"};
+			String[] byArray = {"Sæby", "Frederikshavn", "Aalborg", "Vestbjerg", "Løkken", "Prag", "København", "Aarhus", "Odense", "Nørresundby", "Flensborg", "Berlin"};
 
+			
 			for(int i = 0; i<200; i++){
 				int c = rand.nextInt(catList.size());
 				int z = rand.nextInt(storList.size());
@@ -118,16 +122,22 @@ public class Demo {
 				eCtr.createEmployee("1", "Ole", "70809010", "Egonsvej 19", "ole@ucn.dk", "Aalborg", "9000", "201050-1043", "1234", true);
 				eCtr.createEmployee("2", "Jens", "40509010", "Hobrovej 29", "jens@ucn.dk", "Vestbjerg", "9380", "100170-2143", null, false);
 				eCtr.createEmployee("3", "Bjarne", "12345678", "Hobrovej 26", "bjarne@ucn.dk", "Vestbjerg", "9380", "100170-2141", null, false);
-				
-				String[] navnArray = {"Hans T.", "Grethe T.", "Flemming T.", "Birthe T.", "Åse T.", "Arne T.", "Henriette Birgitte Hansen T.", "Ib T."};
-				
+								
 				for(int i = 4; i < 75; i++){
 					int x = rand.nextInt(navnArray.length);
-					eCtr.createEmployee(""+(20+i), ""+navnArray[x], "9846"+(rand.nextInt(9999)+1000), "Testvej", "test@ucn.dk", "Testbjerg", ""+(rand.nextInt(9999)+1000), "141010-2040", null, false);
-
+					int y = rand.nextInt(vejArray.length);
+					int z = rand.nextInt(80);
+					int by = rand.nextInt(byArray.length);
+					eCtr.createEmployee(""+(75+i), ""+navnArray[x], "9846"+(rand.nextInt(8888)+1000), vejArray[y]+" "+z, navnArray[x].substring(0, 3).trim()+z+"@ucn.dk", byArray[by], ""+(rand.nextInt(8888)+1000), (rand.nextInt(999999)+100000)+"-"+(rand.nextInt(8888)+1000), null, false);
+				}
+				for(int i = 1; i < 10; i++){
+					int x = rand.nextInt(navnArray.length);
+					int y = rand.nextInt(vejArray.length);
+					int z = rand.nextInt(80);
+					int by = rand.nextInt(byArray.length);
+					eCtr.createEmployee(""+(50+i), ""+navnArray[x], "9846"+(rand.nextInt(8888)+1000), vejArray[y]+" "+z, navnArray[x].substring(0, 3).trim()+z+"@ucn.dk", byArray[by], ""+(rand.nextInt(8888)+1000), (rand.nextInt(999999)+100000)+"-"+(rand.nextInt(8888)+1000), "asd", true);
 				}
 			} catch (AlreadyExistException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
@@ -135,34 +145,45 @@ public class Demo {
 			CustomerCtr cusCtr = new CustomerCtr();
 			cusCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
 
-			for(int i = 0; i < 25; i++){
-				cusCtr.createPrivateCustomer("Testper"+i, "00885501", "Testvej "+i, "test"+i+"@ft.dk", "Aalborg", "9000", "121248-3011", "08080808");
+			for(int i = 0; i < 125; i++){
+				int x = rand.nextInt(navnArray.length);
+				int vej = rand.nextInt(vejArray.length);
+				int by = rand.nextInt(byArray.length);
+				int nr = rand.nextInt(80);
+				cusCtr.createPrivateCustomer(navnArray[x], "9846"+(rand.nextInt(8888)+1000), vejArray[vej]+" "+nr, navnArray[x].substring(0, 3).trim().toLowerCase()+nr+"@ft.dk", byArray[by], ""+(rand.nextInt(8888)+1000), (rand.nextInt(999999)+100000)+"-"+(rand.nextInt(8888)+1000), "1");
 
+			}
+			String[] virkArray = {"JØR", "Tømrer", "Svenne", "Hans og søn", "Arne og Co.", "Vindue Service", "Reparer bil", "Hegnflytter", "Træplanter"};
+			for(int i = 0; i < 125; i++) {
+				int x = rand.nextInt(navnArray.length);
+				int vej = rand.nextInt(vejArray.length);
+				int by = rand.nextInt(byArray.length);
+				int nr = rand.nextInt(80);
+				int virk = rand.nextInt(virkArray.length);
+				cusCtr.createBusinessCustomer(navnArray[x], "9846"+(rand.nextInt(8888)+1000), vejArray[vej]+" "+nr, navnArray[x].substring(0, 3).trim().toLowerCase()+nr+"@ft.dk", byArray[by], ""+(rand.nextInt(8888)+1000), virkArray[virk]+" A/S", "1"+i+i+i+i+i);
 			}
 
 			cusCtr.createBusinessCustomer("Kis", "72691867", "Sofiendalsvej 60", "kbha@ucn.dk", "Aalborg", "9000", "UCN A/S", "33556063");
 			
-			for(int i = 0; i < 10; i++) {
-				cusCtr.createBusinessCustomer("TestB"+i, "12345678", "Testgade "+i, "Btest"+i+"@test "+i+".dk", "Aalborg", "9000", "Test "+i+" A/S", "1"+i+i+i+i+i);
-			}
+			
 			try {
-				for(int i = 1; i<15; i++){
+				for(int i = 1; i<45; i++){
 					SaleCtr sCtr = new SaleCtr();
 					sCtr.createSale();
 					Item itemi = iCtr.getItem(i);
 					sCtr.addItem(itemi, 1);
-					Customer c = cusCtr.findCustomer(i);
+					Customer c = cusCtr.findCustomer(90+i);
 					sCtr.setCustomer(c);
 					sCtr.finishSale("1");
 				}
 				
-				for(int i = 30; i<35; i++){
+				for(int i = 30; i<55; i++){
 					SaleCtr sCtr = new SaleCtr();
 					sCtr.createSale();
 					Item itemi = iCtr.getItem(i);
 					sCtr.addItem(itemi, 1);
-					Customer c = cusCtr.findCustomer(i);
-					sCtr.setCustomer(c);
+					Customer c = cusCtr.findCustomer(40+i);
+					//sCtr.setCustomer(c);
 					sCtr.parkSale();
 				}
 			} catch (NullPointerException e) {
