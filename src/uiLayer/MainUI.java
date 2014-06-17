@@ -94,7 +94,6 @@ public class MainUI extends SuperUI {
 			iCtr.createStorage("Trælast");
 			iCtr.createStorage("Byggecenter");
 		} catch (StorageExistException e3) {
-			// TODO Auto-generated catch block
 			e3.printStackTrace();
 		}
 		Storage s1 = iCtr.findStorage("Trælast");
@@ -103,7 +102,6 @@ public class MainUI extends SuperUI {
 			cCtr.createCategory("Søm");
 			cCtr.createCategory("Hammer");
 		} catch (CategoryExistException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		Category c1 = cCtr.findCategory("Søm");
@@ -130,20 +128,16 @@ public class MainUI extends SuperUI {
 		try {
 			ccCtr.setCustomer(p);
 		} catch (SaleNotCreatedException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		Item i = iCtr.getItem("Flad Hammer");
 		try {
 			ccCtr.addItem(i, 100);
 		} catch (NullPointerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotEnoughItemsException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SaleNotCreatedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Calendar c = Calendar.getInstance();
