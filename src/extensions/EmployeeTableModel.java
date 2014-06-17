@@ -58,7 +58,7 @@ public class EmployeeTableModel extends AbstractTableModel{
 		String value = "??";
 		
 		if(collIndex == 0){
-			value = "Medarbejder ID";
+			value = "ID";
 		} else if(collIndex == 1){
 			value = "Navn";
 		} else if(collIndex == 2){

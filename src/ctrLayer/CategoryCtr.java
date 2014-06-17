@@ -18,7 +18,6 @@ public class CategoryCtr {
 			try {
 				createCategory("Alle");
 			} catch (CategoryExistException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			ItemCont.getInstance(findCategory("Alle"));
