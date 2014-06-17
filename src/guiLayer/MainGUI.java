@@ -183,7 +183,6 @@ public class MainGUI extends JFrame{
 					storage.txtStorageName.requestFocusInWindow();
 					getRootPane().setDefaultButton(storage.btnOpret);
 				} else if(comp.equals(order)){
-					//TODO
 					order.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(order.btnSearch);
 					order.update();
