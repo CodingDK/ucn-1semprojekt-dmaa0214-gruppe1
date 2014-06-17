@@ -158,6 +158,9 @@ public class ItemGUI extends JPanel {
 		cmbStorage = new JComboBox<Storage>();
 		cmbStorage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(items.size() <= 0 || items == null){
+					showAll();
+				}
 				changeFiltering();
 			}
 		});
@@ -170,19 +173,14 @@ public class ItemGUI extends JPanel {
 		cmbCategory = new JComboBox<Category>();
 		cmbCategory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(items.size() <= 0 || items == null){
+					showAll();
+				}
 				changeFiltering();
 			}
 		});
 		cmbCategory.setModel(new DefaultComboBoxModel(categories.toArray()));
 		panel_2.add(cmbCategory);
-		
-		JButton btnVisAlle = new JButton("Vis Alle");
-		btnVisAlle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				showAll();
-			}
-		});
-		panel_2.add(btnVisAlle);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
@@ -302,7 +300,6 @@ public class ItemGUI extends JPanel {
 	}
 
 	protected void showAll() {
-		clear();
 		CategoryCtr cCtr = new CategoryCtr();
 		for(Category c : categories){
 			ItemCont iCont = ItemCont.getInstance(c);
@@ -336,9 +333,9 @@ public class ItemGUI extends JPanel {
 
 	protected void clear(){
 		txtName.setText("");
-		items.clear();
 		cmbCategory.setSelectedIndex(0);
 		cmbStorage.setSelectedIndex(0);
+		items.clear();
 		model.refresh(items);
 		model.fireTableDataChanged();
 	}
