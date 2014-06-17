@@ -167,6 +167,7 @@ public class MainGUI extends JFrame{
 				if (comp.equals(item)){
 					item.update();
 					item.txtName.requestFocusInWindow();
+					getRootPane().setDefaultButton(item.btnSg);
 				} else if(comp.equals(category)){
 					category.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(category.btnCreate);
