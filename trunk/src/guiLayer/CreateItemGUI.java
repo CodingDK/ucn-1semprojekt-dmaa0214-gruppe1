@@ -27,6 +27,7 @@ import ctrLayer.ItemCtr;
 import extensions.JBlinkLabel;
 import extensions.JDoubleField;
 import extensions.JIntegerField;
+import extensions.SpaceDocument;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -102,6 +103,7 @@ public class CreateItemGUI extends JPanel {
 		panel_2.add(lblName, "2, 1, left, fill");
 		
 		txtName = new JTextField();
+		txtName.setDocument(new SpaceDocument());
 		txtName.setColumns(10);
 		panel_2.add(txtName, "4, 1, fill, fill");
 		
@@ -144,6 +146,7 @@ public class CreateItemGUI extends JPanel {
 		panel_2.add(lblLocation, "2, 7, fill, fill");
 		
 		txtLocation = new JTextField();
+		txtLocation.setDocument(new SpaceDocument());
 		txtLocation.setColumns(10);
 		panel_2.add(txtLocation, "4, 7, fill, fill");
 		
