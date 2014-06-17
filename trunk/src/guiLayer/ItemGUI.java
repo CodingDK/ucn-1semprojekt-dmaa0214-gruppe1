@@ -31,6 +31,7 @@ import javax.swing.table.TableRowSorter;
 
 import modelLayer.Category;
 import modelLayer.Item;
+import modelLayer.ItemCont;
 import modelLayer.Storage;
 
 import com.jgoodies.forms.factories.FormFactory;
@@ -136,6 +137,14 @@ public class ItemGUI extends JPanel {
 		cmbCategory.setModel(new DefaultComboBoxModel(categories.toArray()));
 		panel_2.add(cmbCategory);
 		
+		JButton btnVisAlle = new JButton("Vis Alle");
+		btnVisAlle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showAll();
+			}
+		});
+		panel_2.add(btnVisAlle);
+		
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -155,22 +164,15 @@ public class ItemGUI extends JPanel {
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_3.createSequentialGroup()
-							.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 214, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(gl_panel_3.createSequentialGroup()
-							.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-							.addGap(6))))
+				.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+				.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
 		);
 		gl_panel_3.setVerticalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
 					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+					.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
 		);
 		panel_5.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.GROWING_BUTTON_COLSPEC,
@@ -244,6 +246,18 @@ public class ItemGUI extends JPanel {
 		
 	}
 
+	protected void showAll() {
+		clear();
+		CategoryCtr cCtr = new CategoryCtr();
+		for(Category c : categories){
+			ItemCont iCont = ItemCont.getInstance(c);
+			items.addAll(iCont.getAll());
+		}
+		
+		model.refresh(items);
+		model.fireTableDataChanged();
+	}
+
 	protected void changeFiltering() {
 		filters = new ArrayList<RowFilter<ItemTableModel,Object>>();
 		if(!cmbStorage.getSelectedItem().toString().equals("Alle")){
@@ -268,6 +282,8 @@ public class ItemGUI extends JPanel {
 	protected void clear(){
 		txtName.setText("");
 		items.clear();
+		cmbCategory.setSelectedIndex(0);
+		cmbStorage.setSelectedIndex(0);
 		model.refresh(items);
 		model.fireTableDataChanged();
 	}
