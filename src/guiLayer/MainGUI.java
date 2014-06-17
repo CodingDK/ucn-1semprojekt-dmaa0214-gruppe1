@@ -160,7 +160,7 @@ public class MainGUI extends JFrame{
 			}
 		});
 		mnHelp.add(mntmHelp);
-		getRootPane().setDefaultButton(item.btnSearch);
+		getRootPane().setDefaultButton(sale.btnAddItem);
 		
 		tabbedPane.addChangeListener(new ChangeListener(){
 			public void stateChanged(ChangeEvent e){
