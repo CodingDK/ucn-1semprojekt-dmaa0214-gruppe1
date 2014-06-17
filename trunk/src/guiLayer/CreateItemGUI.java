@@ -388,8 +388,11 @@ public class CreateItemGUI extends JPanel {
 			lblState.startBlinking(true, true);
 			return;
 		}
-		
-		iCtr.createItem(name, amount, reserved, salePrice, purchasePrice, bulkSalePrice, bulk, location, storage, max, min, category);
+		if(!isUpdate){
+			iCtr.createItem(name, amount, reserved, salePrice, purchasePrice, bulkSalePrice, bulk, location, storage, max, min, category);
+		}else if(isUpdate){
+			iCtr.updateItem(item.getId(), name, amount, reserved, salePrice, purchasePrice, bulkSalePrice, bulk, location, storage, max, min, category);
+		}
 		done();
 	}
 
