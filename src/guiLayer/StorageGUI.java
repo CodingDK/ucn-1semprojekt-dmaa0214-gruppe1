@@ -204,23 +204,24 @@ public class StorageGUI extends JPanel {
 
 	private void createStorage() {
 		ItemCtr iCtr = new ItemCtr();
-		if(txtStorageName.getText() != null || !txtStorageName.getText().trim().isEmpty()){
+		String txtName = txtStorageName.getText();
+		if(txtName == null || txtName.trim().isEmpty() ){		
+			lblState.setText("Navnet må ikke være tomt");
+			lblState.startBlinking(true, true);
+		} else {
 			try{
-				iCtr.createStorage(txtStorageName.getText());
+				iCtr.createStorage(txtName);
 				model.fireTableDataChanged();
 				storages = iCtr.getAllStorage();
 				model.refresh(storages);
 				clearInput();
-				lblState.setText(txtStorageName.getText() + " er oprettet");
+				lblState.setText(txtName + " er oprettet");
 				lblState.startBlinking(true, false);
 			} catch (StorageExistException e){
 				lblState.setText(e.getMessage());
 				lblState.startBlinking(true, true);
 			}
-		} else {		
-			lblState.setText("Navnet må ikke være tomt");
-			lblState.startBlinking(true, true);
-		}
+		} 
 	}
 		
 		
