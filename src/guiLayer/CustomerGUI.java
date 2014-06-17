@@ -193,15 +193,12 @@ public class CustomerGUI extends JPanel {
 		searchGridPanel.add(lblCompany, "1, 1, fill, fill");
 		
 		txtCompany = new JTextField();
+		txtCompany.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				findCustomer();
+			}
+		});
 		txtCompany.setDocument(new SpaceDocument());
-//		txtCompany.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyPressed(KeyEvent arg0) {
-//				if(KeyEvent.VK_ENTER == arg0.getKeyCode()){
-//					findCustomer();
-//				}
-//			}
-//		});
 		searchGridPanel.add(txtCompany, "2, 1, fill, fill");
 		txtCompany.setColumns(10);
 		
@@ -209,15 +206,12 @@ public class CustomerGUI extends JPanel {
 		searchGridPanel.add(lblName, "1, 2, fill, fill");
 		
 		txtName = new JTextField();
+		txtName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				findCustomer();
+			}
+		});
 		txtName.setDocument(new SpaceDocument());
-//		txtName.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyPressed(KeyEvent arg0) {
-//				if(KeyEvent.VK_ENTER == arg0.getKeyCode()){
-//					findCustomer();
-//				}
-//			}
-//		});
 		txtName.setColumns(10);
 		searchGridPanel.add(txtName, "2, 2, fill, fill");
 		
@@ -225,17 +219,13 @@ public class CustomerGUI extends JPanel {
 		searchGridPanel.add(lblTlf, "1, 3, fill, fill");
 		
 		txtTlf = new JTextField();
-		txtTlf.setDocument(new SpaceDocument());
-		txtTlf.setColumns(10);
-		//TODO Spørg Lau
-		txtTlf.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				if(KeyEvent.VK_ENTER == arg0.getKeyCode()){
-					findCustomer();
-				}
+		txtTlf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				findCustomer();
 			}
 		});
+		txtTlf.setDocument(new SpaceDocument());
+		txtTlf.setColumns(10);
 		searchGridPanel.add(txtTlf, "2, 3, fill, fill");
 		searchGroupPanel.setLayout(gl_searchGroupPanel);	
 		
@@ -319,10 +309,25 @@ public class CustomerGUI extends JPanel {
 		String phone = txtTlf.getText();
 
 		c.clear();
-
+		
+		ArrayList<Customer> fin = new ArrayList<Customer>();
+		
 		if(company != null && !company.trim().isEmpty()){
-			c.addAll(cCtr.searchBusiness(company));
+			//c.addAll(cCtr.searchBusiness(company));
+			fin.addAll(cCtr.searchBusiness(company));
 		}
+		
+		if(name != null && !name.trim().isEmpty()){
+			fin = search(name, fin, false);
+		}
+		
+		if(phone != null && !phone.trim().isEmpty()){
+			fin = search(phone, fin, true);
+		}
+		
+		c = fin;
+		
+		/*
 		if(name != null && !name.trim().isEmpty()){
 			nameArray = cCtr.searchCustomer(name);
 			if(c.size() != 0){
@@ -349,6 +354,12 @@ public class CustomerGUI extends JPanel {
 				c = phoneArray;
 			}
 		}
+		*/
+		
+		
+		
+		
+		
 
 		
 //		if(phone != null && !phone.trim().isEmpty()){
@@ -367,6 +378,25 @@ public class CustomerGUI extends JPanel {
 		
 	    model.refresh(c);
 	    model.fireTableDataChanged();
+	}
+	
+	private ArrayList<Customer> search(String searchString, ArrayList<Customer> cutArray, boolean isPhone){
+		CustomerCtr cCtr = new CustomerCtr();
+		ArrayList<Customer> hej = new ArrayList<Customer>();
+		if(cutArray.size() <= 0){
+			cutArray = cCtr.searchCustomer(searchString);
+		}
+		for(Customer cust : cutArray) {
+			if(!hej.contains(cust)){
+				if(isPhone && cust.getPhoneNr().contains(searchString)){
+					hej.add(cust);
+				}else if(!isPhone && cust.getName().toLowerCase().contains(searchString.toLowerCase())){
+					hej.add(cust);
+				}
+			}
+		}
+	
+		return hej;
 	}
 	
 	private void removePerson(int id) {
