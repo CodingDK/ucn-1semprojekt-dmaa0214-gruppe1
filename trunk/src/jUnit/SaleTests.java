@@ -19,6 +19,7 @@ import ctrLayer.CustomerCtr;
 import ctrLayer.EmployeeCtr;
 import ctrLayer.ItemCtr;
 import ctrLayer.SaleCtr;
+import exceptionLayer.AlreadyExistException;
 import exceptionLayer.CategoryExistException;
 import exceptionLayer.NotEnoughItemsException;
 import exceptionLayer.SaleNotCreatedException;
@@ -123,7 +124,7 @@ public class SaleTests {
 	}
 	
 	@Test
-	public void testFinishSale() throws NullPointerException, NotEnoughItemsException, SaleNotCreatedException {
+	public void testFinishSale() throws NullPointerException, NotEnoughItemsException, SaleNotCreatedException, AlreadyExistException {
 		ItemCtr iCtr = new ItemCtr();
 		CategoryCtr cCtr = new CategoryCtr();
 		try {

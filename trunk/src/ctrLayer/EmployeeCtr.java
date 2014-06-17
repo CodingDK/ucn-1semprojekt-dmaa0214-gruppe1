@@ -2,6 +2,7 @@ package ctrLayer;
 
 import java.util.ArrayList;
 
+import exceptionLayer.AlreadyExistException;
 import modelLayer.EmployeeCont;
 import personLayer.Employee;
 
@@ -44,10 +45,17 @@ public class EmployeeCtr {
 	 * @param postCode The postCode of the employee.
 	 * @param cprNr The cprNr of the employee.
 	 * @param admin A boolean value, true for admin.
+	 * @throws AlreadyExistException 
 	 */
-	public Employee createEmployee(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String password, boolean admin) {
-		Employee retE = new Employee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, password, admin);
-		eCont.addEmployee(retE);
+	public Employee createEmployee(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String password, boolean admin) throws AlreadyExistException {
+		Employee retE = null;
+		if(findEmployee(employeeNr) != null){
+			retE = new Employee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, password, admin);
+			eCont.addEmployee(retE);
+		}else{
+			throw new AlreadyExistException("Der findes allerede en medarbejder på det ønskede medarbejder nr");
+		}
+		
 		return retE;
 	}
 	

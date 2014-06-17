@@ -8,6 +8,7 @@ import personLayer.Employee;
 import personLayer.Private;
 import ctrLayer.CustomerCtr;
 import ctrLayer.EmployeeCtr;
+import exceptionLayer.AlreadyExistException;
 
 public class PersonUI extends SuperUI {
 	
@@ -19,7 +20,7 @@ public class PersonUI extends SuperUI {
 		selectedEmployee = null;
 	}
 	
-	public PersonUI() {
+	public PersonUI() throws AlreadyExistException {
 		selectedCustomer = null;
 		selectedEmployee = null;
 		
@@ -28,8 +29,9 @@ public class PersonUI extends SuperUI {
 	
 	/**
 	 * menu - Handels the selection part of the UI
+	 * @throws AlreadyExistException 
 	 */
-	private void menu() {
+	private void menu() throws AlreadyExistException {
 		boolean exit = false;
 		while (!exit) {
 			
@@ -159,8 +161,9 @@ public class PersonUI extends SuperUI {
 	
 	/**
 	 * createEmployee - Create a seller or administrator
+	 * @throws AlreadyExistException 
 	 */
-	private void createEmployee() {
+	private void createEmployee() throws AlreadyExistException {
 		boolean rights = false;
 		flush();
 		System.out.println("## Opret sælger ##");
