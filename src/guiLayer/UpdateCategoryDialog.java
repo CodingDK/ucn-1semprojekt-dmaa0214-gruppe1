@@ -32,7 +32,7 @@ public class UpdateCategoryDialog extends JDialog {
 	public UpdateCategoryDialog(Frame parent, int id, String name) {
 		super(parent, name, true);
 		this.name = name;
-		setBounds(100, 100, 286, 152);
+		setBounds(100, 100, 286, 129);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -53,7 +53,7 @@ public class UpdateCategoryDialog extends JDialog {
 					ColumnSpec.decode("77px"),
 					ColumnSpec.decode("183px"),},
 				new RowSpec[] {
-					RowSpec.decode("36px"),}));
+					RowSpec.decode("30px"),}));
 			{
 				JLabel lblCategory = new JLabel("Kategori");
 				panel.add(lblCategory, "1, 1, center, fill");
