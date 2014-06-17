@@ -283,7 +283,7 @@ public class MainGUI extends JFrame{
 	}
 	
 	public void createItem(){
-		CreateItemGUI comp = new CreateItemGUI(this, item);
+		CreateItemGUI comp = new CreateItemGUI(this, item, null);
 		addPaneToTab(comp, "Opret Vare");
 	}
 
