@@ -241,8 +241,8 @@ public class CreateItemGUI extends JPanel {
 	protected void createItem() {
 		ItemCtr iCtr = new ItemCtr();
 		
-		String name = txtName.getText();
-		if(name == null && name.trim().length() >= 1){
+		String name = txtName.getText().trim();
+		if(name == null && name.length() >= 1){
 			lblState.setText("Navnet må ikke være tomt");
 			lblState.startBlinking(true, true);
 			return;
@@ -313,8 +313,8 @@ public class CreateItemGUI extends JPanel {
 			return;
 		}
 		
-		String location = txtLocation.getText();
-		if(location == null && location.trim().length() >= 1){
+		String location = txtLocation.getText().trim();
+		if(location == null && location.length() >= 1){
 			lblState.setText("Lokationen må ikke være tomt");
 			lblState.startBlinking(true, true);
 			return;
