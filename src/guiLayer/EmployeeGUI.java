@@ -39,7 +39,6 @@ public class EmployeeGUI extends JPanel {
 	private ArrayList<Employee> employees;
 	private ArrayList<Employee> employees2;
 	public JTextField txtName;
-	private JTextField txtEmpNr;
 	private EmployeeTableModel model;
 	private MainGUI parent;
 	private JPanel panel_6;
@@ -96,7 +95,7 @@ public class EmployeeGUI extends JPanel {
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "Find medarbejder", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(10, 22, 240, 125);
+		panel_3.setBounds(10, 22, 240, 95);
 		panel.add(panel_3);
 
 		JPanel panel_4 = new JPanel();
@@ -111,7 +110,7 @@ public class EmployeeGUI extends JPanel {
 						.addGroup(gl_panel_3.createSequentialGroup()
 							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(0))
-						.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
+						.addGroup(gl_panel_3.createSequentialGroup()
 							.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
 							.addContainerGap())))
 		);
@@ -119,8 +118,9 @@ public class EmployeeGUI extends JPanel {
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
 					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(33, Short.MAX_VALUE))
 		);
 		panel_5.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.GROWING_BUTTON_COLSPEC,
@@ -148,11 +148,10 @@ public class EmployeeGUI extends JPanel {
 		panel_4.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("100px:grow"),
 				ColumnSpec.decode("110px:grow"),},
-				new RowSpec[] {
-				RowSpec.decode("28px"),
+			new RowSpec[] {
 				RowSpec.decode("28px"),}));
 
-		JLabel lblName = new JLabel("Navn");
+		JLabel lblName = new JLabel("Navn/ID");
 		panel_4.add(lblName, "1, 1, fill, fill");
 
 		txtName = new JTextField();
@@ -163,18 +162,6 @@ public class EmployeeGUI extends JPanel {
 		});
 		panel_4.add(txtName, "2, 1, fill, fill");
 		txtName.setColumns(10);
-
-		JLabel lblEmpNr = new JLabel("Medarbejder ID");
-		panel_4.add(lblEmpNr, "1, 2, fill, fill");
-
-		txtEmpNr = new JIntegerField();
-		txtEmpNr.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				findCustomer();
-			}
-		});
-		txtEmpNr.setColumns(10);
-		panel_4.add(txtEmpNr, "2, 2, fill, fill");
 		panel_3.setLayout(gl_panel_3);
 
 		panel_6 = new JPanel();
@@ -216,14 +203,9 @@ public class EmployeeGUI extends JPanel {
 	private void findCustomer() {
 		EmployeeCtr eCtr = new EmployeeCtr();
 		String name = txtName.getText();
-		String empNr = txtEmpNr.getText();
 		if(name.trim().length() > 0){
 			employees = eCtr.searchEmployee(name);
 		}
-		if(empNr.trim().length() > 0){
-			employees2 = eCtr.searchEmployee(empNr);
-		}
-		employees.addAll(employees2);
 		model.refresh(employees);
 		model.fireTableDataChanged();
 		if(employees.size() == 0){
@@ -241,7 +223,6 @@ public class EmployeeGUI extends JPanel {
 
 	private void clear(){
 		txtName.setText("");
-		txtEmpNr.setText("");
 		employees.clear();
 		model.fireTableDataChanged();
 	}
