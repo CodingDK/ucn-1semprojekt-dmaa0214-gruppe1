@@ -39,6 +39,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.CustomerCtr;
 import extensions.CustomerTableModel;
+import extensions.SpaceDocument;
 
 public class CustomerGUI extends JPanel {
 	private JTable table;
@@ -192,6 +193,7 @@ public class CustomerGUI extends JPanel {
 		searchGridPanel.add(lblCompany, "1, 1, fill, fill");
 		
 		txtCompany = new JTextField();
+		txtCompany.setDocument(new SpaceDocument());
 //		txtCompany.addKeyListener(new KeyAdapter() {
 //			@Override
 //			public void keyPressed(KeyEvent arg0) {
@@ -207,6 +209,7 @@ public class CustomerGUI extends JPanel {
 		searchGridPanel.add(lblName, "1, 2, fill, fill");
 		
 		txtName = new JTextField();
+		txtName.setDocument(new SpaceDocument());
 //		txtName.addKeyListener(new KeyAdapter() {
 //			@Override
 //			public void keyPressed(KeyEvent arg0) {
@@ -222,6 +225,7 @@ public class CustomerGUI extends JPanel {
 		searchGridPanel.add(lblTlf, "1, 3, fill, fill");
 		
 		txtTlf = new JTextField();
+		txtTlf.setDocument(new SpaceDocument());
 		txtTlf.setColumns(10);
 		//TODO Spørg Lau
 		txtTlf.addKeyListener(new KeyAdapter() {
