@@ -84,9 +84,13 @@ public class SaleItemTableModel extends AbstractTableModel{
 		PartSale ps  = partSales.get(rowIndex);
 		try  
 		{  
-		    int newAmount = Integer.parseInt((String) value);
+			String value1 = (String) value;
+		    int newAmount = Integer.parseInt(value1);
+		    if(value1.trim().isEmpty()){
+		    	JOptionPane.showMessageDialog(null, "Antal kan ikke være tomt","Advarsel",JOptionPane.ERROR_MESSAGE);
+		    }
 		    if(newAmount <= 0){
-		    	JOptionPane.showMessageDialog(null, "Anal skal være større end 0","Advarsel",JOptionPane.ERROR_MESSAGE);
+		    	JOptionPane.showMessageDialog(null, "Antal skal være større end 0","Advarsel",JOptionPane.ERROR_MESSAGE);
 		    } else {
 			    int oldAmount = ps.getAmount();
 			    Item item = ps.getItem();
