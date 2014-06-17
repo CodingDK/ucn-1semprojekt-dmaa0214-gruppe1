@@ -46,5 +46,5 @@ public class PartSale {
 	public String toString() {
 		return "Vare: " + item.getName() + ", Antal: " + amount;
 	}
-	
+
 }

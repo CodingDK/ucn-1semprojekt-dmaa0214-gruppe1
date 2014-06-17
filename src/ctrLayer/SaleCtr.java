@@ -236,4 +236,10 @@ public class SaleCtr {
 		}
 	}
 	
+	public void removePartSale(PartSale ps){
+		Item i = ps.getItem();
+		i.addReserved(-ps.getAmount());
+		sale.removePartSale(ps);
+	}
+	
 }

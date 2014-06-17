@@ -1,28 +1,14 @@
 package guiLayer;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import modelLayer.Item;
@@ -37,6 +23,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.SaleCtr;
+import extensions.JIntegerField;
 import extensions.SaleItemTableModel;
 
 public class SaleGUI extends JPanel {
@@ -59,6 +46,10 @@ public class SaleGUI extends JPanel {
 	private JLabel txtLblBusiness;
 	private JLabel lblName;
 	private JLabel lblBusiness;
+	private JPopupMenu popupMenu;
+	private JButton btnFinish;
+	private JButton btnPark;
+	private JButton btnCancel;
 
 	/**
 	 * Create the panel.
@@ -169,6 +160,44 @@ public class SaleGUI extends JPanel {
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
 		
+		JIntegerField tableEditAmount = new JIntegerField();
+		tableEditAmount.setBorder(null);
+		table.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(tableEditAmount));
+		table.addPropertyChangeListener(new PropertyChangeListener() {
+
+		    @Override
+		    public void propertyChange(PropertyChangeEvent evt) {
+		        if ("tableCellEditor".equals(evt.getPropertyName())) {
+		            if (table.isEditing()) {
+		                //processEditingStarted();
+		            	
+		            } else {
+		                updatePrices();
+		            }
+		        }
+		    }
+		});
+		
+		
+		popupMenu = new JPopupMenu();
+		//addPopup(tablePanel, popupMenu);
+		JMenuItem mntmDelete = new JMenuItem("Slet");
+		mntmDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int rowindex = table.getSelectedRow();
+				int id = (Integer) table.getValueAt(rowindex, 0);
+				removePartSale(id);
+			}
+		});
+		popupMenu.add(mntmDelete);
+		
+		table.addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		    	mouseListenerTable(e);
+		    }
+		});
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
@@ -274,30 +303,75 @@ public class SaleGUI extends JPanel {
 		panel_1.add(panel_9);
 		panel_9.setLayout(new GridLayout(3, 0, 0, 12));
 		
-		JButton bntCancel = new JButton("Nulstil");
-		bntCancel.addActionListener(new ActionListener() {
+		btnCancel = new JButton("Nulstil");
+		btnCancel.setEnabled(false);
+		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cancelSale();
 			}
 		});
-		panel_9.add(bntCancel);
+		panel_9.add(btnCancel);
 		
-		JButton bntPark = new JButton("Parker");
-		bntPark.addActionListener(new ActionListener() {
+		btnPark = new JButton("Parker");
+		btnPark.setEnabled(false);
+		btnPark.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				parkSale();
 			}
 		});
-		panel_9.add(bntPark);
+		panel_9.add(btnPark);
 		
-		JButton btnFinish = new JButton("Afslut");
+		btnFinish = new JButton("Afslut");
+		btnFinish.setEnabled(false);
 		btnFinish.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				finishSale();
 			}
 		});
 		panel_9.add(btnFinish);
+		
+		updateButtons();
+		updatePrices();
+	}
+	
+	private void updateButtons(){
+		if(partSales.size() != 0){
+			btnFinish.setEnabled(true);
+			btnPark.setEnabled(true);
+			btnCancel.setEnabled(true);
+		} else {
+			btnFinish.setEnabled(false);
+			btnPark.setEnabled(false);
+			if(saleCtr.getSale().getCustomer() != null){
+				btnCancel.setEnabled(true);
+			} else {
+				btnCancel.setEnabled(false);
+			}
+			
+		}
+	}
+	
+	private void removePartSale(int itemId) {
+		PartSale ps = null;
+		int i = 0;
+		while(i < partSales.size() && ps == null){
+			Item item = partSales.get(i).getItem();
+			if(item.getId() == itemId){
+				ps = partSales.get(i);
+				saleCtr.removePartSale(ps);
+			}
+		}
+		updatePrices();
+		updateButtons();
+	}
 
+	private void mouseListenerTable(MouseEvent e) {
+		int rowNumber = table.rowAtPoint(e.getPoint());
+		table.setRowSelectionInterval(rowNumber, rowNumber);
+		if(SwingUtilities.isRightMouseButton(e)){
+			//System.out.println(rowNumber);
+			popupMenu.show(table, e.getX(), e.getY());
+		} 
 	}
 	
 	public void setCustomer(Customer c){
@@ -305,10 +379,7 @@ public class SaleGUI extends JPanel {
 			saleCtr.getSale().setCustomer(c);
 		}
 		updateCustomer();
-	}
-	
-	private void changeCustomerBnt(){
-		
+		updateButtons();
 	}
 	
 	private void updateCustomer(){
@@ -339,8 +410,7 @@ public class SaleGUI extends JPanel {
 		txtLblName.setText(name);
 		txtLblPhone.setText(phone);
 		txtLblCustomerNr.setText(customerNr);
-		txtLblCredit.setText(credit);
-		
+		txtLblCredit.setText(credit);	
 	}
 	
 	private void findCustomer() {
@@ -361,6 +431,7 @@ public class SaleGUI extends JPanel {
 		else if(choice == 1){
 			mainGUI.createBusinesssCustomer(this);
 		}
+		updateButtons();
 	}
 
 	private void finishSale() {
@@ -396,27 +467,27 @@ public class SaleGUI extends JPanel {
 
 	private void cancelSale() {
 		
-			JFrame frame = new JFrame();
-			String[] options = new String[2];
-			options[1] = new String("Nulstil");
-			options[0] = new String("Annuller");
-			int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Er du sikker på du vil nulstille salget?","Nulstil Salg", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
-			//System.out.println(choice);
-			if(choice == 1){
-				
-				saleCtr.cancelSale();
-				mainGUI.resetSale();
-				updateCustomer();
-			}
+		JFrame frame = new JFrame();
+		String[] options = new String[2];
+		options[1] = new String("Nulstil");
+		options[0] = new String("Annuller");
+		int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Er du sikker på du vil nulstille salget?","Nulstil Salg", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
+		//System.out.println(choice);
+		if(choice == 1){
+			
+			saleCtr.cancelSale();
+			mainGUI.resetSale();
+			updateCustomer();
+		}
+		updateButtons();
 	}
 
 	private void makeAddItem(){
-		JDialog addDialog = new SaleAddItem(null, saleCtr);
+		//JDialog addDialog = 
+		new SaleAddItem(null, saleCtr);
 		
-		partSales = saleCtr.getSale().getPartSales();
-		model.refresh(partSales);
-		model.fireTableDataChanged();
 		updatePrices();
+		updateButtons();
 	}
 	
 	public boolean isSaleEmpty(){
@@ -428,6 +499,9 @@ public class SaleGUI extends JPanel {
 	}
 	
 	private void updatePrices(){
+		partSales = saleCtr.getSale().getPartSales();
+		model.refresh(partSales);
+		model.fireTableDataChanged();
 		double subtotal = 0;
 		double moms = 0;
 		for(PartSale ps : partSales){

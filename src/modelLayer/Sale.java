@@ -173,10 +173,12 @@ public class Sale {
 		return retString;
 	}
 	
-	//** Skal fjernes **// ASD LAU FFS GOGOGOGO Amagawd
-	
-	public void setDate(Date date) {
-		this.date = date;
+	public void removePartSale(PartSale ps){
+		partSales.remove(ps);
 	}
-	
+
+	public void setDate(Date d) {
+		// TODO Auto-generated method stub
+		date = d;
+	}
 }
