@@ -24,6 +24,7 @@ import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import modelLayer.Item;
 import personLayer.Customer;
 import ctrLayer.Demo;
 import extensions.CloseButtonTabbedPane;
@@ -285,6 +286,11 @@ public class MainGUI extends JFrame{
 	public void createItem(){
 		CreateItemGUI comp = new CreateItemGUI(this, item, null);
 		addPaneToTab(comp, "Opret Vare");
+	}
+	
+	public void updateItem(Item updateItem){
+		CreateItemGUI comp = new CreateItemGUI(this, item, updateItem);
+		addPaneToTab(comp, "Ret Vare");
 	}
 
 	public void createPrivateCustomer(Component c){
