@@ -7,6 +7,7 @@ import modelLayer.Category;
 import modelLayer.Item;
 import modelLayer.Storage;
 import personLayer.Customer;
+import exceptionLayer.AlreadyExistException;
 import exceptionLayer.CategoryExistException;
 import exceptionLayer.NotEnoughItemsException;
 import exceptionLayer.SaleNotCreatedException;
@@ -62,14 +63,20 @@ public class Demo {
 			}
 
 			EmployeeCtr eCtr = new EmployeeCtr();
-			eCtr.createEmployee("1", "Ole", "70809010", "Egonsvej 19", "ole@ucn.dk", "Aalborg", "9000", "201050-1043", "1234", true);
-			eCtr.createEmployee("2", "Jens", "40509010", "Hobrovej 29", "jens@ucn.dk", "Vestbjerg", "9380", "100170-2143", null, false);
-			eCtr.createEmployee("3", "Bjarne", "12345678", "Hobrovej 26", "bjarne@ucn.dk", "Vestbjerg", "9380", "100170-2141", null, false);
+			try {
+				eCtr.createEmployee("1", "Ole", "70809010", "Egonsvej 19", "ole@ucn.dk", "Aalborg", "9000", "201050-1043", "1234", true);
+				eCtr.createEmployee("2", "Jens", "40509010", "Hobrovej 29", "jens@ucn.dk", "Vestbjerg", "9380", "100170-2143", null, false);
+				eCtr.createEmployee("3", "Bjarne", "12345678", "Hobrovej 26", "bjarne@ucn.dk", "Vestbjerg", "9380", "100170-2141", null, false);
 
-			for(int i = 0; i < 25; i++){
-				eCtr.createEmployee(""+i, "Testper"+i, "1231"+i, "Testvej", "test@ucn.dk", "Testbjerg", "8888", "141010-2040", null, false);
+				for(int i = 0; i < 25; i++){
+					eCtr.createEmployee(""+i, "Testper"+i, "1231"+i, "Testvej", "test@ucn.dk", "Testbjerg", "8888", "141010-2040", null, false);
 
+				}
+			} catch (AlreadyExistException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
+			
 
 			CustomerCtr cusCtr = new CustomerCtr();
 			cusCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");

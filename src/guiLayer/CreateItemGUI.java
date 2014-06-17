@@ -52,6 +52,7 @@ public class CreateItemGUI extends JPanel {
 	private JBlinkLabel lblState;
 	private Item item;
 	private boolean isUpdate;
+	private JButton btnCreate;
 	
 	/**
 	 * Create the panel.
@@ -74,6 +75,7 @@ public class CreateItemGUI extends JPanel {
 			txtSalePrice.setText(item.getSalePrice() + "");
 			cmbCategory.setSelectedItem(item.getCategory());
 			cmbStorage.setSelectedItem(item.getStorage());
+			btnCreate.setText("Ret");
 		}else{
 			isUpdate = false;
 		}
@@ -228,8 +230,8 @@ public class CreateItemGUI extends JPanel {
 		});
 		panel_4.add(btnClear, "2, 2");
 		
-		JButton btnOpret = new JButton("Opret");
-		btnOpret.addActionListener(new ActionListener() {
+		btnCreate = new JButton("Opret");
+		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				createItem();
 			}
@@ -243,7 +245,7 @@ public class CreateItemGUI extends JPanel {
 			}
 		});
 		panel_4.add(btnAnnuller, "4, 2");
-		panel_4.add(btnOpret, "6, 2");
+		panel_4.add(btnCreate, "6, 2");
 		
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3, BorderLayout.NORTH);

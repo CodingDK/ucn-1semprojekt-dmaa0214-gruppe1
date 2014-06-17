@@ -12,6 +12,7 @@ import ctrLayer.CategoryCtr;
 import ctrLayer.CustomerCtr;
 import ctrLayer.EmployeeCtr;
 import ctrLayer.ItemCtr;
+import exceptionLayer.AlreadyExistException;
 import exceptionLayer.CategoryExistException;
 import exceptionLayer.StorageExistException;
 
@@ -25,7 +26,7 @@ public class AllTests {
 	}
 	
 	@BeforeClass
-	public static void makeTest() {
+	public static void makeTest() throws AlreadyExistException {
 		ItemCtr iCtr = new ItemCtr();
 		CategoryCtr cCtr = new CategoryCtr();
 		try {

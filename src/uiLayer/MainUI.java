@@ -13,6 +13,7 @@ import ctrLayer.CustomerCtr;
 import ctrLayer.EmployeeCtr;
 import ctrLayer.ItemCtr;
 import ctrLayer.SaleCtr;
+import exceptionLayer.AlreadyExistException;
 import exceptionLayer.CategoryExistException;
 import exceptionLayer.NotEnoughItemsException;
 import exceptionLayer.SaleNotCreatedException;
@@ -21,17 +22,23 @@ import exceptionLayer.StorageExistException;
 public class MainUI extends SuperUI {
 	
 	public static void main(String[] args) {
-		new MainUI();
+		try {
+			new MainUI();
+		} catch (AlreadyExistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	private MainUI() {
+	private MainUI() throws AlreadyExistException {
 		menu();
 	}
 	
 	/**
 	 * menu - Handels the selection part of the UI
+	 * @throws AlreadyExistException 
 	 */
-	private void menu() {
+	private void menu() throws AlreadyExistException {
 		boolean exit = false;
 		boolean testCreated = false;
 		while (!exit) {
@@ -87,7 +94,7 @@ public class MainUI extends SuperUI {
 		return choice;
 	}
 	
-	private void makeTest() {
+	private void makeTest() throws AlreadyExistException {
 		ItemCtr iCtr = new ItemCtr();
 		CategoryCtr cCtr = new CategoryCtr();
 		try {
