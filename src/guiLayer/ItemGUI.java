@@ -69,6 +69,7 @@ public class ItemGUI extends JPanel {
 	private RowFilter<ItemTableModel, Object> rfStorage;
 	private JPopupMenu popupMenu;
 	public JButton btnSearch;
+	public Item saleItem;
 
 	/**
 	 * Create the panel.
@@ -372,7 +373,14 @@ public class ItemGUI extends JPanel {
 		if(SwingUtilities.isRightMouseButton(e)){
 			popupMenu.show(table, e.getX(), e.getY());
 		} else if(SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2){
-			
+			int rowindex = table.getSelectedRow();
+			int id = (Integer) table.getValueAt(rowindex, 0);
+			ItemCtr iCtr = new ItemCtr();
+			new ItemInfoDialog(iCtr.getItem(id), parent, this);
+			if(saleItem != null){
+				parent.addToSale(saleItem);
+				saleItem = null;
+			}
 		}
 	}
 }
