@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import modelLayer.Item;
 import modelLayer.PartSale;
@@ -163,8 +164,27 @@ public class SaleGUI extends JPanel {
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
 		
-		JIntegerField tableEditAmount = new JIntegerField();
-		tableEditAmount.setBorder(null);
+		final JIntegerField tableEditAmount = new JIntegerField();
+		tableEditAmount.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.DARK_GRAY),
+                BorderFactory.createEmptyBorder(0, 0, 0, 2)));
+		tableEditAmount.setHorizontalAlignment(JTextField.RIGHT);
+		tableEditAmount.addFocusListener(new FocusListener() {
+			
+			
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				tableEditAmount.setCaretPosition(tableEditAmount.getText().length());
+				
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+    	
+		//tableEditAmount.set
 		table.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(tableEditAmount));
 		table.addPropertyChangeListener(new PropertyChangeListener() {
 
@@ -172,14 +192,17 @@ public class SaleGUI extends JPanel {
 		        if ("tableCellEditor".equals(evt.getPropertyName())) {
 		            if (table.isEditing()) {
 		                //processEditingStarted();
-		            	
 		            } else {
 		                updatePrices();
 		            }
 		        }
 		    }
 		});
-		
+		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+		table.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
+		table.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
+		table.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
 		
 		popupMenu = new JPopupMenu();
 		//addPopup(tablePanel, popupMenu);
