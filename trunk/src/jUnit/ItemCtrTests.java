@@ -23,14 +23,12 @@ public class ItemCtrTests {
 		try {
 			iCtr.createStorage("Test1");
 		} catch (StorageExistException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		Storage s1 = iCtr.findStorage("Test1");
 		try {
 			cCtr.createCategory("Søm");
 		} catch (CategoryExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Category c1 = cCtr.findCategory("Søm");
@@ -50,7 +48,6 @@ public class ItemCtrTests {
 			iCtr.createStorage("Test1");
 			iCtr.createStorage("Test2");
 		} catch (StorageExistException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		Storage s1 = iCtr.findStorage("Test1");
@@ -59,7 +56,6 @@ public class ItemCtrTests {
 			cCtr.createCategory("Søm");
 			cCtr.createCategory("Hammer");
 		} catch (CategoryExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -82,7 +78,6 @@ public class ItemCtrTests {
 		try {
 			iCtr.createStorage("Cookie");
 		} catch (StorageExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

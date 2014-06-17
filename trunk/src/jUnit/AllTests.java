@@ -32,7 +32,6 @@ public class AllTests {
 			iCtr.createStorage("Lager1");
 			iCtr.createStorage("Lager2");
 		} catch (StorageExistException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		Storage s1 = iCtr.findStorage("Lager1");
@@ -41,7 +40,6 @@ public class AllTests {
 			cCtr.createCategory("Søm");
 			cCtr.createCategory("Hammer");
 		} catch (CategoryExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

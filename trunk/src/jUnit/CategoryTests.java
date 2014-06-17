@@ -20,7 +20,6 @@ public class CategoryTests {
 		try {
 			cCtr.createCategory("Cookies");
 		} catch (CategoryExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Category c = cCtr.findCategory("Cookies");
@@ -33,7 +32,6 @@ public class CategoryTests {
 		try {
 			cCtr.createCategory("Cookies");
 		} catch (CategoryExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Category c = cCtr.findCategory("Cookies");
@@ -48,7 +46,6 @@ public class CategoryTests {
 		try {
 			cCtr.removeCategory(c);
 		} catch (MainCategoryException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		assertEquals(cCtr.findCategory("Cookies"), null);
@@ -60,7 +57,6 @@ public class CategoryTests {
 		try {
 			cCtr.createCategory("Cookie");
 		} catch (CategoryExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Category c = cCtr.findCategory("Cookies");

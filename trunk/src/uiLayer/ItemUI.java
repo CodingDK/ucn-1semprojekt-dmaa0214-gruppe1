@@ -309,7 +309,6 @@ public class ItemUI extends SuperUI {
 			try {
 				iCtr.createStorage(storageName);
 			} catch (StorageExistException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			selectedStorage = iCtr.findStorage(storageName);
@@ -545,7 +544,6 @@ public class ItemUI extends SuperUI {
 				try {
 					cCtr.removeCategory(selectedCategory);
 				} catch (MainCategoryException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				selectedCategory = null;
