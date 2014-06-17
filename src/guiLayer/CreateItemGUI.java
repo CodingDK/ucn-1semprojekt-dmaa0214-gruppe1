@@ -242,7 +242,7 @@ public class CreateItemGUI extends JPanel {
 		ItemCtr iCtr = new ItemCtr();
 		
 		String name = txtName.getText();
-		if(name == null && name.length() >= 1){
+		if(name == null && name.trim().length() >= 1){
 			lblState.setText("Navnet må ikke være tomt");
 			lblState.startBlinking(true, true);
 			return;
@@ -314,7 +314,7 @@ public class CreateItemGUI extends JPanel {
 		}
 		
 		String location = txtLocation.getText();
-		if(location == null && location.length() >= 1){
+		if(location == null && location.trim().length() >= 1){
 			lblState.setText("Lokationen må ikke være tomt");
 			lblState.startBlinking(true, true);
 			return;
@@ -344,8 +344,12 @@ public class CreateItemGUI extends JPanel {
 		int min = 0;
 		try{
 			min = Integer.parseInt(txtMax.getText());
-			if(max < 0){
+			if(min < 0){
 				lblState.setText("Min kan ikke være et negativt tal");
+				lblState.startBlinking(true, true);
+				return;
+			}else if(min > max){
+				lblState.setText("Min kan ikke være større end maks");
 				lblState.startBlinking(true, true);
 				return;
 			}
