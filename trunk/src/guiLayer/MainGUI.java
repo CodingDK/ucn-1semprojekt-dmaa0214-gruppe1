@@ -340,4 +340,9 @@ public class MainGUI extends JFrame{
 		tabbedPane.setSelectedComponent(sale);
 		reDraw();
 	}
+
+	public void addToSale(Item i) {
+		sale.addItem(i);
+		tabbedPane.setSelectedComponent(sale);
+	}
 }

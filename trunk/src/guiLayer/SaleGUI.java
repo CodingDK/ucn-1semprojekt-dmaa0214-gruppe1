@@ -24,6 +24,8 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.SaleCtr;
+import exceptionLayer.NotEnoughItemsException;
+import exceptionLayer.SaleNotCreatedException;
 import extensions.JIntegerField;
 import extensions.SaleItemTableModel;
 
@@ -521,6 +523,17 @@ public class SaleGUI extends JPanel {
 			ret = false;
 		}
 		return ret;
+	}
+	
+	public void addItem(Item item){
+		try {
+			saleCtr.addItem(item, 1);
+		} catch (Exception e){
+			
+		}
+		
+		updatePrices();
+		updateButtons();
 	}
 	
 	private void updatePrices(){

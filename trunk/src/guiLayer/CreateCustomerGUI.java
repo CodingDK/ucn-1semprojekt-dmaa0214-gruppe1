@@ -212,7 +212,7 @@ public class CreateCustomerGUI extends JPanel {
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
 		txtCpr1 = new JTextField();
-		txtCpr1.setDocument(new JTextFieldLimit(6));
+		txtCpr1.setDocument(new JTextFieldLimit(6, true));
 		txtCpr1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
@@ -236,7 +236,7 @@ public class CreateCustomerGUI extends JPanel {
 				}
 			}
 		});
-		txtCpr2.setDocument(new JTextFieldLimit(4));
+		txtCpr2.setDocument(new JTextFieldLimit(4, true));
 		panel_3.add(txtCpr2, "5, 1, fill, default");
 		txtCpr2.setColumns(10);
 		
@@ -379,11 +379,9 @@ public class CreateCustomerGUI extends JPanel {
 	}
 	
 	private boolean validateFields(){
-		String cprNr = null;
 		String pictureId = null;
 		String company = null;
 		String cvr = null;
-		String cprNr2 = null;
 		String errorMsg = " må ikke være tomt";
 		String name = txtName.getText();
 		if (name == null || name.trim().isEmpty()) {
@@ -427,28 +425,6 @@ public class CreateCustomerGUI extends JPanel {
 			lblError.setText("Email" + errorMsg);
 			lblError.startBlinking(true, true);
 			return false;
-		}
-		if (!business) {
-			pictureId = txtPictureID.getText();
-			if (pictureId == null || pictureId.trim().isEmpty()) {
-				lblError.setText("Billede ID" + errorMsg);
-				lblError.startBlinking(true, true);
-				return false;
-			}
-			
-			cprNr = txtCpr1.getText();
-			if (cprNr == null || cprNr.trim().isEmpty()) {
-				lblError.setText("Cpr nr" + errorMsg);
-				lblError.startBlinking(true, true);
-				return false;
-			}
-			
-			cprNr2 = txtCpr2.getText();
-			if (cprNr2 == null || cprNr2.trim().isEmpty()) {
-				lblError.setText("Cpr nr" + errorMsg);
-				lblError.startBlinking(true, true);
-				return false;
-			}
 		}
 		
 		if (business) {
