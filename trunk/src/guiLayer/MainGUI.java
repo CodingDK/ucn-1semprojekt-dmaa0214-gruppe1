@@ -160,7 +160,7 @@ public class MainGUI extends JFrame{
 			}
 		});
 		mnHelp.add(mntmHelp);
-		getRootPane().setDefaultButton(item.btnSg);
+		getRootPane().setDefaultButton(item.btnSearch);
 		
 		tabbedPane.addChangeListener(new ChangeListener(){
 			public void stateChanged(ChangeEvent e){
@@ -168,7 +168,7 @@ public class MainGUI extends JFrame{
 				if (comp.equals(item)){
 					item.update();
 					item.txtName.requestFocusInWindow();
-					getRootPane().setDefaultButton(item.btnSg);
+					getRootPane().setDefaultButton(item.btnSearch);
 				} else if(comp.equals(category)){
 					category.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(category.btnCreate);

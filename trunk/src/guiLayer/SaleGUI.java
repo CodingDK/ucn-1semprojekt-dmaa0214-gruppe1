@@ -165,7 +165,6 @@ public class SaleGUI extends JPanel {
 		table.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(tableEditAmount));
 		table.addPropertyChangeListener(new PropertyChangeListener() {
 
-		    @Override
 		    public void propertyChange(PropertyChangeEvent evt) {
 		        if ("tableCellEditor".equals(evt.getPropertyName())) {
 		            if (table.isEditing()) {
