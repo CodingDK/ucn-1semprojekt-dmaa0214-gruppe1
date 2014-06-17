@@ -42,8 +42,8 @@ public class CreateItemGUI extends JPanel {
 	private JIntegerField txtBulk;
 	private JDoubleField txtBulkPrice;
 	private JTextField txtLocation;
-	private JIntegerField txtMax;
 	private JIntegerField txtMin;
+	private JIntegerField txtMax;
 	public JTextField txtName;
 	private JComboBox<Storage> cmbStorage;
 	private JComboBox<Category> cmbCategory;
@@ -68,8 +68,8 @@ public class CreateItemGUI extends JPanel {
 			txtBulk.setText(item.getBulk() + "");
 			txtBulkPrice.setText(item.getBulkSalePrice() + "");
 			txtLocation.setText(item.getLocation());
-			txtMax.setText(item.getMax() + "");
-			txtMin.setText(item.getMin() + "");
+			txtMin.setText(item.getMax() + "");
+			txtMax.setText(item.getMin() + "");
 			txtName.setText(item.getName());
 			txtPurchasePrice.setText(item.getPurchasePrice() + "");
 			txtSalePrice.setText(item.getSalePrice() + "");
@@ -181,19 +181,19 @@ public class CreateItemGUI extends JPanel {
 		cmbStorage.setModel(new DefaultComboBoxModel(stors.toArray()));
 		panel_2.add(cmbStorage, "4, 8, fill, default");
 		
-		JLabel lblMax = new JLabel("Max Lagerbeholdning");
+		JLabel lblMax = new JLabel("Min Lagerbeholdning");
 		panel_2.add(lblMax, "2, 9, fill, fill");
-		
-		txtMax = new JIntegerField();
-		txtMax.setColumns(10);
-		panel_2.add(txtMax, "4, 9, fill, fill");
-		
-		JLabel lblMin = new JLabel("Min Lagerbeholdning");
-		panel_2.add(lblMin, "2, 10, fill, fill");
 		
 		txtMin = new JIntegerField();
 		txtMin.setColumns(10);
-		panel_2.add(txtMin, "4, 10, fill, fill");
+		panel_2.add(txtMin, "4, 9, fill, fill");
+		
+		JLabel lblMin = new JLabel("Max Lagerbeholdning");
+		panel_2.add(lblMin, "2, 10, fill, fill");
+		
+		txtMax = new JIntegerField();
+		txtMax.setColumns(10);
+		panel_2.add(txtMax, "4, 10, fill, fill");
 		
 		JLabel lblCategory = new JLabel("Kategori");
 		panel_2.add(lblCategory, "2, 11, left, fill");
@@ -403,8 +403,8 @@ public class CreateItemGUI extends JPanel {
 		txtBulk.setText("");
 		txtBulkPrice.setText("");
 		txtLocation.setText("");
-		txtMax.setText("");
 		txtMin.setText("");
+		txtMax.setText("");
 		txtName.setText("");
 		txtPurchasePrice.setText("");
 		txtSalePrice.setText("");
