@@ -54,7 +54,7 @@ public class CustomerGUI extends JPanel {
 	private MainGUI parent;
 	private JPopupMenu popupMenu;
 	public JButton btnFind;
-	
+
 	/**
 	 * Create the panel.
 	 */
@@ -66,7 +66,7 @@ public class CustomerGUI extends JPanel {
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
-		
+
 		JPanel tablePanel = new JPanel();
 		GridBagConstraints gbc_tablePanel = new GridBagConstraints();
 		gbc_tablePanel.insets = new Insets(0, 0, 0, 5);
@@ -75,13 +75,13 @@ public class CustomerGUI extends JPanel {
 		gbc_tablePanel.gridy = 0;
 		add(tablePanel, gbc_tablePanel);
 		tablePanel.setLayout(new BorderLayout(0, 0));
-		
+
 		c = new ArrayList<Customer>();
 		model = new CustomerTableModel(c);
 		table = new JTable(model);
-//		table.setAutoCreateRowSorter(true);
+		//		table.setAutoCreateRowSorter(true);
 		table.getColumnModel().getColumn(0).setMaxWidth(30);
-		
+
 		//added
 		popupMenu = new JPopupMenu();
 		//addPopup(tablePanel, popupMenu);
@@ -107,22 +107,22 @@ public class CustomerGUI extends JPanel {
 
 		table.addMouseListener(new MouseAdapter() {
 
-		    @Override
-		    public void mouseClicked(MouseEvent e) {
-		    	mouseListenerTable(e);
-		    }
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mouseListenerTable(e);
+			}
 		});
 		tablePanel.add(new JScrollPane(table), BorderLayout.CENTER);
-		
+
 		JPanel panel_4 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_4.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		tablePanel.add(panel_4, BorderLayout.NORTH);
-		
+
 		JLabel lblTest = new JLabel("Kunder");
 		lblTest.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel_4.add(lblTest);
-		
+
 		JPanel searchPanel_1 = new JPanel();
 		searchPanel_1.setLayout(null);
 		GridBagConstraints gbc_searchPanel_1 = new GridBagConstraints();
@@ -130,43 +130,43 @@ public class CustomerGUI extends JPanel {
 		gbc_searchPanel_1.gridx = 1;
 		gbc_searchPanel_1.gridy = 0;
 		add(searchPanel_1, gbc_searchPanel_1);
-		
+
 		JPanel searchGroupPanel = new JPanel();
 		searchGroupPanel.setBorder(new TitledBorder(null, "Find kunde", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
 		searchGroupPanel.setBounds(10, 22, 240, 162);
 		searchPanel_1.add(searchGroupPanel);
-		
+
 		JPanel searchGridPanel = new JPanel();
-		
+
 		JPanel panel = new JPanel();
 		GroupLayout gl_searchGroupPanel = new GroupLayout(searchGroupPanel);
 		gl_searchGroupPanel.setHorizontalGroup(
-			gl_searchGroupPanel.createParallelGroup(Alignment.LEADING)
+				gl_searchGroupPanel.createParallelGroup(Alignment.LEADING)
 				.addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
 				.addGroup(gl_searchGroupPanel.createSequentialGroup()
-					.addGap(6)
-					.addComponent(searchGridPanel, GroupLayout.PREFERRED_SIZE, 222, Short.MAX_VALUE)
-					.addContainerGap())
-		);
+						.addGap(6)
+						.addComponent(searchGridPanel, GroupLayout.PREFERRED_SIZE, 222, Short.MAX_VALUE)
+						.addContainerGap())
+				);
 		gl_searchGroupPanel.setVerticalGroup(
-			gl_searchGroupPanel.createParallelGroup(Alignment.TRAILING)
+				gl_searchGroupPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_searchGroupPanel.createSequentialGroup()
-					.addComponent(searchGridPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
+						.addComponent(searchGridPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
+				);
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.GROWING_BUTTON_COLSPEC,
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 				FormFactory.GROWING_BUTTON_COLSPEC,},
-			new RowSpec[] {
+				new RowSpec[] {
 				FormFactory.LINE_GAP_ROWSPEC,
 				RowSpec.decode("28px"),}));
-		
+
 		JButton btnClear = new JButton("Nulstil");
 		panel.add(btnClear, "1, 2, fill, top");
-		
+
 		JButton btnFind = new JButton("Søg");
 		panel.add(btnFind, "3, 2, fill, top");
 		btnFind.addActionListener(new ActionListener() {
@@ -184,14 +184,14 @@ public class CustomerGUI extends JPanel {
 				ColumnSpec.decode("55dlu"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,},
-			new RowSpec[] {
+				new RowSpec[] {
 				RowSpec.decode("28px"),
 				RowSpec.decode("28px"),
 				RowSpec.decode("28px"),}));
-		
+
 		JLabel lblCompany = new JLabel("Virksomhed");
 		searchGridPanel.add(lblCompany, "1, 1, fill, fill");
-		
+
 		txtCompany = new JTextField();
 		txtCompany.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -201,10 +201,10 @@ public class CustomerGUI extends JPanel {
 		txtCompany.setDocument(new SpaceDocument());
 		searchGridPanel.add(txtCompany, "2, 1, fill, fill");
 		txtCompany.setColumns(10);
-		
+
 		JLabel lblName = new JLabel("Navn");
 		searchGridPanel.add(lblName, "1, 2, fill, fill");
-		
+
 		txtName = new JTextField();
 		txtName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -214,10 +214,10 @@ public class CustomerGUI extends JPanel {
 		txtName.setDocument(new SpaceDocument());
 		txtName.setColumns(10);
 		searchGridPanel.add(txtName, "2, 2, fill, fill");
-		
+
 		JLabel lblTlf = new JLabel("Tlf");
 		searchGridPanel.add(lblTlf, "1, 3, fill, fill");
-		
+
 		txtTlf = new JTextField();
 		txtTlf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -228,28 +228,28 @@ public class CustomerGUI extends JPanel {
 		txtTlf.setColumns(10);
 		searchGridPanel.add(txtTlf, "2, 3, fill, fill");
 		searchGroupPanel.setLayout(gl_searchGroupPanel);	
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Opret Kunde", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(10, 184, 234, 58);
 		searchPanel_1.add(panel_1);
-		
+
 		JPanel panel_2 = new JPanel();
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				gl_panel_1.createParallelGroup(Alignment.TRAILING)
 				.addComponent(panel_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-		);
+				);
 		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-		);
+				);
 		panel_2.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.GROWING_BUTTON_COLSPEC,
 				FormFactory.GROWING_BUTTON_COLSPEC,},
-			new RowSpec[] {
+				new RowSpec[] {
 				RowSpec.decode("fill:default:grow"),}));
-		
+
 		JButton btnPrivate = new JButton("Privat");
 		btnPrivate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -267,7 +267,7 @@ public class CustomerGUI extends JPanel {
 		panel_1.setLayout(gl_panel_1);
 		//this.getRootPane().setDefaultButton(btnFind);
 	}
-	
+
 	private void mouseListenerTable(MouseEvent e) {
 		Point p = e.getPoint();
 		int rowNumber = table.rowAtPoint(p);
@@ -293,8 +293,7 @@ public class CustomerGUI extends JPanel {
 
 		c.clear();
 
-		model.refresh(c);
-		model.fireTableDataChanged();
+		update();
 	}
 
 	private void findCustomer() {
@@ -304,99 +303,48 @@ public class CustomerGUI extends JPanel {
 		String phone = txtTlf.getText();
 
 		c.clear();
-		
-		ArrayList<Customer> fin = new ArrayList<Customer>();
-		
-		if(company != null && !company.trim().isEmpty()){
-			fin.addAll(cCtr.searchBusiness(company));
-		}
-		
-		if(name != null && !name.trim().isEmpty()){
-			fin = search(name, fin, false);
-		}
-		
-		if(phone != null && !phone.trim().isEmpty()){
-			fin = search(phone, fin, true);
-		}
-		
-		c = fin;
-		
-		/*
-		if(name != null && !name.trim().isEmpty()){
-			nameArray = cCtr.searchCustomer(name);
-			if(c.size() != 0){
-				for(Customer cust : nameArray){
-					if(c.contains(cust)){
-						temp1Array.add(cust);
-					}
-				}
-				c = temp1Array;
-			} else{
-				c = nameArray;
-			}
-		}
-		if(phone != null && !phone.trim().isEmpty()){
-			phoneArray = cCtr.searchCustomer(phone);
-			if(c.size() != 0){
-				for(Customer cust : phoneArray){
-					if(c.contains(cust)){
-						temp2Array.add(cust);
-					}
-				}
-				c = temp2Array;
-			} else{
-				c = phoneArray;
-			}
-		}
-		*/
-		
-		
-		
-		
-		
 
-		
-//		if(phone != null && !phone.trim().isEmpty()){
-//			c = cCtr.searchCustomer(phone);
-//		} else if(name != null && !name.trim().isEmpty()){
-//			c = cCtr.searchCustomer(name);
-//		} else if(company != null && !company.trim().isEmpty()){
-//			c = cCtr.searchBusiness(company);
-//		} 
-		
-//		if(c != null && !c.isEmpty()){
-//			txtCompany.setText("");
-//			txtName.setText("");
-//			txtTlf.setText("");
-//		}
-		
-	    model.refresh(c);
-	    model.fireTableDataChanged();
+		ArrayList<Customer> retArray = new ArrayList<Customer>();
+
+		if(company != null && !company.trim().isEmpty()){
+			retArray.addAll(cCtr.searchBusiness(company));
+		}
+
+		if(name != null && !name.trim().isEmpty()){
+			retArray = search(name, retArray, false);
+		}
+
+		if(phone != null && !phone.trim().isEmpty()){
+			retArray = search(phone, retArray, true);
+		}
+
+		c = retArray;
+
+		update();
 	}
-	
-	private ArrayList<Customer> search(String searchString, ArrayList<Customer> cutArray, boolean isPhone){
+
+	private ArrayList<Customer> search(String partNamePhone, ArrayList<Customer> cutArray, boolean isPhone){
 		CustomerCtr cCtr = new CustomerCtr();
-		ArrayList<Customer> hej = new ArrayList<Customer>();
+		ArrayList<Customer> retArray = new ArrayList<Customer>();
 		if(cutArray.size() <= 0){
-			cutArray = cCtr.searchCustomer(searchString);
+			cutArray = cCtr.searchCustomer(partNamePhone);
 		}
 		for(Customer cust : cutArray) {
-			if(!hej.contains(cust)){
-				if(isPhone && cust.getPhoneNr().contains(searchString)){
-					hej.add(cust);
-				}else if(!isPhone && cust.getName().toLowerCase().contains(searchString.toLowerCase())){
-					hej.add(cust);
+			if(!retArray.contains(cust)){
+				if(isPhone && cust.getPhoneNr().contains(partNamePhone)){
+					retArray.add(cust);
+				}else if(!isPhone && cust.getName().toLowerCase().contains(partNamePhone.toLowerCase())){
+					retArray.add(cust);
 				}
 			}
 		}
-	
-		return hej;
+		return retArray;
 	}
-	
+
 	private void removePerson(int id) {
 		CustomerCtr cCtr = new CustomerCtr();
 		cCtr.removeCustomer(id);
-		
+
 		boolean removed = false;
 		int i = 0;
 		while(i < c.size() && !removed){
@@ -407,15 +355,11 @@ public class CustomerGUI extends JPanel {
 			}
 			i++;
 		}
-		
-		model.refresh(c);
-		model.fireTableDataChanged();
-		
+		update();
 	}
-	
+
 	private void updateCustomer(int id) {
 		Customer updateCust = null;
-		
 		int i = 0;
 		boolean found = false;
 		while(i < c.size() && !found){
@@ -426,12 +370,17 @@ public class CustomerGUI extends JPanel {
 			}
 			i++;
 		}
-		
+
 		if(updateCust != null){
 			if(parent != null){
 				CreateCustomerGUI cGUI = new CreateCustomerGUI(updateCust, this, parent);
 				parent.addPaneToTab(cGUI, "Ret Kunde");
 			}
 		}
+	}
+	
+	private void update(){
+		model.refresh(c);
+		model.fireTableDataChanged();
 	}
 }
