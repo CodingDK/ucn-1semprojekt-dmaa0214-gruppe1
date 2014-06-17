@@ -7,9 +7,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +22,20 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
+import javax.swing.SwingUtilities;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableRowSorter;
 
+import personLayer.Customer;
 import modelLayer.Category;
 import modelLayer.Item;
 import modelLayer.ItemCont;
@@ -40,6 +47,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.CategoryCtr;
+import ctrLayer.CustomerCtr;
 import ctrLayer.ItemCtr;
 import extensions.ItemTableModel;
 
@@ -59,6 +67,8 @@ public class ItemGUI extends JPanel {
 	private RowFilter<ItemTableModel, Object> rowFilterCompound;
 	private RowFilter<ItemTableModel, Object> rfCategory;
 	private RowFilter<ItemTableModel, Object> rfStorage;
+	private JPopupMenu popupMenu;
+	public JButton btnSg;
 
 	/**
 	 * Create the panel.
@@ -95,6 +105,35 @@ public class ItemGUI extends JPanel {
 		model = new ItemTableModel(items);
 		table = new JTable(model);
 		table.getColumnModel().getColumn(0).setMaxWidth(30);
+		
+		popupMenu = new JPopupMenu();
+		JMenuItem mntmDelete = new JMenuItem("Slet");
+		mntmDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int rowindex = table.getSelectedRow();
+				int id = (Integer) table.getValueAt(rowindex, 0);
+				removeItem(id);
+			}
+		});
+		JMenuItem mntmUpdate = new JMenuItem("Ret Kundeoplysninger");
+		mntmUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int rowindex = table.getSelectedRow();
+				int id = (Integer) table.getValueAt(rowindex, 0);
+				updateItem(id);
+			}
+		});
+		popupMenu.add(mntmDelete);
+		popupMenu.add(mntmUpdate);
+		
+		table.addMouseListener(new MouseAdapter() {
+
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		    	mouseListenerTable(e);
+		    }
+		});
+		
 		scrollPane.setViewportView(table);
 		panel_1.add(scrollPane, BorderLayout.CENTER);
 		
@@ -189,7 +228,7 @@ public class ItemGUI extends JPanel {
 		});
 		panel_5.add(btnNewButton, "1, 2, fill, top");
 		
-		JButton btnSg = new JButton("Søg");
+		btnSg = new JButton("Søg");
 		btnSg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				searchItem();
@@ -244,6 +283,22 @@ public class ItemGUI extends JPanel {
 		panel_7.add(btnOpretVare);
 		panel_6.setLayout(gl_panel_6);
 		
+	}
+
+	protected void updateItem(int id) {
+		ItemCtr iCtr = new ItemCtr();
+		Item i = iCtr.getItem(id);
+		parent.updateItem(i);
+	}
+
+	protected void removeItem(int id) {
+		ItemCtr iCtr = new ItemCtr();
+		Item i = iCtr.getItem(id);
+		iCtr.removeItem(i);
+		items.remove(i);
+		
+		model.refresh(items);
+		model.fireTableDataChanged();
 	}
 
 	protected void showAll() {
@@ -311,5 +366,15 @@ public class ItemGUI extends JPanel {
 		
 		cmbStorage.setModel(new DefaultComboBoxModel(storages.toArray()));
 		cmbCategory.setModel(new DefaultComboBoxModel(categories.toArray()));
+	}
+	
+	private void mouseListenerTable(MouseEvent e) {
+		Point p = e.getPoint();
+		int rowNumber = table.rowAtPoint(p);
+		table.setRowSelectionInterval(rowNumber, rowNumber);
+		if(SwingUtilities.isRightMouseButton(e)){
+			//System.out.println(rowNumber);
+			popupMenu.show(table, e.getX(), e.getY());
+		} 
 	}
 }
