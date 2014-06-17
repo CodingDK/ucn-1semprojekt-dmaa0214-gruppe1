@@ -180,28 +180,28 @@ public class CreateEmployee extends JPanel {
 
 		String name = txtName.getText();
 		if (name == null || name.trim().isEmpty()) {
-			lblError.setText("Feltet må ikke være tomt");
+			lblError.setText("Feltet mÃ¥ ikke vÃ¦re tomt");
 			return;
 		}
 
 		String street= txtStreet.getText();
 		if (street== null || street.trim().isEmpty()) {
-			lblError.setText("Feltet må ikke være tomt");
+			lblError.setText("Feltet mÃ¥ ikke vÃ¦re tomt");
 			return;
 		}
 		String town = txtTown.getText();
 		if (town == null || town.trim().isEmpty()) {
-			lblError.setText("Feltet må ikke være tomt");
+			lblError.setText("Feltet mÃ¥ ikke vÃ¦re tomt");
 			return;
 		}
 		String cprNr = txtCprNr.getText();
 		if (cprNr == null || cprNr.trim().isEmpty()) {
-			lblError.setText("Feltet må ikke være tomt");
+			lblError.setText("Feltet mÃ¥ ikke vÃ¦re tomt");
 			return;
 		}
 		String employeeNr = txtEmployeeNr.getText();
 		if (employeeNr == null || employeeNr.trim().isEmpty()) {
-			lblError.setText("Feltet må ikke være tomt");
+			lblError.setText("Feltet mÃ¥ ikke vÃ¦re tomt");
 			return;
 
 		}
