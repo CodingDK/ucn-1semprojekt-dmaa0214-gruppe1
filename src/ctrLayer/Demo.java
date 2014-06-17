@@ -14,11 +14,12 @@ import exceptionLayer.SaleNotCreatedException;
 import exceptionLayer.StorageExistException;
 
 public class Demo {
+	private Random rand;
 	private static boolean firstRun = true;
 	public Demo(){
-
+		rand = new Random();
 	}
-
+	
 	public void runDemo(){
 		if(firstRun){
 			ItemCtr iCtr = new ItemCtr();
@@ -102,13 +103,7 @@ public class Demo {
 			storList.add(s5);
 			storList.add(s6);
 			
-			Random rand = new Random();
-			
 			String[] lokArray = {"Hylde 2", "Lok A", "Lok B", "Lok C", "På loftet", "På lageret", "Række 27", "Bagved", "Spørg Bjarne"};
-			String[] navnArray = {"Hans T.", "Grethe T.", "Flemming T.", "Birthe T.", "Åse T.", "Arne T.", "Henriette Birgitte Hansen T.", "Ib T.", "Mads", "Svend", "Poul", "Anders", "Rene", "Signe", "Marie", "Kristian"};
-			String[] vejArray = {"Rosenvej", "Vesterbro", "Østerbro", "Niels Lykkes Gade", "Zieglersvej", "Kronprinsens Alle", "Østergade", "Engvej", "Ferskenvej", "Solvej", "Vestbjerg", "Søndergade", "Norden Alle"};
-			String[] byArray = {"Sæby", "Frederikshavn", "Aalborg", "Vestbjerg", "Løkken", "Prag", "København", "Aarhus", "Odense", "Nørresundby", "Flensborg", "Berlin"};
-
 			
 			for(int i = 0; i<200; i++){
 				int c = rand.nextInt(catList.size());
@@ -122,20 +117,12 @@ public class Demo {
 				eCtr.createEmployee("1", "Ole", "70809010", "Egonsvej 19", "ole@ucn.dk", "Aalborg", "9000", "201050-1043", "1234", true);
 				eCtr.createEmployee("2", "Jens", "40509010", "Hobrovej 29", "jens@ucn.dk", "Vestbjerg", "9380", "100170-2143", null, false);
 				eCtr.createEmployee("3", "Bjarne", "12345678", "Hobrovej 26", "bjarne@ucn.dk", "Vestbjerg", "9380", "100170-2141", null, false);
-								
+
 				for(int i = 4; i < 75; i++){
-					int x = rand.nextInt(navnArray.length);
-					int y = rand.nextInt(vejArray.length);
-					int z = rand.nextInt(80);
-					int by = rand.nextInt(byArray.length);
-					eCtr.createEmployee(""+(75+i), ""+navnArray[x], "9846"+(rand.nextInt(8888)+1000), vejArray[y]+" "+z, navnArray[x].substring(0, 3).trim()+z+"@ucn.dk", byArray[by], ""+(rand.nextInt(8888)+1000), (rand.nextInt(999999)+100000)+"-"+(rand.nextInt(8888)+1000), null, false);
+					eCtr.createEmployee("A"+i, name(), phone(), street(), email("@vb.dk"), city(), postCode(), cpr(), null, false);
 				}
 				for(int i = 1; i < 10; i++){
-					int x = rand.nextInt(navnArray.length);
-					int y = rand.nextInt(vejArray.length);
-					int z = rand.nextInt(80);
-					int by = rand.nextInt(byArray.length);
-					eCtr.createEmployee(""+(50+i), ""+navnArray[x], "9846"+(rand.nextInt(8888)+1000), vejArray[y]+" "+z, navnArray[x].substring(0, 3).trim()+z+"@ucn.dk", byArray[by], ""+(rand.nextInt(8888)+1000), (rand.nextInt(999999)+100000)+"-"+(rand.nextInt(8888)+1000), "asd", true);
+					eCtr.createEmployee("B"+i, name(), phone(), street(), email("@vb.dk"), city(), postCode(), cpr(), "asd", true);
 				}
 			} catch (AlreadyExistException e1) {
 				e1.printStackTrace();
@@ -146,21 +133,12 @@ public class Demo {
 			cusCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
 
 			for(int i = 0; i < 125; i++){
-				int x = rand.nextInt(navnArray.length);
-				int vej = rand.nextInt(vejArray.length);
-				int by = rand.nextInt(byArray.length);
-				int nr = rand.nextInt(80);
-				cusCtr.createPrivateCustomer(navnArray[x], "9846"+(rand.nextInt(8888)+1000), vejArray[vej]+" "+nr, navnArray[x].substring(0, 3).trim().toLowerCase()+nr+"@ft.dk", byArray[by], ""+(rand.nextInt(8888)+1000), (rand.nextInt(999999)+100000)+"-"+(rand.nextInt(8888)+1000), "1");
+				cusCtr.createPrivateCustomer(name(), phone(), street(), email("@priv.dk"), city(), postCode(), cpr(), "1");
 
 			}
-			String[] virkArray = {"JØR", "Tømrer", "Svenne", "Hans og søn", "Arne og Co.", "Vindue Service", "Reparer bil", "Hegnflytter", "Træplanter"};
+			
 			for(int i = 0; i < 125; i++) {
-				int x = rand.nextInt(navnArray.length);
-				int vej = rand.nextInt(vejArray.length);
-				int by = rand.nextInt(byArray.length);
-				int nr = rand.nextInt(80);
-				int virk = rand.nextInt(virkArray.length);
-				cusCtr.createBusinessCustomer(navnArray[x], "9846"+(rand.nextInt(8888)+1000), vejArray[vej]+" "+nr, navnArray[x].substring(0, 3).trim().toLowerCase()+nr+"@ft.dk", byArray[by], ""+(rand.nextInt(8888)+1000), virkArray[virk]+" A/S", "1"+i+i+i+i+i);
+				cusCtr.createBusinessCustomer(name(), phone(), street(), email("@ft.dk"), city(), postCode(), company(), cvrNr());
 			}
 
 			cusCtr.createBusinessCustomer("Kis", "72691867", "Sofiendalsvej 60", "kbha@ucn.dk", "Aalborg", "9000", "UCN A/S", "33556063");
@@ -197,5 +175,54 @@ public class Demo {
 			firstRun = false;
 		}	
 	}
+	
+	private String cpr(){
+		return ""+(rand.nextInt(8999)+1000);
+	}
+	
+	private String phone(){
+		return "9846"+(rand.nextInt(8999)+1000);
+	}
+	
+	private String street(){
+		String[] strArray = {"Rosenvej", "Vesterbro", "Østerbro", "Niels Lykkes Gade", "Zieglersvej", "Kronprinsens Alle", "Østergade", "Engvej", "Ferskenvej", "Solvej", "Vestbjerg", "Søndergade", "Norden Alle"};
+		int str = rand.nextInt(strArray.length);
+		int nr = (rand.nextInt(93)+1);
+		return strArray[str]+" "+nr;
+	}
+	
+	private String company(){
+		String[] compArray = {"JØR", "Tømrer", "Svenne", "Hans og søn", "Arne og Co.", "Vindue Service", "Reparer bil", "Hegnflytter", "Træplanter"};
+		int comp = rand.nextInt(compArray.length);
+		return compArray[comp];
+	}
+	
+	private String city(){
+		String[] cityArray = {"Sæby", "Frederikshavn", "Aalborg", "Vestbjerg", "Løkken", "Prag", "København", "Aarhus", "Odense", "Nørresundby", "Flensborg", "Berlin"};
+		int city = rand.nextInt(cityArray.length);
+		return cityArray[city];
+	}
+	
+	private String email(String at){
+		String[] nameArray = {"Hans T.", "Grethe T.", "Flemming T.", "Birthe T.", "Åse T.", "Arne T.", "Henriette Birgitte Hansen T.", "Ib T.", "Mads", "Svend", "Poul", "Anders", "Rene", "Signe", "Marie", "Kristian"};
+		int mail = rand.nextInt(nameArray.length);
+		int nr = (rand.nextInt(89)+10);
+		return nameArray[mail].toLowerCase().substring(0,3).trim()+nr+at;
+	}
+	
+	private String name(){
+		String[] nameArray = {"Hans T.", "Grethe T.", "Flemming T.", "Birthe T.", "Åse T.", "Arne T.", "Henriette Birgitte Hansen T.", "Ib T.", "Mads", "Svend", "Poul", "Anders", "Rene", "Signe", "Marie", "Kristian"};
+		int name = rand.nextInt(nameArray.length);
+		return nameArray[name];
+	}
+	
+	private String postCode(){
+		return (rand.nextInt(89)+10)+"00";
+	}
+	
+	private String cvrNr(){
+		return "DK"+rand.nextInt(89999999)+10000000;
+	}
+	
 }
 
