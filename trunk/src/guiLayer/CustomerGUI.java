@@ -139,34 +139,33 @@ public class CustomerGUI extends JPanel {
 		JPanel panel = new JPanel();
 		GroupLayout gl_searchGroupPanel = new GroupLayout(searchGroupPanel);
 		gl_searchGroupPanel.setHorizontalGroup(
-				gl_searchGroupPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+			gl_searchGroupPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_searchGroupPanel.createSequentialGroup()
-						.addGap(6)
-						.addComponent(searchGridPanel, GroupLayout.PREFERRED_SIZE, 222, Short.MAX_VALUE)
-						.addContainerGap())
-				);
+					.addGroup(gl_searchGroupPanel.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(searchGridPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(12))
+		);
 		gl_searchGroupPanel.setVerticalGroup(
-				gl_searchGroupPanel.createParallelGroup(Alignment.TRAILING)
+			gl_searchGroupPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_searchGroupPanel.createSequentialGroup()
-						.addComponent(searchGridPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				);
+					.addComponent(searchGridPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.GROWING_BUTTON_COLSPEC,
-				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 				FormFactory.GROWING_BUTTON_COLSPEC,},
-				new RowSpec[] {
-				FormFactory.LINE_GAP_ROWSPEC,
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("28px"),}));
 
 		JButton btnClear = new JButton("Nulstil");
 		panel.add(btnClear, "1, 2, fill, top");
 
 		btnFind = new JButton("Søg");
-		panel.add(btnFind, "3, 2, fill, top");
+		panel.add(btnFind, "2, 2, fill, top");
 		btnFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				findCustomer();
@@ -178,11 +177,9 @@ public class CustomerGUI extends JPanel {
 			}
 		});
 		searchGridPanel.setLayout(new FormLayout(new ColumnSpec[] {
-				FormFactory.GROWING_BUTTON_COLSPEC,
-				ColumnSpec.decode("55dlu"),
-				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,},
-				new RowSpec[] {
+				ColumnSpec.decode("max(46dlu;pref)"),
+				ColumnSpec.decode("62dlu"),},
+			new RowSpec[] {
 				RowSpec.decode("28px"),
 				RowSpec.decode("28px"),
 				RowSpec.decode("28px"),}));
@@ -229,7 +226,7 @@ public class CustomerGUI extends JPanel {
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Opret Kunde", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 184, 234, 58);
+		panel_1.setBounds(10, 184, 240, 58);
 		searchPanel_1.add(panel_1);
 
 		JPanel panel_2 = new JPanel();
