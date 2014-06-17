@@ -107,7 +107,7 @@ public class ItemGUI extends JPanel {
 		table.getColumnModel().getColumn(0).setMaxWidth(30);
 		
 		popupMenu = new JPopupMenu();
-		JMenuItem mntmDelete = new JMenuItem("Slet");
+		JMenuItem mntmDelete = new JMenuItem("Slet Vare");
 		mntmDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int rowindex = table.getSelectedRow();
@@ -115,7 +115,7 @@ public class ItemGUI extends JPanel {
 				removeItem(id);
 			}
 		});
-		JMenuItem mntmUpdate = new JMenuItem("Ret Kundeoplysninger");
+		JMenuItem mntmUpdate = new JMenuItem("Ret Vare");
 		mntmUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int rowindex = table.getSelectedRow();
@@ -373,8 +373,9 @@ public class ItemGUI extends JPanel {
 		int rowNumber = table.rowAtPoint(p);
 		table.setRowSelectionInterval(rowNumber, rowNumber);
 		if(SwingUtilities.isRightMouseButton(e)){
-			//System.out.println(rowNumber);
 			popupMenu.show(table, e.getX(), e.getY());
-		} 
+		} else if(SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2){
+			
+		}
 	}
 }
