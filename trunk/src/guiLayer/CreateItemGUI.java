@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import modelLayer.Category;
+import modelLayer.Item;
 import modelLayer.Storage;
 
 import com.jgoodies.forms.factories.FormFactory;
@@ -49,14 +50,33 @@ public class CreateItemGUI extends JPanel {
 	private MainGUI parent;
 	private ItemGUI iGUI;
 	private JBlinkLabel lblState;
+	private Item item;
+	private boolean isUpdate;
 	
 	/**
 	 * Create the panel.
 	 */
-	public CreateItemGUI(MainGUI parent, ItemGUI iGUI) {
+	public CreateItemGUI(MainGUI parent, ItemGUI iGUI, Item item) {
 		this.parent = parent;
 		this.iGUI = iGUI;
 		makePanels();
+		if(item != null){
+			this.item = item;
+			isUpdate =  true;
+			txtAmount.setText("" + item.getAmount());
+			txtBulk.setText(item.getBulk() + "");
+			txtBulkPrice.setText(item.getBulkSalePrice() + "");
+			txtLocation.setText(item.getLocation());
+			txtMax.setText(item.getMax() + "");
+			txtMin.setText(item.getMin() + "");
+			txtName.setText(item.getName());
+			txtPurchasePrice.setText(item.getPurchasePrice() + "");
+			txtSalePrice.setText(item.getSalePrice() + "");
+			cmbCategory.setSelectedItem(item.getCategory());
+			cmbStorage.setSelectedItem(item.getStorage());
+		}else{
+			isUpdate = false;
+		}
 	}
 	
 	protected void makePanels(){
@@ -334,12 +354,12 @@ public class CreateItemGUI extends JPanel {
 		try{
 			max = Integer.parseInt(txtMax.getText());
 			if(max < 0){
-				lblState.setText("Maks kan ikke være et negativt tal");
+				lblState.setText("Max kan ikke være et negativt tal");
 				lblState.startBlinking(true, true);
 				return;
 			}
 		}catch(NumberFormatException e){
-			lblState.setText("Maks skal være et gyldigt tal");
+			lblState.setText("Max skal være et gyldigt tal");
 			lblState.startBlinking(true, true);
 			return;
 		}
