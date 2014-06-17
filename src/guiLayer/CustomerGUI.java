@@ -309,11 +309,11 @@ public class CustomerGUI extends JPanel {
 		}
 
 		if(name != null && !name.trim().isEmpty()){
-			retArray = search(name, retArray, false);
+			retArray = cutArray(name, retArray, false);
 		}
 
 		if(phone != null && !phone.trim().isEmpty()){
-			retArray = search(phone, retArray, true);
+			retArray = cutArray(phone, retArray, true);
 		}
 
 		c = retArray;
@@ -321,7 +321,7 @@ public class CustomerGUI extends JPanel {
 		update();
 	}
 
-	private ArrayList<Customer> search(String partNamePhone, ArrayList<Customer> cutArray, boolean isPhone){
+	private ArrayList<Customer> cutArray(String partNamePhone, ArrayList<Customer> cutArray, boolean isPhone){
 		CustomerCtr cCtr = new CustomerCtr();
 		ArrayList<Customer> retArray = new ArrayList<Customer>();
 		if(cutArray.size() <= 0){
