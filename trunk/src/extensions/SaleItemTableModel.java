@@ -2,14 +2,19 @@ package extensions;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
+import exceptionLayer.NotEnoughItemsException;
 import modelLayer.Item;
 import modelLayer.PartSale;
 
 public class SaleItemTableModel extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
 	private ArrayList<PartSale> partSales;
+	private final boolean[] canEdit = new boolean[]{
+            false, false, true, false, false
+    };
 	
 	public SaleItemTableModel(ArrayList<PartSale> ps){
 		this.partSales = ps;
@@ -68,4 +73,43 @@ public class SaleItemTableModel extends AbstractTableModel{
 		
 		return value;
 	}
+	
+	@Override
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return canEdit[columnIndex];
+    }
+
+	@Override
+	public void setValueAt(Object value, int rowIndex, int columnIndex) {
+		PartSale ps  = partSales.get(rowIndex);
+		try  
+		{  
+		    int newAmount = Integer.parseInt((String) value);
+		    if(newAmount <= 0){
+		    	JOptionPane.showMessageDialog(null, "Anal skal være større end 0","Advarsel",JOptionPane.ERROR_MESSAGE);
+		    } else {
+			    int oldAmount = ps.getAmount();
+			    Item item = ps.getItem();
+			    int addedAmount = newAmount-oldAmount;
+			    int availableAmount = item.getAmount() - item.getReserved();
+				if (availableAmount - addedAmount < 0) {
+					JOptionPane.showMessageDialog(null, "Der er kun " + (availableAmount+oldAmount) + " af " + item.getName() + " ledige på lageret.","Advarsel",JOptionPane.ERROR_MESSAGE);
+					
+				} else {
+					item.addReserved(addedAmount);
+				    ps.addAmount(addedAmount);
+				    fireTableRowsUpdated(rowIndex, rowIndex);
+				}
+		    }
+			
+		    //fireTableCellUpdated(rowIndex, columnIndex);
+		}  
+		catch(NumberFormatException nfe)  
+		{  
+			JOptionPane.showMessageDialog(null, "Der kan kun tastes tal","Advarsel",JOptionPane.ERROR_MESSAGE);
+		}  
+		
+		
+	}
+	
 }
