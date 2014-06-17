@@ -343,7 +343,7 @@ public class CreateItemGUI extends JPanel {
 		
 		int min = 0;
 		try{
-			min = Integer.parseInt(txtMax.getText());
+			min = Integer.parseInt(txtMin.getText());
 			if(min < 0){
 				lblState.setText("Min kan ikke være et negativt tal");
 				lblState.startBlinking(true, true);
