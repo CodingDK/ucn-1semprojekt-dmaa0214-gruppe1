@@ -6,8 +6,11 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -16,10 +19,13 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.TitledBorder;
 
@@ -201,6 +207,7 @@ public class OrderGUI extends JPanel {
 		txtID.setColumns(10);
 		panel_3.setLayout(gl_panel_3);
 		panel_1.setLayout(gl_panel_1);
+		
 		update();
 	}
 	
@@ -228,6 +235,7 @@ public class OrderGUI extends JPanel {
 	private void clearInput(){
 		txtID.setText("");
 		txtName.setText("");
+		comboBox.setSelectedIndex(0);
 	}
 	
 	private void searchCustomer(){
