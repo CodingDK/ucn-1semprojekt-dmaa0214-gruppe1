@@ -351,8 +351,8 @@ public class CreateItemGUI extends JPanel {
 				lblState.setText("Min kan ikke være et negativt tal");
 				lblState.startBlinking(true, true);
 				return;
-			}else if(min > max){
-				lblState.setText("Min kan ikke være større end maks");
+			}else if(min >= max){
+				lblState.setText("Min kan ikke være større eller det samme som maks");
 				lblState.startBlinking(true, true);
 				return;
 			}
