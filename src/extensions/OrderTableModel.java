@@ -36,7 +36,7 @@ public class OrderTableModel extends AbstractTableModel{
 			value = s.getId();
 		}else if(collIndex == 1){
 			if(c == null){
-				value = "-";
+				value = " ";
 			}else{
 				if(c instanceof Business){
 					value = ((Business) c).getCompany();
@@ -48,7 +48,7 @@ public class OrderTableModel extends AbstractTableModel{
 			value = s.getTotalPrice()+",-";
 		}else if(collIndex == 3){
 			if(s.getEmployee() == null){
-				value = "-";
+				value = " ";
 			}else{
 				value = s.getEmployee().getId();
 			}

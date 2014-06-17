@@ -78,7 +78,7 @@ public class CustomerGUI extends JPanel {
 		c = new ArrayList<Customer>();
 		model = new CustomerTableModel(c);
 		table = new JTable(model);
-		table.setAutoCreateRowSorter(true);
+//		table.setAutoCreateRowSorter(true);
 		table.getColumnModel().getColumn(0).setMaxWidth(30);
 		
 		//added
@@ -223,14 +223,15 @@ public class CustomerGUI extends JPanel {
 		
 		txtTlf = new JTextField();
 		txtTlf.setColumns(10);
-//		txtTlf.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyPressed(KeyEvent arg0) {
-//				if(KeyEvent.VK_ENTER == arg0.getKeyCode()){
-//					findCustomer();
-//				}
-//			}
-//		});
+		//TODO Spørg Lau
+		txtTlf.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if(KeyEvent.VK_ENTER == arg0.getKeyCode()){
+					findCustomer();
+				}
+			}
+		});
 		searchGridPanel.add(txtTlf, "2, 3, fill, fill");
 		searchGroupPanel.setLayout(gl_searchGroupPanel);	
 		
@@ -295,32 +296,70 @@ public class CustomerGUI extends JPanel {
 		txtCompany.setText("");
 		txtName.setText("");
 		txtTlf.setText("");
-		
+
 		c.clear();
-		
+
 		model.refresh(c);
-	    model.fireTableDataChanged();
+		model.fireTableDataChanged();
 	}
-	
+
 	private void findCustomer() {
+		ArrayList<Customer> nameArray = new ArrayList<Customer>();
+		ArrayList<Customer> phoneArray = new ArrayList<Customer>();
+		ArrayList<Customer> temp1Array = new ArrayList<Customer>();
+		ArrayList<Customer> temp2Array = new ArrayList<Customer>();
+
 		CustomerCtr cCtr = new CustomerCtr();
-		String phone = txtTlf.getText();
-		String name = txtName.getText();
 		String company = txtCompany.getText();
-		
-		if(phone != null && !phone.trim().isEmpty()){
-			c = cCtr.searchCustomer(phone);
-		} else if(name != null && !name.trim().isEmpty()){
-			c = cCtr.searchCustomer(name);
-		} else if(company != null && !company.trim().isEmpty()){
-			c = cCtr.searchBusiness(company);
-		} 
-		
-		if(c != null && !c.isEmpty()){
-			txtCompany.setText("");
-			txtName.setText("");
-			txtTlf.setText("");
+		String name = txtName.getText();
+		String phone = txtTlf.getText();
+
+		c.clear();
+
+		if(company != null && !company.trim().isEmpty()){
+			c.addAll(cCtr.searchBusiness(company));
 		}
+		if(name != null && !name.trim().isEmpty()){
+			nameArray = cCtr.searchCustomer(name);
+			if(c.size() != 0){
+				for(Customer cust : nameArray){
+					if(c.contains(cust)){
+						temp1Array.add(cust);
+					}
+				}
+				c = temp1Array;
+			} else{
+				c = nameArray;
+			}
+		}
+		if(phone != null && !phone.trim().isEmpty()){
+			phoneArray = cCtr.searchCustomer(phone);
+			if(c.size() != 0){
+				for(Customer cust : phoneArray){
+					if(c.contains(cust)){
+						temp2Array.add(cust);
+					}
+				}
+				c = temp2Array;
+			} else{
+				c = phoneArray;
+			}
+		}
+
+		
+//		if(phone != null && !phone.trim().isEmpty()){
+//			c = cCtr.searchCustomer(phone);
+//		} else if(name != null && !name.trim().isEmpty()){
+//			c = cCtr.searchCustomer(name);
+//		} else if(company != null && !company.trim().isEmpty()){
+//			c = cCtr.searchBusiness(company);
+//		} 
+		
+//		if(c != null && !c.isEmpty()){
+//			txtCompany.setText("");
+//			txtName.setText("");
+//			txtTlf.setText("");
+//		}
 		
 	    model.refresh(c);
 	    model.fireTableDataChanged();
