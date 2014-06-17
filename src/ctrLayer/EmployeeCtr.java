@@ -49,7 +49,7 @@ public class EmployeeCtr {
 	 */
 	public Employee createEmployee(String employeeNr, String name, String phoneNr, String street, String email, String city, String postCode, String cprNr, String password, boolean admin) throws AlreadyExistException {
 		Employee retE = null;
-		if(findEmployee(employeeNr) != null){
+		if(findEmployee(employeeNr) == null){
 			retE = new Employee(employeeNr, name, phoneNr, street, email, city, postCode, cprNr, password, admin);
 			eCont.addEmployee(retE);
 		}else{
