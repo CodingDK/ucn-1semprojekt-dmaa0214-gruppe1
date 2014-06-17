@@ -24,8 +24,14 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
+import extensions.JBlinkLabel;
 import extensions.JDoubleField;
 import extensions.JIntegerField;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.SwingConstants;
 
 public class CreateItemGUI extends JPanel {
 	private JIntegerField txtAmount;
@@ -37,11 +43,22 @@ public class CreateItemGUI extends JPanel {
 	private JIntegerField txtMax;
 	private JIntegerField txtMin;
 	public JTextField txtName;
+	private JComboBox<Storage> cmbStorage;
+	private JComboBox<Category> cmbCategory;
+	private MainGUI parent;
+	private ItemGUI iGUI;
+	private JBlinkLabel lblState;
 	
 	/**
 	 * Create the panel.
 	 */
-	public CreateItemGUI() {
+	public CreateItemGUI(MainGUI parent, ItemGUI iGUI) {
+		this.parent = parent;
+		this.iGUI = iGUI;
+		makePanels();
+	}
+	
+	protected void makePanels(){
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{296, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
@@ -78,6 +95,7 @@ public class CreateItemGUI extends JPanel {
 				RowSpec.decode("28px"),
 				RowSpec.decode("28px"),
 				RowSpec.decode("28px"),
+				FormFactory.DEFAULT_ROWSPEC,
 				RowSpec.decode("28px"),}));
 		
 		JLabel lblName = new JLabel("Navn");
@@ -132,7 +150,7 @@ public class CreateItemGUI extends JPanel {
 		JLabel lblStorage = new JLabel("Lager");
 		panel_2.add(lblStorage, "2, 8, left, fill");
 		
-		JComboBox<Storage> cmbStorage = new JComboBox<Storage>();
+		cmbStorage = new JComboBox<Storage>();
 		ItemCtr iCtr = new ItemCtr();
 		ArrayList<Storage> stors = iCtr.getAllStorage();
 		cmbStorage.setModel(new DefaultComboBoxModel(stors.toArray()));
@@ -155,15 +173,21 @@ public class CreateItemGUI extends JPanel {
 		JLabel lblCategory = new JLabel("Kategori");
 		panel_2.add(lblCategory, "2, 11, left, fill");
 		
-		JComboBox<Category> cmbCategory = new JComboBox<Category>();
+		cmbCategory = new JComboBox<Category>();
 		CategoryCtr cCtr = new CategoryCtr();
 		ArrayList<Category> cats = cCtr.getAllCategories();
 		cmbCategory.setModel(new DefaultComboBoxModel(cats.toArray()));
 		panel_2.add(cmbCategory, "4, 11, fill, default");
 		
+		lblState = new JBlinkLabel("");
+		lblState.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_2.add(lblState, "2, 12, 3, 1");
+		
 		JPanel panel_4 = new JPanel();
-		panel_2.add(panel_4, "2, 12, 3, 1, fill, fill");
+		panel_2.add(panel_4, "2, 13, 3, 1, fill, fill");
 		panel_4.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.GROWING_BUTTON_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.GROWING_BUTTON_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -174,10 +198,29 @@ public class CreateItemGUI extends JPanel {
 				RowSpec.decode("20px"),}));
 		
 		JButton btnClear = new JButton("Nulstil");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				clear();
+			}
+		});
 		panel_4.add(btnClear, "2, 2");
 		
 		JButton btnOpret = new JButton("Opret");
-		panel_4.add(btnOpret, "4, 2");
+		btnOpret.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				createItem();
+			}
+		});
+		
+		JButton btnAnnuller = new JButton("Annuller");
+		btnAnnuller.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				parent.switchPane(iGUI);
+				getParent().remove(CreateItemGUI.this);
+			}
+		});
+		panel_4.add(btnAnnuller, "4, 2");
+		panel_4.add(btnOpret, "6, 2");
 		
 		JPanel panel_3 = new JPanel();
 		panel_1.add(panel_3, BorderLayout.NORTH);
@@ -193,6 +236,153 @@ public class CreateItemGUI extends JPanel {
 		gbc_panel.gridy = 0;
 		add(panel, gbc_panel);
 		
+	}
+
+	protected void createItem() {
+		ItemCtr iCtr = new ItemCtr();
+		
+		String name = txtName.getText();
+		if(name == null && name.length() >= 1){
+			lblState.setText("Navnet må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return;
+		}
+		
+		int amount = 0;
+		try{
+			amount = Integer.parseInt(txtAmount.getText());
+			if(amount < 0){
+				lblState.setText("Mængden kan ikke være et negativt tal");
+				lblState.startBlinking(true, true);
+				return;
+			}
+		}catch(NumberFormatException e){
+			lblState.setText("Mængden skal være et gyldigt tal");
+			lblState.startBlinking(true, true);
+			return;
+		}
+		
+		int reserved = 0;
+		
+		double salePrice = 0;
+		try{
+			salePrice = Double.parseDouble(txtSalePrice.getText());
+			if(salePrice < 0){
+				lblState.setText("Salgs prisen kan ikke være et negativt tal");
+				lblState.startBlinking(true, true);
+				return;
+			}
+		}catch(NumberFormatException e){
+			lblState.setText("Salgs prisen skal være et gyldigt tal");
+			lblState.startBlinking(true, true);
+			return;
+		}
+		
+		double purchasePrice = 0;
+		try{
+			purchasePrice = Double.parseDouble(txtPurchasePrice.getText());
+			if(purchasePrice < 0){
+				lblState.setText("Købs prisen kan ikke være et negativt tal");
+				lblState.startBlinking(true, true);
+				return;
+			}
+		}catch(NumberFormatException e){
+			lblState.setText("Købs prisen skal være et gyldigt tal");
+			lblState.startBlinking(true, true);
+			return;
+		}
+		
+		double bulkSalePrice = 0;
+		try{
+			bulkSalePrice = Double.parseDouble(txtBulkPrice.getText());
+			if(bulkSalePrice < 0){
+				lblState.setText("Bulk salgs prisen kan ikke være et negativt tal");
+				lblState.startBlinking(true, true);
+				return;
+			}
+		}catch(NumberFormatException e){
+			lblState.setText("Bulk salgs prisen skal være et gyldigt tal");
+			lblState.startBlinking(true, true);
+			return;
+		}
+		
+		int bulk = Integer.parseInt(txtBulk.getText());
+		if(bulk < 0){
+			lblState.setText("Bulk skal være større eller det samme som 0");
+			lblState.startBlinking(true, true);
+			return;
+		}
+		
+		String location = txtLocation.getText();
+		if(location == null && location.length() >= 1){
+			lblState.setText("Lokationen må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return;
+		}
+		
+		Storage storage = (Storage) cmbStorage.getSelectedItem();
+		if(storage == null){
+			lblState.setText("Der skal vælges et gyldigt Lager");
+			lblState.startBlinking(true, true);
+			return;
+		}
+		
+		int max = 0;
+		try{
+			max = Integer.parseInt(txtMax.getText());
+			if(max < 0){
+				lblState.setText("Maks kan ikke være et negativt tal");
+				lblState.startBlinking(true, true);
+				return;
+			}
+		}catch(NumberFormatException e){
+			lblState.setText("Maks skal være et gyldigt tal");
+			lblState.startBlinking(true, true);
+			return;
+		}
+		
+		int min = 0;
+		try{
+			min = Integer.parseInt(txtMax.getText());
+			if(max < 0){
+				lblState.setText("Min kan ikke være et negativt tal");
+				lblState.startBlinking(true, true);
+				return;
+			}
+		}catch(NumberFormatException e){
+			lblState.setText("Min skal være et gyldigt tal");
+			lblState.startBlinking(true, true);
+			return;
+		}
+		
+		Category category = (Category) cmbCategory.getSelectedItem();
+		if(category == null){
+			lblState.setText("Der skal vælges en gyldig Kategori");
+			lblState.startBlinking(true, true);
+			return;
+		}
+		
+		iCtr.createItem(name, amount, reserved, salePrice, purchasePrice, bulkSalePrice, bulk, location, storage, max, min, category);
+		done();
+	}
+
+	protected void clear() {
+		txtAmount.setText("");
+		txtBulk.setText("");
+		txtBulkPrice.setText("");
+		txtLocation.setText("");
+		txtMax.setText("");
+		txtMin.setText("");
+		txtName.setText("");
+		txtPurchasePrice.setText("");
+		txtSalePrice.setText("");
+		cmbCategory.setSelectedIndex(0);
+		cmbStorage.setSelectedIndex(0);
+	}
+	
+	protected void done(){
+		parent.switchPane(iGUI);
+		getParent().remove(this);
 	}
 	
 }
