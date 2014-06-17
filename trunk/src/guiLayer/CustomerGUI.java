@@ -44,8 +44,6 @@ import extensions.SpaceDocument;
 public class CustomerGUI extends JPanel {
 	private JTable table;
 	private static final long serialVersionUID = 1L;
-	private JPanel searchPanel;
-	private JScrollPane tablePane;
 	private ArrayList<Customer> c;
 	private CustomerTableModel model;
 	private JTextField txtCompany;
