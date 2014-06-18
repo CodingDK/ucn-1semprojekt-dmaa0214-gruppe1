@@ -67,6 +67,9 @@ public class CreateCustomerGUI extends JPanel {
 	private MainGUI parent;
 	private boolean isUpdate = false;
 	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public CreateCustomerGUI(boolean business, Component creator, MainGUI parent) {
 		this.parent = parent;
 		this.creator = creator;

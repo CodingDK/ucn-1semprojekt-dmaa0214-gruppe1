@@ -8,6 +8,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
@@ -24,10 +25,14 @@ import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import modelLayer.Help;
 import modelLayer.Item;
 import personLayer.Customer;
 import ctrLayer.Demo;
+import ctrLayer.HelpCtr;
 import extensions.CloseButtonTabbedPane;
+
+import javax.swing.JButton;
 
 public class MainGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -154,12 +159,12 @@ public class MainGUI extends JFrame{
 		menuBar.add(mnHelp);
 		
 		JMenuItem mntmHelp = new JMenuItem("Hjælp");
+		mnHelp.add(mntmHelp);
 		mntmHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				help();
 			}
 		});
-		mnHelp.add(mntmHelp);
 		getRootPane().setDefaultButton(sale.btnAddItem);
 		
 		tabbedPane.addChangeListener(new ChangeListener(){
@@ -194,7 +199,17 @@ public class MainGUI extends JFrame{
 	}
 
 	private void help() {
-		JOptionPane.showMessageDialog(null, "Du er helt alene.. ingen hjælp her :(","Advarsel",JOptionPane.WARNING_MESSAGE);
+		try {
+			HelpCtr hCtr = new HelpCtr();
+			String pane = tabbedPane.getTitleAt(tabbedPane.getSelectedIndex());
+			Help h = hCtr.getHelp(pane);
+			if(h != null){
+				JOptionPane.showMessageDialog(null, h.getHelp(),h.getName(),JOptionPane.INFORMATION_MESSAGE);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		;
 	}
 
 	private void makeTabbedPaneSwitcher() {
