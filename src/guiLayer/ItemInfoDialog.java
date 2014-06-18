@@ -34,6 +34,7 @@ import extensions.KeyListener;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 public class ItemInfoDialog extends JDialog {
 	private final Item i;
@@ -42,6 +43,15 @@ public class ItemInfoDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextArea txtItemInfo;
 	private ItemGUI iGUI;
+	private JButton btnToSale;
+	private JPanel panel_1;
+	private JPanel panel_2;
+	private JPanel panel_3;
+	private JPanel buttonPane;
+	private JPanel panel_4;
+	private JPanel panel;
+	private JButton btnCancel;
+	private JButton btnSave;
 
 	/**
 	 * Create the dialog.
@@ -62,14 +72,14 @@ public class ItemInfoDialog extends JDialog {
 		gbl_contentPanel.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
-			JPanel panel = new JPanel();
-			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.insets = new Insets(0, 0, 5, 5);
-			gbc_panel.fill = GridBagConstraints.BOTH;
-			gbc_panel.gridx = 0;
-			gbc_panel.gridy = 0;
-			contentPanel.add(panel, gbc_panel);
-			panel.setLayout(new FormLayout(new ColumnSpec[] {
+			panel_1 = new JPanel();
+			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+			gbc_panel_1.insets = new Insets(0, 0, 5, 5);
+			gbc_panel_1.fill = GridBagConstraints.BOTH;
+			gbc_panel_1.gridx = 0;
+			gbc_panel_1.gridy = 0;
+			contentPanel.add(panel_1, gbc_panel_1);
+			panel_1.setLayout(new FormLayout(new ColumnSpec[] {
 					ColumnSpec.decode("165px"),
 					ColumnSpec.decode("max(37dlu;default):grow"),},
 				new RowSpec[] {
@@ -79,47 +89,47 @@ public class ItemInfoDialog extends JDialog {
 				txtItem.setColumns(1);
 				txtItem.setEditable(false);
 				txtItem.setBackground(new Color(214, 217, 223));
-				panel.add(txtItem, "1, 1, fill, fill");
+				panel_1.add(txtItem, "1, 1, fill, fill");
 			}
 			{
 				txtItemInfo = new JTextArea();
 				txtItemInfo.setEditable(false);
 				txtItemInfo.setBackground(new Color(214, 217, 223));
-				panel.add(txtItemInfo, "2, 1, fill, fill");
+				panel_1.add(txtItemInfo, "2, 1, fill, fill");
 			}
 		}
 		{
-			JPanel panel = new JPanel();
-			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.insets = new Insets(0, 0, 5, 5);
-			gbc_panel.fill = GridBagConstraints.BOTH;
-			gbc_panel.gridx = 1;
-			gbc_panel.gridy = 0;
-			contentPanel.add(panel, gbc_panel);
+			panel_2 = new JPanel();
+			GridBagConstraints gbc_panel_2 = new GridBagConstraints();
+			gbc_panel_2.insets = new Insets(0, 0, 5, 5);
+			gbc_panel_2.fill = GridBagConstraints.BOTH;
+			gbc_panel_2.gridx = 1;
+			gbc_panel_2.gridy = 0;
+			contentPanel.add(panel_2, gbc_panel_2);
 		}
 		{
-			JPanel panel = new JPanel();
-			GridBagConstraints gbc_panel = new GridBagConstraints();
-			gbc_panel.insets = new Insets(0, 0, 0, 5);
-			gbc_panel.fill = GridBagConstraints.BOTH;
-			gbc_panel.gridx = 0;
-			gbc_panel.gridy = 1;
-			contentPanel.add(panel, gbc_panel);
-			panel.setLayout(new BorderLayout(0, 0));
+			panel_3 = new JPanel();
+			GridBagConstraints gbc_panel_3 = new GridBagConstraints();
+			gbc_panel_3.insets = new Insets(0, 0, 0, 5);
+			gbc_panel_3.fill = GridBagConstraints.BOTH;
+			gbc_panel_3.gridx = 0;
+			gbc_panel_3.gridy = 1;
+			contentPanel.add(panel_3, gbc_panel_3);
+			panel_3.setLayout(new BorderLayout(0, 0));
 			{
 				txtDescription = new JTextArea();
-				panel.add(txtDescription, BorderLayout.CENTER);
+				panel_3.add(txtDescription, BorderLayout.CENTER);
 			}
 		}
 		{
-			JPanel buttonPane = new JPanel();
+			buttonPane = new JPanel();
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new BorderLayout(0, 0));
 			{
-				JPanel panel = new JPanel();
-				buttonPane.add(panel, BorderLayout.WEST);
+				panel_4 = new JPanel();
+				buttonPane.add(panel_4, BorderLayout.WEST);
 				{
-					JButton btnToSale = new JButton("Tilføj til Salg");
+					btnToSale = new JButton("Tilføj til Salg");
 					btnToSale.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 							iGUI.saleItem = i;
@@ -127,14 +137,14 @@ public class ItemInfoDialog extends JDialog {
 							dispose();
 						}
 					});
-					panel.add(btnToSale);
+					panel_4.add(btnToSale);
 				}
 			}
 			{
-				JPanel panel = new JPanel();
+				panel = new JPanel();
 				buttonPane.add(panel, BorderLayout.EAST);
 				{
-					JButton btnCancel = new JButton("Annuller");
+					btnCancel = new JButton("Annuller");
 					btnCancel.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 							setVisible(false);
@@ -144,7 +154,7 @@ public class ItemInfoDialog extends JDialog {
 					panel.add(btnCancel);
 				}
 				{
-					JButton btnSave = new JButton("Gem");
+					btnSave = new JButton("Gem");
 					btnSave.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
 							i.setDescription(txtDescription.getText());
@@ -156,6 +166,7 @@ public class ItemInfoDialog extends JDialog {
 				}
 			}
 		}
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnToSale, btnCancel, btnSave}));
 		fillTxtArea();
 		setVisible(true);
 	}
