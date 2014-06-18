@@ -29,6 +29,7 @@ import ctrLayer.CustomerCtr;
 import extensions.JBlinkLabel;
 import extensions.JIntegerField;
 import extensions.JTextFieldLimit;
+import extensions.KeyListener;
 
 public class CreateCustomerGUI extends JPanel {
 	public JTextField txtName;
@@ -64,21 +65,21 @@ public class CreateCustomerGUI extends JPanel {
 	private JLabel label;
 	private Customer updateCust;
 	private Component creator;
-	private MainGUI parent;
+	private MainGUI mainGUI;
 	private boolean isUpdate = false;
 	
 	/**
 	 * @wbp.parser.constructor
 	 */
 	public CreateCustomerGUI(boolean business, Component creator, MainGUI parent) {
-		this.parent = parent;
+		this.mainGUI = parent;
 		this.creator = creator;
 		this.business = business;
 		buildPanel();
 	}
 	
 	public CreateCustomerGUI(Customer updateCust, Component creator, MainGUI parent) {
-		this.parent = parent;
+		this.mainGUI = parent;
 		this.creator = creator;
 		if(updateCust != null){
 			if(updateCust instanceof Business){
@@ -97,6 +98,8 @@ public class CreateCustomerGUI extends JPanel {
 		}
 	}
 	private void buildPanel() {
+		
+		new KeyListener().addEscapeListenerToTab(creator, mainGUI, this);
 		setBounds(new Rectangle(0, 0, 0, 5));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {318, 145, 0};
@@ -318,8 +321,9 @@ public class CreateCustomerGUI extends JPanel {
 	}
 	
 	protected void cancel() {
-		parent.switchPane(creator);
-		getParent().remove(this);
+		int tabIndex = mainGUI.getSelectedTab();
+		mainGUI.switchPane(creator);
+		getParent().remove(tabIndex);
 	}
 
 	protected void updateCustomer() {
@@ -342,7 +346,7 @@ public class CreateCustomerGUI extends JPanel {
 			cCtr.updateCustomer(updateCust.getId(), name, phone, street, email, city, post, null, company, cvr);
 		}
 
-		parent.switchPane(creator);
+		mainGUI.switchPane(creator);
 		getParent().remove(this);
 	}
 
@@ -376,7 +380,7 @@ public class CreateCustomerGUI extends JPanel {
 				}
 			}
 			
-			parent.switchPane(creator);
+			mainGUI.switchPane(creator);
 			getParent().remove(this);
 		}
 	}
