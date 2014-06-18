@@ -39,9 +39,9 @@ public class ItemTableModel extends AbstractTableModel{
 		} else if(collIndex == 2){
 			value = i.getAmount() + "(" + i.getReserved() + ")";
 		} else if(collIndex == 3){
-			value = money.format(i.getSalePrice()) + ",-";
+			value = money.format(i.getSalePrice());
 		} else if(collIndex == 4){
-			value = money.format(i.getPurchasePrice()) + ",-";
+			value = money.format(i.getPurchasePrice());
 		} else if(collIndex == 5){
 			value = i.getLocation();
 		} else if(collIndex == 6){
