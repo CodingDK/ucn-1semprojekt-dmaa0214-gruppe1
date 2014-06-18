@@ -48,7 +48,7 @@ public class EmployeeGUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public EmployeeGUI(MainGUI parent) {
+	public EmployeeGUI(final MainGUI parent) {
 		this.parent = parent;
 		employees = new ArrayList<Employee>();
 		employees2 = new ArrayList<Employee>();
@@ -173,7 +173,7 @@ public class EmployeeGUI extends JPanel {
 		JButton btnOpretMedarbejder = new JButton("Opret Medarbejder");
 		btnOpretMedarbejder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				parent.CreateEmployee();
+				parent.createEmployee(EmployeeGUI.this);
 			}
 		});
 		GroupLayout gl_panel_6 = new GroupLayout(panel_6);
