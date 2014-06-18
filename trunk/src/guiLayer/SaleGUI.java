@@ -1,14 +1,39 @@
 package guiLayer;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultCellEditor;
+import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -24,12 +49,11 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.SaleCtr;
-import exceptionLayer.NotEnoughItemsException;
-import exceptionLayer.SaleNotCreatedException;
 import extensions.JIntegerField;
 import extensions.SaleItemTableModel;
 
 public class SaleGUI extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private JLabel txtSubtotal;
 	private JLabel txtMoms;
 	private JLabel txtTotal;
@@ -53,7 +77,7 @@ public class SaleGUI extends JPanel {
 	private JButton btnFinish;
 	private JButton btnPark;
 	private JButton btnCancel;
-
+	
 	/**
 	 * Create the panel.
 	 */
@@ -61,10 +85,10 @@ public class SaleGUI extends JPanel {
 		this.mainGUI = mainGUI;
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{313, 250, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] {313, 250, 0};
+		gridBagLayout.rowHeights = new int[] {0, 0};
+		gridBagLayout.columnWeights = new double[] {1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[] {1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JPanel panel = new JPanel();
@@ -109,10 +133,10 @@ public class SaleGUI extends JPanel {
 		FormLayout fl_panel_5 = new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("61px"),
 				ColumnSpec.decode("max(51dlu;pref):grow"),},
-			new RowSpec[] {
-				RowSpec.decode("30px"),
-				RowSpec.decode("30px"),
-				RowSpec.decode("30px"),});
+				new RowSpec[] {
+						RowSpec.decode("30px"),
+						RowSpec.decode("30px"),
+						RowSpec.decode("30px"),});
 		panel_5.setLayout(fl_panel_5);
 		
 		JLabel lblSubtotal = new JLabel("Subtotal: ");
@@ -157,32 +181,32 @@ public class SaleGUI extends JPanel {
 		
 		final JIntegerField tableEditAmount = new JIntegerField();
 		tableEditAmount.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.DARK_GRAY),
-                BorderFactory.createEmptyBorder(0, 0, 0, 2)));
-		tableEditAmount.setHorizontalAlignment(JTextField.RIGHT);
+				BorderFactory.createEmptyBorder(0, 0, 0, 2)));
+		tableEditAmount.setHorizontalAlignment(SwingConstants.RIGHT);
 		tableEditAmount.addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent arg0) {
 				tableEditAmount.setCaretPosition(tableEditAmount.getText().length());
 				
 			}
-
+			
 			public void focusLost(FocusEvent arg0) {
-				// TODO Auto-generated method stub
+				// Blank
 			}
 		});
-    	
+		
 		//tableEditAmount.set
 		table.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(tableEditAmount));
 		table.addPropertyChangeListener(new PropertyChangeListener() {
-
-		    public void propertyChange(PropertyChangeEvent evt) {
-		        if ("tableCellEditor".equals(evt.getPropertyName())) {
-		            if (table.isEditing()) {
-		                //processEditingStarted();
-		            } else {
-		                updatePrices();
-		            }
-		        }
-		    }
+			
+			public void propertyChange(PropertyChangeEvent evt) {
+				if ("tableCellEditor".equals(evt.getPropertyName())) {
+					if (table.isEditing()) {
+						//processEditingStarted();
+					} else {
+						updatePrices();
+					}
+				}
+			}
 		});
 		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -203,10 +227,10 @@ public class SaleGUI extends JPanel {
 		popupMenu.add(mntmDelete);
 		
 		table.addMouseListener(new MouseAdapter() {
-		    @Override
-		    public void mouseClicked(MouseEvent e) {
-		    	mouseListenerTable(e);
-		    }
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mouseListenerTable(e);
+			}
 		});
 		
 		JPanel panel_1 = new JPanel();
@@ -229,23 +253,23 @@ public class SaleGUI extends JPanel {
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
 		gl_panel_4.setHorizontalGroup(
-			gl_panel_4.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_4.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-						.addComponent(panel_8, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
-					.addGap(3))
-		);
+				gl_panel_4.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_4.createSequentialGroup()
+								.addContainerGap()
+								.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
+										.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+										.addComponent(panel_8, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
+								.addGap(3))
+				);
 		gl_panel_4.setVerticalGroup(
-			gl_panel_4.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_4.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
+				gl_panel_4.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_4.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap())
+				);
 		
 		JButton bntFind = new JButton("Find Kunde");
 		bntFind.addActionListener(new ActionListener() {
@@ -265,13 +289,13 @@ public class SaleGUI extends JPanel {
 		panel_7.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("80px"),
 				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormFactory.NARROW_LINE_GAP_ROWSPEC,
-				RowSpec.decode("18px"),
-				RowSpec.decode("18px"),
-				RowSpec.decode("18px"),
-				RowSpec.decode("18px"),
-				RowSpec.decode("18px"),}));
+				new RowSpec[] {
+						FormFactory.NARROW_LINE_GAP_ROWSPEC,
+						RowSpec.decode("18px"),
+						RowSpec.decode("18px"),
+						RowSpec.decode("18px"),
+						RowSpec.decode("18px"),
+						RowSpec.decode("18px"),}));
 		
 		lblBusiness = new JLabel("Virksomhed: ");
 		panel_7.add(lblBusiness, "1, 2");
@@ -342,7 +366,7 @@ public class SaleGUI extends JPanel {
 		panel_9.add(btnFinish);
 		
 		saleCtr = new SaleCtr();
-		if (sale != null){
+		if (sale != null) {
 			saleCtr.loadSale(sale);
 			updateCustomer();
 		}
@@ -355,18 +379,17 @@ public class SaleGUI extends JPanel {
 		updateButtons();
 		updatePrices();
 		
-		
 	}
 	
-	private void updateButtons(){
-		if(partSales.size() != 0){
+	private void updateButtons() {
+		if (partSales.size() != 0) {
 			btnFinish.setEnabled(true);
 			btnPark.setEnabled(true);
 			btnCancel.setEnabled(true);
 		} else {
 			btnFinish.setEnabled(false);
 			btnPark.setEnabled(false);
-			if(saleCtr.getSale().getCustomer() != null){
+			if (saleCtr.getSale().getCustomer() != null) {
 				btnCancel.setEnabled(true);
 			} else {
 				btnCancel.setEnabled(false);
@@ -378,9 +401,9 @@ public class SaleGUI extends JPanel {
 	private void removePartSale(int itemId) {
 		PartSale ps = null;
 		int i = 0;
-		while(i < partSales.size() && ps == null){
+		while (i < partSales.size() && ps == null) {
 			Item item = partSales.get(i).getItem();
-			if(item.getId() == itemId){
+			if (item.getId() == itemId) {
 				ps = partSales.get(i);
 				saleCtr.removePartSale(ps);
 			}
@@ -388,25 +411,25 @@ public class SaleGUI extends JPanel {
 		updatePrices();
 		updateButtons();
 	}
-
+	
 	private void mouseListenerTable(MouseEvent e) {
 		int rowNumber = table.rowAtPoint(e.getPoint());
 		table.setRowSelectionInterval(rowNumber, rowNumber);
-		if(SwingUtilities.isRightMouseButton(e)){
+		if (SwingUtilities.isRightMouseButton(e)) {
 			//System.out.println(rowNumber);
 			popupMenu.show(table, e.getX(), e.getY());
-		} 
+		}
 	}
 	
-	public void setCustomer(Customer c){
-		if(c != null){
+	public void setCustomer(Customer c) {
+		if (c != null) {
 			saleCtr.getSale().setCustomer(c);
 		}
 		updateCustomer();
 		updateButtons();
 	}
 	
-	private void updateCustomer(){
+	private void updateCustomer() {
 		Sale sale = saleCtr.getSale();
 		Customer cus = sale.getCustomer();
 		String business = " ";
@@ -414,8 +437,8 @@ public class SaleGUI extends JPanel {
 		String phone = " ";
 		String customerNr = " ";
 		String credit = " ";
-		if (cus != null){
-			if (cus instanceof Business){
+		if (cus != null) {
+			if (cus instanceof Business) {
 				Business b = (Business) cus;
 				business = b.getCompany();
 				lblBusiness.setVisible(true);
@@ -427,77 +450,93 @@ public class SaleGUI extends JPanel {
 			}
 			name = cus.getName();
 			phone = cus.getPhoneNr();
-			customerNr = "#"+cus.getId();
+			customerNr = "#" + cus.getId();
 			credit = cus.getCredit() + " ,-";
 		}
 		txtLblBusiness.setText(business);
 		txtLblName.setText(name);
 		txtLblPhone.setText(phone);
 		txtLblCustomerNr.setText(customerNr);
-		txtLblCredit.setText(credit);	
+		txtLblCredit.setText(credit);
 	}
 	
 	private void findCustomer() {
 		mainGUI.setSelectedToSale(false, null);
 	}
-
+	
 	private void createCustomer() {
 		JFrame frame = new JFrame();
 		String[] options = new String[3];
 		options[2] = new String("Privat");
 		options[1] = new String("Erhverv");
 		options[0] = new String("Annuller");
-		int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Vælg Kundetype","Opret Kunde", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
-		//System.out.println(choice);
-		if(choice == 2){
+		int choice = JOptionPane.showOptionDialog(frame.getContentPane(), "Vælg Kundetype", "Opret Kunde", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
+		if (choice == 2) {
 			mainGUI.createPrivateCustomer(this);
 		}
-		else if(choice == 1){
+		else if (choice == 1) {
 			mainGUI.createBusinesssCustomer(this);
 		}
 		updateButtons();
 	}
-
+	
 	private void finishSale() {
-		if(isSaleEmpty()){
-			JOptionPane.showMessageDialog(null, "Du kan ikke lave et tomt salg","Advarsel",JOptionPane.ERROR_MESSAGE);
-		} else{
+		if (isSaleEmpty()) {
+			JOptionPane.showMessageDialog(null, "Du kan ikke lave et tomt salg", "Advarsel", JOptionPane.ERROR_MESSAGE);
+		} else {
 			SaleFinishGUI finishDialog = new SaleFinishGUI(null, saleCtr);
-			if (finishDialog.isDone()){
+			if (finishDialog.isDone()) {
 				mainGUI.resetSale();
 			}
 			finishDialog.dispose();
 		}
 	}
 	
-	private void parkSale() {
-		if(isSaleEmpty()){
-			JOptionPane.showMessageDialog(null, "Du kan ikke parkere et tomt salg","Advarsel",JOptionPane.ERROR_MESSAGE);
-		} else{
+	public int parkSale() {
+		int ret = 0;
+		if (isSaleEmpty()) {
+			JOptionPane.showMessageDialog(null, "Du kan ikke parkere et tomt salg", "Advarsel", JOptionPane.ERROR_MESSAGE);
+		} else if (saleCtr.getSale().getCustomer() == null) {
 			JFrame frame = new JFrame();
 			String[] options = new String[2];
-			options[0] = new String("Parker");
-			options[1] = new String("Annuller");
-			int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Er du sikker på du vil parkere salget?","Parker Salg", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
-			//System.out.println(choice);
-			if(choice == 0){
-				
-				saleCtr.parkSale();
+			options[0] = new String("Tilføj Kunde");
+			options[1] = new String("Annuller Salg");
+			int choice = JOptionPane.showOptionDialog(frame.getContentPane(), "Det igangværende salg kan ikke parkeres uden en kunde?", "Parker Salg", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
+			if (choice == 0) {
+				findCustomer();
+			} else if (choice == 1) {
 				mainGUI.resetSale();
-				updateCustomer();
-			}	
-		}	
-	}
-
-	private void cancelSale() {
+				ret = 3;
+			}
+		} else {
+			park();
+		}
 		
+		return ret;
+	}
+	
+	private void park() {
+		JFrame frame = new JFrame();
+		String[] options = new String[2];
+		options[0] = new String("Parker");
+		options[1] = new String("Annuller");
+		int choice = JOptionPane.showOptionDialog(frame.getContentPane(), "Er du sikker på du vil parkere salget?", "Parker Salg", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
+		if (choice == 0) {
+			
+			saleCtr.parkSale();
+			mainGUI.resetSale();
+			updateCustomer();
+		}
+	}
+	
+	private void cancelSale() {
 		JFrame frame = new JFrame();
 		String[] options = new String[2];
 		options[1] = new String("Nulstil");
 		options[0] = new String("Annuller");
-		int choice = JOptionPane.showOptionDialog(frame.getContentPane(),"Er du sikker på du vil nulstille salget?","Nulstil Salg", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
+		int choice = JOptionPane.showOptionDialog(frame.getContentPane(), "Er du sikker på du vil nulstille salget?", "Nulstil Salg", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
 		//System.out.println(choice);
-		if(choice == 1){
+		if (choice == 1) {
 			
 			saleCtr.cancelSale();
 			mainGUI.resetSale();
@@ -505,27 +544,26 @@ public class SaleGUI extends JPanel {
 		}
 		updateButtons();
 	}
-
-	private void makeAddItem(){
-		//JDialog addDialog = 
+	
+	private void makeAddItem() {
 		new SaleAddItem(null, saleCtr);
 		
 		updatePrices();
 		updateButtons();
 	}
 	
-	public boolean isSaleEmpty(){
+	public boolean isSaleEmpty() {
 		boolean ret = true;
-		if (partSales.size() > 0){
+		if (partSales.size() > 0) {
 			ret = false;
 		}
 		return ret;
 	}
 	
-	public void addItem(Item item){
+	public void addItem(Item item) {
 		try {
 			saleCtr.addItem(item, 1);
-		} catch (Exception e){
+		} catch (Exception e) {
 			
 		}
 		
@@ -533,19 +571,19 @@ public class SaleGUI extends JPanel {
 		updateButtons();
 	}
 	
-	private void updatePrices(){
+	private void updatePrices() {
 		partSales = saleCtr.getSale().getPartSales();
 		model.refresh(partSales);
 		model.fireTableDataChanged();
 		double subtotal = 0;
 		double moms = 0;
-		for(PartSale ps : partSales){
+		for (PartSale ps : partSales) {
 			Item i = ps.getItem();
-			subtotal += i.getSalePrice()*ps.getAmount();
+			subtotal += i.getSalePrice() * ps.getAmount();
 		}
-		moms = subtotal*0.25;
+		moms = subtotal * 0.25;
 		txtSubtotal.setText(subtotal + " ,-");
 		txtMoms.setText(moms + " ,-");
-		txtTotal.setText(subtotal+moms + " ,-");
+		txtTotal.setText(subtotal + moms + " ,-");
 	}
 }
