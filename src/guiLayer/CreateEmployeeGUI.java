@@ -1,9 +1,6 @@
 package guiLayer;
 
-import javax.swing.JPanel;
-
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -13,33 +10,31 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
+import javax.swing.SwingConstants;
 import ctrLayer.EmployeeCtr;
 import exceptionLayer.AlreadyExistException;
 import extensions.JBlinkLabel;
-
 import extensions.JTextFieldLimit;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
-
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
+import ctrLayer.EmployeeCtr;
+import extensions.JBlinkLabel;
+import extensions.JIntegerField;
+import extensions.JTextFieldLimit;
 import java.awt.GridLayout;
-
 import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
-
 import personLayer.Employee;
 
-
-
 public class CreateEmployeeGUI extends JPanel {
-	private JBlinkLabel lblError;
+	private JBlinkLabel lblState;
 	private MainGUI parent;
 	private Component creator;
 	private JTextField txtName;
@@ -55,25 +50,22 @@ public class CreateEmployeeGUI extends JPanel {
 	private JTextField txtPassword;
 	private JCheckBox chkAdmin;
 	
-
-
-
 	/**
 	 * Create the panel.
 	 */
 	public CreateEmployeeGUI(Component e, MainGUI mainGUI) {
-		this.creator = creator;
-		this.parent = parent;
-		this.eGUI = eGUI;
+		creator = creator;
+		parent = parent;
+		eGUI = eGUI;
 		buildPanel();
 	}
 	
 	public void buildPanel() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{411, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] {411, 0, 0};
+		gridBagLayout.rowHeights = new int[] {0, 0};
+		gridBagLayout.columnWeights = new double[] {0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[] {1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
@@ -87,29 +79,29 @@ public class CreateEmployeeGUI extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("center:156px:grow"),
 				ColumnSpec.decode("156px:grow"),},
-			new RowSpec[] {
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),}));
+				new RowSpec[] {
+						FormFactory.RELATED_GAP_ROWSPEC,
+						FormFactory.DEFAULT_ROWSPEC,
+						FormFactory.RELATED_GAP_ROWSPEC,
+						FormFactory.DEFAULT_ROWSPEC,
+						FormFactory.RELATED_GAP_ROWSPEC,
+						FormFactory.DEFAULT_ROWSPEC,
+						FormFactory.RELATED_GAP_ROWSPEC,
+						FormFactory.DEFAULT_ROWSPEC,
+						FormFactory.RELATED_GAP_ROWSPEC,
+						FormFactory.DEFAULT_ROWSPEC,
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.DEFAULT_ROWSPEC,
+						RowSpec.decode("default:grow"),}));
 		
 		JLabel lblNavn = new JLabel("Navn");
 		lblNavn.setHorizontalAlignment(SwingConstants.LEFT);
@@ -129,7 +121,7 @@ public class CreateEmployeeGUI extends JPanel {
 		JLabel lblPostnummer = new JLabel("Postnummer");
 		panel.add(lblPostnummer, "2, 6, left, default");
 		
-		txtPostalCode = new JTextField();
+		txtPostalCode = new JIntegerField();
 		panel.add(txtPostalCode, "3, 6, fill, default");
 		txtPostalCode.setColumns(10);
 		
@@ -143,7 +135,7 @@ public class CreateEmployeeGUI extends JPanel {
 		JLabel lblTlfNr = new JLabel("Tlf nr");
 		panel.add(lblTlfNr, "2, 10, left, default");
 		
-		txtTlf = new JTextField();
+		txtTlf = new JIntegerField();
 		panel.add(txtTlf, "3, 10, fill, default");
 		txtTlf.setColumns(10);
 		
@@ -165,15 +157,15 @@ public class CreateEmployeeGUI extends JPanel {
 				ColumnSpec.decode("default:grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormFactory.DEFAULT_ROWSPEC,}));
+				new RowSpec[] {
+						FormFactory.DEFAULT_ROWSPEC,}));
 		
 		txtCpr1 = new JTextField();
 		txtCpr1.setDocument(new JTextFieldLimit(6, true));
 		txtCpr1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				if(txtCpr1.getText().length() > 5){
+				if (txtCpr1.getText().length() > 5) {
 					txtCpr2.requestFocusInWindow();
 				}
 			}
@@ -189,7 +181,7 @@ public class CreateEmployeeGUI extends JPanel {
 		txtCpr2.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				if(arg0.getKeyCode() == KeyEvent.VK_BACK_SPACE && txtCpr2.getText().length() == 0){
+				if (arg0.getKeyCode() == KeyEvent.VK_BACK_SPACE && txtCpr2.getText().length() == 0) {
 					txtCpr1.requestFocusInWindow();
 				}
 			}
@@ -200,7 +192,7 @@ public class CreateEmployeeGUI extends JPanel {
 		JLabel lblMedarbejderNummer = new JLabel("Medarbejder nummer");
 		panel.add(lblMedarbejderNummer, "2, 16, left, default");
 		
-		txtEmpNr = new JTextField();
+		txtEmpNr = new JIntegerField();
 		panel.add(txtEmpNr, "3, 16, fill, default");
 		txtEmpNr.setColumns(10);
 		
@@ -210,9 +202,9 @@ public class CreateEmployeeGUI extends JPanel {
 		chkAdmin = new JCheckBox("");
 		chkAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(chkAdmin.isSelected()){
+				if (chkAdmin.isSelected()) {
 					txtPassword.setEditable(true);
-				}else if(!chkAdmin.isSelected()){
+				} else if (!chkAdmin.isSelected()) {
 					txtPassword.setText("");
 					txtPassword.setEditable(false);
 				}
@@ -227,6 +219,9 @@ public class CreateEmployeeGUI extends JPanel {
 		txtPassword.setEditable(false);
 		panel.add(txtPassword, "3, 20, fill, default");
 		txtPassword.setColumns(10);
+		
+		lblState = new JBlinkLabel("");
+		panel.add(lblState, "2, 21, 2, 1, center, default");
 		
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1, "2, 22, 2, 1, fill, fill");
@@ -249,21 +244,11 @@ public class CreateEmployeeGUI extends JPanel {
 				FormFactory.GROWING_BUTTON_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.GROWING_BUTTON_COLSPEC,},
-			new RowSpec[] {
-				RowSpec.decode("28px"),}));
+				new RowSpec[] {
+						RowSpec.decode("28px"),}));
 		panel_1.add(btnCreate, "1, 1, fill, fill");
 		panel_1.add(btnAnnuller, "3, 1, fill, fill");
 	}
-
-		
-	
-
-		
-
-	
-	
-	
-
 	
 	protected void createEmployee() {
 		if(validdateField()){
@@ -295,63 +280,56 @@ public class CreateEmployeeGUI extends JPanel {
 						
 		}		
 	}
-
 	
-	
-			private boolean validdateField(){
-				String name = txtName.getText();
-				if (name == null || name.trim().isEmpty()) {
-					lblError.setText("Navn må ikke være tomt");
-					lblError.startBlinking(true, true);
-					return false;
-				}
-				String street= txtStreet.getText();
-				if (street== null || street.trim().isEmpty()) {
-					lblError.setText("Gade må ikke være tomt");
-					lblError.startBlinking(true, true);
-					return false;
-				}
-				String postalCode = txtPostalCode.getText();
-				if (postalCode == null || postalCode.trim().isEmpty()) {
-					lblError.setText("Postnummer må ikke være tomt");
-					lblError.startBlinking(true, true);
-					return false;
-				}
-				String city = txtCity.getText();
-				if (city == null || city.trim().isEmpty()) {
-					lblError.setText("By må ikke være tomt");
-					lblError.startBlinking(true, true);
-					return false;
-				}
-				String tlf = txtTlf.getText();
-				if (tlf == null || tlf.trim().isEmpty()) {
-					lblError.setText("Telefonnummeret må ikke være tomt");
-					lblError.startBlinking(true, true);
-					return false;
-				}
-				String eMail = txtEmail.getText();
-				if (eMail == null || eMail.trim().isEmpty()) {
-					lblError.setText("E-mail må ikke være tomt");
-					lblError.startBlinking(true, true);
-					return false;
-				}
-				String cpr = txtCpr1.getText() + "-" + txtCpr2.getText();
-				if (cpr == null || cpr.trim().isEmpty()) {
-					lblError.setText("Cprnr må ikke være tomt");
-					lblError.startBlinking(true, true);
-					return false;
-				}
-				String empNr = txtEmpNr.getText();
-				if (empNr == null || empNr.trim().isEmpty()) {
-					lblError.setText("Medarbejdernummeret må ikke være tomt");
-					lblError.startBlinking(true, true);
-					return false;
-				}
-				return true;
-			}
+	private boolean validdateField() {
+		String name = txtName.getText();
+		if (name == null || name.trim().isEmpty()) {
+			lblState.setText("Navn må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		String street = txtStreet.getText();
+		if (street == null || street.trim().isEmpty()) {
+			lblState.setText("Gade må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		String postalCode = txtPostalCode.getText();
+		if (postalCode == null || postalCode.trim().isEmpty()) {
+			lblState.setText("Postnummer må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		String city = txtCity.getText();
+		if (city == null || city.trim().isEmpty()) {
+			lblState.setText("By må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		String tlf = txtTlf.getText();
+		if (tlf == null || tlf.trim().isEmpty()) {
+			lblState.setText("Telefonnummeret må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		String eMail = txtEmail.getText();
+		if (eMail == null || eMail.trim().isEmpty()) {
+			lblState.setText("E-mail må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		String cpr = txtCpr1.getText() + "-" + txtCpr2.getText();
+		if (cpr == null || cpr.trim().isEmpty()) {
+			lblState.setText("Cprnr må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		String empNr = txtEmpNr.getText();
+		if (empNr == null || empNr.trim().isEmpty()) {
+			lblState.setText("Medarbejdernummeret må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		return true;
 	}
-
-
-
-
-
+}
