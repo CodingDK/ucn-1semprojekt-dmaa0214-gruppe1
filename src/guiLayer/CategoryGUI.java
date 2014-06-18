@@ -49,11 +49,13 @@ public class CategoryGUI extends JPanel {
 	private JTable table;
 	private JBlinkLabel lblState;
 	public JButton btnCreate;
+	private MainGUI parent;
 	
 	/**
 	 * Create the panel.
 	 */
-	public CategoryGUI() {
+	public CategoryGUI(MainGUI parent) {
+		this.parent = parent;
 		CategoryCtr cCtr = new CategoryCtr();
 		categories = cCtr.getAllCategories();
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -255,6 +257,8 @@ public class CategoryGUI extends JPanel {
 	protected void updateCategory(int id, String name) {
 		if(!name.equals("Alle")){
 			JDialog update = new UpdateCategoryDialog(null, id, name);
+			update.setLocationRelativeTo(parent);
+			update.setVisible(true);
 			CategoryCtr cCtr = new CategoryCtr();
 			model.refresh(cCtr.getAllCategories());
 			model.fireTableDataChanged();

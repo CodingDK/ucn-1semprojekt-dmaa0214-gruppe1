@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -46,11 +47,13 @@ public class StorageGUI extends JPanel {
 	private StorageTableModel model;
 	public JButton btnOpret;
 	private JBlinkLabel lblState;
+	private MainGUI parent;
 
 	/**
 	 * Create the panel.
 	 */
-	public StorageGUI() {
+	public StorageGUI(MainGUI parent) {
+		this.parent = parent;
 		setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel panel = new JPanel();
@@ -243,7 +246,9 @@ public class StorageGUI extends JPanel {
 	
 	protected void updateStorage(int id, String name) {
 		if(!name.equals("Ukendt") ){
-			new UpdateStorageDialog(null, id, name);
+			JDialog updateStorage = new UpdateStorageDialog(null, id, name);
+			updateStorage.setLocationRelativeTo(parent);
+			updateStorage.setVisible(true);
 			ItemCtr iCtr = new ItemCtr();
 			model.refresh(iCtr.getAllStorage() );
 			model.fireTableDataChanged();

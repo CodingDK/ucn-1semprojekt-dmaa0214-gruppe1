@@ -113,7 +113,6 @@ public class LoginDialog extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton, "4, 4, fill, top");
 			}
-			setVisible(true);
 		}
 	}
 

@@ -150,7 +150,6 @@ public class SaleAddItem extends JDialog {
 				buttonPane.add(bntCancel);
 			}
 		}
-		setVisible(true);
 	}
 
 	private void addItem() {
