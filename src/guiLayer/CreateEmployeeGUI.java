@@ -28,7 +28,7 @@ import javax.swing.SwingConstants;
 public class CreateEmployeeGUI extends JPanel {
 	private JBlinkLabel lblError;
 	private MainGUI parent;
-	private Component creator;
+	//private Component creator;
 	private JTextField txtName;
 	private JTextField txtStreet;
 	private JTextField txtPostalCode;
@@ -37,15 +37,19 @@ public class CreateEmployeeGUI extends JPanel {
 	private JTextField txtEmail;
 	private JTextField txtCpr;
 	private JTextField txtEmpNr;
+	private EmployeeGUI eGUI;
+	
 
 
 
 	/**
 	 * Create the panel.
 	 */
-	public CreateEmployeeGUI(Component creator, MainGUI parent) {
-		this.creator = creator;
+	public CreateEmployeeGUI(EmployeeGUI eGUI, MainGUI parent) {
+		//this.creator = creator;
 		this.parent = parent;
+		this.eGUI = eGUI;
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{411, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
@@ -134,13 +138,11 @@ public class CreateEmployeeGUI extends JPanel {
 		
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1, "1, 10, 2, 1, fill, fill");
-		
-		
-		
-		
 		JButton btnAnnuller = new JButton("Annuller");
 		btnAnnuller.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//parent.switchPane(eGUI);
+				getParent().remove(CreateEmployeeGUI.this);
 			}
 		});
 		
