@@ -171,18 +171,13 @@ public class SaleGUI extends JPanel {
                 BorderFactory.createEmptyBorder(0, 0, 0, 2)));
 		tableEditAmount.setHorizontalAlignment(JTextField.RIGHT);
 		tableEditAmount.addFocusListener(new FocusListener() {
-			
-			
-			@Override
 			public void focusGained(FocusEvent arg0) {
 				tableEditAmount.setCaretPosition(tableEditAmount.getText().length());
 				
 			}
 
-			@Override
-			public void focusLost(FocusEvent e) {
+			public void focusLost(FocusEvent arg0) {
 				// TODO Auto-generated method stub
-				
 			}
 		});
     	
