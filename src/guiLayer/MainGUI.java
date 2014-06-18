@@ -361,8 +361,10 @@ public class MainGUI extends JFrame{
 		}else if(selected instanceof Sale){
 			Sale selectedSale = (Sale) selected;
 			if(!selectedSale.isDone()){
+				tabbedPane.remove(sale);
 				sale = new SaleGUI(this, selectedSale);
-				tabbedPane.setSelectedIndex(0);
+				tabbedPane.insertTab("Salg", null, sale, null, 0);
+				tabbedPane.setSelectedComponent(sale);
 			}
 		}
 	}
