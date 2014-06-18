@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -19,6 +20,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.ItemCtr;
+import extensions.KeyListener;
 
 public class UpdateStorageDialog extends JDialog {
 
@@ -35,7 +37,8 @@ public class UpdateStorageDialog extends JDialog {
 	public UpdateStorageDialog(Frame parent, int id, String name) {
 		super(parent, name, true);
 		this.name = name;
-		setBounds(100, 100, 368, 98);
+		new KeyListener().addEscapeListener(this);
+		setBounds(100, 100, 368, 115);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -90,9 +93,11 @@ public class UpdateStorageDialog extends JDialog {
 		if(txtStorageName.getText() != null && !txtStorageName.getText().trim().isEmpty() ){
 			ItemCtr iCtr = new ItemCtr();
 			iCtr.updateStorage(iCtr.findStorage(name), txtStorageName.getText() );
+			setVisible(false);
+			dispose();
+		}  else {
+			JOptionPane.showMessageDialog(null, "Navnet kan ikke være tomt","Advarsel",JOptionPane.ERROR_MESSAGE);
 		}
-		setVisible(false);
-		dispose();
 	}
 
 }

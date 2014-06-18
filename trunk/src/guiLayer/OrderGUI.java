@@ -273,7 +273,7 @@ public class OrderGUI extends JPanel {
 		}
 		sales = sales1;
 		if(sales == null || sales.isEmpty()){
-			errLabel.setText("0 kunder fundet");
+			errLabel.setText("0 ordre fundet");
 			errLabel.startBlinking(true, true);
 		}
 		model.refresh(sales);

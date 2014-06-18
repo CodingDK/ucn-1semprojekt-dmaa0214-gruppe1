@@ -23,6 +23,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.EmployeeCtr;
 import extensions.JBlinkLabel;
+import extensions.KeyListener;
 
 public class LoginDialog extends JDialog {
 	
@@ -41,6 +42,7 @@ public class LoginDialog extends JDialog {
 		if(main == null){
 			close();
 		}
+		new KeyListener().addEscapeListener(this);
 		setBounds(100, 100, 300, 150);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

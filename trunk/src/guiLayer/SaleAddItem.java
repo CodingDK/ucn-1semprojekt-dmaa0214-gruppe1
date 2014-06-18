@@ -9,11 +9,13 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
 
 import modelLayer.Item;
@@ -28,6 +30,10 @@ import ctrLayer.SaleCtr;
 import exceptionLayer.NotEnoughItemsException;
 import exceptionLayer.SaleNotCreatedException;
 import extensions.JIntegerField;
+import extensions.KeyListener;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class SaleAddItem extends JDialog {
 
@@ -46,6 +52,8 @@ public class SaleAddItem extends JDialog {
 	 */
 	public SaleAddItem(Frame f, SaleCtr sCtr) {
 		super(f, "Tilføj vare", true);
+		
+		new KeyListener().addEscapeListener(this);
 		item = null;
 		this.saleCtr = sCtr;
 		setResizable(false);

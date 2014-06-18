@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -19,6 +20,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.CategoryCtr;
+import extensions.KeyListener;
 
 public class UpdateCategoryDialog extends JDialog {
 	
@@ -32,7 +34,8 @@ public class UpdateCategoryDialog extends JDialog {
 	public UpdateCategoryDialog(Frame parent, int id, String name) {
 		super(parent, name, true);
 		this.name = name;
-		setBounds(100, 100, 286, 129);
+		new KeyListener().addEscapeListener(this);
+		setBounds(100, 100, 286, 148);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -99,10 +102,13 @@ public class UpdateCategoryDialog extends JDialog {
 		if(txtCategory.getText() != null && !txtCategory.getText().trim().isEmpty()){
 			CategoryCtr cCtr = new CategoryCtr();
 			cCtr.updateCategory(cCtr.findCategory(name), txtCategory.getText());
+			setVisible(false);
+			dispose();
+		} else {
+			JOptionPane.showMessageDialog(null, "Navnet kan ikke være tomt","Advarsel",JOptionPane.ERROR_MESSAGE);
 		}
 		
-		setVisible(false);
-		dispose();
+		
 	}
 	
 	
