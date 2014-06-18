@@ -21,7 +21,7 @@ public class HelpCtr {
 	}
 	
 	public void load() throws IOException{
-		BufferedReader bf = new BufferedReader(new InputStreamReader(new FileInputStream("./test.txt"), "UTF-8"));
+		BufferedReader bf = new BufferedReader(new InputStreamReader(new FileInputStream("./help.hlp"), "UTF-8"));
 		HelpCont hCont = HelpCont.getInstance();
 		String line;
 		boolean firstLine = false;
