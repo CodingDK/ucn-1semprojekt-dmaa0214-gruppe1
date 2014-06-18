@@ -6,22 +6,30 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import modelLayer.Sale;
+import personLayer.Customer;
 import personLayer.Employee;
 
 import com.jgoodies.forms.factories.FormFactory;
@@ -29,21 +37,23 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
+import ctrLayer.CustomerCtr;
 import ctrLayer.EmployeeCtr;
 import extensions.EmployeeTableModel;
 import extensions.JBlinkLabel;
 import extensions.JIntegerField;
 
 public class EmployeeGUI extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private ArrayList<Employee> employees;
-	private ArrayList<Employee> employees2;
 	public JTextField txtName;
 	private EmployeeTableModel model;
 	private MainGUI parent;
 	private JPanel panel_6;
 	private JBlinkLabel errLabel;
 	public JButton btnFind;
+	private JPopupMenu popupMenu;
 
 	/**
 	 * Create the panel.
@@ -51,7 +61,6 @@ public class EmployeeGUI extends JPanel {
 	public EmployeeGUI(final MainGUI parent) {
 		this.parent = parent;
 		employees = new ArrayList<Employee>();
-		employees2 = new ArrayList<Employee>();
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {562, 250, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
@@ -71,6 +80,35 @@ public class EmployeeGUI extends JPanel {
 		model = new EmployeeTableModel(employees);
 		table = new JTable(model);
 		table.getColumnModel().getColumn(0).setPreferredWidth(25);
+		
+		popupMenu = new JPopupMenu();
+		JMenuItem mntmDelete = new JMenuItem("Slet");
+		mntmDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int rowindex = table.getSelectedRow();
+				String id = (String) table.getValueAt(rowindex, 0);
+				Employee e = employees.get(table.convertRowIndexToModel(rowindex));
+				removeEmployee(e);
+			}
+		});
+		JMenuItem mntmUpdate = new JMenuItem("Ret Medarbejder");
+		mntmUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int rowindex = table.getSelectedRow();
+				Employee e = employees.get(table.convertRowIndexToModel(rowindex));
+				updateEmployee(e);
+			}
+		});
+		popupMenu.add(mntmDelete);
+		popupMenu.add(mntmUpdate);
+
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mouseListenerTable(e);
+			}
+		});
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportView(table);
 		panel_1.add(scrollPane, BorderLayout.CENTER);
@@ -139,10 +177,8 @@ public class EmployeeGUI extends JPanel {
 		btnFind = new JButton("Søg");
 		btnFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				findCustomer();
+				findEmployee();
 			}
-
-
 		});
 		panel_5.add(btnFind, "2, 2, fill, top");
 		panel_4.setLayout(new FormLayout(new ColumnSpec[] {
@@ -157,7 +193,7 @@ public class EmployeeGUI extends JPanel {
 		txtName = new JTextField();
 		txtName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				findCustomer();
+				findEmployee();
 			}
 		});
 		panel_4.add(txtName, "2, 1, fill, fill");
@@ -200,7 +236,32 @@ public class EmployeeGUI extends JPanel {
 		panel_6.setVisible(false);
 	}
 
-	private void findCustomer() {
+	protected void updateEmployee(Employee e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void removeEmployee(Employee e) {
+		EmployeeCtr eCtr = new EmployeeCtr();
+		eCtr.removeEmployee(e);
+		employees.remove(e);
+		
+		model.refresh(employees);
+		model.fireTableDataChanged();
+	}
+	
+
+	private void mouseListenerTable(MouseEvent e) {
+		Point p = e.getPoint();
+		int rowNumber = table.rowAtPoint(p);
+		table.setRowSelectionInterval(rowNumber, rowNumber);
+		if(SwingUtilities.isRightMouseButton(e)){
+			popupMenu.show(table, e.getX(), e.getY());
+		}
+	}
+
+
+	private void findEmployee() {
 		EmployeeCtr eCtr = new EmployeeCtr();
 		String name = txtName.getText();
 		if(name.trim().length() > 0){
@@ -213,6 +274,7 @@ public class EmployeeGUI extends JPanel {
 			errLabel.startBlinking(true, true);
 		}
 	}
+	
 	public void setAdmin(boolean admin){
 		if(admin){
 			panel_6.setVisible(true);
