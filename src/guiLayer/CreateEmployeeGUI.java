@@ -54,9 +54,8 @@ public class CreateEmployeeGUI extends JPanel {
 	 * Create the panel.
 	 */
 	public CreateEmployeeGUI(Component e, MainGUI mainGUI) {
-		creator = creator;
-		parent = parent;
-		eGUI = eGUI;
+		this.creator = e;
+		this.parent = mainGUI;
 		buildPanel();
 	}
 	
@@ -273,9 +272,11 @@ public class CreateEmployeeGUI extends JPanel {
 			EmployeeCtr eCtr = new EmployeeCtr();
 			try {
 				Employee e = eCtr.createEmployee(empNr, name, tlf, street, eMail, city, postalCode, cpr, password, admin);
+				parent.switchPane(creator);
+				getParent().remove(this);
 			} catch (AlreadyExistException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				lblState.setText(e.getMessage());
+				lblState.startBlinking(true, true);
 			}
 						
 		}		
@@ -318,9 +319,9 @@ public class CreateEmployeeGUI extends JPanel {
 			lblState.startBlinking(true, true);
 			return false;
 		}
-		String cpr = txtCpr1.getText() + "-" + txtCpr2.getText();
-		if (cpr == null || cpr.trim().isEmpty()) {
-			lblState.setText("Cprnr må ikke være tomt");
+		//String cpr = txtCpr1.getText() + "-" + txtCpr2.getText();
+		if (txtCpr1.getText().length() != 6 || txtCpr2.getText().length() != 4) {
+			lblState.setText("Cprnr er ikke udfyldt korrekt");
 			lblState.startBlinking(true, true);
 			return false;
 		}

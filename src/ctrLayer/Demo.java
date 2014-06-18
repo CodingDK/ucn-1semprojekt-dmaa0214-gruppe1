@@ -119,10 +119,10 @@ public class Demo {
 				eCtr.createEmployee("3", "Bjarne", "12345678", "Hobrovej 26", "bjarne@ucn.dk", "Vestbjerg", "9380", "100170-2141", null, false);
 
 				for(int i = 4; i < 75; i++){
-					eCtr.createEmployee("A"+i, name(), phone(), street(), email("@vb.dk"), city(), postCode(), cpr(), null, false);
+					eCtr.createEmployee(i+"", name(), phone(), street(), email("@vb.dk"), city(), postCode(), cpr(), null, false);
 				}
-				for(int i = 1; i < 10; i++){
-					eCtr.createEmployee("B"+i, name(), phone(), street(), email("@vb.dk"), city(), postCode(), cpr(), "asd", true);
+				for(int i = 75; i < 85; i++){
+					eCtr.createEmployee(i+"", name(), phone(), street(), email("@vb.dk"), city(), postCode(), cpr(), "asd", true);
 				}
 			} catch (AlreadyExistException e1) {
 				e1.printStackTrace();
