@@ -35,7 +35,6 @@ public class KeyListener {
 				Component[] components = mainGUI.getTabbedPane().getComponents();
 				ArrayList<Component> cont = new ArrayList<Component>(Arrays.asList(components));
 				if(cont.contains(tab)){
-					int tabIndex = mainGUI.getSelectedTab();
 					mainGUI.switchPane(creator);
 					((JPanel) tab).getParent().remove(tab);
 				}
