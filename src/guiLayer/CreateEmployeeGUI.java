@@ -24,16 +24,11 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
-import ctrLayer.EmployeeCtr;
-import extensions.JBlinkLabel;
 import extensions.JIntegerField;
-import extensions.JTextFieldLimit;
-import java.awt.GridLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JCheckBox;
 import personLayer.Employee;
 
 public class CreateEmployeeGUI extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private JBlinkLabel lblState;
 	private MainGUI parent;
 	private Component creator;
@@ -43,7 +38,6 @@ public class CreateEmployeeGUI extends JPanel {
 	private JTextField txtTlf;
 	private JTextField txtEmail;
 	private JTextField txtEmpNr;
-	private EmployeeGUI eGUI;
 	private JTextField txtPostalCode;
 	private JTextField txtCpr1;
 	private JTextField txtCpr2;
@@ -54,6 +48,12 @@ public class CreateEmployeeGUI extends JPanel {
 	 * Create the panel.
 	 */
 	public CreateEmployeeGUI(Component e, MainGUI mainGUI) {
+		this.creator = e;
+		this.parent = mainGUI;
+		buildPanel();
+	}
+	
+	public CreateEmployeeGUI(Component e, MainGUI mainGUI, Employee employee) {
 		this.creator = e;
 		this.parent = mainGUI;
 		buildPanel();
