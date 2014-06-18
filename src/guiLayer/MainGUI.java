@@ -320,6 +320,7 @@ public class MainGUI extends JFrame{
 	protected void grantAccess(){
 		mntmLogin.setText("Logud");
 		employee.setAdmin(true);
+		item.setAdmin(true);
 		tabbedPane.insertTab("Lager", null, storage, null, 5);
 		tabbedPane.setMnemonicAt(5, KeyEvent.VK_L);
 		tabbedPane.insertTab("Kategori", null, category, "Kategori", 6);
@@ -331,6 +332,7 @@ public class MainGUI extends JFrame{
 		mntmLogin.setText("Administrator Login");
 		//tabbedPane.remove(Category);
 		employee.setAdmin(false);
+		item.setAdmin(false);
 		admin = false;
 		tabbedPane.remove(storage);
 		tabbedPane.remove(category);
