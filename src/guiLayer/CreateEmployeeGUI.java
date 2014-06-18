@@ -19,7 +19,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import ctrLayer.EmployeeCtr;
+import exceptionLayer.AlreadyExistException;
 import extensions.JBlinkLabel;
+
 import extensions.JTextFieldLimit;
 
 import com.jgoodies.forms.layout.FormLayout;
@@ -31,6 +33,8 @@ import java.awt.GridLayout;
 
 import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
+
+import personLayer.Employee;
 
 
 
@@ -262,9 +266,38 @@ public class CreateEmployeeGUI extends JPanel {
 
 	
 	protected void createEmployee() {
-		EmployeeCtr eCtr = new EmployeeCtr();
+		if(validdateField()){
+			String name = txtName.getText();
+			String street  = txtStreet.getText();
+			String postalCode = txtPostalCode.getText();
+			String city = txtCity.getText();
+			String tlf = txtTlf.getText();
+			String eMail = txtEmail.getText();
+			String cpr = txtCpr1.getText() + "-" + txtCpr2.getText();
+			String empNr = txtEmpNr.getText();
+			String password;
+			boolean admin;
+			if(chkAdmin.isSelected()){
+				admin = true;
+				password = txtPassword.getText();
+			} else  {
+				admin = false;	
+				password = null;			
+			}
+			
+			EmployeeCtr eCtr = new EmployeeCtr();
+			try {
+				Employee e = eCtr.createEmployee(empNr, name, tlf, street, eMail, city, postalCode, cpr, password, admin);
+			} catch (AlreadyExistException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+						
+		}		
 	}
 
+	
+	
 			private boolean validdateField(){
 				String name = txtName.getText();
 				if (name == null || name.trim().isEmpty()) {
