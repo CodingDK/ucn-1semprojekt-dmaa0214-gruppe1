@@ -454,7 +454,7 @@ public class SaleGUI extends JPanel {
 			name = cus.getName();
 			phone = cus.getPhoneNr();
 			customerNr = "#" + cus.getId();
-			credit = cus.getCredit() + " ,-";
+			credit = money.format(cus.getCredit()) + ",-";
 		}
 		txtLblBusiness.setText(business);
 		txtLblName.setText(name);
