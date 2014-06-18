@@ -259,7 +259,9 @@ public class OrderGUI extends JPanel {
 		if(SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2){
 			int rowindex = table.getSelectedRow();
 			Sale sko = sales.get(table.convertRowIndexToModel(rowindex));
-			parent.setSelectedToSale(true, sko);
+			if(!sko.isDone()){
+				parent.setSelectedToSale(true, sko);
+			}
 		}
 	}
 	
