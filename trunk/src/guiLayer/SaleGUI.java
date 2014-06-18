@@ -60,17 +60,6 @@ public class SaleGUI extends JPanel {
 	public SaleGUI(MainGUI mainGUI, Sale sale) {
 		this.mainGUI = mainGUI;
 		
-		saleCtr = new SaleCtr();
-		if (sale != null){
-			saleCtr.loadSale(sale);
-			updateCustomer();
-		}
-		else {
-			saleCtr.createSale();
-		}
-		Sale saleObj = saleCtr.getSale();
-		partSales = saleObj.getPartSales();
-		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{313, 250, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
@@ -352,8 +341,21 @@ public class SaleGUI extends JPanel {
 		});
 		panel_9.add(btnFinish);
 		
+		saleCtr = new SaleCtr();
+		if (sale != null){
+			saleCtr.loadSale(sale);
+			updateCustomer();
+		}
+		else {
+			saleCtr.createSale();
+		}
+		Sale saleObj = saleCtr.getSale();
+		partSales = saleObj.getPartSales();
+		
 		updateButtons();
 		updatePrices();
+		
+		
 	}
 	
 	private void updateButtons(){
