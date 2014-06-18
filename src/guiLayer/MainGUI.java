@@ -348,7 +348,7 @@ public class MainGUI extends JFrame{
 	}
 		
 	public void setSelectedToSale(boolean b, Object selected){
-		if(selected instanceof Customer){
+		if(selected instanceof Customer || selected == null){
 			Customer selectedCus = (Customer) selected;
 			if(b){
 				tabbedPane.setSelectedComponent(sale);
@@ -359,12 +359,15 @@ public class MainGUI extends JFrame{
 				tabbedPane.setSelectedComponent(customer);
 			}
 		}else if(selected instanceof Sale){
-			Sale selectedSale = (Sale) selected;
-			if(!selectedSale.isDone()){
-				tabbedPane.remove(sale);
-				sale = new SaleGUI(this, selectedSale);
-				tabbedPane.insertTab("Salg", null, sale, null, 0);
-				tabbedPane.setSelectedComponent(sale);
+			int choice = sale.parkSale();
+			if(choice == 3){
+				Sale selectedSale = (Sale) selected;
+				if(!selectedSale.isDone()){
+					tabbedPane.remove(sale);
+					sale = new SaleGUI(this, selectedSale);
+					tabbedPane.insertTab("Salg", null, sale, null, 0);
+					tabbedPane.setSelectedComponent(sale);
+				}
 			}
 		}
 	}
