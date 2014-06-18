@@ -92,7 +92,6 @@ public class OrderGUI extends JPanel {
 		table = new JTable(model);
 		table.getColumnModel().getColumn(0).setMaxWidth(30);
 		table.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mouseListenerTable(e);
@@ -252,11 +251,9 @@ public class OrderGUI extends JPanel {
 		int rowNumber = table.rowAtPoint(p);
 		table.setRowSelectionInterval(rowNumber, rowNumber);
 		if(SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2){
-			SaleCtr sCtr = new SaleCtr();
 			int rowindex = table.getSelectedRow();
-			int id = (Integer) table.getValueAt(rowindex, 0);
-			Sale s = sCtr.getSale(id);
-			parent.setSelectedToSale(true, s);
+			Sale sko = sales.get(table.convertRowIndexToModel(rowindex));
+			parent.setSelectedToSale(true, sko);
 		}
 	}
 	
