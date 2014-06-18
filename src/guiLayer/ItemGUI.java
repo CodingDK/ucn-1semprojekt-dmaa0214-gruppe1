@@ -72,6 +72,8 @@ public class ItemGUI extends JPanel {
 	private JPopupMenu popupMenu;
 	public JButton btnSearch;
 	public Item saleItem;
+	private JPanel panel_6;
+	private JMenuItem mntmDelete;
 
 	/**
 	 * Create the panel.
@@ -124,7 +126,7 @@ public class ItemGUI extends JPanel {
 		});
 		
 		popupMenu = new JPopupMenu();
-		JMenuItem mntmDelete = new JMenuItem("Slet Vare");
+		mntmDelete = new JMenuItem("Slet Vare");
 		mntmDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int rowindex = table.getSelectedRow();
@@ -267,7 +269,7 @@ public class ItemGUI extends JPanel {
 		lblState.setBounds(6, 6, 238, 14);
 		panel.add(lblState);
 		
-		JPanel panel_6 = new JPanel();
+		panel_6 = new JPanel();
 		panel_6.setBorder(new TitledBorder(null, "Opret Vare", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_6.setBounds(6, 137, 238, 64);
 		panel.add(panel_6);
@@ -292,6 +294,8 @@ public class ItemGUI extends JPanel {
 		panel_7.add(btnOpretVare);
 		panel_6.setLayout(gl_panel_6);
 		
+		panel_6.setVisible(false);
+		mntmDelete.setVisible(false);
 	}
 
 	protected void updateItem(int id) {
@@ -339,7 +343,6 @@ public class ItemGUI extends JPanel {
 		sorter = new TableRowSorter<ItemTableModel>(model);
 		sorter.setRowFilter(rowFilterCompound);
 		table.setRowSorter(sorter);
-		
 	}
 
 	protected void clear(){
@@ -393,6 +396,16 @@ public class ItemGUI extends JPanel {
 				parent.addToSale(saleItem);
 				saleItem = null;
 			}
+		}
+	}
+	
+	public void setAdmin(boolean admin){
+		if(admin){
+			panel_6.setVisible(true);
+			mntmDelete.setVisible(true);
+		} else if(!admin){
+			panel_6.setVisible(false);
+			mntmDelete.setVisible(false);
 		}
 	}
 }
