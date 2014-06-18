@@ -119,7 +119,6 @@ public class SaleFinishGUI extends JDialog {
 				buttonPane.add(bntCancel);
 			}
 		}
-		setVisible(true);
 	}
 
 	/**
