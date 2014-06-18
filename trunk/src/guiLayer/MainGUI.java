@@ -216,7 +216,7 @@ public class MainGUI extends JFrame{
 			String pane = tabbedPane.getTitleAt(tabbedPane.getSelectedIndex());
 			Help h = hCtr.getHelp(pane);
 			if(h != null){
-				JOptionPane.showMessageDialog(null, h.getHelp(),h.getName(),JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, h.getHelp(),h.getName(),JOptionPane.INFORMATION_MESSAGE);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
