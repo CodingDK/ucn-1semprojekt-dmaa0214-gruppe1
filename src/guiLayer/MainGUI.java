@@ -328,6 +328,11 @@ public class MainGUI extends JFrame{
 		addPaneToTab(comp, "Opret Erhvervs Kunde");
 	}
 	
+	public void createEmployee(Component e){
+		CreateEmployee comp = new CreateEmployee(e, this);
+		addPaneToTab(comp, "Opret medarbejder");
+	}
+	
 	public void addPaneToTab(Component c, String title){
 		tabbedPane.addTab(title, c);
 		tabbedPane.setSelectedComponent(c);
