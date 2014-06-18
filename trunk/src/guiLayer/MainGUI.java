@@ -3,6 +3,7 @@ package guiLayer;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Event;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -106,6 +107,8 @@ public class MainGUI extends JFrame{
 		tabbedPane.setMnemonicAt(2, KeyEvent.VK_K);
 		tabbedPane.insertTab("Ordre", null, order, null, 3);
 		tabbedPane.setMnemonicAt(3, KeyEvent.VK_O);
+		tabbedPane.insertTab("Medarbejder", null, employee, null, 4);
+		tabbedPane.setMnemonicAt(4, KeyEvent.VK_M);
 		
 		makeTabbedPaneSwitcher();
 		
@@ -123,7 +126,7 @@ public class MainGUI extends JFrame{
 		
 		JMenuItem mntmInsertTestData = new JMenuItem("Indsæt Test Data");
 		mntmInsertTestData.setMnemonic(KeyEvent.VK_D);
-		mntmInsertTestData.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+		mntmInsertTestData.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() + KeyEvent.ALT_MASK));
 		mntmInsertTestData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new Demo().runDemo();
@@ -135,8 +138,8 @@ public class MainGUI extends JFrame{
 		mnFile.add(separator);
 	
 		mntmLogin = new JMenuItem("Administrator Login");
-		mntmLogin.setMnemonic(KeyEvent.VK_L);
-		mntmLogin.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); //Event.CTRL_MASK));
+		mntmLogin.setMnemonic(KeyEvent.VK_A);
+		mntmLogin.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() + KeyEvent.ALT_MASK)); //Event.CTRL_MASK));
 		mntmLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				login();
@@ -150,7 +153,7 @@ public class MainGUI extends JFrame{
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
 		mntmExit.setMnemonic(KeyEvent.VK_E);
-		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() + KeyEvent.ALT_MASK));
 		mntmExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -162,12 +165,14 @@ public class MainGUI extends JFrame{
 		menuBar.add(mnHelp);
 		
 		JMenuItem mntmHelp = new JMenuItem("Hjælp");
-		mnHelp.add(mntmHelp);
+		mntmHelp.setMnemonic(KeyEvent.VK_F1);
+		mntmHelp.setAccelerator(KeyStroke.getKeyStroke("F1"));
 		mntmHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				help();
 			}
 		});
+		mnHelp.add(mntmHelp);
 		getRootPane().setDefaultButton(sale.btnAddItem);
 		
 		tabbedPane.addChangeListener(new ChangeListener(){
@@ -225,13 +230,18 @@ public class MainGUI extends JFrame{
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_V, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "ctrl-v");
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_K, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "ctrl-k");
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "ctrl-o");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_M, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "ctrl-m");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_L, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "ctrl-l");
+		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_T, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "ctrl-t");
+		
 		ActionMap am = tabbedPane.getActionMap();
+		
 		am.put("ctrl-s", new AbstractAction() {
 			private static final long serialVersionUID = 1L;
 
 			public void actionPerformed(ActionEvent e) {
 				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
-				tp.setSelectedIndex(0);
+				tp.setSelectedComponent(sale);
 			}
 		});
 		
@@ -240,7 +250,7 @@ public class MainGUI extends JFrame{
 
 			public void actionPerformed(ActionEvent e) {
 				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
-				tp.setSelectedIndex(1);
+				tp.setSelectedComponent(item);
 			}
 		});
 		
@@ -249,7 +259,7 @@ public class MainGUI extends JFrame{
 
 			public void actionPerformed(ActionEvent e) {
 				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
-				tp.setSelectedIndex(2);
+				tp.setSelectedComponent(customer);
 			}
 		});
 		
@@ -258,7 +268,38 @@ public class MainGUI extends JFrame{
 
 			public void actionPerformed(ActionEvent e) {
 				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
-				tp.setSelectedIndex(3);
+				tp.setSelectedComponent(order);
+			}
+		});
+		
+		am.put("ctrl-m", new AbstractAction() {
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e) {
+				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
+				tp.setSelectedComponent(employee);
+			}
+		});
+		
+		am.put("ctrl-l", new AbstractAction() {
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e) {
+				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
+				if(admin){
+					tp.setSelectedComponent(storage);
+				}
+			}
+		});
+		
+		am.put("ctrl-t", new AbstractAction() {
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e) {
+				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
+				if(admin){
+					tp.setSelectedComponent(category);
+				}
 			}
 		});
 	}
@@ -270,7 +311,6 @@ public class MainGUI extends JFrame{
             login.setVisible(true);
 			if(admin){
 				grantAccess();
-				
 			}
 		}else if(admin){
 			revokeAccess();
@@ -280,10 +320,10 @@ public class MainGUI extends JFrame{
 	protected void grantAccess(){
 		mntmLogin.setText("Logud");
 		employee.setAdmin(true);
-		tabbedPane.insertTab("Medarbejder", null, employee, null, 4);
-		tabbedPane.setMnemonicAt(4, KeyEvent.VK_M);
 		tabbedPane.insertTab("Lager", null, storage, null, 5);
-		tabbedPane.insertTab("Kategori", null, category, "Kategori", 5);
+		tabbedPane.setMnemonicAt(5, KeyEvent.VK_L);
+		tabbedPane.insertTab("Kategori", null, category, "Kategori", 6);
+		tabbedPane.setMnemonicAt(6, KeyEvent.VK_T);
 		reDraw();
 	}
 	
@@ -292,7 +332,6 @@ public class MainGUI extends JFrame{
 		//tabbedPane.remove(Category);
 		employee.setAdmin(false);
 		admin = false;
-		tabbedPane.remove(employee);
 		tabbedPane.remove(storage);
 		tabbedPane.remove(category);
 		reDraw();
