@@ -112,7 +112,7 @@ public class StorageGUI extends JPanel {
 			    				removeStorage(name);
 			    			}
 			    		});
-			    		JMenuItem mntmUpdate = new JMenuItem("Ret Kategori");
+			    		JMenuItem mntmUpdate = new JMenuItem("Ret Lager");
 			    		mntmUpdate.addActionListener(new ActionListener() {
 			    			public void actionPerformed(ActionEvent arg0) {
 			    				int id = (Integer) table.getValueAt(rowindex, 0);
