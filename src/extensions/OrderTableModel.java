@@ -1,5 +1,6 @@
 package extensions;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
@@ -11,9 +12,11 @@ import modelLayer.Sale;
 public class OrderTableModel extends AbstractTableModel{
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Sale> sales;
+	private NumberFormat money;
 
 	public OrderTableModel(ArrayList<Sale> sales){
 		this.sales = sales;
+		money = NumberFormat.getCurrencyInstance();
 	}
 
 	public void refresh(ArrayList<Sale> sales) {
@@ -45,7 +48,7 @@ public class OrderTableModel extends AbstractTableModel{
 				}
 			}
 		}else if(collIndex == 2){
-			value = s.getTotalPrice()+",-";
+			value = money.format(s.getTotalPrice())+",-";
 		}else if(collIndex == 3){
 			if(s.getEmployee() == null){
 				value = " ";

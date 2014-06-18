@@ -1,5 +1,6 @@
 package extensions;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -15,9 +16,11 @@ public class SaleItemTableModel extends AbstractTableModel{
 	private final boolean[] canEdit = new boolean[]{
             false, false, true, false, false
     };
+	private NumberFormat money;
 	
 	public SaleItemTableModel(ArrayList<PartSale> ps){
 		this.partSales = ps;
+		money = NumberFormat.getCurrencyInstance();
 	}
 
 	public void refresh(ArrayList<PartSale> ps) {
@@ -46,10 +49,10 @@ public class SaleItemTableModel extends AbstractTableModel{
 			value = ps.getAmount();
 		} else if(collIndex == 3){
 			Item item = ps.getItem();
-			value = item.getSalePrice();
+			value = money.format(item.getSalePrice());
 		} else if(collIndex == 4){
 			Item item = ps.getItem();
-			String totalPrice = "" + item.getSalePrice()*ps.getAmount();
+			String totalPrice = "" + money.format(item.getSalePrice()*ps.getAmount());
 			value = totalPrice;
 		}
 		return value;
