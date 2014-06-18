@@ -27,6 +27,7 @@ import javax.swing.event.ChangeListener;
 
 import modelLayer.Help;
 import modelLayer.Item;
+import modelLayer.Sale;
 import personLayer.Customer;
 import ctrLayer.Demo;
 import ctrLayer.HelpCtr;
@@ -90,7 +91,7 @@ public class MainGUI extends JFrame{
 		sale = new SaleGUI(this, null);
 		item = new ItemGUI(this);
 		customer = new CustomerGUI(this);
-		order = new OrderGUI();
+		order = new OrderGUI(this);
 		employee = new EmployeeGUI(this);
 		category = new CategoryGUI();
 		storage = new StorageGUI();
@@ -342,14 +343,20 @@ public class MainGUI extends JFrame{
 		tabbedPane.setSelectedComponent(c);
 	}
 		
-	public void setSelectedToSale(boolean b, Customer selectedCus){
-		if(b){
-			tabbedPane.setSelectedComponent(sale);
-			if (selectedCus != null){
-				sale.setCustomer(selectedCus);
+	public void setSelectedToSale(boolean b, Object selected){
+		if(selected instanceof Customer){
+			Customer selectedCus = (Customer) selected;
+			if(b){
+				tabbedPane.setSelectedComponent(sale);
+				if (selectedCus != null){
+					sale.setCustomer(selectedCus);
+				}
+			} else {
+				tabbedPane.setSelectedComponent(customer);
 			}
-		} else {
-			tabbedPane.setSelectedComponent(customer);
+		}else if(selected instanceof Sale){
+			Sale selectedSale = (Sale) selected;
+			sale = new SaleGUI(this, selectedSale);
 		}
 	}
 	
