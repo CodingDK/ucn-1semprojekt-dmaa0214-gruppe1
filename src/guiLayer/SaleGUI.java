@@ -538,7 +538,7 @@ public class SaleGUI extends JPanel {
 		String[] options = new String[2];
 		options[1] = new String("Nulstil");
 		options[0] = new String("Annuller");
-		int choice = JOptionPane.showOptionDialog(frame.getContentPane(), "Er du sikker på du vil nulstille salget?", "Nulstil Salg", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
+		int choice = JOptionPane.showOptionDialog(mainGUI, "Er du sikker på du vil nulstille salget?", "Nulstil Salg", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
 		//System.out.println(choice);
 		if (choice == 1) {
 			
