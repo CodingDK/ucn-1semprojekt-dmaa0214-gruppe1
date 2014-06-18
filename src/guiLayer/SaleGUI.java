@@ -594,8 +594,8 @@ public class SaleGUI extends JPanel {
 			subtotal += i.getSalePrice() * ps.getAmount();
 		}
 		moms = subtotal * 0.25;
-		txtSubtotal.setText(money.format(subtotal) + ",-");
-		txtMoms.setText(money.format(moms) + ",-");
-		txtTotal.setText(money.format(subtotal + moms) + ",-");
+		txtSubtotal.setText(money.format(subtotal));
+		txtMoms.setText(money.format(moms));
+		txtTotal.setText(money.format(subtotal + moms));
 	}
 }

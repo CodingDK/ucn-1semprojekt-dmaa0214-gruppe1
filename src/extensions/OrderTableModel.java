@@ -48,7 +48,7 @@ public class OrderTableModel extends AbstractTableModel{
 				}
 			}
 		}else if(collIndex == 2){
-			value = money.format(s.getTotalPrice())+",-";
+			value = money.format(s.getTotalPrice());
 		}else if(collIndex == 3){
 			if(s.getEmployee() == null){
 				value = " ";
