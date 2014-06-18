@@ -1,7 +1,16 @@
-﻿@Title Salg
-Hejsa, jeg hjælper dig med dit salg!
-Du er squ en heldig en :o
+@Title Salg
+Fanen Salg, viser det nuvÃ¦rende salg.
+Her har du mulighed for at:
+	1. Nulstille Salget
+	2. Parkere Salget(KrÃ¦ver en kunde er tilknyttet)
+	3. Afslutte Salget
+	4. Varer antal kan Ã¦ndre i Vare oversigten("Varer"), ved at trykke pÃ¥ "Stk." 
 ----------
 @Title Varer
-Her kan du søge efter varer :o
+Her kan du sÃƒÂ¸ge efter varer :o
 Its AMAZING AMAGAWD
+----------
+@Title Opret Vare
+Her kan du sÃƒÂ¸ge efter varer :o
+Its AMAZING AMAGAWD
+----------
