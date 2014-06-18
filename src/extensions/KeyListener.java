@@ -11,9 +11,10 @@ import javax.swing.*;
 
 public class KeyListener {
 
-	
+	private boolean done;
 	public KeyListener() {
 		// TODO Auto-generated constructor stub
+		this.done = false;
 	}
 
 	public void addEscapeListener(final JDialog dialog) {
@@ -33,9 +34,12 @@ public class KeyListener {
 	public void addEscapeListenerToTab(final Component creator, final MainGUI mainGUI, final Component tab){
 		ActionListener escListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int tabIndex = mainGUI.getSelectedTab();
-				mainGUI.switchPane(creator);
-				((JPanel) tab).getParent().remove(tabIndex);
+				if(!done){
+					int tabIndex = mainGUI.getSelectedTab();
+					mainGUI.switchPane(creator);
+					((JPanel) tab).getParent().remove(tabIndex);
+					done = true;
+				}
 	        }
 	    };
 	    mainGUI.getRootPane().registerKeyboardAction(escListener,
