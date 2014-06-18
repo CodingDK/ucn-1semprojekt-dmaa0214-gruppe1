@@ -199,8 +199,8 @@ public class MainGUI extends JFrame{
 		});
 	}
 	
-	public int getSelectedTab(){
-		return tabbedPane.getSelectedIndex();
+	public Component getSelectedTab(){
+		return tabbedPane.getSelectedComponent();
 	}
 
 	private void help() {
