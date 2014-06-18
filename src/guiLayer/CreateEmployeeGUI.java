@@ -45,10 +45,13 @@ public class CreateEmployeeGUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public CreateEmployeeGUI(Component creator, EmployeeGUI eGUI, MainGUI parent) {
+	public CreateEmployeeGUI(Component e, MainGUI mainGUI) {
 		this.creator = creator;
 		this.parent = parent;
 		this.eGUI = eGUI;
+		buildpanel();
+	}
+	public void buildpanel() {
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{411, 0, 0};
@@ -158,17 +161,14 @@ public class CreateEmployeeGUI extends JPanel {
 		buildpanel();
 	}
 
-		public CreateEmployeeGUI(Component e, MainGUI mainGUI) {
-		// TODO Auto-generated constructor stub
-	}
-
-		/**
-		 * Create the panel.
-		 */
-
-	public void buildpanel() {
+		
 	
-	}
+
+		
+
+	
+	
+	
 
 	
 	protected void createEmployee() {

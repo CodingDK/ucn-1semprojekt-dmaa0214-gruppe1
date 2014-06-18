@@ -173,7 +173,7 @@ public class EmployeeGUI extends JPanel {
 		JButton btnOpretMedarbejder = new JButton("Opret Medarbejder");
 		btnOpretMedarbejder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//CreateEmployee();
+				parent.CreateEmployee();
 			}
 		});
 		GroupLayout gl_panel_6 = new GroupLayout(panel_6);
