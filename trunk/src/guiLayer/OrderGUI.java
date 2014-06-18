@@ -52,16 +52,18 @@ public class OrderGUI extends JPanel {
 	public JButton btnSearch;
 	private JComboBox<String> comboBox;
 	private JBlinkLabel errLabel;
+	private MainGUI parent;
 
 	/**
 	 * Create the panel.
 	 */
-	public OrderGUI() {
+	public OrderGUI(MainGUI parent) {
+		this.parent = parent;
 		sales = new ArrayList<Sale>();
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{555, 121, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -89,6 +91,13 @@ public class OrderGUI extends JPanel {
 		model = new OrderTableModel(sales);
 		table = new JTable(model);
 		table.getColumnModel().getColumn(0).setMaxWidth(30);
+		table.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mouseListenerTable(e);
+			}
+		});
 		scrollPane.setViewportView(table);
 	
 		
@@ -236,6 +245,19 @@ public class OrderGUI extends JPanel {
 		txtID.setText("");
 		txtName.setText("");
 		comboBox.setSelectedIndex(0);
+	}
+	
+	private void mouseListenerTable(MouseEvent e) {
+		Point p = e.getPoint();
+		int rowNumber = table.rowAtPoint(p);
+		table.setRowSelectionInterval(rowNumber, rowNumber);
+		if(SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2){
+			SaleCtr sCtr = new SaleCtr();
+			int rowindex = table.getSelectedRow();
+			int id = (Integer) table.getValueAt(rowindex, 0);
+			Sale s = sCtr.getSale(id);
+			parent.setSelectedToSale(true, s);
+		}
 	}
 	
 	private void searchCustomer(){
