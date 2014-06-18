@@ -34,6 +34,8 @@ import extensions.KeyListener;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.NumberFormat;
+
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 public class ItemInfoDialog extends JDialog {
@@ -172,19 +174,20 @@ public class ItemInfoDialog extends JDialog {
 	}
 
 	private void fillTxtArea() {
+		NumberFormat money = NumberFormat.getCurrencyInstance();
 		String nL = System.getProperty("line.separator");
 		txtItem.append("Navn: " + nL);
 		txtItemInfo.append(i.getName() + nL);
 		txtItem.append("Mængde: " + nL);
 		txtItemInfo.append(i.getAmount() + nL);
 		txtItem.append("Salgs Pris: " + nL);
-		txtItemInfo.append(Double.toString(i.getSalePrice()) + nL);
+		txtItemInfo.append(money.format(i.getSalePrice()) + nL);
 		txtItem.append("Indkøbs Pris: " + nL);
-		txtItemInfo.append(Double.toString(i.getPurchasePrice()) + nL);
+		txtItemInfo.append(money.format(i.getPurchasePrice()) + nL);
 		txtItem.append("Bulk: " + nL);
 		txtItemInfo.append(i.getBulk() + nL);
 		txtItem.append("Bulk Pris: " + nL);
-		txtItemInfo.append(Double.toString(i.getBulkSalePrice()) + nL);
+		txtItemInfo.append(money.format(i.getBulkSalePrice()) + nL);
 		txtItem.append("Lokation: " + nL);
 		txtItemInfo.append(i.getLocation() + nL);
 		txtItem.append("Lager: " + nL);
