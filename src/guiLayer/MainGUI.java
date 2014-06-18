@@ -125,8 +125,8 @@ public class MainGUI extends JFrame{
 		mnFile.add(mntmLoad);
 		
 		JMenuItem mntmInsertTestData = new JMenuItem("Indsæt Test Data");
-		mntmInsertTestData.setMnemonic(KeyEvent.VK_D);
-		mntmInsertTestData.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() + KeyEvent.ALT_MASK));
+		mntmInsertTestData.setMnemonic(KeyEvent.VK_F2);
+		mntmInsertTestData.setAccelerator(KeyStroke.getKeyStroke("F2"));
 		mntmInsertTestData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new Demo().runDemo();
@@ -138,8 +138,8 @@ public class MainGUI extends JFrame{
 		mnFile.add(separator);
 	
 		mntmLogin = new JMenuItem("Administrator Login");
-		mntmLogin.setMnemonic(KeyEvent.VK_A);
-		mntmLogin.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() + KeyEvent.ALT_MASK)); //Event.CTRL_MASK));
+		mntmLogin.setMnemonic(KeyEvent.VK_F3);
+		mntmLogin.setAccelerator(KeyStroke.getKeyStroke("F3")); 
 		mntmLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				login();
@@ -152,8 +152,8 @@ public class MainGUI extends JFrame{
 		mnFile.add(separator_1);
 		
 		JMenuItem mntmExit = new JMenuItem("Exit");
-		mntmExit.setMnemonic(KeyEvent.VK_E);
-		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask() + KeyEvent.ALT_MASK));
+		mntmExit.setMnemonic(KeyEvent.VK_F12);
+		mntmExit.setAccelerator(KeyStroke.getKeyStroke("F12"));
 		mntmExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
