@@ -28,7 +28,7 @@ import javax.swing.SwingConstants;
 public class CreateEmployeeGUI extends JPanel {
 	private JBlinkLabel lblError;
 	private MainGUI parent;
-	//private Component creator;
+	private Component creator;
 	private JTextField txtName;
 	private JTextField txtStreet;
 	private JTextField txtPostalCode;
@@ -45,8 +45,8 @@ public class CreateEmployeeGUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public CreateEmployeeGUI(EmployeeGUI eGUI, MainGUI parent) {
-		//this.creator = creator;
+	public CreateEmployeeGUI(Component creator, EmployeeGUI eGUI, MainGUI parent) {
+		this.creator = creator;
 		this.parent = parent;
 		this.eGUI = eGUI;
 		
@@ -156,6 +156,10 @@ public class CreateEmployeeGUI extends JPanel {
 		panel_1.add(btnCreate);
 		panel_1.add(btnAnnuller);
 		buildpanel();
+	}
+
+		public CreateEmployeeGUI(Component e, MainGUI mainGUI) {
+		// TODO Auto-generated constructor stub
 	}
 
 		/**
