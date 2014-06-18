@@ -388,7 +388,11 @@ public class SaleGUI extends JPanel {
 	private void updateButtons() {
 		if (partSales.size() != 0) {
 			btnFinish.setEnabled(true);
-			btnPark.setEnabled(true);
+			if(saleCtr.getSale().getCustomer() != null){
+				btnPark.setEnabled(true);
+			} else {
+				btnPark.setEnabled(false);
+			}				
 			btnCancel.setEnabled(true);
 		} else {
 			btnFinish.setEnabled(false);
@@ -474,7 +478,7 @@ public class SaleGUI extends JPanel {
 		options[2] = new String("Privat");
 		options[1] = new String("Erhverv");
 		options[0] = new String("Annuller");
-		int choice = JOptionPane.showOptionDialog(frame.getContentPane(), "Vælg Kundetype", "Opret Kunde", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
+		int choice = JOptionPane.showOptionDialog(mainGUI, "Vælg Kundetype", "Opret Kunde", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
 		if (choice == 2) {
 			mainGUI.createPrivateCustomer(this);
 		}
@@ -486,9 +490,11 @@ public class SaleGUI extends JPanel {
 	
 	private void finishSale() {
 		if (isSaleEmpty()) {
-			JOptionPane.showMessageDialog(null, "Du kan ikke lave et tomt salg", "Advarsel", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(mainGUI, "Du kan ikke lave et tomt salg", "Advarsel", JOptionPane.ERROR_MESSAGE);
 		} else {
 			SaleFinishGUI finishDialog = new SaleFinishGUI(null, saleCtr);
+			finishDialog.setLocationRelativeTo(mainGUI);
+			finishDialog.setVisible(true);
 			if (finishDialog.isDone()) {
 				mainGUI.resetSale();
 			}
@@ -499,13 +505,13 @@ public class SaleGUI extends JPanel {
 	public int parkSale() {
 		int ret = 0;
 		if (isSaleEmpty()) {
-			JOptionPane.showMessageDialog(null, "Du kan ikke parkere et tomt salg", "Advarsel", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(mainGUI, "Du kan ikke parkere et tomt salg", "Advarsel", JOptionPane.ERROR_MESSAGE);
 		} else if (saleCtr.getSale().getCustomer() == null) {
 			JFrame frame = new JFrame();
 			String[] options = new String[2];
 			options[0] = new String("Tilføj Kunde");
 			options[1] = new String("Annuller Salg");
-			int choice = JOptionPane.showOptionDialog(frame.getContentPane(), "Det igangværende salg kan ikke parkeres uden en kunde?", "Parker Salg", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
+			int choice = JOptionPane.showOptionDialog(mainGUI, "Det igangværende salg kan ikke parkeres uden en kunde?", "Parker Salg", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
 			if (choice == 0) {
 				findCustomer();
 			} else if (choice == 1) {
@@ -524,7 +530,7 @@ public class SaleGUI extends JPanel {
 		String[] options = new String[2];
 		options[0] = new String("Parker");
 		options[1] = new String("Annuller");
-		int choice = JOptionPane.showOptionDialog(frame.getContentPane(), "Er du sikker på du vil parkere salget?", "Parker Salg", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
+		int choice = JOptionPane.showOptionDialog(mainGUI, "Er du sikker på du vil parkere salget?", "Parker Salg", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
 		if (choice == 0) {
 			
 			saleCtr.parkSale();
@@ -570,7 +576,7 @@ public class SaleGUI extends JPanel {
 		try {
 			saleCtr.addItem(item, 1);
 		} catch (Exception e) {
-			
+			JOptionPane.showMessageDialog(mainGUI, e.getMessage(), "Fejl", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		updatePrices();
