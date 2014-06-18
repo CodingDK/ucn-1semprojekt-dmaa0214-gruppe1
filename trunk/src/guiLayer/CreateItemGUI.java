@@ -28,6 +28,7 @@ import ctrLayer.ItemCtr;
 import extensions.JBlinkLabel;
 import extensions.JDoubleField;
 import extensions.JIntegerField;
+import extensions.KeyListener;
 import extensions.SpaceDocument;
 
 import java.awt.event.ActionListener;
@@ -47,7 +48,7 @@ public class CreateItemGUI extends JPanel {
 	public JTextField txtName;
 	private JComboBox<Storage> cmbStorage;
 	private JComboBox<Category> cmbCategory;
-	private MainGUI parent;
+	private MainGUI mainGUI;
 	private ItemGUI iGUI;
 	private JBlinkLabel lblState;
 	private Item item;
@@ -58,7 +59,7 @@ public class CreateItemGUI extends JPanel {
 	 * Create the panel.
 	 */
 	public CreateItemGUI(MainGUI parent, ItemGUI iGUI, Item item) {
-		this.parent = parent;
+		this.mainGUI = parent;
 		this.iGUI = iGUI;
 		makePanels();
 		if(item != null){
@@ -79,6 +80,7 @@ public class CreateItemGUI extends JPanel {
 		}else{
 			isUpdate = false;
 		}
+		new KeyListener().addEscapeListenerToTab(iGUI, mainGUI, this);
 	}
 	
 	protected void makePanels(){
@@ -240,7 +242,7 @@ public class CreateItemGUI extends JPanel {
 		JButton btnAnnuller = new JButton("Annuller");
 		btnAnnuller.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				parent.switchPane(iGUI);
+				mainGUI.switchPane(iGUI);
 				getParent().remove(CreateItemGUI.this);
 			}
 		});
@@ -413,7 +415,7 @@ public class CreateItemGUI extends JPanel {
 	}
 	
 	protected void done(){
-		parent.switchPane(iGUI);
+		mainGUI.switchPane(iGUI);
 		getParent().remove(this);
 	}
 	

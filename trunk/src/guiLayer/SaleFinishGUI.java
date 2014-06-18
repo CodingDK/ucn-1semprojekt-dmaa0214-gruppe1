@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import ctrLayer.SaleCtr;
 import exceptionLayer.SaleNotCreatedException;
 import extensions.JIntegerField;
+import extensions.KeyListener;
 
 public class SaleFinishGUI extends JDialog {
 
@@ -39,6 +40,7 @@ public class SaleFinishGUI extends JDialog {
 	 */
 	public SaleFinishGUI(Frame f, SaleCtr sCtr) {
 		super(f, "Afslut salg", true);
+		new KeyListener().addEscapeListener(this);
 		done = false;
 		this.saleCtr = sCtr;
 		setResizable(false);
