@@ -33,6 +33,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
 
 import personLayer.Customer;
@@ -116,6 +117,7 @@ public class ItemGUI extends JPanel {
 				removeItem(id);
 			}
 		});
+		
 		JMenuItem mntmUpdate = new JMenuItem("Ret Vare");
 		mntmUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -124,6 +126,13 @@ public class ItemGUI extends JPanel {
 				updateItem(id);
 			}
 		});
+		
+		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+		table.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
+		table.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
+		table.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+		
 		popupMenu.add(mntmDelete);
 		popupMenu.add(mntmUpdate);
 		
