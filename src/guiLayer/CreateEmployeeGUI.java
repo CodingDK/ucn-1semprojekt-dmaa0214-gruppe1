@@ -49,10 +49,10 @@ public class CreateEmployeeGUI extends JPanel {
 		this.creator = creator;
 		this.parent = parent;
 		this.eGUI = eGUI;
-		buildpanel();
+		buildPanel();
 	}
-	public void buildpanel() {
-		
+	
+	public void buildPanel() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{411, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0};
@@ -158,7 +158,6 @@ public class CreateEmployeeGUI extends JPanel {
 		});
 		panel_1.add(btnCreate);
 		panel_1.add(btnAnnuller);
-		buildpanel();
 	}
 
 		
