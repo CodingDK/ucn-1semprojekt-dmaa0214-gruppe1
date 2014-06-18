@@ -94,8 +94,6 @@ public class UpdateCategoryDialog extends JDialog {
 				buttonPane.add(btnCancel);
 			}
 		}
-		
-		setVisible(true);
 	}
 
 	protected void saveCategory() {
