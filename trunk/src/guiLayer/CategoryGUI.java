@@ -124,7 +124,7 @@ public class CategoryGUI extends JPanel {
 		    	}
 		    }
 		});
-		table.getColumnModel().getColumn(0).setMaxWidth(25);
+		table.getColumnModel().getColumn(0).setMaxWidth(35);
 		scrollPane.setViewportView(table);
 		
 		JPanel panel_1 = new JPanel();
