@@ -14,7 +14,7 @@ public class KeyListener {
 
 	public void addEscapeListener(final JDialog dialog) {
 		ActionListener escListener = new ActionListener() {
-			@Override
+			
 	        public void actionPerformed(ActionEvent e) {
 				dialog.setVisible(false); 
 				dialog.dispose();
