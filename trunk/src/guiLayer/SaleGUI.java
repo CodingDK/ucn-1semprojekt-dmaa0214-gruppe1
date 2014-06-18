@@ -16,6 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -77,12 +78,14 @@ public class SaleGUI extends JPanel {
 	private JButton btnFinish;
 	private JButton btnPark;
 	private JButton btnCancel;
+	private NumberFormat money;
 	
 	/**
 	 * Create the panel.
 	 */
 	public SaleGUI(MainGUI mainGUI, Sale sale) {
 		this.mainGUI = mainGUI;
+		money = NumberFormat.getCurrencyInstance();
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {313, 250, 0};
@@ -582,8 +585,8 @@ public class SaleGUI extends JPanel {
 			subtotal += i.getSalePrice() * ps.getAmount();
 		}
 		moms = subtotal * 0.25;
-		txtSubtotal.setText(subtotal + " ,-");
-		txtMoms.setText(moms + " ,-");
-		txtTotal.setText(subtotal + moms + " ,-");
+		txtSubtotal.setText(money.format(subtotal) + ",-");
+		txtMoms.setText(money.format(moms) + ",-");
+		txtTotal.setText(money.format(subtotal + moms) + ",-");
 	}
 }
