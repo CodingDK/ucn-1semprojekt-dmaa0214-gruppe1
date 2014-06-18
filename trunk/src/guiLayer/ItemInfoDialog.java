@@ -12,17 +12,26 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
 
 import modelLayer.Item;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JTextArea;
+
 import java.awt.SystemColor;
+
 import javax.swing.UIManager;
+
 import java.awt.Color;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+
+import extensions.KeyListener;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -39,6 +48,7 @@ public class ItemInfoDialog extends JDialog {
 	 */
 	public ItemInfoDialog(final Item i, Frame parent, final ItemGUI iGUI) {
 		super(parent, "Vare Information", true);
+		new KeyListener().addEscapeListener(this);
 		this.i = i;
 		this.iGUI = iGUI;
 		setBounds(100, 100, 361, 458);
