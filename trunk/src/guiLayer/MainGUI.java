@@ -405,7 +405,12 @@ public class MainGUI extends JFrame{
 				tabbedPane.setSelectedComponent(customer);
 			}
 		}else if(selected instanceof Sale){
-			int choice = sale.parkSale();
+			int choice = 3;
+			if(sale.isSaleEmpty()){
+				choice = 3;
+			}else if(!sale.isSaleEmpty()){
+				 choice = sale.parkSale();
+			}
 			if(choice == 3){
 				Sale selectedSale = (Sale) selected;
 				if(!selectedSale.isDone()){
