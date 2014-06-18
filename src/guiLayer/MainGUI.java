@@ -377,8 +377,11 @@ public class MainGUI extends JFrame{
 	}
 	
 	public void createEmployee(Component e){
+		CreateEmployeeGUI comp = new CreateEmployeeGUI(e, this);
+		addPaneToTab(comp, "Opret medarbejder");
 		//CreateEmployee comp = new CreateEmployee(e, this);
 		//addPaneToTab(comp, "Opret medarbejder");
+
 	}
 	
 	public void addPaneToTab(Component c, String title){
