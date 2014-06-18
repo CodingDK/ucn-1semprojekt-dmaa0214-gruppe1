@@ -128,7 +128,7 @@ public class StorageGUI extends JPanel {
 		    }
 		});
 
-		
+		table.getColumnModel().getColumn(0).setMaxWidth(35);
 		scrollPane.setViewportView(table);
 		
 		JPanel panel_2 = new JPanel();
