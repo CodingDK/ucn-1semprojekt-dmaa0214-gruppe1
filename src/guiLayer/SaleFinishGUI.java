@@ -136,14 +136,14 @@ public class SaleFinishGUI extends JDialog {
 		String employeeNr = txtEmployeeNr.getText();
 		try {
 			saleCtr.finishSale(employeeNr);
-			JOptionPane.showMessageDialog(null, "Kontant salg fuldført");
+			JOptionPane.showMessageDialog(this, "Kontant salg fuldført");
 			setVisible(false);
 			done = true;
 		} catch (NullPointerException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			JOptionPane.showMessageDialog(this, e.getMessage());
 			txtEmployeeNr.requestFocus();
 		} catch (SaleNotCreatedException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
 	}
 

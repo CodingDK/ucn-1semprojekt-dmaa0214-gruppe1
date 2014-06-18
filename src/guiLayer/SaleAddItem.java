@@ -1,29 +1,15 @@
 package guiLayer;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Frame;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
-import javax.swing.border.EmptyBorder;
+import javax.swing.*;
+import javax.swing.border.*;
 
 import modelLayer.Item;
 
 import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.*;
 
 import ctrLayer.ItemCtr;
 import ctrLayer.SaleCtr;
@@ -32,11 +18,12 @@ import exceptionLayer.SaleNotCreatedException;
 import extensions.JIntegerField;
 import extensions.KeyListener;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
 public class SaleAddItem extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtItemNr;
 	private JTextField txtAmont;
@@ -46,7 +33,7 @@ public class SaleAddItem extends JDialog {
 	private JLabel lblAmountStatus;
 	private Item item;
 	private SaleCtr saleCtr;
-
+	
 	/**
 	 * Create the dialog.
 	 */
@@ -67,12 +54,12 @@ public class SaleAddItem extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(new FormLayout(new ColumnSpec[] {
 					FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
-					ColumnSpec.decode("100px"),
-					ColumnSpec.decode("100px"),
-					ColumnSpec.decode("100px"),},
+					ColumnSpec.decode("90px"),
+					ColumnSpec.decode("80px"),
+					ColumnSpec.decode("140px"),},
 				new RowSpec[] {
 					RowSpec.decode("28px"),
-					FormFactory.UNRELATED_GAP_ROWSPEC,
+					RowSpec.decode("11px"),
 					RowSpec.decode("28px"),}));
 			{
 				lblItemNr = new JLabel("Vare nummer: ");
@@ -105,11 +92,9 @@ public class SaleAddItem extends JDialog {
 			{
 				txtAmont = new JIntegerField();
 				txtAmont.addFocusListener(new FocusAdapter() {
-					@Override
 					public void focusLost(FocusEvent e) {
 						checkAmount();
 					}
-					@Override
 					public void focusGained(FocusEvent arg0) {
 						lblAmountStatus.setText("");
 					}
@@ -123,6 +108,7 @@ public class SaleAddItem extends JDialog {
 				panel.add(lblAmountStatus, "4, 3, fill, fill");
 			}
 		}
+		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -160,17 +146,18 @@ public class SaleAddItem extends JDialog {
 				setVisible(false);
 				dispose();
 			} catch (NullPointerException e) {
-				JOptionPane.showMessageDialog(null, e.getMessage());
+				JOptionPane.showMessageDialog(this, e.getMessage());
 			} catch (NotEnoughItemsException e) {
-				JOptionPane.showMessageDialog(null, e.getMessage());
+				JOptionPane.showMessageDialog(this, e.getMessage());
 			} catch (SaleNotCreatedException e) {
-				JOptionPane.showMessageDialog(null, e.getMessage());
+				JOptionPane.showMessageDialog(this, e.getMessage());
 			}
 		} else{
-			JOptionPane.showMessageDialog(null, "Hov.. Du glemte vist noget");
+			JOptionPane.showMessageDialog(this, "Hov.. Du glemte vist noget");
 		}
 	}
-
+	
+	// TODO nulstil/nulstil ikke
 	private boolean checkAmount() {
 		boolean ret = false;
 		String strAmount = txtAmont.getText();
@@ -184,7 +171,7 @@ public class SaleAddItem extends JDialog {
 				if (aviAmount - amount < 0) {
 					lblAmountStatus.setText("Kun " + aviAmount + " på lager");
 				} else {
-					lblAmountStatus.setText("Jubii!");
+					lblAmountStatus.setText("Antal er muligt");
 					ret = true;
 				}
 			} else {
@@ -208,13 +195,13 @@ public class SaleAddItem extends JDialog {
 			Item retItem = iCtr.getItem(itemNr);
 			if(retItem != null){
 				item = retItem;
-				lblItemNrStatus.setText("Done");
+				lblItemNrStatus.setText(item.getName());
 				ret = true;
 			} else {
 				lblItemNrStatus.setText("Varenr. ikke fundet");
 			}
 		} else {
-			lblItemNrStatus.setText("Tomt felt! FYHA");
+			lblItemNrStatus.setText("Varenr. er tomt");
 		}
 		return ret;
 	}
