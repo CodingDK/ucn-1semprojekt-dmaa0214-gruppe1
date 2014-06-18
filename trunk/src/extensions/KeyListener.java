@@ -32,8 +32,7 @@ public class KeyListener {
 	
 	public void addEscapeListenerToTab(final Component creator, final MainGUI mainGUI, final Component tab){
 		ActionListener escListener = new ActionListener() {
-			@Override
-	        public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				int tabIndex = mainGUI.getSelectedTab();
 				mainGUI.switchPane(creator);
 				((JPanel) tab).getParent().remove(tabIndex);

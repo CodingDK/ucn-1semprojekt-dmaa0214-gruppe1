@@ -106,7 +106,21 @@ public class ItemGUI extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		model = new ItemTableModel(items);
 		table = new JTable(model);
-		table.getColumnModel().getColumn(0).setMaxWidth(30);
+		table.getColumnModel().getColumn(0).setPreferredWidth(25);
+		
+		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+		table.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
+		table.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
+		table.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+		
+		table.addMouseListener(new MouseAdapter() {
+
+		    @Override
+		    public void mouseClicked(MouseEvent e) {
+		    	mouseListenerTable(e);
+		    }
+		});
 		
 		popupMenu = new JPopupMenu();
 		JMenuItem mntmDelete = new JMenuItem("Slet Vare");
@@ -127,22 +141,8 @@ public class ItemGUI extends JPanel {
 			}
 		});
 		
-		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
-		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
-		table.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
-		table.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
-		table.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
-		
 		popupMenu.add(mntmDelete);
 		popupMenu.add(mntmUpdate);
-		
-		table.addMouseListener(new MouseAdapter() {
-
-		    @Override
-		    public void mouseClicked(MouseEvent e) {
-		    	mouseListenerTable(e);
-		    }
-		});
 		
 		scrollPane.setViewportView(table);
 		panel_1.add(scrollPane, BorderLayout.CENTER);

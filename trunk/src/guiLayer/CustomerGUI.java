@@ -78,7 +78,7 @@ public class CustomerGUI extends JPanel {
 		model = new CustomerTableModel(c);
 		table = new JTable(model);
 		//		table.setAutoCreateRowSorter(true);
-		table.getColumnModel().getColumn(0).setMaxWidth(30);
+		table.getColumnModel().getColumn(0).setPreferredWidth(25);
 
 		//added
 		popupMenu = new JPopupMenu();

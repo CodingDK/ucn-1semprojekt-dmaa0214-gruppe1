@@ -70,8 +70,8 @@ public class EmployeeGUI extends JPanel {
 
 		model = new EmployeeTableModel(employees);
 		table = new JTable(model);
+		table.getColumnModel().getColumn(0).setPreferredWidth(25);
 		JScrollPane scrollPane = new JScrollPane();
-		table.getColumnModel().getColumn(1).setMaxWidth(250);
 		scrollPane.setViewportView(table);
 		panel_1.add(scrollPane, BorderLayout.CENTER);
 
@@ -173,7 +173,7 @@ public class EmployeeGUI extends JPanel {
 		JButton btnOpretMedarbejder = new JButton("Opret Medarbejder");
 		btnOpretMedarbejder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CreateEmployee();
+				//CreateEmployee();
 			}
 		});
 		GroupLayout gl_panel_6 = new GroupLayout(panel_6);
