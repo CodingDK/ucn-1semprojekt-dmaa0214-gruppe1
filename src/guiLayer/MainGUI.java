@@ -430,4 +430,8 @@ public class MainGUI extends JFrame{
 		sale.addItem(i);
 		tabbedPane.setSelectedComponent(sale);
 	}
+	
+	public CloseButtonTabbedPane getTabbedPane(){
+		return tabbedPane;
+	}
 }
