@@ -14,6 +14,7 @@ import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -84,6 +85,7 @@ public class MainGUI extends JFrame{
 		this.setBounds(100, 100, 900, 515);
 		this.setMinimumSize(new Dimension(900, 515));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationByPlatform(true);
 		
 		tabbedPane = new CloseButtonTabbedPane();
 		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
@@ -93,8 +95,8 @@ public class MainGUI extends JFrame{
 		customer = new CustomerGUI(this);
 		order = new OrderGUI(this);
 		employee = new EmployeeGUI(this);
-		category = new CategoryGUI();
-		storage = new StorageGUI();
+		category = new CategoryGUI(this);
+		storage = new StorageGUI(this);
 		
 		tabbedPane.insertTab("Salg", null, sale, null, 0);
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_S);
@@ -263,7 +265,9 @@ public class MainGUI extends JFrame{
 
 	protected void login() {
 		if(!admin){
-			new LoginDialog(null, this);
+			JDialog login = new LoginDialog(null, this);
+            login.setLocationRelativeTo(this);
+            login.setVisible(true);
 			if(admin){
 				grantAccess();
 				

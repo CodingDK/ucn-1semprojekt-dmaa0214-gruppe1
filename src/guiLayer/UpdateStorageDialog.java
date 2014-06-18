@@ -83,8 +83,6 @@ public class UpdateStorageDialog extends JDialog {
 					buttonPane.add(cancelButton);
 				}
 			}
-			
-			setVisible(true);
 		}
 	}
 

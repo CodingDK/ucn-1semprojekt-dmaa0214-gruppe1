@@ -21,6 +21,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -385,7 +386,9 @@ public class ItemGUI extends JPanel {
 			int rowindex = table.getSelectedRow();
 			int id = (Integer) table.getValueAt(rowindex, 0);
 			ItemCtr iCtr = new ItemCtr();
-			new ItemInfoDialog(iCtr.getItem(id), parent, this);
+			JDialog itemInfo = new ItemInfoDialog(iCtr.getItem(id), parent, this);
+			itemInfo.setLocationRelativeTo(parent);
+			itemInfo.setVisible(true);
 			if(saleItem != null){
 				parent.addToSale(saleItem);
 				saleItem = null;

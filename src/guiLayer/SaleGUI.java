@@ -24,6 +24,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -549,7 +550,9 @@ public class SaleGUI extends JPanel {
 	}
 	
 	private void makeAddItem() {
-		new SaleAddItem(null, saleCtr);
+		JDialog addItem = new SaleAddItem(null, saleCtr);
+        addItem.setLocationRelativeTo(mainGUI);
+        addItem.setVisible(true);
 		
 		updatePrices();
 		updateButtons();

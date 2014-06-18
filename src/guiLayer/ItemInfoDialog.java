@@ -170,7 +170,6 @@ public class ItemInfoDialog extends JDialog {
 		}
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnToSale, btnCancel, btnSave}));
 		fillTxtArea();
-		setVisible(true);
 	}
 
 	private void fillTxtArea() {
