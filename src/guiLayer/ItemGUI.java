@@ -16,40 +16,22 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.RowFilter;
-import javax.swing.SwingUtilities;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
 
-import personLayer.Customer;
 import modelLayer.Category;
 import modelLayer.Item;
 import modelLayer.ItemCont;
 import modelLayer.Storage;
 
 import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.*;
 
 import ctrLayer.CategoryCtr;
-import ctrLayer.CustomerCtr;
 import ctrLayer.ItemCtr;
 import extensions.ItemTableModel;
 
@@ -315,7 +297,6 @@ public class ItemGUI extends JPanel {
 	}
 
 	protected void showAll() {
-		CategoryCtr cCtr = new CategoryCtr();
 		for(Category c : categories){
 			ItemCont iCont = ItemCont.getInstance(c);
 			items.addAll(iCont.getAll());
