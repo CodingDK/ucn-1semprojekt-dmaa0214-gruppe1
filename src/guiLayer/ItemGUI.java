@@ -248,7 +248,7 @@ public class ItemGUI extends JPanel {
 		panel_5.add(btnSearch, "2, 2, fill, top");
 		panel_4.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JLabel lblName = new JLabel("Vare");
+		JLabel lblName = new JLabel("Varenavn");
 		lblName.setToolTipText("Her indtastes det ønskede vare navn");
 		panel_4.add(lblName);
 		
