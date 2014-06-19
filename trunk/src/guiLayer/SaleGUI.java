@@ -25,6 +25,7 @@ import com.jgoodies.forms.layout.*;
 import ctrLayer.SaleCtr;
 import extensions.JIntegerField;
 import extensions.SaleItemTableModel;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 public class SaleGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -237,23 +238,25 @@ public class SaleGUI extends JPanel {
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
 		gl_panel_4.setHorizontalGroup(
-				gl_panel_4.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_4.createSequentialGroup()
-								.addContainerGap()
-								.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
-										.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-										.addComponent(panel_8, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
-								.addGap(3))
-				);
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_8, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+					.addGap(3))
+				.addGroup(Alignment.TRAILING, gl_panel_4.createSequentialGroup()
+					.addGap(3)
+					.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+					.addContainerGap())
+		);
 		gl_panel_4.setVerticalGroup(
-				gl_panel_4.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_4.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap())
-				);
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel_4.createSequentialGroup()
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
 		
 		btnFindOrRemove = new JButton("Find Kunde");
 		btnFindOrRemove.addActionListener(new ActionListener() {
@@ -348,6 +351,7 @@ public class SaleGUI extends JPanel {
 			}
 		});
 		panel_9.add(btnFinish);
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnAddItem, btnFindOrRemove, btnCreate, btnCancel, btnPark, btnFinish}));
 		
 		saleCtr = new SaleCtr();
 		if (sale != null) {
