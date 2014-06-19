@@ -140,7 +140,7 @@ public class SaleAddItem extends JDialog {
 	}
 
 	private void addItem() {
-		if(checkItemNr() && checkAmount()) {
+		if(checkAmount() && checkItemNr()) {
 			int amount = Integer.parseInt(txtAmont.getText());
 			try {
 				saleCtr.addItem(item, amount);
@@ -153,12 +153,17 @@ public class SaleAddItem extends JDialog {
 			} catch (SaleNotCreatedException e) {
 				JOptionPane.showMessageDialog(this, e.getMessage());
 			}
+		}
+		else if(!checkItemNr()) {
+			JOptionPane.showMessageDialog(this, "Varenummer blev ikke fundet","Fejl",JOptionPane.ERROR_MESSAGE);
+		}
+		else if(!checkAmount()){
+			JOptionPane.showMessageDialog(this, "Antal er ikke muligt","Fejl",JOptionPane.ERROR_MESSAGE);
 		} else{
-			JOptionPane.showMessageDialog(this, "Hov.. Du glemte vist noget");
+			JOptionPane.showMessageDialog(this, "Hov.. Du glemte vist noget","Fejl",JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
-	// TODO nulstil/nulstil ikke
 	private boolean checkAmount() {
 		boolean ret = false;
 		String strAmount = txtAmont.getText();
