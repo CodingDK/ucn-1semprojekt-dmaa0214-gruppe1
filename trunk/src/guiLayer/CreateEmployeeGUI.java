@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -37,7 +38,7 @@ public class CreateEmployeeGUI extends JPanel {
 	private JBlinkLabel lblState;
 	private MainGUI parent;
 	private Component creator;
-	private JTextField txtName;
+	public JTextField txtName;
 	private JTextField txtStreet;
 	private JTextField txtCity;
 	private JTextField txtTlf;
@@ -48,6 +49,11 @@ public class CreateEmployeeGUI extends JPanel {
 	private JTextField txtCpr2;
 	private JTextField txtPassword;
 	private JCheckBox chkAdmin;
+	private Employee updateEmp;
+	public AbstractButton btnCreate;
+	private JLabel lblPassword;
+	private JLabel lblCprnr;
+	private JLabel label;
 	
 	/**
 	 * Create the panel.
@@ -56,15 +62,32 @@ public class CreateEmployeeGUI extends JPanel {
 		this.creator = e;
 		this.parent = mainGUI;
 		buildPanel();
+		btnCreate.setText("Opret");
 	}
 	
 	/**
 	 * @wbp.parser.constructor
 	 */
 	public CreateEmployeeGUI(Component e, MainGUI mainGUI, Employee employee) {
+		updateEmp = employee;
 		this.creator = e;
 		this.parent = mainGUI;
 		buildPanel();
+		lblPassword.setVisible(false);
+		txtPassword.setVisible(false);
+		txtCpr1.setVisible(false);
+		txtCpr2.setVisible(false);
+		lblCprnr.setVisible(false);
+		label.setVisible(false);
+		btnCreate.setText("Ret");
+		txtName.setText(employee.getName());
+		txtStreet.setText(employee.getStreet());
+		txtCity.setText(employee.getCity());
+		txtTlf.setText(employee.getPhoneNr());
+		txtEmail.setText(employee.getEmail());
+		txtEmpNr.setText(employee.getEmployeeNr());
+		txtPostalCode.setText(employee.getPostCode());
+		chkAdmin.setSelected(employee.getAdmin());
 	}
 	
 	public void buildPanel() {
@@ -158,7 +181,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel.add(txtEmail, "3, 12, fill, default");
 		txtEmail.setColumns(10);
 		
-		JLabel lblCprnr = new JLabel("Cprnr");
+		lblCprnr = new JLabel("Cprnr");
 		panel.add(lblCprnr, "2, 14, left, default");
 		
 		JPanel panel_2 = new JPanel();
@@ -185,7 +208,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel_2.add(txtCpr1, "1, 1, fill, default");
 		txtCpr1.setColumns(10);
 		
-		JLabel label = new JLabel("-");
+		label = new JLabel("-");
 		panel_2.add(label, "3, 1, right, default");
 		
 		txtCpr2 = new JTextField();
@@ -224,7 +247,7 @@ public class CreateEmployeeGUI extends JPanel {
 		});
 		panel.add(chkAdmin, "3, 18, center, default");
 		
-		JLabel lblPassword = new JLabel("Kodeord");
+		lblPassword = new JLabel("Kodeord");
 		panel.add(lblPassword, "2, 20, left, default");
 		
 		txtPassword = new JPasswordField();
@@ -245,11 +268,14 @@ public class CreateEmployeeGUI extends JPanel {
 			}
 		});
 		
-		JButton btnCreate = new JButton("Opret");
-		btnCreate = new JButton("Opret");
+		btnCreate = new JButton();
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				createEmployee();
+				if(updateEmp == null){
+					createEmployee();
+				} else {
+					updateEmployee();
+				}
 			}
 		});
 		panel_1.setLayout(new FormLayout(new ColumnSpec[] {
@@ -295,6 +321,33 @@ public class CreateEmployeeGUI extends JPanel {
 		}		
 	}
 	
+	protected void updateEmployee(){
+		
+		if(validdateUpdate() ){
+			String name = txtName.getText();
+			String street  = txtStreet.getText();
+			String postalCode = txtPostalCode.getText();
+			String city = txtCity.getText();
+			String tlf = txtTlf.getText();
+			String eMail = txtEmail.getText();
+			String empNr = txtEmpNr.getText();
+			boolean admin;
+			if(chkAdmin.isSelected()){
+				admin = true;
+			} else  {
+				admin = false;			
+			}
+		EmployeeCtr eCtr = new EmployeeCtr();
+		
+		eCtr.updateEmployee(updateEmp.getId(), empNr, name, tlf, street, eMail, city, postalCode, admin);	
+		} else {
+			lblState.setText("Medarbejderen er ikke rettet");
+			lblState.startBlinking(true, true);
+		}
+		parent.switchPane(creator);
+		getParent().remove(this);
+	}
+	
 	private boolean validdateField() {
 		String name = txtName.getText();
 		if (name == null || name.trim().isEmpty()) {
@@ -332,9 +385,55 @@ public class CreateEmployeeGUI extends JPanel {
 			lblState.startBlinking(true, true);
 			return false;
 		}
-		//String cpr = txtCpr1.getText() + "-" + txtCpr2.getText();
+		
 		if (txtCpr1.getText().length() != 6 || txtCpr2.getText().length() != 4) {
 			lblState.setText("Cprnr er ikke udfyldt korrekt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		String empNr = txtEmpNr.getText();
+		if (empNr == null || empNr.trim().isEmpty()) {
+			lblState.setText("Medarbejdernummeret må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean validdateUpdate() {
+		String name = txtName.getText();
+		if (name == null || name.trim().isEmpty()) {
+			lblState.setText("Navn må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		String street = txtStreet.getText();
+		if (street == null || street.trim().isEmpty()) {
+			lblState.setText("Gade må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		String postalCode = txtPostalCode.getText();
+		if (postalCode == null || postalCode.trim().isEmpty()) {
+			lblState.setText("Postnummer må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		String city = txtCity.getText();
+		if (city == null || city.trim().isEmpty()) {
+			lblState.setText("By må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		String tlf = txtTlf.getText();
+		if (tlf == null || tlf.trim().isEmpty()) {
+			lblState.setText("Telefonnummeret må ikke være tomt");
+			lblState.startBlinking(true, true);
+			return false;
+		}
+		String eMail = txtEmail.getText();
+		if (eMail == null || eMail.trim().isEmpty()) {
+			lblState.setText("E-mail må ikke være tomt");
 			lblState.startBlinking(true, true);
 			return false;
 		}
