@@ -131,7 +131,7 @@ public class CustomerGUI extends JPanel {
 
 		JPanel searchGroupPanel = new JPanel();
 		searchGroupPanel.setBorder(new TitledBorder(null, "Find kunde", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(59, 59, 59)));
-		searchGroupPanel.setBounds(10, 22, 240, 162);
+		searchGroupPanel.setBounds(10, 28, 240, 162);
 		searchPanel_1.add(searchGroupPanel);
 
 		JPanel searchGridPanel = new JPanel();
@@ -226,7 +226,7 @@ public class CustomerGUI extends JPanel {
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Opret Kunde", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 184, 240, 58);
+		panel_1.setBounds(10, 190, 240, 58);
 		searchPanel_1.add(panel_1);
 
 		JPanel panel_2 = new JPanel();

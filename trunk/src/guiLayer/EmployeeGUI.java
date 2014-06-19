@@ -133,7 +133,7 @@ public class EmployeeGUI extends JPanel {
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "Find medarbejder", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(10, 22, 240, 95);
+		panel_3.setBounds(10, 27, 230, 95);
 		panel.add(panel_3);
 
 		JPanel panel_4 = new JPanel();
@@ -202,7 +202,7 @@ public class EmployeeGUI extends JPanel {
 
 		panel_6 = new JPanel();
 		panel_6.setBorder(new TitledBorder(null, "Opret Medarbejder", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_6.setBounds(10, 146, 240, 58);
+		panel_6.setBounds(10, 151, 240, 58);
 		panel.add(panel_6);
 
 
@@ -231,7 +231,7 @@ public class EmployeeGUI extends JPanel {
 		panel_6.setLayout(gl_panel_6);
 
 		errLabel = new JBlinkLabel("");
-		errLabel.setBounds(10, 6, 240, 16);
+		errLabel.setBounds(10, 11, 240, 16);
 		panel.add(errLabel);
 		panel_6.setVisible(false);
 	}
