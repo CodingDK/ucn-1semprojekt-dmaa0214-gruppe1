@@ -76,6 +76,7 @@ public class SaleAddItem extends JDialog {
 					@Override
 					public void focusGained(FocusEvent arg0) {
 						lblItemNrStatus.setText("");
+						lblAmountStatus.setText("");
 					}
 				});
 				panel.add(txtItemNr, "3, 1, fill, fill");
@@ -96,7 +97,7 @@ public class SaleAddItem extends JDialog {
 						checkAmount();
 					}
 					public void focusGained(FocusEvent arg0) {
-						lblAmountStatus.setText("");
+						//lblAmountStatus.setText("");
 					}
 				});
 				lblAmount.setLabelFor(txtAmont);
@@ -178,7 +179,7 @@ public class SaleAddItem extends JDialog {
 				lblAmountStatus.setText("Vælg vare først!");
 			}
 		} else {
-			lblAmountStatus.setText("større end 0");
+			lblAmountStatus.setText("Vælg antal større end 0");
 		}
 		return ret;
 		
