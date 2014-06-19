@@ -187,7 +187,7 @@ public class CreateCustomerGUI extends JPanel {
 		panel_1.add(lblEmail, "2, 12, fill, fill");
 		
 		txtEmail = new JTextField();
-		txtEmail.setDocument(new SpaceDocument());
+		txtEmail.setDocument(new SpaceDocument(true));
 		panel_1.add(txtEmail, "3, 12, fill, fill");
 		txtEmail.setColumns(10);
 		

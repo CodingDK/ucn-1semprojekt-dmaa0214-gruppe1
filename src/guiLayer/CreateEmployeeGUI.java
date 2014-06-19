@@ -151,7 +151,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel.add(lblEmail, "2, 12, left, default");
 		
 		txtEmail = new JTextField();
-		txtEmail.setDocument(new SpaceDocument());
+		txtEmail.setDocument(new SpaceDocument(false));
 		panel.add(txtEmail, "3, 12, fill, default");
 		txtEmail.setColumns(10);
 		
