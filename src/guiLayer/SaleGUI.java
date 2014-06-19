@@ -179,6 +179,7 @@ public class SaleGUI extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
 		
+		partSales = new ArrayList<PartSale>();
 		model = new SaleItemTableModel(partSales);
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
