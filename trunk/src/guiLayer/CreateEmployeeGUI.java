@@ -58,6 +58,9 @@ public class CreateEmployeeGUI extends JPanel {
 		buildPanel();
 	}
 	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public CreateEmployeeGUI(Component e, MainGUI mainGUI, Employee employee) {
 		this.creator = e;
 		this.parent = mainGUI;
@@ -237,7 +240,7 @@ public class CreateEmployeeGUI extends JPanel {
 		JButton btnAnnuller = new JButton("Annuller");
 		btnAnnuller.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//parent.switchPane(eGUI);
+				parent.switchPane(creator);
 				getParent().remove(CreateEmployeeGUI.this);
 			}
 		});
