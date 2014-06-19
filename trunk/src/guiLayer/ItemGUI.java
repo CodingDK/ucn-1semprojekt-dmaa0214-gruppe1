@@ -179,7 +179,7 @@ public class ItemGUI extends JPanel {
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "Søg Vare", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(6, 26, 238, 99);
+		panel_3.setBounds(6, 38, 238, 99);
 		panel.add(panel_3);
 		
 		JPanel panel_4 = new JPanel();
@@ -246,7 +246,7 @@ public class ItemGUI extends JPanel {
 		
 		panel_6 = new JPanel();
 		panel_6.setBorder(new TitledBorder(null, "Opret Vare", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_6.setBounds(6, 137, 238, 64);
+		panel_6.setBounds(6, 149, 238, 64);
 		panel.add(panel_6);
 		
 		JPanel panel_7 = new JPanel();
