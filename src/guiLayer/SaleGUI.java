@@ -505,9 +505,10 @@ public class SaleGUI extends JPanel {
 	}
 	
 	public int parkSale() {
-		int ret = 0;
+		int ret = 3;
 		if (isSaleEmpty()) {
 			JOptionPane.showMessageDialog(mainGUI, "Du kan ikke parkere et tomt salg", "Advarsel", JOptionPane.ERROR_MESSAGE);
+			ret = 0;
 		} else if (saleCtr.getSale().getCustomer() == null) {
 			new JFrame();
 			String[] options = new String[2];
