@@ -4,14 +4,26 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class CloseButtonTabbedPane extends JTabbedPane {
-	/**
-	 * 
-	 */
+	private int previousTabIndex;
+	private int currentTabIndex = 0;
+	private JTabbedPane tabbedPane = this;
 	private static final long serialVersionUID = 1L;
-
+	
 	public CloseButtonTabbedPane() {
+		this.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent ce) {
+                previousTabIndex = currentTabIndex;
+                currentTabIndex = tabbedPane.getSelectedIndex();
+            }
+        });
+	}
+	
+	public void goToPrev(){
+		setSelectedIndex(previousTabIndex);
 	}
 
 	@Override
@@ -54,7 +66,8 @@ public class CloseButtonTabbedPane extends JTabbedPane {
 			button.setBorder(BorderFactory.createLineBorder(new Color(214,217,223, 100), 1));
 			button.addMouseListener(new MouseListener() {
 				public void mouseClicked(MouseEvent e) {
-					JTabbedPane tabbedPane = (JTabbedPane) getParent().getParent();
+					CloseButtonTabbedPane tabbedPane = (CloseButtonTabbedPane) getParent().getParent();
+					tabbedPane.goToPrev();
 					tabbedPane.remove(tab);
 				}
 
