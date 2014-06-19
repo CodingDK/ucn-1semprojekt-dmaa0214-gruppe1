@@ -50,7 +50,7 @@ public class CreateEmployeeGUI extends JPanel {
 	private JTextField txtPassword;
 	private JCheckBox chkAdmin;
 	private Employee updateEmp;
-	public AbstractButton btnCreate;
+	public JButton btnCreate;
 	private JLabel lblPassword;
 	private JLabel lblCprnr;
 	private JLabel label;
