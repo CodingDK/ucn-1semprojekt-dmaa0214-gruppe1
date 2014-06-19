@@ -68,6 +68,7 @@ public class CreateCustomerGUI extends JPanel {
 	private Component creator;
 	private MainGUI mainGUI;
 	private boolean isUpdate = false;
+	public JButton btnOpret;
 	
 	/**
 	 * @wbp.parser.constructor
@@ -287,7 +288,7 @@ public class CreateCustomerGUI extends JPanel {
 				new RowSpec[] {
 						RowSpec.decode("fill:28px"),}));
 		
-		JButton btnOpret = new JButton();
+		btnOpret = new JButton();
 		if(isUpdate){
 			btnOpret.setText("Ret");
 		}else{
