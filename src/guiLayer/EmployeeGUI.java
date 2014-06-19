@@ -54,6 +54,9 @@ public class EmployeeGUI extends JPanel {
 	private JBlinkLabel errLabel;
 	public JButton btnFind;
 	private JPopupMenu popupMenu;
+	private JMenuItem mntmDelete;
+	private JMenuItem mntmUpdate;
+	private boolean admin;
 
 	/**
 	 * Create the panel.
@@ -82,7 +85,7 @@ public class EmployeeGUI extends JPanel {
 		table.getColumnModel().getColumn(0).setPreferredWidth(25);
 		
 		popupMenu = new JPopupMenu();
-		JMenuItem mntmDelete = new JMenuItem("Slet");
+		mntmDelete = new JMenuItem("Slet");
 		mntmDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int rowindex = table.getSelectedRow();
@@ -91,7 +94,7 @@ public class EmployeeGUI extends JPanel {
 				removeEmployee(e);
 			}
 		});
-		JMenuItem mntmUpdate = new JMenuItem("Ret Medarbejder");
+		mntmUpdate = new JMenuItem("Ret Medarbejder");
 		mntmUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int rowindex = table.getSelectedRow();
@@ -101,7 +104,7 @@ public class EmployeeGUI extends JPanel {
 		});
 		popupMenu.add(mntmDelete);
 		popupMenu.add(mntmUpdate);
-
+		popupMenu.setVisible(false);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -133,7 +136,7 @@ public class EmployeeGUI extends JPanel {
 
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "Find medarbejder", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_3.setBounds(10, 27, 230, 95);
+		panel_3.setBounds(10, 28, 240, 95);
 		panel.add(panel_3);
 
 		JPanel panel_4 = new JPanel();
@@ -143,14 +146,10 @@ public class EmployeeGUI extends JPanel {
 		gl_panel_3.setHorizontalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_3.createSequentialGroup()
-							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(0))
-						.addGroup(gl_panel_3.createSequentialGroup()
-							.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-							.addContainerGap())))
+					.addGroup(gl_panel_3.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		gl_panel_3.setVerticalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
@@ -158,7 +157,7 @@ public class EmployeeGUI extends JPanel {
 					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(33, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel_5.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.GROWING_BUTTON_COLSPEC,
@@ -257,11 +256,13 @@ public class EmployeeGUI extends JPanel {
 	
 
 	private void mouseListenerTable(MouseEvent e) {
-		Point p = e.getPoint();
-		int rowNumber = table.rowAtPoint(p);
-		table.setRowSelectionInterval(rowNumber, rowNumber);
-		if(SwingUtilities.isRightMouseButton(e)){
-			popupMenu.show(table, e.getX(), e.getY());
+		if(admin){
+			Point p = e.getPoint();
+			int rowNumber = table.rowAtPoint(p);
+			table.setRowSelectionInterval(rowNumber, rowNumber);
+			if(SwingUtilities.isRightMouseButton(e)){
+				popupMenu.show(table, e.getX(), e.getY());
+			}
 		}
 	}
 
@@ -283,8 +284,10 @@ public class EmployeeGUI extends JPanel {
 	public void setAdmin(boolean admin){
 		if(admin){
 			panel_6.setVisible(true);
+			this.admin = true;
 		} else if(!admin){
 			panel_6.setVisible(false);
+			this.admin = false;
 		}
 	}
 
