@@ -105,12 +105,14 @@ public class SaleCtr {
 				sale.setEmployee(employee);
 				
 				ArrayList<PartSale> partsales = sale.getPartSales();
-				
+				double totalPrice = 0;
 				for (PartSale ps : partsales) {
 					Item item = ps.getItem();
 					item.addReserved(-ps.getAmount());
 					item.addAmount(-ps.getAmount());
+					totalPrice += (item.getSalePrice()*ps.getAmount());
 				}
+				sale.setTotalPrice(totalPrice);
 				sale.setDone(true);
 				SaleCont.getInstance().addSale(sale);
 			}
@@ -151,6 +153,13 @@ public class SaleCtr {
 			if (!sCont.getAll().contains(sale)) {
 				sCont.addSale(sale);
 			}
+			ArrayList<PartSale> partsales = sale.getPartSales();
+			double totalPrice = 0;
+			for (PartSale ps : partsales) {
+				Item item = ps.getItem();
+				totalPrice += (item.getSalePrice()*ps.getAmount());
+			}
+			sale.setTotalPrice(totalPrice);
 			ret = true;
 		}
 		return ret;
