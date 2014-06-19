@@ -155,6 +155,10 @@ public class SaleGUI extends JPanel {
 		model = new SaleItemTableModel(partSales);
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
+		table.getColumnModel().getColumn(0).setPreferredWidth(20);
+		table.getColumnModel().getColumn(2).setPreferredWidth(25);
+		table.getColumnModel().getColumn(3).setPreferredWidth(25);
+		table.getColumnModel().getColumn(4).setPreferredWidth(25);
 		
 		final JIntegerField tableEditAmount = new JIntegerField();
 		tableEditAmount.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.DARK_GRAY),
