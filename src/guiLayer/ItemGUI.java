@@ -34,6 +34,7 @@ import com.jgoodies.forms.layout.*;
 import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
 import extensions.ItemTableModel;
+import extensions.SpaceDocument;
 
 public class ItemGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -235,6 +236,7 @@ public class ItemGUI extends JPanel {
 		panel_4.add(lblName);
 		
 		txtName = new JTextField();
+		txtName.setDocument(new SpaceDocument());
 		txtName.setToolTipText("Her indtastes det ønskede vare navn");
 		txtName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
