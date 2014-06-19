@@ -119,10 +119,12 @@ public class Demo {
 				eCtr.createEmployee("3", "Bjarne", "12345678", "Hobrovej 26", "bjarne@ucn.dk", "Vestbjerg", "9380", "100170-2141", null, false);
 
 				for(int i = 4; i < 75; i++){
-					eCtr.createEmployee(i+"", name(), phone(), street(), email("@vb.dk"), city(), postCode(), cpr(), null, false);
+					String name = name();
+					eCtr.createEmployee(i+"", name, phone(), street(), email(name, "@vb.dk"), city(), postCode(), cpr(), null, false);
 				}
 				for(int i = 75; i < 85; i++){
-					eCtr.createEmployee(i+"", name(), phone(), street(), email("@vb.dk"), city(), postCode(), cpr(), "asd", true);
+					String name = name();
+					eCtr.createEmployee(i+"", name, phone(), street(), email(name, "@vb.dk"), city(), postCode(), cpr(), "asd", true);
 				}
 			} catch (AlreadyExistException e1) {
 				e1.printStackTrace();
@@ -133,12 +135,14 @@ public class Demo {
 			cusCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
 
 			for(int i = 0; i < 125; i++){
-				cusCtr.createPrivateCustomer(name(), phone(), street(), email("@priv.dk"), city(), postCode(), cpr(), "1");
+				String name = name();
+				cusCtr.createPrivateCustomer(name, phone(), street(), email(name, "@priv.dk"), city(), postCode(), cpr(), "1");
 
 			}
 			
 			for(int i = 0; i < 125; i++) {
-				cusCtr.createBusinessCustomer(name(), phone(), street(), email("@ft.dk"), city(), postCode(), company(), cvrNr());
+				String name = name();
+				cusCtr.createBusinessCustomer(name, phone(), street(), email(name, "@ft.dk"), city(), postCode(), company(), cvrNr());
 			}
 
 			cusCtr.createBusinessCustomer("Kis", "72691867", "Sofiendalsvej 60", "kbha@ucn.dk", "Aalborg", "9000", "UCN A/S", "33556063");
@@ -203,11 +207,9 @@ public class Demo {
 		return cityArray[city];
 	}
 	
-	private String email(String at){
-		String[] nameArray = {"Hans T.", "Grethe T.", "Flemming T.", "Birthe T.", "Åse T.", "Arne T.", "Henriette Birgitte Hansen T.", "Ib T.", "Mads", "Svend", "Poul", "Anders", "Rene", "Signe", "Marie", "Kristian"};
-		int mail = rand.nextInt(nameArray.length);
+	private String email(String name, String at){
 		int nr = (rand.nextInt(89)+10);
-		return nameArray[mail].toLowerCase().substring(0,3).trim()+nr+at;
+		return name.toLowerCase().substring(0,3).trim()+nr+at;
 	}
 	
 	private String name(){
