@@ -188,6 +188,7 @@ public class MainGUI extends JFrame{
 				} else if(comp.equals(sale)){
 					sale.btnAddItem.requestFocusInWindow();
 					getRootPane().setDefaultButton(sale.btnAddItem);
+					sale.updateCustomer();
 				} else if(comp.equals(customer)){
 					customer.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(customer.btnFind);
@@ -385,6 +386,11 @@ public class MainGUI extends JFrame{
 	public void createBusinesssCustomer(SaleGUI sGUI){
 		CreateCustomerGUI comp = new CreateCustomerGUI(true, sGUI, this);
 		addPaneToTab(comp, "Opret Erhvervs Kunde");
+	}
+	
+	public void editCustomer(Customer cus){
+		CreateCustomerGUI comp = new CreateCustomerGUI(cus, sale, this);
+		addPaneToTab(comp, "Ændre Kunde");
 	}
 	
 	public void createEmployee(Component e){
