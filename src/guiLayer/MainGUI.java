@@ -186,6 +186,7 @@ public class MainGUI extends JFrame{
 					category.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(category.btnCreate);
 				} else if(comp.equals(sale)){
+					sale.btnAddItem.requestFocusInWindow();
 					getRootPane().setDefaultButton(sale.btnAddItem);
 				} else if(comp.equals(customer)){
 					customer.txtName.requestFocusInWindow();
