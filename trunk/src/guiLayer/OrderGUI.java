@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -70,7 +72,7 @@ public class OrderGUI extends JPanel {
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
-		
+
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 0, 5);
@@ -79,19 +81,19 @@ public class OrderGUI extends JPanel {
 		gbc_panel.gridy = 0;
 		add(panel, gbc_panel);
 		panel.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panel_2 = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel_2.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		panel.add(panel_2, BorderLayout.NORTH);
-		
+
 		JLabel lblNewLabel = new JLabel("Ordreoversigt");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		panel_2.add(lblNewLabel);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
-		
+
 		model = new OrderTableModel(sales);
 		table = new JTable(model);
 		table.getColumnModel().getColumn(0).setMaxWidth(30);
@@ -102,46 +104,46 @@ public class OrderGUI extends JPanel {
 			}
 		});
 		scrollPane.setViewportView(table);
-	
-		
+
+
 		JPanel panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 1;
 		gbc_panel_1.gridy = 0;
 		add(panel_1, gbc_panel_1);
-		
+
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "Find kunde", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		
+
 		JPanel panel_6 = new JPanel();
-		
+
 		lblState = new JBlinkLabel("");
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(6)
-							.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE))
-						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-						.addComponent(lblState, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
-		);
+						.addContainerGap()
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+										.addGap(6)
+										.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 228, GroupLayout.PREFERRED_SIZE))
+										.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+										.addComponent(lblState, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE))
+										.addContainerGap())
+				);
 		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblState, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(75, Short.MAX_VALUE))
-		);
-		
+						.addContainerGap()
+						.addComponent(lblState, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(75, Short.MAX_VALUE))
+				);
+
 		comboBox = new JComboBox<String>();
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -150,35 +152,35 @@ public class OrderGUI extends JPanel {
 		});
 		String[] options = {"Parkeret salg", "Afsluttet salg", "Alle salg", "Andet"};
 		comboBox.setModel(new DefaultComboBoxModel<String>(options));
-		
+
 		panel_6.add(comboBox);
-		
+
 		JPanel panel_4 = new JPanel();
-		
+
 		JPanel panel_5 = new JPanel();
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 210, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 210, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(100, Short.MAX_VALUE))
-		);
+						.addContainerGap()
+						.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+								.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 210, GroupLayout.PREFERRED_SIZE)
+								.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 210, GroupLayout.PREFERRED_SIZE))
+								.addContainerGap(100, Short.MAX_VALUE))
+				);
 		gl_panel_3.setVerticalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		
+						.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				);
+
 		DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
 		rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
 		table.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
-		
+
 		btnSearch = new JButton("Søg");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -186,7 +188,7 @@ public class OrderGUI extends JPanel {
 			}
 		});
 		panel_5.add(btnSearch);
-		
+
 		JButton btnClear = new JButton("Nulstil");
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -199,32 +201,32 @@ public class OrderGUI extends JPanel {
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
+				new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
-		
+
 		JLabel lblName = new JLabel("Kundenavn");
 		panel_4.add(lblName, "2, 2, right, default");
-		
+
 		txtName = new JTextField();
 		txtName.setDocument(new SpaceDocument());
 		panel_4.add(txtName, "4, 2, fill, default");
 		txtName.setColumns(10);
-		
+
 		JLabel lblKundeId = new JLabel("Kunde ID");
 		panel_4.add(lblKundeId, "2, 4, right, default");
-		
+
 		txtID = new JIntegerField();
 		panel_4.add(txtID, "4, 4, fill, top");
 		txtID.setColumns(10);
 		panel_3.setLayout(gl_panel_3);
 		panel_1.setLayout(gl_panel_1);
-		
+
 		update();
 	}
-	
+
 	public void update(){
 		int i = comboBox.getSelectedIndex();
 		SaleCtr sCtr = new SaleCtr();
@@ -245,13 +247,13 @@ public class OrderGUI extends JPanel {
 		model.refresh(sales);
 		model.fireTableDataChanged();
 	}
-	
+
 	private void clearInput(){
 		txtID.setText("");
 		txtName.setText("");
 		comboBox.setSelectedIndex(0);
 	}
-	
+
 	private void mouseListenerTable(MouseEvent e) {
 		Point p = e.getPoint();
 		int rowNumber = table.rowAtPoint(p);
@@ -264,12 +266,12 @@ public class OrderGUI extends JPanel {
 			}
 		}
 	}
-	
+
 	private void searchCustomer(){
 		comboBox.setSelectedIndex(3);
 		String name = txtName.getText();
 		String strID = txtID.getText();
-		
+
 		SaleCtr sCtr = new SaleCtr();
 		sales = sCtr.getSales();
 		ArrayList<Sale> sales1 = new ArrayList<Sale>();
