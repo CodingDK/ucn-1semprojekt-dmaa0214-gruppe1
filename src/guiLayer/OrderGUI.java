@@ -43,6 +43,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import ctrLayer.CustomerCtr;
 import ctrLayer.SaleCtr;
 import extensions.JBlinkLabel;
+import extensions.JIntegerField;
 import extensions.OrderTableModel;
 
 public class OrderGUI extends JPanel {
@@ -216,7 +217,7 @@ public class OrderGUI extends JPanel {
 		JLabel lblKundeId = new JLabel("Kunde ID");
 		panel_4.add(lblKundeId, "2, 4, right, default");
 		
-		txtID = new JTextField();
+		txtID = new JIntegerField();
 		panel_4.add(txtID, "4, 4, fill, top");
 		txtID.setColumns(10);
 		panel_3.setLayout(gl_panel_3);
