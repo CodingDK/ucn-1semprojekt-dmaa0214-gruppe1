@@ -152,7 +152,7 @@ public class Demo {
 					sCtr.addItem(itemi, 1);
 					Customer c = cusCtr.findCustomer(90+i);
 					sCtr.setCustomer(c);
-					sCtr.finishSale("1");
+					sCtr.finishSale(""+(rand.nextInt(75)+1));
 				}
 				
 				for(int i = 30; i<55; i++){
