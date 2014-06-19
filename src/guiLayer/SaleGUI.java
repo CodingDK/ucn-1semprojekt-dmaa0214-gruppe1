@@ -411,7 +411,7 @@ public class SaleGUI extends JPanel {
 			
 		}
 		if (saleCtr.getSale().getCustomer() != null) {
-			btnFindOrRemove.setText("Slet Kunde");
+			btnFindOrRemove.setText("Fjern Kunde");
 			//btnCreateOrEdit.setVisible(false);
 			btnCreateOrEdit.setText("Ændre Kunde");
 		} else {
