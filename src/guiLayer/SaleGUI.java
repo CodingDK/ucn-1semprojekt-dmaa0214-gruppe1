@@ -1,41 +1,15 @@
 package guiLayer;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
-import javax.swing.DefaultCellEditor;
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -46,9 +20,7 @@ import personLayer.Business;
 import personLayer.Customer;
 
 import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.*;
 
 import ctrLayer.SaleCtr;
 import extensions.JIntegerField;
@@ -533,7 +505,6 @@ public class SaleGUI extends JPanel {
 		options[1] = new String("Annuller");
 		int choice = JOptionPane.showOptionDialog(mainGUI, "Er du sikker på du vil parkere salget?", "Parker Salg", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
 		if (choice == 0) {
-			
 			saleCtr.parkSale();
 			mainGUI.resetSale();
 			updateCustomer();
