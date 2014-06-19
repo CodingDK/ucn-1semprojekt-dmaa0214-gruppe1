@@ -16,14 +16,18 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 import ctrLayer.EmployeeCtr;
 import exceptionLayer.AlreadyExistException;
 import extensions.JBlinkLabel;
 import extensions.JTextFieldLimit;
+import extensions.KeyListener;
+
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
+
 import extensions.JIntegerField;
 import personLayer.Employee;
 
@@ -60,6 +64,7 @@ public class CreateEmployeeGUI extends JPanel {
 	}
 	
 	public void buildPanel() {
+		new KeyListener().addEscapeListenerToTab(creator, parent, this);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {411, 0, 0};
 		gridBagLayout.rowHeights = new int[] {0, 0};
