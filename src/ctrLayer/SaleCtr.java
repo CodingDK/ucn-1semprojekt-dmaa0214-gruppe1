@@ -175,6 +175,8 @@ public class SaleCtr {
 			System.out.println("Det valgte salg er allerede færdig gjort");
 		} else if (!sale.isDone()) {
 			this.sale = sale;
+			SaleCont sCont = SaleCont.getInstance();
+			sCont.removeSale(sale);
 		}
 	}
 	
