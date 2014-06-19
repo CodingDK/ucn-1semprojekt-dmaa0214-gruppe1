@@ -70,8 +70,8 @@ public class CreateItemGUI extends JPanel {
 			txtBulk.setText(item.getBulk() + "");
 			txtBulkPrice.setText(item.getBulkSalePrice() + "");
 			txtLocation.setText(item.getLocation());
-			txtMin.setText(item.getMax() + "");
-			txtMax.setText(item.getMin() + "");
+			txtMin.setText(item.getMin() + "");
+			txtMax.setText(item.getMax() + "");
 			txtName.setText(item.getName());
 			txtPurchasePrice.setText(item.getPurchasePrice() + "");
 			txtSalePrice.setText(item.getSalePrice() + "");
