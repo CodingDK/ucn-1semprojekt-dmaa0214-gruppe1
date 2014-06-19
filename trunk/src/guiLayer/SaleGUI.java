@@ -156,6 +156,7 @@ public class SaleGUI extends JPanel {
 		table = new JTable(model);
 		scrollPane.setViewportView(table);
 		table.getColumnModel().getColumn(0).setPreferredWidth(20);
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);
 		table.getColumnModel().getColumn(2).setPreferredWidth(25);
 		table.getColumnModel().getColumn(3).setPreferredWidth(25);
 		table.getColumnModel().getColumn(4).setPreferredWidth(25);
@@ -518,11 +519,11 @@ public class SaleGUI extends JPanel {
 	private void cancelSale() {
 		JFrame frame = new JFrame();
 		String[] options = new String[2];
-		options[1] = new String("Nulstil");
-		options[0] = new String("Annuller");
+		options[0] = new String("Nulstil");
+		options[1] = new String("Annuller");
 		int choice = JOptionPane.showOptionDialog(mainGUI, "Er du sikker på du vil nulstille salget?", "Nulstil Salg", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
 		//System.out.println(choice);
-		if (choice == 1) {
+		if (choice == 0) {
 			
 			saleCtr.cancelSale();
 			mainGUI.resetSale();
