@@ -52,6 +52,8 @@ public class SaleGUI extends JPanel {
 	private JButton btnPark;
 	private JButton btnCancel;
 	private NumberFormat money;
+	private JButton btnFindOrRemove;
+	private JButton btnCreate;
 	
 	/**
 	 * Create the panel.
@@ -253,15 +255,15 @@ public class SaleGUI extends JPanel {
 								.addContainerGap())
 				);
 		
-		JButton bntFind = new JButton("Find Kunde");
-		bntFind.addActionListener(new ActionListener() {
+		btnFindOrRemove = new JButton("Find Kunde");
+		btnFindOrRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				findCustomer();
+				findOrRemoveCustomer();
 			}
 		});
-		panel_8.add(bntFind);
+		panel_8.add(btnFindOrRemove);
 		
-		JButton btnCreate = new JButton("Opret kunde");
+		btnCreate = new JButton("Opret kunde");
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				createCustomer();
@@ -363,6 +365,19 @@ public class SaleGUI extends JPanel {
 		
 	}
 	
+	private void findOrRemoveCustomer() {
+		Customer c = saleCtr.getSale().getCustomer();
+		if(c != null){
+			removeCustomer();
+		} else {
+			findCustomer();
+		}
+	}
+
+	private void removeCustomer() {
+		setCustomer(null);
+	}
+
 	private void updateButtons() {
 		if (partSales.size() != 0) {
 			btnFinish.setEnabled(true);
@@ -381,6 +396,13 @@ public class SaleGUI extends JPanel {
 				btnCancel.setEnabled(false);
 			}
 			
+		}
+		if (saleCtr.getSale().getCustomer() != null) {
+			btnFindOrRemove.setText("Slet Kunde");
+			btnCreate.setVisible(false);
+		} else {
+			btnFindOrRemove.setText("Find Kunde");
+			btnCreate.setVisible(true);
 		}
 	}
 	
@@ -408,9 +430,7 @@ public class SaleGUI extends JPanel {
 	}
 	
 	public void setCustomer(Customer c) {
-		if (c != null) {
-			saleCtr.getSale().setCustomer(c);
-		}
+		saleCtr.getSale().setCustomer(c);
 		updateCustomer();
 		updateButtons();
 	}
@@ -423,12 +443,12 @@ public class SaleGUI extends JPanel {
 		String phone = " ";
 		String customerNr = " ";
 		String credit = " ";
+		lblBusiness.setVisible(true);
+		txtLblBusiness.setVisible(true);
 		if (cus != null) {
 			if (cus instanceof Business) {
 				Business b = (Business) cus;
 				business = b.getCompany();
-				lblBusiness.setVisible(true);
-				txtLblBusiness.setVisible(true);
 			}
 			else {
 				lblBusiness.setVisible(false);
@@ -451,7 +471,7 @@ public class SaleGUI extends JPanel {
 	}
 	
 	private void createCustomer() {
-		JFrame frame = new JFrame();
+		new JFrame();
 		String[] options = new String[3];
 		options[2] = new String("Privat");
 		options[1] = new String("Erhverv");
@@ -485,7 +505,7 @@ public class SaleGUI extends JPanel {
 		if (isSaleEmpty()) {
 			JOptionPane.showMessageDialog(mainGUI, "Du kan ikke parkere et tomt salg", "Advarsel", JOptionPane.ERROR_MESSAGE);
 		} else if (saleCtr.getSale().getCustomer() == null) {
-			JFrame frame = new JFrame();
+			new JFrame();
 			String[] options = new String[2];
 			options[0] = new String("Tilføj Kunde");
 			options[1] = new String("Annuller Salg");
@@ -504,7 +524,7 @@ public class SaleGUI extends JPanel {
 	}
 	
 	private void park() {
-		JFrame frame = new JFrame();
+		new JFrame();
 		String[] options = new String[2];
 		options[0] = new String("Parker");
 		options[1] = new String("Annuller");
@@ -517,7 +537,7 @@ public class SaleGUI extends JPanel {
 	}
 	
 	private void cancelSale() {
-		JFrame frame = new JFrame();
+		new JFrame();
 		String[] options = new String[2];
 		options[0] = new String("Nulstil");
 		options[1] = new String("Annuller");
