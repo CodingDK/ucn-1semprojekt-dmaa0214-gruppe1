@@ -201,6 +201,14 @@ public class MainGUI extends JFrame{
 					order.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(order.btnSearch);
 					order.update();
+				}else if(comp instanceof CreateCustomerGUI){
+					CreateCustomerGUI ccG = (CreateCustomerGUI)comp;
+					ccG.txtName.requestFocusInWindow();
+					getRootPane().setDefaultButton(ccG.btnOpret);
+				}else if(comp instanceof CreateEmployeeGUI){
+					CreateEmployeeGUI ceG = (CreateEmployeeGUI)comp;
+					ceG.txtName.requestFocusInWindow();
+					getRootPane().setDefaultButton(ceG.btnCreate);
 				}
 			}
 			
