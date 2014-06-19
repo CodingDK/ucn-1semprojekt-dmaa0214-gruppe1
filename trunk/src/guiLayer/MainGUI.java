@@ -373,18 +373,8 @@ public class MainGUI extends JFrame{
 		addPaneToTab(comp, "Opret Privat Kunde");
 	}
 
-	public void createPrivateCustomer(SaleGUI sGUI){
-		CreateCustomerGUI comp = new CreateCustomerGUI(false, sGUI, this);
-		addPaneToTab(comp, "Opret Privat Kunde");
-	}
-
 	public void createBusinesssCustomer(Component c){
 		CreateCustomerGUI comp = new CreateCustomerGUI(true, c, this);
-		addPaneToTab(comp, "Opret Erhvervs Kunde");
-	}
-	
-	public void createBusinesssCustomer(SaleGUI sGUI){
-		CreateCustomerGUI comp = new CreateCustomerGUI(true, sGUI, this);
 		addPaneToTab(comp, "Opret Erhvervs Kunde");
 	}
 	
