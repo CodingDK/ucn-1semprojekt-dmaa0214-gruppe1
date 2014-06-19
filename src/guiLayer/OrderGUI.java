@@ -48,6 +48,7 @@ import extensions.JBlinkLabel;
 import extensions.JIntegerField;
 import extensions.OrderTableModel;
 import extensions.SpaceDocument;
+import java.awt.GridLayout;
 
 public class OrderGUI extends JPanel {
 	private JTable table;
@@ -187,23 +188,20 @@ public class OrderGUI extends JPanel {
 				searchCustomer();
 			}
 		});
-		panel_5.setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("22px"),
-				ColumnSpec.decode("75px"),
-				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("86px"),},
-			new RowSpec[] {
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("29px"),}));
-		panel_5.add(btnSearch, "2, 2, left, top");
-
-		JButton btnClear = new JButton("Nulstil");
-		btnClear.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				clearInput();
-			}
-		});
-		panel_5.add(btnClear, "4, 2, left, top");
+		
+				JButton btnClear = new JButton("Nulstil");
+				btnClear.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						clearInput();
+					}
+				});
+				panel_5.setLayout(new FormLayout(new ColumnSpec[] {
+						FormFactory.GROWING_BUTTON_COLSPEC,
+						FormFactory.GROWING_BUTTON_COLSPEC,},
+					new RowSpec[] {
+						RowSpec.decode("28px"),}));
+				panel_5.add(btnClear, "1, 1, fill, fill");
+		panel_5.add(btnSearch, "2, 1, fill, fill");
 		panel_4.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
