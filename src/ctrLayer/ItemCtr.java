@@ -94,7 +94,7 @@ public class ItemCtr {
 	 * @param category The category object of the item.
 	 */
 	public void createItem(String name, int amount, int reserved, double salePrice, double purchasePrice, double bulkSalePrice, int bulk, String location, Storage storage, int max, int min, Category category) {
-		Item item = new Item(name, amount, reserved, salePrice, purchasePrice, bulkSalePrice, bulk, location, storage, min, min, category);
+		Item item = new Item(name, amount, reserved, salePrice, purchasePrice, bulkSalePrice, bulk, location, storage, max, min, category);
 		ItemCont.getInstance(category).addItem(item);
 	}
 	
