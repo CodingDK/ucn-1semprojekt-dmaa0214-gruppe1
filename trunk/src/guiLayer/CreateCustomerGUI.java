@@ -30,6 +30,7 @@ import extensions.JBlinkLabel;
 import extensions.JIntegerField;
 import extensions.JTextFieldLimit;
 import extensions.KeyListener;
+import extensions.SpaceDocument;
 
 public class CreateCustomerGUI extends JPanel {
 	public JTextField txtName;
@@ -149,12 +150,14 @@ public class CreateCustomerGUI extends JPanel {
 		panel_1.add(lblName, "2, 2, fill, fill");
 		
 		txtName = new JTextField();
+		txtName.setDocument(new SpaceDocument());
 		panel_1.add(txtName, "3, 2, fill, fill");
 		
 		lblStreet = new JLabel("Gade");
 		panel_1.add(lblStreet, "2, 4, left, fill");
 		
 		txtStreet = new JTextField();
+		txtStreet.setDocument(new SpaceDocument());
 		panel_1.add(txtStreet, "3, 4, fill, fill");
 		txtStreet.setColumns(10);
 		
@@ -162,13 +165,14 @@ public class CreateCustomerGUI extends JPanel {
 		panel_1.add(lblTown, "2, 6, fill, fill");
 		
 		txtCity = new JTextField();
+		txtCity.setDocument(new SpaceDocument());
 		panel_1.add(txtCity, "3, 6, fill, fill");
 		txtCity.setColumns(10);
 		
 		lblPostCode = new JLabel("PostNr");
 		panel_1.add(lblPostCode, "2, 8, fill, fill");
 		
-		txtPostCode = new JTextField();
+		txtPostCode = new JIntegerField();
 		panel_1.add(txtPostCode, "3, 8, fill, fill");
 		txtPostCode.setColumns(10);
 		
@@ -183,6 +187,7 @@ public class CreateCustomerGUI extends JPanel {
 		panel_1.add(lblEmail, "2, 12, fill, fill");
 		
 		txtEmail = new JTextField();
+		txtEmail.setDocument(new SpaceDocument());
 		panel_1.add(txtEmail, "3, 12, fill, fill");
 		txtEmail.setColumns(10);
 		

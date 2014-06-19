@@ -22,6 +22,7 @@ import exceptionLayer.AlreadyExistException;
 import extensions.JBlinkLabel;
 import extensions.JTextFieldLimit;
 import extensions.KeyListener;
+import extensions.SpaceDocument;
 
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -112,6 +113,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel.add(lblNavn, "2, 2, left, default");
 		
 		txtName = new JTextField();
+		txtName.setDocument(new SpaceDocument());
 		panel.add(txtName, "3, 2, fill, default");
 		txtName.setColumns(10);
 		
@@ -119,6 +121,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel.add(lblAdresse, "2, 4, left, default");
 		
 		txtStreet = new JTextField();
+		txtStreet.setDocument(new SpaceDocument());
 		panel.add(txtStreet, "3, 4, fill, default");
 		txtStreet.setColumns(10);
 		
@@ -133,6 +136,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel.add(lblY, "2, 8, left, default");
 		
 		txtCity = new JTextField();
+		txtCity.setDocument(new SpaceDocument());
 		panel.add(txtCity, "3, 8, fill, default");
 		txtCity.setColumns(10);
 		
@@ -147,6 +151,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel.add(lblEmail, "2, 12, left, default");
 		
 		txtEmail = new JTextField();
+		txtEmail.setDocument(new SpaceDocument());
 		panel.add(txtEmail, "3, 12, fill, default");
 		txtEmail.setColumns(10);
 		
@@ -207,10 +212,10 @@ public class CreateEmployeeGUI extends JPanel {
 		chkAdmin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (chkAdmin.isSelected()) {
-					txtPassword.setEditable(true);
+					txtPassword.setEnabled(true);
 				} else if (!chkAdmin.isSelected()) {
 					txtPassword.setText("");
-					txtPassword.setEditable(false);
+					txtPassword.setEnabled(false);
 				}
 			}
 		});
@@ -220,7 +225,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel.add(lblPassword, "2, 20, left, default");
 		
 		txtPassword = new JPasswordField();
-		txtPassword.setEditable(false);
+		txtPassword.setEnabled(false);
 		panel.add(txtPassword, "3, 20, fill, default");
 		txtPassword.setColumns(10);
 		
