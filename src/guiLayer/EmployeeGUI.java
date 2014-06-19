@@ -236,10 +236,15 @@ public class EmployeeGUI extends JPanel {
 		panel_6.setVisible(false);
 	}
 
-	protected void updateEmployee(Employee e) {
-		// TODO Auto-generated method stub
-		
+	protected void updateEmployee(Employee updateEmp) {
+		if(updateEmp != null){
+			if(parent != null){
+				CreateEmployeeGUI eGUI = new CreateEmployeeGUI(this, parent,  updateEmp);
+				parent.addPaneToTab(eGUI, "Ret Kunde");
+			}
+		}
 	}
+		
 
 	protected void removeEmployee(Employee e) {
 		EmployeeCtr eCtr = new EmployeeCtr();
