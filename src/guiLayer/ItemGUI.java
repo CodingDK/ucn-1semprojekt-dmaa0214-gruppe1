@@ -18,11 +18,25 @@ import java.util.List;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.SwingUtilities;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
 
+import personLayer.Customer;
 import modelLayer.Category;
 import modelLayer.Item;
 import modelLayer.ItemCont;
@@ -32,8 +46,10 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.*;
 
 import ctrLayer.CategoryCtr;
+import ctrLayer.CustomerCtr;
 import ctrLayer.ItemCtr;
 import extensions.ItemTableModel;
+import extensions.JBlinkLabel;
 import extensions.SpaceDocument;
 
 public class ItemGUI extends JPanel {
@@ -57,6 +73,7 @@ public class ItemGUI extends JPanel {
 	public Item saleItem;
 	private JPanel panel_6;
 	private JMenuItem mntmDelete;
+	private JBlinkLabel lblState;
 
 	/**
 	 * Create the panel.
@@ -248,7 +265,7 @@ public class ItemGUI extends JPanel {
 		txtName.requestFocusInWindow();
 		panel_3.setLayout(gl_panel_3);
 		
-		JLabel lblState = new JLabel("");
+		lblState = new JBlinkLabel("");
 		lblState.setHorizontalAlignment(SwingConstants.CENTER);
 		lblState.setBounds(6, 6, 238, 14);
 		panel.add(lblState);
@@ -342,6 +359,13 @@ public class ItemGUI extends JPanel {
 		String name = txtName.getText();
 		if(!name.trim().isEmpty() && name != null){
 			items = iCtr.searchItem(name);
+		}
+		
+		lblState.setText(items.size() + " varer fundet.");
+		if(items.size() <= 0){
+			lblState.startBlinking(true, true);
+		}else{
+			lblState.startBlinking(true, false);
 		}
 		
 		model.refresh(items);
