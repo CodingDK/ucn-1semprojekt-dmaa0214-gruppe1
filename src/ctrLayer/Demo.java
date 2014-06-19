@@ -109,7 +109,7 @@ public class Demo {
 				int c = rand.nextInt(catList.size());
 				int z = rand.nextInt(storList.size());
 				int y = rand.nextInt(lokArray.length);
-				iCtr.createItem("Test ting "+i, 5+i, 0, 220+i, 230+i, 100+i, 3+i, lokArray[y], storList.get(z), 43+i, 3+i, catList.get(c));
+				iCtr.createItem("Test ting "+i, 5+i, 0, 220+i, 230+i, 100+i, 3+i, lokArray[y], storList.get(z), (100+i), (5+i), catList.get(c));
 			}
 
 			EmployeeCtr eCtr = new EmployeeCtr();
