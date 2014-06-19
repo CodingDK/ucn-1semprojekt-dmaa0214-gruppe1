@@ -45,6 +45,7 @@ import ctrLayer.SaleCtr;
 import extensions.JBlinkLabel;
 import extensions.JIntegerField;
 import extensions.OrderTableModel;
+import extensions.SpaceDocument;
 
 public class OrderGUI extends JPanel {
 	private JTable table;
@@ -211,6 +212,7 @@ public class OrderGUI extends JPanel {
 		panel_4.add(lblName, "2, 2, right, default");
 		
 		txtName = new JTextField();
+		txtName.setDocument(new SpaceDocument());
 		panel_4.add(txtName, "4, 2, fill, default");
 		txtName.setColumns(10);
 		

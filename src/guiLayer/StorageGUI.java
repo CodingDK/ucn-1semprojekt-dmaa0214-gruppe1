@@ -35,6 +35,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import ctrLayer.ItemCtr;
 import exceptionLayer.StorageExistException;
 import extensions.JBlinkLabel;
+import extensions.SpaceDocument;
 import extensions.StorageTableModel;
 
 public class StorageGUI extends JPanel {
@@ -161,6 +162,7 @@ public class StorageGUI extends JPanel {
 		panel_5.add(lblStorageName, "1, 1, fill, fill");
 		
 		txtStorageName = new JTextField();
+		txtStorageName.setDocument(new SpaceDocument());
 		panel_5.add(txtStorageName, "2, 1, fill, fill");
 		txtStorageName.setColumns(10);
 		

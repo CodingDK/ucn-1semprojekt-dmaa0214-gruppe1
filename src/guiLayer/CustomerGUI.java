@@ -39,6 +39,7 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.CustomerCtr;
 import extensions.CustomerTableModel;
+import extensions.JIntegerField;
 import extensions.SpaceDocument;
 
 public class CustomerGUI extends JPanel {
@@ -213,13 +214,12 @@ public class CustomerGUI extends JPanel {
 		JLabel lblTlf = new JLabel("Tlf");
 		searchGridPanel.add(lblTlf, "1, 3, fill, fill");
 
-		txtTlf = new JTextField();
+		txtTlf = new JIntegerField();
 		txtTlf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				findCustomer();
 			}
 		});
-		txtTlf.setDocument(new SpaceDocument());
 		txtTlf.setColumns(10);
 		searchGridPanel.add(txtTlf, "2, 3, fill, fill");
 		searchGroupPanel.setLayout(gl_searchGroupPanel);	
