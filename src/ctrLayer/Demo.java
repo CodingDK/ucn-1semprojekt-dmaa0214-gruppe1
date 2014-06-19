@@ -161,7 +161,7 @@ public class Demo {
 					Item itemi = iCtr.getItem(i);
 					sCtr.addItem(itemi, 1);
 					Customer c = cusCtr.findCustomer(40+i);
-					//sCtr.setCustomer(c);
+					sCtr.setCustomer(c);
 					sCtr.parkSale();
 				}
 			} catch (NullPointerException e) {
@@ -194,7 +194,7 @@ public class Demo {
 	private String company(){
 		String[] compArray = {"JØR", "Tømrer", "Svenne", "Hans og søn", "Arne og Co.", "Vindue Service", "Reparer bil", "Hegnflytter", "Træplanter"};
 		int comp = rand.nextInt(compArray.length);
-		return compArray[comp];
+		return compArray[comp]+" A/S";
 	}
 	
 	private String city(){
