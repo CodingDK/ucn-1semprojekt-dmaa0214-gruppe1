@@ -532,10 +532,13 @@ public class SaleGUI extends JPanel {
 		new JFrame();
 		String[] options = new String[2];
 		options[0] = new String("Parker");
-		options[1] = new String("Annuller");
+		options[1] = new String("Annuller Salg");
 		int choice = JOptionPane.showOptionDialog(mainGUI, "Er du sikker på du vil parkere det nuværende salg?", "Parker Salg", 0, JOptionPane.INFORMATION_MESSAGE, null, options, null);
 		if (choice == 0) {
 			saleCtr.parkSale();
+			mainGUI.resetSale();
+			updateCustomer();
+		} else {
 			mainGUI.resetSale();
 			updateCustomer();
 		}
