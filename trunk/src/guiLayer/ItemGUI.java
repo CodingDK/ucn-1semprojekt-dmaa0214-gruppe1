@@ -300,23 +300,34 @@ public class ItemGUI extends JPanel {
 	}
 
 	protected void changeFiltering() {
-		filters = new ArrayList<RowFilter<ItemTableModel,Object>>();
+		ArrayList<RowFilter<ItemTableModel,Object>> filters = new ArrayList<RowFilter<ItemTableModel,Object>>();
+		RowFilter<ItemTableModel, Object> rfCategory = null;
+		RowFilter<ItemTableModel, Object> rfStorage = null;
 		if(!cmbStorage.getSelectedItem().toString().equals("Alle")){
 			rfStorage = RowFilter.regexFilter(cmbStorage.getSelectedItem().toString(), 6);
-		}else{
-			rfStorage = RowFilter.notFilter(rfStorage = RowFilter.regexFilter(" ", 6));
 		}
+		
 		if(!cmbCategory.getSelectedItem().toString().equals("Alle")){
 			rfCategory = RowFilter.regexFilter(cmbCategory.getSelectedItem().toString(), 7);
-		}else{
-			rfCategory = RowFilter.notFilter(rfCategory = RowFilter.regexFilter(" ", 7));
 		}
-		filters.add(rfCategory);
-		filters.add(rfStorage);
-		rowFilterCompound = RowFilter.andFilter(filters);
-		sorter = new TableRowSorter<ItemTableModel>(model);
-		sorter.setRowFilter(rowFilterCompound);
-		table.setRowSorter(sorter);
+		if(rfCategory != null){
+			filters.add(rfCategory);
+		}
+		if(rfStorage != null){
+			filters.add(rfStorage);
+		}
+
+		if(filters.size() > 0){
+			RowFilter<ItemTableModel, Object> rowFilterCompound = RowFilter.andFilter(filters);
+			TableRowSorter<ItemTableModel> sorter = new TableRowSorter<ItemTableModel>(model);
+			sorter.setRowFilter(rowFilterCompound);
+			table.setRowSorter(sorter);
+		}else if(filters.isEmpty()){
+			table.setRowSorter(null);
+		}
+
+		model.refresh(items);
+		model.fireTableDataChanged();
 	}
 
 	protected void clear(){
