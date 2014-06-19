@@ -54,7 +54,7 @@ public class SaleGUI extends JPanel {
 	private JButton btnCancel;
 	private NumberFormat money;
 	private JButton btnFindOrRemove;
-	private JButton btnCreate;
+	private JButton btnCreateOrEdit;
 	
 	/**
 	 * Create the panel.
@@ -266,13 +266,13 @@ public class SaleGUI extends JPanel {
 		});
 		panel_8.add(btnFindOrRemove);
 		
-		btnCreate = new JButton("Opret kunde");
-		btnCreate.addActionListener(new ActionListener() {
+		btnCreateOrEdit = new JButton("Opret kunde");
+		btnCreateOrEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				createCustomer();
+				createOrEditCustomer();
 			}
 		});
-		panel_8.add(btnCreate);
+		panel_8.add(btnCreateOrEdit);
 		panel_7.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("80px"),
 				ColumnSpec.decode("default:grow"),},
@@ -351,7 +351,7 @@ public class SaleGUI extends JPanel {
 			}
 		});
 		panel_9.add(btnFinish);
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnAddItem, btnFindOrRemove, btnCreate, btnCancel, btnPark, btnFinish}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnAddItem, btnFindOrRemove, btnCreateOrEdit, btnCancel, btnPark, btnFinish}));
 		
 		saleCtr = new SaleCtr();
 		if (sale != null) {
@@ -369,6 +369,15 @@ public class SaleGUI extends JPanel {
 		
 	}
 	
+	private void createOrEditCustomer() {
+		Customer c = saleCtr.getSale().getCustomer();
+		if(c != null){
+			mainGUI.editCustomer(c);
+		} else {
+			createCustomer();
+		}
+	}
+
 	private void findOrRemoveCustomer() {
 		Customer c = saleCtr.getSale().getCustomer();
 		if(c != null){
@@ -403,10 +412,12 @@ public class SaleGUI extends JPanel {
 		}
 		if (saleCtr.getSale().getCustomer() != null) {
 			btnFindOrRemove.setText("Slet Kunde");
-			btnCreate.setVisible(false);
+			//btnCreateOrEdit.setVisible(false);
+			btnCreateOrEdit.setText("Ændre Kunde");
 		} else {
 			btnFindOrRemove.setText("Find Kunde");
-			btnCreate.setVisible(true);
+			//btnCreateOrEdit.setVisible(true);
+			btnCreateOrEdit.setText("Opret Kunde");
 		}
 	}
 	
@@ -439,7 +450,7 @@ public class SaleGUI extends JPanel {
 		updateButtons();
 	}
 	
-	private void updateCustomer() {
+	public void updateCustomer() {
 		Sale sale = saleCtr.getSale();
 		Customer cus = sale.getCustomer();
 		String business = " ";
