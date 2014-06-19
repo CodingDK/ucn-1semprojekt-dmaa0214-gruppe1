@@ -177,7 +177,7 @@ public class Demo {
 	}
 	
 	private String cpr(){
-		return ""+(rand.nextInt(8999)+1000);
+		return (rand.nextInt(899999)+100000) + "-" + (rand.nextInt(8999)+1000);
 	}
 	
 	private String phone(){
