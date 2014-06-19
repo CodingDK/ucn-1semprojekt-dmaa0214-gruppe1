@@ -1,20 +1,16 @@
 package extensions;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Insets;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 
 public class CloseButtonTabbedPane extends JTabbedPane {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public CloseButtonTabbedPane() {
 	}
 
@@ -36,6 +32,10 @@ public class CloseButtonTabbedPane extends JTabbedPane {
 	}
 
 	public class CloseButtonTab extends JPanel {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private Component tab;
 
 		public CloseButtonTab(final Component tab, String title, Icon icon) {
