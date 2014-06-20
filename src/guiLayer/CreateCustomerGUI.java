@@ -154,7 +154,6 @@ public class CreateCustomerGUI extends JPanel {
 		
 		txtName = new JTextField();
 		txtName.setDocument(new JTextFieldLimit(100, false, false));
-
 		panel_1.add(txtName, "3, 2, fill, fill");
 		
 		lblStreet = new JLabel("Gade");
@@ -169,7 +168,7 @@ public class CreateCustomerGUI extends JPanel {
 		panel_1.add(lblTown, "2, 6, fill, fill");
 		
 		txtCity = new JTextField();
-		txtCity.setDocument(new JTextFieldLimit(100, false));
+		txtCity.setDocument(new JTextFieldLimit(100, false, false));
 		panel_1.add(txtCity, "3, 6, fill, fill");
 		txtCity.setColumns(10);
 		
