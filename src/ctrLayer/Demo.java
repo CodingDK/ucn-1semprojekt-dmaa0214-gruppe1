@@ -105,7 +105,7 @@ public class Demo {
 			
 			String[] lokArray = {"Hylde 2", "Lok A", "Lok B", "Lok C", "På loftet", "På lageret", "Række 27", "Bagved", "Spørg Bjarne"};
 			
-			for(int i = 0; i<200; i++){
+			for(int i = 0; i<1000000; i++){
 				int c = rand.nextInt(catList.size());
 				int z = rand.nextInt(storList.size());
 				int y = rand.nextInt(lokArray.length);
@@ -134,7 +134,7 @@ public class Demo {
 			CustomerCtr cusCtr = new CustomerCtr();
 			cusCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
 
-			for(int i = 0; i < 125; i++){
+			for(int i = 0; i < 1000000; i++){
 				String name = name();
 				cusCtr.createPrivateCustomer(name, phone(), street(), email(name, "@priv.dk"), city(), postCode(), cpr(), "1");
 
