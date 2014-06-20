@@ -15,22 +15,22 @@ public class JBlinkLabel extends JLabel {
 	
 	public JBlinkLabel(String text) {
 		super(text);
-		Timer timer = new Timer( BLINKING_RATE , new TimerListener(this));
+		Timer timer = new Timer(BLINKING_RATE, new TimerListener(this));
 		timer.setInitialDelay(0);
 		timer.start();
 	}
 	
 	public void startBlinking(boolean flag, boolean isError) {
-		this.state = isError;
-		this.blinkingOn = flag;
+		state = isError;
+		blinkingOn = flag;
 	}
 	
-	private void setBlinking(boolean flag){
-		this.blinkingOn = flag;
+	private void setBlinking(boolean flag) {
+		blinkingOn = flag;
 	}
 	
-	private boolean getState(){
-		return this.state;
+	private boolean getState() {
+		return state;
 	}
 	
 	private class TimerListener implements ActionListener {
@@ -46,12 +46,12 @@ public class JBlinkLabel extends JLabel {
 		}
 		
 		public void actionPerformed(ActionEvent e) {
-			if(bl.getState()){
+			if (bl.getState()) {
 				bg = Color.RED;
-			}else{
+			} else {
 				bg = Color.GREEN;
 			}
-			if (bl.blinkingOn) {	
+			if (bl.blinkingOn) {
 				interval++;
 				if (isForeground) {
 					bl.setForeground(fg);
@@ -59,12 +59,12 @@ public class JBlinkLabel extends JLabel {
 					bl.setForeground(bg);
 				}
 				isForeground = !isForeground;
-				if(interval > 10){
+				if (interval > 10) {
 					bl.setBlinking(false);
 					bl.setText("");
 					interval = 0;
 				}
-			}else {
+			} else {
 				if (isForeground) {
 					bl.setForeground(fg);
 					isForeground = false;

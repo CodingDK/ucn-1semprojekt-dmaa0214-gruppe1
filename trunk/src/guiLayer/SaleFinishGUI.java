@@ -15,27 +15,27 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import ctrLayer.SaleCtr;
 import exceptionLayer.SaleNotCreatedException;
-import extensions.JIntegerField;
 import extensions.JTextFieldLimit;
 import extensions.KeyListener;
 
 public class SaleFinishGUI extends JDialog {
-
+	
 	private final JPanel contentPanel = new JPanel();
 	private SaleCtr saleCtr;
 	private JPanel panel_1;
-	private JIntegerField txtEmployeeNr;
+	private JTextField txtEmployeeNr;
 	private JLabel lblEmployeeNrStatus;
 	private JLabel lblEmployeeNr;
 	private JButton btnCredit;
 	private JPanel panel;
 	private JLabel lblEndSale;
 	private boolean done;
-
+	
 	/**
 	 * Create the dialog.
 	 */
@@ -43,7 +43,7 @@ public class SaleFinishGUI extends JDialog {
 		super(f, "Afslut salg", true);
 		new KeyListener().addEscapeListener(this);
 		done = false;
-		this.saleCtr = sCtr;
+		saleCtr = sCtr;
 		setResizable(false);
 		setBounds(100, 100, 321, 147);
 		getContentPane().setLayout(new BorderLayout());
@@ -67,13 +67,14 @@ public class SaleFinishGUI extends JDialog {
 				panel_1.add(lblEmployeeNr);
 			}
 			{
-				txtEmployeeNr = new JIntegerField();
+				txtEmployeeNr = new JTextField();
 				txtEmployeeNr.setDocument(new JTextFieldLimit(10, true, false));
 				txtEmployeeNr.addFocusListener(new FocusAdapter() {
 					@Override
 					public void focusLost(FocusEvent e) {
 						checkEmployeeNr();
 					}
+					
 					@Override
 					public void focusGained(FocusEvent arg0) {
 						lblEmployeeNrStatus.setText("");
@@ -107,8 +108,8 @@ public class SaleFinishGUI extends JDialog {
 				JButton bntCancel = new JButton("Annuller");
 				bntCancel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						setVisible(false); 
-					    dispose();
+						setVisible(false);
+						dispose();
 					}
 				});
 				{
@@ -122,18 +123,18 @@ public class SaleFinishGUI extends JDialog {
 			}
 		}
 	}
-
+	
 	/**
 	 * @return the done
 	 */
 	public boolean isDone() {
 		return done;
 	}
-
+	
 	private void checkEmployeeNr() {
 		//check employeeNr before finish the Sale
 	}
-
+	
 	private void finishCashSale() {
 		String employeeNr = txtEmployeeNr.getText();
 		try {
@@ -148,5 +149,5 @@ public class SaleFinishGUI extends JDialog {
 			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
 	}
-
+	
 }

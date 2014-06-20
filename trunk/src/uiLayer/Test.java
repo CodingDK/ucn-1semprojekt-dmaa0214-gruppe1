@@ -41,10 +41,10 @@ public class Test extends JPanel {
 	 */
 	public Test() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{406, 238, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] {406, 238, 0};
+		gridBagLayout.rowHeights = new int[] {0, 0};
+		gridBagLayout.columnWeights = new double[] {1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[] {1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JPanel tablePanel = new JPanel();
@@ -85,13 +85,13 @@ public class Test extends JPanel {
 		JPanel searchGridPanel = new JPanel();
 		GroupLayout gl_searchGroupPanel = new GroupLayout(searchGroupPanel);
 		gl_searchGroupPanel.setHorizontalGroup(
-			gl_searchGroupPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(searchGridPanel, GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-		);
+				gl_searchGroupPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(searchGridPanel, GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+				);
 		gl_searchGroupPanel.setVerticalGroup(
-			gl_searchGroupPanel.createParallelGroup(Alignment.LEADING)
-				.addComponent(searchGridPanel, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-		);
+				gl_searchGroupPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(searchGridPanel, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+				);
 		searchGridPanel.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblCompany = new JLabel("Virksomhedsnavn");
@@ -128,10 +128,9 @@ public class Test extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				findCustomer();
 			}
-		});	
+		});
 		searchGridPanel.add(btnFind);
 		searchGroupPanel.setLayout(gl_searchGroupPanel);
-		
 		
 	}
 	
@@ -143,7 +142,7 @@ public class Test extends JPanel {
 		c.clear();
 		
 		model.refresh(c);
-	    model.fireTableDataChanged();
+		model.fireTableDataChanged();
 	}
 	
 	private void findCustomer() {
@@ -152,14 +151,14 @@ public class Test extends JPanel {
 		String name = txtName.getText();
 		String company = txtCompany.getText();
 		
-		if(phone != null && !phone.trim().isEmpty()){
+		if (phone != null && !phone.trim().isEmpty()) {
 			c = cCtr.searchCustomer(phone);
-		} else if(name != null && !name.trim().isEmpty()){
+		} else if (name != null && !name.trim().isEmpty()) {
 			c = cCtr.searchCustomer(name);
-		} else if(company != null && !company.trim().isEmpty()){
+		} else if (company != null && !company.trim().isEmpty()) {
 			c = cCtr.searchCustomer(company);
-		} 
-	    model.refresh(c);
-	    model.fireTableDataChanged();
+		}
+		model.refresh(c);
+		model.fireTableDataChanged();
 	}
 }

@@ -180,8 +180,8 @@ public class ItemCtr {
 	 * 
 	 * @param name The name of the new Storage.
 	 */
-	public void createStorage(String name) throws StorageExistException{
-		if(sCont.findStorage(name) == null){
+	public void createStorage(String name) throws StorageExistException {
+		if (sCont.findStorage(name) == null) {
 			sCont.addStorage(new Storage(name));
 		} else {
 			throw new StorageExistException("Lageret eksisterer allerede");
@@ -295,7 +295,7 @@ public class ItemCtr {
 		}
 		return storages;
 	}
-
+	
 	public ArrayList<Storage> getAllStorage() {
 		StorageCont sCont = StorageCont.getInstance();
 		return sCont.getAll();

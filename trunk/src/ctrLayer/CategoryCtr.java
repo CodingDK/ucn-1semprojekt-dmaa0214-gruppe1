@@ -29,8 +29,8 @@ public class CategoryCtr {
 	 * 
 	 * @param name
 	 */
-	public void createCategory(String name) throws CategoryExistException{
-		if(cCont.findCategory(name) == null){
+	public void createCategory(String name) throws CategoryExistException {
+		if (cCont.findCategory(name) == null) {
 			cCont.addCategory(new Category(name));
 		} else {
 			throw new CategoryExistException("Kategorien eksistere allerede");
@@ -50,10 +50,10 @@ public class CategoryCtr {
 	 * Removes the selected category
 	 * 
 	 * @param Category
-	 * @throws MainCategoryException 
+	 * @throws MainCategoryException
 	 */
 	public void removeCategory(Category c) throws MainCategoryException {
-		if(c.getName() != findCategory("Alle").getName()){
+		if (c.getName() != findCategory("Alle").getName()) {
 			ItemCont iContDel = ItemCont.getInstance(c);
 			ArrayList<Item> items = iContDel.getAll();
 			Category cat = findCategory("Alle");
@@ -64,7 +64,7 @@ public class CategoryCtr {
 			}
 			ItemCont.removeInstance(c);
 			cCont.removeCategory(c);
-		}else{
+		} else {
 			throw new MainCategoryException("Hovedkategorien kan ikke slettes");
 		}
 	}

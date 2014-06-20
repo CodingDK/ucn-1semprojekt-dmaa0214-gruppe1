@@ -110,7 +110,7 @@ public class SaleCtr {
 					Item item = ps.getItem();
 					item.addReserved(-ps.getAmount());
 					item.addAmount(-ps.getAmount());
-					totalPrice += (item.getSalePrice()*ps.getAmount());
+					totalPrice += (item.getSalePrice() * ps.getAmount());
 				}
 				sale.setTotalPrice(totalPrice);
 				sale.setDone(true);
@@ -157,7 +157,7 @@ public class SaleCtr {
 			double totalPrice = 0;
 			for (PartSale ps : partsales) {
 				Item item = ps.getItem();
-				totalPrice += (item.getSalePrice()*ps.getAmount());
+				totalPrice += (item.getSalePrice() * ps.getAmount());
 			}
 			sale.setTotalPrice(totalPrice);
 			ret = true;
@@ -247,7 +247,7 @@ public class SaleCtr {
 		}
 	}
 	
-	public void removePartSale(PartSale ps){
+	public void removePartSale(PartSale ps) {
 		Item i = ps.getItem();
 		i.addReserved(-ps.getAmount());
 		sale.removePartSale(ps);

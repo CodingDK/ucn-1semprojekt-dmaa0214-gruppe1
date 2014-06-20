@@ -55,8 +55,8 @@ public class UpdateCategoryDialog extends JDialog {
 			panel.setLayout(new FormLayout(new ColumnSpec[] {
 					ColumnSpec.decode("77px"),
 					ColumnSpec.decode("183px"),},
-				new RowSpec[] {
-					RowSpec.decode("30px"),}));
+					new RowSpec[] {
+							RowSpec.decode("30px"),}));
 			{
 				JLabel lblCategory = new JLabel("Kategori");
 				panel.add(lblCategory, "1, 1, center, fill");
@@ -86,8 +86,8 @@ public class UpdateCategoryDialog extends JDialog {
 				JButton btnCancel = new JButton("Annuller");
 				btnCancel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						setVisible(false); 
-					    dispose();
+						setVisible(false);
+						dispose();
 					}
 				});
 				btnCancel.setActionCommand("Cancel");
@@ -95,19 +95,17 @@ public class UpdateCategoryDialog extends JDialog {
 			}
 		}
 	}
-
+	
 	protected void saveCategory() {
-		if(txtCategory.getText() != null && !txtCategory.getText().trim().isEmpty()){
+		if (txtCategory.getText() != null && !txtCategory.getText().trim().isEmpty()) {
 			CategoryCtr cCtr = new CategoryCtr();
 			cCtr.updateCategory(cCtr.findCategory(name), txtCategory.getText());
 			setVisible(false);
 			dispose();
 		} else {
-			JOptionPane.showMessageDialog(null, "Navnet kan ikke være tomt","Advarsel",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Navnet kan ikke være tomt", "Advarsel", JOptionPane.ERROR_MESSAGE);
 		}
 		
-		
 	}
-	
 	
 }

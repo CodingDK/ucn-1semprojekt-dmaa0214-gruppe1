@@ -34,7 +34,7 @@ public class PartSale {
 	public void addAmount(int amount) {
 		this.amount += amount;
 	}
-
+	
 	/**
 	 * @return the item
 	 */
@@ -46,5 +46,5 @@ public class PartSale {
 	public String toString() {
 		return "Vare: " + item.getName() + ", Antal: " + amount;
 	}
-
+	
 }

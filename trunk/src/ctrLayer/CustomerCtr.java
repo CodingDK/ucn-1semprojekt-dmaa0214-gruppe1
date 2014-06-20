@@ -156,7 +156,7 @@ public class CustomerCtr {
 		return foundBusiness;
 	}
 	
-	public Customer findCustomer(int id){
+	public Customer findCustomer(int id) {
 		CustomerCont cCont = CustomerCont.getInstance();
 		return cCont.findCustomer(id);
 	}

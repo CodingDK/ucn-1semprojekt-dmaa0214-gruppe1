@@ -5,79 +5,77 @@ import javax.swing.UIManager;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
-import javax.swing.text.JTextComponent;
 import javax.swing.text.PlainDocument;
 
 public class JDoubleField extends JTextField {
 	private static final long serialVersionUID = 1L;
 	
-	public JDoubleField(){
+	public JDoubleField() {
 		super();
 	}
 	
-	public JDoubleField(int col){
+	public JDoubleField(int col) {
 		super(col);
 	}
 	
 	@Override
-	public void setText(String t){
+	public void setText(String t) {
 		try {
 			Document doc = getDocument();
-			if(doc instanceof UpperCaseDocument){
-				UpperCaseDocument upper = (UpperCaseDocument)getDocument();
+			if (doc instanceof UpperCaseDocument) {
+				UpperCaseDocument upper = (UpperCaseDocument) getDocument();
 				upper.remove(0, doc.getLength());
 				upper.insertString(0, t, null, true);
-			}else{
+			} else {
 				doc.remove(0, doc.getLength());
-	            doc.insertString(0, t, null);
+				doc.insertString(0, t, null);
 			}
 		} catch (BadLocationException e) {
 			UIManager.getLookAndFeel().provideErrorFeedback(JDoubleField.this);
 		}
-        
+		
 	}
 	
 	@Override
-	protected Document createDefaultModel(){
+	protected Document createDefaultModel() {
 		return new UpperCaseDocument();
 	}
 	
-	static class UpperCaseDocument extends PlainDocument{
+	static class UpperCaseDocument extends PlainDocument {
 		private static final long serialVersionUID = 1L;
 		
-		public void insertString(int offs, String str, AttributeSet a, boolean forced) throws BadLocationException{
+		public void insertString(int offs, String str, AttributeSet a, boolean forced) throws BadLocationException {
 			super.insertString(offs, str, a);
 		}
 		
-		public void insertString(int offs, String str, AttributeSet a) throws BadLocationException{
-			if(str == null){
+		@Override
+		public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
+			if (str == null) {
 				return;
 			}
 			
-			
-			
 			char[] chars = str.toCharArray();
 			boolean go = true;
-			for(int i = 0; i < chars.length; i++){
-				if(chars[i] == '.'){
-					if(getLength() == 0){
+			for (int i = 0; i < chars.length; i++) {
+				if (chars[i] == '.') {
+					if (getLength() == 0) {
 						go = false;
 						break;
-					}else if(getText(0, getLength()).contains(".")){
+					} else if (getText(0, getLength()).contains(".")) {
 						go = false;
 						break;
 					}
 				} else {
-					try{
+					try {
 						Double.parseDouble(String.valueOf(chars[i]));
-					}catch(NumberFormatException e){
+					} catch (NumberFormatException e) {
 						go = false;
 						break;
 					}
 				}
 			}
 			
-			if(go){
+			if (go) {
 				super.insertString(offs, new String(chars), a);
 			}
 		}

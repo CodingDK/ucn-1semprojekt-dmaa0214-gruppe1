@@ -1,13 +1,38 @@
 package guiLayer;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.RowFilter;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableRowSorter;
@@ -18,14 +43,15 @@ import modelLayer.ItemCont;
 import modelLayer.Storage;
 
 import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.*;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
 import extensions.ItemTableModel;
 import extensions.JBlinkLabel;
 import extensions.JTextFieldLimit;
-import extensions.SpaceDocument;
 
 public class ItemGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -39,7 +65,7 @@ public class ItemGUI extends JPanel {
 	private ArrayList<Category> categories;
 	private ArrayList<Storage> storages;
 	private TableRowSorter<ItemTableModel> sorter;
-	private List<RowFilter<ItemTableModel,Object>> filters;
+	private List<RowFilter<ItemTableModel, Object>> filters;
 	private RowFilter<ItemTableModel, Object> rowFilterCompound;
 	private RowFilter<ItemTableModel, Object> rfCategory;
 	private RowFilter<ItemTableModel, Object> rfStorage;
@@ -49,14 +75,15 @@ public class ItemGUI extends JPanel {
 	private JPanel panel_6;
 	private JMenuItem mntmDelete;
 	private JBlinkLabel lblState;
-
+	
 	/**
 	 * Create the panel.
-	 * @param mainGUI 
+	 * 
+	 * @param mainGUI
 	 */
 	public ItemGUI(MainGUI mainGUI) {
-		this.parent = mainGUI;
-		filters = new ArrayList<RowFilter<ItemTableModel,Object>>();
+		parent = mainGUI;
+		filters = new ArrayList<RowFilter<ItemTableModel, Object>>();
 		CategoryCtr cCtr = new CategoryCtr();
 		categories = cCtr.getAllCategories();
 		ItemCtr iCtr = new ItemCtr();
@@ -66,10 +93,10 @@ public class ItemGUI extends JPanel {
 		storages.addAll(iCtr.getAllStorage());
 		items = new ArrayList<Item>();
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 250, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] {0, 250, 0};
+		gridBagLayout.rowHeights = new int[] {0, 0};
+		gridBagLayout.columnWeights = new double[] {1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[] {1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JPanel panel_1 = new JPanel();
@@ -93,11 +120,11 @@ public class ItemGUI extends JPanel {
 		table.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
 		
 		table.addMouseListener(new MouseAdapter() {
-
-		    @Override
-		    public void mouseClicked(MouseEvent e) {
-		    	mouseListenerTable(e);
-		    }
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mouseListenerTable(e);
+			}
 		});
 		
 		popupMenu = new JPopupMenu();
@@ -146,7 +173,7 @@ public class ItemGUI extends JPanel {
 		cmbStorage = new JComboBox<Storage>();
 		cmbStorage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(items.size() <= 0 || items == null){
+				if (items.size() <= 0 || items == null) {
 					showAll();
 				}
 				changeFiltering();
@@ -161,7 +188,7 @@ public class ItemGUI extends JPanel {
 		cmbCategory = new JComboBox<Category>();
 		cmbCategory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(items.size() <= 0 || items == null){
+				if (items.size() <= 0 || items == null) {
 					showAll();
 				}
 				changeFiltering();
@@ -188,23 +215,23 @@ public class ItemGUI extends JPanel {
 		JPanel panel_5 = new JPanel();
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-				.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-		);
+				gl_panel_3.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+				);
 		gl_panel_3.setVerticalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-		);
+				gl_panel_3.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_3.createSequentialGroup()
+								.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
+				);
 		panel_5.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.GROWING_BUTTON_COLSPEC,
 				FormFactory.GROWING_BUTTON_COLSPEC,},
-			new RowSpec[] {
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),}));
+				new RowSpec[] {
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),}));
 		
 		JButton btnNewButton = new JButton("Nulstil");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -253,13 +280,13 @@ public class ItemGUI extends JPanel {
 		JPanel panel_7 = new JPanel();
 		GroupLayout gl_panel_6 = new GroupLayout(panel_6);
 		gl_panel_6.setHorizontalGroup(
-			gl_panel_6.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-		);
+				gl_panel_6.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+				);
 		gl_panel_6.setVerticalGroup(
-			gl_panel_6.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
-		);
+				gl_panel_6.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+				);
 		
 		JButton btnOpretVare = new JButton("Opret Vare");
 		btnOpretVare.addActionListener(new ActionListener() {
@@ -273,13 +300,13 @@ public class ItemGUI extends JPanel {
 		panel_6.setVisible(false);
 		mntmDelete.setVisible(false);
 	}
-
+	
 	protected void updateItem(int id) {
 		ItemCtr iCtr = new ItemCtr();
 		Item i = iCtr.getItem(id);
 		parent.updateItem(i);
 	}
-
+	
 	protected void removeItem(int id) {
 		ItemCtr iCtr = new ItemCtr();
 		Item i = iCtr.getItem(id);
@@ -289,9 +316,9 @@ public class ItemGUI extends JPanel {
 		model.refresh(items);
 		model.fireTableDataChanged();
 	}
-
+	
 	protected void showAll() {
-		for(Category c : categories){
+		for (Category c : categories) {
 			ItemCont iCont = ItemCont.getInstance(c);
 			items.addAll(iCont.getAll());
 		}
@@ -299,39 +326,39 @@ public class ItemGUI extends JPanel {
 		model.refresh(items);
 		model.fireTableDataChanged();
 	}
-
+	
 	protected void changeFiltering() {
-		ArrayList<RowFilter<ItemTableModel,Object>> filters = new ArrayList<RowFilter<ItemTableModel,Object>>();
+		ArrayList<RowFilter<ItemTableModel, Object>> filters = new ArrayList<RowFilter<ItemTableModel, Object>>();
 		RowFilter<ItemTableModel, Object> rfCategory = null;
 		RowFilter<ItemTableModel, Object> rfStorage = null;
-		if(!cmbStorage.getSelectedItem().toString().equals("Alle")){
+		if (!cmbStorage.getSelectedItem().toString().equals("Alle")) {
 			rfStorage = RowFilter.regexFilter(cmbStorage.getSelectedItem().toString(), 6);
 		}
 		
-		if(!cmbCategory.getSelectedItem().toString().equals("Alle")){
+		if (!cmbCategory.getSelectedItem().toString().equals("Alle")) {
 			rfCategory = RowFilter.regexFilter(cmbCategory.getSelectedItem().toString(), 7);
 		}
-		if(rfCategory != null){
+		if (rfCategory != null) {
 			filters.add(rfCategory);
 		}
-		if(rfStorage != null){
+		if (rfStorage != null) {
 			filters.add(rfStorage);
 		}
-
-		if(filters.size() > 0){
+		
+		if (filters.size() > 0) {
 			RowFilter<ItemTableModel, Object> rowFilterCompound = RowFilter.andFilter(filters);
 			TableRowSorter<ItemTableModel> sorter = new TableRowSorter<ItemTableModel>(model);
 			sorter.setRowFilter(rowFilterCompound);
 			table.setRowSorter(sorter);
-		}else if(filters.isEmpty()){
+		} else if (filters.isEmpty()) {
 			table.setRowSorter(null);
 		}
-
+		
 		model.refresh(items);
 		model.fireTableDataChanged();
 	}
-
-	protected void clear(){
+	
+	protected void clear() {
 		txtName.setText("");
 		cmbCategory.setSelectedIndex(0);
 		cmbStorage.setSelectedIndex(0);
@@ -339,18 +366,18 @@ public class ItemGUI extends JPanel {
 		model.refresh(items);
 		model.fireTableDataChanged();
 	}
-
+	
 	protected void searchItem() {
 		ItemCtr iCtr = new ItemCtr();
 		String name = txtName.getText();
-		if(!name.trim().isEmpty() && name != null){
+		if (!name.trim().isEmpty() && name != null) {
 			items = iCtr.searchItem(name);
 		}
 		
 		lblState.setText(items.size() + " varer fundet.");
-		if(items.size() <= 0){
+		if (items.size() <= 0) {
 			lblState.startBlinking(true, true);
-		}else{
+		} else {
 			lblState.startBlinking(true, false);
 		}
 		
@@ -359,7 +386,7 @@ public class ItemGUI extends JPanel {
 		
 	}
 	
-	public void update(){
+	public void update() {
 		ItemCtr iCtr = new ItemCtr();
 		storages = new ArrayList<Storage>();
 		Storage st = new Storage("Alle");
@@ -376,27 +403,27 @@ public class ItemGUI extends JPanel {
 		Point p = e.getPoint();
 		int rowNumber = table.rowAtPoint(p);
 		table.setRowSelectionInterval(rowNumber, rowNumber);
-		if(SwingUtilities.isRightMouseButton(e)){
+		if (SwingUtilities.isRightMouseButton(e)) {
 			popupMenu.show(table, e.getX(), e.getY());
-		} else if(SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2){
+		} else if (SwingUtilities.isLeftMouseButton(e) && e.getClickCount() == 2) {
 			int rowindex = table.getSelectedRow();
 			int id = (Integer) table.getValueAt(rowindex, 0);
 			ItemCtr iCtr = new ItemCtr();
 			JDialog itemInfo = new ItemInfoDialog(iCtr.getItem(id), parent, this);
 			itemInfo.setLocationRelativeTo(parent);
 			itemInfo.setVisible(true);
-			if(saleItem != null){
+			if (saleItem != null) {
 				parent.addToSale(saleItem);
 				saleItem = null;
 			}
 		}
 	}
 	
-	public void setAdmin(boolean admin){
-		if(admin){
+	public void setAdmin(boolean admin) {
+		if (admin) {
 			panel_6.setVisible(true);
 			mntmDelete.setVisible(true);
-		} else if(!admin){
+		} else if (!admin) {
 			panel_6.setVisible(false);
 			mntmDelete.setVisible(false);
 		}

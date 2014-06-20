@@ -3,7 +3,6 @@ package guiLayer;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Event;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -35,9 +34,7 @@ import ctrLayer.Demo;
 import ctrLayer.HelpCtr;
 import extensions.CloseButtonTabbedPane;
 
-import javax.swing.JButton;
-
-public class MainGUI extends JFrame{
+public class MainGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public boolean admin = false;
 	private JMenuItem mntmLogin;
@@ -84,12 +81,12 @@ public class MainGUI extends JFrame{
 	 */
 	private void initialize() {
 		this.setBounds(100, 100, 900, 515);
-		this.setMinimumSize(new Dimension(900, 515));
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationByPlatform(true);
+		setMinimumSize(new Dimension(900, 515));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationByPlatform(true);
 		
 		tabbedPane = new CloseButtonTabbedPane();
-		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		sale = new SaleGUI(this, null);
 		item = new ItemGUI(this);
@@ -136,17 +133,16 @@ public class MainGUI extends JFrame{
 		
 		JSeparator separator = new JSeparator();
 		mnFile.add(separator);
-	
+		
 		mntmLogin = new JMenuItem("Administrator Login");
 		mntmLogin.setMnemonic(KeyEvent.VK_F3);
-		mntmLogin.setAccelerator(KeyStroke.getKeyStroke("F3")); 
+		mntmLogin.setAccelerator(KeyStroke.getKeyStroke("F3"));
 		mntmLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				login();
 			}
 		});
 		mnFile.add(mntmLogin);
-		
 		
 		JSeparator separator_1 = new JSeparator();
 		mnFile.add(separator_1);
@@ -175,39 +171,39 @@ public class MainGUI extends JFrame{
 		mnHelp.add(mntmHelp);
 		getRootPane().setDefaultButton(sale.btnAddItem);
 		
-		tabbedPane.addChangeListener(new ChangeListener(){
-			public void stateChanged(ChangeEvent e){
+		tabbedPane.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
 				Component comp = tabbedPane.getSelectedComponent();
-				if (comp.equals(item)){
+				if (comp.equals(item)) {
 					item.update();
 					item.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(item.btnSearch);
-				} else if(comp.equals(category)){
+				} else if (comp.equals(category)) {
 					category.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(category.btnCreate);
-				} else if(comp.equals(sale)){
+				} else if (comp.equals(sale)) {
 					sale.btnAddItem.requestFocusInWindow();
 					getRootPane().setDefaultButton(sale.btnAddItem);
 					sale.updateCustomer();
-				} else if(comp.equals(customer)){
+				} else if (comp.equals(customer)) {
 					customer.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(customer.btnFind);
-				} else if(comp.equals(employee)){
+				} else if (comp.equals(employee)) {
 					employee.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(employee.btnFind);
-				} else if(comp.equals(storage)){
+				} else if (comp.equals(storage)) {
 					storage.txtStorageName.requestFocusInWindow();
 					getRootPane().setDefaultButton(storage.btnOpret);
-				} else if(comp.equals(order)){
+				} else if (comp.equals(order)) {
 					order.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(order.btnSearch);
 					order.update();
-				}else if(comp instanceof CreateCustomerGUI){
-					CreateCustomerGUI ccG = (CreateCustomerGUI)comp;
+				} else if (comp instanceof CreateCustomerGUI) {
+					CreateCustomerGUI ccG = (CreateCustomerGUI) comp;
 					ccG.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(ccG.btnOpret);
-				}else if(comp instanceof CreateEmployeeGUI){
-					CreateEmployeeGUI ceG = (CreateEmployeeGUI)comp;
+				} else if (comp instanceof CreateEmployeeGUI) {
+					CreateEmployeeGUI ceG = (CreateEmployeeGUI) comp;
 					ceG.txtName.requestFocusInWindow();
 					getRootPane().setDefaultButton(ceG.btnCreate);
 				}
@@ -216,24 +212,23 @@ public class MainGUI extends JFrame{
 		});
 	}
 	
-	public int getSelectedTab(){
+	public int getSelectedTab() {
 		return tabbedPane.getSelectedIndex();
 	}
-
+	
 	private void help() {
 		try {
 			HelpCtr hCtr = new HelpCtr();
 			String pane = tabbedPane.getTitleAt(tabbedPane.getSelectedIndex());
 			Help h = hCtr.getHelp(pane);
-			if(h != null){
-				JOptionPane.showMessageDialog(this, h.getHelp(),h.getName(),JOptionPane.INFORMATION_MESSAGE);
+			if (h != null) {
+				JOptionPane.showMessageDialog(this, h.getHelp(), h.getName(), JOptionPane.INFORMATION_MESSAGE);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		;
+		};
 	}
-
+	
 	private void makeTabbedPaneSwitcher() {
 		InputMap im = tabbedPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "ctrl-s");
@@ -248,55 +243,55 @@ public class MainGUI extends JFrame{
 		
 		am.put("ctrl-s", new AbstractAction() {
 			private static final long serialVersionUID = 1L;
-
+			
 			public void actionPerformed(ActionEvent e) {
-				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
+				CloseButtonTabbedPane tp = (CloseButtonTabbedPane) e.getSource();
 				tp.setSelectedComponent(sale);
 			}
 		});
 		
 		am.put("ctrl-v", new AbstractAction() {
 			private static final long serialVersionUID = 1L;
-
+			
 			public void actionPerformed(ActionEvent e) {
-				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
+				CloseButtonTabbedPane tp = (CloseButtonTabbedPane) e.getSource();
 				tp.setSelectedComponent(item);
 			}
 		});
 		
 		am.put("ctrl-k", new AbstractAction() {
 			private static final long serialVersionUID = 1L;
-
+			
 			public void actionPerformed(ActionEvent e) {
-				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
+				CloseButtonTabbedPane tp = (CloseButtonTabbedPane) e.getSource();
 				tp.setSelectedComponent(customer);
 			}
 		});
 		
 		am.put("ctrl-o", new AbstractAction() {
 			private static final long serialVersionUID = 1L;
-
+			
 			public void actionPerformed(ActionEvent e) {
-				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
+				CloseButtonTabbedPane tp = (CloseButtonTabbedPane) e.getSource();
 				tp.setSelectedComponent(order);
 			}
 		});
 		
 		am.put("ctrl-m", new AbstractAction() {
 			private static final long serialVersionUID = 1L;
-
+			
 			public void actionPerformed(ActionEvent e) {
-				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
+				CloseButtonTabbedPane tp = (CloseButtonTabbedPane) e.getSource();
 				tp.setSelectedComponent(employee);
 			}
 		});
 		
 		am.put("ctrl-l", new AbstractAction() {
 			private static final long serialVersionUID = 1L;
-
+			
 			public void actionPerformed(ActionEvent e) {
-				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
-				if(admin){
+				CloseButtonTabbedPane tp = (CloseButtonTabbedPane) e.getSource();
+				if (admin) {
 					tp.setSelectedComponent(storage);
 				}
 			}
@@ -304,30 +299,30 @@ public class MainGUI extends JFrame{
 		
 		am.put("ctrl-t", new AbstractAction() {
 			private static final long serialVersionUID = 1L;
-
+			
 			public void actionPerformed(ActionEvent e) {
-				CloseButtonTabbedPane tp = (CloseButtonTabbedPane)e.getSource();
-				if(admin){
+				CloseButtonTabbedPane tp = (CloseButtonTabbedPane) e.getSource();
+				if (admin) {
 					tp.setSelectedComponent(category);
 				}
 			}
 		});
 	}
-
+	
 	protected void login() {
-		if(!admin){
+		if (!admin) {
 			JDialog login = new LoginDialog(null, this);
-            login.setLocationRelativeTo(this);
-            login.setVisible(true);
-			if(admin){
+			login.setLocationRelativeTo(this);
+			login.setVisible(true);
+			if (admin) {
 				grantAccess();
 			}
-		}else if(admin){
+		} else if (admin) {
 			revokeAccess();
 		}
 	}
 	
-	protected void grantAccess(){
+	protected void grantAccess() {
 		mntmLogin.setText("Logud");
 		employee.setAdmin(true);
 		item.setAdmin(true);
@@ -338,7 +333,7 @@ public class MainGUI extends JFrame{
 		reDraw();
 	}
 	
-	protected void revokeAccess(){
+	protected void revokeAccess() {
 		mntmLogin.setText("Administrator Login");
 		//tabbedPane.remove(Category);
 		employee.setAdmin(false);
@@ -349,78 +344,78 @@ public class MainGUI extends JFrame{
 		reDraw();
 	}
 	
-	public void setAdmin(boolean flag){
-		this.admin = flag;
+	public void setAdmin(boolean flag) {
+		admin = flag;
 	}
 	
-	protected void reDraw(){
+	protected void reDraw() {
 		revalidate();
 		repaint();
 	}
 	
-	public void createItem(){
+	public void createItem() {
 		CreateItemGUI comp = new CreateItemGUI(this, item, null);
 		addPaneToTab(comp, "Opret Vare");
 	}
 	
-	public void updateItem(Item updateItem){
+	public void updateItem(Item updateItem) {
 		CreateItemGUI comp = new CreateItemGUI(this, item, updateItem);
 		addPaneToTab(comp, "Ret Vare");
 	}
-
-	public void createPrivateCustomer(Component c){
+	
+	public void createPrivateCustomer(Component c) {
 		CreateCustomerGUI comp = new CreateCustomerGUI(false, c, this);
 		addPaneToTab(comp, "Opret Privat Kunde");
 	}
-
-	public void createBusinesssCustomer(Component c){
+	
+	public void createBusinesssCustomer(Component c) {
 		CreateCustomerGUI comp = new CreateCustomerGUI(true, c, this);
 		addPaneToTab(comp, "Opret Erhvervs Kunde");
 	}
 	
-	public void editCustomer(Customer cus){
+	public void editCustomer(Customer cus) {
 		CreateCustomerGUI comp = new CreateCustomerGUI(cus, sale, this);
 		addPaneToTab(comp, "Ændre Kunde");
 	}
 	
-	public void createEmployee(Component e){
+	public void createEmployee(Component e) {
 		CreateEmployeeGUI comp = new CreateEmployeeGUI(e, this);
 		addPaneToTab(comp, "Opret medarbejder");
 		//CreateEmployee comp = new CreateEmployee(e, this);
 		//addPaneToTab(comp, "Opret medarbejder");
-
+		
 	}
 	
-	public void addPaneToTab(Component c, String title){
+	public void addPaneToTab(Component c, String title) {
 		tabbedPane.addTab(title, c);
 		tabbedPane.setSelectedComponent(c);
 	}
 	
-	public void switchPane(Component c){
+	public void switchPane(Component c) {
 		tabbedPane.setSelectedComponent(c);
 	}
-		
-	public void setSelectedToSale(boolean b, Object selected){
-		if(selected instanceof Customer || selected == null){
+	
+	public void setSelectedToSale(boolean b, Object selected) {
+		if (selected instanceof Customer || selected == null) {
 			Customer selectedCus = (Customer) selected;
-			if(b){
+			if (b) {
 				tabbedPane.setSelectedComponent(sale);
-				if (selectedCus != null){
+				if (selectedCus != null) {
 					sale.setCustomer(selectedCus);
 				}
 			} else {
 				tabbedPane.setSelectedComponent(customer);
 			}
-		}else if(selected instanceof Sale){
+		} else if (selected instanceof Sale) {
 			int choice = 3;
-			if(sale.isSaleEmpty()){
+			if (sale.isSaleEmpty()) {
 				choice = 3;
-			}else if(!sale.isSaleEmpty()){
-				 choice = sale.parkSale();
+			} else if (!sale.isSaleEmpty()) {
+				choice = sale.parkSale();
 			}
-			if(choice == 3){
+			if (choice == 3) {
 				Sale selectedSale = (Sale) selected;
-				if(!selectedSale.isDone()){
+				if (!selectedSale.isDone()) {
 					tabbedPane.remove(sale);
 					sale = new SaleGUI(this, selectedSale);
 					tabbedPane.insertTab("Salg", null, sale, null, 0);
@@ -430,20 +425,20 @@ public class MainGUI extends JFrame{
 		}
 	}
 	
-	public void resetSale(){
+	public void resetSale() {
 		tabbedPane.remove(sale);
 		sale = new SaleGUI(this, null);
 		tabbedPane.insertTab("Salg", null, sale, null, 0);
 		tabbedPane.setSelectedComponent(sale);
 		reDraw();
 	}
-
+	
 	public void addToSale(Item i) {
 		sale.addItem(i);
 		tabbedPane.setSelectedComponent(sale);
 	}
 	
-	public CloseButtonTabbedPane getTabbedPane(){
+	public CloseButtonTabbedPane getTabbedPane() {
 		return tabbedPane;
 	}
 }

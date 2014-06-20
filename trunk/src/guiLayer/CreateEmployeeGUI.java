@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -18,20 +17,18 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import ctrLayer.EmployeeCtr;
-import exceptionLayer.AlreadyExistException;
-import extensions.JBlinkLabel;
-import extensions.JTextFieldLimit;
-import extensions.KeyListener;
-import extensions.SpaceDocument;
+import personLayer.Employee;
 
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
-import extensions.JIntegerField;
-import personLayer.Employee;
+import ctrLayer.EmployeeCtr;
+import exceptionLayer.AlreadyExistException;
+import extensions.JBlinkLabel;
+import extensions.JTextFieldLimit;
+import extensions.KeyListener;
 
 public class CreateEmployeeGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -59,8 +56,8 @@ public class CreateEmployeeGUI extends JPanel {
 	 * Create the panel.
 	 */
 	public CreateEmployeeGUI(Component e, MainGUI mainGUI) {
-		this.creator = e;
-		this.parent = mainGUI;
+		creator = e;
+		parent = mainGUI;
 		buildPanel();
 		btnCreate.setText("Opret");
 	}
@@ -70,8 +67,8 @@ public class CreateEmployeeGUI extends JPanel {
 	 */
 	public CreateEmployeeGUI(Component e, MainGUI mainGUI, Employee employee) {
 		updateEmp = employee;
-		this.creator = e;
-		this.parent = mainGUI;
+		creator = e;
+		parent = mainGUI;
 		buildPanel();
 		lblPassword.setVisible(false);
 		txtPassword.setVisible(false);
@@ -154,7 +151,7 @@ public class CreateEmployeeGUI extends JPanel {
 		JLabel lblPostnummer = new JLabel("Postnummer");
 		panel.add(lblPostnummer, "2, 6, left, default");
 		
-		txtPostalCode = new JIntegerField(6);
+		txtPostalCode = new JTextField();
 		txtPostalCode.setDocument(new JTextFieldLimit(6, true, false));
 		panel.add(txtPostalCode, "3, 6, fill, default");
 		txtPostalCode.setColumns(10);
@@ -170,7 +167,7 @@ public class CreateEmployeeGUI extends JPanel {
 		JLabel lblTlfNr = new JLabel("Tlf nr");
 		panel.add(lblTlfNr, "2, 10, left, default");
 		
-		txtTlf = new JIntegerField();
+		txtTlf = new JTextField();
 		txtTlf.setDocument(new JTextFieldLimit(8, true, false));
 		panel.add(txtTlf, "3, 10, fill, default");
 		txtTlf.setColumns(10);
@@ -229,7 +226,7 @@ public class CreateEmployeeGUI extends JPanel {
 		JLabel lblMedarbejderNummer = new JLabel("Medarbejder nummer");
 		panel.add(lblMedarbejderNummer, "2, 16, left, default");
 		
-		txtEmpNr = new JIntegerField();
+		txtEmpNr = new JTextField();
 		txtEmpNr.setDocument(new JTextFieldLimit(10, true, false));
 		panel.add(txtEmpNr, "3, 16, fill, default");
 		txtEmpNr.setColumns(10);
@@ -274,7 +271,7 @@ public class CreateEmployeeGUI extends JPanel {
 		btnCreate = new JButton();
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(updateEmp == null){
+				if (updateEmp == null) {
 					createEmployee();
 				} else {
 					updateEmployee();
@@ -292,9 +289,9 @@ public class CreateEmployeeGUI extends JPanel {
 	}
 	
 	protected void createEmployee() {
-		if(validdateField()){
+		if (validdateField()) {
 			String name = txtName.getText();
-			String street  = txtStreet.getText();
+			String street = txtStreet.getText();
 			String postalCode = txtPostalCode.getText();
 			String city = txtCity.getText();
 			String tlf = txtTlf.getText();
@@ -303,12 +300,12 @@ public class CreateEmployeeGUI extends JPanel {
 			String empNr = txtEmpNr.getText();
 			String password;
 			boolean admin;
-			if(chkAdmin.isSelected()){
+			if (chkAdmin.isSelected()) {
 				admin = true;
 				password = txtPassword.getText();
-			} else  {
-				admin = false;	
-				password = null;			
+			} else {
+				admin = false;
+				password = null;
 			}
 			
 			EmployeeCtr eCtr = new EmployeeCtr();
@@ -320,29 +317,29 @@ public class CreateEmployeeGUI extends JPanel {
 				lblState.setText(e.getMessage());
 				lblState.startBlinking(true, true);
 			}
-						
-		}		
+			
+		}
 	}
 	
-	protected void updateEmployee(){
+	protected void updateEmployee() {
 		
-		if(validdateUpdate() ){
+		if (validdateUpdate()) {
 			String name = txtName.getText();
-			String street  = txtStreet.getText();
+			String street = txtStreet.getText();
 			String postalCode = txtPostalCode.getText();
 			String city = txtCity.getText();
 			String tlf = txtTlf.getText();
 			String eMail = txtEmail.getText();
 			String empNr = txtEmpNr.getText();
 			boolean admin;
-			if(chkAdmin.isSelected()){
+			if (chkAdmin.isSelected()) {
 				admin = true;
-			} else  {
-				admin = false;			
+			} else {
+				admin = false;
 			}
-		EmployeeCtr eCtr = new EmployeeCtr();
-		
-		eCtr.updateEmployee(updateEmp.getId(), empNr, name, tlf, street, eMail, city, postalCode, admin);	
+			EmployeeCtr eCtr = new EmployeeCtr();
+			
+			eCtr.updateEmployee(updateEmp.getId(), empNr, name, tlf, street, eMail, city, postalCode, admin);
 		} else {
 			lblState.setText("Medarbejderen er ikke rettet");
 			lblState.startBlinking(true, true);

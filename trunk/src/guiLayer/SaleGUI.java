@@ -1,33 +1,63 @@
 package guiLayer;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultCellEditor;
+import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import modelLayer.Item;
 import modelLayer.PartSale;
 import modelLayer.Sale;
+
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
 import personLayer.Business;
 import personLayer.Customer;
 
 import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.*;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.SaleCtr;
-import extensions.JIntegerField;
 import extensions.JTextFieldLimit;
 import extensions.SaleItemTableModel;
-
-import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 public class SaleGUI extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -166,7 +196,7 @@ public class SaleGUI extends JPanel {
 		table.getColumnModel().getColumn(3).setPreferredWidth(25);
 		table.getColumnModel().getColumn(4).setPreferredWidth(25);
 		
-		final JIntegerField tableEditAmount = new JIntegerField();
+		final JTextField tableEditAmount = new JTextField();
 		tableEditAmount.setDocument(new JTextFieldLimit(10, true, false));
 		tableEditAmount.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.DARK_GRAY),
 				BorderFactory.createEmptyBorder(0, 0, 0, 2)));
@@ -241,23 +271,23 @@ public class SaleGUI extends JPanel {
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
 		gl_panel_4.setHorizontalGroup(
-			gl_panel_4.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_4.createSequentialGroup()
-					.addGap(3)
-					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-						.addComponent(panel_8, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
-					.addContainerGap())
-		);
+				gl_panel_4.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel_4.createSequentialGroup()
+								.addGap(3)
+								.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
+										.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+										.addComponent(panel_8, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE))
+								.addContainerGap())
+				);
 		gl_panel_4.setVerticalGroup(
-			gl_panel_4.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_4.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(4))
-		);
+				gl_panel_4.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel_4.createSequentialGroup()
+								.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGap(4))
+				);
 		
 		btnFindOrRemove = new JButton("Find Kunde");
 		btnFindOrRemove.addActionListener(new ActionListener() {
@@ -352,7 +382,7 @@ public class SaleGUI extends JPanel {
 			}
 		});
 		panel_9.add(btnFinish);
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnAddItem, btnFindOrRemove, btnCreateOrEdit, btnCancel, btnPark, btnFinish}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] {btnAddItem, btnFindOrRemove, btnCreateOrEdit, btnCancel, btnPark, btnFinish}));
 		
 		saleCtr = new SaleCtr();
 		if (sale != null) {
@@ -372,34 +402,34 @@ public class SaleGUI extends JPanel {
 	
 	private void createOrEditCustomer() {
 		Customer c = saleCtr.getSale().getCustomer();
-		if(c != null){
+		if (c != null) {
 			mainGUI.editCustomer(c);
 		} else {
 			createCustomer();
 		}
 	}
-
+	
 	private void findOrRemoveCustomer() {
 		Customer c = saleCtr.getSale().getCustomer();
-		if(c != null){
+		if (c != null) {
 			removeCustomer();
 		} else {
 			findCustomer();
 		}
 	}
-
+	
 	private void removeCustomer() {
 		setCustomer(null);
 	}
-
+	
 	private void updateButtons() {
 		if (partSales.size() != 0) {
 			btnFinish.setEnabled(true);
-			if(saleCtr.getSale().getCustomer() != null){
+			if (saleCtr.getSale().getCustomer() != null) {
 				btnPark.setEnabled(true);
 			} else {
 				btnPark.setEnabled(false);
-			}				
+			}
 			btnCancel.setEnabled(true);
 		} else {
 			btnFinish.setEnabled(false);
@@ -574,8 +604,8 @@ public class SaleGUI extends JPanel {
 	
 	private void makeAddItem() {
 		JDialog addItem = new SaleAddItem(null, saleCtr);
-        addItem.setLocationRelativeTo(mainGUI);
-        addItem.setVisible(true);
+		addItem.setLocationRelativeTo(mainGUI);
+		addItem.setVisible(true);
 		
 		updatePrices();
 		updateButtons();
