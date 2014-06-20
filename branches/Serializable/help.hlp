@@ -1,0 +1,15 @@
+﻿-------------
+@Title Salg
+Fanen Salg, viser det nuværende salg.
+Her har du mulighed for at:
+	1. Nulstille Salget
+	2. Parkere Salget(Kræver en kunde er tilknyttet)
+	3. Afslutte Salget
+	4. Varer antal kan ændre i Vare oversigten("Varer"), ved at trykke på "Stk." 
+----------
+@Title Varer
+Her kan du søge efter varer 
+----------
+@Title Opret Vare
+Her kan du oprette en vare
+----------
