@@ -15,10 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 public class KeyListener {
-	private boolean done;
 	
 	public KeyListener() {
-		done = false;
+		
 	}
 	
 	public void addEscapeListener(final JDialog dialog) {

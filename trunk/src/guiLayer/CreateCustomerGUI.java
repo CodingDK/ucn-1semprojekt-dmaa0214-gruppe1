@@ -31,7 +31,7 @@ import extensions.JTextFieldLimit;
 import extensions.KeyListener;
 
 public class CreateCustomerGUI extends JPanel {
-	
+	private static final long serialVersionUID = 1L;
 	private boolean business;
 	private boolean isUpdate = false;
 	private Component creator;
@@ -396,7 +396,6 @@ public class CreateCustomerGUI extends JPanel {
 	}
 	
 	private boolean validateFields() {
-		String pictureId = null;
 		String company = null;
 		String cvr = null;
 		String errorMsg = " må ikke være tomt";

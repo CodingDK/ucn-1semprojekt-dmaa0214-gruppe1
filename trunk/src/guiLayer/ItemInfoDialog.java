@@ -28,12 +28,12 @@ import com.jgoodies.forms.layout.RowSpec;
 import extensions.KeyListener;
 
 public class ItemInfoDialog extends JDialog {
+	private static final long serialVersionUID = 1L;
 	private final Item i;
 	private JTextArea txtDescription;
 	private JTextArea txtItem;
 	private final JPanel contentPanel = new JPanel();
 	private JTextArea txtItemInfo;
-	private ItemGUI iGUI;
 	private JButton btnToSale;
 	private JPanel panel_1;
 	private JPanel panel_2;
@@ -51,7 +51,6 @@ public class ItemInfoDialog extends JDialog {
 		super(parent, "Vare Information", true);
 		new KeyListener().addEscapeListener(this);
 		this.i = i;
-		this.iGUI = iGUI;
 		setBounds(100, 100, 361, 458);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -1,7 +1,8 @@
 package exceptionLayer;
 
 public class StorageExistException extends Exception {
-	
+	private static final long serialVersionUID = 1L;
+
 	public StorageExistException() {}
 	
 	public StorageExistException(String message) {

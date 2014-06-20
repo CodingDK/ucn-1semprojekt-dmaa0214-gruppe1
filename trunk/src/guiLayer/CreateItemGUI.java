@@ -34,6 +34,7 @@ import extensions.JTextFieldLimit;
 import extensions.KeyListener;
 
 public class CreateItemGUI extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private JTextField txtAmount;
 	private JDoubleField txtSalePrice;
 	private JDoubleField txtPurchasePrice;
@@ -80,6 +81,7 @@ public class CreateItemGUI extends JPanel {
 		new KeyListener().addEscapeListenerToTab(iGUI, mainGUI, this);
 	}
 	
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	protected void makePanels() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] {296, 0, 0};
@@ -266,6 +268,7 @@ public class CreateItemGUI extends JPanel {
 		
 	}
 	
+	@SuppressWarnings("null")
 	protected void createItem() {
 		ItemCtr iCtr = new ItemCtr();
 		
