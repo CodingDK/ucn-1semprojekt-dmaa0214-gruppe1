@@ -8,11 +8,13 @@ public class JTextFieldLimit extends PlainDocument {
 	private static final long serialVersionUID = 1L;
 	private int limit;
 	private boolean onlyInt;
+	private boolean oneSpace;
 	
-	public JTextFieldLimit(int limit, boolean onlyInt) {
+	public JTextFieldLimit(int limit, boolean onlyInt, boolean oneSpace) {
 		super();
 		this.limit = limit;
 		this.onlyInt = onlyInt;
+		this.oneSpace = oneSpace;
 	}
 	
 	public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException{
@@ -28,6 +30,22 @@ public class JTextFieldLimit extends PlainDocument {
 					go = false;
 					break;
 				}
+			}
+		}else{
+			if(oneSpace){
+				if(str.equals(" ")){
+					return;
+				}
+			}else if(getLength() == 0 && str.equals(" ")){
+				return;
+			}else if(str.equals(" ")){
+				if(getLength() > 0){
+					if(getText(0, getLength()).charAt(getLength()-1) == ' '){
+						return;
+					}
+				}
+			}else{
+	
 			}
 		}
 		
