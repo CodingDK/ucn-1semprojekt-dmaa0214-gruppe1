@@ -2,9 +2,8 @@ package exceptionLayer;
 
 public class MainCategoryException extends Exception {
 	private static final long serialVersionUID = 1L;
-
-	public MainCategoryException() {
-	}
+	
+	public MainCategoryException() {}
 	
 	public MainCategoryException(String arg0) {
 		super(arg0);

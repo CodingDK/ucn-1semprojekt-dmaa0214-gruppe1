@@ -7,18 +7,18 @@ public class Help {
 	
 	public Help(String name) {
 		this.name = name;
-		this.help = "";
+		help = "";
 	}
 	
-	public void append(String line){
+	public void append(String line) {
 		help += line + nL;
 	}
 	
-	public String getName(){
+	public String getName() {
 		return name;
 	}
 	
-	public String getHelp(){
+	public String getHelp() {
 		return help;
 	}
 	

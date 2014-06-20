@@ -1,26 +1,37 @@
 package guiLayer;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
-import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import modelLayer.Item;
 
 import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.*;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.ItemCtr;
 import ctrLayer.SaleCtr;
 import exceptionLayer.NotEnoughItemsException;
 import exceptionLayer.SaleNotCreatedException;
-import extensions.JIntegerField;
 import extensions.JTextFieldLimit;
 import extensions.KeyListener;
 
 public class SaleAddItem extends JDialog {
-
+	
 	/**
 	 * 
 	 */
@@ -43,7 +54,7 @@ public class SaleAddItem extends JDialog {
 		
 		new KeyListener().addEscapeListener(this);
 		item = null;
-		this.saleCtr = sCtr;
+		saleCtr = sCtr;
 		setResizable(false);
 		setBounds(100, 100, 321, 147);
 		getContentPane().setLayout(new BorderLayout());
@@ -58,23 +69,24 @@ public class SaleAddItem extends JDialog {
 					ColumnSpec.decode("90px"),
 					ColumnSpec.decode("80px"),
 					ColumnSpec.decode("140px"),},
-				new RowSpec[] {
-					RowSpec.decode("28px"),
-					RowSpec.decode("11px"),
-					RowSpec.decode("28px"),}));
+					new RowSpec[] {
+							RowSpec.decode("28px"),
+							RowSpec.decode("11px"),
+							RowSpec.decode("28px"),}));
 			{
 				lblItemNr = new JLabel("Vare nummer: ");
 				lblItemNr.setLabelFor(lblItemNr);
 				panel.add(lblItemNr, "2, 1, fill, fill");
 			}
 			{
-				txtItemNr = new JIntegerField();
+				txtItemNr = new JTextField();
 				txtItemNr.setDocument(new JTextFieldLimit(10, true, false));
 				txtItemNr.addFocusListener(new FocusAdapter() {
 					@Override
 					public void focusLost(FocusEvent arg0) {
 						checkItemNr();
 					}
+					
 					@Override
 					public void focusGained(FocusEvent arg0) {
 						lblItemNrStatus.setText("");
@@ -93,12 +105,15 @@ public class SaleAddItem extends JDialog {
 				panel.add(lblAmount, "2, 3, fill, fill");
 			}
 			{
-				txtAmont = new JIntegerField(10);
+				txtAmont = new JTextField();
 				txtAmont.setDocument(new JTextFieldLimit(10, true, false));
 				txtAmont.addFocusListener(new FocusAdapter() {
+					@Override
 					public void focusLost(FocusEvent e) {
 						checkAmount();
 					}
+					
+					@Override
 					public void focusGained(FocusEvent arg0) {
 						//lblAmountStatus.setText("");
 					}
@@ -132,8 +147,8 @@ public class SaleAddItem extends JDialog {
 				JButton bntCancel = new JButton("Annuller");
 				bntCancel.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						setVisible(false); 
-					    dispose();
+						setVisible(false);
+						dispose();
 					}
 				});
 				bntCancel.setActionCommand("Cancel");
@@ -141,9 +156,9 @@ public class SaleAddItem extends JDialog {
 			}
 		}
 	}
-
+	
 	private void addItem() {
-		if(checkAmount() && checkItemNr()) {
+		if (checkAmount() && checkItemNr()) {
 			int amount = Integer.parseInt(txtAmont.getText());
 			try {
 				saleCtr.addItem(item, amount);
@@ -157,26 +172,26 @@ public class SaleAddItem extends JDialog {
 				JOptionPane.showMessageDialog(this, e.getMessage());
 			}
 		}
-		else if(!checkItemNr()) {
-			JOptionPane.showMessageDialog(this, "Varenummer blev ikke fundet","Fejl",JOptionPane.ERROR_MESSAGE);
+		else if (!checkItemNr()) {
+			JOptionPane.showMessageDialog(this, "Varenummer blev ikke fundet", "Fejl", JOptionPane.ERROR_MESSAGE);
 		}
-		else if(!checkAmount()){
-			JOptionPane.showMessageDialog(this, "Antal er ikke muligt","Fejl",JOptionPane.ERROR_MESSAGE);
-		} else{
-			JOptionPane.showMessageDialog(this, "Hov.. Du glemte vist noget","Fejl",JOptionPane.ERROR_MESSAGE);
+		else if (!checkAmount()) {
+			JOptionPane.showMessageDialog(this, "Antal er ikke muligt", "Fejl", JOptionPane.ERROR_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(this, "Hov.. Du glemte vist noget", "Fejl", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
 	private boolean checkAmount() {
 		boolean ret = false;
 		String strAmount = txtAmont.getText();
-
+		
 		//int amount = Integer.parseInt(strAmount);
-		if(!strAmount.isEmpty() && Integer.parseInt(strAmount) > 0) {
+		if (!strAmount.isEmpty() && Integer.parseInt(strAmount) > 0) {
 			
-			if(item != null) {
+			if (item != null) {
 				int amount = Integer.parseInt(strAmount);
-				int aviAmount = item.getAmount()-item.getReserved();
+				int aviAmount = item.getAmount() - item.getReserved();
 				if (aviAmount - amount < 0) {
 					lblAmountStatus.setText("Kun " + aviAmount + " på lager");
 				} else {
@@ -192,17 +207,17 @@ public class SaleAddItem extends JDialog {
 		return ret;
 		
 	}
-
+	
 	private boolean checkItemNr() {
 		boolean ret = false;
 		String strItemNr = txtItemNr.getText();
 		item = null;
 		
-		if(!strItemNr.isEmpty()) {
+		if (!strItemNr.isEmpty()) {
 			ItemCtr iCtr = new ItemCtr();
 			int itemNr = Integer.parseInt(strItemNr);
 			Item retItem = iCtr.getItem(itemNr);
-			if(retItem != null){
+			if (retItem != null) {
 				item = retItem;
 				lblItemNrStatus.setText(item.getName());
 				ret = true;
@@ -214,5 +229,5 @@ public class SaleAddItem extends JDialog {
 		}
 		return ret;
 	}
-
+	
 }

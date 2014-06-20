@@ -1,42 +1,31 @@
 package guiLayer;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.Frame;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-import javax.swing.BoxLayout;
 
 import modelLayer.Item;
 
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import javax.swing.JTextArea;
-
-import java.awt.SystemColor;
-
-import javax.swing.UIManager;
-
-import java.awt.Color;
-
-import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
 
 import extensions.KeyListener;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.text.NumberFormat;
-
-import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 public class ItemInfoDialog extends JDialog {
 	private final Item i;
@@ -54,7 +43,7 @@ public class ItemInfoDialog extends JDialog {
 	private JPanel panel;
 	private JButton btnCancel;
 	private JButton btnSave;
-
+	
 	/**
 	 * Create the dialog.
 	 */
@@ -68,10 +57,10 @@ public class ItemInfoDialog extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{346, 0, 0, 0};
-		gbl_contentPanel.rowHeights = new int[]{277, 0, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPanel.columnWidths = new int[] {346, 0, 0, 0};
+		gbl_contentPanel.rowHeights = new int[] {277, 0, 0};
+		gbl_contentPanel.columnWeights = new double[] {0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[] {1.0, 1.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 			panel_1 = new JPanel();
@@ -84,8 +73,8 @@ public class ItemInfoDialog extends JDialog {
 			panel_1.setLayout(new FormLayout(new ColumnSpec[] {
 					ColumnSpec.decode("165px"),
 					ColumnSpec.decode("max(37dlu;default):grow"),},
-				new RowSpec[] {
-					RowSpec.decode("272px:grow"),}));
+					new RowSpec[] {
+							RowSpec.decode("272px:grow"),}));
 			{
 				txtItem = new JTextArea();
 				txtItem.setColumns(1);
@@ -168,10 +157,10 @@ public class ItemInfoDialog extends JDialog {
 				}
 			}
 		}
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnToSale, btnCancel, btnSave}));
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[] {btnToSale, btnCancel, btnSave}));
 		fillTxtArea();
 	}
-
+	
 	private void fillTxtArea() {
 		NumberFormat money = NumberFormat.getCurrencyInstance();
 		String nL = System.getProperty("line.separator");

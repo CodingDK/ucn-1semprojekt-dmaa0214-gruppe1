@@ -93,13 +93,13 @@ public class Sale {
 		int index = 0;
 		PartSale ps = null;
 		
-		while(index < partSales.size() && ps == null){
-			if(partSales.get(index).getItem() == i){
+		while (index < partSales.size() && ps == null) {
+			if (partSales.get(index).getItem() == i) {
 				ps = partSales.get(index);
 			}
 			index++;
 		}
-		if (ps != null){
+		if (ps != null) {
 			ps.addAmount(amount);
 		} else {
 			PartSale p = new PartSale(i, amount);
@@ -173,10 +173,10 @@ public class Sale {
 		return retString;
 	}
 	
-	public void removePartSale(PartSale ps){
+	public void removePartSale(PartSale ps) {
 		partSales.remove(ps);
 	}
-
+	
 	public void setDate(Date d) {
 		// TODO Auto-generated method stub
 		date = d;

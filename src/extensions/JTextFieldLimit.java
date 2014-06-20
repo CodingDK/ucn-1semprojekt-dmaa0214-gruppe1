@@ -17,39 +17,41 @@ public class JTextFieldLimit extends PlainDocument {
 		this.oneSpace = oneSpace;
 	}
 	
-	public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException{
-		if(str == null) return;
+	@Override
+	public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+		if (str == null)
+			return;
 		boolean go = true;
-		if(onlyInt){
+		if (onlyInt) {
 			char[] chars = str.toCharArray();
 			
-			for(int i = 0; i < chars.length; i++){
-				try{
+			for (int i = 0; i < chars.length; i++) {
+				try {
 					Integer.parseInt(String.valueOf(chars[i]));
-				}catch(NumberFormatException e){
+				} catch (NumberFormatException e) {
 					go = false;
 					break;
 				}
 			}
-		}else{
-			if(oneSpace){
-				if(str.equals(" ")){
+		} else {
+			if (oneSpace) {
+				if (str.equals(" ")) {
 					return;
 				}
-			}else if(getLength() == 0 && str.equals(" ")){
+			} else if (getLength() == 0 && str.equals(" ")) {
 				return;
-			}else if(str.equals(" ")){
-				if(getLength() > 0){
-					if(getText(0, getLength()).charAt(getLength()-1) == ' '){
+			} else if (str.equals(" ")) {
+				if (getLength() > 0) {
+					if (getText(0, getLength()).charAt(getLength() - 1) == ' ') {
 						return;
 					}
 				}
-			}else{
-	
+			} else {
+				
 			}
 		}
 		
-		if(go && ((getLength() + str.length()) <= limit)){
+		if (go && ((getLength() + str.length()) <= limit)) {
 			super.insertString(offset, str, attr);
 		}
 	}

@@ -5,7 +5,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.text.NumberFormat;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
@@ -14,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import modelLayer.Category;
 import modelLayer.Item;
@@ -28,25 +30,18 @@ import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
 import extensions.JBlinkLabel;
 import extensions.JDoubleField;
-import extensions.JIntegerField;
 import extensions.JTextFieldLimit;
 import extensions.KeyListener;
-import extensions.SpaceDocument;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.SwingConstants;
 
 public class CreateItemGUI extends JPanel {
-	private JIntegerField txtAmount;
+	private JTextField txtAmount;
 	private JDoubleField txtSalePrice;
 	private JDoubleField txtPurchasePrice;
-	private JIntegerField txtBulk;
+	private JTextField txtBulk;
 	private JDoubleField txtBulkPrice;
 	private JTextField txtLocation;
-	private JIntegerField txtMin;
-	private JIntegerField txtMax;
+	private JTextField txtMin;
+	private JTextField txtMax;
 	public JTextField txtName;
 	private JComboBox<Storage> cmbStorage;
 	private JComboBox<Category> cmbCategory;
@@ -61,12 +56,12 @@ public class CreateItemGUI extends JPanel {
 	 * Create the panel.
 	 */
 	public CreateItemGUI(MainGUI parent, ItemGUI iGUI, Item item) {
-		this.mainGUI = parent;
+		mainGUI = parent;
 		this.iGUI = iGUI;
 		makePanels();
-		if(item != null){
+		if (item != null) {
 			this.item = item;
-			isUpdate =  true;
+			isUpdate = true;
 			txtAmount.setText("" + item.getAmount());
 			txtBulk.setText(item.getBulk() + "");
 			txtBulkPrice.setText(item.getBulkSalePrice() + "");
@@ -79,18 +74,18 @@ public class CreateItemGUI extends JPanel {
 			cmbCategory.setSelectedItem(item.getCategory());
 			cmbStorage.setSelectedItem(item.getStorage());
 			btnCreate.setText("Ret");
-		}else{
+		} else {
 			isUpdate = false;
 		}
 		new KeyListener().addEscapeListenerToTab(iGUI, mainGUI, this);
 	}
 	
-	protected void makePanels(){
+	protected void makePanels() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{296, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] {296, 0, 0};
+		gridBagLayout.rowHeights = new int[] {0, 0};
+		gridBagLayout.columnWeights = new double[] {0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[] {1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JPanel panel_1 = new JPanel();
@@ -110,20 +105,20 @@ public class CreateItemGUI extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("164px:grow"),
 				FormFactory.RELATED_GAP_COLSPEC,},
-			new RowSpec[] {
-				RowSpec.decode("28px"),
-				RowSpec.decode("28px"),
-				RowSpec.decode("28px"),
-				RowSpec.decode("28px"),
-				RowSpec.decode("28px"),
-				RowSpec.decode("28px"),
-				RowSpec.decode("28px"),
-				RowSpec.decode("28px"),
-				RowSpec.decode("28px"),
-				RowSpec.decode("28px"),
-				RowSpec.decode("28px"),
-				FormFactory.DEFAULT_ROWSPEC,
-				RowSpec.decode("28px"),}));
+				new RowSpec[] {
+						RowSpec.decode("28px"),
+						RowSpec.decode("28px"),
+						RowSpec.decode("28px"),
+						RowSpec.decode("28px"),
+						RowSpec.decode("28px"),
+						RowSpec.decode("28px"),
+						RowSpec.decode("28px"),
+						RowSpec.decode("28px"),
+						RowSpec.decode("28px"),
+						RowSpec.decode("28px"),
+						RowSpec.decode("28px"),
+						FormFactory.DEFAULT_ROWSPEC,
+						RowSpec.decode("28px"),}));
 		
 		JLabel lblName = new JLabel("Navn");
 		panel_2.add(lblName, "2, 1, left, fill");
@@ -136,7 +131,7 @@ public class CreateItemGUI extends JPanel {
 		JLabel lblAmount = new JLabel("Mængde");
 		panel_2.add(lblAmount, "2, 2, fill, fill");
 		
-		txtAmount = new JIntegerField();
+		txtAmount = new JTextField();
 		txtAmount.setDocument(new JTextFieldLimit(10, true, false));
 		txtAmount.setColumns(10);
 		panel_2.add(txtAmount, "4, 2, fill, fill");
@@ -158,7 +153,7 @@ public class CreateItemGUI extends JPanel {
 		JLabel lblBulk = new JLabel("Bulk");
 		panel_2.add(lblBulk, "2, 5, fill, fill");
 		
-		txtBulk = new JIntegerField();
+		txtBulk = new JTextField();
 		txtBulk.setDocument(new JTextFieldLimit(10, true, false));
 		txtBulk.setColumns(10);
 		panel_2.add(txtBulk, "4, 5, fill, fill");
@@ -190,7 +185,7 @@ public class CreateItemGUI extends JPanel {
 		JLabel lblMax = new JLabel("Min Lagerbeholdning");
 		panel_2.add(lblMax, "2, 9, fill, fill");
 		
-		txtMin = new JIntegerField();
+		txtMin = new JTextField();
 		txtMin.setDocument(new JTextFieldLimit(10, true, false));
 		txtMin.setColumns(10);
 		panel_2.add(txtMin, "4, 9, fill, fill");
@@ -198,7 +193,7 @@ public class CreateItemGUI extends JPanel {
 		JLabel lblMin = new JLabel("Max Lagerbeholdning");
 		panel_2.add(lblMin, "2, 10, fill, fill");
 		
-		txtMax = new JIntegerField(10);
+		txtMax = new JTextField();
 		txtMax.setDocument(new JTextFieldLimit(10, true, false));
 		txtMax.setColumns(10);
 		panel_2.add(txtMax, "4, 10, fill, fill");
@@ -226,9 +221,9 @@ public class CreateItemGUI extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.GROWING_BUTTON_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,},
-			new RowSpec[] {
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),}));
+				new RowSpec[] {
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("20px"),}));
 		
 		JButton btnClear = new JButton("Nulstil");
 		btnClear.addActionListener(new ActionListener() {
@@ -270,26 +265,26 @@ public class CreateItemGUI extends JPanel {
 		add(panel, gbc_panel);
 		
 	}
-
+	
 	protected void createItem() {
 		ItemCtr iCtr = new ItemCtr();
 		
 		String name = txtName.getText().trim();
-		if(name == null && name.length() >= 1){
+		if (name == null && name.length() >= 1) {
 			lblState.setText("Navnet må ikke være tomt");
 			lblState.startBlinking(true, true);
 			return;
 		}
 		
 		int amount = 0;
-		try{
+		try {
 			amount = Integer.parseInt(txtAmount.getText());
-			if(amount < 0){
+			if (amount < 0) {
 				lblState.setText("Mængden kan ikke være et negativt tal");
 				lblState.startBlinking(true, true);
 				return;
 			}
-		}catch(NumberFormatException e){
+		} catch (NumberFormatException e) {
 			lblState.setText("Mængden skal være et gyldigt tal");
 			lblState.startBlinking(true, true);
 			return;
@@ -298,114 +293,114 @@ public class CreateItemGUI extends JPanel {
 		int reserved = 0;
 		
 		double salePrice = 0;
-		try{
+		try {
 			salePrice = Double.parseDouble(txtSalePrice.getText());
-			if(salePrice < 0){
+			if (salePrice < 0) {
 				lblState.setText("Salgs prisen kan ikke være et negativt tal");
 				lblState.startBlinking(true, true);
 				return;
 			}
-		}catch(NumberFormatException e){
+		} catch (NumberFormatException e) {
 			lblState.setText("Salgs prisen skal være et gyldigt tal");
 			lblState.startBlinking(true, true);
 			return;
 		}
 		
 		double purchasePrice = 0;
-		try{
+		try {
 			purchasePrice = Double.parseDouble(txtPurchasePrice.getText());
-			if(purchasePrice < 0){
+			if (purchasePrice < 0) {
 				lblState.setText("Købs prisen kan ikke være et negativt tal");
 				lblState.startBlinking(true, true);
 				return;
 			}
-		}catch(NumberFormatException e){
+		} catch (NumberFormatException e) {
 			lblState.setText("Købs prisen skal være et gyldigt tal");
 			lblState.startBlinking(true, true);
 			return;
 		}
 		
 		double bulkSalePrice = 0;
-		try{
+		try {
 			bulkSalePrice = Double.parseDouble(txtBulkPrice.getText());
-			if(bulkSalePrice < 0){
+			if (bulkSalePrice < 0) {
 				lblState.setText("Bulk salgs prisen kan ikke være et negativt tal");
 				lblState.startBlinking(true, true);
 				return;
 			}
-		}catch(NumberFormatException e){
+		} catch (NumberFormatException e) {
 			lblState.setText("Bulk salgs prisen skal være et gyldigt tal");
 			lblState.startBlinking(true, true);
 			return;
 		}
 		
 		int bulk = Integer.parseInt(txtBulk.getText());
-		if(bulk < 0){
+		if (bulk < 0) {
 			lblState.setText("Bulk skal være større eller det samme som 0");
 			lblState.startBlinking(true, true);
 			return;
 		}
 		
 		String location = txtLocation.getText().trim();
-		if(location == null && location.length() >= 1){
+		if (location == null && location.length() >= 1) {
 			lblState.setText("Lokationen må ikke være tomt");
 			lblState.startBlinking(true, true);
 			return;
 		}
 		
 		Storage storage = (Storage) cmbStorage.getSelectedItem();
-		if(storage == null){
+		if (storage == null) {
 			lblState.setText("Der skal vælges et gyldigt Lager");
 			lblState.startBlinking(true, true);
 			return;
 		}
 		
 		int max = 0;
-		try{
+		try {
 			max = Integer.parseInt(txtMax.getText());
-			if(max < 0){
+			if (max < 0) {
 				lblState.setText("Max kan ikke være et negativt tal");
 				lblState.startBlinking(true, true);
 				return;
 			}
-		}catch(NumberFormatException e){
+		} catch (NumberFormatException e) {
 			lblState.setText("Max skal være et gyldigt tal");
 			lblState.startBlinking(true, true);
 			return;
 		}
 		
 		int min = 0;
-		try{
+		try {
 			min = Integer.parseInt(txtMin.getText());
-			if(min < 0){
+			if (min < 0) {
 				lblState.setText("Min kan ikke være et negativt tal");
 				lblState.startBlinking(true, true);
 				return;
-			}else if(min >= max){
+			} else if (min >= max) {
 				lblState.setText("Min kan ikke være større eller det samme som maks");
 				lblState.startBlinking(true, true);
 				return;
 			}
-		}catch(NumberFormatException e){
+		} catch (NumberFormatException e) {
 			lblState.setText("Min skal være et gyldigt tal");
 			lblState.startBlinking(true, true);
 			return;
 		}
 		
 		Category category = (Category) cmbCategory.getSelectedItem();
-		if(category == null){
+		if (category == null) {
 			lblState.setText("Der skal vælges en gyldig Kategori");
 			lblState.startBlinking(true, true);
 			return;
 		}
-		if(!isUpdate){
+		if (!isUpdate) {
 			iCtr.createItem(name, amount, reserved, salePrice, purchasePrice, bulkSalePrice, bulk, location, storage, max, min, category);
-		}else if(isUpdate){
+		} else if (isUpdate) {
 			iCtr.updateItem(item.getId(), name, amount, reserved, salePrice, purchasePrice, bulkSalePrice, bulk, location, storage, max, min, category);
 		}
 		done();
 	}
-
+	
 	protected void clear() {
 		txtAmount.setText("");
 		txtBulk.setText("");
@@ -420,7 +415,7 @@ public class CreateItemGUI extends JPanel {
 		cmbStorage.setSelectedIndex(0);
 	}
 	
-	protected void done(){
+	protected void done() {
 		mainGUI.switchPane(iGUI);
 		getParent().remove(this);
 	}

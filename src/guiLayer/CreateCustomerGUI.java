@@ -10,13 +10,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.text.Document;
 
 import personLayer.Business;
 import personLayer.Customer;
@@ -29,21 +27,19 @@ import com.jgoodies.forms.layout.RowSpec;
 
 import ctrLayer.CustomerCtr;
 import extensions.JBlinkLabel;
-import extensions.JIntegerField;
 import extensions.JTextFieldLimit;
 import extensions.KeyListener;
-import extensions.SpaceDocument;
 
 public class CreateCustomerGUI extends JPanel {
-
+	
 	private boolean business;
 	private boolean isUpdate = false;
 	private Component creator;
 	private Customer updateCust;
 	private JBlinkLabel lblError;
-	private JIntegerField txtCvr;
-	private JIntegerField txtPhone;
-	private JIntegerField txtPictureID;
+	private JTextField txtCvr;
+	private JTextField txtPhone;
+	private JTextField txtPictureID;
 	private JLabel label;
 	private JLabel lblCompany;
 	private JLabel lblCpr;
@@ -76,31 +72,32 @@ public class CreateCustomerGUI extends JPanel {
 	 * @wbp.parser.constructor
 	 */
 	public CreateCustomerGUI(boolean business, Component creator, MainGUI parent) {
-		this.mainGUI = parent;
+		mainGUI = parent;
 		this.creator = creator;
 		this.business = business;
 		buildPanel();
 	}
 	
 	public CreateCustomerGUI(Customer updateCust, Component creator, MainGUI parent) {
-		this.mainGUI = parent;
+		mainGUI = parent;
 		this.creator = creator;
-		if(updateCust != null){
-			if(updateCust instanceof Business){
-				this.business = true;
-			}else{
-				this.business = false;
+		if (updateCust != null) {
+			if (updateCust instanceof Business) {
+				business = true;
+			} else {
+				business = false;
 			}
-			this.isUpdate = true;
+			isUpdate = true;
 			this.updateCust = updateCust;
 			buildPanel();
 			insertUpdateDate();
-			this.txtCpr1.setEditable(false);
-			this.txtCpr2.setEditable(false);
-		}else{
+			txtCpr1.setEditable(false);
+			txtCpr2.setEditable(false);
+		} else {
 			getParent().remove(this);
 		}
 	}
+	
 	private void buildPanel() {
 		
 		new KeyListener().addEscapeListenerToTab(creator, mainGUI, this);
@@ -123,31 +120,31 @@ public class CreateCustomerGUI extends JPanel {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("156px:grow"),
 				ColumnSpec.decode("156px:grow"),},
-			new RowSpec[] {
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px"),
-				RowSpec.decode("21px"),
-				RowSpec.decode("32px:grow"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),}));
+				new RowSpec[] {
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px"),
+						RowSpec.decode("21px"),
+						RowSpec.decode("32px:grow"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("default:grow"),}));
 		
 		lblName = new JLabel("Navn");
 		panel_1.add(lblName, "2, 2, fill, fill");
@@ -175,7 +172,7 @@ public class CreateCustomerGUI extends JPanel {
 		lblPostCode = new JLabel("PostNr");
 		panel_1.add(lblPostCode, "2, 8, fill, fill");
 		
-		txtPostCode = new JIntegerField();
+		txtPostCode = new JTextField();
 		txtPostCode.setDocument(new JTextFieldLimit(6, true, false));
 		panel_1.add(txtPostCode, "3, 8, fill, fill");
 		txtPostCode.setColumns(10);
@@ -183,7 +180,7 @@ public class CreateCustomerGUI extends JPanel {
 		lblPhoneNr = new JLabel("Tlf");
 		panel_1.add(lblPhoneNr, "2, 10, fill, fill");
 		
-		txtPhone = new JIntegerField();
+		txtPhone = new JTextField();
 		txtPhone.setDocument(new JTextFieldLimit(8, true, false));
 		panel_1.add(txtPhone, "3, 10, fill, fill");
 		txtPhone.setColumns(10);
@@ -201,15 +198,15 @@ public class CreateCustomerGUI extends JPanel {
 		privatePanel.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("156px"),
 				ColumnSpec.decode("156px:grow"),},
-			new RowSpec[] {
-				RowSpec.decode("28px"),
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("28px:grow"),}));
+				new RowSpec[] {
+						RowSpec.decode("28px"),
+						FormFactory.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("28px:grow"),}));
 		
 		lblPictureID = new JLabel("Billed-Id");
 		privatePanel.add(lblPictureID, "1, 1, fill, fill");
 		
-		txtPictureID = new JIntegerField();
+		txtPictureID = new JTextField();
 		txtPictureID.setDocument(new JTextFieldLimit(9, true, false));
 		txtPictureID.setColumns(10);
 		privatePanel.add(txtPictureID, "2, 1, fill, fill");
@@ -225,15 +222,15 @@ public class CreateCustomerGUI extends JPanel {
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"),},
-			new RowSpec[] {
-				FormFactory.DEFAULT_ROWSPEC,}));
+				new RowSpec[] {
+						FormFactory.DEFAULT_ROWSPEC,}));
 		
 		txtCpr1 = new JTextField();
 		txtCpr1.setDocument(new JTextFieldLimit(6, true, false));
 		txtCpr1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				if(txtCpr1.getText().length() > 5){
+				if (txtCpr1.getText().length() > 5) {
 					txtCpr2.requestFocusInWindow();
 				}
 			}
@@ -248,7 +245,7 @@ public class CreateCustomerGUI extends JPanel {
 		txtCpr2.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
-				if(arg0.getKeyCode() == KeyEvent.VK_BACK_SPACE && txtCpr2.getText().length() == 0){
+				if (arg0.getKeyCode() == KeyEvent.VK_BACK_SPACE && txtCpr2.getText().length() == 0) {
 					txtCpr1.requestFocusInWindow();
 				}
 			}
@@ -278,7 +275,7 @@ public class CreateCustomerGUI extends JPanel {
 		lblCvr = new JLabel("Cvr nummer");
 		companyPanel.add(lblCvr, "1, 3, fill, fill");
 		
-		txtCvr = new JIntegerField();
+		txtCvr = new JTextField();
 		txtCvr.setDocument(new JTextFieldLimit(12, true, false));
 		txtCvr.setColumns(10);
 		companyPanel.add(txtCvr, "2, 3, fill, fill");
@@ -296,9 +293,9 @@ public class CreateCustomerGUI extends JPanel {
 						RowSpec.decode("fill:28px"),}));
 		
 		btnOpret = new JButton();
-		if(isUpdate){
+		if (isUpdate) {
 			btnOpret.setText("Ret");
-		}else{
+		} else {
 			btnOpret.setText("Opret");
 		}
 		panel.add(btnOpret, "1, 1, fill, fill");
@@ -320,9 +317,9 @@ public class CreateCustomerGUI extends JPanel {
 		});
 		btnOpret.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!isUpdate){
+				if (!isUpdate) {
 					createCustomer();
-				}else if(isUpdate){
+				} else if (isUpdate) {
 					updateCustomer();
 				}
 			}
@@ -338,7 +335,7 @@ public class CreateCustomerGUI extends JPanel {
 		mainGUI.switchPane(creator);
 		getParent().remove(tabIndex);
 	}
-
+	
 	protected void updateCustomer() {
 		validateFields();
 		String name = txtName.getText();
@@ -358,13 +355,13 @@ public class CreateCustomerGUI extends JPanel {
 			String cvr = txtCvr.getText();
 			cCtr.updateCustomer(updateCust.getId(), name, phone, street, email, city, post, null, company, cvr);
 		}
-
+		
 		mainGUI.switchPane(creator);
 		getParent().remove(this);
 	}
-
+	
 	protected void createCustomer() {
-		if(validateFields()){
+		if (validateFields()) {
 			String name = txtName.getText();
 			String street = txtStreet.getText();
 			String phone = txtPhone.getText();
@@ -377,8 +374,8 @@ public class CreateCustomerGUI extends JPanel {
 				String cpr = txtCpr1.getText() + "-" + txtCpr2.getText();
 				String pictureId = txtPictureID.getText();
 				Customer c = cCtr.createPrivateCustomer(name, phone, street, email, city, post, cpr, pictureId);
-				if(creator instanceof SaleGUI){
-					SaleGUI sGUI = (SaleGUI)creator;
+				if (creator instanceof SaleGUI) {
+					SaleGUI sGUI = (SaleGUI) creator;
 					sGUI.setCustomer(c);
 				}
 			} else if (business) {
@@ -387,8 +384,8 @@ public class CreateCustomerGUI extends JPanel {
 				String cvr = txtCvr.getText();
 				Customer c = cCtr.createBusinessCustomer(name, phone, street, email, city, post, company, cvr);
 				
-				if(creator instanceof SaleGUI){
-					SaleGUI sGUI = (SaleGUI)creator;
+				if (creator instanceof SaleGUI) {
+					SaleGUI sGUI = (SaleGUI) creator;
 					sGUI.setCustomer(c);
 				}
 			}
@@ -398,7 +395,7 @@ public class CreateCustomerGUI extends JPanel {
 		}
 	}
 	
-	private boolean validateFields(){
+	private boolean validateFields() {
 		String pictureId = null;
 		String company = null;
 		String cvr = null;
@@ -476,19 +473,19 @@ public class CreateCustomerGUI extends JPanel {
 		}
 	}
 	
-	private void insertUpdateDate(){
+	private void insertUpdateDate() {
 		txtName.setText(updateCust.getName());
 		txtStreet.setText(updateCust.getStreet());
 		txtCity.setText(updateCust.getCity());
 		txtPostCode.setText(updateCust.getPostCode());
 		txtPhone.setText(updateCust.getPhoneNr());
 		txtEmail.setText(updateCust.getEmail());
-		if(updateCust instanceof Business){
-			Business b = (Business)updateCust;
+		if (updateCust instanceof Business) {
+			Business b = (Business) updateCust;
 			txtCompany.setText(b.getCompany());
 			txtCvr.setText(b.getCvrNr());
-		}else if(updateCust instanceof Private){
-			Private p = (Private)updateCust;
+		} else if (updateCust instanceof Private) {
+			Private p = (Private) updateCust;
 			txtPictureID.setText(p.getPictureID());
 			String[] cpr = p.getCpr().split("-");
 			txtCpr1.setText(cpr[0]);

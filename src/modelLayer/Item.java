@@ -301,22 +301,23 @@ public class Item {
 	public int getId() {
 		return id;
 	}
-
+	
 	/**
 	 * Get the description
+	 * 
 	 * @return the description
 	 */
 	public String getDescription() {
 		return description;
 	}
-
+	
 	/**
 	 * Set the description
+	 * 
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
 	
 }

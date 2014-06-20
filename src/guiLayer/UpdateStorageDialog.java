@@ -23,13 +23,12 @@ import ctrLayer.ItemCtr;
 import extensions.KeyListener;
 
 public class UpdateStorageDialog extends JDialog {
-
+	
 	private static final long serialVersionUID = 1;
 	
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtStorageName;
 	private String name;
-
 	
 	/**
 	 * Create the dialog.
@@ -45,8 +44,8 @@ public class UpdateStorageDialog extends JDialog {
 		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("110px"),
 				ColumnSpec.decode("left:default:grow"),},
-			new RowSpec[] {
-				RowSpec.decode("30px"),}));
+				new RowSpec[] {
+						RowSpec.decode("30px"),}));
 		{
 			JLabel lblStorageName = new JLabel("Lagernavn");
 			lblStorageName.setHorizontalAlignment(SwingConstants.LEFT);
@@ -66,8 +65,8 @@ public class UpdateStorageDialog extends JDialog {
 					JButton cancelButton = new JButton("Annuller");
 					cancelButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							setVisible(false); 
-						    dispose();
+							setVisible(false);
+							dispose();
 						}
 					});
 					JButton okButton = new JButton("Gem");
@@ -85,17 +84,16 @@ public class UpdateStorageDialog extends JDialog {
 			}
 		}
 	}
-
-
+	
 	protected void saveStorage() {
-		if(txtStorageName.getText() != null && !txtStorageName.getText().trim().isEmpty() ){
+		if (txtStorageName.getText() != null && !txtStorageName.getText().trim().isEmpty()) {
 			ItemCtr iCtr = new ItemCtr();
-			iCtr.updateStorage(iCtr.findStorage(name), txtStorageName.getText() );
+			iCtr.updateStorage(iCtr.findStorage(name), txtStorageName.getText());
 			setVisible(false);
 			dispose();
-		}  else {
-			JOptionPane.showMessageDialog(null, "Navnet kan ikke være tomt","Advarsel",JOptionPane.ERROR_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "Navnet kan ikke være tomt", "Advarsel", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
+	
 }

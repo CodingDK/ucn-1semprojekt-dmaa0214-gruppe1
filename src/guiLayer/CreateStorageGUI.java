@@ -19,16 +19,16 @@ public class CreateStorageGUI extends JPanel {
 	private JTextField txtCity;
 	private JTextField txtPhoneNr;
 	private JLabel lblError;
-
+	
 	/**
 	 * Create the panel.
 	 */
 	public CreateStorageGUI() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{30, 30, 30, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] {30, 30, 30, 0};
+		gridBagLayout.rowHeights = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[] {0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JLabel lblNewLabel = new JLabel("Opret Lager");
@@ -135,40 +135,38 @@ public class CreateStorageGUI extends JPanel {
 		gbc_btnOpret.gridx = 0;
 		gbc_btnOpret.gridy = 7;
 		add(btnOpret, gbc_btnOpret);
-
+		
 	}
-	 
-	protected void createStorage (){
+	
+	protected void createStorage() {
 		String storageName = txtStorageName.getText();
 		if (storageName == null || storageName.trim().isEmpty()) {
-				lblError.setText("feltet m� ikke v�re tomt");
-				return;
+			lblError.setText("feltet m� ikke v�re tomt");
+			return;
 		}
 		
 		String street = txtStreet.getText();
 		if (street == null || street.trim().isEmpty()) {
-				lblError.setText("feltet m� ikke v�re tomt");
-				return;
+			lblError.setText("feltet m� ikke v�re tomt");
+			return;
 		}
 		
 		String postalCode = txtPostalCode.getText();
 		if (postalCode == null || postalCode.trim().isEmpty()) {
-				lblError.setText("feltet m� ikke v�re tomt");
-				return;
+			lblError.setText("feltet m� ikke v�re tomt");
+			return;
 		}
 		String city = txtCity.getText();
 		if (city == null || city.trim().isEmpty()) {
-				lblError.setText("feltet m� ikke v�re tomt");
-				return;
+			lblError.setText("feltet m� ikke v�re tomt");
+			return;
 		}
 		
 		String phoneNr = txtPhoneNr.getText();
 		if (phoneNr == null || phoneNr.trim().isEmpty()) {
-				lblError.setText("feltet m� ikke v�re tomt");
-				return;
+			lblError.setText("feltet m� ikke v�re tomt");
+			return;
 		}
-		
-		
 		
 	}
 }

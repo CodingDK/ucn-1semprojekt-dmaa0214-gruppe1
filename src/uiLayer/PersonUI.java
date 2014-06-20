@@ -29,7 +29,8 @@ public class PersonUI extends SuperUI {
 	
 	/**
 	 * menu - Handels the selection part of the UI
-	 * @throws AlreadyExistException 
+	 * 
+	 * @throws AlreadyExistException
 	 */
 	private void menu() throws AlreadyExistException {
 		boolean exit = false;
@@ -161,7 +162,8 @@ public class PersonUI extends SuperUI {
 	
 	/**
 	 * createEmployee - Create a seller or administrator
-	 * @throws AlreadyExistException 
+	 * 
+	 * @throws AlreadyExistException
 	 */
 	private void createEmployee() throws AlreadyExistException {
 		boolean rights = false;

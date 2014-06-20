@@ -39,7 +39,7 @@ public class LoginDialog extends JDialog {
 	public LoginDialog(Frame parent, final MainGUI main) {
 		super(parent, "Login", true);
 		this.main = main;
-		if(main == null){
+		if (main == null) {
 			close();
 		}
 		new KeyListener().addEscapeListener(this);
@@ -50,9 +50,9 @@ public class LoginDialog extends JDialog {
 		contentPanel.setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("137px:grow"),
 				ColumnSpec.decode("137px:grow"),},
-			new RowSpec[] {
-				RowSpec.decode("fill:25px"),
-				RowSpec.decode("fill:25px"),}));
+				new RowSpec[] {
+						RowSpec.decode("fill:25px"),
+						RowSpec.decode("fill:25px"),}));
 		{
 			JLabel lblEmployee = new JLabel("Medarbejder Nummer");
 			contentPanel.add(lblEmployee, "1, 1, fill, fill");
@@ -88,11 +88,11 @@ public class LoginDialog extends JDialog {
 						ColumnSpec.decode("60px:grow"),
 						FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 						ColumnSpec.decode("30px"),},
-					new RowSpec[] {
-						FormFactory.LINE_GAP_ROWSPEC,
-						RowSpec.decode("max(2dlu;default):grow"),
-						FormFactory.RELATED_GAP_ROWSPEC,
-						RowSpec.decode("23px"),}));
+						new RowSpec[] {
+								FormFactory.LINE_GAP_ROWSPEC,
+								RowSpec.decode("max(2dlu;default):grow"),
+								FormFactory.RELATED_GAP_ROWSPEC,
+								RowSpec.decode("23px"),}));
 				{
 					lblError = new JBlinkLabel("");
 					lblError.setText(" ");
@@ -115,38 +115,38 @@ public class LoginDialog extends JDialog {
 			}
 		}
 	}
-
+	
 	protected void login() {
 		EmployeeCtr eCtr = new EmployeeCtr();
 		String empNr = txtEmployee.getText();
 		String password = txtPassword.getText();
 		Employee e = eCtr.findEmployee(empNr);
-		if(e != null){
-			if(e.getAdmin()){
-				if(e.getPassword().equals(password)){
+		if (e != null) {
+			if (e.getAdmin()) {
+				if (e.getPassword().equals(password)) {
 					main.setAdmin(true);
 					close();
-				}else{
+				} else {
 					lblError.setText("Kodeordet er forkert");
 					lblError.startBlinking(true, true);
 					return;
 				}
-			}else{
+			} else {
 				lblError.setText("Denne medarbejder har ikke administrator rettigheder");
 				lblError.startBlinking(true, true);
 				return;
 			}
-		}else{
+		} else {
 			lblError.setText("Medarbejder findes ikke");
 			lblError.startBlinking(true, true);
 			return;
 		}
 		
 	}
-
+	
 	private void close() {
-		setVisible(false); 
-	    dispose();
+		setVisible(false);
+		dispose();
 	}
 	
 }
