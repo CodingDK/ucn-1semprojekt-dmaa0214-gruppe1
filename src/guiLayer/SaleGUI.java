@@ -24,7 +24,9 @@ import com.jgoodies.forms.layout.*;
 
 import ctrLayer.SaleCtr;
 import extensions.JIntegerField;
+import extensions.JTextFieldLimit;
 import extensions.SaleItemTableModel;
+
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 public class SaleGUI extends JPanel {
@@ -165,6 +167,7 @@ public class SaleGUI extends JPanel {
 		table.getColumnModel().getColumn(4).setPreferredWidth(25);
 		
 		final JIntegerField tableEditAmount = new JIntegerField();
+		tableEditAmount.setDocument(new JTextFieldLimit(10, true, false));
 		tableEditAmount.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.DARK_GRAY),
 				BorderFactory.createEmptyBorder(0, 0, 0, 2)));
 		tableEditAmount.setHorizontalAlignment(SwingConstants.RIGHT);

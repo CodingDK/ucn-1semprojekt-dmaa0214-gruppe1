@@ -176,6 +176,7 @@ public class CreateCustomerGUI extends JPanel {
 		panel_1.add(lblPostCode, "2, 8, fill, fill");
 		
 		txtPostCode = new JIntegerField();
+		txtPostCode.setDocument(new JTextFieldLimit(6, true, false));
 		panel_1.add(txtPostCode, "3, 8, fill, fill");
 		txtPostCode.setColumns(10);
 		
@@ -183,6 +184,7 @@ public class CreateCustomerGUI extends JPanel {
 		panel_1.add(lblPhoneNr, "2, 10, fill, fill");
 		
 		txtPhone = new JIntegerField();
+		txtPhone.setDocument(new JTextFieldLimit(8, true, false));
 		panel_1.add(txtPhone, "3, 10, fill, fill");
 		txtPhone.setColumns(10);
 		
@@ -208,6 +210,7 @@ public class CreateCustomerGUI extends JPanel {
 		privatePanel.add(lblPictureID, "1, 1, fill, fill");
 		
 		txtPictureID = new JIntegerField();
+		txtPictureID.setDocument(new JTextFieldLimit(9, true, false));
 		txtPictureID.setColumns(10);
 		privatePanel.add(txtPictureID, "2, 1, fill, fill");
 		
@@ -276,6 +279,7 @@ public class CreateCustomerGUI extends JPanel {
 		companyPanel.add(lblCvr, "1, 3, fill, fill");
 		
 		txtCvr = new JIntegerField();
+		txtCvr.setDocument(new JTextFieldLimit(12, true, false));
 		txtCvr.setColumns(10);
 		companyPanel.add(txtCvr, "2, 3, fill, fill");
 		

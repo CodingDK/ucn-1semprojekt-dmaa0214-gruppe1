@@ -16,6 +16,7 @@ import ctrLayer.SaleCtr;
 import exceptionLayer.NotEnoughItemsException;
 import exceptionLayer.SaleNotCreatedException;
 import extensions.JIntegerField;
+import extensions.JTextFieldLimit;
 import extensions.KeyListener;
 
 public class SaleAddItem extends JDialog {
@@ -68,6 +69,7 @@ public class SaleAddItem extends JDialog {
 			}
 			{
 				txtItemNr = new JIntegerField();
+				txtItemNr.setDocument(new JTextFieldLimit(10, true, false));
 				txtItemNr.addFocusListener(new FocusAdapter() {
 					@Override
 					public void focusLost(FocusEvent arg0) {
@@ -91,7 +93,8 @@ public class SaleAddItem extends JDialog {
 				panel.add(lblAmount, "2, 3, fill, fill");
 			}
 			{
-				txtAmont = new JIntegerField();
+				txtAmont = new JIntegerField(10);
+				txtAmont.setDocument(new JTextFieldLimit(10, true, false));
 				txtAmont.addFocusListener(new FocusAdapter() {
 					public void focusLost(FocusEvent e) {
 						checkAmount();

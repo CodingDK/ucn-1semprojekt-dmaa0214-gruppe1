@@ -137,6 +137,7 @@ public class CreateItemGUI extends JPanel {
 		panel_2.add(lblAmount, "2, 2, fill, fill");
 		
 		txtAmount = new JIntegerField();
+		txtAmount.setDocument(new JTextFieldLimit(10, true, false));
 		txtAmount.setColumns(10);
 		panel_2.add(txtAmount, "4, 2, fill, fill");
 		
@@ -158,6 +159,7 @@ public class CreateItemGUI extends JPanel {
 		panel_2.add(lblBulk, "2, 5, fill, fill");
 		
 		txtBulk = new JIntegerField();
+		txtBulk.setDocument(new JTextFieldLimit(10, true, false));
 		txtBulk.setColumns(10);
 		panel_2.add(txtBulk, "4, 5, fill, fill");
 		
@@ -189,13 +191,15 @@ public class CreateItemGUI extends JPanel {
 		panel_2.add(lblMax, "2, 9, fill, fill");
 		
 		txtMin = new JIntegerField();
+		txtMin.setDocument(new JTextFieldLimit(10, true, false));
 		txtMin.setColumns(10);
 		panel_2.add(txtMin, "4, 9, fill, fill");
 		
 		JLabel lblMin = new JLabel("Max Lagerbeholdning");
 		panel_2.add(lblMin, "2, 10, fill, fill");
 		
-		txtMax = new JIntegerField();
+		txtMax = new JIntegerField(10);
+		txtMax.setDocument(new JTextFieldLimit(10, true, false));
 		txtMax.setColumns(10);
 		panel_2.add(txtMax, "4, 10, fill, fill");
 		

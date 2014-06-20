@@ -154,7 +154,8 @@ public class CreateEmployeeGUI extends JPanel {
 		JLabel lblPostnummer = new JLabel("Postnummer");
 		panel.add(lblPostnummer, "2, 6, left, default");
 		
-		txtPostalCode = new JIntegerField();
+		txtPostalCode = new JIntegerField(6);
+		txtPostalCode.setDocument(new JTextFieldLimit(6, true, false));
 		panel.add(txtPostalCode, "3, 6, fill, default");
 		txtPostalCode.setColumns(10);
 		
@@ -170,6 +171,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel.add(lblTlfNr, "2, 10, left, default");
 		
 		txtTlf = new JIntegerField();
+		txtTlf.setDocument(new JTextFieldLimit(8, true, false));
 		panel.add(txtTlf, "3, 10, fill, default");
 		txtTlf.setColumns(10);
 		
@@ -228,6 +230,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel.add(lblMedarbejderNummer, "2, 16, left, default");
 		
 		txtEmpNr = new JIntegerField();
+		txtEmpNr.setDocument(new JTextFieldLimit(10, true, false));
 		panel.add(txtEmpNr, "3, 16, fill, default");
 		txtEmpNr.setColumns(10);
 		

@@ -218,6 +218,7 @@ public class CustomerGUI extends JPanel {
 		searchGridPanel.add(lblTlf, "1, 3, fill, fill");
 
 		txtTlf = new JIntegerField();
+		txtTlf.setDocument(new JTextFieldLimit(8, true, false));
 		txtTlf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				findCustomer();
