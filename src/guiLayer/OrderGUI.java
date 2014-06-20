@@ -44,6 +44,7 @@ import extensions.JTextFieldLimit;
 import extensions.OrderTableModel;
 
 public class OrderGUI extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private OrderTableModel model;
 	private ArrayList<Sale> sales;

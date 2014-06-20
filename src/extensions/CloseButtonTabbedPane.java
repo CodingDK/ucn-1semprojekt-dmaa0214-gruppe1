@@ -53,14 +53,9 @@ public class CloseButtonTabbedPane extends JTabbedPane {
 	}
 	
 	public class CloseButtonTab extends JPanel {
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
-		private Component tab;
 		
 		public CloseButtonTab(final Component tab, String title, Icon icon) {
-			this.tab = tab;
 			setOpaque(false);
 			FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, 3, 3);
 			setLayout(flowLayout);

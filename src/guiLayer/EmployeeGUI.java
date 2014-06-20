@@ -85,7 +85,6 @@ public class EmployeeGUI extends JPanel {
 		mntmDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int rowindex = table.getSelectedRow();
-				String id = (String) table.getValueAt(rowindex, 0);
 				Employee e = employees.get(table.convertRowIndexToModel(rowindex));
 				removeEmployee(e);
 			}

@@ -310,7 +310,7 @@ public class CreateEmployeeGUI extends JPanel {
 			
 			EmployeeCtr eCtr = new EmployeeCtr();
 			try {
-				Employee e = eCtr.createEmployee(empNr, name, tlf, street, eMail, city, postalCode, cpr, password, admin);
+				eCtr.createEmployee(empNr, name, tlf, street, eMail, city, postalCode, cpr, password, admin);
 				parent.switchPane(creator);
 				getParent().remove(this);
 			} catch (AlreadyExistException e) {

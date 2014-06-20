@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class CreateStorageGUI extends JPanel {
+	private static final long serialVersionUID = 1L;
 	private JTextField txtStorageName;
 	private JTextField txtStreet;
 	private JTextField txtPostalCode;

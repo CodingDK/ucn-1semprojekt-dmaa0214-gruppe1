@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -64,11 +63,7 @@ public class ItemGUI extends JPanel {
 	private JComboBox<Category> cmbCategory;
 	private ArrayList<Category> categories;
 	private ArrayList<Storage> storages;
-	private TableRowSorter<ItemTableModel> sorter;
-	private List<RowFilter<ItemTableModel, Object>> filters;
-	private RowFilter<ItemTableModel, Object> rowFilterCompound;
-	private RowFilter<ItemTableModel, Object> rfCategory;
-	private RowFilter<ItemTableModel, Object> rfStorage;
+
 	private JPopupMenu popupMenu;
 	public JButton btnSearch;
 	public Item saleItem;
@@ -81,9 +76,9 @@ public class ItemGUI extends JPanel {
 	 * 
 	 * @param mainGUI
 	 */
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public ItemGUI(MainGUI mainGUI) {
 		parent = mainGUI;
-		filters = new ArrayList<RowFilter<ItemTableModel, Object>>();
 		CategoryCtr cCtr = new CategoryCtr();
 		categories = cCtr.getAllCategories();
 		ItemCtr iCtr = new ItemCtr();
@@ -386,6 +381,7 @@ public class ItemGUI extends JPanel {
 		
 	}
 	
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void update() {
 		ItemCtr iCtr = new ItemCtr();
 		storages = new ArrayList<Storage>();

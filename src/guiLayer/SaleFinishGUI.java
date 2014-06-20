@@ -24,7 +24,7 @@ import extensions.JTextFieldLimit;
 import extensions.KeyListener;
 
 public class SaleFinishGUI extends JDialog {
-	
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private SaleCtr saleCtr;
 	private JPanel panel_1;

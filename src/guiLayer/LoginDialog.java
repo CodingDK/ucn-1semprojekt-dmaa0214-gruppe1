@@ -26,7 +26,7 @@ import extensions.JBlinkLabel;
 import extensions.KeyListener;
 
 public class LoginDialog extends JDialog {
-	
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtEmployee;
 	private JTextField txtPassword;
