@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import ctrLayer.SaleCtr;
 import exceptionLayer.SaleNotCreatedException;
 import extensions.JIntegerField;
+import extensions.JTextFieldLimit;
 import extensions.KeyListener;
 
 public class SaleFinishGUI extends JDialog {
@@ -67,6 +68,7 @@ public class SaleFinishGUI extends JDialog {
 			}
 			{
 				txtEmployeeNr = new JIntegerField();
+				txtEmployeeNr.setDocument(new JTextFieldLimit(10, true, false));
 				txtEmployeeNr.addFocusListener(new FocusAdapter() {
 					@Override
 					public void focusLost(FocusEvent e) {
