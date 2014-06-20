@@ -10,11 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.Document;
 
 import personLayer.Business;
 import personLayer.Customer;
@@ -151,7 +153,8 @@ public class CreateCustomerGUI extends JPanel {
 		panel_1.add(lblName, "2, 2, fill, fill");
 		
 		txtName = new JTextField();
-		txtName.setDocument(new SpaceDocument());
+		//txtName.setDocument(new SpaceDocument());
+		txtName.setDocument(new JTextFieldLimit(8, false));
 		panel_1.add(txtName, "3, 2, fill, fill");
 		
 		lblStreet = new JLabel("Gade");
