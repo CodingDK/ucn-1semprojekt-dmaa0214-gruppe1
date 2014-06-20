@@ -196,7 +196,7 @@ public class CustomerGUI extends JPanel {
 				findCustomer();
 			}
 		});
-		txtCompany.setDocument(new SpaceDocument());
+		txtCompany.setDocument(new JTextFieldLimit(100, false, false));
 		searchGridPanel.add(txtCompany, "2, 1, fill, fill");
 		txtCompany.setColumns(10);
 
@@ -209,7 +209,7 @@ public class CustomerGUI extends JPanel {
 				findCustomer();
 			}
 		});
-		txtName.setDocument(new SpaceDocument());
+		txtName.setDocument(new JTextFieldLimit(100, false, false));
 		txtName.setColumns(10);
 		searchGridPanel.add(txtName, "2, 2, fill, fill");
 
