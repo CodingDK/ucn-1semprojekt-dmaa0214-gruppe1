@@ -35,6 +35,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import ctrLayer.ItemCtr;
 import exceptionLayer.StorageExistException;
 import extensions.JBlinkLabel;
+import extensions.JTextFieldLimit;
 import extensions.SpaceDocument;
 import extensions.StorageTableModel;
 
