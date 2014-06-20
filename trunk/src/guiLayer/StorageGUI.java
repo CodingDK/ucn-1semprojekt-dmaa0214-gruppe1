@@ -162,7 +162,7 @@ public class StorageGUI extends JPanel {
 		panel_5.add(lblStorageName, "1, 1, fill, fill");
 		
 		txtStorageName = new JTextField();
-		txtStorageName.setDocument(new SpaceDocument());
+		txtStorageName.setDocument(new JTextFieldLimit(100, false, false));
 		panel_5.add(txtStorageName, "2, 1, fill, fill");
 		txtStorageName.setColumns(10);
 		

@@ -227,7 +227,7 @@ public class ItemGUI extends JPanel {
 		panel_4.add(lblName);
 		
 		txtName = new JTextField();
-		txtName.setDocument(new SpaceDocument());
+		txtName.setDocument(new JTextFieldLimit(100, false, false));
 		txtName.setToolTipText("Her indtastes det ønskede vare navn");
 		txtName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
