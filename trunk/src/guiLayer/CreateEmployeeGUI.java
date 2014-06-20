@@ -139,7 +139,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel.add(lblNavn, "2, 2, left, default");
 		
 		txtName = new JTextField();
-		txtName.setDocument(new SpaceDocument());
+		txtName.setDocument(new JTextFieldLimit(100, false, false));
 		panel.add(txtName, "3, 2, fill, default");
 		txtName.setColumns(10);
 		
@@ -147,7 +147,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel.add(lblAdresse, "2, 4, left, default");
 		
 		txtStreet = new JTextField();
-		txtStreet.setDocument(new SpaceDocument());
+		txtStreet.setDocument(new JTextFieldLimit(100, false, false));
 		panel.add(txtStreet, "3, 4, fill, default");
 		txtStreet.setColumns(10);
 		
@@ -162,7 +162,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel.add(lblY, "2, 8, left, default");
 		
 		txtCity = new JTextField();
-		txtCity.setDocument(new SpaceDocument());
+		txtCity.setDocument(new JTextFieldLimit(100, false, false));
 		panel.add(txtCity, "3, 8, fill, default");
 		txtCity.setColumns(10);
 		
@@ -177,7 +177,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel.add(lblEmail, "2, 12, left, default");
 		
 		txtEmail = new JTextField();
-		txtEmail.setDocument(new SpaceDocument(false));
+		txtEmail.setDocument(new JTextFieldLimit(100, false, true));
 		panel.add(txtEmail, "3, 12, fill, default");
 		txtEmail.setColumns(10);
 		

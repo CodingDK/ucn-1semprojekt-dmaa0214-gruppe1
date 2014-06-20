@@ -40,6 +40,7 @@ import exceptionLayer.CategoryExistException;
 import exceptionLayer.MainCategoryException;
 import extensions.CategoryTableModel;
 import extensions.JBlinkLabel;
+import extensions.JTextFieldLimit;
 import extensions.SpaceDocument;
 
 public class CategoryGUI extends JPanel {
@@ -199,7 +200,8 @@ public class CategoryGUI extends JPanel {
 		panel_4.add(lblName, "1, 1, fill, fill");
 		
 		txtName = new JTextField();
-		txtName.setDocument(new SpaceDocument());
+		txtName.setDocument(new JTextFieldLimit(100, false, false));
+
 		txtName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				createCategory();

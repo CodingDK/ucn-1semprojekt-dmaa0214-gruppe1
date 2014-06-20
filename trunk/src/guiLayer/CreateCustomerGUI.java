@@ -35,42 +35,42 @@ import extensions.KeyListener;
 import extensions.SpaceDocument;
 
 public class CreateCustomerGUI extends JPanel {
-	public JTextField txtName;
-	private JTextField txtPostCode;
+
+	private boolean business;
+	private boolean isUpdate = false;
+	private Component creator;
+	private Customer updateCust;
+	private JBlinkLabel lblError;
+	private JIntegerField txtCvr;
 	private JIntegerField txtPhone;
-	private JTextField txtEmail;
-	private JTextField txtCity;
-	
-	private JLabel lblStreet;
-	private JLabel lblTown;
-	private JLabel lblPostCode;
-	private JLabel lblPhoneNr;
+	private JIntegerField txtPictureID;
+	private JLabel label;
+	private JLabel lblCompany;
+	private JLabel lblCpr;
+	private JLabel lblCvr;
 	private JLabel lblEmail;
 	private JLabel lblName;
-	private boolean business;
+	private JLabel lblPhoneNr;
+	private JLabel lblPictureID;
+	private JLabel lblPostCode;
+	private JLabel lblStreet;
+	private JLabel lblTown;
+	private JPanel companyPanel;
 	private JPanel panel;
 	private JPanel panel_1;
-	private JBlinkLabel lblError;
-	private JTextField txtStreet;
 	private JPanel panel_2;
-	private JPanel privatePanel;
-	private JLabel lblPictureID;
-	private JIntegerField txtPictureID;
-	private JLabel lblCpr;
-	private JPanel companyPanel;
-	private JTextField txtCompany;
-	private JIntegerField txtCvr;
-	private JLabel lblCvr;
-	private JLabel lblCompany;
 	private JPanel panel_3;
-	private JTextField txtCpr2;
+	private JPanel privatePanel;
+	private JTextField txtCity;
+	private JTextField txtCompany;
 	private JTextField txtCpr1;
-	private JLabel label;
-	private Customer updateCust;
-	private Component creator;
+	private JTextField txtCpr2;
+	private JTextField txtEmail;
+	private JTextField txtPostCode;
+	private JTextField txtStreet;
 	private MainGUI mainGUI;
-	private boolean isUpdate = false;
 	public JButton btnOpret;
+	public JTextField txtName;
 	
 	/**
 	 * @wbp.parser.constructor
@@ -153,15 +153,15 @@ public class CreateCustomerGUI extends JPanel {
 		panel_1.add(lblName, "2, 2, fill, fill");
 		
 		txtName = new JTextField();
-		//txtName.setDocument(new SpaceDocument());
-		txtName.setDocument(new JTextFieldLimit(8, false));
+		txtName.setDocument(new JTextFieldLimit(100, false, false));
+
 		panel_1.add(txtName, "3, 2, fill, fill");
 		
 		lblStreet = new JLabel("Gade");
 		panel_1.add(lblStreet, "2, 4, left, fill");
 		
 		txtStreet = new JTextField();
-		txtStreet.setDocument(new SpaceDocument());
+		txtStreet.setDocument(new JTextFieldLimit(100, false, false));
 		panel_1.add(txtStreet, "3, 4, fill, fill");
 		txtStreet.setColumns(10);
 		
@@ -169,7 +169,7 @@ public class CreateCustomerGUI extends JPanel {
 		panel_1.add(lblTown, "2, 6, fill, fill");
 		
 		txtCity = new JTextField();
-		txtCity.setDocument(new SpaceDocument());
+		txtCity.setDocument(new JTextFieldLimit(100, false));
 		panel_1.add(txtCity, "3, 6, fill, fill");
 		txtCity.setColumns(10);
 		
@@ -191,7 +191,7 @@ public class CreateCustomerGUI extends JPanel {
 		panel_1.add(lblEmail, "2, 12, fill, fill");
 		
 		txtEmail = new JTextField();
-		txtEmail.setDocument(new SpaceDocument(false));
+		txtEmail.setDocument(new JTextFieldLimit(100, false, true));
 		panel_1.add(txtEmail, "3, 12, fill, fill");
 		txtEmail.setColumns(10);
 		
@@ -227,7 +227,7 @@ public class CreateCustomerGUI extends JPanel {
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
 		txtCpr1 = new JTextField();
-		txtCpr1.setDocument(new JTextFieldLimit(6, true));
+		txtCpr1.setDocument(new JTextFieldLimit(6, true, false));
 		txtCpr1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
@@ -251,7 +251,7 @@ public class CreateCustomerGUI extends JPanel {
 				}
 			}
 		});
-		txtCpr2.setDocument(new JTextFieldLimit(4, true));
+		txtCpr2.setDocument(new JTextFieldLimit(4, true, false));
 		panel_3.add(txtCpr2, "5, 1, fill, default");
 		txtCpr2.setColumns(10);
 		
@@ -269,6 +269,7 @@ public class CreateCustomerGUI extends JPanel {
 		companyPanel.add(lblCompany, "1, 1, fill, fill");
 		
 		txtCompany = new JTextField();
+		txtCompany.setDocument(new JTextFieldLimit(100, false, false));
 		txtCompany.setColumns(10);
 		companyPanel.add(txtCompany, "2, 1, fill, fill");
 		
