@@ -19,9 +19,8 @@ public class SpaceDocument extends PlainDocument {
 	public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
 		boolean go = true;
 		if (str == null) {
-			return;}
-
-		else if(!oneSpace){
+			return;
+		}else if(!oneSpace){
 			if(str.equals(" ")){
 				return;
 			}

@@ -196,7 +196,7 @@ public class CreateEmployeeGUI extends JPanel {
 						FormFactory.DEFAULT_ROWSPEC,}));
 		
 		txtCpr1 = new JTextField();
-		txtCpr1.setDocument(new JTextFieldLimit(6, true));
+		txtCpr1.setDocument(new JTextFieldLimit(6, true, false));
 		txtCpr1.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
@@ -212,7 +212,7 @@ public class CreateEmployeeGUI extends JPanel {
 		panel_2.add(label, "3, 1, right, default");
 		
 		txtCpr2 = new JTextField();
-		txtCpr2.setDocument(new JTextFieldLimit(4, true));
+		txtCpr2.setDocument(new JTextFieldLimit(4, true, false));
 		txtCpr2.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
