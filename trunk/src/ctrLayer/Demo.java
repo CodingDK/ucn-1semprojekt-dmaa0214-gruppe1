@@ -104,7 +104,7 @@ public class Demo {
 			
 			String[] lokArray = {"Hylde 2", "Lok A", "Lok B", "Lok C", "På loftet", "På lageret", "Række 27", "Bagved", "Spørg Bjarne"};
 			
-			for (int i = 0; i < 1000000; i++) {
+			for (int i = 0; i < 20000; i++) {
 				int c = rand.nextInt(catList.size());
 				int z = rand.nextInt(storList.size());
 				int y = rand.nextInt(lokArray.length);
@@ -132,13 +132,13 @@ public class Demo {
 			CustomerCtr cusCtr = new CustomerCtr();
 			cusCtr.createPrivateCustomer("Bjarne", "12345678", "Lærkevej 2", "bjarne@ft.dk", "Aalborg", "9000", "121248-3010", "43432535");
 			
-			for (int i = 0; i < 1000000; i++) {
+			for (int i = 0; i < 1000; i++) {
 				String name = name();
 				cusCtr.createPrivateCustomer(name, phone(), street(), email(name, "@priv.dk"), city(), postCode(), cpr(), "1");
 				
 			}
 			
-			for (int i = 0; i < 125; i++) {
+			for (int i = 0; i < 1000; i++) {
 				String name = name();
 				cusCtr.createBusinessCustomer(name, phone(), street(), email(name, "@ft.dk"), city(), postCode(), company(), cvrNr());
 			}
@@ -146,7 +146,7 @@ public class Demo {
 			cusCtr.createBusinessCustomer("Kis", "72691867", "Sofiendalsvej 60", "kbha@ucn.dk", "Aalborg", "9000", "UCN A/S", "33556063");
 			
 			try {
-				for (int i = 1; i < 45; i++) {
+				for (int i = 1; i < 1997; i++) {
 					SaleCtr sCtr = new SaleCtr();
 					sCtr.createSale();
 					Item itemi = iCtr.getItem(i);
@@ -156,7 +156,7 @@ public class Demo {
 					sCtr.finishSale("" + (rand.nextInt(75) + 1));
 				}
 				
-				for (int i = 30; i < 55; i++) {
+				for (int i = 30; i < 230; i++) {
 					SaleCtr sCtr = new SaleCtr();
 					sCtr.createSale();
 					Item itemi = iCtr.getItem(i);

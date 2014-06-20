@@ -91,7 +91,7 @@ public class OrderGUI extends JPanel {
 		
 		model = new OrderTableModel(sales);
 		table = new JTable(model);
-		table.getColumnModel().getColumn(0).setMaxWidth(30);
+		table.getColumnModel().getColumn(0).setMaxWidth(50);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
