@@ -41,6 +41,7 @@ import ctrLayer.CustomerCtr;
 import extensions.CustomerTableModel;
 import extensions.JBlinkLabel;
 import extensions.JIntegerField;
+import extensions.JTextFieldLimit;
 import extensions.SpaceDocument;
 
 public class CustomerGUI extends JPanel {

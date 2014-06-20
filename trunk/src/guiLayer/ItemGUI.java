@@ -24,6 +24,7 @@ import ctrLayer.CategoryCtr;
 import ctrLayer.ItemCtr;
 import extensions.ItemTableModel;
 import extensions.JBlinkLabel;
+import extensions.JTextFieldLimit;
 import extensions.SpaceDocument;
 
 public class ItemGUI extends JPanel {

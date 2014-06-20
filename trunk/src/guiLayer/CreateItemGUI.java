@@ -29,6 +29,7 @@ import ctrLayer.ItemCtr;
 import extensions.JBlinkLabel;
 import extensions.JDoubleField;
 import extensions.JIntegerField;
+import extensions.JTextFieldLimit;
 import extensions.KeyListener;
 import extensions.SpaceDocument;
 
